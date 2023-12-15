@@ -1,0 +1,16 @@
+version: "3.2"
+services:
+
+  # app
+  webpulse:
+    build:
+      context: ./docker/app
+      dockerfile: ./Dockerfile
+    restart: always
+    ports:
+      - ${DOCKER_PORT}:80
+    volumes:
+      - .:/var/www/html/
+      - ../nuxt-client:/var/www/nuxt-client
+    env_file:
+      - .env
