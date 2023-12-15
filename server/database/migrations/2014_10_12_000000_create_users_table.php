@@ -19,8 +19,8 @@ return new class extends Migration {
             $table->string('email');
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->string('verification_codeverification_code');
-            $table->string('invitation_code');
+            $table->string('verification_code', 64)->nullable();
+            $table->string('invitation_code', 6)->nullable();
             $table->smallInteger('active')->default(0);
             $table->smallInteger('verified')->default(0);
             $table->rememberToken();
