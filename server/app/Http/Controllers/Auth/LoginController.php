@@ -27,6 +27,10 @@ class LoginController extends Controller
     {
         $credentials = request(['email', 'password']);
 
+        // check if user is active and verified
+        $credentials['active'] = 1;
+        $credentials['verified'] = 1;
+
         if (!$token = auth()->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
