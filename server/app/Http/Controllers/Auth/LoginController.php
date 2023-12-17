@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -80,6 +81,8 @@ class LoginController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
+            'id' => 1,
+            'email' => 'martas.hanzl@email.cz',
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth('api')->factory()->getTTL() * 60 * 24 * 3 // 3 days
