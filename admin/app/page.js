@@ -3,7 +3,6 @@ import { useState } from 'react';
 import axios, {request} from 'axios';
 import { useRouter } from 'next/navigation';
 import toast from "react-hot-toast";
-import {signIn} from "next-auth/react";
 
 export default function Page() {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -69,7 +68,7 @@ export default function Page() {
             </div>
             <div className="mt-2 flex items-center justify-end gap-x-6">
                 <button
-                    onClick={signIn}
+                    onClick={handleCLick}
                     className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                     Login
