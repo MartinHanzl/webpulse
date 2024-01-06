@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authentication implements JWTSubject
+class Administrator extends Authentication implements JWTSubject
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -23,13 +23,7 @@ class User extends Authentication implements JWTSubject
         'phone_prefix',
         'phone',
         'email',
-        'street',
-        'postcode',
-        'city',
         'password',
-        'active',
-        'verification_code',
-        'invitation_code',
         'active',
         'verified',
     ];
@@ -42,7 +36,6 @@ class User extends Authentication implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
-        'invitation_code',
     ];
 
     /**

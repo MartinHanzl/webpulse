@@ -13,7 +13,7 @@
     "http-proxy-middleware": "^2.0.6",
     "jsonwebtoken": "^9.0.2",
     "next": "14.0.4",
-    "next-auth": "^4.24.5",
+    "next-auth": "^5.0.0-beta.4",
     "react": "^18",
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1"

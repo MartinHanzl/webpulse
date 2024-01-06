@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Me;
+namespace App\Http\Resources\Admin\Employee;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MeResource extends JsonResource
+class EmployeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,15 +15,15 @@ class MeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
+            'id' => $this->id,
             'firstname' => $this->firstname,
             'lastname' => $this->lastname,
             'phone_prefix' => $this->phone_prefix,
             'phone' => $this->phone,
             'email' => $this->email,
-            'street' => $this->street,
-            'postcode' => $this->postcode,
-            'city' => $this->city,
-            'invitation_code' => $this->invitation_code,
+            'active' => $this->active,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

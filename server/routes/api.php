@@ -1,21 +1,15 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Client\Auth\LoginController;
+use App\Http\Controllers\Client\Auth\RegisterController;
+use App\Http\Controllers\Client\Me\MeController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Me\MeController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+// admin controllers
+use App\Http\Controllers\Admin\Auth\RegisterController as AdminRegisterController;
+use App\Http\Controllers\Admin\Auth\LoginController as AdminLoginController;
+use App\Http\Controllers\Admin\Me\MeController as AdminMeController;
+
 
 Route::group([
     'prefix' => 'auth'
@@ -34,6 +28,31 @@ Route::group([
         ], function () {
             Route::post('/', [LoginController::class, 'me']);
             Route::get('/profile', [MeController::class, 'profile']);
+        });
+    });
+});
+
+Route::group([
+    'prefix' => 'admin'
+], function () {
+    Route::group([
+        'prefix' => 'auth'
+    ], function () {
+        Route::post('register', [AdminRegisterController::class, 'register']);
+
+        Route::group([
+            'middleware' => 'api'
+        ], function () {
+            Route::post('login', [AdminLoginController::class, 'login']);
+            Route::post('logout', [AdminLoginController::class, 'logout']);
+            Route::post('refresh', [AdminLoginController::class, 'refresh']);
+
+            Route::group([
+                'prefix' => 'me'
+            ], function () {
+                Route::post('/', [AdminLoginController::class, 'me']);
+                Route::get('/profile', [AdminMeController::class, 'profile']);
+            });
         });
     });
 });

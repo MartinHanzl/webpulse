@@ -17,9 +17,6 @@ return new class extends Migration {
             $table->string('phone_prefix')->default('+420');
             $table->string('phone')->nullable();
             $table->string('email');
-            $table->string('password');
-            $table->smallInteger('active')->default(1);
-            $table->enum('role', ['editor', 'admin', 'owner'])->default('editor');
             $table->rememberToken();
             $table->timestamps();
         });

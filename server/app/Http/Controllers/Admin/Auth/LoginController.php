@@ -1,11 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -16,7 +13,7 @@ class LoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api')->except('login');
     }
 
     /**
@@ -28,11 +25,10 @@ class LoginController extends Controller
     {
         $credentials = request(['email', 'password']);
 
-        // check if user is active and verified
+        // check if administrator is active
         $credentials['active'] = 1;
-        $credentials['verified'] = 1;
 
-        if (!$token = auth()->attempt($credentials)) {
+        if (!$token = auth('admins')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -46,7 +42,7 @@ class LoginController extends Controller
      */
     public function me()
     {
-        return response()->json(auth()->user());
+        return response()->json(auth('admins')->user());
     }
 
     /**
@@ -56,7 +52,7 @@ class LoginController extends Controller
      */
     public function logout()
     {
-        auth()->logout();
+        auth('admins')->logout();
 
         return response()->json(['message' => 'Successfully logged out']);
     }
@@ -68,7 +64,7 @@ class LoginController extends Controller
      */
     public function refresh()
     {
-        return $this->respondWithToken(auth()->refresh());
+        return $this->respondWithToken(auth('admins')->refresh());
     }
 
     /**
@@ -81,11 +77,9 @@ class LoginController extends Controller
     protected function respondWithToken($token)
     {
         return response()->json([
-            'id' => 1,
-            'email' => 'martas.hanzl@email.cz',
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth('api')->factory()->getTTL() * 60 * 24 * 3 // 3 days
+            'expires_in' => auth('admins')->factory()->getTTL() * 60 * 24 * 3 // 3 days
         ]);
     }
 }
