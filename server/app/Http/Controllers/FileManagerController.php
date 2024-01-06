@@ -18,7 +18,6 @@ class FileManagerController extends Controller
 
     public function uploadImage(Request $request): JsonResponse
     {
-        $filename = $this->fileManagerService->uploadImage($request);
-        return Response::json(['filename' => $filename]);
+        return $this->fileManagerService->uploadImage($request);
     }
 }

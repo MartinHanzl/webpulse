@@ -2,10 +2,10 @@
 
 return [
     'image' => [
-        'user' => [
-            'big' => ['width' => 1200, 'height' => 1200, 'folder' => 'big'],
+        'users' => [
+            'avatar' => ['width' => 128, 'height' => 128, 'folder' => 'avatar', 'column' => 'avatar'],
             'ico' => ['width' => 64, 'height' => 64, 'folder' => 'ico'],
-            'avatar' => ['width' => 128, 'height' => 128, 'folder' => 'avatar'],
+            'big' => ['width' => 1200, 'height' => 1200, 'folder' => 'big'],
         ]
     ],
     'file' => [
