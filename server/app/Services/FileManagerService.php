@@ -17,6 +17,7 @@ class FileManagerService
         $file = $request->file('image');
         $fileId = uniqid();
         $extension = $file->getClientOriginalExtension();
+
         $filename = $fileId . '.' . $extension;
 
         $format = $request->get('format');
@@ -47,7 +48,7 @@ class FileManagerService
         $image->scale($width, $height);
 
         $tempPath = tempnam(sys_get_temp_dir(), 'resized_');
-        $image->save($tempPath, 100, $extension);
+        $image->save($tempPath, 100);
 
         return new UploadedFile(
             $tempPath,

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Services\FileManagerService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Http\JsonResponse;
 
 class FileManagerController extends Controller
 {
@@ -14,8 +16,9 @@ class FileManagerController extends Controller
         $this->fileManagerService = $fileManagerService;
     }
 
-    public function uploadImage(Request $request)
+    public function uploadImage(Request $request): JsonResponse
     {
-        return $this->fileManagerService->uploadImage($request);
+        $filename = $this->fileManagerService->uploadImage($request);
+        return Response::json(['filename' => $filename]);
     }
 }
