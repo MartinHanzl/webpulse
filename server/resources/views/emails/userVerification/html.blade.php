@@ -134,10 +134,10 @@
                    cellpadding="0" cellspacing="0">
                 <tbody>
                 <tr>
-                    <td width="600" style="padding: 0;" class="mobile-w-50">
+                    <td width="600" style="padding: 0; text-align: center" class="mobile-w-50">
                         <img
                             src="https://assets.website-files.com/61ed56ae9da9fd7e0ef0a967/61f12e6faf73568658154dae_SitemarkDefault.svg"
-                            style="display: block !important;" alt="Kuc Kuc" width="160" vspace="0"
+                            alt="Kuc Kuc" width="160" vspace="0"
                             hspace="0" border="0">
                     </td>
                 </tr>
