@@ -4,6 +4,7 @@ use App\Http\Controllers\Client\Auth\LoginController;
 use App\Http\Controllers\Client\Auth\RegisterController;
 use App\Http\Controllers\Client\Me\MeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FileManagerController;
 
 // admin controllers
 use App\Http\Controllers\Admin\Auth\RegisterController as AdminRegisterController;
@@ -31,6 +32,13 @@ Route::group([
             Route::get('/profile', [MeController::class, 'profile']);
         });
     });
+});
+
+Route::group([
+    'prefix' => 'files',
+    'middleware' => 'api'
+], function () {
+    Route::post('image', [FileManagerController::class, 'uploadImage']);
 });
 
 Route::group([
