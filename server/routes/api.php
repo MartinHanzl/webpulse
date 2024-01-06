@@ -15,6 +15,7 @@ Route::group([
     'prefix' => 'auth'
 ], function () {
     Route::post('register', [RegisterController::class, 'register']);
+    Route::post('verify', [RegisterController::class, 'verify']);
 
     Route::group([
         'middleware' => 'api'

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Services\EmailService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -48,8 +49,8 @@ class RegisterController extends Controller
             'password' => $request->get('password'),
             'verification_code' => Str::random(64),
             'invitation_code' => $this->generateCode(6),
-            'active' => 1, // for developer purposes only
-            'verified' => 1 // for developer purposes only
+            'active' => 1,
+            'verified' => 0 // for developer purposes only
         ];
 
         $user->fill($userData);
@@ -65,6 +66,33 @@ class RegisterController extends Controller
                 'user' => $user
             ]
         );
+
+        return Response::json();
+    }
+
+    public function verify(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'verification_code' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return Response::json([
+                'sucess' => false,
+                'errors' => $validator->messages()
+            ], 400);
+        }
+
+        $user = User::query()->where('verification_code', '=', $request->get('verification_code'))->first();
+
+        if (!$user) {
+            App::abort(404);
+        }
+
+        $user->verification_code = null;
+        $user->verified = 1;
+        
+        $user->save();
 
         return Response::json();
     }
