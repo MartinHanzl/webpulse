@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Services\EmailService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -12,6 +13,13 @@ use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
+    protected EmailService $emailService;
+
+    public function __construct(EmailService $emailService)
+    {
+        $this->emailService = $emailService;
+    }
+
     public function register(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -46,6 +54,17 @@ class RegisterController extends Controller
 
         $user->fill($userData);
         $user->save();
+
+        $this->emailService->queue(
+            'dev@webpulse.cz',
+            $request->get('email'),
+            'Potvrzení registrace',
+            'userVerification',
+            null,
+            [
+                'user' => $user
+            ]
+        );
 
         return Response::json();
     }
