@@ -1,6 +1,3 @@
-[submodule "server/app/Modules/TelevisionProgram"]
-	path = server/app/Modules/TelevisionProgram
-	url = https://github.com/MartinHanzl/televisionprogram.git
 [submodule "server/app/Modules/Blog"]
 	path = server/app/Modules/Blog
 	url = https://github.com/MartinHanzl/blog.git
