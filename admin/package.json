@@ -9,6 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.5.1",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/free-regular-svg-icons": "^6.5.1",
+    "@fortawesome/free-solid-svg-icons": "^6.5.1",
+    "@heroicons/react": "^2.1.1",
     "axios": "^1.6.2",
     "http-proxy-middleware": "^2.0.6",
     "jsonwebtoken": "^9.0.2",
