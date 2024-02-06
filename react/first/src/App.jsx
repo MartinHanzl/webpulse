@@ -4,7 +4,8 @@ import './App.css'
 function App() {
   return (
     <>
-        <Post />
+        <Post author="Martin" body="Title 1"/>
+        <Post author="Matěj" body="Title 2"/>
     </>
   )
 }
