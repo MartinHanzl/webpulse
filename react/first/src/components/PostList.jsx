@@ -1,34 +1,27 @@
+import {useState} from "react";
+
 import Post from "./Post.jsx";
 import NewPost from "./NewPost.jsx";
 import styles from './PostList.module.css';
 
 function PostList() {
-    const posts = [
-        {
-            author: 'Jan',
-            body: 'Body 1'
-        },
-        {
-            author: 'Martin',
-            body: 'Body 2'
-        }
-    ];
+    const [body, setBody] = useState('');
+    const [author, setAuthor] = useState('');
 
-    const results = [];
+    function bodyChangeHandler(event) {
+        setBody(event.target.value);
+    }
+    function authorChangeHandler(event) {
+        setAuthor(event.target.value);
+    }
 
-    posts.forEach((post) => {
-       results.push(
-           <li>
-               <Post author={post.author} body={post.body} />
-           </li>
-       )
-    });
     return (
         <>
-            <NewPost />
-        <ul className={styles.ul}>
-            {results}
-        </ul>
+            <NewPost onBodyChange={bodyChangeHandler} onAuthorChange={authorChangeHandler}/>
+            <ul className={styles.ul}>
+                <Post author={author} body={body}/>
+                <Post author="Petr" body="Nevím"/>
+            </ul>
         </>
     );
 }
