@@ -1,4 +1,5 @@
 import Post from "./Post.jsx";
+import NewPost from "./NewPost.jsx";
 import styles from './PostList.module.css';
 
 function PostList() {
@@ -23,9 +24,12 @@ function PostList() {
        )
     });
     return (
+        <>
+            <NewPost />
         <ul className={styles.ul}>
             {results}
         </ul>
+        </>
     );
 }
 
