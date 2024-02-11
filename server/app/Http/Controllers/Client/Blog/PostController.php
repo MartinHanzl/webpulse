@@ -25,6 +25,12 @@ class PostController extends Controller
             $query->where('status', '=', $request->get('status'));
         }
 
+        if ($request->has('order_by')) {
+            $query->orderBy($request->get('order_by'), $request->get('order_way'));
+        } else {
+            $query->orderBy('id', 'desc');
+        }
+
         $posts = $query->get();
         return Response::json([
             'success' => true,
