@@ -67,9 +67,13 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'posts'
+    'prefix' => 'blog'
 ], function () {
-    Route::get('list', [\App\Http\Controllers\Client\Blog\PostController::class, 'list']);
-    Route::get('detail/{id}', [\App\Http\Controllers\Client\Blog\PostController::class, 'detail'])->where('id', '[0-9]+');
-    Route::post('create', [\App\Http\Controllers\Client\Blog\PostController::class, 'create']);
+    Route::group([
+        'prefix' => 'posts'
+    ], function () {
+        Route::get('list', [\App\Http\Controllers\Client\Blog\PostController::class, 'list']);
+        Route::get('detail/{id}', [\App\Http\Controllers\Client\Blog\PostController::class, 'detail'])->where('id', '[0-9]+');
+        Route::post('create', [\App\Http\Controllers\Client\Blog\PostController::class, 'create']);
+    });
 });
