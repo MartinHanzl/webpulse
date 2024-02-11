@@ -11,6 +11,7 @@
 - we can pass function to props same as we can pass numbers and strings
 - function starting with *use* are considered as hooks
 - `useState()` always returns 2 elements as array (`useState()[0]` = current value, `useState()[1]` = updating value)
+- `key` prop should be guaranteed unique for each item
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
