@@ -15,6 +15,7 @@
 - promises should not be returned
 - `useEffect` will be executed by react whenever React thinks it requires execution
 - `useEffect` has second parameter **dependencies**
+- for routing we need to install `pnpm install react-router-dom`
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
