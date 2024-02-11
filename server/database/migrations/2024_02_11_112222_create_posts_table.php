@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,6 +16,9 @@ return new class extends Migration
             $table->string('slug');
             $table->string('body');
             $table->string('author');
+            $table->string('image')->nullable();
+            $table->enum('status', ['public', 'draft', 'trash'])->default('public');
+            $table->tinyInteger('active')->default(1);
             $table->timestamps();
         });
     }

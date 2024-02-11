@@ -18,9 +18,17 @@ class PostController extends Controller
 {
     public function list(Request $request): JsonResponse
     {
+        $query = Post::query()
+            ->active();
+
+        if ($request->has('status')) {
+            $query->where('status', '=', $request->get('status'));
+        }
+
+        $posts = $query->get();
         return Response::json([
             'success' => true,
-            'data' => PostResource::collection(Post::all())
+            'data' => PostResource::collection($posts)
         ]);
     }
 

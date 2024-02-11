@@ -16,5 +16,13 @@ class Post extends Model
         'slug',
         'body',
         'author',
+        'active',
+        'image',
+        'status'
     ];
+
+    protected function scopeActive($query)
+    {
+        return $query->where('active', '=', 1);
+    }
 }
