@@ -39,6 +39,7 @@
 - `export const metadata = {...}`
 - **icon.png**
 - components folder out of app folder
+- dynamic routes: https://www.udemy.com/course/nextjs-react-the-complete-guide/learn/lecture/41159656#overview
 - 
 
 ## Nápady
