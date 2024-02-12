@@ -32,6 +32,8 @@
 - in file based routing every new route should be named page.js
 - name of component does not matter
 - app router vs pages router (section 1, part 7)
+- page.js, layout.js, not-found.js, error.js are reserved names
+- react server components: rendered only on server, never on client
 - 
 
 ## Nápady
