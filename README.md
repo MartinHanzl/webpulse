@@ -16,8 +16,22 @@
 - `useEffect` will be executed by react whenever React thinks it requires execution
 - `useEffect` has second parameter **dependencies**
 - for routing we need to install `pnpm install react-router-dom`
+- react app are rendered on client side
 
 ## Next.js
+- instalation
+- - typescript: no
+- - eslint: yes
+- - tailwind: no
+- - src directory: no
+- - App router: yes
+- - custom alias: no
+
+
+- Next.js app are rendered on server side
+- in file based routing every new route should be named page.js
+- name of component does not matter
+- app router vs pages router (section 1, part 7)
 - 
 
 ## Nápady
