@@ -17,6 +17,9 @@
 - `useEffect` has second parameter **dependencies**
 - for routing we need to install `pnpm install react-router-dom`
 
+## Next.js
+- 
+
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
 - [ ]
