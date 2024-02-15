@@ -40,7 +40,7 @@
 - **icon.png**
 - components folder out of app folder
 - dynamic routes: https://www.udemy.com/course/nextjs-react-the-complete-guide/learn/lecture/41159656#overview
-- 
+- nested layouts are children of root layout
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
