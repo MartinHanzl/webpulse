@@ -43,6 +43,7 @@
 - nested layouts are children of root layout
 - `@` is for root folder
 - if we are accessing img, we need to add `.src`
+- recommendation is to use `<Image>` component (then we do not to use `.src`)
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
