@@ -41,6 +41,8 @@
 - components folder out of app folder
 - dynamic routes: https://www.udemy.com/course/nextjs-react-the-complete-guide/learn/lecture/41159656#overview
 - nested layouts are children of root layout
+- `@` is for root folder
+- if we are accessing img, we need to add `.src`
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
