@@ -13,9 +13,11 @@ class MealController extends Controller
 {
     public function list(Request $request): JsonResponse
     {
-        return Response::json(
-            MealResource::collection(Meal::query()->get())
-        );
+        $meals = Meal::query()->get();
+        return Response::json([
+            'success' => true,
+            'data' => MealResource::collection($meals)
+        ]);
     }
 
     public function save(Request $request, int $id = null): JsonResponse

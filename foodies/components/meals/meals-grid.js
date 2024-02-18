@@ -1,11 +1,14 @@
-import styles from './meals-grid.module.css';
-import MealItem from "@/components/meals/meal-item";
-export default function MealsGrid(props) {
+import MealItem from './meal-item';
+import classes from './meals-grid.module.css';
+
+export default function MealsGrid({ meals }) {
     return (
-        <ul className={styles.meals}>
-            {props.meals.map((meal) => {
-                <MealItem {...meal} />
-            })}
+        <ul className={classes.meals}>
+            {meals.map((meal) => (
+                <li key={meal.id}>
+                    <MealItem {...meal} />
+                </li>
+            ))}
         </ul>
-    )
+    );
 }
