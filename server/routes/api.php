@@ -77,3 +77,10 @@ Route::group([
         Route::post('create', [\App\Http\Controllers\Client\Blog\PostController::class, 'create']);
     });
 });
+
+Route::group([
+    'prefix' => 'meals'
+], function () {
+    Route::get('', [\App\Http\Controllers\Client\Meal\MealController::class, 'list']);
+    Route::post('save/{id?}', [\App\Http\Controllers\Client\Meal\MealController::class, 'save'])->where('id', '[0-9]+');
+});
