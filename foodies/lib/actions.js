@@ -7,7 +7,7 @@ function isInvalidText(text) {
     return !text || text.trim() === '';
 }
 
-export async function shareMeal(FormData) {
+export async function shareMeal(prevState, FormData) {
     const meal = {
         title: FormData.get('title'),
         summary: FormData.get('summary'),
@@ -20,13 +20,15 @@ export async function shareMeal(FormData) {
     if (
         isInvalidText(meal.title) ||
         isInvalidText(meal.summary) ||
-        isInvalidText(meal.instruction) ||
+        isInvalidText(meal.instructions) ||
         isInvalidText(meal.creator) ||
         isInvalidText(meal.creator_email) ||
         !meal.creator_email.includes('@') ||
         !meal.image || meal.image.size === 0
     ) {
-        throw new Error('Invalid input');
+        return {
+            message: 'Invalid field'
+        }
     }
 
     await saveMeal(meal);
