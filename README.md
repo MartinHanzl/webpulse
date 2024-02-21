@@ -59,6 +59,8 @@
 - `npm run build` pre-generate all the pages that can be pre-generated
 - `npm start` run production server on localhost
 - `revalidatePath('/meals')` tells next.js to revalidate cache of the certain route path
+- **/public** folder is only available on development server
+- 
 
 
 ## Nápady
