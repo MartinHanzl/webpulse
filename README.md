@@ -51,6 +51,7 @@
                     __html: '...'
                 }}></p>`
 - `notFound()` function shows closest `nof-found.js` page
+- `use server;` is guaranteed to happen on the server
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
