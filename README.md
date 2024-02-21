@@ -46,7 +46,10 @@
 - recommendation is to use `<Image>` component (then we do not to use `.src`)
 - `'use client;'` put as far down as possible
 - `<Suspense>` is component by react to allow us to handle loading state and show fallback content until data are loaded
-- 
+- `dangerouslySetInnerHTML` xss attack
+- `<p className={styles.instructions} dangerouslySetInnerHTML={{
+                    __html: '...'
+                }}></p>`
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
