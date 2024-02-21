@@ -1,21 +1,9 @@
 import classes from './page.module.css';
 import ImagePicker from "@/components/meals/image-picker";
+import {shareMeal} from "@/lib/actions";
 
 export default function ShareMealPage() {
-    async function shareMeal(FormData) {
-        'use server';
-
-        const meal = {
-            title: FormData.get('title'),
-            summary: FormData.get('summary'),
-            creator_email: FormData.get('email'),
-            creator: FormData.get('name'),
-            instructions: FormData.get('instructions'),
-            image: FormData.get('image')
-        }
-    }
-
-    return (
+        return (
         <>
             <header className={classes.header}>
                 <h1>
