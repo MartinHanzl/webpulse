@@ -53,6 +53,8 @@
 - `notFound()` function shows closest `nof-found.js` page
 - `use server;` is guaranteed to happen on the server
 - `use server;` cannot be in use with `use client;` component
+- `npm install slugify xss`
+
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
