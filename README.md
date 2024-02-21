@@ -50,6 +50,7 @@
 - `<p className={styles.instructions} dangerouslySetInnerHTML={{
                     __html: '...'
                 }}></p>`
+- `notFound()` function shows closest `nof-found.js` page
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
