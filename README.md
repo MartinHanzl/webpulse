@@ -55,6 +55,9 @@
 - `use server;` cannot be in use with `use client;` component
 - `npm install slugify xss`
 - `import {useFormStatus} from 'react-dom';` must be inside any form component
+- `npm run build` prepare project for production
+- `npm run build` pre-generate all the pages that can be pre-generated
+- `npm start` run production server on localhost
 
 
 ## Nápady
