@@ -15,6 +15,7 @@ export default function ImagePicker(props) {
         const file = event.target.files[0];
 
         if (!file) {
+            setPickedImage(null);
             return;
         }
 
@@ -32,8 +33,16 @@ export default function ImagePicker(props) {
                 {!pickedImage && <p>No image!</p>}
                 {pickedImage && <Image src={pickedImage} alt="Image selected by the user" fill/>}
             </div>
-            <input className={styles.input} type="file" id="image" accept="image/png, image/jpeg" name={props.name}
-                   ref={imageInput} onChange={handleImageChange}></input>
+            <input
+                className={styles.input}
+                type="file"
+                id={props.name}
+                accept="image/png, image/jpeg"
+                name={props.name}
+                ref={imageInput}
+                onChange={handleImageChange}
+                required
+            />
             <button className={styles.button} type="button" onClick={handlePickClick}>Upload image</button>
         </div>
     </div>
