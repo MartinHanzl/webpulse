@@ -54,6 +54,7 @@
 - `use server;` is guaranteed to happen on the server
 - `use server;` cannot be in use with `use client;` component
 - `npm install slugify xss`
+- `import {useFormStatus} from 'react-dom';` must be inside any form component
 
 
 ## Nápady
