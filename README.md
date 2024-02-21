@@ -60,7 +60,7 @@
 - `npm start` run production server on localhost
 - `revalidatePath('/meals')` tells next.js to revalidate cache of the certain route path
 - **/public** folder is only available on development server
-- `generateMetadata({params})` used for generating metadata for dynamic pages
+- `generateMetadata({params})` used for generating metadata for dynamic pages [Next.js metadata docs](https://nextjs.org/docs/app/api-reference/functions/generate-metadata)
 
 
 ## Nápady
