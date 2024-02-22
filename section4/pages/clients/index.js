@@ -8,7 +8,10 @@ export default function ClientsPage() {
         <div>
             <h1>Clients page</h1>
             <ul>
-                {clients.map(client => <li key={client.id}><Link href={`/clients/${client.id}`}>{client.name}</Link></li>)}
+                {clients.map(client => <li key={client.id}><Link href={{
+                    pathname: '/clients/[id]',
+                    query: {id: client.id}
+                }}>{client.name}</Link></li>)}
             </ul>
         </div>
     )
