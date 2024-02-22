@@ -27,7 +27,7 @@
 - - App router: yes
 - - custom alias: no
 
-## Section 3
+## Section 3: NextJS Essentials (App Router)
 - Next.js app are rendered on server side
 - in file based routing every new route should b*e* named `page.js`
 - name of component does not matter
@@ -67,6 +67,8 @@
 - filenames **matters** (index.js, index.js, ...)
 - `import { useRouter } from 'next/router';` -> `const router = useRouter();`
 - `router.query` & `router.pathname`
+- we can have nested dynamic paths
+- 
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
