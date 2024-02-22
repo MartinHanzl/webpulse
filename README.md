@@ -69,6 +69,7 @@
 - `router.query` & `router.pathname`
 - we can have nested dynamic paths
 - **[...slug].js** catch all nested routes -> we got array when use `useRouter()`
+- `<Link />` pre-fetch data from page we want to visit as soon as we hover over the component
 - 
 
 ## Nápady
