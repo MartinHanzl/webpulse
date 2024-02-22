@@ -32,7 +32,7 @@
 - in file based routing every new route should b*e* named `page.js`
 - name of component does not matter
 - app router vs pages router (section 1, part 7)
-- `page.js`, `layout.js`, `not-found.js`, `error.js` are reserved names (https://www.udemy.com/course/nextjs-react-the-complete-guide/learn/lecture/41161954#overview)
+- `page.js`, `layout.js`, `404.js`, `error.js` are reserved names (https://www.udemy.com/course/nextjs-react-the-complete-guide/learn/lecture/41161954#overview)
 - react server components: rendered only on server, never on client
 - every nextjs project needs at least one root layout
 - we can add `layout.js` in route folders
