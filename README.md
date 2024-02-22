@@ -27,7 +27,7 @@
 - - App router: yes
 - - custom alias: no
 
-
+## Section 3
 - Next.js app are rendered on server side
 - in file based routing every new route should b*e* named `page.js`
 - name of component does not matter
@@ -62,6 +62,9 @@
 - **/public** folder is only available on development server
 - `generateMetadata({params})` used for generating metadata for dynamic pages [Next.js metadata docs](https://nextjs.org/docs/app/api-reference/functions/generate-metadata)
 
+## Section 4: Pages and file-based routing
+- somehting like nuxt2
+- 
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
