@@ -23,14 +23,15 @@ export default function SingleEventSlugPage() {
         month: filteredMonth
     });
 
-    if(!events) {
+    if (!events) {
         return <p className="center">No events!</p>
     }
 
+    console.log(events);
+
     return (
         <main>
-            <h1>Single event SLUG</h1>
-            <EventList items={events} />
+            <EventList items={events}/>
         </main>
     )
 }
