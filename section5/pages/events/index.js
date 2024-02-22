@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 
 export default function EventsPage() {
     const events = getAllEvents();
-        const router = useRouter();
+    const router = useRouter();
 
     function findEventsHandler(year, month) {
         router.push(`/events/${year}/${month}`);
@@ -14,7 +14,7 @@ export default function EventsPage() {
     return (
         <main>
             <h1>All events page</h1>
-            <EventsSearch onSearch={findEventsHandler()}/>
+            <EventsSearch onSearch={findEventsHandler}/>
             <EventList items={events}/>
         </main>
     )
