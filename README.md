@@ -73,7 +73,7 @@
 - `404.js` = custom not found page
 
 ## Section 5
-
+- `const { title, image, date, location, id } = props;` => destructurized props
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
