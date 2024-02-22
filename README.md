@@ -75,6 +75,8 @@
 ## Section 5
 - `const { title, image, date, location, id } = props;` => destructurized props
 - [Link up to Next.js 13](https://www.udemy.com/course/nextjs-react-the-complete-guide/learn/lecture/34563778#overview)
+- `import {Fragment} from "react";` is needed if we have jsx elements and components
+- 
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
