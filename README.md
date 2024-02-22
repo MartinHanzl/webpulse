@@ -64,7 +64,7 @@
 
 ## Section 4: Pages and file-based routing
 - somehting like nuxt2
-- 
+- filenames **matters** (about.js, index.js, ...)
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
