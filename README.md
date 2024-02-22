@@ -65,6 +65,8 @@
 ## Section 4: Pages and file-based routing
 - somehting like nuxt2
 - filenames **matters** (index.js, index.js, ...)
+- `import { useRouter } from 'next/router';` -> `const router = useRouter();`
+- `router.query` & `router.pathname`
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
