@@ -70,7 +70,10 @@
 - we can have nested dynamic paths
 - **[...slug].js** catch all nested routes -> we got array when use `useRouter()`
 - `<Link />` pre-fetch data from page we want to visit as soon as we hover over the component
-- 
+- `404.js` = custom not found page
+
+## Section 5
+
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
