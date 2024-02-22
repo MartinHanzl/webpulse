@@ -11,8 +11,8 @@ export default function SingleEventSlugPage() {
         return <p className="center">No event found!</p>
     }
 
-    const filteredYear = Number(filteredData[0]);
-    const filteredMonth = Number(filteredData[1]);
+    const filteredYear = +filteredData[0];
+    const filteredMonth = +filteredData[1];
 
     if (isNaN(filteredYear) || isNaN(filteredMonth)) {
         return <p className="center">Invalid URL!</p>
