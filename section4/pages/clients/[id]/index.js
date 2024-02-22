@@ -4,7 +4,7 @@ export default function ClientsPageId() {
 
     return (
         <div>
-            <h1>Project of given client</h1>
+            <h1>Project client {router.query.id}</h1>
         </div>
     )
 }
