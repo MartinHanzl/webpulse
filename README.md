@@ -68,6 +68,7 @@
 - `import { useRouter } from 'next/router';` -> `const router = useRouter();`
 - `router.query` & `router.pathname`
 - we can have nested dynamic paths
+- **[...slug].js** catch all nested routes -> we got array when use `useRouter()`
 - 
 
 ## Nápady
