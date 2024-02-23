@@ -97,6 +97,12 @@
 - dynamic pages are not pre-genarated by default
 - with `fallback: true` we tell Next.js that the pages are not here
 
+### Server side rendering
+- `export async function getServerSideProps() { ... }` - name of the function matters
+- `getServerSideProps() { ... }` executes only on server
+- `getServerSideProps` & `getStaticProps` needs same parameters
+- 
+
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
 - [ ]
