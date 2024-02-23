@@ -91,6 +91,8 @@
 - we need to always return object of props
 - we can use imports in `getStaticProps()`
 - `process.cwd()` stands for root folder of the project 
+- **ISR** - Incremental static generation
+- `revalidate: 1 `**really matters in production**
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
