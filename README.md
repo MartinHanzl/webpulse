@@ -72,10 +72,22 @@
 - `<Link />` pre-fetch data from page we want to visit as soon as we hover over the component
 - `404.js` = custom not found page
 
-## Section 5
+## Section 5: Project Time: Working with File-based Routing
 - `const { title, image, date, location, id } = props;` => destructurized props
 - [Link up to Next.js 13](https://www.udemy.com/course/nextjs-react-the-complete-guide/learn/lecture/34563778#overview)
 - `import {Fragment} from "react";` is needed if we have jsx elements and components
+
+## Section 6: Page Pre-Rendering & Data Fetching
+- in classic react apps when we fetch some data and we press **CTRL+U**, we cannot see the data
+- so the search engines like google etc. won't see the content
+- we send request after the page was rendered
+- **Page pre-rendering** returns pre-rendered page which is good for SEO
+-two forms of pre-rendering: Static generation and Server-side rendering
+
+### Static generation
+- idea is pre-generate page during build-time and one we deploy them, they can be cached by CDN
+- `export async function getStaticProps(context) { ... }` - name of the function matters
+- any code we put inside `getStaticProps()` function won't be included in the code bundled when sent back to client (credentials, etc.)
 - 
 
 ## Nápady
