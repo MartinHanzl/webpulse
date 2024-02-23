@@ -101,7 +101,7 @@
 - `export async function getServerSideProps() { ... }` - name of the function matters
 - `getServerSideProps() { ... }` executes only on server
 - `getServerSideProps` & `getStaticProps` needs same parameters
-- 
+- `{params, req, res}` = default Node.js objects
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
