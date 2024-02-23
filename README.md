@@ -89,7 +89,8 @@
 - `export async function getStaticProps(context) { ... }` - name of the function matters
 - any code we put inside `getStaticProps()` function won't be included in the code bundled when sent back to client (credentials, etc.)
 - we need to always return object of props
-- 
+- we can use imports in `getStaticProps()`
+- `process.cwd()` stands for root folder of the project 
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
