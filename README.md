@@ -107,6 +107,9 @@
 - some data does not to be pre-rendered (eshop, dashboard, etc)
 - `useSwr()` can be used only in react components
 
+## Section 7
+-
+
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
 - [ ]
