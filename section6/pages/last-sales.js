@@ -1,30 +1,30 @@
 import {useEffect, useState} from "react";
+import useSWR from "swr";
 
 export default function LastSales() {
+    const { data, error } = useSWR(
+        'https://quickstart-1612785053126-default-rtdb.firebaseio.com/sales.json',
+        (url) => fetch(url).then(res => res.json())
+    );
     const [sales, setSales] = useState();
-    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
-        setIsLoading(true);
-        fetch('https://quickstart-1612785053126-default-rtdb.firebaseio.com/sales.json')
-            .then(response => response.json())
-            .then(data => {
-                const transformedSales = [];
+        if(data) {
+            const transformedSales = [];
 
-                for (const key in data) {
-                    transformedSales.push({id: key, username: data[key].username, volume: data[key].volume})
-                }
-                setSales(transformedSales);
-                console.log(sales);
-                setIsLoading(false);
-            });
-    }, []);
+            for (const key in data) {
+                transformedSales.push({id: key, username: data[key].username, volume: data[key].volume})
+            }
+            setSales(transformedSales);
+        }
+    }, [data]);
 
-    if (isLoading) {
+    if (!data) {
         return <p>Loading...</p>;
     }
 
-    if (!sales) {
-        return <p>No data yet</p>;
+    if (error || !sales) {
+        return <p>Failed to load</p>;
     }
     return (
         <main>
