@@ -88,6 +88,7 @@
 - idea is pre-generate page during build-time and one we deploy them, they can be cached by CDN
 - `export async function getStaticProps(context) { ... }` - name of the function matters
 - any code we put inside `getStaticProps()` function won't be included in the code bundled when sent back to client (credentials, etc.)
+- we need to always return object of props
 - 
 
 ## Nápady
