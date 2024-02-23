@@ -95,7 +95,7 @@
 - **ISR** - Incremental static generation
 - `revalidate: 1 `**really matters in production**
 - dynamic pages are not pre-genarated by default
-- 
+- with `fallback: true` we tell Next.js that the pages are not here
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu

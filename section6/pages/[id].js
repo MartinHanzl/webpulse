@@ -4,6 +4,10 @@ import fs from "fs/promises";
 
 export default function ProductDetail(props) {
     const {loadedProduct} = props;
+
+    if(!loadedProduct) {
+        return <p>Product was not found.</p>
+    }
     return <Fragment>
         <h1>{loadedProduct.title}</h1>
         <p>{loadedProduct.description}</p>
@@ -38,18 +42,8 @@ export async function getStaticPaths() {
                 params: {
                     id: 'p1'
                 }
-            },
-            {
-                params: {
-                    id: 'p2'
-                }
-            },
-            {
-                params: {
-                    id: 'p3'
-                }
             }
         ],
-        fallback: false
+        fallback: true // or 'blocking' - when we set blocking, the page wait to be fully generated on the server, and we do not need any fallback in the main component
     }
 }
