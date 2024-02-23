@@ -102,6 +102,10 @@
 - `getServerSideProps() { ... }` executes only on server
 - `getServerSideProps` & `getStaticProps` needs same parameters
 - `{params, req, res}` = default Node.js objects
+- 
+- ### Client-side data fetching
+- some data does not to be pre-rendered (eshop, dashboard, etc)
+- 
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
