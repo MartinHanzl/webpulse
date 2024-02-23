@@ -87,12 +87,15 @@
 ### Static generation
 - idea is pre-generate page during build-time and one we deploy them, they can be cached by CDN
 - `export async function getStaticProps(context) { ... }` - name of the function matters
+- `export async function getStaticPaths() { ... }` - name of the function matters
 - any code we put inside `getStaticProps()` function won't be included in the code bundled when sent back to client (credentials, etc.)
 - we need to always return object of props
 - we can use imports in `getStaticProps()`
 - `process.cwd()` stands for root folder of the project 
 - **ISR** - Incremental static generation
 - `revalidate: 1 `**really matters in production**
+- dynamic pages are not pre-genarated by default
+- 
 
 ## Nápady
 - [ ] v administraci při vytváření nového záznamu nejdříve vytvořit skrze modal a potom přesměrovat na celkovou úpravu
