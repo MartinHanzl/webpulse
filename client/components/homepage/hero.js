@@ -4,7 +4,7 @@ import {Suspense} from "react";
 export default function HomepageHeroSection() {
     const {t} = useTranslation('translation');
     return (
-        <div className="relative isolate px-6 pt-14 lg:px-8">
+        <div className="relative isolate px-6 pt-14 lg:px-8 h-full bg-slate-950">
             <div
                 className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
                 aria-hidden="true"
@@ -17,28 +17,31 @@ export default function HomepageHeroSection() {
                     }}
                 />
             </div>
-            <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-                <div className="text-center">
-                    <h1 className="text-4xl font-bold tracking-tight text-slate-50 sm:text-6xl">
-                        <Suspense fallback="loading">
-                            {t('system.title')}
-                        </Suspense>
-                    </h1>
-                    <p className="mt-6 text-lg leading-8 text-slate-200">
-                        <Suspense fallback="loading">
-                            {t('system.slogan')}
-                        </Suspense>
-                    </p>
-                    <div className="mt-10 flex items-center justify-center gap-x-6">
-                        <a
-                            href="#"
-                            className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                        >
-                            Get started
-                        </a>
-                        <a href="#" className="text-sm font-semibold leading-6 text-gray-900">
-                            Learn more <span aria-hidden="true">→</span>
-                        </a>
+            <div className="container mx-auto py-32 sm:py-48 lg:py-56">
+                <div className="flex flex-wrap justify-between">
+                    <div className="text-center md:text-left w-full md:w-1/2">
+                        <div className="mb-auto">
+                            <h1 className="text-4xl font-bold tracking-tight text-slate-50 md:text-6xl lg:text-8xl xl:text-9xl">
+                                <Suspense fallback="loading">
+                                    {t('system.title')}
+                                </Suspense>
+                            </h1>
+                        </div>
+                        <div className="mt-auto mb-auto">
+                            <p className="mt-6 text-lg leading-8 text-slate-200">
+                                <Suspense fallback="loading">
+                                    {t('system.slogan')}
+                                </Suspense>
+                            </p>
+                        </div>
+                        <div className="mt-16 mb-auto">
+                            <a
+                                href="#"
+                                className="rounded-md bg-sky-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                                Get started
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

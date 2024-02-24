@@ -7,7 +7,7 @@ export default function App({Component, pageProps}) {
         <>
             <Header/>
             <Fragment>
-                <main>
+                <main className="lg:container mx-auto">
                     <Component {...pageProps} />
                 </main>
             </Fragment>
