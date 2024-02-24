@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Models\Meal;
+namespace App\Models\Settings;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Meal extends Model
+class LinkTranslation extends Model
 {
     use HasFactory;
 
+    protected $table = 'link_translations';
     protected $fillable = [
-        'slug',
+        'link_id',
+        'locale',
         'title',
-        'image',
-        'summary',
-        'instructions',
-        'creator',
-        'creator_email'
+        'link'
     ];
 }

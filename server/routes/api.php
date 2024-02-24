@@ -42,6 +42,24 @@ Route::group([
 });
 
 Route::group([
+    'prefix' => 'blog'
+], function () {
+    Route::group([
+        'prefix' => 'posts'
+    ], function () {
+        Route::get('list', [\App\Http\Controllers\Client\Blog\PostController::class, 'list']);
+        Route::get('detail/{id}', [\App\Http\Controllers\Client\Blog\PostController::class, 'detail'])->where('id', '[0-9]+');
+        Route::post('create', [\App\Http\Controllers\Client\Blog\PostController::class, 'create']);
+    });
+});
+
+Route::group([
+    'prefix' => 'links'
+], function () {
+    Route::get('list/{lang}', [\App\Http\Controllers\Client\Settings\LinkController::class, 'list']);
+});
+
+Route::group([
     'prefix' => 'admin'
 ], function () {
     Route::group([
@@ -64,23 +82,13 @@ Route::group([
             });
         });
     });
-});
-
-Route::group([
-    'prefix' => 'blog'
-], function () {
     Route::group([
-        'prefix' => 'posts'
+        'prefix' => 'links'
     ], function () {
-        Route::get('list', [\App\Http\Controllers\Client\Blog\PostController::class, 'list']);
-        Route::get('detail/{id}', [\App\Http\Controllers\Client\Blog\PostController::class, 'detail'])->where('id', '[0-9]+');
-        Route::post('create', [\App\Http\Controllers\Client\Blog\PostController::class, 'create']);
+        Route::get('list/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'list']);
+        Route::get('list/detail/{id}/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'detail'])->where('id', '[0-9]+');
+        Route::post('create/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'create']);
+        Route::post('edit/{id}/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'edit'])->where('id', '[0-9]+');
+        Route::delete('list/{id}/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'delete'])->where('id', '[0-9]+');
     });
-});
-
-Route::group([
-    'prefix' => 'meals'
-], function () {
-    Route::get('', [\App\Http\Controllers\Client\Meal\MealController::class, 'list']);
-    Route::post('save/{id?}', [\App\Http\Controllers\Client\Meal\MealController::class, 'save'])->where('id', '[0-9]+');
 });

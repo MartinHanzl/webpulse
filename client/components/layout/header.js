@@ -1,14 +1,45 @@
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import {Dialog} from '@headlessui/react'
 import {Bars3Icon, XMarkIcon} from '@heroicons/react/24/outline'
-import Link from 'next/link'
-import {Menu} from '@headlessui/react'
+import Link from 'next/link';
+import useSWR from 'swr';
+import {Disclosure, Menu, Transition} from '@headlessui/react'
+import {Fragment} from "react";
+import Image from 'next/image';
 
-export default function Header() {
+function classNames(...classes) {
+    return classes.filter(Boolean).join(' ')
+}
+
+export default function Header(props) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [links, setLinks] = useState();
+
+    const locale = props.lang;
+
+    const {data, error} = useSWR(
+        'http://localhost:8000/api/links/list/' + props.lang,
+        (url) => fetch(url).then(res => res.json())
+    );
+
+    useEffect(() => {
+        if (data) {
+            const links = [];
+
+            for (const key in data) {
+                links.push({
+                    id: key,
+                    ...data[key],
+                });
+            }
+
+            setLinks(links);
+        }
+    }, [data]);
+
 
     return (
-        <header className="fixed inset-x-0 top-0 z-50 backdrop-blur-sm">
+        <header className="fixed inset-x-0 py-4 top-0 z-50 backdrop-blur-sm">
             <div className="lg:container mx-auto">
                 <nav className="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
                     <div className="flex lg:flex-1">
@@ -31,25 +62,75 @@ export default function Header() {
                             <Bars3Icon className="h-6 w-6" aria-hidden="true"/>
                         </button>
                     </div>
-                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <Link href='/'>About us</Link>
-                        {/*{navigation.map((item) => (
-                        <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-gray-900">
-                            {item.name}
-                        </a>
-                    ))}*/}
-                        <a href='/en' className="text-sm font-semibold leading-6 text-slate-100">
-                            Angličtina
-                        </a>
-                        <a href='/' className="text-sm font-semibold leading-6 text-slate-100">
-                            Česština
-                        </a>
+                    <div className="hidden md:flex lg:flex-1 lg:justify-end">
+                        {links && links.map((link) => (
+                            <Link key={link.id} href={link.link}
+                                  className="text-1xl font-semibold text-slate-100">
+                                {link.title}
+                            </Link>
+                        ))}
+                        <Menu as="div" className="relative ml-24">
+                            <div>
+                                <Menu.Button
+                                    className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800">
+                                    <span className="absolute -inset-1.5"/>
+                                    <span className="sr-only">Open user menu</span>
+                                    {locale === 'cs' &&
+                                        <img
+                                            className="h-8 w-8 rounded-full"
+                                            src="https://flagicons.lipis.dev/flags/4x3/cz.svg"
+                                            alt=""
+                                        />
+                                    }
+                                    {locale === 'en' &&
+                                        <img
+                                            className="h-8 w-8 rounded-full"
+                                            src="https://flagicons.lipis.dev/flags/4x3/gb.svg"
+                                            alt=""
+                                        />
+                                    }
+                                </Menu.Button>
+                            </div>
+                            <Transition
+                                as={Fragment}
+                                enter="transition ease-out duration-100"
+                                enterFrom="transform opacity-0 scale-95"
+                                enterTo="transform opacity-100 scale-100"
+                                leave="transition ease-in duration-75"
+                                leaveFrom="transform opacity-100 scale-100"
+                                leaveTo="transform opacity-0 scale-95"
+                            >
+                                <Menu.Items
+                                    className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                                    <Menu.Item>
+                                        {({active}) => (
+                                            <a
+                                                href="/en"
+                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                            >
+                                                Angličtina
+                                            </a>
+                                        )}
+                                    </Menu.Item>
+                                    <Menu.Item>
+                                        {({active}) => (
+                                            <a
+                                                href="/cs"
+                                                className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                            >
+                                                Čeština
+                                            </a>
+                                        )}
+                                    </Menu.Item>
+                                </Menu.Items>
+                            </Transition>
+                        </Menu>
                     </div>
                 </nav>
-                <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
+                <Dialog as="div" className="md:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
                     <div className="fixed inset-0 z-50"/>
                     <Dialog.Panel
-                        className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+                        className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-slate-950/5 px-6 py-10 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 backdrop-blur-sm">
                         <div className="flex items-center justify-between">
                             <a href="#" className="-m-1.5 p-1.5">
                                 <span className="sr-only">Your Company</span>
@@ -71,23 +152,15 @@ export default function Header() {
                         <div className="mt-6 flow-root">
                             <div className="-my-6 divide-y divide-gray-500/10">
                                 <div className="space-y-2 py-6">
-                                    {/*{navigation.map((item) => (
-                                    <a
-                                        key={item.name}
-                                        href={item.href}
-                                        className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                    >
-                                        {item.name}
-                                    </a>
-                                ))}*/}
-                                </div>
-                                <div className="py-6">
-                                    <a
-                                        href="#"
-                                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-                                    >
-                                        Log in
-                                    </a>
+                                    {links.map((link) => (
+                                        <a
+                                            key={link.id}
+                                            href={link.link}
+                                            className="-mx-3 block rounded-lg px-3 py-2 text-center font-semibold leading-7 text-slate-100 hover:text-slate-400"
+                                        >
+                                            {link.title}
+                                        </a>
+                                    ))}
                                 </div>
                             </div>
                         </div>
