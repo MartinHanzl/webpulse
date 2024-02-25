@@ -60,6 +60,12 @@ Route::group([
 });
 
 Route::group([
+    'prefix' => 'languages'
+], function () {
+    Route::get('list/{lang}', [\App\Http\Controllers\Client\LanguageController::class, 'list']);
+});
+
+Route::group([
     'prefix' => 'admin'
 ], function () {
     Route::group([
@@ -85,10 +91,20 @@ Route::group([
     Route::group([
         'prefix' => 'links'
     ], function () {
-        Route::get('list/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'list']);
-        Route::get('list/detail/{id}/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'detail'])->where('id', '[0-9]+');
-        Route::post('create/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'create']);
-        Route::post('edit/{id}/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'edit'])->where('id', '[0-9]+');
-        Route::delete('list/{id}/{lang?}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'delete'])->where('id', '[0-9]+');
+        Route::get('list/{lang}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'list']);
+        Route::get('list/detail/{id}/{lang}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'detail'])->where('id', '[0-9]+'); //TODO -> detail/{id}/{lang}
+        Route::post('create/{lang}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'create']);
+        Route::post('edit/{id}/{lang}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'edit'])->where('id', '[0-9]+');
+        Route::delete('list/{id}/{lang}', [\App\Http\Controllers\Admin\Settings\LinkController::class, 'delete'])->where('id', '[0-9]+');
+    });
+
+    Route::group([
+        'prefix' => 'languages'
+    ], function () {
+        Route::get('list/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'list']);
+        Route::get('detail/{id}/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'detail'])->where('id', '[0-9]+');
+        Route::post('create/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'create']);
+        Route::post('edit/{id?}{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'edit'])->where('id', '[0-9]+');;
+        Route::delete('delete/{id}/{lang}', [\App\Http\Controllers\Admin\LanguageController::class, 'delete'])->where('id', '[0-9]+');;
     });
 });

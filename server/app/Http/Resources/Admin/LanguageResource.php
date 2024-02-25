@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Http\Resources\Admin\Settings;
+namespace App\Http\Resources\Admin;
 
-use App\Models\Settings\LinkTranslation;
+use App\Models\LanguageTranslation;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\App;
 
-class LinkResource extends JsonResource
+class LanguageResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +15,13 @@ class LinkResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        /** @var LinkTranslation $translation */
+        /** @var LanguageTranslation $translation */
         $translation = optional($this->getTranslation());
         return [
             'id' => $this->id,
-            'is_active' => $this->active,
-            'title' => $translation->title,
-            'link' => $translation->link,
+            'locale' => $this->default_locale,
+            'name' => $translation->name,
+            'active' => $this->active,
             'translations' => array_column($this->translations->toArray(), NULL, 'locale'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
