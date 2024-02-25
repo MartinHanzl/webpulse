@@ -9,17 +9,11 @@ export default function Header(props) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
     const [links, setLinks] = useState();
-    const [languages, setLanguages] = useState();
 
     const locale = props.lang;
 
     const {data, error} = useSWR(
         'http://localhost:8000/api/links/list/' + props.lang,
-        (url) => fetch(url).then(res => res.json())
-    );
-
-    const {languagesData, languagesError} = useSWR(
-        'http://localhost:8000/api/languages/list/' + props.lang,
         (url) => fetch(url).then(res => res.json())
     );
 
@@ -37,21 +31,6 @@ export default function Header(props) {
             setLinks(links);
         }
     }, [data]);
-
-    useEffect(() => {
-        if (languagesData) {
-            const languages = [];
-
-            for (const key in languagesData) {
-                languages.push({
-                    id: key,
-                    ...languagesData[key],
-                });
-            }
-
-            setLanguages(languages);
-        }
-    }, [languagesData]);
 
     return (
         <header className="fixed inset-x-0 py-4 top-0 z-50 backdrop-blur-sm">
@@ -84,9 +63,7 @@ export default function Header(props) {
                                 {link.title}
                             </Link>
                         ))}
-                        {languages &&
-                            <HeaderLanguageSwitcher lang={locale} languages={languages}/>
-                        }
+                        <HeaderLanguageSwitcher lang={locale}/>
                     </div>
                 </nav>
                 <Dialog as="div" className="md:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
