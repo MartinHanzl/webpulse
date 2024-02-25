@@ -18,11 +18,9 @@ class LinkController extends Controller
     {
         $this->handleLang($lang);
 
-        $query = Link::query()->where('type', '=', 'client');
-
-        if ($request->has('active')) {
-            $query->where('active', '=', true);
-        }
+        $query = Link::query()
+            ->where('type', '=', 'client')
+            ->where('active', '=', true);
 
         $links = $query->get();
 

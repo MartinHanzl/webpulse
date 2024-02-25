@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\Settings\LinkResource;
 use App\Http\Resources\Me\MeResource;
 use App\Models\Settings\Link;
+use App\Models\Settings\LinkTranslation;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -59,8 +60,7 @@ class LinkController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'title' => 'required',
-            'link' => 'required'
+            'translations' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -71,8 +71,13 @@ class LinkController extends Controller
         $link->fill($data);
         $link->save();
 
-        $link->translate('en');
-        $link->translate('cs');
+        foreach ($request->get('translations') as $key => $translation) {
+            $translation['link_id'] = (int)$link->id;
+            $translation['locale'] = (string)$key;
+            $linkTranslation = new LinkTranslation();
+            $linkTranslation->fill($translation);
+            $linkTranslation->save();
+        }
 
         return Response::json(
             LinkResource::make($link)

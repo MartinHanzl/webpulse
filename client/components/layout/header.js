@@ -65,16 +65,15 @@ export default function Header(props) {
                     <div className="hidden md:flex lg:flex-1 lg:justify-end">
                         {links && links.map((link) => (
                             <Link key={link.id} href={link.link}
-                                  className="text-1xl font-semibold text-slate-100">
+                                  className="text-1xl font-semibold text-slate-100 ml-16">
                                 {link.title}
                             </Link>
                         ))}
-                        <Menu as="div" className="relative ml-24">
+                        <Menu as="div" className="relative ml-16">
                             <div>
                                 <Menu.Button
                                     className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800">
                                     <span className="absolute -inset-1.5"/>
-                                    <span className="sr-only">Open user menu</span>
                                     {locale === 'cs' &&
                                         <img
                                             className="h-8 w-8 rounded-full"
@@ -152,14 +151,14 @@ export default function Header(props) {
                         <div className="mt-6 flow-root">
                             <div className="-my-6 divide-y divide-gray-500/10">
                                 <div className="space-y-2 py-6">
-                                    {links.map((link) => (
-                                        <a
+                                    {links && links.map((link) => (
+                                        <Link
                                             key={link.id}
                                             href={link.link}
                                             className="-mx-3 block rounded-lg px-3 py-2 text-center font-semibold leading-7 text-slate-100 hover:text-slate-400"
                                         >
                                             {link.title}
-                                        </a>
+                                        </Link>
                                     ))}
                                 </div>
                             </div>
