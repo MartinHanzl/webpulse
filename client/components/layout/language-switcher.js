@@ -38,22 +38,12 @@ export default function HeaderLanguageSwitcher(props) {
             <Menu as="div" className="relative ml-16">
                 <div>
                     <Menu.Button
-                        className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-slate-800">
-                        <span className="absolute -inset-1.5"/>
-                        {locale === 'cs' &&
-                            <img
-                                className="h-8 w-8 rounded-full"
-                                src="https://flagicons.lipis.dev/flags/4x3/cz.svg"
-                                alt=""
-                            />
-                        }
-                        {locale === 'en' &&
-                            <img
-                                className="h-8 w-8 rounded-full"
-                                src="https://flagicons.lipis.dev/flags/4x3/gb.svg"
-                                alt=""
-                            />
-                        }
+                        className="flex rounded-full bg-slate-950 focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-4 focus:ring-offset-slate-950">
+                        <img
+                            className="h-8 w-8 rounded-full"
+                            src={`/images/${locale}.svg`}
+                            alt=""
+                        />
                     </Menu.Button>
                 </div>
                 <Transition
@@ -66,21 +56,21 @@ export default function HeaderLanguageSwitcher(props) {
                     leaveTo="transform opacity-0 scale-95"
                 >
                     <Menu.Items
-                        className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-slate-950 py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {languages.map(language => {
+                        className="absolute right-0 z-10 mt-4 w-32 origin-top-right border-2 rounded-md bg-slate-950 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        {languages.map((language) => (
                             <div key={language.id}>
                                 <Menu.Item>
                                     {({active}) => (
                                         <a
                                             href={`/${language.locale}`}
-                                            className={classNames(active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                            className={classNames(active ? 'bg-gray-100 text-slate-950' : '', 'block px-4 py-2 text-sm text-slate-200')}
                                         >
                                             {language.name}
                                         </a>
                                     )}
                                 </Menu.Item>
                             </div>
-                        })}
+                        ))}
                     </Menu.Items>
                 </Transition>
             </Menu>

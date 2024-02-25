@@ -19,7 +19,7 @@ class LanguageResource extends JsonResource
         $translation = optional($this->getTranslation());
         return [
             'id' => $this->id,
-            'locale' => $this->locale,
+            'locale' => $this->default_locale,
             'name' => $translation->name,
         ];
     }
