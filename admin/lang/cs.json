@@ -1,5 +1,11 @@
 {
   "system": {
     "date": "Dnes je "
+  },
+  "auth": {
+    "email": "Emailová adresa",
+    "passowrd": "Heslo",
+    "title": "Přihlášení do Webpulse",
+    "button": "Přihlásit se"
   }
 }

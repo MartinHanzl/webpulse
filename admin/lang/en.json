@@ -1,5 +1,11 @@
 {
   "system": {
     "date": "Today is "
+  },
+  "auth": {
+    "email": "Email address",
+    "passowrd": "Password",
+    "title": "Sign in Webpulse system",
+    "button": "Sign in"
   }
 }
