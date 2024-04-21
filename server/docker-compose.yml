@@ -12,5 +12,6 @@ services:
     volumes:
       - .:/var/www/html/
       - ../admin:/var/www/admin
+      - ../client:/var/www/client
     env_file:
       - .env
