@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="ring-green-400">
+    <h1 class="font-bold">
       Home Page
     </h1>
     <p>

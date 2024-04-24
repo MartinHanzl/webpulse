@@ -3,6 +3,13 @@ export default defineNuxtConfig({
     ssr: false,
     devtools: {enabled: false},
     css: ['~/assets/css/main.css'],
+    app: {
+        head: {
+            charset: 'utf-8',
+            viewport: 'width=device-width, initial-scale=1',
+            title: 'Euro 2024'
+        }
+    },
     modules: [
         '@nuxtjs/tailwindcss',
         '@nuxtjs/i18n',
