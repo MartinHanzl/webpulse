@@ -6,7 +6,8 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
         '@nuxtjs/i18n',
-        '@nuxtjs/eslint-module'
+        '@nuxtjs/eslint-module',
+        '@pinia/nuxt'
     ],
     i18n: {
         defaultLocale: 'cs',
