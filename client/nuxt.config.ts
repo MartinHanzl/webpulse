@@ -7,7 +7,7 @@ export default defineNuxtConfig({
         head: {
             charset: 'utf-8',
             viewport: 'width=device-width, initial-scale=1',
-            title: 'Euro 2024'
+            title: 'Web Pulse'
         }
     },
     modules: [

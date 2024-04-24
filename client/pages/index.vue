@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="font-bold">
-      Home Page
+      Web Pulse
     </h1>
     <p>
       Click <nuxt-link to="/about">
