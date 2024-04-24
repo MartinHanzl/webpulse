@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     modules: [
         '@nuxtjs/tailwindcss',
         '@nuxtjs/i18n',
+        '@nuxtjs/eslint-module'
     ],
     i18n: {
         defaultLocale: 'cs',
@@ -13,5 +14,8 @@ export default defineNuxtConfig({
             {code: 'cs', name: 'Čeština', file: './lang/cs.json',},
             {code: 'en', name: 'English', file: './lang/en.json',}
         ]
+    },
+    eslint: {
+        cache: false,
     }
 })
