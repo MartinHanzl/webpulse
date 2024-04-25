@@ -1,15 +1,14 @@
 <template>
-  <div></div>
+  <div>
+    <h1 class="font-bold">
+      Web Pulse
+    </h1>
+    <p>
+      Click <nuxt-link to="/about">
+        here
+      </nuxt-link> to go to the about page
+    </p>
+  </div>
 </template>
-
 <script setup lang="ts">
-definePageMeta({
-  title: 'Dashboard',
-  description: 'Welcome to the dashboard',
-  image: 'https://example.com/image.jpg',
-  url: 'https://example.com/dashboard',
-  type: 'website',
-  keywords: 'dashboard, admin, panel',
-  layout: 'login',
-});
 </script>
