@@ -365,11 +365,22 @@ import {
 } from '@heroicons/vue/24/outline'
 import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
 
+const route = useRoute();
+let currentLink = route.path;
+watch(() => route.path, (to) => {
+  currentLink = to;
+});
+
 const nav = [
   {
     name: 'Přehled', links: [
-      {name: 'Nástěnka', href: '/', icon: HomeIcon, current: true},
-      {name: 'Statistiky', href: '/statistiky', icon: PresentationChartLineIcon, current: false},
+      {name: 'Nástěnka', href: '/', icon: HomeIcon, current: currentLink === '/' ? true : false},
+      {
+        name: 'Statistiky',
+        href: '/statistiky',
+        icon: PresentationChartLineIcon,
+        current: currentLink === '/statistiky' ? true : false
+      },
     ]
   },
   {
