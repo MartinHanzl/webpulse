@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeading title="Nástěnka" :links="links" />
+    <PageHeading title="Statistiky" :links="links" />
     <h1 class="font-bold">
       Web Pulse
     </h1>
@@ -25,7 +25,11 @@ export default {
         {
           text: "Nástěnka",
           href: "/",
-        }
+        },
+        {
+          text: "Statistiky",
+          href: "/statistiky"
+        },
       ],
     };
   },

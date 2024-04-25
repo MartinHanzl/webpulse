@@ -136,8 +136,8 @@
                   v-for="item in block.links"
                   :key="item.name"
                 >
-                  <a
-                    :href="item.href"
+                  <NuxtLink
+                    :to="item.href"
                     :class="[item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
                   >
                     <component
@@ -146,7 +146,7 @@
                       aria-hidden="true"
                     />
                     {{ item.name }}
-                  </a>
+                  </NuxtLink>
                 </li>
               </ul>
             </li>
@@ -178,7 +178,8 @@
         />
 
         <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-          <form
+          <div class="relative flex flex-1" />
+          <!--          <form
             class="relative flex flex-1"
             action="#"
             method="GET"
@@ -198,7 +199,7 @@
               type="search"
               name="search"
             >
-          </form>
+          </form>-->
           <div class="flex items-center gap-x-4 lg:gap-x-6">
             <button
               type="button"
@@ -212,6 +213,55 @@
             </button>
 
             <!-- Separator -->
+            <div
+              class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200"
+              aria-hidden="true"
+            />
+
+            <!-- Quick access dropdown -->
+            <Menu
+              as="div"
+              class="relative"
+            >
+              <MenuButton class="-m-1.5 flex items-center p-1.5">
+                <span class="sr-only">Rychlý přístup</span>
+                <span class="hidden lg:flex lg:items-center">
+                  <span
+                    class="text-sm font-semibold leading-6 text-gray-900"
+                    aria-hidden="true"
+                  >Rychlý přístup</span>
+                  <ChevronDownIcon
+                    class="ml-2 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                </span>
+              </MenuButton>
+              <transition
+                enter-active-class="transition ease-out duration-100"
+                enter-from-class="transform opacity-0 scale-95"
+                enter-to-class="transform opacity-100 scale-100"
+                leave-active-class="transition ease-in duration-75"
+                leave-from-class="transform opacity-100 scale-100"
+                leave-to-class="transform opacity-0 scale-95"
+              >
+                <MenuItems
+                  class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+                >
+                  <MenuItem
+                    v-for="item in userNavigation"
+                    :key="item.name"
+                    v-slot="{ active }"
+                  >
+                    <NuxtLink
+                      :to="item.href"
+                      :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
+                    >
+                      {{ item.name }}
+                    </NuxtLink>
+                  </MenuItem>
+                </MenuItems>
+              </transition>
+            </Menu><!-- Separator -->
             <div
               class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-200"
               aria-hidden="true"
@@ -256,10 +306,12 @@
                     :key="item.name"
                     v-slot="{ active }"
                   >
-                    <a
-                      :href="item.href"
+                    <NuxtLink
+                      :to="item.href"
                       :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
-                    >{{ item.name }}</a>
+                    >
+                      {{ item.name }}
+                    </NuxtLink>
                   </MenuItem>
                 </MenuItems>
               </transition>
@@ -309,25 +361,26 @@ import {
   AcademicCapIcon,
   QuestionMarkCircleIcon,
   EnvelopeOpenIcon,
-  HandThumbUpIcon
+  HandThumbUpIcon, ChatBubbleOvalLeftIcon
 } from '@heroicons/vue/24/outline'
 import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
 
 const nav = [
   {
     name: 'Přehled', links: [
-      {name: 'Nástěnka', href: '#', icon: HomeIcon, current: true},
-      {name: 'Statistiky', href: '#', icon: PresentationChartLineIcon, current: false},
+      {name: 'Nástěnka', href: '/', icon: HomeIcon, current: true},
+      {name: 'Statistiky', href: '/statistiky', icon: PresentationChartLineIcon, current: false},
     ]
   },
   {
     name: 'Obsah', links: [
-      {name: 'Služby', href: '#', icon: WrenchScrewdriverIcon, current: false},
+      {name: 'Služby', href: '/sluzby', icon: WrenchScrewdriverIcon, current: false},
       {name: 'Události', href: '#', icon: CalendarDaysIcon, current: false},
       {name: 'Blog', href: '#', icon: NewspaperIcon, current: false},
       {name: 'Stránky', href: '#', icon: DocumentDuplicateIcon, current: false},
       {name: 'Kariéra', href: '#', icon: AcademicCapIcon, current: false},
       {name: 'Reference', href: '#', icon: HandThumbUpIcon, current: false},
+      {name: 'FAQ', href: '#', icon: ChatBubbleOvalLeftIcon, current: false},
     ]
   },
   {
