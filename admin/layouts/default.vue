@@ -108,7 +108,11 @@
                             :href="team.href"
                             :class="[team.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
                           >
-                            <span :class="[team.current ? 'text-indigo-600 border-indigo-600' : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600', 'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white']">{{ team.initial }}</span>
+                            <span
+                              :class="[team.current ? 'text-indigo-600 border-indigo-600' : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600', 'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white']"
+                            >{{
+                              team.initial
+                            }}</span>
                             <span class="truncate">{{ team.name }}</span>
                           </a>
                         </li>
@@ -190,7 +194,11 @@
                     :href="team.href"
                     :class="[team.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
                   >
-                    <span :class="[team.current ? 'text-indigo-600 border-indigo-600' : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600', 'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white']">{{ team.initial }}</span>
+                    <span
+                      :class="[team.current ? 'text-indigo-600 border-indigo-600' : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600', 'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white']"
+                    >{{
+                      team.initial
+                    }}</span>
                     <span class="truncate">{{ team.name }}</span>
                   </a>
                 </li>
@@ -214,7 +222,9 @@
     </div>
 
     <div class="lg:pl-72">
-      <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+      <div
+        class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+      >
         <button
           type="button"
           class="-m-2.5 p-2.5 text-gray-700 lg:hidden"
@@ -304,7 +314,9 @@
                 leave-from-class="transform opacity-100 scale-100"
                 leave-to-class="transform opacity-0 scale-95"
               >
-                <MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+                <MenuItems
+                  class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+                >
                   <MenuItem
                     v-for="item in userNavigation"
                     :key="item.name"
@@ -324,6 +336,7 @@
 
       <main class="py-10">
         <div class="px-4 sm:px-6 lg:px-8">
+          <PageHeading />
           <slot />
         </div>
       </main>
@@ -332,7 +345,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {ref} from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -346,37 +359,36 @@ import {
 import {
   Bars3Icon,
   BellIcon,
-  CalendarIcon,
-  ChartPieIcon,
   Cog6ToothIcon,
   DocumentDuplicateIcon,
-  FolderIcon,
   HomeIcon,
-  UsersIcon,
   XMarkIcon,
+  WrenchScrewdriverIcon,
+    NewspaperIcon, CalendarDaysIcon
 } from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
+import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
+import PageHeading from "~/components/layout/PageHeading.vue";
+
 
 const navigation = [
-  { name: 'Nástěnka', href: '#', icon: HomeIcon, current: true },
-  { name: 'Služby', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  {name: 'Nástěnka', href: '#', icon: HomeIcon, current: true},
+  {name: 'Služby', href: '#', icon: WrenchScrewdriverIcon, current: false},
+  {name: 'Události', href: '#', icon: CalendarDaysIcon, current: false},
+  {name: 'Blog', href: '#', icon: NewspaperIcon, current: false},
+  {name: 'Stránky', href: '#', icon: DocumentDuplicateIcon, current: false}
 ]
 const teams = [
 
 
-  { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-  { id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+  {id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false},
+  {id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false},
+  {id: 3, name: 'Workcation', href: '#', initial: 'W', current: false},
 ]
 const userNavigation = [
 
 
-  { name: 'Your profile', href: '#' },
-  { name: 'Sign out', href: '#' },
+  {name: 'Your profile', href: '#'},
+  {name: 'Sign out', href: '#'},
 ]
 
 const sidebarOpen = ref(false)
