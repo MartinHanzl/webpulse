@@ -65,7 +65,7 @@
     <div class="mt-2 md:flex md:items-center md:justify-between">
       <div class="min-w-0 flex-1">
         <h2 class="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-          Nástěnka
+          {{ title }}
         </h2>
       </div>
       <div class="mt-4 flex flex-shrink-0 md:ml-4 md:mt-0">
@@ -85,6 +85,17 @@
     </div>
   </div>
 </template>
-<script setup lang="ts">
+<script setup>
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/20/solid'
+</script>
+
+<script>
+export default {
+  props: {
+    title: {
+      type: String,
+      required: true
+    }
+  }
+}
 </script>

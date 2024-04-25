@@ -270,7 +270,6 @@
 
       <main class="py-10">
         <div class="px-4 sm:px-6 lg:px-8">
-          <PageHeading />
           <slot />
         </div>
       </main>
@@ -310,33 +309,9 @@ import {
   AcademicCapIcon,
   QuestionMarkCircleIcon,
   EnvelopeOpenIcon,
-  BriefcaseIcon,
   HandThumbUpIcon
 } from '@heroicons/vue/24/outline'
 import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
-import PageHeading from "~/components/layout/PageHeading.vue";
-
-
-const navigation = [
-  {name: 'Nástěnka', href: '#', icon: HomeIcon, current: true},
-  {name: 'Statistiky', href: '#', icon: PresentationChartLineIcon, current: false},
-  {name: 'Služby', href: '#', icon: WrenchScrewdriverIcon, current: false},
-  {name: 'Události', href: '#', icon: CalendarDaysIcon, current: false},
-  {name: 'Blog', href: '#', icon: NewspaperIcon, current: false},
-  {name: 'Stránky', href: '#', icon: DocumentDuplicateIcon, current: false},
-  {name: 'Kariéra', href: '#', icon: AcademicCapIcon, current: false},
-  {name: 'Reference', href: '#', icon: HandThumbUpIcon, current: false},
-  {name: 'Uživatelé', href: '#', icon: UsersIcon, current: false},
-  {name: 'Dotazy uživatelů', href: '#', icon: QuestionMarkCircleIcon, current: false},
-  {name: 'Emaily', href: '#', icon: EnvelopeIcon, current: false},
-  {name: 'Odběry newsletterů', href: '#', icon: EnvelopeOpenIcon, current: false},
-  {name: 'Administrátoři', href: '#', icon: UserGroupIcon, current: false},
-  {name: 'Úrovně oprávnění', href: '#', icon: AdjustmentsHorizontalIcon, current: false},
-  {name: 'Nastavení', href: '#', icon: Cog6ToothIcon, current: false},
-  {name: 'Sociální sítě', href: '#', icon: DevicePhoneMobileIcon, current: false},
-  {name: 'Odkazy', href: '#', icon: LinkIcon, current: false},
-  {name: 'Seo', href: '#', icon: PresentationChartBarIcon, current: false},
-];
 
 const nav = [
   {
@@ -379,15 +354,9 @@ const nav = [
   },
 ];
 
-const teams = [
-  {id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false},
-  {id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false},
-  {id: 3, name: 'Workcation', href: '#', initial: 'W', current: false},
-]
-
 const userNavigation = [
-  {name: 'Your profile', href: '#'},
-  {name: 'Sign out', href: '#'},
+  {name: 'Profil', href: '#'},
+  {name: 'Odhlásit se', href: '#'},
 ]
 
 const sidebarOpen = ref(false)
