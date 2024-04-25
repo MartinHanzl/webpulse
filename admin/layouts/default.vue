@@ -66,16 +66,21 @@
                 </div>
                 <nav class="flex flex-1 flex-col">
                   <ul
+                    v-for="block in nav"
+                    :key="block.name"
                     role="list"
-                    class="flex flex-1 flex-col gap-y-7"
+                    class="flex flex-1 flex-col space-y-1 mb-2"
                   >
+                    <div class="text-xs font-semibold leading-6 text-gray-400">
+                      {{ block.name }}
+                    </div>
                     <li>
                       <ul
                         role="list"
                         class="-mx-2 space-y-1"
                       >
                         <li
-                          v-for="item in navigation"
+                          v-for="item in block.links"
                           :key="item.name"
                         >
                           <a
@@ -91,44 +96,6 @@
                           </a>
                         </li>
                       </ul>
-                    </li>
-                    <li>
-                      <div class="text-xs font-semibold leading-6 text-gray-400">
-                        Your teams
-                      </div>
-                      <ul
-                        role="list"
-                        class="-mx-2 mt-2 space-y-1"
-                      >
-                        <li
-                          v-for="team in teams"
-                          :key="team.name"
-                        >
-                          <a
-                            :href="team.href"
-                            :class="[team.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
-                          >
-                            <span
-                              :class="[team.current ? 'text-indigo-600 border-indigo-600' : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600', 'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white']"
-                            >{{
-                              team.initial
-                            }}</span>
-                            <span class="truncate">{{ team.name }}</span>
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="mt-auto">
-                      <a
-                        href="#"
-                        class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-                      >
-                        <Cog6ToothIcon
-                          class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
-                          aria-hidden="true"
-                        />
-                        Settings
-                      </a>
                     </li>
                   </ul>
                 </nav>
@@ -152,16 +119,21 @@
         </div>
         <nav class="flex flex-1 flex-col">
           <ul
+            v-for="block in nav"
+            :key="block.name"
             role="list"
-            class="flex flex-1 flex-col gap-y-7"
+            class="flex flex-1 flex-col space-y-2 mb-4"
           >
+            <div class="text-xs font-semibold leading-6 text-gray-400">
+              {{ block.name }}
+            </div>
             <li>
               <ul
                 role="list"
                 class="-mx-2 space-y-1"
               >
                 <li
-                  v-for="item in navigation"
+                  v-for="item in block.links"
                   :key="item.name"
                 >
                   <a
@@ -177,44 +149,6 @@
                   </a>
                 </li>
               </ul>
-            </li>
-            <li>
-              <div class="text-xs font-semibold leading-6 text-gray-400">
-                Your teams
-              </div>
-              <ul
-                role="list"
-                class="-mx-2 mt-2 space-y-1"
-              >
-                <li
-                  v-for="team in teams"
-                  :key="team.name"
-                >
-                  <a
-                    :href="team.href"
-                    :class="[team.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
-                  >
-                    <span
-                      :class="[team.current ? 'text-indigo-600 border-indigo-600' : 'text-gray-400 border-gray-200 group-hover:border-indigo-600 group-hover:text-indigo-600', 'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white']"
-                    >{{
-                      team.initial
-                    }}</span>
-                    <span class="truncate">{{ team.name }}</span>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="mt-auto">
-              <a
-                href="#"
-                class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-700 hover:bg-gray-50 hover:text-indigo-600"
-              >
-                <Cog6ToothIcon
-                  class="h-6 w-6 shrink-0 text-gray-400 group-hover:text-indigo-600"
-                  aria-hidden="true"
-                />
-                Settings
-              </a>
             </li>
           </ul>
         </nav>
@@ -364,18 +298,20 @@ import {
   HomeIcon,
   XMarkIcon,
   WrenchScrewdriverIcon,
-    NewspaperIcon, CalendarDaysIcon,
-    UsersIcon,
-    UserGroupIcon,
-    AdjustmentsHorizontalIcon,
-    LinkIcon,
-    DevicePhoneMobileIcon,
-    PresentationChartBarIcon,
-    PresentationChartLineIcon,
-    EnvelopeIcon,
-    AcademicCapIcon,
-    QuestionMarkCircleIcon,
-    EnvelopeOpenIcon
+  NewspaperIcon, CalendarDaysIcon,
+  UsersIcon,
+  UserGroupIcon,
+  AdjustmentsHorizontalIcon,
+  LinkIcon,
+  DevicePhoneMobileIcon,
+  PresentationChartBarIcon,
+  PresentationChartLineIcon,
+  EnvelopeIcon,
+  AcademicCapIcon,
+  QuestionMarkCircleIcon,
+  EnvelopeOpenIcon,
+  BriefcaseIcon,
+  HandThumbUpIcon
 } from '@heroicons/vue/24/outline'
 import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
 import PageHeading from "~/components/layout/PageHeading.vue";
@@ -389,6 +325,7 @@ const navigation = [
   {name: 'Blog', href: '#', icon: NewspaperIcon, current: false},
   {name: 'Stránky', href: '#', icon: DocumentDuplicateIcon, current: false},
   {name: 'Kariéra', href: '#', icon: AcademicCapIcon, current: false},
+  {name: 'Reference', href: '#', icon: HandThumbUpIcon, current: false},
   {name: 'Uživatelé', href: '#', icon: UsersIcon, current: false},
   {name: 'Dotazy uživatelů', href: '#', icon: QuestionMarkCircleIcon, current: false},
   {name: 'Emaily', href: '#', icon: EnvelopeIcon, current: false},
@@ -399,7 +336,48 @@ const navigation = [
   {name: 'Sociální sítě', href: '#', icon: DevicePhoneMobileIcon, current: false},
   {name: 'Odkazy', href: '#', icon: LinkIcon, current: false},
   {name: 'Seo', href: '#', icon: PresentationChartBarIcon, current: false},
-]
+];
+
+const nav = [
+  {
+    name: 'Přehled', links: [
+      {name: 'Nástěnka', href: '#', icon: HomeIcon, current: true},
+      {name: 'Statistiky', href: '#', icon: PresentationChartLineIcon, current: false},
+    ]
+  },
+  {
+    name: 'Obsah', links: [
+      {name: 'Služby', href: '#', icon: WrenchScrewdriverIcon, current: false},
+      {name: 'Události', href: '#', icon: CalendarDaysIcon, current: false},
+      {name: 'Blog', href: '#', icon: NewspaperIcon, current: false},
+      {name: 'Stránky', href: '#', icon: DocumentDuplicateIcon, current: false},
+      {name: 'Kariéra', href: '#', icon: AcademicCapIcon, current: false},
+      {name: 'Reference', href: '#', icon: HandThumbUpIcon, current: false},
+    ]
+  },
+  {
+    name: 'Uživatelé', links: [
+      {name: 'Uživatelé', href: '#', icon: UsersIcon, current: false},
+      {name: 'Dotazy uživatelů', href: '#', icon: QuestionMarkCircleIcon, current: false},
+      {name: 'Emaily', href: '#', icon: EnvelopeIcon, current: false},
+      {name: 'Odběry newsletterů', href: '#', icon: EnvelopeOpenIcon, current: false},
+    ]
+  },
+  {
+    name: 'Administrace', links: [
+      {name: 'Administrátoři', href: '#', icon: UserGroupIcon, current: false},
+      {name: 'Úrovně oprávnění', href: '#', icon: AdjustmentsHorizontalIcon, current: false},
+    ]
+  },
+  {
+    name: 'Nastavení', links: [
+      {name: 'Nastavení', href: '#', icon: Cog6ToothIcon, current: false},
+      {name: 'Sociální sítě', href: '#', icon: DevicePhoneMobileIcon, current: false},
+      {name: 'Odkazy', href: '#', icon: LinkIcon, current: false},
+      {name: 'Seo', href: '#', icon: PresentationChartBarIcon, current: false},
+    ]
+  },
+];
 
 const teams = [
   {id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false},
