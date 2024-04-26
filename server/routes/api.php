@@ -19,7 +19,7 @@ Route::group([
     Route::post('verify', [RegisterController::class, 'verify']);
 
     Route::group([
-        'middleware' => 'api'
+        'middleware' => 'jwt.auth'
     ], function () {
         Route::post('login', [LoginController::class, 'login']);
         Route::post('logout', [LoginController::class, 'logout']);
