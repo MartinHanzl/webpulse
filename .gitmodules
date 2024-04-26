@@ -1,3 +1,0 @@
-[submodule "server/app/Modules/Blog"]
-	path = server/app/Modules/Blog
-	url = https://github.com/MartinHanzl/blog.git
