@@ -64,7 +64,7 @@
                     alt="Your Company"
                   >
                 </div>
-                <nav class="flex flex-1 flex-col">
+                <nav class="flex flex-0 flex-col">
                   <ul
                     v-for="block in nav"
                     :key="block.name"
@@ -122,7 +122,7 @@
             v-for="block in nav"
             :key="block.name"
             role="list"
-            class="flex flex-1 flex-col space-y-2 mb-4"
+            class="flex flex-0 flex-col space-y-2 mb-4"
           >
             <div class="text-xs font-semibold leading-6 text-gray-400">
               {{ block.name }}
@@ -361,7 +361,9 @@ import {
   AcademicCapIcon,
   QuestionMarkCircleIcon,
   EnvelopeOpenIcon,
-  HandThumbUpIcon, ChatBubbleOvalLeftIcon
+  HandThumbUpIcon, ChatBubbleOvalLeftIcon,
+    BanknotesIcon,
+    BriefcaseIcon
 } from '@heroicons/vue/24/outline'
 import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
 
@@ -400,6 +402,12 @@ const nav = [
       {name: 'Dotazy uživatelů', href: '#', icon: QuestionMarkCircleIcon, current: false},
       {name: 'Emaily', href: '#', icon: EnvelopeIcon, current: false},
       {name: 'Odběry newsletterů', href: '#', icon: EnvelopeOpenIcon, current: false},
+    ]
+  },
+  {
+    name: 'Firma', links: [
+      {name: 'Zaměstnanci', href: '#', icon: BriefcaseIcon, current: false},
+      {name: 'Faktury', href: '#', icon: BanknotesIcon, current: false},
     ]
   },
   {
