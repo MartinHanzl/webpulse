@@ -60,7 +60,7 @@
                 <div class="flex h-16 shrink-0 items-center">
                   <img
                     class="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                    src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=600"
                     alt="Your Company"
                   >
                 </div>
@@ -85,11 +85,11 @@
                         >
                           <a
                             :href="item.href"
-                            :class="[item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
+                            :class="[item.current ? 'bg-gray-50 text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
                           >
                             <component
                               :is="item.icon"
-                              :class="[item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600', 'h-6 w-6 shrink-0']"
+                              :class="[item.current ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600', 'h-6 w-6 shrink-0']"
                               aria-hidden="true"
                             />
                             {{ item.name }}
@@ -113,7 +113,7 @@
         <div class="flex h-16 shrink-0 items-center">
           <img
             class="h-8 w-auto"
-            src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+            src="https://tailwindui.com/img/logos/mark.svg?color=blue&shade=600"
             alt="Your Company"
           >
         </div>
@@ -138,11 +138,11 @@
                 >
                   <NuxtLink
                     :to="item.href"
-                    :class="[item.current ? 'bg-gray-50 text-indigo-600' : 'text-gray-700 hover:text-indigo-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
+                    :class="[item.current ? 'bg-gray-50 text-blue-600' : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50', 'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold']"
                   >
                     <component
                       :is="item.icon"
-                      :class="[item.current ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-600', 'h-6 w-6 shrink-0']"
+                      :class="[item.current ? 'text-blue-600' : 'text-gray-400 group-hover:text-blue-600', 'h-6 w-6 shrink-0']"
                       aria-hidden="true"
                     />
                     {{ item.name }}
@@ -393,7 +393,7 @@ const nav = [
       {name: 'Stránky', href: '#', icon: DocumentDuplicateIcon, current: false},
       {name: 'Kariéra', href: '#', icon: AcademicCapIcon, current: false},
       {name: 'Reference', href: '#', icon: HandThumbUpIcon, current: false},
-      {name: 'FAQ', href: '#', icon: ChatBubbleOvalLeftIcon, current: false},
+      {name: 'FAQ', href: '/faq', icon: ChatBubbleOvalLeftIcon, current: currentLink === '/faq' ? true : false},
     ]
   },
   {
