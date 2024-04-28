@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed top-16 w-56 text-right">
+  <div class="fixed top-16 w-auto text-right">
     <Menu as="div" class="relative inline-block text-left">
       <div>
         <MenuButton
@@ -18,37 +18,22 @@
           leave-to-class="transform scale-95 opacity-0"
       >
         <MenuItems
-            class="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+            class="absolute right-0 mt-2 w-auto origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
         >
           <div class="px-1 py-1">
             <MenuItem v-slot="{ active }">
               <button
                   :class="[
-                  active ? 'bg-blue-500 text-white' : 'text-gray-900',
+                  active ? 'bg-indigo-100 text-indigo-500' : 'text-gray-500',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
               >
                 <PencilIcon
                     :active="active"
-                    class="mr-2 h-5 w-5 text-blue-400"
+                    :class="[active ? 'mr-2 h-5 w-5 text-white-500' : 'mr-2 h-5 w-5 text-indigo-500']"
                     aria-hidden="true"
                 />
                 Upravit
-              </button>
-            </MenuItem>
-            <MenuItem v-slot="{ active }">
-              <button
-                  :class="[
-                  active ? 'bg-blue-500 text-white' : 'text-gray-900',
-                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
-                ]"
-              >
-                <EyeIcon
-                    :active="active"
-                    class="mr-2 h-5 w-5 text-blue-400"
-                    aria-hidden="true"
-                />
-                Zobrazit
               </button>
             </MenuItem>
           </div>
@@ -56,13 +41,28 @@
             <MenuItem v-slot="{ active }">
               <button
                   :class="[
-                  active ? 'bg-blue-500 text-white' : 'text-gray-900',
+                  active ? 'bg-green-100 text-green-500' : 'text-gray-500',
+                  'group flex w-full items-center rounded-md px-2 py-2 text-sm',
+                ]"
+              >
+                <EyeIcon
+                    :active="active"
+                    :class="[active ? 'mr-2 h-5 w-5 text-white-500' : 'mr-2 h-5 w-5 text-green-500']"
+                    aria-hidden="true"
+                />
+                Zobrazit
+              </button>
+            </MenuItem>
+            <MenuItem v-slot="{ active }">
+              <button
+                  :class="[
+                  active ? 'bg-yellow-100 text-yellow-500' : 'text-gray-500',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
               >
                 <BoltIcon
                     :active="active"
-                    class="mr-2 h-5 w-5 text-blue-400"
+                    :class="[active ? 'mr-2 h-5 w-5 text-white-500' : 'mr-2 h-5 w-5 text-yellow-500']"
                     aria-hidden="true"
                 />
                 Rychlý náhled
@@ -74,13 +74,13 @@
             <MenuItem v-slot="{ active }">
               <button
                   :class="[
-                  active ? 'bg-blue-500 text-white' : 'text-gray-900',
+                  active ? 'bg-red-100 text-red-500' : 'text-gray-500',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm',
                 ]"
               >
                 <TrashIcon
                     :active="active"
-                    class="mr-2 h-5 w-5 text-blue-400"
+                    :class="[active ? 'mr-2 h-5 w-5 text-white-500' : 'mr-2 h-5 w-5 text-red-500']"
                     aria-hidden="true"
                 />
                 Smazat

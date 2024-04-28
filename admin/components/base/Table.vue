@@ -33,12 +33,14 @@
         </div>
       </div>
     </div>
+    <Pagination />
   </div>
 </template>
 
 <script setup>
 import {PencilIcon, BoltIcon, TrashIcon, EllipsisHorizontalIcon} from "@heroicons/vue/24/outline";
 import Dropdown from "~/components/base/Dropdown.vue";
+import Pagination from "~/components/base/Pagination.vue";
 const people = [
   { name: 'Lindsay Walton', title: 'Front-end Developer', email: 'lindsay.walton@example.com', role: 'Member' },
 ]
