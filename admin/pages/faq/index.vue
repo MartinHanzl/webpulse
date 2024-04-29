@@ -1,9 +1,7 @@
 <template>
   <div>
     <PageHeading
-      :title="title"
-      :links="links"
-      :action-button="actionButton"
+      :page-heading-data="pageHeadingData[0]"
     />
     <Table />
     {{ data.todos }}
@@ -16,30 +14,19 @@ import PageHeading from "~/components/layout/PageHeading.vue";
 import Table from "~/components/base/Table.vue";
 
 const {data, pending, error, refresh } = await useFetch('https://dummyjson.com/todos?skip=0&limit=10');
-</script>
-<script>
-export default {
-  data() {
-    return {
-      title: "FAQ",
-      links: [
-        {
-          text: "Faq",
-          href: "/",
-        }
-      ],
-      actionButton: [
-        {
-          text: "Přidat FAQ otázku",
-          href: "/faq/1",
-        }
-      ],
-    };
+const pageHeadingData = [
+  {
+    title: 'FAQ',
+    links: [
+      {
+        text: 'Faq',
+        href: '/faq',
+      },
+    ],
+    actionButton: {
+      text: 'Přidat FAQ otázku',
+      href: '/faq/pridat',
+    },
   },
-  head () {
-    return {
-      title: 'FAQ - %s',
-    };
-  },
-}
+];
 </script>

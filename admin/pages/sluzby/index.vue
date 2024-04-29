@@ -1,6 +1,6 @@
 <template>
   <div>
-    <PageHeading title="Služby" />
+    <PageHeading :page-heading-data="pageHeadingData[0]" />
     <h1 class="font-bold">
       Web Pulse
     </h1>
@@ -15,4 +15,15 @@
 </template>
 <script setup>
 import PageHeading from "~/components/layout/PageHeading.vue";
+const pageHeadingData = [
+  {
+    title: 'Služby',
+    links: [
+      {
+        text: 'Služby',
+        href: '/sluzby',
+      },
+    ],
+  },
+];
 </script>
