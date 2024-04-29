@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'firstname' => fake()->firstName(),
             'lastname' => fake()->lastName(),
             'phone_prefix' => '+420',
-            'phone' => fake()->phoneNumber(),
+            'phone' => str_replace([' ', '+420', '00420'], '', fake()->phoneNumber()),
             'email' => fake()->unique()->safeEmail(),
             'street' => fake()->streetAddress(),
             'postcode' => str_replace(' ', '', fake()->postcode()),
