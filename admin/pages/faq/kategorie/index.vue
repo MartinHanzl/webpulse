@@ -5,6 +5,9 @@
 </template>
 <script setup>
 import PageHeading from "~/components/layout/PageHeading.vue";
+import { ref } from 'vue'
+const show = ref(true)
+
 const pageHeadingData = [
   {
     title: 'FAQ ─ Kategorie',
