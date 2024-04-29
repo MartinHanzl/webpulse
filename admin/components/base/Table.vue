@@ -23,8 +23,7 @@
               <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
                 <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
               </td>
-              <td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8">
-<!--                <EllipsisHorizontalIcon class="text-blue-600 hover:text-blue-900 cursor-pointer" />-->
+              <td class="relative whitespace-nowrap text-center text-sm font-medium">
                 <Dropdown />
               </td>
             </tr>

@@ -1,11 +1,11 @@
 <template>
   <div class="fixed top-16 w-auto text-right">
-    <Menu as="div" class="relative inline-block text-left">
+    <Menu as="div" class="relative inline-block text-center">
       <div>
         <MenuButton
-            class="inline-flex w-full justify-center rounded-md bg-black/20 px-4 py-2 text-sm font-medium text-white hover:bg-black/30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
+            class="inline-flex w-full justify-center rounded-md px-4 py-1.5 text-sm font-medium text-white"
         >
-          <EllipsisHorizontalIcon class="h-5 w-5" aria-hidden="true" />
+          <EllipsisHorizontalIcon class="h-6 w-6 text-blue-600" aria-hidden="true" />
         </MenuButton>
       </div>
 
