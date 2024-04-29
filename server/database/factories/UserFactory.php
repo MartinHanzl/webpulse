@@ -24,8 +24,8 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'firstname' => fake()->name(),
-            'lastname' => fake()->name(),
+            'firstname' => fake()->firstName(),
+            'lastname' => fake()->lastName(),
             'phone_prefix' => '+420',
             'phone' => fake()->phoneNumber(),
             'email' => fake()->unique()->safeEmail(),
@@ -35,9 +35,9 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'verification_code' => Str::random(64),
-            'invitation_code' => Str::upper(Str::random(6)),
-            'active' => 1,
-            'verified' => 1,
+            'invitation_code' => strtoupper(Str::random(6)),
+            'active' => fake()->boolean(),
+            'verified' => fake()->boolean(),
             'remember_token' => Str::random(10),
         ];
     }

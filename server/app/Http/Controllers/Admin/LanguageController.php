@@ -58,8 +58,8 @@ class LanguageController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
-            'default_locale' => 'required|min:2',
-            'default_name' => 'required',
+            'code' => 'required|min:2',
+            'iso' => 'required',
             'translations' => 'required'
         ]);
 
@@ -106,6 +106,8 @@ class LanguageController extends Controller
         $data = $request->all();
 
         $validator = Validator::make($data, [
+            'code' => 'required|min:2',
+            'iso' => 'required',
             'translations' => 'required'
         ]);
 

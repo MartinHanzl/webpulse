@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Language;
+use App\Services\GoogleTranslatorService;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -50,6 +52,19 @@ class DatabaseSeeder extends Seeder
         ];
         foreach ($languages as $language) {
             DB::table('languages')->insert($language);
+        }
+
+        $languages = Language::all();
+
+        $gTranslateClient = new GoogleTranslatorService();
+        foreach ($languages as $language) {
+            $langs = Language::all();
+            foreach ($langs as $lang) {
+                $language->translations()->create([
+                    'name' => $gTranslateClient->translate($language->name, 'cs', $lang->code),
+                    'locale' => $lang->code
+                ]);
+            }
         }
     }
 }
