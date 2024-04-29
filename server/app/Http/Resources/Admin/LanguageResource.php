@@ -21,6 +21,7 @@ class LanguageResource extends JsonResource
             'id' => $this->id,
             'code' => $this->default_locale,
             'name' => $translation->name,
+            'iso' => $this->iso,
             'active' => (bool)$this->active,
             'translations' => array_column($this->translations->toArray(), NULL, 'locale'),
             'created_at' => $this->created_at,
