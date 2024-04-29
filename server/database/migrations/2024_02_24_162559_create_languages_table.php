@@ -12,8 +12,9 @@ return new class extends Migration {
     {
         Schema::create('languages', function (Blueprint $table) {
             $table->id();
-            $table->string('default_locale');
-            $table->string('default_name');
+            $table->string('name');
+            $table->string('locale');
+            $table->string('iso');
             $table->boolean('active')->default(true);
             $table->timestamps();
         });

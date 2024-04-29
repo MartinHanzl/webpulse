@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Language extends Model
 {
-    use HasFactory, Translatable;
+    use Translatable;
 
     protected $table = 'languages';
 
     protected $fillable = [
-        'default_locale',
-        'default_name',
+        'name',
+        'locale',
+        'iso',
         'active'
     ];
 

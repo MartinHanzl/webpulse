@@ -19,13 +19,13 @@ return new class extends Migration {
             $table->string('email');
             $table->string('street')->nullable();
             $table->integer('postcode')->nullable();
-            $table->integer('city')->nullable();
+            $table->string('city')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('verification_code', 64)->nullable();
             $table->string('invitation_code', 6)->nullable();
-            $table->smallInteger('active')->default(0);
-            $table->smallInteger('verified')->default(0);
+            $table->boolean('active')->default(false);
+            $table->boolean('verified')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
