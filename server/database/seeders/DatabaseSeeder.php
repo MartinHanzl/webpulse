@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'postcode' => 53002,
             'city' => 'Mikulovice',
             'email_verified_at' => Carbon::now(),
-            'password' => Hash::make('pstruh01'),
+            'password' => Hash::make('MarHan537'),
             'verification_code' => Str::random(64),
             'invitation_code' => Str::random(6),
             'active' => true,
@@ -42,11 +42,11 @@ class DatabaseSeeder extends Seeder
     private function seedLanguages()
     {
         $languages = [
-            ['name' => 'Čeština', 'locale' => 'cs', 'iso' => 'cs-CZ', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Angličtina', 'locale' => 'en', 'iso' => 'en-GB', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Němčina', 'locale' => 'de', 'iso' => 'de-DE', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Polština', 'locale' => 'pl', 'iso' => 'pl-PL', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-            ['name' => 'Slovenština', 'locale' => 'sk', 'iso' => 'sk-SK', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
+            ['name' => 'Čeština', 'code' => 'cs', 'iso' => 'cs-CZ', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Angličtina', 'code' => 'en', 'iso' => 'en-GB', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Němčina', 'code' => 'de', 'iso' => 'de-DE', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Polština', 'code' => 'pl', 'iso' => 'pl-PL', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Slovenština', 'code' => 'sk', 'iso' => 'sk-SK', 'active' => true, 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()]
         ];
         foreach ($languages as $language) {
             DB::table('languages')->insert($language);
