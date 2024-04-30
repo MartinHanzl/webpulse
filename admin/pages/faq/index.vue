@@ -1,14 +1,3 @@
-<template>
-  <div>
-    <PageHeading
-      :page-heading-data="pageHeadingData[0]"
-    />
-    <Table />
-    {{ data.todos }}
-    {{ pending }}
-    {{ error }}
-  </div>
-</template>
 <script setup>
 import PageHeading from "~/components/layout/PageHeading.vue";
 import Table from "~/components/base/Table.vue";
@@ -30,3 +19,27 @@ const pageHeadingData = [
   },
 ];
 </script>
+
+<template>
+  <div>
+    <PageHeading
+      :page-heading-data="pageHeadingData[0]"
+    />
+    <Table
+      :columns="[
+        { key: 'id', name: 'ID', type: 'number', width: 50 },
+        { key: 'todo', name: 'FAQ', type: 'text', width: 50 },
+        { key: 'completed', name: 'Aktivní', type: 'status', width: 50 },
+        { key: 'userId', name: 'User ID', type: 'number', width: 120 },
+      ]"
+      :items="data.todos"
+      :actions="[
+        { text: 'Edit', href: '/faq/edit' },
+        { text: 'Delete', href: '/faq/delete' },
+      ]"
+    />
+    {{ data.todos }}
+    {{ pending }}
+    {{ error }}
+  </div>
+</template>

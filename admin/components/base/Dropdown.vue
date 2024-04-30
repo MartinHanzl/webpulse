@@ -1,5 +1,5 @@
 <template>
-  <div class="fixed top-16 w-auto text-right">
+  <div class="w-auto text-right">
     <Menu as="div" class="relative inline-block text-center">
       <div>
         <MenuButton
@@ -18,7 +18,7 @@
           leave-to-class="transform scale-95 opacity-0"
       >
         <MenuItems
-            class="absolute right-0 mt-2 w-auto origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
+            class="absolute z-10 right-0 mt-2 w-auto origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
         >
           <div class="px-1 py-1">
             <MenuItem v-slot="{ active }">
