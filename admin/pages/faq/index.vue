@@ -34,6 +34,7 @@ const pageHeadingData = [
       ]"
       :items="data.todos"
       :actions="{ edit: true, view: true, quick: true, delete: true }"
+      :pending="pending"
     />
     {{ data.todos }}
     {{ pending }}
