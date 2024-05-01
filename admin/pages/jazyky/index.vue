@@ -66,7 +66,7 @@ onBeforeMount(() => {
         { key: 'created_at', name: 'Vytvořeno', type: 'date', width: 50, mobile: false },
       ]"
       :items="items"
-      :actions="{ edit: true, view: true, quick: true, delete: true }"
+      :actions="{ edit: true, view: true, delete: true }"
       :pending="pending"
       :titles="{
         singular: 'Jazyk',

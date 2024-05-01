@@ -2,7 +2,8 @@
 import {defineProps, watch, defineEmits} from 'vue';
 import Dropdown from "~/components/base/Dropdown.vue";
 import Pagination from "~/components/base/Pagination.vue";
-import {CheckIcon, XMarkIcon} from "@heroicons/vue/20/solid";
+import {CheckIcon, XMarkIcon} from "@heroicons/vue/24/solid";
+import {PencilIcon, TrashIcon, BoltIcon} from "@heroicons/vue/24/outline";
 
 defineProps({
   columns: {
@@ -90,21 +91,29 @@ watch(page, () => {
                       v-if="item[column.key] === true"
                       class="text-green-600 text-sm"
                     >
-                      <CheckIcon class="w-4 h-4" />
+                      <CheckIcon class="w-5 h-5" />
                     </div>
                     <div
                       v-else
                       class="text-red-600 text-sm"
                     >
-                      <XMarkIcon class="w-4 h-4" />
+                      <XMarkIcon class="w-5 h-5" />
                     </div>
                   </div>
                 </td>
-                <!--                <td class="whitespace-nowrap px-3 py-5 text-sm text-gray-500">
-                  <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
-                </td>-->
-                <td class="relative whitespace-nowrap text-center text-sm font-medium">
-                  <Dropdown :actions="actions" />
+                <td class="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 flex flex-1 justify-evenly">
+                  <NuxtLink v-if="actions.edit" to="/jazyky/pridat" class="text-blue-600 hover:text-blue-900">
+                    <span class="sr-only">Edit</span>
+                    <PencilIcon class="h-5 w-5" aria-hidden="true" />
+                  </NuxtLink>
+                  <NuxtLink v-if="actions.view" to="/" class="text-yellow-600 hover:text-yellow-900">
+                    <span class="sr-only">Quick view</span>
+                    <BoltIcon class="h-5 w-5" aria-hidden="true" />
+                  </NuxtLink>
+                  <NuxtLink v-if="actions.delete" to="/" class="text-red-600 hover:text-red-900">
+                    <span class="sr-only">Delete</span>
+                    <TrashIcon class="h-5 w-5" aria-hidden="true" />
+                  </NuxtLink>
                 </td>
               </tr>
             </tbody>
