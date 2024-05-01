@@ -3,21 +3,19 @@ import PageHeading from "~/components/layout/PageHeading.vue";
 import Table from "~/components/base/Table.vue";
 import { ref, onMounted, watch } from 'vue';
 
-const pageHeadingData = [
-  {
-    title: 'Jazyky',
-    links: [
-      {
-        text: 'Jazyky',
-        href: '/jazyky',
-      },
-    ],
-    actionButton: {
-      text: 'Přidat jazyk',
-      href: '/jazyky/pridat',
+const pageHeadingData = {
+  title: 'Jazyky',
+  links: [
+    {
+      text: 'Jazyky',
+      href: '/jazyky',
     },
-  },
-];
+  ],
+  actionButton: {
+    text: 'Přidat jazyk',
+    href: '/jazyky/pridat',
+  }
+};
 
 const items = ref({data:[]});
 const pending = ref(false);
@@ -54,7 +52,7 @@ onBeforeMount(() => {
 <template>
   <div>
     <PageHeading
-      :page-heading-data="pageHeadingData[0]"
+      :page-heading-data="pageHeadingData"
     />
     <Table
       :columns="[

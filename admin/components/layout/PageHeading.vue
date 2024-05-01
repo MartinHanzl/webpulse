@@ -28,7 +28,7 @@ import Breadcrumbs from "~/components/navigation/Breadcrumbs.vue";
 export default {
   props: {
     pageHeadingData: {
-      type: Array,
+      type: Object,
       required: true
     }
   }
