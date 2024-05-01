@@ -1,3 +1,16 @@
+<script setup>
+import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
+import { ChevronDownIcon } from '@heroicons/vue/20/solid';
+import { PencilIcon, EyeIcon, BoltIcon, TrashIcon, EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
+
+import { defineProps } from 'vue';
+defineProps({
+  actions: {
+    type: Object,
+    required: false
+  },
+})
+</script>
 <template>
   <div class="w-auto text-right">
     <Menu as="div" class="relative inline-block text-center">
@@ -21,7 +34,7 @@
             class="absolute z-10 right-0 mt-2 w-auto origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
         >
           <div class="px-1 py-1">
-            <MenuItem v-slot="{ active }">
+            <MenuItem v-if="actions.edit === true" v-slot="{ active }">
               <button
                   :class="[
                   active ? 'bg-indigo-100 text-indigo-500' : 'text-gray-500',
@@ -38,7 +51,7 @@
             </MenuItem>
           </div>
           <div class="px-1 py-1">
-            <MenuItem v-slot="{ active }">
+            <MenuItem v-if="actions.edit === true" v-slot="{ active }">
               <button
                   :class="[
                   active ? 'bg-green-100 text-green-500' : 'text-gray-500',
@@ -53,7 +66,7 @@
                 Zobrazit
               </button>
             </MenuItem>
-            <MenuItem v-slot="{ active }">
+            <MenuItem v-if="actions.quick === true" v-slot="{ active }">
               <button
                   :class="[
                   active ? 'bg-yellow-100 text-yellow-500' : 'text-gray-500',
@@ -71,7 +84,7 @@
           </div>
 
           <div class="px-1 py-1">
-            <MenuItem v-slot="{ active }">
+            <MenuItem v-if="actions.delete === true" v-slot="{ active }">
               <button
                   :class="[
                   active ? 'bg-red-100 text-red-500' : 'text-gray-500',
@@ -92,9 +105,3 @@
     </Menu>
   </div>
 </template>
-
-<script setup>
-import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
-import { ChevronDownIcon } from '@heroicons/vue/20/solid';
-import { PencilIcon, EyeIcon, BoltIcon, TrashIcon, EllipsisHorizontalIcon } from '@heroicons/vue/24/outline';
-</script>

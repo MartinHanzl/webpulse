@@ -14,7 +14,7 @@ defineProps({
     required: true
   },
   actions: {
-    type: Array,
+    type: Object,
     required: false
   },
 });
@@ -64,7 +64,7 @@ defineProps({
                   <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">Active</span>
                 </td>-->
                 <td class="relative whitespace-nowrap text-center text-sm font-medium">
-                  <Dropdown />
+                  <Dropdown :actions="actions" />
                 </td>
               </tr>
             </tbody>

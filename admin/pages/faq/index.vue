@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import PageHeading from "~/components/layout/PageHeading.vue";
 import Table from "~/components/base/Table.vue";
 
@@ -33,10 +33,7 @@ const pageHeadingData = [
         { key: 'userId', name: 'User ID', type: 'number', width: 120 },
       ]"
       :items="data.todos"
-      :actions="[
-        { text: 'Edit', href: '/faq/edit' },
-        { text: 'Delete', href: '/faq/delete' },
-      ]"
+      :actions="{ edit: true, view: true, quick: true, delete: true }"
     />
     {{ data.todos }}
     {{ pending }}
