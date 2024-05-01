@@ -46,7 +46,7 @@ defineProps({
                 <th
                   v-for="(column, key) in columns"
                   :key="key"
-                  class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8"
+                  :class="[column.mobile === false ? 'hidden' : '', 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8 md:table-cell']"
                 >
                   {{ column.name }}
                 </th>
@@ -70,7 +70,7 @@ defineProps({
                 <td
                   v-for="(column, index) in columns"
                   :key="index"
-                  :class="`whitespace-nowrap w-[${column.width}]/12 py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8`"
+                  :class="[column.mobile === false ? 'hidden' : '', `whitespace-nowrap w-[${column.width}]/12 py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 md:table-cell`]"
                 >
                   <div v-if="column.type === 'text' || column.type === 'number'">
                     {{ item[column.key] }}
