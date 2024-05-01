@@ -2,6 +2,11 @@
 export default defineNuxtConfig({
   ssr: false,
   devtools: { enabled: false },
+  routeRules: {
+    '/api/**': {
+      proxy: process.env.API_URL + '/api/**' || 'http://api.web-pulse.cz/api/**',
+    },
+  },
   css: ['~/assets/css/main.css'],
   app: {
     head: {

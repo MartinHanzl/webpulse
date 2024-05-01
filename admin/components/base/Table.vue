@@ -21,6 +21,14 @@ defineProps({
     type: Boolean,
     required: false
   },
+  titles: {
+    type: Object,
+    required: false
+  },
+  pagination: {
+    type: Object,
+    required: false
+  }
 });
 </script>
 
@@ -50,15 +58,19 @@ defineProps({
                 </th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200 bg-white">
+            <tbody
+              v-if="!pending"
+              class="divide-y divide-gray-200 bg-white"
+            >
               <tr
-                v-for="(item, key) in items"
+                v-for="(item, key) in items.data"
                 :key="key"
+                class="even:bg-gray-50"
               >
                 <td
                   v-for="(column, index) in columns"
                   :key="index"
-                  :class="`whitespace-nowrap w-[${column.width}]/12 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8`"
+                  :class="`whitespace-nowrap w-[${column.width}]/12 py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8`"
                 >
                   <div v-if="column.type === 'text' || column.type === 'number'">
                     {{ item[column.key] }}
@@ -71,13 +83,13 @@ defineProps({
                       v-if="item[column.key] === true"
                       class="text-green-600 text-sm"
                     >
-                      <CheckIcon class="w-6 h-6" />
+                      <CheckIcon class="w-4 h-4" />
                     </div>
                     <div
                       v-else
                       class="text-red-600 text-sm"
                     >
-                      <XMarkIcon class="w-6 h-6" />
+                      <XMarkIcon class="w-4 h-4" />
                     </div>
                   </div>
                 </td>
@@ -89,10 +101,21 @@ defineProps({
                 </td>
               </tr>
             </tbody>
+            <tbody
+              v-else
+              class="divide-y divide-gray-200 bg-white"
+            >
+              <div class="py-1.5 text-center">
+                {{ titles.plural }} se načítají...
+              </div>
+            </tbody>
           </table>
         </div>
       </div>
     </div>
-    <Pagination />
+    <Pagination
+      v-if="pagination"
+      :pagination="pagination"
+    />
   </div>
 </template>

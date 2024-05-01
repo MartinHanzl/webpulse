@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Admin;
+namespace App\Http\Resources\Admin\Language;
 
 use App\Models\LanguageTranslation;
 use Illuminate\Http\Request;
@@ -23,7 +23,8 @@ class LanguageResource extends JsonResource
             'name' => $translation->name,
             'iso' => $this->iso,
             'active' => (bool)$this->active,
-            'translations' => array_column($this->translations->toArray(), NULL, 'locale'),
+            //'translations' => LanguagesTranslationResource::collection(array_column($this->translations->toArray(), NULL, 'locale')),
+            'translations' => LanguagesTranslationResource::collection($this->translations),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

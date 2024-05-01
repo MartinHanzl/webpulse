@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import PageHeading from "~/components/layout/PageHeading.vue";
 import Table from "~/components/base/Table.vue";
+import { ref, onMounted, watch } from 'vue';
 
 const pageHeadingData = [
   {
@@ -17,12 +18,56 @@ const pageHeadingData = [
     },
   },
 ];
+
+const items = ref({data:[]});
+const pending = ref(false);
+
+async function loadItems() {
+  pending.value = true;
+  await useFetch('http://localhost:8000/api/admin/language', {
+    method: 'GET',
+    params: {
+      page: 0,
+      perPage: 2,
+      orderBy: 'id',
+      orderWay: 'desc',
+    },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then((response) => {
+    items.value = response.data.value;
+    pending.value = false;
+  })
+}
+onMounted(() => {
+  loadItems();
+});
 </script>
 
 <template>
   <div>
     <PageHeading
       :page-heading-data="pageHeadingData[0]"
+    />
+    <Table
+      :columns="[
+        { key: 'id', name: 'ID', type: 'number', width: 50 },
+        { key: 'name', name: 'Název', type: 'text', width: 50 },
+        { key: 'code', name: 'Kód', type: 'text', width: 50 },
+        { key: 'iso', name: 'ISO', type: 'text', width: 50 },
+        { key: 'active', name: 'Aktivní', type: 'status', width: 50 },
+        { key: 'created_at', name: 'Vytvořeno', type: 'date', width: 50 },
+      ]"
+      :items="items"
+      :actions="{ edit: true, view: true, quick: true, delete: true }"
+      :pending="pending"
+      :titles="{
+        singular: 'Jazyk',
+        plural: 'Jazyky',
+      }"
+      :pagination="{ total: 5, perPage: 2, currentPage: 1}"
     />
   </div>
 </template>
