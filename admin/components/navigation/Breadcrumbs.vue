@@ -21,45 +21,45 @@
             </NuxtLink>
           </div>
         </li>
-        <li v-if="links[0]">
+        <li v-if="breadcrumbLinks[0]">
           <div class="flex items-center">
             <ChevronRightIcon
               class="h-5 w-5 flex-shrink-0 text-gray-400"
               aria-hidden="true"
             />
             <NuxtLink
-              :to="links[0].href"
+              :to="breadcrumbLinks[0].href"
               class="ml-4 text-sm font-medium text-gray-400 hover:text-blue-400"
             >
-              {{ links[0].text }}
+              {{ breadcrumbLinks[0].text }}
             </NuxtLink>
           </div>
         </li>
-        <li v-if="links[1]">
+        <li v-if="breadcrumbLinks[1]">
           <div class="flex items-center">
             <ChevronRightIcon
               class="h-5 w-5 flex-shrink-0 text-gray-400"
               aria-hidden="true"
             />
             <NuxtLink
-              :to="links[1].href"
+              :to="breadcrumbLinks[1].href"
               class="ml-4 text-sm font-medium text-gray-400 hover:text-blue-400"
             >
-              {{ links[1].text }}
+              {{ breadcrumbLinks[1].text }}
             </NuxtLink>
           </div>
         </li>
-        <li v-if="links[2]">
+        <li v-if="breadcrumbLinks[2]">
           <div class="flex items-center">
             <ChevronRightIcon
               class="h-5 w-5 flex-shrink-0 text-gray-400"
               aria-hidden="true"
             />
             <NuxtLink
-              :to="links[2].href"
+              :to="breadcrumbLinks[2].href"
               class="ml-4 text-sm font-medium text-gray-400 hover:text-blue-400"
             >
-              {{ links[2].text }}
+              {{ breadcrumbLinks[2].text }}
             </NuxtLink>
           </div>
         </li>
@@ -73,7 +73,7 @@ import {HomeIcon, ChevronRightIcon} from "@heroicons/vue/20/solid";
 <script>
 export default {
   props: {
-    links: {
+    breadcrumbLinks: {
       type: Array,
       required: true
     }

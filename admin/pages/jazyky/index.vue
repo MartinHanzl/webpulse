@@ -5,7 +5,7 @@ import { ref, onMounted, watch } from 'vue';
 
 const pageHeadingData = {
   title: 'Jazyky',
-  links: [
+  breadcrumbLinks: [
     {
       text: 'Jazyky',
       href: '/jazyky',
