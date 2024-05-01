@@ -61,7 +61,7 @@ onMounted(() => {
         { key: 'id', name: 'ID', type: 'number', width: 50, mobile: true },
         { key: 'name', name: 'Název', type: 'text', width: 50, mobile: true },
         { key: 'code', name: 'Kód', type: 'text', width: 50, mobile: false },
-        { key: 'iso', name: 'ISO', type: 'text', width: 50, mobile: false },
+        { key: 'iso', name: 'Iso kód', type: 'text', width: 50, mobile: false },
         { key: 'active', name: 'Aktivní', type: 'status', width: 50, mobile: true },
         { key: 'created_at', name: 'Vytvořeno', type: 'date', width: 50, mobile: false },
       ]"

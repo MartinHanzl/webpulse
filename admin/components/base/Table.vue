@@ -35,7 +35,6 @@ const page = ref(1);
 
 const emit = defineEmits(['update-page']);
 watch(page, () => {
-  console.log('table log');
   emit('update-page', page.value);
 });
 </script>
