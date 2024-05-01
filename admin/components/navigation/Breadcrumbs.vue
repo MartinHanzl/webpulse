@@ -9,10 +9,27 @@
         class="flex items-center space-x-4"
       >
         <li>
-          <div class="flex">
+          <div class="flex items-center">
+            <NuxtLink
+              to="/"
+              class="text-sm font-medium text-gray-500 hover:text-gray-700"
+            >
+              <HomeIcon
+                class="h-5 w-5 flex-shrink-0 text-gray-400"
+                aria-hidden="true"
+              />
+            </NuxtLink>
+          </div>
+        </li>
+        <li v-if="links[0]">
+          <div class="flex items-center">
+            <ChevronRightIcon
+              class="h-5 w-5 flex-shrink-0 text-gray-400"
+              aria-hidden="true"
+            />
             <NuxtLink
               :to="links[0].href"
-              class="text-sm font-medium text-gray-500 hover:text-gray-700"
+              class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
             >
               {{ links[0].text }}
             </NuxtLink>
@@ -51,7 +68,7 @@
   </div>
 </template>
 <script setup>
-import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/vue/20/solid";
+import {HomeIcon, ChevronRightIcon} from "@heroicons/vue/20/solid";
 </script>
 <script>
 export default {

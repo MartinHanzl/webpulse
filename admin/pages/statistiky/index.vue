@@ -20,10 +20,6 @@ const pageHeadingData = [
     title: 'Statistiky',
     links: [
       {
-        text: 'Nástěnka',
-        href: '/',
-      },
-      {
         text: 'Statistiky',
         href: '/statistiky',
       },

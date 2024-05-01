@@ -420,7 +420,7 @@ const nav = [
   {
     name: 'Systém', links: [
       {name: 'Nastavení', href: '#', icon: Cog6ToothIcon, current: false},
-      {name: 'Jazyky', href: '#', icon: LanguageIcon, current: false},
+      {name: 'Jazyky', href: '/jazyky', icon: LanguageIcon, current: false},
       {name: 'Sociální sítě', href: '#', icon: DevicePhoneMobileIcon, current: false},
       {name: 'Odkazy', href: '#', icon: LinkIcon, current: false},
       {name: 'Seo', href: '#', icon: PresentationChartBarIcon, current: false},
