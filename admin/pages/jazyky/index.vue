@@ -42,11 +42,11 @@ async function loadItems() {
     pending.value = false;
   })
 }
-function updatePage(newPage) {
+function updatePage(newPage: Number) {
   page.value = newPage;
   loadItems();
 }
-onMounted(() => {
+onBeforeMount(() => {
   loadItems();
 });
 </script>

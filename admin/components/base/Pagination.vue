@@ -6,7 +6,7 @@ const page = defineModel('page', {
   default: 1
 })
 
-defineProps({
+const props = defineProps({
   pagination: {
     type: Object,
     required: true
@@ -17,16 +17,19 @@ function changePage() {
   page.value = Math.ceil(Math.random() *3);
 }
 
+const previousIsDisabled = computed(() => {
+  return page.value === 1;
+});
+const nextIsDisabled = computed(() => {
+  return props.pagination.lastPage === page.value;
+});
+
 function previousPage() {
-  if (page.value > 1) {
-    page.value = page.value - 1;
-  }
+  if (!previousIsDisabled.value) page.value = page.value - 1;
 }
 
 function nextPage() {
-  if (page.value < pagination.lastPage) {
-    page.value = page.value + 1;
-  }
+  if (!nextIsDisabled.value) page.value = page.value + 1;
 }
 </script>
 
@@ -44,7 +47,7 @@ function nextPage() {
     </div>
     <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
       <div>
-        <p class="text-sm text-gray-700">
+        <p class="text-sm text-gray-400">
           Zobrazeno
           {{ ' ' }}
           <span class="font-medium">{{ pagination.perPage }}</span>
@@ -62,7 +65,7 @@ function nextPage() {
           aria-label="Pagination"
         >
           <span
-            class="cursor-pointer relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            :class="[previousIsDisabled ? 'cursor-not-allowed' : 'cursor-pointer', 'relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0']"
             @click="previousPage"
           >
             <span class="sr-only">Předchozí</span>
@@ -71,18 +74,20 @@ function nextPage() {
               aria-hidden="true"
             />
           </span>
-          <!-- Current: "z-10 bg-blue-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600", Default: "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
+          <!-- Current: "z-10 bg-blue-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600", Default: "text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
           <span
-            :aria-current="page"
+            aria-current="page"
             class="cursor-pointer relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600"
             @click="changePage"
           >1</span>
           <span
-            class="cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
+            aria-current="page"
+            class="cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0"
             @click="changePage"
           >2</span>
           <span
-            class="cursor-pointer relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
+            aria-current="page"
+            class="cursor-pointer relative hidden items-center px-4 py-2 text-sm font-semibold text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex"
             @click="changePage"
           >3</span>
           <span

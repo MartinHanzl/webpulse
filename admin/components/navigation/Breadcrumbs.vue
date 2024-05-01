@@ -12,10 +12,10 @@
           <div class="flex items-center">
             <NuxtLink
               to="/"
-              class="text-sm font-medium text-gray-500 hover:text-gray-700"
+              class="text-sm font-medium text-gray-400 hover:text-blue-400"
             >
               <HomeIcon
-                class="h-5 w-5 flex-shrink-0 text-gray-400"
+                class="h-5 w-5 flex-shrink-0 text-gray-400 hover:text-blue-400"
                 aria-hidden="true"
               />
             </NuxtLink>
@@ -29,7 +29,7 @@
             />
             <NuxtLink
               :to="links[0].href"
-              class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+              class="ml-4 text-sm font-medium text-gray-400 hover:text-blue-400"
             >
               {{ links[0].text }}
             </NuxtLink>
@@ -43,7 +43,7 @@
             />
             <NuxtLink
               :to="links[1].href"
-              class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+              class="ml-4 text-sm font-medium text-gray-400 hover:text-blue-400"
             >
               {{ links[1].text }}
             </NuxtLink>
@@ -57,7 +57,7 @@
             />
             <NuxtLink
               :to="links[2].href"
-              class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+              class="ml-4 text-sm font-medium text-gray-400 hover:text-blue-400"
             >
               {{ links[2].text }}
             </NuxtLink>

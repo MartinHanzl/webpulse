@@ -53,7 +53,7 @@ watch(page, () => {
                 <th
                   v-for="(column, key) in columns"
                   :key="key"
-                  :class="[column.mobile === false ? 'hidden' : '', 'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8 md:table-cell']"
+                  :class="[column.mobile === false ? 'hidden' : '', `w-[${column.width}] py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8 md:table-cell`]"
                 >
                   {{ column.name }}
                 </th>
@@ -77,7 +77,7 @@ watch(page, () => {
                 <td
                   v-for="(column, index) in columns"
                   :key="index"
-                  :class="[column.mobile === false ? 'hidden' : '', `whitespace-nowrap w-[${column.width}]/12 py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 md:table-cell`]"
+                  :class="[column.mobile === false ? 'hidden' : '', `whitespace-nowrap w-[${column.width}] py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 md:table-cell`]"
                 >
                   <div v-if="column.type === 'text' || column.type === 'number'">
                     {{ item[column.key] }}
@@ -112,16 +112,20 @@ watch(page, () => {
               v-else
               class="divide-y divide-gray-200 bg-white"
             >
-              <div class="py-1.5 text-center">
-                {{ titles.plural }} se načítají...
-              </div>
+              <tr>
+                <td :colspan="columns.length + 1" class="py-4 text-center text-gray-400 text-sm">
+                  <span class="animate-pulse">
+                    {{ titles.plural }} se načítají...
+                  </span>
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>
       </div>
     </div>
     <Pagination
-      v-if="pagination"
+      v-if="pagination && !pending"
       v-model:page="page"
       :pagination="pagination"
     />
