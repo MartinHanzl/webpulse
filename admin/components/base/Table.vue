@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineProps } from 'vue';
+import {defineProps, watch, defineEmits} from 'vue';
 import Dropdown from "~/components/base/Dropdown.vue";
 import Pagination from "~/components/base/Pagination.vue";
 import {CheckIcon, XMarkIcon} from "@heroicons/vue/20/solid";
@@ -29,6 +29,14 @@ defineProps({
     type: Object,
     required: false
   }
+});
+
+const page = ref(1);
+
+const emit = defineEmits(['update-page']);
+watch(page, () => {
+  console.log('hurr');
+  emit('update-page', page.value);
 });
 </script>
 
@@ -115,6 +123,7 @@ defineProps({
     </div>
     <Pagination
       v-if="pagination"
+      v-model:page="page"
       :pagination="pagination"
     />
   </div>

@@ -41,6 +41,9 @@ async function loadItems() {
     pending.value = false;
   })
 }
+function updatePage() {
+  loadItems();
+}
 onMounted(() => {
   loadItems();
 });
@@ -68,6 +71,7 @@ onMounted(() => {
         plural: 'Jazyky',
       }"
       :pagination="{ total: 5, perPage: 2, currentPage: 1}"
+      @update-page="updatePage"
     />
   </div>
 </template>
