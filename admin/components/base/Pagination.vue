@@ -14,7 +14,7 @@ defineProps({
 });
 
 function changePage() {
-  page.value = Math.round(Math.random() *10);
+  page.value = Math.ceil(Math.random() *3);
 }
 </script>
 

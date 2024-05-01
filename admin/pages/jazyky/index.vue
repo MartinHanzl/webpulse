@@ -21,13 +21,14 @@ const pageHeadingData = [
 
 const items = ref({data:[]});
 const pending = ref(false);
+const page = ref(1);
 
 async function loadItems() {
   pending.value = true;
   await useFetch('http://localhost:8000/api/admin/language', {
     method: 'GET',
     params: {
-      page: 0,
+      page: page,
       perPage: 2,
       orderBy: 'id',
       orderWay: 'desc',
@@ -41,7 +42,8 @@ async function loadItems() {
     pending.value = false;
   })
 }
-function updatePage() {
+function updatePage(newPage) {
+  page.value = newPage;
   loadItems();
 }
 onMounted(() => {
