@@ -55,10 +55,10 @@ function generatePages() {
   for (let i = props.pagination.lastPage - 3; i <= props.pagination.lastPage - 3; i++) {
     pages.push({ current: i === page.value, page: i, text: i.toString() });
   }
-  if (page.value + 2 < props.pagination.lastPage - 2) {
+  if (page.value + 2 < props.pagination.lastPage) {
     pages.push({ current: false, page: 0, text: '...' });
   }
-  if (page.value + 3 >= props.pagination.lastPage) {
+  if (page.value + 2 >= props.pagination.lastPage) {
     for (let i = props.pagination.lastPage - 2; i <= props.pagination.lastPage; i++) {
       pages.push({ current: i === page.value, page: i, text: i.toString() });
     }
