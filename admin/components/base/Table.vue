@@ -124,7 +124,7 @@ watch(page, () => {
               <tr>
                 <td :colspan="columns.length + 1" class="py-4 text-center text-gray-400 text-sm">
                   <span class="animate-pulse">
-                    {{ titles.plural }} se načítají...
+                    {{ titles.plural }} se načítají ...
                   </span>
                 </td>
               </tr>
@@ -137,6 +137,7 @@ watch(page, () => {
       v-if="pagination && !pending"
       v-model:page="page"
       :pagination="pagination"
+      :items="items"
     />
   </div>
 </template>

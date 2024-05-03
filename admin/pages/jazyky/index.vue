@@ -78,7 +78,7 @@ watch(searchString, () => {
         singular: 'Jazyk',
         plural: 'Jazyky',
       }"
-      :pagination="{ total: 5, perPage: 2, currentPage: 1}"
+      :pagination="{ total: items.total, perPage: items.perPage, currentPage: items.currentPage, lastPage: items.lastPage }"
       @update-page="updatePage"
     />
   </div>
