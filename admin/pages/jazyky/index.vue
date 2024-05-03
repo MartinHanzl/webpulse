@@ -28,7 +28,7 @@ async function loadItems() {
     method: 'GET',
     params: {
       page: page,
-      perPage: 2,
+      perPage: 12,
       orderBy: 'id',
       orderWay: 'desc',
       search: searchString.value,

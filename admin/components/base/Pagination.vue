@@ -2,10 +2,11 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/20/solid'
 import {defineProps, watch} from 'vue';
 
-const page = defineModel('page', {
+const defPage = defineModel('page', {
   type: Number,
   default: 1
-})
+});
+const page = ref(defPage.value);
 
 const props = defineProps({
   pagination: {
@@ -17,7 +18,6 @@ const props = defineProps({
 function changePage(pageObject) {
   if (pageObject.page !== 0 || pageObject.page !== page.value) {
     page.value = pageObject.page;
-    generatePages();
   }
 }
 
@@ -35,7 +35,7 @@ function previousPage() {
 function nextPage() {
   if (!nextIsDisabled.value) page.value = page.value + 1;
 }
-const pages = ref([
+const paginationPages = ref([
   { current: false, page: 1, text: '1' },
   { current: false, page: 0, text: '...' },
   { current: false, page: 3, text: '3' },
@@ -43,24 +43,36 @@ const pages = ref([
 
 function generatePages() {
   const pages = [];
-  for (let i = 1; i <= props.pagination.lastPage; i++) {
-    pages.push({
-      current: i === page.value,
-      page: i,
-    });
+
+  pages.push({ current: 1 === page.value, page: 1, text: 1 });
+
+  for (let i = 2; i <= 4; i++) {
+    pages.push({ current: i === page.value, page: i, text: i.toString() });
   }
-  pages.value = pages;
+  if (page.value < props.pagination.lastPage - 3) {
+    pages.push({ current: false, page: 0, text: '...' });
+  }
+  for (let i = props.pagination.lastPage - 3; i <= props.pagination.lastPage - 3; i++) {
+    pages.push({ current: i === page.value, page: i, text: i.toString() });
+  }
+  if (page.value < props.pagination.lastPage - 3) {
+    pages.push({ current: false, page: 0, text: '...' });
+  }
+  for (let i = props.pagination.lastPage; i <= props.pagination.lastPage; i++) {
+    pages.push({ current: i === page.value, page: i, text: i.toString() });
+  }
+  paginationPages.value = pages;
 }
 
 watch(page, () => {
-  console.log('I am wathicng');
   generatePages();
+  // defPage.value = page.value;
 });
 </script>
 
 <template>
   <div class="flex items-center justify-between border-t border-gray-200 bg-white py-3 px-2 md:px-0">
-    {{ pagination }}
+    {{ paginationPages }}
     <div class="flex flex-1 justify-between sm:hidden">
       <span
         class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
@@ -76,7 +88,7 @@ watch(page, () => {
         <p class="text-sm text-gray-400">
           Zobrazeno
           {{ ' ' }}
-          <span class="font-medium">{{ pagination.currentPage + 1 }} ─ {{ pagination.perPage * pagination.currentPage }}</span>
+          <span class="font-medium">{{ pagination.currentPage }} ─ {{ pagination.perPage * pagination.currentPage }}</span>
           {{ ' ' }}
           z
           {{ ' ' }}
@@ -102,7 +114,7 @@ watch(page, () => {
           </span>
           <!-- Current: "z-10 bg-blue-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600", Default: "text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
           <span
-            v-for="(pageObject, index) in pages"
+            v-for="(pageObject, index) in paginationPages"
             :key="index"
             aria-current="page"
             :class="[pageObject.current === true ? 'bg-blue-600 text-white' : '', 'cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0']"
