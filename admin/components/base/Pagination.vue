@@ -51,7 +51,7 @@ function generatePages() {
   }
   if (1 < page.value - 1) {
     for (let i = page.value - 1; i <= page.value + 1; i++) {
-      if (i < props.pagination.lastPage + 1) {
+      if (i <= props.pagination.lastPage) {
         pages.push({ current: i === page.value, page: i, text: i.toString() });
       }
     }
