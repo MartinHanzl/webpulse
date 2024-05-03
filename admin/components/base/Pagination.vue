@@ -46,20 +46,26 @@ function generatePages() {
 
   pages.push({ current: 1 === page.value, page: 1, text: 1 });
 
-  for (let i = 2; i <= 4; i++) {
+  /*for (let i = 2; i <= 4; i++) {
     pages.push({ current: i === page.value, page: i, text: i.toString() });
-  }
-  if (page.value < props.pagination.lastPage - 3) {
+  }*/
+  if (1 < props.pagination.lastPage - 3) {
     pages.push({ current: false, page: 0, text: '...' });
   }
   for (let i = props.pagination.lastPage - 3; i <= props.pagination.lastPage - 3; i++) {
     pages.push({ current: i === page.value, page: i, text: i.toString() });
   }
-  if (page.value < props.pagination.lastPage - 3) {
+  if (page.value + 2 < props.pagination.lastPage - 2) {
     pages.push({ current: false, page: 0, text: '...' });
   }
-  for (let i = props.pagination.lastPage; i <= props.pagination.lastPage; i++) {
-    pages.push({ current: i === page.value, page: i, text: i.toString() });
+  if (page.value + 3 >= props.pagination.lastPage) {
+    for (let i = props.pagination.lastPage - 2; i <= props.pagination.lastPage; i++) {
+      pages.push({ current: i === page.value, page: i, text: i.toString() });
+    }
+  } else {
+    for (let i = props.pagination.lastPage; i <= props.pagination.lastPage; i++) {
+      pages.push({ current: i === page.value, page: i, text: i.toString() });
+    }
   }
   paginationPages.value = pages;
 }
