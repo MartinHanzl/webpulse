@@ -24,6 +24,7 @@ class LanguageController extends Controller
 
         if ($request->has('search') && $request->get('search') !== null) {
             $query->where('code', 'like', '%' . $request->get('search') . '%')
+                ->orWhere('iso', 'like', '%' . $request->get('search') . '%')
                 ->orWhereTranslationLike('name', $request->get('search'));
         }
 

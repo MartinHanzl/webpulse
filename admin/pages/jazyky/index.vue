@@ -2,6 +2,7 @@
 import PageHeading from "~/components/layout/PageHeading.vue";
 import Table from "~/components/base/Table.vue";
 import { ref, onMounted, watch } from 'vue';
+import debounce from 'lodash.debounce'
 
 const pageHeadingData = {
   title: 'Jazyky',
@@ -60,9 +61,9 @@ onBeforeMount(() => {
 onMounted(() => {
   searchString.value = null;
 });
-watch(searchString, () => {
+watch(searchString, debounce(() => {
   loadItems();
-});
+}));
 </script>
 
 <template>
