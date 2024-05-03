@@ -46,15 +46,21 @@ function generatePages() {
 
   pages.push({ current: 1 === page.value, page: 1, text: 1 });
 
-  /*for (let i = 2; i <= 4; i++) {
-    pages.push({ current: i === page.value, page: i, text: i.toString() });
-  }*/
-  if (1 < props.pagination.lastPage - 3) {
+  if (1 < page.value - 3) {
     pages.push({ current: false, page: 0, text: '...' });
   }
-  for (let i = props.pagination.lastPage - 3; i <= props.pagination.lastPage - 3; i++) {
-    pages.push({ current: i === page.value, page: i, text: i.toString() });
+  if (1 < page.value - 1) {
+    for (let i = page.value - 1; i <= page.value + 1; i++) {
+      pages.push({current: i === page.value, page: i, text: i.toString()});
+    }
+  } else {
+    for (let i = 2; i <= 4; i++) {
+      pages.push({current: i === page.value, page: i, text: i.toString()});
+    }
   }
+  /*for (let i = props.pagination.lastPage - 3; i <= props.pagination.lastPage - 3; i++) {
+    pages.push({ current: i === page.value, page: i, text: i.toString() });
+  }*/
   if (page.value + 2 < props.pagination.lastPage) {
     pages.push({ current: false, page: 0, text: '...' });
   }
@@ -78,7 +84,6 @@ watch(page, () => {
 
 <template>
   <div class="flex items-center justify-between border-t border-gray-200 bg-white py-3 px-2 md:px-0">
-    {{ paginationPages }}
     <div class="flex flex-1 justify-between sm:hidden">
       <span
         class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
