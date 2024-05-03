@@ -1,3 +1,114 @@
+<script setup lang="ts">
+import {ref, watch} from 'vue'
+import {
+  Dialog,
+  DialogPanel,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  TransitionChild,
+  TransitionRoot,
+} from '@headlessui/vue'
+import {
+  Bars3Icon,
+  BellIcon,
+  Cog6ToothIcon,
+  DocumentDuplicateIcon,
+  HomeIcon,
+  XMarkIcon,
+  WrenchScrewdriverIcon,
+  NewspaperIcon, CalendarDaysIcon,
+  UsersIcon,
+  UserGroupIcon,
+  AdjustmentsHorizontalIcon,
+  LinkIcon,
+  DevicePhoneMobileIcon,
+  PresentationChartBarIcon,
+  PresentationChartLineIcon,
+  EnvelopeIcon,
+  AcademicCapIcon,
+  QuestionMarkCircleIcon,
+  EnvelopeOpenIcon,
+  HandThumbUpIcon, ChatBubbleOvalLeftIcon,
+  BanknotesIcon,
+  BriefcaseIcon,
+  LanguageIcon
+} from '@heroicons/vue/24/outline';
+import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
+
+const route = ref(useRoute().path);
+function changeCurrentRoute(link: String) {
+  route.value = link;
+  console.log(route.value);
+}
+const currentLink = route.value;
+
+const nav = [
+  {
+    name: 'Přehled', links: [
+      {name: 'Nástěnka', href: '/', icon: HomeIcon, current: currentLink === '/' ? true : false},
+      {
+        name: 'Statistiky',
+        href: '/statistiky',
+        icon: PresentationChartLineIcon,
+        current: currentLink === '/statistiky' ? true : false
+      },
+    ]
+  },
+  {
+    name: 'Obsah', links: [
+      {name: 'Služby', href: '/sluzby', icon: WrenchScrewdriverIcon, current: false},
+      {name: 'Události', href: '#', icon: CalendarDaysIcon, current: false},
+      {name: 'Blog', href: '#', icon: NewspaperIcon, current: false},
+      {name: 'Stránky', href: '#', icon: DocumentDuplicateIcon, current: false},
+      {name: 'Kariéra', href: '#', icon: AcademicCapIcon, current: false},
+      {name: 'Reference', href: '#', icon: HandThumbUpIcon, current: false},
+      {name: 'FAQ', href: '/faq', icon: ChatBubbleOvalLeftIcon, current: currentLink === '/faq' ? true : false},
+    ]
+  },
+  {
+    name: 'Uživatelé', links: [
+      {name: 'Uživatelé', href: '#', icon: UsersIcon, current: false},
+      {name: 'Dotazy uživatelů', href: '#', icon: QuestionMarkCircleIcon, current: false},
+      {name: 'Emaily', href: '#', icon: EnvelopeIcon, current: false},
+      {name: 'Odběry newsletterů', href: '#', icon: EnvelopeOpenIcon, current: false},
+    ]
+  },
+  {
+    name: 'Firma', links: [
+      {name: 'Zaměstnanci', href: '#', icon: BriefcaseIcon, current: false},
+      {name: 'Faktury', href: '#', icon: BanknotesIcon, current: false},
+    ]
+  },
+  {
+    name: 'Administrace', links: [
+      {name: 'Administrátoři', href: '#', icon: UserGroupIcon, current: false},
+      {name: 'Úrovně oprávnění', href: '#', icon: AdjustmentsHorizontalIcon, current: false},
+    ]
+  },
+  {
+    name: 'Systém', links: [
+      {name: 'Nastavení', href: '#', icon: Cog6ToothIcon, current: false},
+      {name: 'Jazyky', href: '/jazyky', icon: LanguageIcon, current: false},
+      {name: 'Sociální sítě', href: '#', icon: DevicePhoneMobileIcon, current: false},
+      {name: 'Odkazy', href: '#', icon: LinkIcon, current: false},
+      {name: 'Seo', href: '#', icon: PresentationChartBarIcon, current: false},
+    ]
+  },
+];
+
+const userNavigation = [
+  {name: 'Profil', href: '#'},
+  {name: 'Odhlásit se', href: '#'},
+]
+
+const sidebarOpen = ref(false);
+
+const searchString = ref(null);
+provide('searchString', searchString);
+</script>
+
 <template>
   <div>
     <TransitionRoot
@@ -178,28 +289,24 @@
         />
 
         <div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-          <div class="relative flex flex-1" />
-          <!--          <form
+          <!--          <div class="relative flex flex-1" />-->
+          <div
             class="relative flex flex-1"
-            action="#"
-            method="GET"
           >
             <label
               for="search-field"
               class="sr-only"
-            >Search</label>
+            >Vyhledávání</label>
             <MagnifyingGlassIcon
               class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
               aria-hidden="true"
             />
             <input
-              id="search-field"
+              v-model="searchString"
               class="block h-full w-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-              placeholder="Search..."
-              type="search"
-              name="search"
+              placeholder="Vyhledávání..."
             >
-          </form>-->
+          </div>
           <div class="flex items-center gap-x-4 lg:gap-x-6">
             <button
               type="button"
@@ -283,7 +390,7 @@
                   <span
                     class="ml-4 text-sm font-semibold leading-6 text-gray-900"
                     aria-hidden="true"
-                  >Tom Cook</span>
+                  >Martin Hanzl</span>
                   <ChevronDownIcon
                     class="ml-2 h-5 w-5 text-gray-400"
                     aria-hidden="true"
@@ -309,6 +416,7 @@
                     <NuxtLink
                       :to="item.href"
                       :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
+                      @click="changeCurrentRoute(item.href)"
                     >
                       {{ item.name }}
                     </NuxtLink>
@@ -328,110 +436,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-import {ref} from 'vue'
-import {
-  Dialog,
-  DialogPanel,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue'
-import {
-  Bars3Icon,
-  BellIcon,
-  Cog6ToothIcon,
-  DocumentDuplicateIcon,
-  HomeIcon,
-  XMarkIcon,
-  WrenchScrewdriverIcon,
-  NewspaperIcon, CalendarDaysIcon,
-  UsersIcon,
-  UserGroupIcon,
-  AdjustmentsHorizontalIcon,
-  LinkIcon,
-  DevicePhoneMobileIcon,
-  PresentationChartBarIcon,
-  PresentationChartLineIcon,
-  EnvelopeIcon,
-  AcademicCapIcon,
-  QuestionMarkCircleIcon,
-  EnvelopeOpenIcon,
-  HandThumbUpIcon, ChatBubbleOvalLeftIcon,
-    BanknotesIcon,
-    BriefcaseIcon,
-    LanguageIcon
-} from '@heroicons/vue/24/outline'
-import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
-
-const route = useRoute();
-let currentLink = route.path;
-watch(() => route.path, (to) => {
-  currentLink = to;
-});
-
-const nav = [
-  {
-    name: 'Přehled', links: [
-      {name: 'Nástěnka', href: '/', icon: HomeIcon, current: currentLink === '/' ? true : false},
-      {
-        name: 'Statistiky',
-        href: '/statistiky',
-        icon: PresentationChartLineIcon,
-        current: currentLink === '/statistiky' ? true : false
-      },
-    ]
-  },
-  {
-    name: 'Obsah', links: [
-      {name: 'Služby', href: '/sluzby', icon: WrenchScrewdriverIcon, current: false},
-      {name: 'Události', href: '#', icon: CalendarDaysIcon, current: false},
-      {name: 'Blog', href: '#', icon: NewspaperIcon, current: false},
-      {name: 'Stránky', href: '#', icon: DocumentDuplicateIcon, current: false},
-      {name: 'Kariéra', href: '#', icon: AcademicCapIcon, current: false},
-      {name: 'Reference', href: '#', icon: HandThumbUpIcon, current: false},
-      {name: 'FAQ', href: '/faq', icon: ChatBubbleOvalLeftIcon, current: currentLink === '/faq' ? true : false},
-    ]
-  },
-  {
-    name: 'Uživatelé', links: [
-      {name: 'Uživatelé', href: '#', icon: UsersIcon, current: false},
-      {name: 'Dotazy uživatelů', href: '#', icon: QuestionMarkCircleIcon, current: false},
-      {name: 'Emaily', href: '#', icon: EnvelopeIcon, current: false},
-      {name: 'Odběry newsletterů', href: '#', icon: EnvelopeOpenIcon, current: false},
-    ]
-  },
-  {
-    name: 'Firma', links: [
-      {name: 'Zaměstnanci', href: '#', icon: BriefcaseIcon, current: false},
-      {name: 'Faktury', href: '#', icon: BanknotesIcon, current: false},
-    ]
-  },
-  {
-    name: 'Administrace', links: [
-      {name: 'Administrátoři', href: '#', icon: UserGroupIcon, current: false},
-      {name: 'Úrovně oprávnění', href: '#', icon: AdjustmentsHorizontalIcon, current: false},
-    ]
-  },
-  {
-    name: 'Systém', links: [
-      {name: 'Nastavení', href: '#', icon: Cog6ToothIcon, current: false},
-      {name: 'Jazyky', href: '/jazyky', icon: LanguageIcon, current: false},
-      {name: 'Sociální sítě', href: '#', icon: DevicePhoneMobileIcon, current: false},
-      {name: 'Odkazy', href: '#', icon: LinkIcon, current: false},
-      {name: 'Seo', href: '#', icon: PresentationChartBarIcon, current: false},
-    ]
-  },
-];
-
-const userNavigation = [
-  {name: 'Profil', href: '#'},
-  {name: 'Odhlásit se', href: '#'},
-]
-
-const sidebarOpen = ref(false)
-</script>

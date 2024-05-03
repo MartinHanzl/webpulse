@@ -22,6 +22,11 @@ class LanguageController extends Controller
             $query->orderBy($request->get('orderBy'), $request->get('orderWay'));
         }
 
+        if ($request->has('search') && $request->get('search') !== null) {
+            $query->where('code', 'like', '%' . $request->get('search') . '%')
+                ->orWhereTranslationLike('name', $request->get('search'));
+        }
+
         if ($request->has('page') && $request->has('perPage')) {
             $languages = $query->paginate($request->get('perPage'));
             return Response::json([

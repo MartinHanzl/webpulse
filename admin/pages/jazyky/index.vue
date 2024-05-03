@@ -20,6 +20,7 @@ const pageHeadingData = {
 const items = ref({data:[]});
 const pending = ref(false);
 const page = ref(1);
+const searchString = ref(inject('searchString'));
 
 async function loadItems() {
   pending.value = true;
@@ -30,6 +31,7 @@ async function loadItems() {
       perPage: 2,
       orderBy: 'id',
       orderWay: 'desc',
+      search: searchString.value,
     },
     headers: {
       Accept: 'application/json',
@@ -45,6 +47,12 @@ function updatePage(newPage: Number) {
   loadItems();
 }
 onBeforeMount(() => {
+  loadItems();
+});
+onMounted(() => {
+  searchString.value = null;
+});
+watch(searchString, () => {
   loadItems();
 });
 </script>
