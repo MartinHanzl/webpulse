@@ -3,7 +3,15 @@ import {defineProps, watch, defineEmits} from 'vue';
 import Dropdown from "~/components/base/Dropdown.vue";
 import Pagination from "~/components/base/Pagination.vue";
 import {CheckIcon, XMarkIcon} from "@heroicons/vue/24/solid";
-import {PencilIcon, TrashIcon, BoltIcon} from "@heroicons/vue/24/outline";
+import {PencilIcon, TrashIcon, BoltIcon, ArrowDownIcon, ArrowUpIcon} from "@heroicons/vue/24/outline";
+
+const order = defineModel('order', {
+  type: Object,
+  default: {
+    orderBy: 'id',
+    orderWay: 'desc',
+  }
+});
 
 defineProps({
   columns: {
@@ -29,14 +37,27 @@ defineProps({
   pagination: {
     type: Object,
     required: false
-  }
+  },
 });
 
 const page = ref(1);
 
-const emit = defineEmits(['update-page']);
+function changeOrder(column: { sortable: any; key: any; }) {
+  if (column.sortable) {
+    if (order.value.orderBy === column.key) {
+      order.value.orderWay = order.value.orderWay === 'asc' ? 'desc' : 'asc';
+    } else {
+      order.value.orderBy = column.key;
+      order.value.orderWay = 'asc';
+    }
+  }
+}
+const emit = defineEmits(['update-page', 'update-order']);
 watch(page, () => {
   emit('update-page', page.value);
+});
+watch(order.value, () => {
+  emit('update-order', order.value);
 });
 </script>
 
@@ -54,9 +75,20 @@ watch(page, () => {
                 <th
                   v-for="(column, key) in columns"
                   :key="key"
-                  :class="[column.mobile === false ? 'hidden' : '', `w-[${column.width}] py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8 md:table-cell`]"
+                  :class="[column.sortable ? 'cursor-pointer' : '', column.mobile === false ? 'hidden' : '', `w-[${column.width}/${columns.length + 1}], py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-6 lg:pl-8 md:table-cell`]"
+                  @click="changeOrder(column)"
                 >
                   {{ column.name }}
+                  <span v-if="order && column.sortable">
+                    <ArrowUpIcon
+                      v-if="order.orderBy === column.key && order.orderWay === 'asc'"
+                      class="w-4 h-4 inline-block ml-1 text-blue-400"
+                    />
+                    <ArrowDownIcon
+                      v-else-if="order.orderBy === column.key && order.orderWay === 'desc'"
+                      class="w-4 h-4 inline-block ml-1 text-blue-400"
+                    />
+                  </span>
                 </th>
                 <th
                   scope="col"
@@ -78,7 +110,7 @@ watch(page, () => {
                 <td
                   v-for="(column, index) in columns"
                   :key="index"
-                  :class="[column.mobile === false ? 'hidden' : '', `whitespace-nowrap w-[${column.width}] py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 md:table-cell`]"
+                  :class="[column.mobile === false ? 'hidden' : '', `whitespace-nowrap w-[${column.width}/${columns.length + 1}] py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 md:table-cell`]"
                 >
                   <div v-if="column.type === 'text' || column.type === 'number'">
                     {{ item[column.key] }}

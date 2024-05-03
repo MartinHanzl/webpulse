@@ -34,6 +34,7 @@ class LanguageController extends Controller
                 'perPage' => $languages->perPage(),
                 'currentPage' => $languages->currentPage(),
                 'lastPage' => $languages->lastPage(),
+                'from' => $languages->firstItem(),
                 'data' => LanguageResource::collection($languages->items()),
             ]);
         }

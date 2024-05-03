@@ -21,6 +21,10 @@ const items = ref({data:[]});
 const pending = ref(false);
 const page = ref(1);
 const searchString = ref(inject('searchString'));
+const order = ref({
+  orderBy: 'id',
+  orderWay: 'desc',
+});
 
 async function loadItems() {
   pending.value = true;
@@ -29,8 +33,8 @@ async function loadItems() {
     params: {
       page: page,
       perPage: 12,
-      orderBy: 'id',
-      orderWay: 'desc',
+      orderBy: order.value.orderBy,
+      orderWay: order.value.orderWay,
       search: searchString.value,
     },
     headers: {
@@ -44,6 +48,10 @@ async function loadItems() {
 }
 function updatePage(newPage: Number) {
   page.value = newPage;
+  loadItems();
+}
+function updateOrder(newOrder: Object) {
+  order.value = newOrder;
   loadItems();
 }
 onBeforeMount(() => {
@@ -63,13 +71,14 @@ watch(searchString, () => {
       :page-heading-data="pageHeadingData"
     />
     <Table
+      v-model:order="order"
       :columns="[
-        { key: 'id', name: 'ID', type: 'number', width: 50, mobile: true },
-        { key: 'name', name: 'Název', type: 'text', width: 50, mobile: true },
-        { key: 'code', name: 'Kód', type: 'text', width: 50, mobile: false },
-        { key: 'iso', name: 'Iso kód', type: 'text', width: 50, mobile: false },
-        { key: 'active', name: 'Aktivní', type: 'status', width: 50, mobile: true },
-        { key: 'created_at', name: 'Vytvořeno', type: 'date', width: 50, mobile: false },
+        { key: 'id', name: 'ID', type: 'number', width: 50, mobile: true, sortable: true },
+        { key: 'name', name: 'Název', type: 'text', width: 50, mobile: true, sortable: false },
+        { key: 'code', name: 'Kód', type: 'text', width: 50, mobile: false, sortable: true },
+        { key: 'iso', name: 'Iso kód', type: 'text', width: 50, mobile: false, sortable: true },
+        { key: 'active', name: 'Aktivní', type: 'status', width: 50, mobile: true, sortable: true },
+        { key: 'created_at', name: 'Vytvořeno', type: 'date', width: 50, mobile: false, sortable: true },
       ]"
       :items="items"
       :actions="{ edit: true, view: true, delete: true }"
@@ -78,8 +87,9 @@ watch(searchString, () => {
         singular: 'Jazyk',
         plural: 'Jazyky',
       }"
-      :pagination="{ total: items.total, perPage: items.perPage, currentPage: items.currentPage, lastPage: items.lastPage }"
+      :pagination="{ total: items.total, perPage: items.perPage, currentPage: items.currentPage, lastPage: items.lastPage, from: items.from }"
       @update-page="updatePage"
+      @update-order="updateOrder"
     />
   </div>
 </template>

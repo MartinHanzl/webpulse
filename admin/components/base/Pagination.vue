@@ -2,11 +2,10 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/20/solid'
 import {defineProps, watch} from 'vue';
 
-const defPage = defineModel('page', {
+const page = defineModel('page', {
   type: Number,
   default: 1
 });
-const page = ref(defPage.value);
 
 const props = defineProps({
   pagination: {
@@ -73,13 +72,12 @@ onMounted(() => {
 
 watch(page, () => {
   generatePages();
-  // defPage.value = page.value;
 });
 </script>
 
 <template>
   <div class="flex items-center justify-between border-t border-gray-200 bg-white py-3 px-2 md:px-0">
-    <div class="flex flex-1 justify-between sm:hidden">
+    <div v-if="pagination.total > pagination.perPage" class="flex flex-1 justify-between sm:hidden">
       <span
         class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
         @click="previousPage"
@@ -103,7 +101,7 @@ watch(page, () => {
           výsledků
         </p>
       </div>
-      <div>
+      <div v-if="pagination.total > pagination.perPage">
         <nav
           class="isolate inline-flex -space-x-px rounded-md shadow-sm"
           aria-label="Pagination"
