@@ -72,5 +72,6 @@ Route::group([
         'prefix' => 'language'
     ], function () {
         Route::get('', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'index']);
+        Route::get('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'show'])->where('id', '[0-9]+');
     });
 });

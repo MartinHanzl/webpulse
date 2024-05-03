@@ -14,7 +14,7 @@ const order = defineModel('order', {
   }
 });
 
-defineProps({
+const props = defineProps({
   columns: {
     type: Array,
     required: true
@@ -42,6 +42,18 @@ defineProps({
 });
 
 const page = ref(1);
+const slideoverIsOpened = ref(false);
+const slideOverData = ref({
+  title: props.titles.plural,
+  open: false,
+  content: 'Panel content',
+});
+
+function defineSlideoverData(item: Object) {
+  slideOverData.value.title = props.titles.slideover;
+  slideOverData.value.content = item;
+  slideoverIsOpened.value = true;
+}
 
 function changeOrder(column: { sortable: any; key: any; }) {
   if (column.sortable) {
@@ -135,17 +147,38 @@ watch(order.value, () => {
                   </div>
                 </td>
                 <td class="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 flex flex-1 justify-evenly">
-                  <NuxtLink v-if="actions.edit" to="/jazyky/pridat" class="text-blue-600 hover:text-blue-900">
+                  <NuxtLink
+                    v-if="actions.edit"
+                    to="/jazyky/pridat"
+                    class="text-blue-600 hover:text-blue-900"
+                  >
                     <span class="sr-only">Edit</span>
-                    <PencilIcon class="h-5 w-5" aria-hidden="true" />
+                    <PencilIcon
+                      class="h-5 w-5"
+                      aria-hidden="true"
+                    />
                   </NuxtLink>
-                  <NuxtLink v-if="actions.view" to="/" class="text-yellow-600 hover:text-yellow-900">
+                  <button
+                    v-if="actions.view"
+                    class="text-yellow-600 hover:text-yellow-900"
+                    @click="defineSlideoverData(item)"
+                  >
                     <span class="sr-only">Quick view</span>
-                    <BoltIcon class="h-5 w-5" aria-hidden="true" />
-                  </NuxtLink>
-                  <NuxtLink v-if="actions.delete" to="/" class="text-red-600 hover:text-red-900">
+                    <BoltIcon
+                      class="h-5 w-5"
+                      aria-hidden="true"
+                    />
+                  </button>
+                  <NuxtLink
+                    v-if="actions.delete"
+                    to="/"
+                    class="text-red-600 hover:text-red-900"
+                  >
                     <span class="sr-only">Delete</span>
-                    <TrashIcon class="h-5 w-5" aria-hidden="true" />
+                    <TrashIcon
+                      class="h-5 w-5"
+                      aria-hidden="true"
+                    />
                   </NuxtLink>
                 </td>
               </tr>
@@ -155,7 +188,10 @@ watch(order.value, () => {
               class="divide-y divide-gray-200 bg-white"
             >
               <tr>
-                <td :colspan="columns.length + 1" class="py-4 text-center text-gray-400 text-sm">
+                <td
+                  :colspan="columns.length + 1"
+                  class="py-4 text-center text-gray-400 text-sm"
+                >
                   <span class="animate-pulse">
                     {{ titles.plural }} se načítají ...
                   </span>
@@ -172,6 +208,10 @@ watch(order.value, () => {
       :pagination="pagination"
       :items="items"
     />
-    <Slideover />
+    <Slideover
+      v-model:open="slideoverIsOpened"
+      :title="slideOverData.title"
+      :content="slideOverData.content"
+    />
   </div>
 </template>

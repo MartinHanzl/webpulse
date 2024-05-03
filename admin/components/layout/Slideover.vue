@@ -1,19 +1,44 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, defineEmits, defineProps } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 
-const open = ref(true)
+const open = defineModel('open', {
+  type: Boolean,
+  default: false
+});
+
+const props = defineProps({
+  open: {
+    type: Boolean,
+    default: false,
+    required: true
+  },
+  title: {
+    type: String,
+    default: '',
+    required: true
+  },
+  content: {
+    type: Object,
+    required: true
+  }
+});
+
+const isOpen = ref(false);
+watch(open, () => {
+  return isOpen.value = open.value;
+})
 </script>
 
 <template>
   <TransitionRoot
     as="template"
-    :show="open"
+    :show="isOpen"
   >
     <Dialog
       class="relative z-50"
-      @close="open = false"
+      @close="isOpen = false"
     >
       <TransitionChild
         as="template"
@@ -44,13 +69,13 @@ const open = ref(true)
                   <div class="px-4 sm:px-6">
                     <div class="flex items-start justify-between">
                       <DialogTitle class="text-base font-semibold leading-6 text-gray-900">
-                        Panel title
+                        {{ title }}
                       </DialogTitle>
                       <div class="ml-3 flex h-7 items-center">
                         <button
                           type="button"
                           class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                          @click="open = false"
+                          @click="isOpen = false"
                         >
                           <span class="absolute -inset-2.5" />
                           <span class="sr-only">Close panel</span>
@@ -63,7 +88,7 @@ const open = ref(true)
                     </div>
                   </div>
                   <div class="relative mt-6 flex-1 px-4 sm:px-6">
-                    <!-- Your content -->
+                    {{ content }}
                   </div>
                 </div>
               </DialogPanel>

@@ -87,6 +87,7 @@ watch(searchString, () => {
       :titles="{
         singular: 'Jazyk',
         plural: 'Jazyky',
+        slideover: 'Detail jazyka',
       }"
       :pagination="{ total: items.total, perPage: items.perPage, currentPage: items.currentPage, lastPage: items.lastPage, from: items.from }"
       @update-page="updatePage"
