@@ -46,7 +46,7 @@ function generatePages() {
 
   pages.push({ current: 1 === page.value, page: 1, text: 1 });
 
-  if (1 < page.value - 3) {
+  if (1 < page.value - 2) {
     pages.push({ current: false, page: 0, text: '...' });
   }
   if (1 < page.value - 1) {
