@@ -35,11 +35,7 @@ function previousPage() {
 function nextPage() {
   if (!nextIsDisabled.value) page.value = page.value + 1;
 }
-const paginationPages = ref([
-  { current: false, page: 1, text: '1' },
-  { current: false, page: 0, text: '...' },
-  { current: false, page: 3, text: '3' },
-]);
+const paginationPages = ref([]);
 
 function generatePages() {
   const pages = [];
@@ -63,13 +59,17 @@ function generatePages() {
   if (page.value + 2 < props.pagination.lastPage) {
     pages.push({ current: false, page: 0, text: '...' });
   }
-  if (page.value - 1 < props.pagination.lastPage - 1) {
+  if (page.value + 1 < props.pagination.lastPage) {
     for (let i = props.pagination.lastPage; i <= props.pagination.lastPage; i++) {
       pages.push({current: i === page.value, page: i, text: i.toString()});
     }
   }
   paginationPages.value = pages;
 }
+
+onMounted(() => {
+  generatePages();
+});
 
 watch(page, () => {
   generatePages();
@@ -123,7 +123,7 @@ watch(page, () => {
             v-for="(pageObject, index) in paginationPages"
             :key="index"
             aria-current="page"
-            :class="[pageObject.current === true ? 'bg-blue-600 text-white' : '', 'cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0']"
+            :class="[pageObject.current === true ? 'bg-blue-600 text-white hover:bg-blue-50 hover:text-blue-600' : '', 'cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0']"
             @click="changePage(pageObject)"
           >{{ pageObject.text }}</span>
           <span
