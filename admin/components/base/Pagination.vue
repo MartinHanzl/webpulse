@@ -65,9 +65,9 @@ function generatePages() {
     pages.push({ current: false, page: 0, text: '...' });
   }
   if (page.value + 2 >= props.pagination.lastPage) {
-    for (let i = props.pagination.lastPage - 2; i <= props.pagination.lastPage; i++) {
+    /*for (let i = props.pagination.lastPage - 2; i <= props.pagination.lastPage; i++) {
       pages.push({ current: i === page.value, page: i, text: i.toString() });
-    }
+    }*/
   } else {
     for (let i = props.pagination.lastPage; i <= props.pagination.lastPage; i++) {
       pages.push({ current: i === page.value, page: i, text: i.toString() });
