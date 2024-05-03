@@ -51,16 +51,15 @@ function generatePages() {
   }
   if (1 < page.value - 1) {
     for (let i = page.value - 1; i <= page.value + 1; i++) {
-      pages.push({current: i === page.value, page: i, text: i.toString()});
+      if (i < props.pagination.lastPage + 1) {
+        pages.push({ current: i === page.value, page: i, text: i.toString() });
+      }
     }
   } else {
     for (let i = 2; i <= 4; i++) {
       pages.push({current: i === page.value, page: i, text: i.toString()});
     }
   }
-  /*for (let i = props.pagination.lastPage - 3; i <= props.pagination.lastPage - 3; i++) {
-    pages.push({ current: i === page.value, page: i, text: i.toString() });
-  }*/
   if (page.value + 2 < props.pagination.lastPage) {
     pages.push({ current: false, page: 0, text: '...' });
   }
