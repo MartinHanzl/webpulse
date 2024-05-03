@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Language;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\Language\LanguageResource;
 use App\Models\Language;
+use Illuminate\Support\Facades\App;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -54,9 +55,19 @@ class LanguageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Request $request, int $id): JsonResponse
     {
-        //
+        if (!$id) {
+            App::abort(403, 'Id is required');
+        }
+
+        $language = Language::query()->find($id);
+
+        if (!$language) {
+            App::abort(404, 'Language not found');
+        }
+
+        return Response::json(['data' => LanguageResource::make($language)]);
     }
 
     /**

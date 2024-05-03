@@ -4,6 +4,7 @@ import Dropdown from "~/components/base/Dropdown.vue";
 import Pagination from "~/components/base/Pagination.vue";
 import {CheckIcon, XMarkIcon} from "@heroicons/vue/24/solid";
 import {PencilIcon, TrashIcon, BoltIcon, ArrowDownIcon, ArrowUpIcon} from "@heroicons/vue/24/outline";
+import Slideover from "~/components/layout/Slideover.vue";
 
 const order = defineModel('order', {
   type: Object,
@@ -171,5 +172,6 @@ watch(order.value, () => {
       :pagination="pagination"
       :items="items"
     />
+    <Slideover />
   </div>
 </template>
