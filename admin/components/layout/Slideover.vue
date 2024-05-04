@@ -17,6 +17,31 @@ const props = defineProps({
   content: {
     type: Object,
     required: true
+  },
+  api: {
+    type: String,
+    required: true
+  }
+});
+
+const item = ref({data:[]});
+const pending = ref(false);
+async function loadItem() {
+  pending.value = true;
+  await useFetch(props.api, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then((response) => {
+    item.value = response.data.value;
+    pending.value = false;
+  })
+}
+watch(open, () => {
+  if (open.value === true) {
+    loadItem();
   }
 });
 </script>

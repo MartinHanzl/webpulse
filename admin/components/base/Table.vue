@@ -43,13 +43,15 @@ const props = defineProps({
 const page = ref(1);
 const slideoverIsOpened = ref(false);
 const slideOverData = ref({
-  title: props.titles.plural,
-  content: 'Panel content',
+  title: '',
+  content: {},
+  api: ''
 });
 
 function defineSlideoverData(item: Object) {
   slideOverData.value.title = props.titles.slideover;
   slideOverData.value.content = item;
+  slideOverData.value.api = 'http://localhost:8000/api/admin/language/' + item.id;
   slideoverIsOpened.value = true;
 }
 
@@ -210,6 +212,7 @@ watch(order.value, () => {
       v-model:open="slideoverIsOpened"
       :title="slideOverData.title"
       :content="slideOverData.content"
+      :api="slideOverData.api"
     />
   </div>
 </template>
