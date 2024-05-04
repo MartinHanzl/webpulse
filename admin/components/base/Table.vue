@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {defineProps, watch, defineEmits} from 'vue';
-import Dropdown from "~/components/base/Dropdown.vue";
 import Pagination from "~/components/base/Pagination.vue";
 import {CheckIcon, XMarkIcon} from "@heroicons/vue/24/solid";
 import {PencilIcon, TrashIcon, BoltIcon, ArrowDownIcon, ArrowUpIcon} from "@heroicons/vue/24/outline";
@@ -45,7 +44,6 @@ const page = ref(1);
 const slideoverIsOpened = ref(false);
 const slideOverData = ref({
   title: props.titles.plural,
-  open: false,
   content: 'Panel content',
 });
 
@@ -53,6 +51,10 @@ function defineSlideoverData(item: Object) {
   slideOverData.value.title = props.titles.slideover;
   slideOverData.value.content = item;
   slideoverIsOpened.value = true;
+}
+
+function toggleSlidover() {
+  slideoverIsOpened.value = !slideoverIsOpened.value;
 }
 
 function changeOrder(column: { sortable: any; key: any; }) {
@@ -209,9 +211,10 @@ watch(order.value, () => {
       :items="items"
     />
     <Slideover
-      v-model:open="slideoverIsOpened"
       :title="slideOverData.title"
       :content="slideOverData.content"
+      :open="slideoverIsOpened"
+      @toggle-slideover="toggleSlidover"
     />
   </div>
 </template>
