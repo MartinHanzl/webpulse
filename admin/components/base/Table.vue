@@ -211,6 +211,7 @@ watch(order.value, () => {
       :items="items"
     />
     <Slideover
+      v-model:open="slideoverIsOpened"
       :title="slideOverData.title"
       :content="slideOverData.content"
       :open="slideoverIsOpened"

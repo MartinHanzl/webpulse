@@ -3,15 +3,15 @@ import { ref, watch, defineEmits, defineProps } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 
+const open = defineModel('open', {
+  type: Boolean,
+  default: false
+});
+
 const props = defineProps({
   title: {
     type: String,
     default: '',
-    required: true
-  },
-  open: {
-    type: Boolean,
-    default: false,
     required: true
   },
   content: {
@@ -19,13 +19,6 @@ const props = defineProps({
     required: true
   }
 });
-
-const isOpened = ref(props.open);
-const emit = defineEmits(['toggle-slideover']);
-watch(isOpened, () => {
-  open.value = isOpened.value;
-  emit('toggle-slideover', props.open.value);
-})
 </script>
 
 <template>
@@ -35,7 +28,7 @@ watch(isOpened, () => {
   >
     <Dialog
       class="relative z-50"
-      @close="isOpened = false"
+      @close="open = false"
     >
       <TransitionChild
         as="template"
@@ -72,7 +65,7 @@ watch(isOpened, () => {
                         <button
                           type="button"
                           class="relative rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                          @click="isOpened = false"
+                          @click="open = false"
                         >
                           <span class="absolute -inset-2.5" />
                           <span class="sr-only">Close panel</span>
