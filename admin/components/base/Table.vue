@@ -53,10 +53,6 @@ function defineSlideoverData(item: Object) {
   slideoverIsOpened.value = true;
 }
 
-function toggleSlidover() {
-  slideoverIsOpened.value = !slideoverIsOpened.value;
-}
-
 function changeOrder(column: { sortable: any; key: any; }) {
   if (column.sortable) {
     if (order.value.orderBy === column.key) {
@@ -214,8 +210,6 @@ watch(order.value, () => {
       v-model:open="slideoverIsOpened"
       :title="slideOverData.title"
       :content="slideOverData.content"
-      :open="slideoverIsOpened"
-      @toggle-slideover="toggleSlidover"
     />
   </div>
 </template>
