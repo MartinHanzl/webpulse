@@ -81,8 +81,20 @@ class LanguageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id): JsonResponse
     {
-        //
+        if (!$id) {
+            App::abort(403, 'Id is required');
+        }
+
+        $language = Language::query()->find($id);
+
+        if (!$language) {
+            App::abort(404, 'Language not found');
+        }
+
+        $language->delete();
+
+        return Response::json();
     }
 }

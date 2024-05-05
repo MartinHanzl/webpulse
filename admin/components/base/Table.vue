@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {defineProps, watch, defineEmits} from 'vue';
 import Pagination from "~/components/base/Pagination.vue";
+import DeleteDialog from "~/components/dialogs/Delete.vue";
 import {PencilIcon, TrashIcon, BoltIcon, ArrowDownIcon, ArrowUpIcon} from "@heroicons/vue/24/outline";
 import Slideover from "~/components/layout/Slideover.vue";
 import StatusIcon from "~/components/props/StatusIcon.vue";
@@ -49,6 +50,7 @@ const props = defineProps({
 });
 
 const page = ref(1);
+
 const slideoverIsOpened = ref(false);
 const slideOverData = ref({
   title: '',
@@ -65,6 +67,20 @@ function defineSlideoverData(itemId: number) {
   slideoverIsOpened.value = true;
 }
 
+const dialogIsOpened = ref(false);
+const dialogData = ref({
+  title: '',
+  id: 0,
+  api: ''
+});
+
+function defineDialogData(itemId: number) {
+  dialogData.value.title = props.titles.singular;
+  dialogData.value.id = itemId;
+  dialogData.value.api = props.slideover.api + itemId;
+  dialogIsOpened.value = true;
+}
+
 function changeOrder(column: { sortable: any; key: any; }) {
   if (column.sortable) {
     if (order.value.orderBy === column.key) {
@@ -75,7 +91,10 @@ function changeOrder(column: { sortable: any; key: any; }) {
     }
   }
 }
-const emit = defineEmits(['update-page', 'update-order']);
+const emit = defineEmits(['update-page', 'update-order', 'load-items']);
+function reloadItems() {
+  emit('load-items');
+}
 watch(page, () => {
   emit('update-page', page.value);
 });
@@ -171,17 +190,17 @@ watch(order.value, () => {
                       aria-hidden="true"
                     />
                   </button>
-                  <NuxtLink
+                  <button
                     v-if="actions.delete"
-                    to="/"
                     class="text-red-600 hover:text-red-900"
+                    @click="defineDialogData(item.id)"
                   >
                     <span class="sr-only">Delete</span>
                     <TrashIcon
                       class="h-5 w-5"
                       aria-hidden="true"
                     />
-                  </NuxtLink>
+                  </button>
                 </td>
               </tr>
             </tbody>
@@ -217,6 +236,11 @@ watch(order.value, () => {
       :columns="slideOverData.columns"
       :api="slideOverData.api"
       :detail-url="detailUrl"
+    />
+    <DeleteDialog
+      v-model:open="dialogIsOpened"
+      :data="dialogData"
+      @load-items="reloadItems"
     />
   </div>
 </template>

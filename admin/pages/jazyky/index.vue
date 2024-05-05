@@ -86,7 +86,7 @@ watch(searchString, () => {
       :actions="{ edit: true, view: true, delete: true }"
       :pending="pending"
       :titles="{
-        singular: 'Jazyk',
+        singular: 'jazyk',
         plural: 'Jazyky',
       }"
       :slideover="{
@@ -105,6 +105,7 @@ watch(searchString, () => {
       :pagination="{ total: items.total, perPage: items.perPage, currentPage: items.currentPage, lastPage: items.lastPage, from: items.from }"
       @update-page="updatePage"
       @update-order="updateOrder"
+      @load-items="loadItems"
     />
   </div>
 </template>
