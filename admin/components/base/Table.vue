@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import {defineProps, watch, defineEmits} from 'vue';
 import Pagination from "~/components/base/Pagination.vue";
-import {CheckIcon, XMarkIcon} from "@heroicons/vue/24/solid";
 import {PencilIcon, TrashIcon, BoltIcon, ArrowDownIcon, ArrowUpIcon} from "@heroicons/vue/24/outline";
 import Slideover from "~/components/layout/Slideover.vue";
 import StatusIcon from "~/components/props/StatusIcon.vue";

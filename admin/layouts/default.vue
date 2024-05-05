@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, watch} from 'vue'
+import {ref} from 'vue'
 import {
   Dialog,
   DialogPanel,
@@ -33,9 +33,10 @@ import {
   HandThumbUpIcon, ChatBubbleOvalLeftIcon,
   BanknotesIcon,
   BriefcaseIcon,
-  LanguageIcon
-} from '@heroicons/vue/24/outline';
-import {ChevronDownIcon, MagnifyingGlassIcon} from '@heroicons/vue/20/solid'
+  LanguageIcon,
+  ChevronDownIcon,
+  MagnifyingGlassIcon
+} from "@heroicons/vue/24/outline";
 
 const route = ref(useRoute().path);
 function changeCurrentRoute(link: String) {
@@ -47,7 +48,7 @@ const currentLink = route.value;
 const nav = [
   {
     name: 'Přehled', links: [
-      {name: 'Nástěnka', href: '/', icon: HomeIcon, current: currentLink === '/' ? true : false},
+      {name: 'Nástěnka', href: '/', icon: HomeIcon, current: currentLink === '/'},
       {
         name: 'Statistiky',
         href: '/statistiky',

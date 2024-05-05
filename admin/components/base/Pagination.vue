@@ -116,7 +116,6 @@ watch(page, () => {
               aria-hidden="true"
             />
           </span>
-          <!-- Current: "z-10 bg-blue-600 text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600", Default: "text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:outline-offset-0" -->
           <span
             v-for="(pageObject, index) in paginationPages"
             :key="index"

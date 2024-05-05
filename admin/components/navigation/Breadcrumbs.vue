@@ -1,3 +1,15 @@
+<script setup lang="ts">
+import {defineProps} from 'vue';
+import {HomeIcon, ChevronRightIcon} from "@heroicons/vue/20/solid";
+
+defineProps({
+  breadcrumbLinks: {
+    type: Array,
+    required: true
+  }
+});
+</script>
+
 <template>
   <div>
     <nav
@@ -67,16 +79,3 @@
     </nav>
   </div>
 </template>
-<script setup>
-import {HomeIcon, ChevronRightIcon} from "@heroicons/vue/20/solid";
-</script>
-<script>
-export default {
-  props: {
-    breadcrumbLinks: {
-      type: Array,
-      required: true
-    }
-  }
-}
-</script>
