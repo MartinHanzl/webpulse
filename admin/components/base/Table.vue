@@ -4,6 +4,7 @@ import Pagination from "~/components/base/Pagination.vue";
 import {CheckIcon, XMarkIcon} from "@heroicons/vue/24/solid";
 import {PencilIcon, TrashIcon, BoltIcon, ArrowDownIcon, ArrowUpIcon} from "@heroicons/vue/24/outline";
 import Slideover from "~/components/layout/Slideover.vue";
+import StatusIcon from "~/components/props/StatusIcon.vue";
 
 const order = defineModel('order', {
   type: Object,
@@ -53,14 +54,15 @@ const slideoverIsOpened = ref(false);
 const slideOverData = ref({
   title: '',
   columns: [],
-  api: ''
+  api: '',
+  detailUrl: ''
 });
 
 function defineSlideoverData(itemId: number) {
   slideOverData.value.title = props.slideover.title;
   slideOverData.value.columns = props.slideover.columns;
   slideOverData.value.api = props.slideover.api + itemId;
-  console.log(slideOverData.value);
+  slideOverData.detailUrl = props.detailUrl;
   slideoverIsOpened.value = true;
 }
 
@@ -141,18 +143,10 @@ watch(order.value, () => {
                     {{ item[column.key] !== null ? new Date(item[column.key]).toLocaleDateString() : '' }}
                   </div>
                   <div v-if="column.type === 'status'">
-                    <div
-                      v-if="item[column.key] === true"
-                      class="text-green-600 text-sm"
-                    >
-                      <CheckIcon class="w-5 h-5" />
-                    </div>
-                    <div
-                      v-else
-                      class="text-red-600 text-sm"
-                    >
-                      <XMarkIcon class="w-5 h-5" />
-                    </div>
+                    <StatusIcon
+                      :status="item[column.key]"
+                      :proportions="'w-5 h-5'"
+                    />
                   </div>
                 </td>
                 <td class="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 flex flex-1 justify-evenly">
@@ -223,6 +217,7 @@ watch(order.value, () => {
       :title="slideOverData.title"
       :columns="slideOverData.columns"
       :api="slideOverData.api"
+      :detail-url="detailUrl"
     />
   </div>
 </template>

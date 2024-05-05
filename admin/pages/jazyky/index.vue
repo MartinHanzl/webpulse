@@ -99,6 +99,7 @@ watch(searchString, () => {
           { key: 'iso', name: 'Iso kód', type: 'text' },
           { key: 'active', name: 'Aktivní', type: 'status' },
           { key: 'created_at', name: 'Vytvořeno', type: 'date' },
+          { key: 'updated_at', name: 'Poslední úprava', type: 'date' },
         ]
       }"
       :pagination="{ total: items.total, perPage: items.perPage, currentPage: items.currentPage, lastPage: items.lastPage, from: items.from }"
