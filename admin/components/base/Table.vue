@@ -22,36 +22,45 @@ const props = defineProps({
     type: Object,
     required: true
   },
+  detailUrl: {
+    type: String,
+    required: false
+  },
   actions: {
     type: Object,
-    required: false
+    required: true
   },
   pending: {
     type: Boolean,
-    required: false
+    required: true
   },
   titles: {
     type: Object,
-    required: false
+    required: true
   },
   pagination: {
     type: Object,
-    required: false
+    required: true
   },
+  slideover: {
+    type: Object,
+    required: false
+  }
 });
 
 const page = ref(1);
 const slideoverIsOpened = ref(false);
 const slideOverData = ref({
   title: '',
-  content: {},
+  columns: [],
   api: ''
 });
 
-function defineSlideoverData(item: Object) {
-  slideOverData.value.title = props.titles.slideover;
-  slideOverData.value.content = item;
-  slideOverData.value.api = 'http://localhost:8000/api/admin/language/' + item.id;
+function defineSlideoverData(itemId: number) {
+  slideOverData.value.title = props.slideover.title;
+  slideOverData.value.columns = props.slideover.columns;
+  slideOverData.value.api = props.slideover.api + itemId;
+  console.log(slideOverData.value);
   slideoverIsOpened.value = true;
 }
 
@@ -149,7 +158,7 @@ watch(order.value, () => {
                 <td class="whitespace-nowrap py-3 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 lg:pl-8 flex flex-1 justify-evenly">
                   <NuxtLink
                     v-if="actions.edit"
-                    to="/jazyky/pridat"
+                    :to="`${detailUrl}${item.id}`"
                     class="text-blue-600 hover:text-blue-900"
                   >
                     <span class="sr-only">Edit</span>
@@ -161,7 +170,7 @@ watch(order.value, () => {
                   <button
                     v-if="actions.view"
                     class="text-yellow-600 hover:text-yellow-900"
-                    @click="defineSlideoverData(item)"
+                    @click="defineSlideoverData(item.id)"
                   >
                     <span class="sr-only">Quick view</span>
                     <BoltIcon
@@ -209,9 +218,10 @@ watch(order.value, () => {
       :items="items"
     />
     <Slideover
+      v-if="slideover"
       v-model:open="slideoverIsOpened"
       :title="slideOverData.title"
-      :content="slideOverData.content"
+      :columns="slideOverData.columns"
       :api="slideOverData.api"
     />
   </div>

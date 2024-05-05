@@ -82,12 +82,24 @@ watch(searchString, () => {
         { key: 'created_at', name: 'Vytvořeno', type: 'date', width: 50, mobile: false, sortable: true },
       ]"
       :items="items"
+      :detail-url="'/jazyky/'"
       :actions="{ edit: true, view: true, delete: true }"
       :pending="pending"
       :titles="{
         singular: 'Jazyk',
         plural: 'Jazyky',
-        slideover: 'Detail jazyka',
+      }"
+      :slideover="{
+        title: 'Detail jazyka',
+        api: 'http://localhost:8000/api/admin/language/',
+        columns: [
+          { key: 'id', name: 'ID', type: 'number' },
+          { key: 'name', name: 'Název', type: 'text' },
+          { key: 'code', name: 'Kód', type: 'text' },
+          { key: 'iso', name: 'Iso kód', type: 'text' },
+          { key: 'active', name: 'Aktivní', type: 'status' },
+          { key: 'created_at', name: 'Vytvořeno', type: 'date' },
+        ]
       }"
       :pagination="{ total: items.total, perPage: items.perPage, currentPage: items.currentPage, lastPage: items.lastPage, from: items.from }"
       @update-page="updatePage"
