@@ -2,7 +2,6 @@
 import { ref, watch, defineEmits, defineProps } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { XMarkIcon, PencilIcon, TrashIcon } from '@heroicons/vue/24/outline'
-import {CheckIcon} from "@heroicons/vue/24/solid";
 import StatusIcon from "~/components/props/StatusIcon.vue";
 
 const open = defineModel('open', {
