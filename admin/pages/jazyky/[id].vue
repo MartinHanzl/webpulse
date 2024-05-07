@@ -2,10 +2,9 @@
 import PageHeading from "~/components/layout/PageHeading.vue";
 import { ref } from 'vue';
 import { Switch } from '@headlessui/vue';
-import { useLanguageStore } from '~/stores/languages';
+import { useLanguagesStore } from '~/stores/languages';
 
-const languageStore = useLanguageStore();
-console.log(languageStore.fetchLanguages());
+const languagesStore = useLanguagesStore();
 
 const pageHeadingData = {
   title: 'Jazyky',

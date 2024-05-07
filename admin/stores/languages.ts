@@ -1,7 +1,6 @@
 import {defineStore} from 'pinia';
-import {$fetch} from "ofetch";
 
-export const useLanguageStore = defineStore('language', {
+export const useLanguagesStore = defineStore('languages', {
     id: 'languageStore',
     actions: () => ({
         async fetchLanguages() {
