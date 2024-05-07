@@ -3,9 +3,10 @@ import PageHeading from "~/components/layout/PageHeading.vue";
 import { ref } from 'vue';
 import { Switch } from '@headlessui/vue';
 import { useLanguagesStore } from '~/stores/languages';
+import {storeToRefs} from "pinia";
 
 const languagesStore = useLanguagesStore();
-const {fetchLanguages} = storeToRefs(languagesStore);
+const activeTranslations = storeToRefs(languagesStore.languages);
 
 const pageHeadingData = {
   title: 'Jazyky',
@@ -37,7 +38,6 @@ function changeTab(tab: any) {
   });
 }
 
-const activeTranslations = ref(fetchLanguages);
 const id = ref(0);
 const pending = ref(false);
 const form = ref({

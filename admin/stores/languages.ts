@@ -1,6 +1,11 @@
 import {defineStore} from 'pinia';
 
 export const useLanguagesStore = defineStore('languages', {
+    state: () => ({
+        languages: [
+            {id: 1, name: 'Czech', code: 'cs'},
+        ],
+    }),
     actions: () => ({
         async fetchLanguages() {
             try {
