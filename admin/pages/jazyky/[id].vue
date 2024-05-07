@@ -2,11 +2,7 @@
 import PageHeading from "~/components/layout/PageHeading.vue";
 import { ref } from 'vue';
 import { Switch } from '@headlessui/vue';
-import { useLanguagesStore } from '~/stores/languages';
-import { storeToRefs } from "pinia";
-
-const {languages} = storeToRefs(useLanguagesStore());
-const activeTranslations = ref({});
+import Translations from "~/components/form/Translations.vue";
 
 const pageHeadingData = {
   title: 'Jazyky',
@@ -44,7 +40,8 @@ const form = ref({
   name: '',
   code: '',
   iso: '',
-  active: true
+  active: true,
+  translations: {},
 });
 async function saveItem() {
   pending.value = true;
@@ -78,7 +75,6 @@ async function loadItem() {
   })
 }
 onMounted(() => {
-  activeTranslations.value = languages;
   id.value = useRoute().params.id !== 'pridat' ? useRoute().params.id : 0;
   if (id.value !== 0) {
     loadItem();
@@ -88,8 +84,10 @@ onMounted(() => {
 </script>
 <template>
   <div>
-    <PageHeading :page-heading-data="pageHeadingData" @save-item="saveItem" />
-    languages: {{ activeTranslations }}
+    <PageHeading
+      :page-heading-data="pageHeadingData"
+      @save-item="saveItem"
+    />
     <div v-if="!pending">
       <div class="sm:hidden">
         <label
@@ -240,7 +238,8 @@ onMounted(() => {
           </div>
         </div>
         <div v-else-if="currentTab === '#preklady' && !pending">
-          překlady
+          {{ form }}
+          <Translations v-model:translations="form.translations" />
         </div>
       </div>
     </div>

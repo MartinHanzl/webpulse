@@ -7,7 +7,7 @@ export const useLanguagesStore = defineStore('languages', {
     }),
     actions: {
         async storeLanguages() {
-            const { data, pending }: any = await useFetch('/api/admin/language', {
+            const { data }: any = await useFetch('/api/admin/language', {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',
