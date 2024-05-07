@@ -5,6 +5,7 @@ import { Switch } from '@headlessui/vue';
 import { useLanguagesStore } from '~/stores/languages';
 
 const languagesStore = useLanguagesStore();
+const {fetchLanguages} = storeToRefs(languagesStore);
 
 const pageHeadingData = {
   title: 'Jazyky',
@@ -36,7 +37,7 @@ function changeTab(tab: any) {
   });
 }
 
-const activeTranslations = ref({});
+const activeTranslations = ref(fetchLanguages);
 const id = ref(0);
 const pending = ref(false);
 const form = ref({
