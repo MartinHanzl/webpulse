@@ -37,6 +37,7 @@ import {
   ChevronDownIcon,
   MagnifyingGlassIcon
 } from "@heroicons/vue/24/outline";
+import { useLanguagesStore } from '~/stores/languages';
 
 const route = ref(useRoute().path);
 function changeCurrentRoute(link: String) {
@@ -108,6 +109,11 @@ const sidebarOpen = ref(false);
 
 const searchString = ref(null);
 provide('searchString', searchString);
+
+const { storeLanguages } = useLanguagesStore();
+onMounted(() => {
+  storeLanguages();
+});
 </script>
 
 <template>

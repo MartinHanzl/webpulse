@@ -3,10 +3,10 @@ import PageHeading from "~/components/layout/PageHeading.vue";
 import { ref } from 'vue';
 import { Switch } from '@headlessui/vue';
 import { useLanguagesStore } from '~/stores/languages';
-import {storeToRefs} from "pinia";
+import { storeToRefs } from "pinia";
 
-const languagesStore = useLanguagesStore();
-const activeTranslations = storeToRefs(languagesStore.languages);
+const {languages} = storeToRefs(useLanguagesStore());
+const activeTranslations = ref({});
 
 const pageHeadingData = {
   title: 'Jazyky',
@@ -78,6 +78,7 @@ async function loadItem() {
   })
 }
 onMounted(() => {
+  activeTranslations.value = languages;
   id.value = useRoute().params.id !== 'pridat' ? useRoute().params.id : 0;
   if (id.value !== 0) {
     loadItem();
