@@ -15,6 +15,7 @@ const pageHeadingData = {
   actionButton: {
     text: 'Přidat jazyk',
     href: '/jazyky/pridat',
+    type: 'link'
   }
 };
 
@@ -29,7 +30,7 @@ const order = ref({
 
 async function loadItems() {
   pending.value = true;
-  await useFetch('http://localhost:8000/api/admin/language', {
+  await useFetch('/api/admin/language', {
     method: 'GET',
     params: {
       page: page,
@@ -91,7 +92,7 @@ watch(searchString, () => {
       }"
       :slideover="{
         title: 'Detail jazyka',
-        api: 'http://localhost:8000/api/admin/language/',
+        api: '/api/admin/language/',
         columns: [
           { key: 'id', name: 'ID', type: 'number' },
           { key: 'name', name: 'Název', type: 'text' },
