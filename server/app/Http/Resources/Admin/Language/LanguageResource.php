@@ -15,15 +15,14 @@ class LanguageResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        /** @var LanguageTranslation $translation */
-        $translation = optional($this->getTranslation());
         return [
             'id' => $this->id,
             'code' => $this->code,
-            'name' => $translation->name,
+            'name' => $this->name,
             'iso' => $this->iso,
             'active' => (bool)$this->active,
-            'translations' => LanguagesTranslationResource::collection($this->translations),
+            //'translations' => LanguagesTranslationResource::collection($this->translations),
+            'translations' => array_column($this->translations->toArray(), 'name', 'locale'),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

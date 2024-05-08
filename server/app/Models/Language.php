@@ -5,11 +5,10 @@ namespace App\Models;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Language extends Model
 {
-    use Translatable;
-
     protected $table = 'languages';
 
     protected $fillable = [
@@ -19,14 +18,16 @@ class Language extends Model
         'active'
     ];
 
+//    protected $guarded = ['name'];
+
     protected $casts = [
         'active' => 'boolean'
     ];
 
-    public $translationModel = LanguageTranslation::class;
+    protected $with = ['translations'];
 
-    protected $translatedAttributes = [
-        'locale',
-        'name'
-    ];
+    public function translations(): HasMany
+    {
+        return $this->hasMany(LanguageTranslation::class, 'language_id', 'id');
+    }
 }

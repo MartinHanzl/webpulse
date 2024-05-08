@@ -43,19 +43,27 @@ const form = ref({
   active: true,
   translations: {},
 });
+
 async function saveItem() {
   pending.value = true;
-  await useFetch('/api/admin/language', {
-    method: 'POST',
-    body: form.value,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  }).then(() => {
-    useRouter().push('/jazyky');
+  try {
+    await useFetch('/api/admin/language', {
+      method: 'POST',
+      body: form.value,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then(() => {
+      //useRouter().push('/jazyky');
+      pending.value = false;
+    }).catch((e) => {
+      pending.value = false;
+    });
+  } catch (e) {
     pending.value = false;
-  })
+    console.log(e);
+  }
 }
 
 async function loadItem() {
@@ -71,6 +79,7 @@ async function loadItem() {
     form.value.code = response.data.value.data.code;
     form.value.iso = response.data.value.data.iso;
     form.value.active = response.data.value.data.active;
+    form.value.translations = response.data.value.data.translations;
     pending.value = false;
   })
 }
@@ -239,7 +248,7 @@ onMounted(() => {
         </div>
         <div v-else-if="currentTab === '#preklady' && !pending">
           {{ form }}
-          <Translations v-model:translations="form.translations" />
+          <Translations v-model:translations="form.translations" :item-translations="form.translations" />
         </div>
       </div>
     </div>

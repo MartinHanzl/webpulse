@@ -73,6 +73,8 @@ Route::group([
     ], function () {
         Route::get('', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'index']);
         Route::get('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'show'])->where('id', '[0-9]+');
+        Route::post('', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'store']);
+        Route::post('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'update'])->where('id', '[0-9]+');
         Route::delete('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'destroy'])->where('id', '[0-9]+');
     });
 });

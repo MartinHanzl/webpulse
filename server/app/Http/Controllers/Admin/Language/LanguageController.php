@@ -5,13 +5,23 @@ namespace App\Http\Controllers\Admin\Language;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\Language\LanguageResource;
 use App\Models\Language;
+use App\Models\LanguageTranslation;
+use App\Services\GoogleTranslatorService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
 
 class LanguageController extends Controller
 {
+    protected $gTranslator = GoogleTranslatorService::class;
+
+    public function __construct(GoogleTranslatorService $gTranslator)
+    {
+        $this->gTranslator = $gTranslator;
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -26,7 +36,7 @@ class LanguageController extends Controller
         if ($request->has('search') && $request->get('search') !== '') {
             $query->where('code', 'like', '%' . $request->get('search') . '%')
                 ->orWhere('iso', 'like', '%' . $request->get('search') . '%')
-                ->orWhereTranslationLike('name', $request->get('search'));
+                ->orWhereRelation('translations', 'name', 'like', '%' . $request->get('search') . '%');
         }
 
         if ($request->has('page') && $request->has('perPage')) {
@@ -47,9 +57,37 @@ class LanguageController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
-        //
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'code' => 'required|string|max:2',
+            'iso' => 'required|string|max:5',
+            'name' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return Response::json(['errors' => $validator->errors()], 422);
+        }
+
+        $language = new Language();
+        $language->fill($data);
+        $language->save();
+
+        if ($data['translations'] && !empty($data['translations'])) {
+            foreach ($data['translations'] as $locale => $translation) {
+                LanguageTranslation::query()
+                    ->where('language_id', '=', $language->id)
+                    ->where('locale', '=', $locale)
+                    ->firstOrNew([
+                        'language_id' => $language->id,
+                        'locale' => $locale,
+                        'name' => $this->gTranslator->translate($data['name'], 'cs', $locale)
+                    ])->save();
+            }
+        }
+
+        return Response::json(['data' => LanguageResource::make($language)], 201);
     }
 
     /**
@@ -75,7 +113,38 @@ class LanguageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $validator = Validator::make($data, [
+            'code' => 'required|string|max:2',
+            'iso' => 'required|string|max:5',
+            'name' => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return Response::json(['errors' => $validator->errors()], 422);
+        }
+
+        $language = new Language();
+        $language->fill($data);
+        $language->save();
+
+        if ($data['translations'] && !empty($data['translations'])) {
+            foreach ($data['translations'] as $locale => $translation) {
+                LanguageTranslation::query()
+                    ->where('language_id', '=', $language->id)
+                    ->where('locale', '=', $locale)
+                    ->firstOrNew([
+                        'language_id' => $language->id,
+                        'locale' => $locale,
+                        'name' => $this->gTranslator->translate($data['name'], 'cs', $locale)
+                    ])->save();
+            }
+            LanguageTranslation::query()
+                ->where('language_id', $language->id)
+                ->whereNotIn('locale', array_keys($data['translations']))->delete();
+        }
+
+        return Response::json(['data' => LanguageResource::make($language)], 201);
     }
 
     /**

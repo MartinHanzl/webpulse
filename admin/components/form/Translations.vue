@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from 'vue';
+import {ref, defineProps} from 'vue';
 import {Switch} from '@headlessui/vue';
 import {useLanguagesStore} from '~/stores/languages';
 import {storeToRefs} from "pinia";
@@ -7,16 +7,29 @@ import {storeToRefs} from "pinia";
 const formTranslations = defineModel('translations', {
   type: Object
 });
-
 const {languages} = storeToRefs(useLanguagesStore());
+
+const props = defineProps({
+  itemTranslations: {
+    type: Object,
+    required: false,
+    default: () => ({}),
+  },
+});
 
 const translations = ref({});
 onMounted(() => {
   translations.value = languages.value;
-  translations.value.map((translation: any) => {
-    const translationCode = translation.code;
-    formTranslations.value[translationCode] = ref(translation.active === true);
-  });
+  if (props.itemTranslations) {
+    Object.keys(props.itemTranslations).map((key) => {
+      formTranslations.value[key] = ref(props.itemTranslations[key]);
+    });
+  } else {
+    translations.value.map((translation: any) => {
+      const translationCode = translation.code;
+      formTranslations.value[translationCode] = ref(translation.active === true);
+    });
+  }
 });
 </script>
 <template>
