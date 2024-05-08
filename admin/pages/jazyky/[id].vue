@@ -3,6 +3,7 @@ import PageHeading from "~/components/layout/PageHeading.vue";
 import { ref } from 'vue';
 import { Switch } from '@headlessui/vue';
 import Translations from "~/components/form/Translations.vue";
+import Informations from "~/components/form/Informations.vue";
 
 const pageHeadingData = {
   title: 'Jazyky',
@@ -47,7 +48,7 @@ const form = ref({
 async function saveItem() {
   pending.value = true;
   try {
-    await useFetch('/api/admin/language', {
+    await useFetch(id.value === 0 ? '/api/admin/language' : '/api/admin/language/' + id.value, {
       method: 'POST',
       body: form.value,
       headers: {
@@ -55,11 +56,11 @@ async function saveItem() {
         'Content-Type': 'application/json',
       },
     }).then(() => {
-      //useRouter().push('/jazyky');
       pending.value = false;
     }).catch((e) => {
       pending.value = false;
     });
+    await useRouter().push('/jazyky');
   } catch (e) {
     pending.value = false;
     console.log(e);
@@ -93,6 +94,7 @@ onMounted(() => {
 </script>
 <template>
   <div>
+    {{ form }}
     <PageHeading
       :page-heading-data="pageHeadingData"
       @save-item="saveItem"
@@ -127,128 +129,37 @@ onMounted(() => {
             v-for="tab in tabs"
             :key="tab.name"
             :href="tab.href"
-            :class="[tab.current ? 'bg-blue-100 text-blue-700' : 'text-gray-500 hover:text-gray-700', 'rounded-md px-3 py-2 text-sm font-medium']"
+            :class="[tab.current ? 'bg-blue-100 text-blue-700 ring-1 ring-blue-200' : 'text-gray-500 hover:text-gray-700', 'rounded-md px-3 py-2 text-sm font-medium']"
             :aria-current="tab.current ? 'page' : undefined"
             @click="changeTab(tab.href)"
           >{{ tab.name }}</a>
         </nav>
         <div v-if="currentTab === '#informace' && !pending">
-          {{ form }}
           <div class="space-y-12">
             <div>
-              <h2 class="text-base font-semibold leading-7 text-gray-900">
-                Základní informace
-              </h2>
-              <p class="mt-1 text-sm leading-6 text-gray-600">
-                Zde vyplníze základní informace o daném jazyce.
-              </p>
-              <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div class="sm:col-span-2">
-                  <label
-                    for="first-name"
-                    class="block text-sm font-medium leading-6 text-gray-900"
-                  >Název</label>
-                  <div class="mt-2">
-                    <input
-                      id="first-name"
-                      v-model="form.name"
-                      type="text"
-                      name="first-name"
-                      autocomplete="given-name"
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div class="sm:col-span-2">
-                  <label
-                    for="last-name"
-                    class="block text-sm font-medium leading-6 text-gray-900"
-                  >Kód</label>
-                  <div class="mt-2">
-                    <input
-                      id="last-name"
-                      v-model="form.code"
-                      type="text"
-                      name="last-name"
-                      autocomplete="family-name"
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                    >
-                  </div>
-                </div>
-
-                <div class="sm:col-span-2">
-                  <label
-                    for="email"
-                    class="block text-sm font-medium leading-6 text-gray-900"
-                  >Iso kód</label>
-                  <div class="mt-2">
-                    <input
-                      id="email"
-                      v-model="form.iso"
-                      name="email"
-                      type="email"
-                      autocomplete="email"
-                      class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
-                    >
-                  </div>
-                </div>
-              </div>
-              <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                <div class="sm:col-span-full">
-                  <label
-                    for="postal-code"
-                    class="block text-sm font-medium leading-6 text-gray-900"
-                  >Aktivní</label>
-                  <div class="mt-2">
-                    <Switch
-                      v-model="form.active"
-                      :class="[form.active ? 'bg-blue-600' : 'bg-gray-200', 'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-600 focus:ring-offset-2']"
-                    >
-                      <span class="sr-only">Use setting</span>
-                      <span :class="[form.active ? 'translate-x-5' : 'translate-x-0', 'pointer-events-none relative inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out']">
-                        <span
-                          :class="[form.active ? 'opacity-0 duration-100 ease-out' : 'opacity-100 duration-200 ease-in', 'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity']"
-                          aria-hidden="true"
-                        >
-                          <svg
-                            class="h-3 w-3 text-gray-400"
-                            fill="none"
-                            viewBox="0 0 12 12"
-                          >
-                            <path
-                              d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
-                              stroke="currentColor"
-                              stroke-width="2"
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                            />
-                          </svg>
-                        </span>
-                        <span
-                          :class="[form.active ? 'opacity-100 duration-200 ease-in' : 'opacity-0 duration-100 ease-out', 'absolute inset-0 flex h-full w-full items-center justify-center transition-opacity']"
-                          aria-hidden="true"
-                        >
-                          <svg
-                            class="h-3 w-3 text-blue-600"
-                            fill="currentColor"
-                            viewBox="0 0 12 12"
-                          >
-                            <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
-                          </svg>
-                        </span>
-                      </span>
-                    </Switch>
-                  </div>
-                </div>
-              </div>
+              <Informations
+                v-model:form="form"
+                :rows="[
+                  { row: [
+                    { name: 'name', label: 'Název', type: 'text', span: '4'}
+                  ] },
+                  { row: [
+                    { name: 'code', label: 'Kód', type: 'text', span: '4' },
+                    { name: 'iso', label: 'Iso kód', type: 'text', span: '4' },
+                  ] },
+                  { row: [
+                    { name: 'active', label: 'Aktivní', type: 'switch', span: 'full' },
+                  ] },
+                ]"
+              />
             </div>
           </div>
         </div>
         <div v-else-if="currentTab === '#preklady' && !pending">
-          {{ form }}
-          <Translations v-model:translations="form.translations" :item-translations="form.translations" />
+          <Translations
+            v-model:translations="form.translations"
+            :item-translations="form.translations"
+          />
         </div>
       </div>
     </div>

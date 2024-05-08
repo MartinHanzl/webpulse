@@ -10,6 +10,7 @@ use App\Services\GoogleTranslatorService;
 use Illuminate\Support\Facades\App;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -76,6 +77,9 @@ class LanguageController extends Controller
 
         if ($data['translations'] && !empty($data['translations'])) {
             foreach ($data['translations'] as $locale => $translation) {
+                if ($translation === false) {
+                    continue;
+                }
                 LanguageTranslation::query()
                     ->where('language_id', '=', $language->id)
                     ->where('locale', '=', $locale)
@@ -113,6 +117,10 @@ class LanguageController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        if (!$id) {
+            App::abort(403, 'Id is required');
+        }
+
         $data = $request->all();
         $validator = Validator::make($data, [
             'code' => 'required|string|max:2',
@@ -124,12 +132,20 @@ class LanguageController extends Controller
             return Response::json(['errors' => $validator->errors()], 422);
         }
 
-        $language = new Language();
-        $language->fill($data);
-        $language->save();
+        $language = Language::query()->find($id);
 
+        if (!$language) {
+            App::abort(404, 'Language not found');
+        }
+
+        $language->update($data);
+
+        $activeLocales = [];
         if ($data['translations'] && !empty($data['translations'])) {
             foreach ($data['translations'] as $locale => $translation) {
+                if ($translation == false) {
+                    continue;
+                }
                 LanguageTranslation::query()
                     ->where('language_id', '=', $language->id)
                     ->where('locale', '=', $locale)
@@ -138,10 +154,13 @@ class LanguageController extends Controller
                         'locale' => $locale,
                         'name' => $this->gTranslator->translate($data['name'], 'cs', $locale)
                     ])->save();
+                $activeLocales[] = $locale;
             }
+
             LanguageTranslation::query()
-                ->where('language_id', $language->id)
-                ->whereNotIn('locale', array_keys($data['translations']))->delete();
+                ->where('language_id', '=', $language->id)
+                ->whereNotIn('locale', $activeLocales)
+                ->delete();
         }
 
         return Response::json(['data' => LanguageResource::make($language)], 201);

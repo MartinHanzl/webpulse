@@ -2,6 +2,7 @@
 import {ref, defineEmits} from 'vue';
 import {Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import {ExclamationTriangleIcon} from '@heroicons/vue/24/outline'
+import {$fetch} from "ofetch";
 
 const open = defineModel('open', {
   type: Boolean,
@@ -17,19 +18,24 @@ const props = defineProps({
 
 const pending = ref(false);
 const emit = defineEmits(['load-items']);
+
 async function deleteItem() {
   pending.value = true;
-  await useFetch(props.data.api, {
-    method: 'DELETE',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  }).then((response) => {
+  try {
+    await useFetch(`${props.data.api}`, {
+      method: 'DELETE',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then(() => {
+      pending.value = false;
+      open.value = false;
+      emit('load-items');
+    })
+  } catch (e) {
     pending.value = false;
-    open.value = false;
-    emit('load-items');
-  })
+  }
 }
 </script>
 <template>
@@ -84,7 +90,7 @@ async function deleteItem() {
                   </DialogTitle>
                   <div class="mt-2">
                     <p class="text-sm text-gray-500">
-                      Opravdu chcete odstranit jazyk <span class="font-semibold">ID {{ data.id }}</span>? Tento proces
+                      Opravdu chcete odstranit {{ data.title }} <span class="font-semibold">ID {{ data.id }}</span>? Tento proces
                       je nevratný.
                     </p>
                   </div>

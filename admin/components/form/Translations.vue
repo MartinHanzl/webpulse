@@ -22,7 +22,7 @@ onMounted(() => {
   translations.value = languages.value;
   if (props.itemTranslations) {
     Object.keys(props.itemTranslations).map((key) => {
-      formTranslations.value[key] = ref(props.itemTranslations[key]);
+      formTranslations.value[key] = true;
     });
   } else {
     translations.value.map((translation: any) => {
@@ -36,7 +36,7 @@ onMounted(() => {
   <div>
     <div
       v-if="translations"
-      class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-12"
+      class="bg-white rounded-lg p-8 shadow-md mt-8 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-12"
     >
       <div
         v-for="(translation, index) in translations"

@@ -248,7 +248,7 @@ onMounted(() => {
             <li>
               <ul
                 role="list"
-                class="-mx-2 space-y-1"
+                class="-mx-2 space-y-0.5"
               >
                 <li
                   v-for="item in block.links"
