@@ -36,12 +36,26 @@ const props = defineProps({
             class="block text-sm font-medium leading-6 text-gray-900"
           >{{ rowSubValue.label }}</label>
           <div class="mt-2">
-            <input
+            <input 
+              v-if="rowSubValue.type === 'text'"
               :id="rowSubValue.name"
               v-model="form[rowSubValue.name]"
               :type="rowSubValue.type"
               :name="rowSubValue.name"
               autocomplete="none"
+              :minlength="rowSubValue.minlength ?? 0"
+              :maxlength="rowSubValue.maxlength ?? 255"
+              class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
+            >
+            <input
+              v-else-if="rowSubValue.type === 'number'"
+              :id="rowSubValue.name"
+              v-model="form[rowSubValue.name]"
+              :type="rowSubValue.type"
+              :name="rowSubValue.name"
+              autocomplete="none"
+              :min="rowSubValue.min ?? 0"
+              :max="rowSubValue.max ?? 999999999"
               class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6"
             >
           </div>

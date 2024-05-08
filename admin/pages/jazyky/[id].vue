@@ -141,11 +141,11 @@ onMounted(() => {
                 v-model:form="form"
                 :rows="[
                   { row: [
-                    { name: 'name', label: 'Název', type: 'text', span: '4'}
+                    { name: 'name', label: 'Název', type: 'text', span: '4', minlength: 2, maxlength: 64},
                   ] },
                   { row: [
-                    { name: 'code', label: 'Kód', type: 'text', span: '4' },
-                    { name: 'iso', label: 'Iso kód', type: 'text', span: '4' },
+                    { name: 'code', label: 'Kód', type: 'text', span: '4', minlength: 2, maxlength: 2 },
+                    { name: 'iso', label: 'Iso kód', type: 'text', span: '4', minlength: 5, maxlength: 5},
                   ] },
                   { row: [
                     { name: 'active', label: 'Aktivní', type: 'switch', span: 'full' },
