@@ -3,6 +3,7 @@ import PageHeading from "~/components/layout/PageHeading.vue";
 import Table from "~/components/base/Table.vue";
 import { ref, onMounted, watch } from 'vue';
 import debounce from 'lodash/debounce';
+import {definePageMeta} from "#imports";
 
 const pageHeadingData = {
   title: 'Jazyky',
@@ -64,6 +65,13 @@ onMounted(() => {
 });
 watch(searchString, () => {
   loadItems();
+});
+definePageMeta({
+  middleware: 'auth',
+  title: 'Jazyky ─ Administrace',
+  description: 'Administrace',
+  keywords: 'administrace, správa, administrátor',
+  robots: 'noindex, nofollow',
 });
 </script>
 

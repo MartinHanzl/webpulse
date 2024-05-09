@@ -38,6 +38,20 @@ import {
   MagnifyingGlassIcon
 } from "@heroicons/vue/24/outline";
 import { useLanguagesStore } from '~/stores/languages';
+import { useUserStore } from '~/stores/user';
+import { useAuthStore } from '~/stores/auth';
+import { storeToRefs } from 'pinia';
+
+
+const router = useRouter();
+
+const { logUserOut } = useAuthStore(); // use authenticateUser action from  auth store
+const { authenticated } = storeToRefs(useAuthStore());
+
+const logout = () => {
+  logUserOut();
+  router.push('/login');
+};
 
 const route = ref(useRoute().path);
 function changeCurrentRoute(link: String) {
@@ -102,7 +116,7 @@ const nav = [
 
 const userNavigation = [
   {name: 'Profil', href: '#'},
-  {name: 'Odhlásit se', href: '#'},
+  {name: 'Odhlásit se', href: '#', action: logout},
 ]
 
 const sidebarOpen = ref(false);
@@ -111,8 +125,10 @@ const searchString = ref(null);
 provide('searchString', searchString);
 
 const { storeLanguages } = useLanguagesStore();
+const { storeUser } = useUserStore();
 onMounted(() => {
   storeLanguages();
+  storeUser();
 });
 </script>
 
@@ -420,10 +436,17 @@ onMounted(() => {
                     :key="item.name"
                     v-slot="{ active }"
                   >
+                    <button
+                      v-if="item.action"
+                      :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
+                      @click="item.action"
+                    >
+                      {{ item.name }}
+                    </button>
                     <NuxtLink
+                      v-else
                       :to="item.href"
                       :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']"
-                      @click="changeCurrentRoute(item.href)"
                     >
                       {{ item.name }}
                     </NuxtLink>

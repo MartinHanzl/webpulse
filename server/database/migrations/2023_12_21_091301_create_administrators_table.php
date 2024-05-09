@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('phone')->nullable();
             $table->string('email');
             $table->string('password');
-            $table->smallInteger('active')->default(1);
-            $table->enum('role', ['editor', 'admin', 'owner'])->default('editor');
+            $table->boolean('active')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {ref, defineProps, defineEmits} from 'vue';
 import Breadcrumbs from "~/components/navigation/Breadcrumbs.vue";
+import {StarIcon} from "@heroicons/vue/24/outline";
 
 defineProps({
   pageHeadingData: {
@@ -37,6 +38,9 @@ const emit = defineEmits(['save-item'])
         >
           {{ pageHeadingData.actionButton.text }}
         </button>
+        <div class="text-amber-300 ml-3">
+          <StarIcon class="cursor-pointer w-9 h-9 fill-amber-200" />
+        </div>
       </div>
     </div>
   </div>

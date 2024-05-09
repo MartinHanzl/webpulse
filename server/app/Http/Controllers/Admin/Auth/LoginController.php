@@ -42,7 +42,8 @@ class LoginController extends Controller
      */
     public function me()
     {
-        return response()->json(auth('admins')->user());
+        $user = auth('admins')->user();
+        return response()->json($user);
     }
 
     /**

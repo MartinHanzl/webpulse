@@ -70,7 +70,7 @@ return [
         ],
         'admins' => [
             'driver' => 'eloquent',
-            'model' => \App\Models\Administrator::class
+            'model' => \App\Models\Administrator\Administrator::class
         ]
     ],
 

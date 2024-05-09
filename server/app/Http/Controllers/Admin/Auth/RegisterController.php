@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\AdministratorResource;
-use App\Models\Administrator;
+use App\Models\Administrator\Administrator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -21,8 +21,8 @@ class RegisterController extends Controller
         $validator = Validator::make($request->all(), [
             'firstname' => 'required',
             'lastname' => 'required',
-            'email' => 'required|unique:employees',
-            'phone' => 'required|unique:employees',
+            'email' => 'required|unique:administrators',
+            'phone' => 'required|unique:administrators',
             'password' => 'required',
         ]);
 
@@ -34,19 +34,16 @@ class RegisterController extends Controller
         }
 
         $admin = new Administrator();
-
-        $adminData = [
+        $admin->fill([
             'firstname' => $request->get('firstname'),
             'lastname' => $request->get('lastname'),
             'phone_prefix' => $request->get('phone_prefix') ?? '+420',
             'phone' => $request->get('phone'),
             'email' => $request->get('email'),
             'password' => $request->get('password'),
-            'role' => $request->get('role') ?? 'editor',
+            'role' => $request->get('group_id') ?? 1,
             'active' => 1
-        ];
-
-        $admin->fill($adminData);
+        ]);
         $admin->save();
 
         return Response::json(

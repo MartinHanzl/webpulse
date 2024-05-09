@@ -69,6 +69,28 @@ Route::group([
     'prefix' => 'admin'
 ], function () {
     Route::group([
+        'prefix' => 'auth'
+    ], function () {
+        Route::post('register', [AdminRegisterController::class, 'register']);
+        Route::post('verify', [AdminRegisterController::class, 'verify']);
+
+        Route::group([
+            'middleware' => 'api'
+        ], function () {
+            Route::post('login', [AdminLoginController::class, 'login']);
+            Route::post('logout', [AdminLoginController::class, 'logout']);
+            Route::post('refresh', [AdminLoginController::class, 'refresh']);
+
+            Route::group([
+                'prefix' => 'me'
+            ], function () {
+                Route::get('/', [AdminMeController::class, 'me']);
+                Route::get('/profile', [AdminMeController::class, 'profile']);
+            });
+        });
+    });
+
+    Route::group([
         'prefix' => 'language'
     ], function () {
         Route::get('', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'index']);
