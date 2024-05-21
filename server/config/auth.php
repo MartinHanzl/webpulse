@@ -40,7 +40,7 @@ return [
             'driver' => 'jwt',
             'provider' => 'users',
         ],
-        'admins' => [
+        'admin' => [
             'driver' => 'jwt',
             'provider' => 'admins'
         ],
@@ -101,7 +101,7 @@ return [
             'throttle' => 60,
         ],
         'admins' => [
-            'provider' => 'admins',
+            'provider' => 'admin',
             'table' => 'password_reset_tokens',
             'expire' => 60,
             'throttle' => 60,

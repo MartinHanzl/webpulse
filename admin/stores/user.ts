@@ -8,12 +8,14 @@ export const useUserStore = defineStore('user', {
     }),
     actions: {
         async storeUser() {
+            const bearerToken = useCookie('token');
             const {data}: any = await useFetch('/api/admin/auth/me', {
                 method: 'GET',
-                authorization: 'Bearer ' + useAuthStore().token,
+                // @ts-ignore
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json',
+                    Authorization: `Bearer ${bearerToken.value}`,
                 }
             });
             if (data.value) {

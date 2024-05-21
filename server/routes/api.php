@@ -19,7 +19,7 @@ Route::group([
     Route::post('verify', [RegisterController::class, 'verify']);
 
     Route::group([
-        'middleware' => 'jwt.auth'
+        'middleware' => 'auth:api'
     ], function () {
         Route::post('login', [LoginController::class, 'login']);
         Route::post('logout', [LoginController::class, 'logout']);
@@ -65,6 +65,9 @@ Route::group([
     Route::get('list/{lang}', [\App\Http\Controllers\Client\LanguageController::class, 'list']);
 });
 
+/*
+ * Admin routes
+ */
 Route::group([
     'prefix' => 'admin'
 ], function () {
@@ -74,29 +77,33 @@ Route::group([
         Route::post('register', [AdminRegisterController::class, 'register']);
         Route::post('verify', [AdminRegisterController::class, 'verify']);
 
+        Route::post('login', [AdminLoginController::class, 'login']);
+
         Route::group([
-            'middleware' => 'api'
+            'middleware' => 'auth:admin'
         ], function () {
-            Route::post('login', [AdminLoginController::class, 'login']);
             Route::post('logout', [AdminLoginController::class, 'logout']);
             Route::post('refresh', [AdminLoginController::class, 'refresh']);
 
             Route::group([
                 'prefix' => 'me'
             ], function () {
-                Route::get('/', [AdminMeController::class, 'me']);
+                Route::get('', [AdminMeController::class, 'me']);
                 Route::get('/profile', [AdminMeController::class, 'profile']);
             });
         });
     });
-
     Route::group([
-        'prefix' => 'language'
+        'middleware' => 'auth:admin'
     ], function () {
-        Route::get('', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'index']);
-        Route::get('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'show'])->where('id', '[0-9]+');
-        Route::post('', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'store']);
-        Route::post('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'update'])->where('id', '[0-9]+');
-        Route::delete('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'destroy'])->where('id', '[0-9]+');
+        Route::group([
+            'prefix' => 'language'
+        ], function () {
+            Route::get('', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'index']);
+            Route::get('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'store']);
+            Route::post('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'update'])->where('id', '[0-9]+');
+            Route::delete('{id}', [\App\Http\Controllers\Admin\Language\LanguageController::class, 'destroy'])->where('id', '[0-9]+');
+        });
     });
 });

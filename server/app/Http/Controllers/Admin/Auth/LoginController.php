@@ -7,16 +7,6 @@ use App\Http\Controllers\Controller;
 class LoginController extends Controller
 {
     /**
-     * Create a new AuthController instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth:api')->except('login');
-    }
-
-    /**
      * Get a JWT via given credentials.
      *
      * @return \Illuminate\Http\JsonResponse
@@ -79,7 +69,7 @@ class LoginController extends Controller
     {
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'bearer',
+            'token_type' => 'Bearer',
             'expires_in' => auth('admins')->factory()->getTTL() * 60 * 24 * 3 // 3 days
         ]);
     }

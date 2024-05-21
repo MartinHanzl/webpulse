@@ -2,7 +2,6 @@
 
 namespace App\Models\Administrator;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authentication;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -11,6 +10,8 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class Administrator extends Authentication implements JWTSubject
 {
     use HasApiTokens, Notifiable;
+
+    protected $guard = 'admin';
 
     protected $fillable = [
         'firstname',

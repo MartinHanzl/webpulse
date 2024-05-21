@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Me;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Me\MeResource;
+use App\Http\Resources\Admin\Me\MeResource;
 use App\Models\Administrator\Administrator;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,9 +14,16 @@ class MeController extends Controller
 {
     public function me(Request $request): JsonResponse
     {
-        dd($request->user()->id);
         $administrator = Administrator::query()->find($request->user()->id);
-        return Response::json(MeResource::make(Auth::user()));
+
+        if (!$administrator) {
+            return Response::json([
+                'success' => false,
+                'message' => 'Administrator not found'
+            ], 404);
+        }
+
+        return Response::json(MeResource::make($administrator));
     }
 
     public function profile(Request $request): JsonResponse
