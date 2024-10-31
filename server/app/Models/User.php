@@ -2,13 +2,13 @@
 
 namespace App\Models;
 
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authentication;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authentication implements JWTSubject
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -18,20 +18,9 @@ class User extends Authentication implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'phone_prefix',
-        'phone',
+        'name',
         'email',
-        'street',
-        'postcode',
-        'city',
         'password',
-        'active',
-        'verification_code',
-        'invitation_code',
-        'active',
-        'verified',
     ];
 
     /**
@@ -42,7 +31,6 @@ class User extends Authentication implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
-        'invitation_code',
     ];
 
     /**
@@ -54,24 +42,4 @@ class User extends Authentication implements JWTSubject
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-
-    /**
-     * Get the identifier that will be stored in the subject claim of the JWT.
-     *
-     * @return mixed
-     */
-    public function getJWTIdentifier()
-    {
-        return $this->getKey();
-    }
-
-    /**
-     * Return a key value array, containing any custom claims to be added to the JWT.
-     *
-     * @return array
-     */
-    public function getJWTCustomClaims()
-    {
-        return [];
-    }
 }

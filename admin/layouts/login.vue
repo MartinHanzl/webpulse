@@ -1,7 +1,9 @@
+<script setup lang="ts">
+
+</script>
+
 <template>
-  <main class="py-10">
-    <div class="flex items-center content-center">
-      <slot />
-    </div>
-  </main>
+  <div>
+    <slot />
+  </div>
 </template>
