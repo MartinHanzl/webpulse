@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\User\UserLoginResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,6 @@ class LoginController extends Controller
 
     public function me(Request $request): JsonResponse
     {
-        return Response::json($request->user());
+        return Response::json(UserLoginResource::make($request->user()));
     }
 }

@@ -16,45 +16,59 @@ import {
 	CalendarIcon,
 	ChartPieIcon,
 	Cog6ToothIcon,
-	DocumentDuplicateIcon,
-	FolderIcon,
 	HomeIcon,
 	UsersIcon,
 	XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 
+const route = useRoute();
+const router = useRouter();
 const user = useSanctumUser();
-const { logout } = useSanctumAuth();
+const { logout, refreshIdentity } = useSanctumAuth();
+const sidebarOpen = ref(false);
+const searchString = ref('');
+provide('searchString', searchString.value);
 
-const navigation = [
-	{ name: 'Úvod', link: '/', icon: HomeIcon, current: true },
-];
+const navigation = ref([
+	{ title: 'Úvod', menu: [
+		{ name: 'Přehled', link: '/', icon: HomeIcon, current: true },
+		{ name: 'Statistiky', link: '/statistiky', icon: ChartPieIcon, current: false },
+	] },
+	{ title: 'Byznys a osobní růst', menu: [
+		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false },
+		{ name: 'Kalendář', link: '/kalendar', icon: CalendarIcon, current: false },
+		{ name: 'Cashflow', link: '/cashflow', icon: CalendarIcon, current: false },
+	] },
+	{ title: 'Osobní sekce', menu: [
+		{ name: 'Faktury', link: '/faktury', icon: HomeIcon, current: false },
+		{ name: 'Projekty', link: '/projekty', icon: HomeIcon, current: false },
+		{ name: 'Trackování', link: '/trackovani', icon: HomeIcon, current: false },
+	] },
+]);
 
-const oldNavigation = [
-	{ name: 'Nástěnka', link: '#', icon: HomeIcon, current: true },
-	{ name: 'Team', link: '#', icon: UsersIcon, current: false },
-	{ name: 'Projects', link: '#', icon: FolderIcon, current: false },
-	{ name: 'Calendar', link: '#', icon: CalendarIcon, current: false },
-	{ name: 'Documents', link: '#', icon: DocumentDuplicateIcon, current: false },
-	{ name: 'Reports', link: '#', icon: ChartPieIcon, current: false },
-];
-
-const teams = [
-	{ id: 1, name: 'Heroicons', link: '#', initial: 'H', current: false },
-	{ id: 2, name: 'Tailwind Labs', link: '#', initial: 'T', current: false },
-	{ id: 3, name: 'Workcation', link: '#', initial: 'W', current: false },
-];
 const userNavigation = [
-	{ name: 'Profil', link: '#' },
+	{ name: 'Profil', link: '/profil' },
+	{ name: 'Rychlý přístup', link: '/rychly-pristup' },
 	{ name: 'Odhlásit se', link: null, action: 'handleLogout' },
 ];
 
-const sidebarOpen = ref(false);
+watchEffect(() => {
+	const currentPath = route.path;
+	navigation.value.forEach((group) => {
+		group.menu.forEach((item) => {
+			item.current = currentPath === item.link;
+		});
+	});
+});
 
 function handleLogout() {
-  logout();
+	logout();
+	router.push('/login');
 }
+onMounted(() => {
+	refreshIdentity();
+});
 </script>
 
 <template>
@@ -118,7 +132,7 @@ function handleLogout() {
 								<div class="flex h-16 shrink-0 items-center">
 									<img
 										class="h-8 w-auto"
-										src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+										src="https://cdn-icons-png.flaticon.com/512/3557/3557519.png"
 										alt="Your Company"
 									>
 								</div>
@@ -127,17 +141,23 @@ function handleLogout() {
 										role="list"
 										class="flex flex-1 flex-col gap-y-7"
 									>
-										<li>
+										<li
+											v-for="(group, index) in navigation"
+											:key="index"
+										>
+											<div class="text-xs/6 font-semibold text-gray-400">
+												{{ group.title }}
+											</div>
 											<ul
 												role="list"
-												class="-mx-2 space-y-1"
+												class="-mx-2 mt-2 space-y-1"
 											>
 												<li
-													v-for="item in navigation"
-													:key="item.name"
+													v-for="(item, key) in group.menu"
+													:key="key"
 												>
 													<a
-														:href="item.href"
+														:href="item.link"
 														:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
 													>
 														<component
@@ -145,29 +165,7 @@ function handleLogout() {
 															class="size-6 shrink-0"
 															aria-hidden="true"
 														/>
-														{{ item.name }}
-													</a>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<div class="text-xs/6 font-semibold text-gray-400">
-												Your teams
-											</div>
-											<ul
-												role="list"
-												class="-mx-2 mt-2 space-y-1"
-											>
-												<li
-													v-for="team in teams"
-													:key="team.name"
-												>
-													<a
-														:href="team.href"
-														:class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
-													>
-														<span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
-														<span class="truncate">{{ team.name }}</span>
+														<span class="truncate">{{ item.name }}</span>
 													</a>
 												</li>
 											</ul>
@@ -200,7 +198,7 @@ function handleLogout() {
 				<div class="flex h-16 shrink-0 items-center">
 					<img
 						class="h-8 w-auto"
-						src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=500"
+						src="https://cdn-icons-png.flaticon.com/512/3557/3557519.png"
 						alt="Your Company"
 					>
 				</div>
@@ -209,17 +207,23 @@ function handleLogout() {
 						role="list"
 						class="flex flex-1 flex-col gap-y-7"
 					>
-						<li>
+						<li
+							v-for="(group, index) in navigation"
+							:key="index"
+						>
+							<div class="text-xs/6 font-semibold text-gray-400">
+								{{ group.title }}
+							</div>
 							<ul
 								role="list"
-								class="-mx-2 space-y-1"
+								class="-mx-2 mt-2 space-y-1"
 							>
 								<li
-									v-for="item in navigation"
-									:key="item.name"
+									v-for="(item, key) in group.menu"
+									:key="key"
 								>
-									<a
-										:href="item.href"
+									<NuxtLink
+										:to="item.link"
 										:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
 									>
 										<component
@@ -227,30 +231,8 @@ function handleLogout() {
 											class="size-6 shrink-0"
 											aria-hidden="true"
 										/>
-										{{ item.name }}
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<div class="text-xs/6 font-semibold text-gray-400">
-								Your teams
-							</div>
-							<ul
-								role="list"
-								class="-mx-2 mt-2 space-y-1"
-							>
-								<li
-									v-for="team in teams"
-									:key="team.name"
-								>
-									<a
-										:href="team.href"
-										:class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
-									>
-										<span class="flex size-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
-										<span class="truncate">{{ team.name }}</span>
-									</a>
+										<span class="truncate">{{ item.name }}</span>
+									</NuxtLink>
 								</li>
 							</ul>
 						</li>
@@ -263,7 +245,7 @@ function handleLogout() {
 									class="size-6 shrink-0"
 									aria-hidden="true"
 								/>
-								Settings
+								Nastavení
 							</a>
 						</li>
 					</ul>
@@ -278,7 +260,7 @@ function handleLogout() {
 					class="-m-2.5 p-2.5 text-gray-700 lg:hidden"
 					@click="sidebarOpen = true"
 				>
-					<span class="sr-only">Open sidebar</span>
+					<span class="sr-only">Menu</span>
 					<Bars3Icon
 						class="size-6"
 						aria-hidden="true"
@@ -292,27 +274,26 @@ function handleLogout() {
 				/>
 
 				<div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-					<form
+					<div
 						class="relative flex flex-1"
-						action="#"
-						method="GET"
 					>
 						<label
 							for="search-field"
 							class="sr-only"
-						>Search</label>
+						>Hledat</label>
 						<MagnifyingGlassIcon
 							class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
 							aria-hidden="true"
 						/>
 						<input
+                v-model="searchString"
 							id="search-field"
 							class="block size-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
 							placeholder="Search..."
 							type="search"
 							name="search"
 						>
-					</form>
+					</div>
 					<div class="flex items-center gap-x-4 lg:gap-x-6">
 						<button
 							type="button"
@@ -368,13 +349,17 @@ function handleLogout() {
 										:key="item.name"
 										v-slot="{ active }"
 									>
-										<NuxtLink v-if="item.link != null" :to="item.link"
+										<NuxtLink
+											v-if="item.link != null"
+											:to="item.link"
 											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900']"
 										>{{ item.name }}
-                    </NuxtLink>
-                    <button type="button" v-else @click="item.action"
+										</NuxtLink>
+										<span
+											v-else
 											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900 cursor-pointer']"
-										>{{ item.name }}</button>
+											@click="handleLogout"
+										>{{ item.name }}</span>
 									</MenuItem>
 								</MenuItems>
 							</transition>
@@ -385,6 +370,7 @@ function handleLogout() {
 
 			<main class="py-10">
 				<div class="px-4 sm:px-6 lg:px-8">
+          {{ searchString }}
 					<slot />
 				</div>
 			</main>
