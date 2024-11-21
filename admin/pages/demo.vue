@@ -1,7 +1,7 @@
 <script setup lang="ts">
 onMounted(() => {
 	useHead({
-		title: 'Admin',
+		title: 'Demo',
 	});
 });
 </script>
@@ -9,7 +9,7 @@ onMounted(() => {
 <template>
 	<div>
 		<BaseHeading
-			title="Nástěnka"
+			title="Demo"
 		/>
 	</div>
 </template>

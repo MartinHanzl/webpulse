@@ -24,30 +24,71 @@ import {
 	PhoneIcon,
 	BanknotesIcon,
 	ClockIcon,
+	PresentationChartLineIcon,
+  CheckCircleIcon
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 
-const navigation = [
-	{ name: 'Nástěnka', href: '#', icon: HomeIcon, current: true },
-	{ name: 'Kontakty', href: '#', icon: PhoneIcon, current: false },
-	{ name: 'Kalendář', href: '#', icon: CalendarIcon, current: false },
-	{ name: 'Cashflow', href: '#', icon: BanknotesIcon, current: false },
-	{ name: 'Trackování', href: '#', icon: ClockIcon, current: false },
-	{ name: 'Team', href: '#', icon: UsersIcon, current: false },
-	{ name: 'Projects', href: '#', icon: FolderIcon, current: false },
-	{ name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-	{ name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
-];
-const teams = [
-	{ id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-	{ id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-	{ id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
-];
-const userNavigation = [
-	{ name: 'Your profile', href: '#' },
-	{ name: 'Sign out', href: '#' },
+const route = useRoute();
+
+const navigation = ref([
+	{ title: 'Nástěnka a přehledy', items: [
+		{ name: 'Nástěnka', href: '/', icon: HomeIcon },
+		{ name: 'Detailní přehledy', href: '/demo', icon: HomeIcon },
+	] },
+	{ title: 'Byznys', items: [
+		{ name: 'Kontakty', href: '/kontakty#kontakty', icon: PhoneIcon },
+		{ name: 'Kalendář', href: '/demo', icon: CalendarIcon },
+		{ name: 'Cashflow', href: '/demo', icon: BanknotesIcon },
+		{ name: 'Aktivita', href: '/demo', icon: PresentationChartLineIcon },
+		{ name: 'Soubory', href: '/demo', icon: FolderIcon },
+	] },
+	{ title: 'Zakázky', items: [
+		{ name: 'Klienti', href: '/demo', icon: UsersIcon },
+		{ name: 'Faktury', href: '/demo', icon: BanknotesIcon },
+		{ name: 'Projekty', href: '/demo', icon: FolderIcon },
+		{ name: 'Trackování', href: '/demo', icon: ClockIcon },
+	] },
+	{ title: 'Osobní', items: [
+		{ name: 'Soubory', href: '/demo', icon: UsersIcon },
+		{ name: 'Úkoly', href: '/demo', icon: CheckCircleIcon },
+	] }
+]);
+const oldNavigation = [
+	{ name: 'Nástěnka', href: '/demo', icon: HomeIcon, current: true },
+	{ name: 'Kontakty', href: '/demo', icon: PhoneIcon, current: false },
+	{ name: 'Kalendář', href: '/demo', icon: CalendarIcon, current: false },
+	{ name: 'Cashflow', href: '/demo', icon: BanknotesIcon, current: false },
+	{ name: 'Aktivita', href: '/demo', icon: PresentationChartLineIcon, current: false },
+	{ name: 'Trackování', href: '/demo', icon: ClockIcon, current: false },
+	{ name: 'Team', href: '/demo', icon: UsersIcon, current: false },
+	{ name: 'Projects', href: '/demo', icon: FolderIcon, current: false },
+	{ name: 'Documents', href: '/demo', icon: DocumentDuplicateIcon, current: false },
 ];
 
+const teams = [
+	{ id: 1, name: 'Heroicons', href: '/demo', initial: 'H', current: false },
+	{ id: 2, name: 'Tailwind Labs', href: '/demo', initial: 'T', current: false },
+	{ id: 3, name: 'Workcation', href: '/demo', initial: 'W', current: false },
+];
+const useroldNavigation = [
+	{ name: 'Profil', href: '#' },
+	{ name: 'Odhlásit se', href: '#' },
+];
+
+watchEffect(() => {
+	const currentPath = route.fullPath;
+	navigation.value.forEach((group) => {
+		group.items.forEach((item) => {
+			if (item.href === '/') {
+				item.current = currentPath === item.href;
+			}
+			else {
+				item.current = currentPath.startsWith(item.href);
+			}
+		});
+	});
+});
 const sidebarOpen = ref(false);
 </script>
 
@@ -129,53 +170,37 @@ const sidebarOpen = ref(false);
 										role="list"
 										class="flex flex-1 flex-col gap-y-7"
 									>
-										<li>
+										<li
+											v-for="(group, key) in navigation"
+											:key="key"
+										>
+											<div class="text-xs/6 font-semibold text-gray-400">
+												{{ group.title }}
+											</div>
 											<ul
 												role="list"
 												class="-mx-2 space-y-1"
 											>
 												<li
-													v-for="item in navigation"
-													:key="item.name"
+													v-for="(link, index) in group.items"
+													:key="index"
 												>
-													<a
-														:href="item.href"
-														:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
+													<NuxtLink
+														:to="link.href"
+														:class="[link.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
 													>
 														<component
-															:is="item.icon"
+															:is="link.icon"
 															class="h-6 w-6 shrink-0"
 															aria-hidden="true"
 														/>
-														{{ item.name }}
-													</a>
-												</li>
-											</ul>
-										</li>
-										<li>
-											<div class="text-xs/6 font-semibold text-gray-400">
-												Your teams
-											</div>
-											<ul
-												role="list"
-												class="-mx-2 mt-2 space-y-1"
-											>
-												<li
-													v-for="team in teams"
-													:key="team.name"
-												>
-													<a
-														:href="team.href"
-														:class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
-													>
-														<span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
-														<span class="truncate">{{ team.name }}</span>
-													</a>
+														{{ link.name }}
+													</NuxtLink>
 												</li>
 											</ul>
 										</li>
 										<li class="mt-auto">
-											<a
+											<NuxtLink
 												href="#"
 												class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white"
 											>
@@ -184,7 +209,7 @@ const sidebarOpen = ref(false);
 													aria-hidden="true"
 												/>
 												Settings
-											</a>
+											</NuxtLink>
 										</li>
 									</ul>
 								</nav>
@@ -211,48 +236,32 @@ const sidebarOpen = ref(false);
 						role="list"
 						class="flex flex-1 flex-col gap-y-7"
 					>
-						<li>
-							<ul
-								role="list"
-								class="-mx-2 space-y-1"
-							>
-								<li
-									v-for="item in navigation"
-									:key="item.name"
-								>
-									<a
-										:href="item.href"
-										:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
-									>
-										<component
-											:is="item.icon"
-											class="h-6 w-6 shrink-0"
-											aria-hidden="true"
-										/>
-										{{ item.name }}
-									</a>
-								</li>
-							</ul>
-						</li>
-						<li>
-							<div class="text-xs/6 font-semibold text-gray-400">
-								Your teams
+						<li
+							v-for="(group, key) in navigation"
+							:key="key"
+						>
+							<div class="text-xs/6 font-semibold text-gray-400 mb-2">
+								{{ group.title }}
 							</div>
 							<ul
 								role="list"
-								class="-mx-2 mt-2 space-y-1"
+								class="-mx-2 space-y-"
 							>
 								<li
-									v-for="team in teams"
-									:key="team.name"
+									v-for="(link, index) in group.items"
+									:key="index"
 								>
-									<a
-										:href="team.href"
-										:class="[team.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
+									<NuxtLink
+										:to="link.href"
+										:class="[link.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
 									>
-										<span class="flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border border-gray-700 bg-gray-800 text-[0.625rem] font-medium text-gray-400 group-hover:text-white">{{ team.initial }}</span>
-										<span class="truncate">{{ team.name }}</span>
-									</a>
+										<component
+											:is="link.icon"
+											class="h-6 w-6 shrink-0"
+											aria-hidden="true"
+										/>
+										{{ link.name }}
+									</NuxtLink>
 								</li>
 							</ul>
 						</li>
@@ -366,14 +375,14 @@ const sidebarOpen = ref(false);
 							>
 								<MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
 									<MenuItem
-										v-for="item in userNavigation"
+										v-for="item in useroldNavigation"
 										:key="item.name"
 										v-slot="{ active }"
 									>
-										<a
-											:href="item.href"
+										<NuxtLink
+											:to="item.href"
 											:class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm/6 text-gray-900']"
-										>{{ item.name }}</a>
+										>{{ item.name }}</NuxtLink>
 									</MenuItem>
 								</MenuItems>
 							</transition>
