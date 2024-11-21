@@ -24,25 +24,37 @@ import {
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
 
+const user = useSanctumUser();
+const { logout } = useSanctumAuth();
+
 const navigation = [
-	{ name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-	{ name: 'Team', href: '#', icon: UsersIcon, current: false },
-	{ name: 'Projects', href: '#', icon: FolderIcon, current: false },
-	{ name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-	{ name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-	{ name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+	{ name: 'Úvod', link: '/', icon: HomeIcon, current: true },
 ];
+
+const oldNavigation = [
+	{ name: 'Nástěnka', link: '#', icon: HomeIcon, current: true },
+	{ name: 'Team', link: '#', icon: UsersIcon, current: false },
+	{ name: 'Projects', link: '#', icon: FolderIcon, current: false },
+	{ name: 'Calendar', link: '#', icon: CalendarIcon, current: false },
+	{ name: 'Documents', link: '#', icon: DocumentDuplicateIcon, current: false },
+	{ name: 'Reports', link: '#', icon: ChartPieIcon, current: false },
+];
+
 const teams = [
-	{ id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
-	{ id: 2, name: 'Tailwind Labs', href: '#', initial: 'T', current: false },
-	{ id: 3, name: 'Workcation', href: '#', initial: 'W', current: false },
+	{ id: 1, name: 'Heroicons', link: '#', initial: 'H', current: false },
+	{ id: 2, name: 'Tailwind Labs', link: '#', initial: 'T', current: false },
+	{ id: 3, name: 'Workcation', link: '#', initial: 'W', current: false },
 ];
 const userNavigation = [
-	{ name: 'Your profile', href: '#' },
-	{ name: 'Sign out', href: '#' },
+	{ name: 'Profil', link: '#' },
+	{ name: 'Odhlásit se', link: null, action: 'handleLogout' },
 ];
 
 const sidebarOpen = ref(false);
+
+function handleLogout() {
+  logout();
+}
 </script>
 
 <template>
@@ -335,7 +347,7 @@ const sidebarOpen = ref(false);
 									<span
 										class="ml-4 text-sm/6 font-semibold text-gray-900"
 										aria-hidden="true"
-									>Tom Cook</span>
+									>{{ user.firstname }} {{ user.lastname }}</span>
 									<ChevronDownIcon
 										class="ml-2 size-5 text-gray-400"
 										aria-hidden="true"
@@ -356,10 +368,13 @@ const sidebarOpen = ref(false);
 										:key="item.name"
 										v-slot="{ active }"
 									>
-										<a
-											:href="item.href"
+										<NuxtLink v-if="item.link != null" :to="item.link"
 											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900']"
-										>{{ item.name }}</a>
+										>{{ item.name }}
+                    </NuxtLink>
+                    <button type="button" v-else @click="item.action"
+											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900 cursor-pointer']"
+										>{{ item.name }}</button>
 									</MenuItem>
 								</MenuItems>
 							</transition>

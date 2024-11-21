@@ -24,10 +24,10 @@ Route::group([
     Route::group([
         'prefix' => 'auth'
     ], function () {
-        Route::post('login', [LoginController::class, 'login'])->middleware('quest');
+        Route::post('login', [LoginController::class, 'login']);
         Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
         Route::get('refresh', [LoginController::class, 'refresh'])->middleware('auth:sanctum');
-        Route::post('me', [LoginController::class, 'me'])->middleware('auth:sanctum');
+        Route::get('api/user', [LoginController::class, 'me'])->middleware('auth:sanctum');
     });
 
     // User routes

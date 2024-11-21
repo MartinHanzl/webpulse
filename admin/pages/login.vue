@@ -8,6 +8,7 @@ const { login } = useSanctumAuth();
 function handleSubmit() {
 	login(form.value);
 }
+
 useHead({
 	title: 'Login',
 	meta: [
@@ -34,7 +35,7 @@ definePageMeta({
 						<label
 							for="email"
 							class="block text-sm font-medium text-gray-700"
-						>Email</label>
+						>E-mail</label>
 						<input
 							id="email"
 							v-model="form.email"
@@ -47,7 +48,7 @@ definePageMeta({
 						<label
 							for="password"
 							class="block text-sm font-medium text-gray-700"
-						>Password</label>
+						>Heslo</label>
 						<input
 							id="password"
 							v-model="form.password"
@@ -57,12 +58,13 @@ definePageMeta({
 						>
 					</div>
 					<div class="mt-6">
-						<button
+						<BaseButton
 							type="submit"
-							class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+							variant="primary"
+							size="lg"
 						>
-							Login
-						</button>
+							Přihlásit se
+						</BaseButton>
 					</div>
 				</form>
 			</div>

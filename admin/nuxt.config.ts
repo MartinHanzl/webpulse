@@ -30,25 +30,7 @@ export default defineNuxtConfig({
 	},
 
 	sanctum: {
-		baseUrl: 'http://localhost:8010', // Laravel API
-		globalMiddleware: {
-			enabled: true,
-			allow404WithoutAuth: true,
-		},
-		redirectIfAuthenticated: true,
-		redirectIfUnauthenticated: true,
-		redirect: {
-			keepRequestedRoute: false,
-			onLogin: '/',
-			onLogout: '/',
-			onAuthOnly: '/login',
-			onGuestOnly: '/',
-		},
-		endpoints: {
-			csrf: '/api/admin/auth/refresh',
-			login: '/api/admin/auth/login',
-			logout: '/api/admin/auth/logout',
-			user: '/api/admin/auth/me',
-		},
+		baseUrl: 'http://localhost:8010/api/admin/auth', // Laravel API
+		mode: 'token',
 	},
 });
