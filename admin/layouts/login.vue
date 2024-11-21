@@ -1,9 +1,8 @@
 <script setup lang="ts">
 
 </script>
-
 <template>
-	<div>
-		<slot />
-	</div>
+  <div class="bg-slate-800">
+    <slot />
+  </div>
 </template>

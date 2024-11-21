@@ -2,12 +2,11 @@
 import {definePageMeta} from "#imports";
 
 definePageMeta({
-  middleware: 'sanctum:auth',
-})
+  layout: 'login',
+});
 </script>
-
 <template>
   <div>
-    <h1>Admin</h1>
+    <h1>Přihlášení</h1>
   </div>
 </template>

@@ -1,23 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-	modules: ['@nuxt/eslint', '@pinia/nuxt', 'nuxt-auth-sanctum'],
-	devtools: { enabled: true },
-	css: ['~/assets/css/main.css'],
-	compatibilityDate: '2024-04-03',
+  compatibilityDate: '2024-11-01',
+  devtools: { enabled: true },
+  css: ['~/assets/css/main.css'],
 
-	postcss: {
-		plugins: {
-			tailwindcss: {},
-			autoprefixer: {},
-		},
-	},
-	eslint: {
-		checker: true,
-		config: {
-			stylistic: {
-				indent: 'tab',
-				semi: true,
-			},
-		},
-	},
-});
+  modules: ['nuxt-auth-sanctum'],
+
+  sanctum: {
+    baseUrl: 'http://localhost:8010', // Laravel API
+  },
+})
