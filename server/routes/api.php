@@ -24,17 +24,21 @@ Route::group([
     Route::group([
         'prefix' => 'auth'
     ], function () {
-        Route::post('login', [LoginController::class, 'login']);
+        Route::post('login', [LoginController::class, 'login'])->middleware('quest');
         Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
-        Route::post('refresh', [LoginController::class, 'refresh'])->middleware('auth:sanctum');
+        Route::get('refresh', [LoginController::class, 'refresh'])->middleware('auth:sanctum');
+        Route::post('me', [LoginController::class, 'me'])->middleware('auth:sanctum');
     });
 
     // User routes
     Route::group([
         'middleware' => 'auth:sanctum'
     ], function () {
-        Route::get('user', function (Request $request) {
-            return $request->user();
+        // Contact routes
+        Route::group([
+            'prefix' => 'contact'
+        ], function () {
+
         });
     });
 });

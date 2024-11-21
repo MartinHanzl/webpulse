@@ -1,12 +1,71 @@
 <script setup lang="ts">
-import {definePageMeta} from "#imports";
+const form = ref({
+	email: '' as string,
+	password: '' as string,
+});
 
+const { login } = useSanctumAuth();
+function handleSubmit() {
+	login(form.value);
+}
+useHead({
+	title: 'Login',
+	meta: [
+		{
+			name: 'description',
+			content: 'Login to your account',
+		},
+	],
+});
 definePageMeta({
-  layout: 'login',
+	layout: 'login',
 });
 </script>
+
 <template>
-  <div>
-    <h1>Přihlášení</h1>
-  </div>
+	<div class="mt-20">
+		<div class="overflow-hidden bg-white shadow sm:rounded-lg">
+			<div class="px-4 py-5 sm:p-6">
+				<h1 class="text-2xl font-semibold text-gray-900">
+					Přihlášení
+				</h1>
+				<form @submit.prevent="handleSubmit">
+					<div class="mt-6">
+						<label
+							for="email"
+							class="block text-sm font-medium text-gray-700"
+						>Email</label>
+						<input
+							id="email"
+							v-model="form.email"
+							type="email"
+							name="email"
+							class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+						>
+					</div>
+					<div class="mt-6">
+						<label
+							for="password"
+							class="block text-sm font-medium text-gray-700"
+						>Password</label>
+						<input
+							id="password"
+							v-model="form.password"
+							type="password"
+							name="password"
+							class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+						>
+					</div>
+					<div class="mt-6">
+						<button
+							type="submit"
+							class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+						>
+							Login
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 </template>

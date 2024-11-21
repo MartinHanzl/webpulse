@@ -50,4 +50,9 @@ class LoginController extends Controller
 
         return Response::json();
     }
+
+    public function me(Request $request): JsonResponse
+    {
+        return Response::json($request->user());
+    }
 }
