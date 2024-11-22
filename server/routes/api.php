@@ -28,13 +28,12 @@ Route::group([
         Route::post('login', [LoginController::class, 'login']);
         Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
         Route::get('refresh', [LoginController::class, 'refresh'])->middleware('auth:sanctum');
-        Route::get('api/user', [LoginController::class, 'me'])->middleware('auth:sanctum');
+        Route::get('me', [LoginController::class, 'me'])->middleware('auth:sanctum');
     });
 
     // User routes
     Route::group([
         'middleware' => 'auth:sanctum',
-        'prefix' => 'auth/api/admin'
     ], function () {
         // Contact routes
         Route::group([

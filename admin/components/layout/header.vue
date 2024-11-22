@@ -27,10 +27,10 @@ defineProps({
 });
 
 const isInQuickAccess = computed(() => {
-  if (user.value) {
-    return user.value.quick_access.some((item) => item.link === route.fullPath);
-  }
-  return false;
+	if (user.value) {
+		return user.value.quick_access.some(item => item.link === route.fullPath);
+	}
+	return false;
 });
 </script>
 
@@ -52,7 +52,7 @@ const isInQuickAccess = computed(() => {
 				class="mt-4 flex shrink-0 md:ml-4 md:mt-0"
 			>
 				<button
-            v-if="isInQuickAccess"
+					v-if="isInQuickAccess"
 					type="button"
 					class="rounded-full px-2.5 py-2.5 text-sm font-semibold shadow-sm hover:shadow-md ring-1 ring-slate-200"
 					@click="quickAccessDialogShow = true"
@@ -62,8 +62,8 @@ const isInQuickAccess = computed(() => {
 						aria-hidden="true"
 					/>
 				</button>
-        <button
-            v-else
+				<button
+					v-else
 					type="button"
 					class="rounded-full px-2.5 py-2.5 text-sm font-semibold shadow-sm hover:shadow-md ring-1 ring-slate-200"
 					@click="quickAccessDialogShow = true"

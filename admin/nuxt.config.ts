@@ -1,7 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 
-	modules: ['nuxt-auth-sanctum', '@nuxt/eslint'],
+	modules: [['nuxt-auth-sanctum', {
+		baseUrl: process.env.API_URL ?? 'http://srv512428.hstgr.cloud',
+		mode: 'token',
+		endpoints: {
+			csrf: '/sanctum/csrf-cookie',
+			login: '/api/admin/auth/login',
+			logout: '/api/admin/auth/logout',
+			user: '/api/admin/auth/me',
+		},
+		csrf: {
+			cookie: 'XSRF-TOKEN',
+			header: 'X-XSRF-TOKEN',
+		},
+	}], '@nuxt/eslint'],
 	devtools: { enabled: true },
 
 	css: ['~/assets/css/main.css'],
@@ -27,10 +40,5 @@ export default defineNuxtConfig({
 				semi: true,
 			},
 		},
-	},
-
-	sanctum: {
-		baseUrl: 'http://localhost:8010/api/admin/auth', // Laravel API
-		mode: 'token',
 	},
 });

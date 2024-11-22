@@ -25,10 +25,10 @@ async function submitForm() {
 			'Content-Type': 'application/json',
 		},
 	}).then(() => {
-    refreshIdentity();
+		refreshIdentity();
 	}).finally(() => {
 		show.value = false;
-  });
+	});
 }
 </script>
 

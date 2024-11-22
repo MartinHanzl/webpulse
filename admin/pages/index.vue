@@ -5,7 +5,7 @@ const breadcrumbs = [
 	{
 		name: 'Přehled',
 		link: '/',
-    current: true,
+		current: true,
 	},
 ];
 definePageMeta({

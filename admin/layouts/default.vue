@@ -69,13 +69,13 @@ function handleLogout() {
 	router.push('/login');
 }
 function getQuickAccess() {
-  if(user && user.value && user.value.quick_access) {
-    quickAccess.value = user.value.quick_access;
-  }
+	if (user && user.value && user.value.quick_access) {
+		quickAccess.value = user.value.quick_access;
+	}
 }
 onMounted(() => {
 	refreshIdentity();
-  getQuickAccess();
+	getQuickAccess();
 });
 </script>
 
