@@ -1,9 +1,18 @@
 <script setup lang="ts">
-
+const breadcrumbs = [
+  {
+    name: 'Profil',
+    link: '/profil',
+    current: true,
+  },
+];
 </script>
 
 <template>
 	<div>
-		<h1>Profil</h1>
+    <LayoutHeader
+        title="Profil"
+        :breadcrumbs="breadcrumbs"
+    />
 	</div>
 </template>

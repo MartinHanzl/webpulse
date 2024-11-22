@@ -20,7 +20,7 @@ import {
 	UsersIcon,
 	XMarkIcon,
 } from '@heroicons/vue/24/outline';
-import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid';
+import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 
 const route = useRoute();
 const router = useRouter();
@@ -53,6 +53,8 @@ const userNavigation = [
 	{ name: 'Odhlásit se', link: null, action: 'handleLogout' },
 ];
 
+const quickAccess = ref([]);
+
 watchEffect(() => {
 	const currentPath = route.path;
 	navigation.value.forEach((group) => {
@@ -66,8 +68,14 @@ function handleLogout() {
 	logout();
 	router.push('/login');
 }
+function getQuickAccess() {
+  if(user && user.value && user.value.quick_access) {
+    quickAccess.value = user.value.quick_access;
+  }
+}
 onMounted(() => {
 	refreshIdentity();
+  getQuickAccess();
 });
 </script>
 
@@ -286,8 +294,8 @@ onMounted(() => {
 							aria-hidden="true"
 						/>
 						<input
-                v-model="searchString"
 							id="search-field"
+							v-model="searchString"
 							class="block size-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
 							placeholder="Search..."
 							type="search"
@@ -312,6 +320,58 @@ onMounted(() => {
 							aria-hidden="true"
 						/>
 
+						<!-- Quick access dropdown -->
+						<Menu
+							as="div"
+							class="relative"
+						>
+							<MenuButton class="-m-1.5 flex items-center p-1.5">
+								<span class="sr-only">Open qick access menu</span>
+								<span class="hidden lg:flex lg:items-center">
+									<span
+										class="text-sm/6 font-semibold text-gray-900"
+										aria-hidden="true"
+									>Rychlý přístup</span>
+									<ChevronDownIcon
+										class="ml-2 size-5 text-gray-400"
+										aria-hidden="true"
+									/>
+								</span>
+							</MenuButton>
+							<transition
+								enter-active-class="transition ease-out duration-100"
+								enter-from-class="transform opacity-0 scale-95"
+								enter-to-class="transform opacity-100 scale-100"
+								leave-active-class="transition ease-in duration-75"
+								leave-from-class="transform opacity-100 scale-100"
+								leave-to-class="transform opacity-0 scale-95"
+							>
+								<MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+									<MenuItem
+										v-for="item in quickAccess"
+										:key="item.name"
+										v-slot="{ active }"
+									>
+										<NuxtLink
+											v-if="item.link != null"
+											:to="item.link"
+											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900']"
+										>{{ item.name }}
+										</NuxtLink>
+										<span
+											v-else
+											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900 cursor-pointer']"
+											@click="handleLogout"
+										>{{ item.name }}</span>
+									</MenuItem>
+								</MenuItems>
+							</transition>
+						</Menu>
+						<!-- Separator -->
+						<div
+							class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
+							aria-hidden="true"
+						/>
 						<!-- Profile dropdown -->
 						<Menu
 							as="div"
@@ -370,7 +430,7 @@ onMounted(() => {
 
 			<main class="py-10">
 				<div class="px-4 sm:px-6 lg:px-8">
-          {{ searchString }}
+					{{ searchString }}
 					<slot />
 				</div>
 			</main>

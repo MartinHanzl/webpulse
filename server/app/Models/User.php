@@ -41,4 +41,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    protected $with = ['quickAccess'];
+
+    public function quickAccess()
+    {
+        return $this->hasMany(QuickAccess::class, 'user_id', 'id');
+    }
 }

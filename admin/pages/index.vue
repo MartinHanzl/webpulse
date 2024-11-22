@@ -1,13 +1,23 @@
 <script setup lang="ts">
 import { definePageMeta } from '#imports';
 
+const breadcrumbs = [
+	{
+		name: 'Přehled',
+		link: '/',
+    current: true,
+	},
+];
 definePageMeta({
-	// middleware: 'sanctum:auth',
+	middleware: 'sanctum:auth',
 });
 </script>
 
 <template>
 	<div>
-		<h1>Admin</h1>
+		<LayoutHeader
+			title="Přehled"
+			:breadcrumbs="breadcrumbs"
+		/>
 	</div>
 </template>

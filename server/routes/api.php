@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\QuickAccessController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,13 +33,17 @@ Route::group([
 
     // User routes
     Route::group([
-        'middleware' => 'auth:sanctum'
+        'middleware' => 'auth:sanctum',
+        'prefix' => 'auth/api/admin'
     ], function () {
         // Contact routes
         Route::group([
-            'prefix' => 'contact'
+            'prefix' => 'quick-access'
         ], function () {
-
+            Route::get('', [QuickAccessController::class, 'index']);
+            Route::get('{id}', [QuickAccessController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [QuickAccessController::class, 'store']);
+            Route::delete('{id}', [QuickAccessController::class, 'destroy'])->where('id', '[0-9]+');
         });
     });
 });
