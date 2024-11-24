@@ -5,7 +5,8 @@ import { ref } from 'vue';
 const user = useSanctumUser();
 const route = useRoute();
 const quickAccessDialogShow = ref(false);
-defineProps({
+
+const props = defineProps({
 	title: {
 		type: String,
 		required: true,
@@ -31,6 +32,22 @@ const isInQuickAccess = computed(() => {
 		return user.value.quick_access.some(item => item.link === route.fullPath);
 	}
 	return false;
+});
+const quickAccessItem = computed(() => {
+	if (user.value) {
+		return user.value.quick_access.find(item => item.link === route.fullPath) || {
+			id: null,
+			name: props.title,
+			link: route.fullPath,
+			target: null,
+		};
+	}
+	return {
+		id: null,
+		name: props.title,
+		link: route.fullPath,
+		target: null,
+	};
 });
 </script>
 
@@ -86,6 +103,9 @@ const isInQuickAccess = computed(() => {
 				</div>
 			</div>
 		</div>
-		<QuickAccessDialog v-model:show="quickAccessDialogShow" />
+		<QuickAccessDialog
+			v-model:show="quickAccessDialogShow"
+			v-model:form="quickAccessItem"
+		/>
 	</div>
 </template>

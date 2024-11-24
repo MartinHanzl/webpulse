@@ -14,8 +14,10 @@
   "dependencies": {
     "@headlessui/vue": "^0.0.0-insiders.d71fb9c",
     "@heroicons/vue": "^2.2.0",
+    "@nuxt/ui": "^2.19.2",
     "nuxt": "^3.14.1592",
     "nuxt-auth-sanctum": "^0.5.2",
+    "vee-validate": "^4.14.7",
     "vue": "latest",
     "vue-router": "latest"
   },

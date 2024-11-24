@@ -33,27 +33,27 @@ provide('searchString', searchString.value);
 const navigation = ref([
 	{ title: 'Úvod', menu: [
 		{ name: 'Přehled', link: '/', icon: HomeIcon, current: true },
-		{ name: 'Statistiky', link: '/statistiky', icon: ChartPieIcon, current: false },
+		{ name: 'Statistiky', link: '/demo', icon: ChartPieIcon, current: false },
 	] },
 	{ title: 'Byznys a osobní růst', menu: [
-		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false },
-		{ name: 'Kalendář', link: '/kalendar', icon: CalendarIcon, current: false },
-		{ name: 'Cashflow', link: '/cashflow', icon: CalendarIcon, current: false },
+		{ name: 'Kontakty', link: '/demo', icon: UsersIcon, current: false },
+		{ name: 'Kalendář', link: '/demo', icon: CalendarIcon, current: false },
+		{ name: 'Cashflow', link: '/demo', icon: CalendarIcon, current: false },
 	] },
 	{ title: 'Osobní sekce', menu: [
-		{ name: 'Faktury', link: '/faktury', icon: HomeIcon, current: false },
-		{ name: 'Projekty', link: '/projekty', icon: HomeIcon, current: false },
-		{ name: 'Trackování', link: '/trackovani', icon: HomeIcon, current: false },
+		{ name: 'Faktury', link: '/demo', icon: HomeIcon, current: false },
+		{ name: 'Projekty', link: '/demo', icon: HomeIcon, current: false },
+		{ name: 'Trackování', link: '/demo', icon: HomeIcon, current: false },
 	] },
 ]);
 
 const userNavigation = [
 	{ name: 'Profil', link: '/profil' },
-	{ name: 'Rychlý přístup', link: '/rychly-pristup' },
+	{ name: 'Rychlý přístup', link: '/profil/rychly-pristup' },
 	{ name: 'Odhlásit se', link: null, action: 'handleLogout' },
 ];
 
-const quickAccess = ref([]);
+const quickAccess = ref([{ name: '', link: '/', target: null }]);
 
 watchEffect(() => {
 	const currentPath = route.path;
@@ -73,6 +73,9 @@ function getQuickAccess() {
 		quickAccess.value = user.value.quick_access;
 	}
 }
+watchEffect(() => {
+	getQuickAccess();
+});
 onMounted(() => {
 	refreshIdentity();
 	getQuickAccess();
@@ -353,16 +356,11 @@ onMounted(() => {
 										v-slot="{ active }"
 									>
 										<NuxtLink
-											v-if="item.link != null"
 											:to="item.link"
+											:target="item.target"
 											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900']"
 										>{{ item.name }}
 										</NuxtLink>
-										<span
-											v-else
-											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900 cursor-pointer']"
-											@click="handleLogout"
-										>{{ item.name }}</span>
 									</MenuItem>
 								</MenuItems>
 							</transition>
