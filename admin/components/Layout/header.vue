@@ -27,28 +27,25 @@ const props = defineProps({
 	},
 });
 
+const quickAccessItem = ref({
+  id: null,
+  name: props.title,
+  link: route.fullPath,
+  target: null,
+});
+
 const isInQuickAccess = computed(() => {
 	if (user.value) {
 		return user.value.quick_access.some(item => item.link === route.fullPath);
 	}
 	return false;
 });
-const quickAccessItem = computed(() => {
-	if (user.value) {
-		return user.value.quick_access.find(item => item.link === route.fullPath) || {
-			id: null,
-			name: props.title,
-			link: route.fullPath,
-			target: null,
-		};
-	}
-	return {
-		id: null,
-		name: props.title,
-		link: route.fullPath,
-		target: null,
-	};
-});
+function openQuickAccessDialog(searchForItem: boolean = false) {
+  quickAccessDialogShow.value = true;
+  if(searchForItem) {
+    quickAccessItem.value = user.value.quick_access.find(item => item.link === route.fullPath);
+  }
+}
 </script>
 
 <template>
@@ -61,7 +58,7 @@ const quickAccessItem = computed(() => {
 		/>
 		<div class="mt-2 md:flex md:items-center md:justify-between">
 			<div class="min-w-0 flex-1">
-				<h2 class="text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
+				<h2 class="text-2xl/7 font-bold text-grayDark sm:truncate sm:text-3xl sm:tracking-tight">
 					{{ title }}
 				</h2>
 			</div>
@@ -72,7 +69,7 @@ const quickAccessItem = computed(() => {
 					v-if="isInQuickAccess"
 					type="button"
 					class="rounded-full px-2.5 py-2.5 text-sm font-semibold shadow-sm hover:shadow-md ring-1 ring-slate-200"
-					@click="quickAccessDialogShow = true"
+					@click="openQuickAccessDialog(true)"
 				>
 					<StarIcon
 						class="size-5 text-yellow-600 fill-yellow-600"
@@ -83,7 +80,7 @@ const quickAccessItem = computed(() => {
 					v-else
 					type="button"
 					class="rounded-full px-2.5 py-2.5 text-sm font-semibold shadow-sm hover:shadow-md ring-1 ring-slate-200"
-					@click="quickAccessDialogShow = true"
+					@click="openQuickAccessDialog(false)"
 				>
 					<StarIcon
 						class="size-5 text-yellow-600"

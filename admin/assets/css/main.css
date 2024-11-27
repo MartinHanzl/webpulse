@@ -6,3 +6,12 @@ body, html {
     background: #f1f5f9;
     min-height: 100vh;
 }
+
+pre {
+    background: #0f172a;
+    padding: 16px;
+    color: #cbd5e1;
+    border-radius: 4px;
+    font-size: 12px;
+    line-height: 18px;
+}

@@ -19,6 +19,7 @@ import {
 	HomeIcon,
 	UsersIcon,
 	XMarkIcon,
+	ArrowTopRightOnSquareIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 
@@ -349,7 +350,7 @@ onMounted(() => {
 								leave-from-class="transform opacity-100 scale-100"
 								leave-to-class="transform opacity-0 scale-95"
 							>
-								<MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+								<MenuItems class="absolute right-0 z-10 mt-2.5 w-56 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
 									<MenuItem
 										v-for="item in quickAccess"
 										:key="item.name"
@@ -358,8 +359,14 @@ onMounted(() => {
 										<NuxtLink
 											:to="item.link"
 											:target="item.target"
-											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900']"
-										>{{ item.name }}
+											:class="[active ? 'bg-gray-50 outline-none' : '', 'block px-3 py-1 text-sm/6 text-gray-900 flex flex-grow items-center justify-between']"
+										>
+											<span>{{ item.name }}</span>
+											<ArrowTopRightOnSquareIcon
+												v-if="item.target === '_blank'"
+												class="size-4 text-warning ml-4"
+												aria-hidden="true"
+											/>
 										</NuxtLink>
 									</MenuItem>
 								</MenuItems>
