@@ -5,6 +5,8 @@ import { ref } from 'vue';
 
 const toast = useToast();
 const showDeleteDialog = ref(false);
+const deleteDialogItem = ref(null);
+
 const show = defineModel('show', {
 	type: Boolean,
 	default: false,
@@ -178,7 +180,7 @@ async function deleteItem() {
 											v-if="form.id !== null"
 											type="button"
 											class="inline-flex w-full justify-center rounded-md bg-danger px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-dangerLight sm:ml-3 sm:w-auto"
-											@click="showDeleteDialog = true"
+											@click="showDeleteDialog = true; deleteDialogItem = form"
 										>
 											Odstranit
 										</button>
@@ -200,6 +202,7 @@ async function deleteItem() {
 		</TransitionRoot>
 		<BaseDialogDelete
 			v-model:show="showDeleteDialog"
+      v-model:item="deleteDialogItem"
 			@delete-item="deleteItem"
 		/>
 	</div>

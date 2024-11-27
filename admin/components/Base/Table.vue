@@ -10,6 +10,8 @@ import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid';
 
 const route = useRoute();
 const router = useRouter();
+const showDeleteDialog = ref(false);
+const deleteDialogItem = ref(null);
 
 defineProps({
 	items: {
@@ -59,7 +61,7 @@ defineProps({
 	},
 });
 
-const emit = defineEmits(['update-sort', 'update-page']);
+const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dialog']);
 </script>
 
 <template>
@@ -76,12 +78,13 @@ const emit = defineEmits(['update-sort', 'update-page']);
 									scope="col"
 									:class="{
 										'hidden md:table-cell': column.hidden,
-										'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-grayDark sm:pl-6 lg:pl-8': true,
+										'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-grayDark sm:pl-6 lg:pl-8 flex-auto items-center justify-between': true,
 										'cursor-pointer': column.sortable,
+										[`w-[${column.width}px]`]: column.width,
 									}"
 									@click="column.sortable ? $emit('update-sort', column.key) : null"
 								>
-									{{ column.name }}
+									<span>{{ column.name }}</span>
 									<ChevronDownIcon
 										v-if="column.sortable && query.orderBy === column.key && query.orderWay === 'asc'"
 										class="size-4 text-grayCustom"
@@ -93,7 +96,7 @@ const emit = defineEmits(['update-sort', 'update-page']);
 								</th>
 								<th
 									scope="col"
-									class="relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8"
+									class="w-[150px] relative py-3.5 pl-3 pr-4 sm:pr-6 lg:pr-8"
 								/>
 							</tr>
 						</thead>
@@ -107,7 +110,7 @@ const emit = defineEmits(['update-sort', 'update-page']);
 									v-for="(column, index) in columns"
 									:key="index"
 									scope="col"
-									:class="[column.hidden ? 'hidden md:table-cell' : '', 'whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-grayCustom sm:pl-6 lg:pl-8']"
+									:class="[column.hidden ? 'hidden md:table-cell' : '', `w-[${column.width}px] whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-grayCustom sm:pl-6 lg:pl-8`]"
 								>
 									<span v-if="column.type === 'text' || column.type === 'number'">
 										{{ item[column.key] }}
@@ -124,7 +127,7 @@ const emit = defineEmits(['update-sort', 'update-page']);
 										{{ item[column.key] }}
 									</NuxtLink>
 								</td>
-								<td class="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8 flex items-center justify-end">
+								<td class="w-[150px] relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8 flex items-center justify-end">
 									<span
 										v-for="(action, key) in actions"
 										:key="key"
@@ -137,10 +140,12 @@ const emit = defineEmits(['update-sort', 'update-page']);
 										<BoltIcon
 											v-if="action.type === 'edit-dialog'"
 											class="cursor-pointer size-5 text-warning hover:text-warningLight ml-4"
+											@click="emit('open-dialog', item)"
 										/>
 										<TrashIcon
 											v-if="action.type === 'delete'"
 											class="cursor-pointer size-5 text-danger hover:text-dangerLight ml-4"
+											@click="showDeleteDialog = true; deleteDialogItem = item"
 										/>
 									</span>
 								</td>
@@ -179,6 +184,11 @@ const emit = defineEmits(['update-sort', 'update-page']);
 					:total="items.total"
 					:last-page="items.lastPage"
 					@update-page="emit('update-page', $event)"
+				/>
+				<BaseDialogDelete
+					v-model:show="showDeleteDialog"
+					v-model:item="deleteDialogItem"
+					@delete-item="emit('delete-item', deleteDialogItem.id);showDeleteDialog = false"
 				/>
 			</div>
 		</div>

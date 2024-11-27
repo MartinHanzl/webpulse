@@ -15,6 +15,9 @@ const tableQuery = ref({
 	orderWay: 'desc',
 });
 
+const quickAccessDialogShow = ref(false);
+const quickAccessDialogForm = ref(false);
+
 const items = ref([]);
 
 async function loadItems() {
@@ -43,6 +46,30 @@ async function loadItems() {
 	});
 }
 
+async function deleteItem(id: number) {
+	loading.value = true;
+	const client = useSanctumClient();
+
+	await client<{}>('/api/admin/quick-access/' + id, {
+		method: 'DELETE',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then((response) => {
+	}).catch(() => {
+		error.value = true;
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se smazat položku rychlého přístupu.',
+			color: 'red',
+		});
+	}).finally(() => {
+		loading.value = false;
+		loadItems();
+	});
+}
+
 function updateSort(column: string) {
 	if (tableQuery.value.orderBy === column) {
 		tableQuery.value.orderWay = tableQuery.value.orderWay === 'asc' ? 'desc' : 'asc';
@@ -57,6 +84,12 @@ function updatePage(page: number) {
 	tableQuery.value.page = page;
 	loadItems();
 }
+
+function openQuickAccessDialog(item) {
+	quickAccessDialogShow.value = true;
+	quickAccessDialogForm.value = item;
+}
+
 const breadcrumbs = [
 	{
 		name: 'Profil',
@@ -88,8 +121,8 @@ onMounted(() => {
 			<BaseTable
 				:items="items"
 				:columns="[
-					{ key: 'id', name: 'ID', type: 'text', width: 210, hidden: false, sortable: true },
-					{ key: 'name', name: 'Název', type: 'text', width: 150, hidden: false, sortable: true },
+					{ key: 'id', name: 'ID', type: 'text', width: 100, hidden: false, sortable: true },
+					{ key: 'name', name: 'Název', type: 'text', width: 210, hidden: false, sortable: true },
 					{ key: 'link', name: 'Odkaz', type: 'link', width: 150, hidden: true, sortable: true, target: 'target' },
 					{ key: 'target', name: 'Cíl', type: 'enum', width: 150, hidden: true, sortable: true },
 				]"
@@ -108,9 +141,15 @@ onMounted(() => {
 				singular="Položka rychlého přístupu"
 				plural="Položky rychlého přístupu"
 				:query="tableQuery"
+        @delete-item="deleteItem"
 				@update-sort="updateSort"
 				@update-page="updatePage"
+				@open-dialog="openQuickAccessDialog"
 			/>
 		</LayoutContainer>
+		<QuickAccessDialog
+			v-model:show="quickAccessDialogShow"
+			v-model:form="quickAccessDialogForm"
+		/>
 	</div>
 </template>

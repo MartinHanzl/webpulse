@@ -16,6 +16,7 @@
     "@heroicons/vue": "^2.2.0",
     "@nuxt/ui": "^2.19.2",
     "@vee-validate/rules": "^4.14.7",
+    "lodash.debounce": "^4.0.8",
     "nuxt": "^3.14.1592",
     "nuxt-auth-sanctum": "^0.5.2",
     "vee-validate": "^4.14.7",
