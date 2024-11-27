@@ -29,7 +29,6 @@ const user = useSanctumUser();
 const { logout, refreshIdentity } = useSanctumAuth();
 const sidebarOpen = ref(false);
 const searchString = ref('');
-provide('searchString', searchString.value);
 
 const navigation = ref([
 	{ title: 'Úvod', menu: [
@@ -77,6 +76,12 @@ function getQuickAccess() {
 watchEffect(() => {
 	getQuickAccess();
 });
+watchEffect(() => {
+	if (searchString.value) {
+		provide('searchString', searchString.value);
+	}
+});
+
 onMounted(() => {
 	refreshIdentity();
 	getQuickAccess();
@@ -294,16 +299,17 @@ onMounted(() => {
 							class="sr-only"
 						>Hledat</label>
 						<MagnifyingGlassIcon
-							class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-gray-400"
+							class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-grayCustom"
 							aria-hidden="true"
 						/>
 						<input
 							id="search-field"
 							v-model="searchString"
-							class="block size-full border-0 py-0 pl-8 pr-0 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm"
-							placeholder="Search..."
+							class="block size-full border-0 py-0 pl-8 pr-0 text-grayDark placeholder:text-grayCustom focus:ring-0 sm:text-sm"
+							placeholder="Hledat..."
 							type="search"
 							name="search"
+							autocomplete="none"
 						>
 					</div>
 					<div class="flex items-center gap-x-4 lg:gap-x-6">
@@ -435,7 +441,6 @@ onMounted(() => {
 
 			<main class="py-10">
 				<div class="px-4 sm:px-6 lg:px-8">
-					{{ searchString }}
 					<slot />
 				</div>
 			</main>

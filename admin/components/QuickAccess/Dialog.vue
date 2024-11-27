@@ -73,14 +73,14 @@ async function deleteItem() {
 		toast.add({
 			title: 'Hotovo',
 			description: 'Položka rychlého přístupu byla úspěšně smazána.',
-			color: 'success',
+			color: 'green',
 		});
 		refreshIdentity();
 	}).catch(() => {
 		toast.add({
 			title: 'Chyba',
 			description: 'Nepodařilo se smazat položku rychlého přístupu.',
-			color: 'danger',
+			color: 'red',
 		});
 	}).finally(() => {
 		showDeleteDialog.value = false;

@@ -11,7 +11,7 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				primary: '#0c4a6e',
+				primaryCustom: '#0c4a6e',
 				primaryLight: '#075985',
 				secondary: '#7dd3fc',
 				secondaryLight: '#bae6fd',
@@ -23,9 +23,9 @@ export default {
 				warningLight: '#eab308',
 				danger: '#dc2626',
 				dangerLight: '#ef4444',
-				grayDark: '#0f172a',
-				gray: '#64748b',
-				grayLight: '#cbd5e1',
+				grayDark: '#111827',
+				grayCustom: '#6b7280',
+				grayLight: '#d1d5db',
 			},
 		},
 	},

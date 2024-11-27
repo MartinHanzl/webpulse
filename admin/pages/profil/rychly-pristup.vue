@@ -1,4 +1,62 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+
+const toast = useToast();
+
+const loading = ref(false);
+const error = ref(false);
+
+const searchString = ref(inject('searchString', ''));
+const tableQuery = ref({
+	search: searchString.value,
+	paginate: 12,
+	page: 1,
+	orderBy: 'id',
+	orderWay: 'desc',
+});
+
+const items = ref([]);
+
+async function loadItems() {
+	loading.value = true;
+	const client = useSanctumClient();
+
+	await client<{}>('/api/admin/quick-access', {
+		method: 'GET',
+		query: tableQuery.value,
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then((response) => {
+		items.value = response;
+		tableQuery.value.page = response.page;
+	}).catch(() => {
+		error.value = true;
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se načíst položky rychlého přístupu. Zkuste to prosím později.',
+			color: 'red',
+		});
+	}).finally(() => {
+		loading.value = false;
+	});
+}
+
+function updateSort(column: string) {
+	if (tableQuery.value.orderBy === column) {
+		tableQuery.value.orderWay = tableQuery.value.orderWay === 'asc' ? 'desc' : 'asc';
+	}
+	else {
+		tableQuery.value.orderBy = column;
+		tableQuery.value.orderWay = 'asc';
+	}
+	loadItems();
+}
+function updatePage(page: number) {
+	tableQuery.value.page = page;
+	loadItems();
+}
 const breadcrumbs = [
 	{
 		name: 'Profil',
@@ -11,6 +69,13 @@ const breadcrumbs = [
 		current: true,
 	},
 ];
+useHead({
+	title: 'Rychlý přístup',
+});
+
+onMounted(() => {
+	loadItems();
+});
 </script>
 
 <template>
@@ -19,5 +84,33 @@ const breadcrumbs = [
 			title="Rychlý přístup"
 			:breadcrumbs="breadcrumbs"
 		/>
+		<LayoutContainer>
+			<BaseTable
+				:items="items"
+				:columns="[
+					{ key: 'id', name: 'ID', type: 'text', width: 210, hidden: false, sortable: true },
+					{ key: 'name', name: 'Název', type: 'text', width: 150, hidden: false, sortable: true },
+					{ key: 'link', name: 'Odkaz', type: 'link', width: 150, hidden: true, sortable: true, target: 'target' },
+					{ key: 'target', name: 'Cíl', type: 'enum', width: 150, hidden: true, sortable: true },
+				]"
+				:enums="{
+					target: {
+						_blank: 'Nové okno',
+						_self: 'Stejné okno',
+					},
+				}"
+				:actions="[
+					{ type: 'edit-dialog' },
+					{ type: 'delete' },
+				]"
+				:loading="loading"
+				:error="error"
+				singular="Položka rychlého přístupu"
+				plural="Položky rychlého přístupu"
+				:query="tableQuery"
+				@update-sort="updateSort"
+				@update-page="updatePage"
+			/>
+		</LayoutContainer>
 	</div>
 </template>

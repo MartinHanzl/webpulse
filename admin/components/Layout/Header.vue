@@ -28,10 +28,10 @@ const props = defineProps({
 });
 
 const quickAccessItem = ref({
-  id: null,
-  name: props.title,
-  link: route.fullPath,
-  target: null,
+	id: null,
+	name: props.title,
+	link: route.fullPath,
+	target: null,
 });
 
 const isInQuickAccess = computed(() => {
@@ -41,16 +41,16 @@ const isInQuickAccess = computed(() => {
 	return false;
 });
 function openQuickAccessDialog(searchForItem: boolean = false) {
-  quickAccessDialogShow.value = true;
-  if(searchForItem) {
-    quickAccessItem.value = user.value.quick_access.find(item => item.link === route.fullPath);
-  }
+	quickAccessDialogShow.value = true;
+	if (searchForItem) {
+		quickAccessItem.value = user.value.quick_access.find(item => item.link === route.fullPath);
+	}
 }
 </script>
 
 <template>
 	<div
-		class="py-6 pb-6 pr-8 pl-8 pb- bg-white rounded-lg shadow"
+		class="py-6 pb-6 pr-8 pl-8 bg-white rounded-lg shadow"
 	>
 		<LayoutBreadcrumbs
 			:pages="breadcrumbs"
