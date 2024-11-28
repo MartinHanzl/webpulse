@@ -27,6 +27,7 @@ const props = defineProps({
 	},
 });
 
+const emit = defineEmits(['save']);
 const quickAccessItem = ref({
 	id: null,
 	name: props.title,
@@ -88,14 +89,17 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 					/>
 				</button>
 				<div
+					v-for="(action, key) in actions"
 					v-if="actions && actions.length"
+					:key="key"
 					class="ml-4"
 				>
 					<button
-						type="button"
-						class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+						v-if="action.type === 'save'"
+						class="rounded-md bg-primaryCustom px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primaryLight"
+						@click="emit('save')"
 					>
-						Button text
+						Uložit
 					</button>
 				</div>
 			</div>

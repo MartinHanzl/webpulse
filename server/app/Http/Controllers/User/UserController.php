@@ -72,7 +72,6 @@ class UserController extends Controller
             'firstname' => 'required|string|max:255',
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8',
             'phone' => 'required|string|max:255|unique:users',
         ]);
 
@@ -128,18 +127,5 @@ class UserController extends Controller
 
         $user->delete();
         return Response::json();
-    }
-
-    public function profile(Request $request): JsonResponse
-    {
-        $authUser = $request->user();
-
-        $user = User::find($authUser->id);
-
-        if (!$user) {
-            App::abort(404);
-        }
-
-        return Response::json(UserResource::make($user));
     }
 }

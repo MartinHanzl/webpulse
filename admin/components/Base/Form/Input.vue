@@ -83,8 +83,8 @@ defineRule('required', (value) => {
 			:type="type"
 			:placeholder="placeholder"
 			:disabled="disabled"
-      aria-autocomplete="none"
-      autocomplete="off"
+			aria-autocomplete="none"
+			autocomplete="off"
 			:class="[
 				'mt-2 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-secondary sm:text-sm/6',
 				{ 'bg-grayLight': disabled },

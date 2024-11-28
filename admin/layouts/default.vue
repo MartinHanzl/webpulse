@@ -20,12 +20,12 @@ import {
 	UsersIcon,
 	XMarkIcon,
 	ArrowTopRightOnSquareIcon,
-    BanknotesIcon,
-    ClockIcon,
-    BuildingOfficeIcon,
-    WalletIcon,
-    DocumentTextIcon,
-    AdjustmentsHorizontalIcon
+	BanknotesIcon,
+	ClockIcon,
+	BuildingOfficeIcon,
+	WalletIcon,
+	DocumentTextIcon,
+	AdjustmentsHorizontalIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 
@@ -54,7 +54,7 @@ const navigation = ref([
 		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false },
 		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false },
 	] },
-  { title: 'Nastavení a správa', menu: [
+	{ title: 'Nastavení a správa', menu: [
 		{ name: 'Uživatelé', link: '/demo', icon: UsersIcon, current: false },
 		{ name: 'Uživatelské skupiny', link: '/demo', icon: AdjustmentsHorizontalIcon, current: false },
 	] },
