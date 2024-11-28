@@ -21,7 +21,7 @@ export default defineNuxtConfig({
 
 	routeRules: {
 		'/api/**': {
-			proxy: `${process.env.API_URL ?? 'http://srv512428.hstgr.cloud'}/api/**`,
+			proxy: `${process.env.API_URL ?? 'https://web-pulse.cz/'}/api/**`,
 		},
 	},
 	compatibilityDate: '2024-11-01',
