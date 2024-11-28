@@ -157,7 +157,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									:colspan="columns.length + 1"
 									class="relative whitespace-nowrap py-8 pl-3 pr-4 text-center text-grayCustom text-sm font-semibold sm:pr-6 lg:pr-8"
 								>
-									{{ `${plural.toLocaleUpperCase('cs-CZ')} se nepodařilo načíst` }}
+									{{ `${plural} se nepodařilo načíst` }}
 								</td>
 							</tr>
 							<tr v-else-if="!loading && !error && items.data && items.data.length === 0">
@@ -173,7 +173,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									:colspan="columns.length + 1"
 									class="relative whitespace-nowrap py-8 pl-3 pr-4 text-center text-grayCustom text-sm font-semibold sm:pr-6 lg:pr-8"
 								>
-									{{ `${plural.toLocaleUpperCase('cs-CZ')} se načítají` }}
+									{{ `${plural} se načítají` }}
 								</td>
 							</tr>
 						</tbody>

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
+import { debounce } from 'lodash';
 
 const toast = useToast();
 
@@ -8,11 +9,11 @@ const error = ref(false);
 
 const searchString = ref(inject('searchString', ''));
 const tableQuery = ref({
-	search: searchString.value,
-	paginate: 12,
-	page: 1,
-	orderBy: 'id',
-	orderWay: 'desc',
+	search: null as string | null,
+	paginate: 12 as number,
+	page: 1 as number,
+	orderBy: 'id' as string,
+	orderWay: 'desc' as string,
 });
 
 const quickAccessDialogShow = ref(false);
@@ -84,6 +85,12 @@ function updatePage(page: number) {
 	tableQuery.value.page = page;
 	loadItems();
 }
+
+const debouncedLoadItems = debounce(loadItems, 400);
+watch(searchString, () => {
+	tableQuery.value.search = searchString.value;
+	debouncedLoadItems();
+});
 
 function openQuickAccessDialog(item) {
 	quickAccessDialogShow.value = true;

@@ -57,11 +57,13 @@ generatePages();
 			<a
 				href="#"
 				class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-			>Previous</a>
+				@click="page !== 1 ? emit('update-page', Number(page-1)) : null"
+			>Předchozí</a>
 			<a
 				href="#"
 				class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
-			>Next</a>
+				@click="page !== lastPage ? emit('update-page', Number(page+1)) : null"
+			>Následující</a>
 		</div>
 		<div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
 			<div>

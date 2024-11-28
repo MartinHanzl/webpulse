@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, provide } from 'vue';
 import {
 	Dialog,
 	DialogPanel,
@@ -28,7 +28,9 @@ const router = useRouter();
 const user = useSanctumUser();
 const { logout, refreshIdentity } = useSanctumAuth();
 const sidebarOpen = ref(false);
+
 const searchString = ref('');
+provide('searchString', searchString);
 
 const navigation = ref([
 	{ title: 'Úvod', menu: [
@@ -75,11 +77,6 @@ function getQuickAccess() {
 }
 watchEffect(() => {
 	getQuickAccess();
-});
-watchEffect(() => {
-	if (searchString.value) {
-		provide('searchString', searchString.value);
-	}
 });
 
 onMounted(() => {
