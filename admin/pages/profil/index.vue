@@ -80,7 +80,7 @@ async function savePassword() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/profile', {
+	await client<{}>('/api/admin/profile/password', {
 		method: 'POST',
 		body: JSON.stringify(passwords.value),
 		headers: {
@@ -221,7 +221,7 @@ onMounted(() => {
 				</div>
 			</LayoutContainer>
 			<LayoutContainer class="col-span-full w-full">
-				<Form @submit="saveItem">
+				<Form @submit="savePassword">
 					<div class="grid grid-cols-3 gap-x-8 gap-y-4">
 						<BaseFormInput
 							v-model="passwords.current_password"

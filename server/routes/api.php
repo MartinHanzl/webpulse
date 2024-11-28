@@ -53,7 +53,7 @@ Route::group([
         ], function () {
             Route::get('', [ProfileController::class, 'index']);
             Route::post('', [ProfileController::class, 'store']);
-            Route::post('password', [ProfileController::class, 'store']);
+            Route::post('password', [ProfileController::class, 'password']);
         });
 
         // User routes
