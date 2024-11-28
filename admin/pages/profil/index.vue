@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { Form } from 'vee-validate';
+import { definePageMeta } from '#imports';
 
 const toast = useToast();
 const error = ref(false);
@@ -132,20 +133,20 @@ async function savePassword() {
 			color: 'red',
 		});
 	}).finally(() => {
-		toast.add({
-			title: 'Úspěch',
-			description: 'Nové heslo bylo změněno. Nyní dojde k odhlášení.',
-			color: 'red',
-		});
 		loading.value = false;
-		setTimeout(() => {
-			logout();
-		}, 3000);
+		if (!error.value) {
+			toast.add({
+				title: 'Úspěch',
+				description: 'Nové heslo bylo změněno. Nyní dojde k odhlášení.',
+				color: 'red',
+			});
+			setTimeout(() => {
+				logout();
+			}, 3000);
+		}
 	});
 }
-async function submitForm() {
-	const client = useSanctumClient();
-}
+
 async function copyToClipboard() {
 	await navigator.clipboard.writeText(item.value.invitation_token).then(() => {
 		toast.add({
@@ -175,6 +176,9 @@ useHead({
 
 onMounted(() => {
 	loadItem();
+});
+definePageMeta({
+	middleware: 'sanctum:auth',
 });
 </script>
 

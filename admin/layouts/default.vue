@@ -28,6 +28,7 @@ import {
 	AdjustmentsHorizontalIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
+import { definePageMeta } from '#imports';
 
 const route = useRoute();
 const router = useRouter();

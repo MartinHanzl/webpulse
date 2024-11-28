@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
 import { debounce } from 'lodash';
+import { definePageMeta } from '#imports';
 
 const toast = useToast();
 
@@ -115,6 +116,9 @@ useHead({
 
 onMounted(() => {
 	loadItems();
+});
+definePageMeta({
+	middleware: 'sanctum:auth',
 });
 </script>
 
