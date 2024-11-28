@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
 
 	modules: [['nuxt-auth-sanctum', {
-		baseUrl: process.env.API_URL ?? 'http://srv512428.hstgr.cloud',
+		baseUrl: process.env.API_URL ?? 'https://web-pulse.cz/',
 		mode: 'token',
 		endpoints: {
 			csrf: '/sanctum/csrf-cookie',
