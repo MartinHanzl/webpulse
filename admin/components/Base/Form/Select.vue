@@ -59,7 +59,10 @@ defineRule('required', (value) => {
 		<label
 			:for="name"
 			class="block text-sm/6 font-medium text-gray-500"
-		>{{ label }}</label>
+		>{{ label }}<span
+			v-if="rules.includes('required')"
+			class="text-danger ml-1"
+		>*</span></label>
 		<Field
 			v-bind="$attrs"
 			v-model="model"
