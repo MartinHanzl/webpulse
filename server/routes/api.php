@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\QuickAccessController;
+use App\Http\Controllers\User\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,13 +30,14 @@ Route::group([
         Route::post('logout', [LoginController::class, 'logout'])->middleware('auth:sanctum');
         Route::get('refresh', [LoginController::class, 'refresh'])->middleware('auth:sanctum');
         Route::get('me', [LoginController::class, 'me'])->middleware('auth:sanctum');
+        Route::get('profile', [UserController::class, 'profile'])->middleware('auth:sanctum');
     });
 
     // User routes
     Route::group([
         'middleware' => 'auth:sanctum',
     ], function () {
-        // Contact routes
+        // Quick access routes
         Route::group([
             'prefix' => 'quick-access'
         ], function () {
@@ -43,6 +45,15 @@ Route::group([
             Route::get('{id}', [QuickAccessController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [QuickAccessController::class, 'store']);
             Route::delete('{id}', [QuickAccessController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        Route::group([
+            'prefix' => 'user'
+        ], function () {
+            Route::get('', [UserController::class, 'index']);
+            Route::get('{id}', [UserController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [UserController::class, 'store']);
+            Route::delete('{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');
         });
     });
 });
