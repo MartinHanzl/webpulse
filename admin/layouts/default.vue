@@ -20,6 +20,12 @@ import {
 	UsersIcon,
 	XMarkIcon,
 	ArrowTopRightOnSquareIcon,
+    BanknotesIcon,
+    ClockIcon,
+    BuildingOfficeIcon,
+    WalletIcon,
+    DocumentTextIcon,
+    AdjustmentsHorizontalIcon
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 
@@ -40,12 +46,17 @@ const navigation = ref([
 	{ title: 'Byznys a osobní růst', menu: [
 		{ name: 'Kontakty', link: '/demo', icon: UsersIcon, current: false },
 		{ name: 'Kalendář', link: '/demo', icon: CalendarIcon, current: false },
-		{ name: 'Cashflow', link: '/demo', icon: CalendarIcon, current: false },
+		{ name: 'Cashflow', link: '/demo', icon: BanknotesIcon, current: false },
 	] },
 	{ title: 'Osobní sekce', menu: [
-		{ name: 'Faktury', link: '/demo', icon: HomeIcon, current: false },
-		{ name: 'Projekty', link: '/demo', icon: HomeIcon, current: false },
-		{ name: 'Trackování', link: '/demo', icon: HomeIcon, current: false },
+		{ name: 'Projekty', link: '/demo', icon: BuildingOfficeIcon, current: false },
+		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false },
+		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false },
+		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false },
+	] },
+  { title: 'Nastavení a správa', menu: [
+		{ name: 'Uživatelé', link: '/demo', icon: UsersIcon, current: false },
+		{ name: 'Uživatelské skupiny', link: '/demo', icon: AdjustmentsHorizontalIcon, current: false },
 	] },
 ]);
 
