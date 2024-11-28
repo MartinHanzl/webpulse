@@ -76,12 +76,12 @@ class ProfileController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'current_password' => 'required|string|password',
+            'current_password' => 'required|string',
             'new_password' => 'required|string',
             'confirm_new_password' => 'required|string|same:new_password',
         ]);
 
-        if ($validator->fails()) {
+        if ($validator->fails() || !Hash::check($request->current_password, $user->password)) {
             return Response::json(['errors' => $validator->errors()], 422);
         }
 
