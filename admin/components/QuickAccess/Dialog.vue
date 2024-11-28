@@ -174,6 +174,7 @@ async function deleteItem() {
 											type="submit"
 											variant="success"
 											size="lg"
+											class="ml-4"
 										>
 											{{ form.id == null ? 'Přidat' : 'Uložit' }}
 										</BaseButton>
@@ -182,6 +183,7 @@ async function deleteItem() {
 											type="button"
 											variant="danger"
 											size="lg"
+											class="ml-4"
 											@click="showDeleteDialog = true; deleteDialogItem = form"
 										>
 											Odstranit
@@ -191,6 +193,7 @@ async function deleteItem() {
 											type="button"
 											variant="secondary"
 											size="lg"
+											class="ml-4"
 											@click="show = false"
 										>
 											Zavřít

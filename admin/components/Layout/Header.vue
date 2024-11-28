@@ -92,6 +92,7 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 					v-for="(action, key) in actions"
 					v-if="actions && actions.length"
 					:key="key"
+					class="ml-4"
 				>
 					<BaseButton
 						v-if="action.type === 'save'"

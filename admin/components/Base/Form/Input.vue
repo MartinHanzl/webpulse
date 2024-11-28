@@ -93,7 +93,7 @@ defineRule('email', (value) => {
 			aria-autocomplete="none"
 			autocomplete="off"
 			:class="[
-				'mt-2 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-secondary sm:text-sm/6',
+				'mt-2 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight sm:text-sm/6',
 				{ 'bg-grayLight': disabled },
 			]"
 		/>
@@ -111,7 +111,7 @@ defineRule('email', (value) => {
 			:min="min > 0 ? min : 3"
 			:max="max > 0 ? max : 45"
 			:class="[
-				'mt-2 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-secondary sm:text-sm/6',
+				'mt-2 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight sm:text-sm/6',
 				{ 'bg-grayLight': disabled },
 			]"
 		/>
