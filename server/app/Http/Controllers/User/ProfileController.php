@@ -9,6 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
@@ -75,7 +76,9 @@ class ProfileController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'password' => 'required|string|min:8',
+            'current_password' => 'required|string|password',
+            'new_password' => 'required|string',
+            'confirm_new_password' => 'required|string|same:new_password',
         ]);
 
         if ($validator->fails()) {
@@ -85,7 +88,7 @@ class ProfileController extends Controller
         try {
             DB::beginTransaction();
 
-            $user->password = bcrypt($request->password);
+            $user->password = Hash::make($request->new_password);
             $user->save();
 
             DB::commit();

@@ -4,7 +4,7 @@ import { Form } from 'vee-validate';
 const toast = useToast();
 const error = ref(false);
 const loading = ref(false);
-const { refreshIdentity } = useSanctumAuth();
+const { refreshIdentity, logout } = useSanctumAuth();
 
 const item = ref({
 	firstname: '' as string,
@@ -29,7 +29,18 @@ async function loadItem() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/profile', {
+	await client<{
+		firstname: string;
+		lastname: string;
+		avatar: string;
+		email: string;
+		phone_prefix: string;
+		phone: string;
+		invitation_token: string;
+		street: string;
+		city: string;
+		zip: string;
+	}>('/api/admin/profile', {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
@@ -53,7 +64,18 @@ async function saveItem() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/profile', {
+	await client<{
+		firstname: string;
+		lastname: string;
+		avatar: string;
+		email: string;
+		phone_prefix: string;
+		phone: string;
+		invitation_token: string;
+		street: string;
+		city: string;
+		zip: string;
+	}>('/api/admin/profile', {
 		method: 'POST',
 		body: JSON.stringify(item.value),
 		headers: {
@@ -77,10 +99,21 @@ async function saveItem() {
 }
 
 async function savePassword() {
+	if (passwords.value.new_password !== passwords.value.confirm_new_password) {
+		toast.add({
+			title: 'Chyba',
+			description: 'Pole nové heslo a potvrzení nového hesla se neshodují.',
+			color: 'red',
+		});
+		return;
+	}
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/profile/password', {
+	await client<{ current_password: string;
+		new_password: string;
+		confirm_new_password: string;
+	}>('/api/admin/profile/password', {
 		method: 'POST',
 		body: JSON.stringify(passwords.value),
 		headers: {
@@ -99,11 +132,18 @@ async function savePassword() {
 			color: 'red',
 		});
 	}).finally(() => {
+		toast.add({
+			title: 'Úspěch',
+			description: 'Nové heslo bylo změněno. Nyní dojde k odhlášení.',
+			color: 'red',
+		});
 		loading.value = false;
+		setTimeout(() => {
+			logout();
+		}, 3000);
 	});
 }
 async function submitForm() {
-	console.log(item.value);
 	const client = useSanctumClient();
 }
 async function copyToClipboard() {
@@ -231,7 +271,9 @@ onMounted(() => {
 							rules="required"
 							class="col-span-1"
 						/>
-            <div class="col-span-2">&nbsp;</div>
+						<div class="col-span-2">
+&nbsp;
+						</div>
 						<BaseFormInput
 							v-model="passwords.new_password"
 							label="Nové heslo"
@@ -248,13 +290,14 @@ onMounted(() => {
 							rules="required"
 							class="col-span-1"
 						/>
-            <div class="col-span-1 flex items-end justify-end">
-              <button
-                  type="submit"
-                class="rounded-md bg-primaryCustom px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primaryLight"
-            >
-              Změnit heslo
-            </button></div>
+						<div class="col-span-1 flex items-end justify-end">
+							<button
+								type="submit"
+								class="rounded-md bg-primaryCustom px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primaryLight"
+							>
+								Změnit heslo
+							</button>
+						</div>
 					</div>
 				</Form>
 			</LayoutContainer>
