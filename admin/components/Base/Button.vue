@@ -1,16 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
-const classes = ref({
-	md: 'px-3.5 py-2.5 text-sm',
-	lg: 'px-4 py-2.5 text-base',
-	xl: 'px-4 py-2.5 text-base',
+const sizeClasses = ref({
+	sm: 'px-2 py-1 text-xs shadow-sm rounded ml-4',
+	lg: 'px-3 py-2 text-sm shadow-sm rounded-md ml-4',
+	xl: 'px-3.5 py-2.5 text-sm shadow-sm rounded-md ml-4',
+});
+const variantClasses = ref({
+	primary: 'bg-primaryCustom hover:bg-primaryLight focus-visible:outline-primaryLight text-white',
+	secondary: 'bg-white ring-1 ring-inset ring-grayLight hover:bg-gray-50 focus-visible:outline-grayLight text-grayDark',
+	success: 'bg-success hover:bg-successLight focus-visible:outline-successLight text-white',
+	danger: 'bg-danger hover:bg-dangerLight focus-visible:outline-dangerLight text-white',
 });
 const props = defineProps({
-	type: {
-		type: String,
-		default: 'button',
-	},
 	variant: {
 		type: String,
 		default: 'primary',
@@ -20,12 +22,14 @@ const props = defineProps({
 		default: 'md',
 	},
 });
+
+const buttonClasses = computed(() => {
+	return `${sizeClasses.value[props.size] || ''} ${variantClasses.value[props.variant] || ''} font-semibold`;
+});
 </script>
 
 <template>
-	<button
-		:class="`rounded-${props.size} bg-${props.variant} px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600`"
-	>
+	<button :class="buttonClasses">
 		<slot />
 	</button>
 </template>

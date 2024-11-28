@@ -92,15 +92,15 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 					v-for="(action, key) in actions"
 					v-if="actions && actions.length"
 					:key="key"
-					class="ml-4"
 				>
-					<button
+					<BaseButton
 						v-if="action.type === 'save'"
-						class="rounded-md bg-primaryCustom px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primaryLight"
+						type="primary"
+						size="xl"
 						@click="emit('save')"
 					>
 						Uložit
-					</button>
+					</BaseButton>
 				</div>
 			</div>
 		</div>

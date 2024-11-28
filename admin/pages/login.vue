@@ -1,22 +1,34 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { Form } from 'vee-validate';
+
 const form = ref({
 	email: '' as string,
 	password: '' as string,
 });
+const toast = useToast();
 
 const { login } = useSanctumAuth();
 function handleSubmit() {
-	login(form.value);
+	if (form.value.email && form.value.password) {
+		login(form.value).then(() => {
+			toast.add({
+				title: 'Přihlášení',
+				description: 'Byli jste úspěšně přihlášeni.',
+				color: 'green',
+			});
+		}).catch(() => {
+			toast.add({
+				title: 'Chyba',
+				description: 'Nepodařilo se přihlásit. Zkontrolujte prosím zadané údaje.',
+				color: 'red',
+			});
+		});
+	}
 }
 
 useHead({
 	title: 'Login',
-	meta: [
-		{
-			name: 'description',
-			content: 'Login to your account',
-		},
-	],
 });
 definePageMeta({
 	layout: 'login',
@@ -24,50 +36,37 @@ definePageMeta({
 </script>
 
 <template>
-	<div class="mt-20">
-		<div class="overflow-hidden bg-white shadow sm:rounded-lg">
-			<div class="px-4 py-5 sm:p-6">
-				<h1 class="text-2xl font-semibold text-gray-900">
-					Přihlášení
-				</h1>
-				<form @submit.prevent="handleSubmit">
-					<div class="mt-6">
-						<label
-							for="email"
-							class="block text-sm font-medium text-gray-700"
-						>E-mail</label>
-						<input
-							id="email"
-							v-model="form.email"
-							type="email"
-							name="email"
-							class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-						>
-					</div>
-					<div class="mt-6">
-						<label
-							for="password"
-							class="block text-sm font-medium text-gray-700"
-						>Heslo</label>
-						<input
-							id="password"
-							v-model="form.password"
-							type="password"
-							name="password"
-							class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-						>
-					</div>
-					<div class="mt-6">
-						<BaseButton
-							type="submit"
-							variant="primary"
-							size="lg"
-						>
-							Přihlásit se
-						</BaseButton>
-					</div>
-				</form>
+	<LayoutContainer class="max-w-md w-full mt-60">
+		<h1 class="text-2xl font-semibold text-grayDark text-center mb-4">
+			Přihlášení
+		</h1>
+		<Form @submit="handleSubmit">
+			<div class="grid grid-cols-1 gap-y-4">
+				<BaseFormInput
+					v-model="form.email"
+					class="col-span-full"
+					label="E-mail"
+					type="email"
+					name="email"
+					rules="required|email"
+				/>
+				<BaseFormInput
+					v-model="form.password"
+					class="col-span-full"
+					label="Heslo"
+					type="password"
+					name="password"
+					rules="required"
+				/>
+				<BaseButton
+					class="col-span-full mt-4"
+					type="submit"
+					variant="primary"
+					size="xl"
+				>
+					Přihlásit se
+				</BaseButton>
 			</div>
-		</div>
-	</div>
+		</Form>
+	</LayoutContainer>
 </template>

@@ -293,12 +293,13 @@ definePageMeta({
 							class="col-span-1"
 						/>
 						<div class="col-span-1 flex items-end justify-end">
-							<button
+							<BaseButton
 								type="submit"
-								class="rounded-md bg-primaryCustom px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-primaryLight"
+								variant="primary"
+								size="xl"
 							>
 								Změnit heslo
-							</button>
+							</BaseButton>
 						</div>
 					</div>
 				</Form>
