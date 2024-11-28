@@ -67,6 +67,7 @@ class ProfileController extends Controller
 
     public function password(Request $request): JsonResponse
     {
+        dd($request->all());
         $authUser = $request->user();
 
         $user = User::find($authUser->id);

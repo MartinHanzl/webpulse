@@ -47,13 +47,13 @@ const props = defineProps({
 	},
 });
 defineRule('min', (value, { min }) => {
-	if (value.length < min) {
+	if (value.length < min && props.type === 'text') {
 		return `Pole ${props.label?.toLowerCase()} musí obsahovat alespoň ${min} znaků.`;
 	}
 	return true;
 });
 defineRule('max', (value, { max }) => {
-	if (value.length > max) {
+	if (value.length > max && props.type === 'text') {
 		return `Pole ${props.label?.toLowerCase()} může obsahovat maximálně ${max} znaků.`;
 	}
 	return true;
@@ -61,6 +61,12 @@ defineRule('max', (value, { max }) => {
 defineRule('required', (value) => {
 	if (!value) {
 		return `Pole ${props.label?.toLowerCase()} je povinné.`;
+	}
+	return true;
+});
+defineRule('email', (value) => {
+	if (!value.includes('@')) {
+		return `Pole ${props.label?.toLowerCase()} musí být platný e-mail.`;
 	}
 	return true;
 });
@@ -76,6 +82,7 @@ defineRule('required', (value) => {
 			class="text-danger ml-1"
 		>*</span></label>
 		<Field
+			v-if="type === 'text' || type === 'email' || type === 'password'"
 			v-bind="$attrs"
 			v-model="model"
 			:rules="rules"
@@ -85,6 +92,24 @@ defineRule('required', (value) => {
 			:disabled="disabled"
 			aria-autocomplete="none"
 			autocomplete="off"
+			:class="[
+				'mt-2 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-secondary sm:text-sm/6',
+				{ 'bg-grayLight': disabled },
+			]"
+		/>
+		<Field
+			v-else-if="type === 'number'"
+			v-bind="$attrs"
+			v-model="model"
+			:rules="rules"
+			:name="name"
+			:type="type"
+			:placeholder="placeholder"
+			:disabled="disabled"
+			aria-autocomplete="none"
+			autocomplete="off"
+			:min="min > 0 ? min : 3"
+			:max="max > 0 ? max : 45"
 			:class="[
 				'mt-2 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-secondary sm:text-sm/6',
 				{ 'bg-grayLight': disabled },
