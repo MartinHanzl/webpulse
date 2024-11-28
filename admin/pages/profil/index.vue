@@ -125,6 +125,14 @@ async function savePassword() {
 		item.value = response;
 	}).then(() => {
 		refreshIdentity();
+		toast.add({
+			title: 'Úspěch',
+			description: 'Nové heslo bylo změněno. Nyní dojde k odhlášení.',
+			color: 'green',
+		});
+		setTimeout(() => {
+			logout();
+		}, 3000);
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -134,16 +142,6 @@ async function savePassword() {
 		});
 	}).finally(() => {
 		loading.value = false;
-		if (!error.value) {
-			toast.add({
-				title: 'Úspěch',
-				description: 'Nové heslo bylo změněno. Nyní dojde k odhlášení.',
-				color: 'red',
-			});
-			setTimeout(() => {
-				logout();
-			}, 3000);
-		}
 	});
 }
 
