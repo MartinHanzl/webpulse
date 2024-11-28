@@ -202,7 +202,7 @@ async function deleteItem() {
 		</TransitionRoot>
 		<BaseDialogDelete
 			v-model:show="showDeleteDialog"
-      v-model:item="deleteDialogItem"
+			v-model:item="deleteDialogItem"
 			@delete-item="deleteItem"
 		/>
 	</div>

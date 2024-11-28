@@ -98,7 +98,7 @@ const breadcrumbs = [
 	},
 	{
 		name: 'Rychlý přístup',
-		link: '/rychly-pristup',
+		link: '/profil/rychly-pristup',
 		current: true,
 	},
 ];
@@ -141,7 +141,7 @@ onMounted(() => {
 				singular="Položka rychlého přístupu"
 				plural="Položky rychlého přístupu"
 				:query="tableQuery"
-        @delete-item="deleteItem"
+				@delete-item="deleteItem"
 				@update-sort="updateSort"
 				@update-page="updatePage"
 				@open-dialog="openQuickAccessDialog"

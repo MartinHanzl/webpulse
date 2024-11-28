@@ -78,21 +78,23 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									scope="col"
 									:class="{
 										'hidden md:table-cell': column.hidden,
-										'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-grayDark sm:pl-6 lg:pl-8 flex-auto items-center justify-between': true,
+										'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-grayDark sm:pl-6 lg:pl-8': true,
 										'cursor-pointer': column.sortable,
 										[`w-[${column.width}px]`]: column.width,
 									}"
 									@click="column.sortable ? $emit('update-sort', column.key) : null"
 								>
-									<span>{{ column.name }}</span>
-									<ChevronDownIcon
-										v-if="column.sortable && query.orderBy === column.key && query.orderWay === 'asc'"
-										class="size-4 text-grayCustom"
-									/>
-									<ChevronUpIcon
-										v-if="column.sortable && query.orderBy === column.key && query.orderWay === 'desc'"
-										class="size-4 text-grayCustom"
-									/>
+									<div class="flex items-center">
+										<span>{{ column.name }}</span>
+										<ChevronDownIcon
+											v-if="column.sortable && query.orderBy === column.key && query.orderWay === 'asc'"
+											class="size-4 text-grayCustom ml-2"
+										/>
+										<ChevronUpIcon
+											v-if="column.sortable && query.orderBy === column.key && query.orderWay === 'desc'"
+											class="size-4 text-grayCustom ml-2"
+										/>
+									</div>
 								</th>
 								<th
 									scope="col"
