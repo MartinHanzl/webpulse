@@ -124,7 +124,7 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 			:actions="[
-				{ type: 'add', text: 'Vytvořit uživatele' },
+				{ type: 'add', text: 'Přidat uživatele' },
 			]"
 		/>
 		<LayoutContainer>

@@ -5,6 +5,7 @@ import { Form } from 'vee-validate';
 const toast = useToast();
 
 const route = useRoute();
+const router = useRouter();
 
 const error = ref(false);
 const loading = ref(false);
@@ -86,8 +87,13 @@ async function saveItem() {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
-	}).then((response) => {
-		item.value = response;
+	}).then(() => {
+		toast.add({
+			title: 'Hotovo',
+			description: 'Nový uživatel byl úspěšně vytvořen.',
+			color: 'green',
+		});
+		router.push('/uzivatele');
 	}).then(() => {
 		refreshIdentity();
 	}).catch(() => {
@@ -180,6 +186,14 @@ definePageMeta({
 							rules="required|email"
 							class="col-span-1"
 						/>
+						<BaseFormInput
+							v-model="item.phone"
+							label="Telefon"
+							type="text"
+							name="phone"
+							rules="required"
+							class="col-span-1"
+						/>
 						<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
 						<BaseFormInput
 							v-model="item.street"
@@ -204,22 +218,22 @@ definePageMeta({
 							class="col-span-1"
 						/>
 						<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
-            <BaseFormInput
-                v-model="passwords.new_password"
-                label="Nové heslo"
-                type="password"
-                name="new_password"
-                rules="required"
-                class="col-span-1"
-            />
-            <BaseFormInput
-                v-model="passwords.confirm_new_password"
-                label="Potvrzení nového hesla"
-                type="password"
-                name="confirm_new_password"
-                rules="required"
-                class="col-span-1"
-            />
+						<BaseFormInput
+							v-model="passwords.new_password"
+							label="Nové heslo"
+							type="password"
+							name="new_password"
+							rules="required"
+							class="col-span-1"
+						/>
+						<BaseFormInput
+							v-model="passwords.confirm_new_password"
+							label="Potvrzení nového hesla"
+							type="password"
+							name="confirm_new_password"
+							rules="required"
+							class="col-span-1"
+						/>
 					</div>
 				</Form>
 			</LayoutContainer>

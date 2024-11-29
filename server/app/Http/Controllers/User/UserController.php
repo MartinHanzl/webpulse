@@ -88,11 +88,11 @@ class UserController extends Controller
                 $user->password = Hash::make($request->get('new_password'));
             }
 
+
+            $user->fill($request->all());
             if (!$id) {
                 $user->invitation_token = $this->generateUnqiueToken();
             }
-
-            $user->fill($request->all());
             $user->save();
 
             DB::commit();
