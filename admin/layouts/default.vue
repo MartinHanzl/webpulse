@@ -56,7 +56,7 @@ const navigation = ref([
 		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false },
 	] },
 	{ title: 'Nastavení a správa', menu: [
-		{ name: 'Uživatelé', link: '/demo', icon: UsersIcon, current: false },
+		{ name: 'Uživatelé', link: '/uzivatele', icon: UsersIcon, current: false },
 		{ name: 'Uživatelské skupiny', link: '/demo', icon: AdjustmentsHorizontalIcon, current: false },
 	] },
 ]);

@@ -48,25 +48,25 @@ const props = defineProps({
 });
 defineRule('min', (value, { min }) => {
 	if (value.length < min && props.type === 'text') {
-		return `Pole ${props.label?.toLowerCase()} musí obsahovat alespoň ${min} znaků.`;
+		return `Pole musí obsahovat alespoň ${min} znaků.`;
 	}
 	return true;
 });
 defineRule('max', (value, { max }) => {
 	if (value.length > max && props.type === 'text') {
-		return `Pole ${props.label?.toLowerCase()} může obsahovat maximálně ${max} znaků.`;
+		return `Pole může obsahovat maximálně ${max} znaků.`;
 	}
 	return true;
 });
 defineRule('required', (value) => {
 	if (!value) {
-		return `Pole ${props.label?.toLowerCase()} je povinné.`;
+		return `Pole je povinné.`;
 	}
 	return true;
 });
 defineRule('email', (value) => {
 	if (!value.includes('@')) {
-		return `Pole ${props.label?.toLowerCase()} musí být platný e-mail.`;
+		return `Pole musí být platný e-mail.`;
 	}
 	return true;
 });

@@ -4,6 +4,7 @@ import { ref } from 'vue';
 
 const user = useSanctumUser();
 const route = useRoute();
+const router = useRouter();
 const quickAccessDialogShow = ref(false);
 
 const props = defineProps({
@@ -101,6 +102,14 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 						@click="emit('save')"
 					>
 						Uložit
+					</BaseButton>
+					<BaseButton
+						v-if="action.type === 'add'"
+						type="primary"
+						size="xl"
+						@click="router.push(route.fullPath + '/pridat')"
+					>
+						{{ action.text }}
 					</BaseButton>
 				</div>
 			</div>

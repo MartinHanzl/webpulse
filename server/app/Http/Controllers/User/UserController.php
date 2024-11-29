@@ -9,8 +9,10 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
@@ -57,7 +59,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, int $id): JsonResponse
+    public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
             $user = User::find($id);
@@ -81,6 +83,14 @@ class UserController extends Controller
 
         try {
             DB::beginTransaction();
+
+            if ($request->has('new_password') && $request->get('new_password') == $request->get('confirm_new_password')) {
+                $user->password = Hash::make($request->get('new_password'));
+            }
+
+            if (!$id) {
+                $user->invitation_token = $this->generateUnqiueToken();
+            }
 
             $user->fill($request->all());
             $user->save();
@@ -127,5 +137,17 @@ class UserController extends Controller
 
         $user->delete();
         return Response::json();
+    }
+
+    private function generateUnqiueToken(): string
+    {
+        $token = Str::upper(Str::random(8));
+        $user = User::where('invitation_token', $token)->exists();
+
+        if ($user) {
+            self::generateUnqiueToken();
+        }
+
+        return $token;
     }
 }
