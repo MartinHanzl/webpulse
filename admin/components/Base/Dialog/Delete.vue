@@ -69,21 +69,24 @@ const emit = defineEmits(['delete-item']);
 								</div>
 							</div>
 							<div class="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-								<button
+								<BaseButton
+									size="lg"
+									variant="danger"
 									type="button"
-									class="inline-flex w-full justify-center rounded-md bg-danger px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+									class="ml-4"
 									@click="emit('delete-item', item.id)"
 								>
 									Potvrdit
-								</button>
-								<button
+								</BaseButton>
+								<BaseButton
 									ref="cancelButtonRef"
 									type="button"
-									class="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-grayDark shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+									size="lg"
+									variant="secondary"
 									@click="show = false"
 								>
 									Zrušit
-								</button>
+								</BaseButton>
 							</div>
 						</DialogPanel>
 					</TransitionChild>
