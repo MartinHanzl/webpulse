@@ -4,7 +4,7 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\User\UserResource;
-use App\Models\User\User;
+use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -62,7 +62,7 @@ class UserController extends Controller
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
-            $user = User::find($id);
+            $user = \App\Models\User::find($id);
             if (!$user) {
                 App::abort(404);
             }
@@ -143,7 +143,7 @@ class UserController extends Controller
     private function generateUnqiueToken(): string
     {
         $token = Str::upper(Str::random(8));
-        $user = User::where('invitation_token', $token)->exists();
+        $user = \App\Models\User::where('invitation_token', $token)->exists();
 
         if ($user) {
             self::generateUnqiueToken();
