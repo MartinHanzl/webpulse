@@ -28,7 +28,6 @@ import {
 	AdjustmentsHorizontalIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
-import { definePageMeta } from '#imports';
 import { useUserGroupStore } from '~/stores/userGroupStore';
 
 const userGroupStore = useUserGroupStore();
@@ -85,10 +84,10 @@ function canView(slug: string) {
 	if (user && user.value && user.value.user_group_id && userGroupStore.userGroups) {
 		const userGroup = userGroupStore.userGroups.find(group => group.id === user.value.user_group_id);
 		if (userGroup && userGroup.permissions) {
-      const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
-      if(currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.view == true) {
-        return true;
-      }
+			const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
+			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.view == true) {
+				return true;
+			}
 		}
 	}
 	return false;

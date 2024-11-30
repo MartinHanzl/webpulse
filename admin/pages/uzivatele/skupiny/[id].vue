@@ -175,6 +175,7 @@ definePageMeta({
 			:title="route.params.id === 'pridat' ? 'Nová uživatelská skupina' : item.name"
 			:breadcrumbs="breadcrumbs"
 			:actions="[{ type: 'save' }]"
+			slug="user_groups"
 			@save="saveItem"
 		/>
 		<Form @submit="saveItem">

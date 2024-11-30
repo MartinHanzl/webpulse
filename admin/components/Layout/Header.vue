@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { StarIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
+import { useUserGroupStore } from '~/stores/userGroupStore';
+
+const userGroupStore = useUserGroupStore();
 
 const user = useSanctumUser();
 const route = useRoute();
@@ -26,6 +29,11 @@ const props = defineProps({
 		required: false,
 		default: [],
 	},
+	slug: {
+		type: String,
+		required: false,
+		default: '',
+	},
 });
 
 const emit = defineEmits(['save']);
@@ -35,6 +43,19 @@ const quickAccessItem = ref({
 	link: route.fullPath,
 	target: null,
 });
+
+function canEdit(slug: string) {
+	if (user && user.value && user.value.user_group_id && userGroupStore.userGroups) {
+		const userGroup = userGroupStore.userGroups.find(group => group.id === user.value.user_group_id);
+		if (userGroup && userGroup.permissions) {
+			const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
+			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.edit == true) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
 
 const isInQuickAccess = computed(() => {
 	if (user.value) {
@@ -96,7 +117,7 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 					class="ml-4"
 				>
 					<BaseButton
-						v-if="action.type === 'save'"
+						v-if="action.type === 'save' && canEdit(slug) || action.type === 'save' && slug === ''"
 						type="primary"
 						size="xl"
 						@click="emit('save')"
@@ -104,7 +125,7 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 						Uložit
 					</BaseButton>
 					<BaseButton
-						v-if="action.type === 'add'"
+						v-if="action.type === 'add' && canEdit(slug)"
 						type="primary"
 						size="xl"
 						@click="router.push(route.fullPath + '/pridat')"

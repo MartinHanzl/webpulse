@@ -124,6 +124,7 @@ definePageMeta({
 		<LayoutHeader
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
+			slug="user_groups"
 			:actions="[
 				{ type: 'add', text: 'Přidat uživatelskou skupinu' },
 			]"
@@ -145,6 +146,7 @@ definePageMeta({
 				singular="Uživatelská skupiny"
 				plural="Uživatelské skupiny"
 				:query="tableQuery"
+				slug="user_groups"
 				@delete-item="deleteItem"
 				@update-sort="updateSort"
 				@update-page="updatePage"

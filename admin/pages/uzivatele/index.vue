@@ -119,6 +119,7 @@ definePageMeta({
 			:actions="[
 				{ type: 'add', text: 'Přidat uživatele' },
 			]"
+			slug="users"
 		/>
 		<LayoutContainer>
 			<BaseTable
@@ -139,6 +140,7 @@ definePageMeta({
 				singular="Uživatel"
 				plural="Uživatelé"
 				:query="tableQuery"
+				slug="users"
 				@delete-item="deleteItem"
 				@update-sort="updateSort"
 				@update-page="updatePage"

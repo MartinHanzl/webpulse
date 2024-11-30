@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { Form } from 'vee-validate';
 import { definePageMeta } from '#imports';
+import { useUserGroupStore } from '~/stores/userGroupStore';
+
+const userGroupStore = useUserGroupStore();
 
 const toast = useToast();
 const error = ref(false);
@@ -260,6 +263,15 @@ definePageMeta({
 						name="invitation_token"
 						class="col-span-full cursor-pointer"
 						@click.prevent="copyToClipboard"
+					/>
+					<BaseFormSelect
+						v-model="item.user_group_id"
+						label="Skupina"
+						name="user_group_id"
+						rules="required"
+						class="col-span-full"
+						disabled
+						:options="userGroupStore.userGroupsOptions"
 					/>
 				</div>
 			</LayoutContainer>

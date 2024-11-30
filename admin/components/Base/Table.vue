@@ -4,9 +4,12 @@ import {
 	BoltIcon,
 	MagnifyingGlassIcon,
 	TrashIcon,
-	EyeIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid';
+import { useUserGroupStore } from '~/stores/userGroupStore';
+
+const user = useSanctumUser();
+const userGroupStore = useUserGroupStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -59,7 +62,38 @@ defineProps({
 		required: false,
 		default: {},
 	},
+	slug: {
+		type: String,
+		required: false,
+		default: '',
+	},
 });
+
+function canEdit(slug: string) {
+	if (user && user.value && user.value.user_group_id && userGroupStore.userGroups) {
+		const userGroup = userGroupStore.userGroups.find(group => group.id === user.value.user_group_id);
+		if (userGroup && userGroup.permissions) {
+			const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
+			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.edit) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+function canDelete(slug: string) {
+	if (user && user.value && user.value.user_group_id && userGroupStore.userGroups) {
+		const userGroup = userGroupStore.userGroups.find(group => group.id === user.value.user_group_id);
+		if (userGroup && userGroup.permissions) {
+			const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
+			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.delete == true) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
 
 const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dialog']);
 </script>
@@ -135,17 +169,17 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 										:key="key"
 									>
 										<MagnifyingGlassIcon
-											v-if="action.type === 'edit'"
+											v-if="action.type === 'edit' && canEdit(slug) || action.type === 'edit' && slug === ''"
 											class="cursor-pointer size-5 text-primaryCustom hover:text-primaryLight"
 											@click="router.push(`${route.fullPath}/${item.id}`)"
 										/>
 										<BoltIcon
-											v-if="action.type === 'edit-dialog'"
+											v-if="action.type === 'edit-dialog' && canEdit(slug) || action.type === 'edit-dialog' && slug === ''"
 											class="cursor-pointer size-5 text-warning hover:text-warningLight ml-4"
 											@click="emit('open-dialog', item)"
 										/>
 										<TrashIcon
-											v-if="action.type === 'delete'"
+											v-if="action.type === 'delete' && canDelete(slug) || action.type === 'delete' && slug === ''"
 											class="cursor-pointer size-5 text-danger hover:text-dangerLight ml-4"
 											@click="showDeleteDialog = true; deleteDialogItem = item"
 										/>

@@ -20,13 +20,13 @@ export const useUserGroupStore = defineStore({
 			});
 		},
 	},
-    getters: {
-        userGroupsOptions() {
-            return this.userGroups.map((userGroup: any) => ({
-                label: userGroup.name,
-                name: userGroup.name,
-                value: userGroup.id,
-            }));
-        }
-    }
+	getters: {
+		userGroupsOptions() {
+			return this.userGroups.map((userGroup: any) => ({
+				label: userGroup.name,
+				name: userGroup.name,
+				value: userGroup.id,
+			}));
+		},
+	},
 });
