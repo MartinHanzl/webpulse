@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Form } from 'vee-validate';
-import { useUserGroupStore } from '~/stores/userGroup';
+import { useUserGroupStore } from '~/stores/userGroupStore';
 
 const userGroupStore = useUserGroupStore();
 
@@ -42,7 +42,7 @@ const allowedPermissions = ref([
 	{ name: 'Cashflow', value: 'Cashflow', slug: 'cashflows' },
 	{ name: 'Projekty', value: 'Projekty', slug: 'projects' },
 	{ name: 'Faktury', value: 'Faktury', slug: 'invoices' },
-	{ name: 'Trackování', value: 'Trackování', slug: 'clocks' },
+	{ name: 'Trackování', value: 'Trackování', slug: 'trackings' },
 	{ name: 'Nacenění', value: 'Nacenění', slug: 'pricings' },
 	{ name: 'Uživatelé', value: 'Uživatelé', slug: 'users' },
 	{ name: 'Uživatelské skupiny', value: 'Uživatelské skupiny', slug: 'user_groups' },

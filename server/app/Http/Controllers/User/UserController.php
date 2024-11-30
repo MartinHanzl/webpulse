@@ -94,6 +94,7 @@ class UserController extends Controller
             if (!$id) {
                 $user->invitation_token = $this->generateUnqiueToken();
             }
+            $user->user_group_id = $request->get('user_group_id');
             $user->save();
 
             DB::commit();

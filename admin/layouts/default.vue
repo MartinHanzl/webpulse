@@ -29,7 +29,7 @@ import {
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { definePageMeta } from '#imports';
-import { useUserGroupStore } from '~/stores/userGroup';
+import { useUserGroupStore } from '~/stores/userGroupStore';
 
 const userGroupStore = useUserGroupStore();
 
@@ -48,19 +48,19 @@ const navigation = ref([
 		{ name: 'Statistiky', link: '/demo', icon: ChartPieIcon, current: false },
 	] },
 	{ title: 'Byznys a osobní růst', menu: [
-		{ name: 'Kontakty', link: '/demo', icon: UsersIcon, current: false },
-		{ name: 'Kalendář', link: '/demo', icon: CalendarIcon, current: false },
-		{ name: 'Cashflow', link: '/demo', icon: BanknotesIcon, current: false },
+		{ name: 'Kontakty', link: '/demo', icon: UsersIcon, current: false, slug: 'contacts' },
+		{ name: 'Kalendář', link: '/demo', icon: CalendarIcon, current: false, slug: 'calendars' },
+		{ name: 'Cashflow', link: '/demo', icon: BanknotesIcon, current: false, slug: 'cashflows' },
 	] },
 	{ title: 'Osobní sekce', menu: [
-		{ name: 'Projekty', link: '/demo', icon: BuildingOfficeIcon, current: false },
-		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false },
-		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false },
-		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false },
+		{ name: 'Projekty', link: '/demo', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
+		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
+		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
+		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false, slug: 'pricings' },
 	] },
 	{ title: 'Nastavení a správa', menu: [
-		{ name: 'Uživatelé', link: '/uzivatele', icon: UsersIcon, current: false },
-		{ name: 'Uživatelské skupiny', link: '/uzivatele/skupiny', icon: AdjustmentsHorizontalIcon, current: false },
+		{ name: 'Uživatelé', link: '/uzivatele', icon: UsersIcon, current: false, slug: 'users' },
+		{ name: 'Uživatelské skupiny', link: '/uzivatele/skupiny', icon: AdjustmentsHorizontalIcon, current: false, slug: 'user_groups' },
 	] },
 ]);
 
@@ -80,6 +80,19 @@ watchEffect(() => {
 		});
 	});
 });
+
+function canView(slug: string) {
+	if (user && user.value && user.value.user_group_id && userGroupStore.userGroups) {
+		const userGroup = userGroupStore.userGroups.find(group => group.id === user.value.user_group_id);
+		if (userGroup && userGroup.permissions) {
+      const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
+      if(currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.view == true) {
+        return true;
+      }
+		}
+	}
+	return false;
+}
 
 function handleLogout() {
 	logout();
@@ -254,6 +267,7 @@ onMounted(() => {
 									:key="key"
 								>
 									<NuxtLink
+										v-if="!item.slug || (item.slug && canView(item.slug))"
 										:to="item.link"
 										:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
 									>

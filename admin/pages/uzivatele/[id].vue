@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Form } from 'vee-validate';
+import { useUserGroupStore} from '~/stores/userGroupStore';
 
+const userGroupStore = useUserGroupStore();
 const toast = useToast();
 
 const route = useRoute();
@@ -42,6 +44,7 @@ const item = ref({
 	zip: '' as string,
 	new_password: '' as string,
 	confirm_new_password: '' as string,
+  user_group_id: 1 as number
 });
 
 async function loadItem() {
@@ -62,6 +65,7 @@ async function loadItem() {
 		zip: string;
 		new_password: string;
 		confirm_new_password: string;
+    user_group_id: number;
 	}>('/api/admin/user/' + route.params.id, {
 		method: 'GET',
 		headers: {
@@ -113,8 +117,9 @@ async function saveItem() {
 		street: string;
 		city: string;
 		zip: string;
-		new_password: string ;
-		confirm_new_password: string ;
+		new_password: string;
+		confirm_new_password: string;
+    user_group_id: number;
 	}>(route.params.id === 'pridat' ? '/api/admin/user' : '/api/admin/user/' + route.params.id, {
 		method: 'POST',
 		body: JSON.stringify(item.value),
@@ -279,6 +284,7 @@ definePageMeta({
 						/>
 					</div>
 					<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
+          <pre> {{ userGroupStore.userGroupsOptions }}</pre>
 					<BaseFormInput
 						v-model="item.invitation_token"
 						label="Kód pozvánky"
@@ -287,6 +293,13 @@ definePageMeta({
 						class="col-span-full cursor-pointer"
 						@click.prevent="copyToClipboard"
 					/>
+          <BaseFormSelect
+            v-model="item.user_group_id"
+            label="Skupina"
+            name="user_group_id"
+            rules="required"
+            class="col-span-full"
+            :options="userGroupStore.userGroupsOptions" />
 				</div>
 			</LayoutContainer>
 		</div>

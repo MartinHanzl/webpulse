@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
 import { debounce } from 'lodash';
-import { useUserGroupStore } from '~/stores/userGroup';
+import { useUserGroupStore } from '~/stores/userGroupStore';
 
 const userGroupStore = useUserGroupStore();
 
