@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
 import { debounce } from 'lodash';
-import { definePageMeta } from '#imports';
+import { useUserGroupStore } from '~/stores/userGroup';
+
+const userGroupStore = useUserGroupStore();
 
 const toast = useToast();
 const pageTitle = ref('Uživatelské skupiny');
@@ -80,6 +82,7 @@ async function deleteItem(id: number) {
 	}).finally(() => {
 		loading.value = false;
 		loadItems();
+		userGroupStore.fetchUserGroups();
 	});
 }
 

@@ -29,6 +29,9 @@ import {
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { definePageMeta } from '#imports';
+import { useUserGroupStore } from '~/stores/userGroup';
+
+const userGroupStore = useUserGroupStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -94,6 +97,8 @@ watchEffect(() => {
 onMounted(() => {
 	refreshIdentity();
 	getQuickAccess();
+
+	userGroupStore.fetchUserGroups();
 });
 </script>
 

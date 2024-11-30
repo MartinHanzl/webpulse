@@ -16,6 +16,7 @@
     "@heroicons/vue": "^2.2.0",
     "@nuxt/image": "^1.8.1",
     "@nuxt/ui": "^2.19.2",
+    "@pinia/nuxt": "^0.8.0",
     "@types/lodash": "^4.17.13",
     "@vee-validate/nuxt": "^4.14.7",
     "@vee-validate/rules": "^4.14.7",
@@ -23,6 +24,7 @@
     "lodash.debounce": "^4.0.8",
     "nuxt": "^3.14.1592",
     "nuxt-auth-sanctum": "^0.5.2",
+    "pinia": "^2.2.8",
     "vee-validate": "^4.14.7",
     "vue": "latest",
     "vue-router": "latest"

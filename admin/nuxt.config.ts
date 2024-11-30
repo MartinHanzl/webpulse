@@ -14,7 +14,7 @@ export default defineNuxtConfig({
 			cookie: 'XSRF-TOKEN',
 			header: 'X-XSRF-TOKEN',
 		},
-	}], '@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@vee-validate/nuxt'],
+	}], '@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@vee-validate/nuxt', '@pinia/nuxt'],
 	devtools: { enabled: true },
 
 	css: ['~/assets/css/main.css'],

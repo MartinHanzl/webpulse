@@ -21,6 +21,7 @@ class UserLoginResource extends JsonResource
             'lastname' => $this->lastname,
             'email' => $this->email,
             'quick_access' => QuickAccessResource::collection($this->quickAccess),
+            'user_group_id' => $this->user_group_id,
             'user_group' => UserGroupResource::make($this->userGroup),
         ];
     }

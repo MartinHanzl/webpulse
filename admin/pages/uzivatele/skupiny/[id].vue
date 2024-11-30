@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Form } from 'vee-validate';
+import { useUserGroupStore } from '~/stores/userGroup';
+
+const userGroupStore = useUserGroupStore();
 
 const toast = useToast();
 
@@ -77,7 +80,7 @@ async function loadItem() {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst uživatelský profil. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst uživatelskou skupinu. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -104,37 +107,22 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: 'Nový uživatel byl úspěšně vytvořen.',
+			description: `Uživatelská skupina byla úspěšně ${route.params.id === 'pridat' ? 'vytvořena' : 'uložena'}.`,
 			color: 'green',
 		});
-		router.push('/uzivatele');
+		router.push('/uzivatele/skupiny');
 	}).then(() => {
 		refreshIdentity();
 	}).catch(() => {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se uložit uživatelský profil. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
+			description: `Nepodařilo se ${route.params.id === 'pridat' ? 'vytvořit' : 'uložit'} uživatelskou skupinu. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.`,
 			color: 'red',
 		});
 	}).finally(() => {
 		loading.value = false;
-	});
-}
-
-async function copyToClipboard() {
-	await navigator.clipboard.writeText(item.value.invitation_token).then(() => {
-		toast.add({
-			title: 'Kopírováno',
-			description: 'Kód pozvánky byl zkopírován do schránky.',
-			color: 'green',
-		});
-	}).catch(() => {
-		toast.add({
-			title: 'Chyba',
-			description: 'Nepodařilo se zkopírovat kód pozvánky do schránky.',
-			color: 'red',
-		});
+		userGroupStore.fetchUserGroups();
 	});
 }
 
