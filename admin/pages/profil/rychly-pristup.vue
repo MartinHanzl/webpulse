@@ -8,6 +8,19 @@ const toast = useToast();
 const loading = ref(false);
 const error = ref(false);
 
+const breadcrumbs = ref([
+	{
+		name: 'Profil',
+		link: '/profil',
+		current: false,
+	},
+	{
+		name: 'Rychlý přístup',
+		link: '/profil/rychly-pristup',
+		current: true,
+	},
+]);
+
 const searchString = ref(inject('searchString', ''));
 const tableQuery = ref({
 	search: null as string | null,
@@ -98,18 +111,6 @@ function openQuickAccessDialog(item) {
 	quickAccessDialogForm.value = item;
 }
 
-const breadcrumbs = [
-	{
-		name: 'Profil',
-		link: '/profil',
-		current: false,
-	},
-	{
-		name: 'Rychlý přístup',
-		link: '/profil/rychly-pristup',
-		current: true,
-	},
-];
 useHead({
 	title: 'Rychlý přístup',
 });

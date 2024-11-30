@@ -23,7 +23,7 @@ defineProps({
 				<div>
 					<NuxtLink
 						to="/"
-						class="text-gray-400 hover:text-gray-500"
+						class="text-gray-400 hover:text-grayCustom"
 					>
 						<HomeIcon
 							class="size-5 shrink-0"
@@ -44,7 +44,7 @@ defineProps({
 					/>
 					<NuxtLink
 						:to="page.link"
-						class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+						class="ml-4 text-sm font-medium text-grayCustom hover:text-gray-700"
 						:aria-current="page.current ? 'page' : undefined"
 					>{{ page.name }}</NuxtLink>
 				</div>

@@ -7,6 +7,14 @@ const error = ref(false);
 const loading = ref(false);
 const { refreshIdentity, logout } = useSanctumAuth();
 
+const breadcrumbs = ref([
+	{
+		name: 'Profil',
+		link: '/profil',
+		current: true,
+	},
+]);
+
 const item = ref({
 	firstname: '' as string,
 	lastname: '' as string,
@@ -161,13 +169,6 @@ async function copyToClipboard() {
 	});
 }
 
-const breadcrumbs = [
-	{
-		name: 'Profil',
-		link: '/profil',
-		current: true,
-	},
-];
 useHead({
 	title: 'Profil',
 });

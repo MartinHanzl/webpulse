@@ -107,7 +107,7 @@ async function deleteItem() {
 					leave-from="opacity-100"
 					leave-to="opacity-0"
 				>
-					<div class="fixed inset-0 bg-gray-500/75 transition-opacity" />
+					<div class="fixed inset-0 bg-grayCustom/75 transition-opacity" />
 				</TransitionChild>
 
 				<div class="fixed inset-0 z-10 w-screen overflow-y-auto">

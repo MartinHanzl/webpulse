@@ -58,7 +58,7 @@ defineRule('required', (value) => {
 	<div>
 		<label
 			:for="name"
-			class="block text-sm/6 font-medium text-gray-500"
+			class="block text-sm/6 font-medium text-grayCustom"
 		>{{ label }}<span
 			v-if="rules.includes('required')"
 			class="text-danger ml-1"

@@ -1,13 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { definePageMeta } from '#imports';
 
-const breadcrumbs = [
+const breadcrumbs = ref([
 	{
 		name: 'Přehled',
 		link: '/',
 		current: true,
 	},
-];
+]);
 definePageMeta({
 	middleware: 'sanctum:auth',
 });

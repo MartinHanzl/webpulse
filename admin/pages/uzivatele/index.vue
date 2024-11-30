@@ -9,6 +9,14 @@ const pageTitle = ref('Uživatelé');
 const loading = ref(false);
 const error = ref(false);
 
+const breadcrumbs = ref([
+	{
+		name: pageTitle.value,
+		link: '/uzivatele',
+		current: true,
+	},
+]);
+
 const searchString = ref(inject('searchString', ''));
 const tableQuery = ref({
 	search: null as string | null,
@@ -53,7 +61,7 @@ async function deleteItem(id: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/quick-access/' + id, {
+	await client<{}>('/api/admin/user/' + id, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
@@ -99,13 +107,6 @@ function openQuickAccessDialog(item) {
 	quickAccessDialogForm.value = item;
 }
 
-const breadcrumbs = [
-	{
-		name: pageTitle.value,
-		link: '/uzivatele',
-		current: true,
-	},
-];
 useHead({
 	title: pageTitle.value,
 });

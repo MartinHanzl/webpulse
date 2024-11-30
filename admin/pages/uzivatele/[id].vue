@@ -9,9 +9,27 @@ const router = useRouter();
 
 const error = ref(false);
 const loading = ref(false);
+
 const { refreshIdentity, logout } = useSanctumAuth();
+const user = useSanctumUser();
+
+const pageTitle = ref(route.params.id === 'pridat' ? 'Nový uživatel' : 'Detail uživatele');
+
+const breadcrumbs = ref([
+	{
+		name: 'Uživatelé',
+		link: '/uzivatele',
+		current: false,
+	},
+	{
+		name: 'Nový uživatel',
+		link: '/uzivatele/pridat',
+		current: true,
+	},
+]);
 
 const item = ref({
+	id: null as number | null,
 	firstname: '' as string,
 	lastname: '' as string,
 	avatar: '' as string,
@@ -22,10 +40,6 @@ const item = ref({
 	street: '' as string,
 	city: '' as string,
 	zip: '' as string,
-});
-
-const passwords = ref({
-	current_password: '' as string,
 	new_password: '' as string,
 	confirm_new_password: '' as string,
 });
@@ -35,6 +49,7 @@ async function loadItem() {
 	loading.value = true;
 
 	await client<{
+		id: number | null;
 		firstname: string;
 		lastname: string;
 		avatar: string;
@@ -45,6 +60,8 @@ async function loadItem() {
 		street: string;
 		city: string;
 		zip: string;
+		new_password: string;
+		confirm_new_password: string;
 	}>('/api/admin/user/' + route.params.id, {
 		method: 'GET',
 		headers: {
@@ -53,6 +70,12 @@ async function loadItem() {
 		},
 	}).then((response) => {
 		item.value = response;
+		breadcrumbs.value.pop();
+		breadcrumbs.value.push({
+			name: item.value.firstname + ' ' + item.value.lastname,
+			link: '/uzivatele/' + route.params.id,
+			current: true,
+		});
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -66,10 +89,20 @@ async function loadItem() {
 }
 
 async function saveItem() {
+	if (item.value.new_password !== '' && item.value.new_password !== null && item.value.new_password !== item.value.confirm_new_password) {
+		toast.add({
+			title: 'Chyba',
+			description: 'Pole heslo a pole pro potvrzení hesla se neshodují.',
+			color: 'red',
+		});
+		return;
+	}
+
 	const client = useSanctumClient();
 	loading.value = true;
 
 	await client<{
+		id: number | null;
 		firstname: string;
 		lastname: string;
 		avatar: string;
@@ -80,6 +113,8 @@ async function saveItem() {
 		street: string;
 		city: string;
 		zip: string;
+		new_password: string ;
+		confirm_new_password: string ;
 	}>(route.params.id === 'pridat' ? '/api/admin/user' : '/api/admin/user/' + route.params.id, {
 		method: 'POST',
 		body: JSON.stringify(item.value),
@@ -124,20 +159,8 @@ async function copyToClipboard() {
 	});
 }
 
-const breadcrumbs = [
-	{
-		name: 'Uživatelé',
-		link: '/uzivatele',
-		current: false,
-	},
-	{
-		name: route.params.id === 'pridat' ? 'Nový uživatel' : item.value.firstname + ' ' + item.value.lastname,
-		link: route.params.id === 'pridat' ? '/uzivatele/pridat' : '/uzivatele/' + route.params.id,
-		current: true,
-	},
-];
 useHead({
-	title: 'Profil',
+	title: pageTitle.value,
 });
 
 onMounted(() => {
@@ -218,22 +241,31 @@ definePageMeta({
 							class="col-span-1"
 						/>
 						<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
-						<BaseFormInput
-							v-model="passwords.new_password"
-							label="Nové heslo"
-							type="password"
-							name="new_password"
-							rules="required"
-							class="col-span-1"
-						/>
-						<BaseFormInput
-							v-model="passwords.confirm_new_password"
-							label="Potvrzení nového hesla"
-							type="password"
-							name="confirm_new_password"
-							rules="required"
-							class="col-span-1"
-						/>
+						<div
+							v-if="item.id !== user.id"
+							class="col-span-full grid grid-cols-2 gap-x-8 gap-y-4"
+						>
+							<BaseFormInput
+								v-model="item.new_password"
+								label="Nové heslo"
+								type="password"
+								name="new_password"
+								class="col-span-1"
+							/>
+							<BaseFormInput
+								v-model="item.confirm_new_password"
+								label="Potvrzení nového hesla"
+								type="password"
+								name="confirm_new_password"
+								class="col-span-1"
+							/>
+						</div>
+						<div
+							v-else
+							class="col-span-full"
+						>
+							<span class="block text-sm/6 font-medium text-grayCustom">Změnu hesla provedete ve svém uživatelském účtu</span>
+						</div>
 					</div>
 				</Form>
 			</LayoutContainer>

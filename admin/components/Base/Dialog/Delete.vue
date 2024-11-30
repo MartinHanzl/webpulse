@@ -32,7 +32,7 @@ const emit = defineEmits(['delete-item']);
 				leave-from="opacity-100"
 				leave-to="opacity-0"
 			>
-				<div class="fixed inset-0 bg-gray-500/75 transition-opacity" />
+				<div class="fixed inset-0 bg-grayCustom/75 transition-opacity" />
 			</TransitionChild>
 
 			<div class="fixed inset-0 z-10 w-screen overflow-y-auto">
@@ -62,7 +62,7 @@ const emit = defineEmits(['delete-item']);
 										Smazat položku
 									</DialogTitle>
 									<div class="mt-2">
-										<p class="text-sm text-gray-500">
+										<p class="text-sm text-grayCustom">
 											Opravdu si přejete smazat položku s id <span class="font-semibold">{{ item.id }}</span>? Tato akce je nevratná.
 										</p>
 									</div>
