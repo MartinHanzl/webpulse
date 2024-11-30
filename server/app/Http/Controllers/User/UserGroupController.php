@@ -88,6 +88,9 @@ class UserGroupController extends Controller
 
 
             $userGroup->fill($request->all());
+            if ($request->has('permissions')) {
+                $userGroup->permissions = json_encode($request->get('permissions'));
+            }
             $userGroup->save();
 
             DB::commit();

@@ -57,7 +57,7 @@ const navigation = ref([
 	] },
 	{ title: 'Nastavení a správa', menu: [
 		{ name: 'Uživatelé', link: '/uzivatele', icon: UsersIcon, current: false },
-		{ name: 'Uživatelské skupiny', link: '/demo', icon: AdjustmentsHorizontalIcon, current: false },
+		{ name: 'Uživatelské skupiny', link: '/uzivatele/skupiny', icon: AdjustmentsHorizontalIcon, current: false },
 	] },
 ]);
 

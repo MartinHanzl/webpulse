@@ -4,15 +4,20 @@ import { debounce } from 'lodash';
 import { definePageMeta } from '#imports';
 
 const toast = useToast();
-const pageTitle = ref('Uživatelé');
+const pageTitle = ref('Uživatelské skupiny');
 
 const loading = ref(false);
 const error = ref(false);
 
 const breadcrumbs = ref([
 	{
-		name: pageTitle.value,
+		name: 'Uživatelé',
 		link: '/uzivatele',
+		current: false,
+	},
+	{
+		name: pageTitle.value,
+		link: '/uzivatele/skupiny',
 		current: true,
 	},
 ]);
@@ -32,7 +37,7 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/user', {
+	await client<{}>('/api/admin/user/group', {
 		method: 'GET',
 		query: tableQuery.value,
 		headers: {
@@ -46,7 +51,7 @@ async function loadItems() {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst uživatele. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst uživatelské skupiny. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -58,7 +63,7 @@ async function deleteItem(id: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/user/' + id, {
+	await client<{}>('/api/admin/user/group/' + id, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
@@ -69,7 +74,7 @@ async function deleteItem(id: number) {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se smazat položku uživatele.',
+			description: 'Nepodařilo se smazat položku uživatelskou skupinu.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -117,7 +122,7 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 			:actions="[
-				{ type: 'add', text: 'Přidat uživatele' },
+				{ type: 'add', text: 'Přidat uživatelskou skupinu' },
 			]"
 		/>
 		<LayoutContainer>
@@ -125,10 +130,8 @@ definePageMeta({
 				:items="items"
 				:columns="[
 					{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: true },
-					{ key: 'firstname', name: 'Jméno', type: 'text', width: 80, hidden: false, sortable: true },
-					{ key: 'lastname', name: 'Příjmení', type: 'text', width: 80, hidden: false, sortable: true, target: 'target' },
-					{ key: 'phone', name: 'Telefon', type: 'text', width: 80, hidden: true, sortable: true, target: 'target' },
-					{ key: 'email', name: 'E-mail', type: 'text', width: 80, hidden: true, sortable: true, target: 'target' },
+					{ key: 'name', name: 'Jméno', type: 'text', width: 80, hidden: false, sortable: true },
+					{ key: 'users_count', name: 'Počet uživatelů', type: 'number', width: 80, hidden: true, sortable: false },
 				]"
 				:actions="[
 					{ type: 'edit' },
@@ -136,8 +139,8 @@ definePageMeta({
 				]"
 				:loading="loading"
 				:error="error"
-				singular="Uživatel"
-				plural="Uživatelé"
+				singular="Uživatelská skupiny"
+				plural="Uživatelské skupiny"
 				:query="tableQuery"
 				@delete-item="deleteItem"
 				@update-sort="updateSort"
