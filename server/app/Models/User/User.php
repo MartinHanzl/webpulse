@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\User;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\QuickAccess\QuickAccess;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -42,10 +43,15 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    protected $with = ['quickAccess'];
+    protected $with = ['quickAccess', 'userGroup'];
 
     public function quickAccess()
     {
         return $this->hasMany(QuickAccess::class, 'user_id', 'id');
+    }
+
+    public function userGroup()
+    {
+        return $this->belongsTo(UserGroup::class, 'user_group_id', 'id');
     }
 }

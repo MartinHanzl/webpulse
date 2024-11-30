@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User\UserGroup;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -15,6 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->seedUserGroups();
         $this->seedUsers();
     }
 
@@ -31,6 +33,7 @@ class DatabaseSeeder extends Seeder
                 'city' => 'Mikulovice',
                 'zip' => 53002,
                 'invitation_token' => 'LYLPSXV6',
+                'user_group_id' => 1,
                 'created_at' => now(),
                 'updated_at' => now()
             ]
@@ -38,6 +41,46 @@ class DatabaseSeeder extends Seeder
 
         foreach ($users as $user) {
             DB::table('users')->insert($user);
+        }
+    }
+
+    private function seedUserGroups(): void
+    {
+        $userGroups = [
+            [
+                'name' => 'Admin',
+                'permissions' => [
+                    [
+
+                        'name' => 'Uživatelé',
+                        'slug' => 'users', // slug based on table name
+                        'permissions' => [
+                            'view' => true,
+                            'edit' => true,
+                            'delete' => true
+                        ]
+                    ],
+                    [
+
+                        'name' => 'Uživatelské skupiny',
+                        'slug' => 'user_group',
+                        'permissions' => [
+                            'view' => true,
+                            'edit' => true,
+                            'delete' => true
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        foreach ($userGroups as $userGroup) {
+            $item = new UserGroup();
+            $item->fill([
+                'name' => $userGroup['name'],
+                'permissions' => json_encode($userGroup['permissions'])
+            ]);
+            $item->save();
         }
     }
 }

@@ -27,6 +27,7 @@ class UserResource extends JsonResource
             'zip' => $this->zip,
             'invitation_token' => $this->invitation_token,
             'quick_access' => QuickAccessResource::collection($this->quickAccess),
+            'user_group' => UserGroupResource::make($this->userGroup),
         ];
     }
 }

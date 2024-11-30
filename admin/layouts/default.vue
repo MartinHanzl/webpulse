@@ -335,12 +335,14 @@ onMounted(() => {
 
 						<!-- Separator -->
 						<div
+							v-if="quickAccess && quickAccess.length"
 							class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
 							aria-hidden="true"
 						/>
 
 						<!-- Quick access dropdown -->
 						<Menu
+							v-if="quickAccess && quickAccess.length"
 							as="div"
 							class="relative"
 						>

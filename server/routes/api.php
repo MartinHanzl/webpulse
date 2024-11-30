@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\QuickAccessController;
 use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\User\UserGroupController;
 use App\Http\Controllers\User\ProfileController;
 
 /*
@@ -60,6 +61,16 @@ Route::group([
         Route::group([
             'prefix' => 'user'
         ], function () {
+            // User group routes
+            Route::group([
+                'prefix' => 'group'
+            ], function () {
+                Route::get('', [UserGroupController::class, 'index']);
+                Route::get('{id}', [UserGroupController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [UserGroupController::class, 'store']);
+                Route::delete('{id}', [UserGroupController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
             Route::get('', [UserController::class, 'index']);
             Route::get('{id}', [UserController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [UserController::class, 'store']);

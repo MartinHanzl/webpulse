@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserResource;
-use App\Models\User\User;
+use App\Http\Resources\User\UserGroupResource;
+use App\Models\User\UserGroup;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -14,14 +14,14 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-class UserController extends Controller
+class UserGroupController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): JsonResponse
     {
-        $query = User::query();
+        $query = UserGroup::query();
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
             $searchString = $request->get('search');
@@ -29,10 +29,7 @@ class UserController extends Controller
                 $searchString = explode(':', $searchString);
                 $query->where($searchString[0], 'like', '%' . $searchString[1] . '%');
             } else {
-                $query->where('firstname', 'like', '%' . $searchString . '%')
-                    ->orWhere('lastname', 'like', '%' . $searchString . '%')
-                    ->orWhere('email', 'like', '%' . $searchString . '%')
-                    ->orWhere('phone', 'like', '%' . $searchString . '%');
+                $query->where('name', 'like', '%' . $searchString . '%');
             }
         }
 
@@ -41,19 +38,23 @@ class UserController extends Controller
         }
 
         if ($request->has('paginate')) {
-            $users = $query->paginate($request->get('paginate'));
+            $userGroups = $query->paginate($request->get('paginate'));
+
+            foreach ($userGroups as $userGroup) {
+                $userGroup->users_count = $userGroup->users()->count();
+            }
 
             return Response::json([
-                'data' => UserResource::collection($users->items()),
-                'total' => $users->total(),
-                'perPage' => $users->perPage(),
-                'currentPage' => $users->currentPage(),
-                'lastPage' => $users->lastPage(),
+                'data' => UserGroupResource::collection($userGroups->items()),
+                'total' => $userGroups->total(),
+                'perPage' => $userGroups->perPage(),
+                'currentPage' => $userGroups->currentPage(),
+                'lastPage' => $userGroups->lastPage(),
             ]);
         }
 
-        $users = $query->get();
-        return Response::json(UserResource::collection($users));
+        $userGroups = $query->get();
+        return Response::json(UserGroupResource::collection($userGroups));
     }
 
     /**
@@ -62,20 +63,16 @@ class UserController extends Controller
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
-            $user = User::find($id);
-            if (!$user) {
+            $userGroup = UserGroup::find($id);
+            if (!$userGroup) {
                 App::abort(404);
             }
         } else {
-            $user = new User();
+            $userGroup = new UserGroup();
         }
 
         $validator = Validator::make($request->all(), [
-            'firstname' => 'required|string|max:255',
-            'lastname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users,email,' . $id,
-            'phone' => 'required|string|max:255|unique:users,phone,' . $id,
-            'user_group_id' => 'required|integer|exists:user_groups,id',
+            'name' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -86,15 +83,12 @@ class UserController extends Controller
             DB::beginTransaction();
 
             if ($request->has('new_password') && $request->get('new_password') == $request->get('confirm_new_password')) {
-                $user->password = Hash::make($request->get('new_password'));
+                $userGroup->password = Hash::make($request->get('new_password'));
             }
 
 
-            $user->fill($request->all());
-            if (!$id) {
-                $user->invitation_token = $this->generateUnqiueToken();
-            }
-            $user->save();
+            $userGroup->fill($request->all());
+            $userGroup->save();
 
             DB::commit();
         } catch (\Throwable|\Exception $e) {
@@ -102,7 +96,7 @@ class UserController extends Controller
             return Response::json(['error' => $e->getMessage()], 500);
         }
 
-        return Response::json(UserResource::make($user));
+        return Response::json(UserGroupResource::make($userGroup));
     }
 
     /**
@@ -114,12 +108,12 @@ class UserController extends Controller
             App::abort(400);
         }
 
-        $user = User::find($id);
-        if (!$user) {
+        $userGroup = UserGroup::find($id);
+        if (!$userGroup) {
             App::abort(404);
         }
 
-        return Response::json(UserResource::make($user));
+        return Response::json(UserGroupResource::make($userGroup));
     }
 
     /**
@@ -131,24 +125,12 @@ class UserController extends Controller
             App::abort(400);
         }
 
-        $user = User::find($id);
-        if (!$user) {
+        $userGroup = UserGroup::find($id);
+        if (!$userGroup) {
             App::abort(404);
         }
 
-        $user->delete();
+        $userGroup->delete();
         return Response::json();
-    }
-
-    private function generateUnqiueToken(): string
-    {
-        $token = Str::upper(Str::random(8));
-        $user = User::where('invitation_token', $token)->exists();
-
-        if ($user) {
-            self::generateUnqiueToken();
-        }
-
-        return $token;
     }
 }

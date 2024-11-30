@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\QickAccess\QuickAccessResource;
-use App\Models\QuickAccess;
+use App\Models\QuickAccess\QuickAccess;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
