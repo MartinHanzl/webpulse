@@ -37,7 +37,7 @@ const breadcrumbs = ref([
 const item = ref({
 	id: null as number | null,
 	name: '' as string,
-  contact_phase_id: null as string | null,
+	contact_phase_id: null as string | null,
 });
 
 async function loadItem() {
@@ -47,7 +47,7 @@ async function loadItem() {
 	await client<{
 		id: number | null;
 		name: string;
-    contact_phase_id: string | null;
+		contact_phase_id: string | null;
 	}>('/api/admin/contact/task/' + route.params.id, {
 		method: 'GET',
 		headers: {
@@ -110,7 +110,7 @@ async function saveItem() {
 	await client<{
 		id: number | null;
 		name: string;
-    contact_phase_id: string | null;
+		contact_phase_id: string | null;
 	}>(route.params.id === 'pridat' ? '/api/admin/contact/task' : '/api/admin/contact/task/' + route.params.id, {
 		method: 'POST',
 		body: JSON.stringify(item.value),

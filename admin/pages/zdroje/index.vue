@@ -124,7 +124,7 @@ definePageMeta({
 				{ type: 'add', text: 'Přidat zdroj kontaktů' },
 			]"
 			slug="contacts"
-      :links="[
+			:links="[
 				{ name: 'Kontakty', to: '/kontakty' },
 				{ name: 'Fáze', to: '/faze' },
 				{ name: 'Úkoly', to: '/ukoly' },

@@ -124,7 +124,7 @@ definePageMeta({
 				{ type: 'add', text: 'Přidat úkol' },
 			]"
 			slug="contacts"
-      :links="[
+			:links="[
 				{ name: 'Kontakty', to: '/kontakty' },
 				{ name: 'Fáze', to: '/faze' },
 				{ name: 'Zdroje', to: '/zdroje' },

@@ -124,7 +124,7 @@ definePageMeta({
 				{ type: 'add', text: 'Přidat fázi procesu' },
 			]"
 			slug="contacts"
-      :links="[
+			:links="[
 				{ name: 'Kontakty', to: '/kontakty' },
 				{ name: 'Zdroje', to: '/zdroje' },
 				{ name: 'Úkoly', to: '/ukoly' },

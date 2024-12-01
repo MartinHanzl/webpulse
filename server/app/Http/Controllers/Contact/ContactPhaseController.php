@@ -20,7 +20,7 @@ class ContactPhaseController extends Controller
     public function index(Request $request): JsonResponse
     {
         $query = ContactPhase::query()
-            //->with(['contacts'])
+            ->with(['tasks'])
             ->where('user_id', $request->user()->id);
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
