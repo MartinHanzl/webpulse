@@ -20,7 +20,7 @@ class ContactSourceController extends Controller
     public function index(Request $request): JsonResponse
     {
         $query = ContactSource::query()
-            ->with(['contacts'])
+            //->with(['contacts'])
             ->where('user_id', $request->user()->id);
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
