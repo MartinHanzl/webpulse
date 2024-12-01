@@ -69,7 +69,7 @@ class ContactTaskController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'color' => 'nullable|string|max:255',
+            'phase_id' => 'nullable|integer|exists:contact_phases,id',
         ]);
 
         if ($validator->fails()) {
@@ -80,12 +80,14 @@ class ContactTaskController extends Controller
             DB::beginTransaction();
 
             $contactTask->fill($request->all());
+            $contactTask->user_id = $request->user()->id;
+
             $contactTask->save();
 
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Throwable | \Exception $e) {
             DB::rollBack();
-            return Response::json(['message' => 'An error occurred while updating contact phase.'], 500);
+            return Response::json(['message' => 'An error occurred while updating contact task.'], 500);
         }
 
         return Response::json(ContactTaskResource::make($contactTask));

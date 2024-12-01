@@ -17,8 +17,8 @@ class ContactTaskResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'phase_id' => $this->phase_id,
-            'contacts_count' => $this->contacts->count(),
+            'phase' => $this->phase?->name,
+            'contact_phase_id' => $this->contact_phase_id
         ];
     }
 }

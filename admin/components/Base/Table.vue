@@ -149,7 +149,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									:class="[column.hidden ? 'hidden md:table-cell' : '', `w-[${column.width}px] whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-grayCustom sm:pl-6 lg:pl-8`]"
 								>
 									<span v-if="column.type === 'text' || column.type === 'number'">
-										{{ item[column.key] }}
+										{{ item[column.key] ?? '-' }}
 									</span>
 									<span v-else-if="column.type === 'enum'">
 										{{ enums[column.key][item[column.key]] }}

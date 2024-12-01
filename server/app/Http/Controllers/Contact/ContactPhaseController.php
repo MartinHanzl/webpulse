@@ -80,10 +80,11 @@ class ContactPhaseController extends Controller
             DB::beginTransaction();
 
             $contactPhase->fill($request->all());
+            $contactPhase->user_id = $request->user()->id;
             $contactPhase->save();
 
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Throwable | \Exception $e) {
             DB::rollBack();
             return Response::json(['message' => 'An error occurred while updating contact phase.'], 500);
         }

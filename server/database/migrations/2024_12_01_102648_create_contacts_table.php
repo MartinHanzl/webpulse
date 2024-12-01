@@ -40,8 +40,8 @@ return new class extends Migration {
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->unsignedBigInteger('phase_id')->nullable();
-            $table->foreign('phase_id')->references('id')->on('contact_phases')->onDelete('set null');
+            $table->unsignedBigInteger('contact_phase_id')->nullable();
+            $table->foreign('contact_phase_id')->references('id')->on('contact_phases')->onDelete('set null');
 
             $table->timestamps();
         });
@@ -82,16 +82,30 @@ return new class extends Migration {
             $table->timestamps();
         });
 
+        // Contacts has tasks
+        Schema::create('contacts_has_tasks', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('contact_id');
+            $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
+
+            $table->unsignedBigInteger('contact_task_id');
+            $table->foreign('contact_task_id')->references('id')->on('contact_tasks')->onDelete('cascade');
+
+            $table->timestamps();
+        });
+
         // contacts history
         Schema::create('contact_histories', function (Blueprint $table) {
             $table->id();
+            $table->string('description');
+            $table->string('note')->nullable();
+
             $table->unsignedBigInteger('contact_id');
             $table->foreign('contact_id')->references('id')->on('contacts')->onDelete('cascade');
 
             $table->unsignedBigInteger('contact_phase_id')->nullable();
             $table->foreign('contact_phase_id')->references('id')->on('contact_phases')->onDelete('set null');
 
-            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
@@ -104,6 +118,7 @@ return new class extends Migration {
         Schema::dropIfExists('contact_phases');
         Schema::dropIfExists('contact_sources');
         Schema::dropIfExists('contact_tasks');
+        Schema::dropIfExists('contacts_has_tasks');
         Schema::dropIfExists('contacts');
         Schema::dropIfExists('contact_histories');
     }

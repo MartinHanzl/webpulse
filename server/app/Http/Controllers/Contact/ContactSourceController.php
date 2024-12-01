@@ -80,12 +80,13 @@ class ContactSourceController extends Controller
             DB::beginTransaction();
 
             $contactSource->fill($request->all());
+            $contactSource->user_id = $request->user()->id;
             $contactSource->save();
 
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Throwable | \Exception $e) {
             DB::rollBack();
-            return Response::json(['message' => 'An error occurred while updating contact phase.'], 500);
+            return Response::json(['message' => 'An error occurred while updating contact source.'], 500);
         }
 
         return Response::json(ContactSourceResource::make($contactSource));

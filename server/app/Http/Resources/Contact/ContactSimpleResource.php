@@ -22,8 +22,8 @@ class ContactSimpleResource extends JsonResource
             'phone_prefix' => $this->phone_prefix,
             'phone' => $this->phone,
             'email' => $this->email,
-            'phase' => $this->phase->name,
-            'source' => $this->source->name,
+            'phase' => $this->phase?->name,
+            'source' => $this->source?->name,
             'contact' => ContactSimpleResource::make($this->contact),
         ];
     }

@@ -47,7 +47,7 @@ const navigation = ref([
 		{ name: 'Statistiky', link: '/demo', icon: ChartPieIcon, current: false },
 	] },
 	{ title: 'Byznys a osobní růst', menu: [
-		{ name: 'Kontakty', link: '/demo', icon: UsersIcon, current: false, slug: 'contacts' },
+		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false, slug: 'contacts' },
 		{ name: 'Kalendář', link: '/demo', icon: CalendarIcon, current: false, slug: 'calendars' },
 		{ name: 'Cashflow', link: '/demo', icon: BanknotesIcon, current: false, slug: 'cashflows' },
 	] },

@@ -82,7 +82,7 @@ defineRule('email', (value) => {
 			class="text-danger ml-1"
 		>*</span></label>
 		<Field
-			v-if="type === 'text' || type === 'email' || type === 'password'"
+			v-if="type === 'text' || type === 'email' || type === 'password' || type === 'datetime-local' || type === 'date' || type === 'time'"
 			v-bind="$attrs"
 			v-model="model"
 			:rules="rules"

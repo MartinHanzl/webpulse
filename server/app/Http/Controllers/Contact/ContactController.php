@@ -8,6 +8,7 @@ use App\Http\Resources\Contact\ContactSimpleResource;
 use App\Models\Contact\Contact;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -101,10 +102,27 @@ class ContactController extends Controller
             DB::beginTransaction();
 
             $contact->fill($request->all());
+            $contact->user_id = $request->user()->id;
+
+            /*$contact->contact_phase_id = $request->has('contact_phase_id') ? $request->get('contact_phase_id') : null;
+            $contact->contact_source_id = $request->has('contact_source_id') ? $request->get('contact_source_id') : null;*/
+
+            if($request->has('formatted_last_contacted_at') && $request->get('formatted_last_contacted_at') != null) {
+                $contact->last_contacted_at = Carbon::parse($request->get('formatted_last_contacted_at'));
+            } else {
+                $contact->last_contacted_at = null;
+            }
+
+            if($request->has('formatted_next_meeting') && $request->get('formatted_next_meeting') != null) {
+                $contact->next_meeting = Carbon::parse($request->get('formatted_next_meeting'));
+            } else {
+                $contact->next_meeting = null;
+            }
+
             $contact->save();
 
             DB::commit();
-        } catch (\Exception $e) {
+        } catch (\Throwable | \Exception $e) {
             DB::rollBack();
             return Response::json(['message' => 'An error occurred while updating contact.'], 500);
         }
@@ -121,7 +139,7 @@ class ContactController extends Controller
             App::abort(400);
         }
 
-        $contact = Contact::find($id);
+        $contact = Contact::with(['contact', 'source', 'phase', 'tasks', 'histories'])->find($id);
         if (!$contact) {
             App::abort(404);
         }

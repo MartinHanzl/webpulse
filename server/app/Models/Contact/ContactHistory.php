@@ -12,9 +12,10 @@ class ContactHistory extends Model
     protected $table = 'contact_histories';
 
     protected $fillable = [
+        'note',
+        'description',
         'contact_id',
         'contact_phase_id',
-        'note',
     ];
 
     public function contact()
