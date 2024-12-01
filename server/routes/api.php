@@ -8,6 +8,10 @@ use App\Http\Controllers\QuickAccessController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\UserGroupController;
 use App\Http\Controllers\User\ProfileController;
+use App\Http\Controllers\Contact\ContactPhaseController;
+use App\Http\Controllers\Contact\ContactSourceController;
+use App\Http\Controllers\Contact\ContactTaskController;
+use App\Http\Controllers\Contact\ContactController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +79,46 @@ Route::group([
             Route::get('{id}', [UserController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [UserController::class, 'store']);
             Route::delete('{id}', [UserController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        // Contact routes
+        Route::group([
+            'prefix' => 'contact'
+        ], function () {
+            // Contact phase routes
+            Route::group([
+                'prefix' => 'phase'
+            ], function () {
+                Route::get('', [ContactPhaseController::class, 'index']);
+                Route::get('{id}', [ContactPhaseController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [ContactPhaseController::class, 'store']);
+                Route::delete('{id}', [ContactPhaseController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            // Contact source routes
+            Route::group([
+                'prefix' => 'source'
+            ], function () {
+                Route::get('', [ContactSourceController::class, 'index']);
+                Route::get('{id}', [ContactSourceController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [ContactSourceController::class, 'store']);
+                Route::delete('{id}', [ContactSourceController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            // Contact task routes
+            Route::group([
+                'prefix' => 'source'
+            ], function () {
+                Route::get('', [ContactTaskController::class, 'index']);
+                Route::get('{id}', [ContactTaskController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [ContactTaskController::class, 'store']);
+                Route::delete('{id}', [ContactTaskController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            Route::get('', [ContactController::class, 'index']);
+            Route::get('{id}', [ContactController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [ContactController::class, 'store']);
+            Route::delete('{id}', [ContactController::class, 'destroy'])->where('id', '[0-9]+');
         });
     });
 });

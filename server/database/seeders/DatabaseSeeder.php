@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
                     [
 
                         'name' => 'Uživatelské skupiny',
-                        'slug' => 'user_group',
+                        'slug' => 'user_groups',
                         'permissions' => [
                             'view' => true,
                             'edit' => true,
