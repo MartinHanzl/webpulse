@@ -28,6 +28,8 @@ class ContactResource extends JsonResource
             'goal' => $this->goal,
             'note' => $this->note,
             'user_id' => $this->user_id,
+            'phase_id' => $this->contact_phase_id,
+            'source_id' => $this->contact_source_id,
             'parent_contact' => ContactSimpleResource::make($this->contact),
             'source' => ContactSourceResource::make($this->source),
             'phase' => ContactPhaseResource::make($this->phase),
