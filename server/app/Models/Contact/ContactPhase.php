@@ -29,6 +29,6 @@ class ContactPhase extends Model
 
     public function tasks()
     {
-        return $this->hasMany(ContactTask::class, 'phase_id', 'id');
+        return $this->hasMany(ContactTask::class, 'contact_phase_id', 'id');
     }
 }
