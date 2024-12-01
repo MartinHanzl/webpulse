@@ -107,7 +107,7 @@ Route::group([
 
             // Contact task routes
             Route::group([
-                'prefix' => 'source'
+                'prefix' => 'task'
             ], function () {
                 Route::get('', [ContactTaskController::class, 'index']);
                 Route::get('{id}', [ContactTaskController::class, 'show'])->where('id', '[0-9]+');

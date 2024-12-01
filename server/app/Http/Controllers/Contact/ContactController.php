@@ -78,8 +78,19 @@ class ContactController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
-            'color' => 'nullable|string|max:255',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'phone' => 'nullable|string|max:255',
+            'email' => 'nullable|string|max:255',
+            'company' => 'nullable|string|max:255',
+            'street' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'zip' => 'nullable|string|max:255',
+            'occupation' => 'nullable|string|max:255',
+            'goal' => 'nullable|string|max:255',
+            'contact_phase_id' => 'nullable|integer|exists:contact_phases,id',
+            'contact_source_id' => 'nullable|integer|exists:contact_sources,id',
+            'contact_id' => 'nullable|integer|exists:contacts,id',
         ]);
 
         if ($validator->fails()) {
@@ -95,7 +106,7 @@ class ContactController extends Controller
             DB::commit();
         } catch (\Exception $e) {
             DB::rollBack();
-            return Response::json(['message' => 'An error occurred while updating contact phase.'], 500);
+            return Response::json(['message' => 'An error occurred while updating contact.'], 500);
         }
 
         return Response::json(ContactResource::make($contact));
