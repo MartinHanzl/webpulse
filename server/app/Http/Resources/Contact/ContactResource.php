@@ -33,6 +33,8 @@ class ContactResource extends JsonResource
             'phase' => ContactPhaseResource::make($this->phase),
             //'tasks' => ContactTaskResource::collection($this->tasks),
             'history' => ContactHistoryResource::collection($this->histories),
+            'last_contacted_at' => $this->last_contacted_at,
+            'next_meeting' => $this->next_meeting,
         ];
     }
 }
