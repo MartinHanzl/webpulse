@@ -60,10 +60,10 @@ class Contact extends Model
         return $this->belongsTo(ContactSource::class, 'contact_source_id', 'id');
     }
 
-    public function tasks()
+    /*public function tasks()
     {
         return $this->hasMany(ContactTask::class, 'contact_id', 'id');
-    }
+    }*/
 
     public function histories()
     {

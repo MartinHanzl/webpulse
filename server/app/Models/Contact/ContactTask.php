@@ -17,10 +17,10 @@ class ContactTask extends Model
         'phase_id',
     ];
 
-    public function contacts()
+    /*public function contacts()
     {
         return $this->belongsTo(Contact::class, 'contact_id', 'id');
-    }
+    }*/
 
     public function phase()
     {

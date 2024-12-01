@@ -31,7 +31,7 @@ class ContactResource extends JsonResource
             'parent_contact' => ContactSimpleResource::make($this->contact),
             'source' => ContactSourceResource::make($this->source),
             'phase' => ContactPhaseResource::make($this->phase),
-            'tasks' => ContactTaskResource::collection($this->tasks),
+            //'tasks' => ContactTaskResource::collection($this->tasks),
             'history' => ContactHistoryResource::collection($this->histories),
         ];
     }
