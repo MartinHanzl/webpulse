@@ -21,7 +21,7 @@ class ContactTask extends Model
 
     public function phase()
     {
-        return $this->belongsTo(ContactPhase::class, 'phase_id', 'id');
+        return $this->belongsTo(ContactPhase::class, 'contact_phase_id', 'id');
     }
 
     public function contacts()

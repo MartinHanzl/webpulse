@@ -24,7 +24,7 @@ const breadcrumbs = ref([
 	},
 	{
 		name: 'Úkoly',
-		link: '/faze',
+		link: '/ukoly',
 		current: false,
 	},
 	{

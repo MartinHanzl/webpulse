@@ -48,7 +48,7 @@ const props = defineProps({
 });
 defineRule('required', (value) => {
 	if (!value) {
-		return `Pole ${props.label?.toLowerCase()} je povinné.`;
+		return `Pole je povinné.`;
 	}
 	return true;
 });
