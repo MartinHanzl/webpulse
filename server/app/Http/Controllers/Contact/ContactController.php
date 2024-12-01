@@ -30,7 +30,16 @@ class ContactController extends Controller
                 $searchString = explode(':', $searchString);
                 $query->where($searchString[0], 'like', '%' . $searchString[1] . '%');
             } else {
-                $query->where('name', 'like', '%' . $searchString . '%');
+                $query->where('firstname', 'like', '%' . $searchString . '%')
+                    ->orWhere('lastname', 'like', '%' . $searchString . '%')
+                    ->orWhere('phone', 'like', '%' . $searchString . '%')
+                    ->orWhere('email', 'like', '%' . $searchString . '%')
+                    ->orWhere('company', 'like', '%' . $searchString . '%')
+                    ->orWhere('street', 'like', '%' . $searchString . '%')
+                    ->orWhere('city', 'like', '%' . $searchString . '%')
+                    ->orWhere('zip', 'like', '%' . $searchString . '%')
+                    ->orWhere('occupation', 'like', '%' . $searchString . '%')
+                    ->orWhere('goal', 'like', '%' . $searchString . '%');
             }
         }
 
