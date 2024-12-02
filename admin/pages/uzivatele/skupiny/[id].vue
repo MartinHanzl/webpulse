@@ -46,7 +46,7 @@ const allowedPermissions = ref([
 	{ name: 'Nacenění', value: 'Nacenění', slug: 'pricings' },
 	{ name: 'Uživatelé', value: 'Uživatelé', slug: 'users' },
 	{ name: 'Uživatelské skupiny', value: 'Uživatelské skupiny', slug: 'user_groups' },
-	{ name: 'šabony zpráv', value: 'Šablony zpráv', slug: 'message_blueprints' },
+	{ name: 'Šablony zpráv', value: 'Šablony zpráv', slug: 'message_blueprints' },
 ]);
 
 const item = ref({
