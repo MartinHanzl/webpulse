@@ -12,6 +12,7 @@ use App\Http\Controllers\Contact\ContactPhaseController;
 use App\Http\Controllers\Contact\ContactSourceController;
 use App\Http\Controllers\Contact\ContactTaskController;
 use App\Http\Controllers\Contact\ContactController;
+use App\Http\Controllers\Message\MessageBlueprintController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,6 +120,19 @@ Route::group([
             Route::get('{id}', [ContactController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [ContactController::class, 'store']);
             Route::delete('{id}', [ContactController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        Route::group([
+            'prefix' => 'message'
+        ], function () {
+            Route::group([
+                'prefix' => 'blueprint'
+            ], function () {
+                Route::get('', [MessageBlueprintController::class, 'index']);
+                Route::get('{id}', [MessageBlueprintController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [MessageBlueprintController::class, 'store']);
+                Route::delete('{id}', [MessageBlueprintController::class, 'destroy'])->where('id', '[0-9]+');
+            });
         });
     });
 });

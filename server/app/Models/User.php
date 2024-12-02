@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Message\MessageBlueprint;
 use App\Models\QuickAccess\QuickAccess;
 use App\Models\User\UserGroup;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -54,5 +55,15 @@ class User extends Authenticatable
     public function userGroup()
     {
         return $this->belongsTo(UserGroup::class, 'user_group_id', 'id');
+    }
+
+    public function messages()
+    {
+        return $this->hasMany(MessageBlueprint::class, 'user_id', 'id');
+    }
+
+    public function getAvatarAttribute($value)
+    {
+        return $value ? asset('storage/' . $value) : null;
     }
 }

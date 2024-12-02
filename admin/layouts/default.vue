@@ -26,6 +26,7 @@ import {
 	WalletIcon,
 	DocumentTextIcon,
 	AdjustmentsHorizontalIcon,
+    ChatBubbleBottomCenterTextIcon
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
@@ -48,6 +49,7 @@ const navigation = ref([
 	] },
 	{ title: 'Byznys a osobní růst', menu: [
 		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false, slug: 'contacts' },
+		{ name: 'Šablony zpráv', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'messages_blueprints' },
 		{ name: 'Kalendář', link: '/demo', icon: CalendarIcon, current: false, slug: 'calendars' },
 		{ name: 'Cashflow', link: '/demo', icon: BanknotesIcon, current: false, slug: 'cashflows' },
 	] },
