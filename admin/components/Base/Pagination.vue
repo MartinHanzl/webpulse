@@ -103,7 +103,7 @@ generatePages();
 						:class="[generatedPage === page ? 'bg-primaryCustom text-white' : 'text-grayDark ring-1 ring-inset ring-gray-300', 'relative z-10 inline-flex items-center px-4 py-2 text-sm font-semibold cursor-pointer']"
 						@click="generatedPage != '...' && generatedPage !== page ? emit('update-page', Number(generatedPage)) : null"
 					>{{ generatedPage }}</span>
-					<spann
+					<span
 						:class="[page === lastPage ? 'cursor-not-allowed' : 'cursor-pointer', 'relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0']"
 					>
 						<span class="sr-only">Následující</span>
@@ -112,7 +112,7 @@ generatePages();
 							aria-hidden="true"
 							@click="page !== lastPage ? emit('update-page', Number(page+1)) : null"
 						/>
-					</spann>
+					</span>
 				</nav>
 			</div>
 		</div>

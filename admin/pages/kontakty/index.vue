@@ -135,8 +135,8 @@ definePageMeta({
 					{ key: 'lastname', name: 'Příjmení', type: 'text', width: 80, hidden: false, sortable: true },
 					{ key: 'phone', name: 'Telefon', type: 'text', width: 80, hidden: true, sortable: true },
 					{ key: 'email', name: 'E-mail', type: 'text', width: 80, hidden: true, sortable: true },
-					{ key: 'phase', name: 'Fáze', type: 'text', width: 80, hidden: true, sortable: false },
-					{ key: 'source', name: 'Zdroj', type: 'text', width: 80, hidden: true, sortable: false },
+					{ key: 'phase', name: 'Fáze', type: 'badge', width: 80, hidden: true, sortable: false, colorKey: 'phase_color' },
+					{ key: 'source', name: 'Zdroj', type: 'badge', width: 80, hidden: true, sortable: false, colorKey: 'source_color' },
 				]"
 				:actions="[
 					{ type: 'edit' },
