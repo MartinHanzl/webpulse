@@ -69,7 +69,7 @@ class MessageBlueprintController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'message' => 'required|string|max:255',
+            'message' => 'required|string',
             'type' => 'required|string|max:255',
         ]);
 
