@@ -115,6 +115,10 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 						aria-hidden="true"
 					/>
 				</button>
+				<LayoutActionsDropdown
+					v-if="links && links.length"
+					:links="links"
+				/>
 				<div
 					v-for="(action, key) in actions"
 					v-if="actions && actions.length"
@@ -139,20 +143,6 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 					</BaseButton>
 				</div>
 			</div>
-		</div>
-		<div v-if="links && links.length">
-			<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
-			<NuxtLink
-				v-for="(link, key) in links"
-				:key="key"
-				:to="link.to"
-			>
-				<BaseButton
-					variant="secondary"
-					size="lg"
-					class="mr-4 mt-2"
-				>{{ link.name }}</BaseButton>
-			</NuxtLink>
 		</div>
 		<QuickAccessDialog
 			v-model:show="quickAccessDialogShow"

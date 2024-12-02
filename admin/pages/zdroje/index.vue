@@ -127,6 +127,7 @@ definePageMeta({
 			:links="[
 				{ name: 'Kontakty', to: '/kontakty' },
 				{ name: 'Fáze', to: '/faze' },
+				{ name: 'Zdroje', to: '/zdroje' },
 				{ name: 'Úkoly', to: '/ukoly' },
 			]"
 		/>

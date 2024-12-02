@@ -271,7 +271,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 										/>
 										<ClipboardDocumentIcon
 											v-if="action.type === 'copy'"
-											class="cursor-pointer size-5 text-primaryLight hover:text-primaryLight ml-4"
+											class="cursor-pointer size-5 text-secondary hover:text-secondaryLight ml-4"
 											@click="copyToClipboard(item, action.key)"
 										/>
 										<BoltIcon
