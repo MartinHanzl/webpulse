@@ -135,7 +135,7 @@ definePageMeta({
 				:loading="loading"
 				:error="error"
 				singular="Šablona zprávy"
-				plural="Šablony zpráb"
+				plural="Šablony zpráv"
 				:query="tableQuery"
 				slug="message_blueprints"
 				@delete-item="deleteItem"
