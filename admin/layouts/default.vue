@@ -26,7 +26,7 @@ import {
 	WalletIcon,
 	DocumentTextIcon,
 	AdjustmentsHorizontalIcon,
-    ChatBubbleBottomCenterTextIcon
+	ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';

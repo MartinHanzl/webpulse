@@ -4,9 +4,12 @@ import {
 	BoltIcon,
 	MagnifyingGlassIcon,
 	TrashIcon,
+	ClipboardDocumentIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
+
+const toast = useToast();
 
 const user = useSanctumUser();
 const userGroupStore = useUserGroupStore();
@@ -95,6 +98,23 @@ function canDelete(slug: string) {
 	return false;
 }
 
+async function copyToClipboard(item, key) {
+	console.log(item[key]);
+	await navigator.clipboard.writeText(item[key]).then(() => {
+		toast.add({
+			title: 'Kopírováno',
+			description: 'Zpráva byla úspěšně zkopírována do schránky.',
+			color: 'green',
+		});
+	}).catch(() => {
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se zkopírovat zprávu do schránky.',
+			color: 'red',
+		});
+	});
+}
+
 const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dialog']);
 </script>
 
@@ -154,6 +174,9 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									<span v-else-if="column.type === 'enum'">
 										{{ enums[column.key][item[column.key]] }}
 									</span>
+									<span v-else-if="column.type === 'date'">
+										{{ new Date(item[column.key]).toLocaleDateString() }}
+									</span>
 									<NuxtLink
 										v-else-if="column.type === 'link'"
 										:to="item[column.key]"
@@ -170,8 +193,13 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									>
 										<MagnifyingGlassIcon
 											v-if="action.type === 'edit' && canEdit(slug) || action.type === 'edit' && slug === ''"
-											class="cursor-pointer size-5 text-primaryCustom hover:text-primaryLight"
+											class="cursor-pointer size-5 text-primaryCustom hover:text-primaryLight ml-4"
 											@click="router.push(`${route.fullPath}/${item.id}`)"
+										/>
+										<ClipboardDocumentIcon
+											v-if="action.type === 'copy'"
+											class="cursor-pointer size-5 text-primaryLight hover:text-primaryLight ml-4"
+											@click="copyToClipboard(item, action.key)"
 										/>
 										<BoltIcon
 											v-if="action.type === 'edit-dialog' && canEdit(slug) || action.type === 'edit-dialog' && slug === ''"

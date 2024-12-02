@@ -116,7 +116,7 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 			:actions="[
-				{ type: 'add', text: 'Přidat fázi procesu' },
+				{ type: 'add', text: 'Přidat šablonu' },
 			]"
 			slug="message_blueprints"
 		/>
@@ -127,8 +127,10 @@ definePageMeta({
 					{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: true },
 					{ key: 'name', name: 'Název', type: 'text', width: 80, hidden: false, sortable: true },
 					{ key: 'type', name: 'Typ', type: 'text', width: 80, hidden: true, sortable: true },
+					{ key: 'updated_at', name: 'Poslední úprava', type: 'date', width: 80, hidden: true, sortable: true },
 				]"
 				:actions="[
+					{ type: 'copy', key: 'message' },
 					{ type: 'edit' },
 					{ type: 'delete' },
 				]"

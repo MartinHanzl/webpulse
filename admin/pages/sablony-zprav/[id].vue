@@ -12,6 +12,15 @@ const router = useRouter();
 const error = ref(false);
 const loading = ref(false);
 
+const allowedTypes = ref([
+	{ value: 'E-mail', name: 'E-mail' },
+	{ value: 'SMS', name: 'SMS' },
+	{ value: 'LinkedIn', name: 'LinkedIn' },
+	{ value: 'Messenger', name: 'Messenger' },
+	{ value: 'Facebook', name: 'Facebook' },
+	{ value: 'Instagram', name: 'Instagram' },
+]);
+
 const pageTitle = ref(route.params.id === 'pridat' ? 'Nová šablona' : 'Detail šablony');
 
 const breadcrumbs = ref([
@@ -31,7 +40,7 @@ const item = ref({
 	id: null as number | null,
 	name: '' as string,
 	message: '' as string,
-  type: '' as string,
+	type: '' as string,
 });
 
 async function loadItem() {
@@ -41,8 +50,8 @@ async function loadItem() {
 	await client<{
 		id: number | null;
 		name: string;
-    message: string;
-    type: string;
+		message: string;
+		type: string;
 	}>('/api/admin/message/blueprint/' + route.params.id, {
 		method: 'GET',
 		headers: {
@@ -74,10 +83,10 @@ async function saveItem() {
 	loading.value = true;
 
 	await client<{
-    id: number | null;
-    name: string;
-    message: string;
-    type: string;
+		id: number | null;
+		name: string;
+		message: string;
+		type: string;
 	}>(route.params.id === 'pridat' ? '/api/admin/message/blueprint' : '/api/admin/message/blueprint/' + route.params.id, {
 		method: 'POST',
 		body: JSON.stringify(item.value),
@@ -91,7 +100,7 @@ async function saveItem() {
 			description: 'Nová šablona byla úspěšně vytvořena.',
 			color: 'green',
 		});
-		router.push('/faze');
+		router.push('/sablony-zprav');
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -138,6 +147,22 @@ definePageMeta({
 							name="name"
 							rules="required|min:3"
 							class="col-span-1"
+						/>
+						<BaseFormSelect
+							v-model="item.type"
+							label="Typ"
+							name="type"
+							:options="allowedTypes"
+							rules="required"
+							class="col-span-1"
+						/>
+						<BaseFormTextarea
+							v-model="item.message"
+							label="Zpráva"
+							name="message"
+							rules="required"
+							rows="10"
+							class="col-span-full"
 						/>
 					</div>
 				</LayoutContainer>
