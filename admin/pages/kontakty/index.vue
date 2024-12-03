@@ -133,8 +133,38 @@ async function deleteItem(id: number) {
 	});
 }
 
+async function saveItem(item) {
+	const client = useSanctumClient();
+	loading.value = true;
+
+	await client<{}>('/api/admin/contact/' + item.id, {
+		method: 'POST',
+		body: JSON.stringify(item),
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then(() => {
+		toast.add({
+			title: 'Hotovo',
+			description: 'Kontakt byl úspěšně uložen.',
+			color: 'green',
+		});
+	}).catch(() => {
+		error.value = true;
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se uložit kontakt. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
+			color: 'red',
+		});
+	}).finally(() => {
+		loading.value = false;
+		showQuickEditDialog.value = false;
+		loadItems();
+	});
+}
+
 function showEditDialog(item) {
-	console.log(item);
 	quickEditDialogItem.value = item;
 	showQuickEditDialog.value = true;
 }
@@ -178,6 +208,7 @@ useHead({
 });
 
 onMounted(() => {
+	searchString.value = '';
 	loadItems();
 	loadPhases();
 	loadSources();
@@ -241,6 +272,7 @@ definePageMeta({
 		<ContactQuickEditDialog
 			v-model:show="showQuickEditDialog"
 			v-model:item="quickEditDialogItem"
+			@save-item="saveItem"
 		/>
 	</div>
 </template>

@@ -5,7 +5,6 @@ import { ref } from 'vue';
 
 const toast = useToast();
 const showDeleteDialog = ref(false);
-const deleteDialogItem = ref(null);
 
 const show = defineModel('show', {
 	type: Boolean,
@@ -16,74 +15,7 @@ const item = defineModel('item', {
 	default: {},
 });
 
-const { refreshIdentity } = useSanctumAuth();
-const route = useRoute();
-
-async function submitForm() {
-	const client = useSanctumClient();
-
-	await client<{
-		id: null;
-		name: string;
-		link: string;
-		target: string;
-	}>(form.value.id == null ? '/api/admin/quick-access' : '/api/admin/quick-access/' + form.value.id, {
-		method: 'POST',
-		body: JSON.stringify(form.value),
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-		},
-	}).then(() => {
-		toast.add({
-			title: 'Hotovo',
-			description: 'Položka rychlého přístupu byla úspěšně ' + (form.value.id == null ? 'přidána' : 'upravena') + '.',
-			color: 'green',
-		});
-		refreshIdentity();
-	}).catch(() => {
-		toast.add({
-			title: 'Chyba',
-			description: 'Nepodařilo se ' + (form.value.id == null ? 'přidat' : 'upravit') + ' položku rychlého přístupu.',
-			color: 'red',
-		});
-	}).finally(() => {
-		showDeleteDialog.value = false;
-		show.value = false;
-	});
-}
-async function deleteItem() {
-	const client = useSanctumClient();
-
-	await client<{
-		id: null;
-		name: string;
-		link: string;
-		target: string;
-	}>('/api/admin/quick-access/' + form.value.id, {
-		method: 'DELETE',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-		},
-	}).then(() => {
-		toast.add({
-			title: 'Hotovo',
-			description: 'Položka rychlého přístupu byla úspěšně smazána.',
-			color: 'green',
-		});
-		refreshIdentity();
-	}).catch(() => {
-		toast.add({
-			title: 'Chyba',
-			description: 'Nepodařilo se smazat položku rychlého přístupu.',
-			color: 'red',
-		});
-	}).finally(() => {
-		showDeleteDialog.value = false;
-		show.value = false;
-	});
-}
+const emit = defineEmits(['save-item']);
 </script>
 
 <template>
@@ -116,9 +48,9 @@ async function deleteItem() {
 							leave-from="opacity-100 translate-y-0 sm:scale-100"
 							leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 						>
-							<DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+							<DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6">
 								<Form
-									@submit="submitForm"
+									@submit="emit('save-item', item)"
 								>
 									<div class="sm:flex sm:items-start">
 										<div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
@@ -146,18 +78,19 @@ async function deleteItem() {
 													</p>
 												</div>
 												<div class="col-span-1 grid grid-cols-1 gap-y-4 text-wrap">
-                            <BaseFormTextarea
-                              v-model="item.note"
-                              class="text-sm font-medium text-grayDark col-span-full"
-                              label="Poznámka"
-                              rules="required" />
-                          <BaseFormInput
-                              v-model="item.formatted_last_contacted_at"
-                              type="datetime-local"
-                              label="Poslední kontakt/pokus o kontakt"
-                              name="last_contacted_at"
-                              class="text-sm font-medium text-grayDark col-span-full"
-                          />
+													<BaseFormTextarea
+														v-model="item.note"
+														class="text-sm font-medium text-grayDark col-span-full"
+														label="Poznámka"
+														rules="required"
+													/>
+													<BaseFormInput
+														v-model="item.formatted_last_contacted_at"
+														type="datetime-local"
+														label="Poslední kontakt/pokus o kontakt"
+														name="last_contacted_at"
+														class="text-sm font-medium text-grayDark col-span-full"
+													/>
 												</div>
 											</div>
 										</div>
@@ -189,10 +122,5 @@ async function deleteItem() {
 				</div>
 			</Dialog>
 		</TransitionRoot>
-		<BaseDialogDelete
-			v-model:show="showDeleteDialog"
-			v-model:item="deleteDialogItem"
-			@delete-item="deleteItem"
-		/>
 	</div>
 </template>
