@@ -6,6 +6,9 @@ import { definePageMeta } from '#imports';
 const toast = useToast();
 const pageTitle = ref('Kontakty');
 
+const sources = ref([]);
+const phases = ref([]);
+
 const loading = ref(false);
 const error = ref(false);
 
@@ -24,7 +27,12 @@ const tableQuery = ref({
 	page: 1 as number,
 	orderBy: 'id' as string,
 	orderWay: 'desc' as string,
+	filters: [],
 });
+const filters = ref([
+	{ name: 'Podle fáze procesu' },
+	{ name: 'Podle zdroje' },
+]);
 
 const items = ref([]);
 
@@ -47,6 +55,54 @@ async function loadItems() {
 		toast.add({
 			title: 'Chyba',
 			description: 'Nepodařilo se načíst kontakty. Zkuste to prosím později.',
+			color: 'red',
+		});
+	}).finally(() => {
+		loading.value = false;
+	});
+}
+
+async function loadPhases() {
+	const client = useSanctumClient();
+	loading.value = true;
+
+	await client<{}>('/api/admin/contact/phase', {
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then((response) => {
+		phases.value = response;
+	}).catch(() => {
+		error.value = true;
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se načíst fáze. Zkuste to prosím později.',
+			color: 'red',
+		});
+	}).finally(() => {
+		loading.value = false;
+	});
+}
+
+async function loadSources() {
+	const client = useSanctumClient();
+	loading.value = true;
+
+	await client<{}>('/api/admin/contact/source', {
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then((response) => {
+		sources.value = response;
+	}).catch(() => {
+		error.value = true;
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se načíst zdroje. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -93,6 +149,18 @@ function updatePage(page: number) {
 	loadItems();
 }
 
+function emitUpdateFilters(data: { slug: string; value: string }) {
+  const filter = tableQuery.value.filters.find((filter) => filter.slug === data.slug);
+  if (!filter) {
+    tableQuery.value.filters.push({ slug: data.slug, values: [data.value] });
+  } else {
+    if (!filter.values.includes(data.value)) {
+      filter.values.push(data.value);
+    }
+  }
+  loadItems();
+}
+
 const debouncedLoadItems = debounce(loadItems, 400);
 watch(searchString, () => {
 	tableQuery.value.search = searchString.value;
@@ -105,6 +173,8 @@ useHead({
 
 onMounted(() => {
 	loadItems();
+	loadPhases();
+	loadSources();
 });
 definePageMeta({
 	middleware: 'sanctum:auth',
@@ -119,6 +189,11 @@ definePageMeta({
 			:actions="[
 				{ type: 'add', text: 'Přidat kontakt' },
 			]"
+			:filters="[
+				{ title: 'Podle fáze', data: phases, multiple: true, type: 'badge', slug: 'phase' },
+				{ title: 'Podle zdroje', data: sources, multiple: true, type: 'badge', slug: 'source' },
+			]"
+			:filters-query="tableQuery"
 			slug="contacts"
 			:links="[
 				{ name: 'Kontakty', to: '/kontakty' },
@@ -126,6 +201,7 @@ definePageMeta({
 				{ name: 'Zdroje', to: '/zdroje' },
 				{ name: 'Úkoly', to: '/ukoly' },
 			]"
+			@update-filters="emitUpdateFilters"
 		/>
 		<LayoutContainer>
 			<BaseTable

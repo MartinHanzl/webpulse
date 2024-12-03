@@ -43,6 +43,20 @@ class ContactController extends Controller
                     ->orWhere('goal', 'like', '%' . $searchString . '%');
             }
         }
+        if($request->has('filters')) {
+            $rawFilters = json_decode($request->get('filters'));
+            switch ($rawFilters->slug) {
+                case 'phase':
+                    $query->whereIn('contact_phase_id', $rawFilters->values);
+                    break;
+                case 'source':
+                    $query->whereIn('contact_source_id', $rawFilters->values);
+                    break;
+                case 'contact':
+                    $query->where('contact_id', $rawFilters->values);
+                    break;
+            }
+        }
 
         if ($request->has('orderWay') && $request->get('orderBy')) {
             $query->orderBy($request->get('orderBy'), $request->get('orderWay'));

@@ -39,9 +39,19 @@ const props = defineProps({
 		required: false,
 		default: [],
 	},
+	filters: {
+		type: Array,
+		required: false,
+		default: [],
+	},
+	filtersQuery: {
+		type: Object,
+		required: false,
+		default: {},
+	},
 });
 
-const emit = defineEmits(['save']);
+const emit = defineEmits(['save', 'update-filters']);
 const quickAccessItem = ref({
 	id: null,
 	name: props.title,
@@ -74,6 +84,10 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 		quickAccessItem.value = user.value.quick_access.find(item => item.link === route.fullPath);
 	}
 }
+
+const emitUpdateFilters = (data: { slug: string; value: string }) => {
+	emit('update-filters', data);
+};
 </script>
 
 <template>
@@ -143,6 +157,23 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 					</BaseButton>
 				</div>
 			</div>
+		</div>
+		<div
+			v-if="filters && filters.length"
+			class="grid grid-cols-12 gap-4"
+		>
+			<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
+			<ContactFilterDropdown
+				v-for="(filter, key) in filters"
+				:key="key"
+				class="col-span-2"
+				:title="filter.title"
+				:data="filter.data"
+				:multiple="filter.multiple"
+				:type="filter.type"
+				:slug="filter.slug"
+				@update-filters="emitUpdateFilters"
+			/>
 		</div>
 		<QuickAccessDialog
 			v-model:show="quickAccessDialogShow"
