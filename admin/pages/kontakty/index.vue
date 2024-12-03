@@ -29,10 +29,9 @@ const tableQuery = ref({
 	orderWay: 'desc' as string,
 	filters: [],
 });
-const filters = ref([
-	{ name: 'Podle fáze procesu' },
-	{ name: 'Podle zdroje' },
-]);
+
+const showQuickEditDialog = ref(false);
+const quickEditDialogItem = ref(null);
 
 const items = ref([]);
 
@@ -134,6 +133,12 @@ async function deleteItem(id: number) {
 	});
 }
 
+function showEditDialog(item) {
+	console.log(item);
+	quickEditDialogItem.value = item;
+	showQuickEditDialog.value = true;
+}
+
 function updateSort(column: string) {
 	if (tableQuery.value.orderBy === column) {
 		tableQuery.value.orderWay = tableQuery.value.orderWay === 'asc' ? 'desc' : 'asc';
@@ -150,15 +155,16 @@ function updatePage(page: number) {
 }
 
 function emitUpdateFilters(data: { slug: string; value: string }) {
-  const filter = tableQuery.value.filters.find((filter) => filter.slug === data.slug);
-  if (!filter) {
-    tableQuery.value.filters.push({ slug: data.slug, values: [data.value] });
-  } else {
-    if (!filter.values.includes(data.value)) {
-      filter.values.push(data.value);
-    }
-  }
-  loadItems();
+	const filter = tableQuery.value.filters.find(filter => filter.slug === data.slug);
+	if (!filter) {
+		tableQuery.value.filters.push({ slug: data.slug, values: [data.value] });
+	}
+	else {
+		if (!filter.values.includes(data.value)) {
+			filter.values.push(data.value);
+		}
+	}
+	loadItems();
 }
 
 const debouncedLoadItems = debounce(loadItems, 400);
@@ -217,6 +223,7 @@ definePageMeta({
 				]"
 				:actions="[
 					{ type: 'edit' },
+					{ type: 'edit-dialog' },
 					{ type: 'delete' },
 				]"
 				:loading="loading"
@@ -228,7 +235,12 @@ definePageMeta({
 				@delete-item="deleteItem"
 				@update-sort="updateSort"
 				@update-page="updatePage"
+				@open-dialog="showEditDialog"
 			/>
 		</LayoutContainer>
+		<ContactQuickEditDialog
+			v-model:show="showQuickEditDialog"
+			v-model:item="quickEditDialogItem"
+		/>
 	</div>
 </template>
