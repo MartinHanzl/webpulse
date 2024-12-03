@@ -61,9 +61,19 @@ const emit = defineEmits(['save-item']);
 												{{ item.firstname + ' ' + item.lastname }}
 											</DialogTitle>
 											<div
-												class="mt-6 grid grid-cols-2 gap-x-8"
+												class="mt-8 grid grid-cols-2 gap-x-8"
 											>
 												<div class="col-span-1 grid grid-cols-1 gap-y-4 text-wrap">
+													<p class="text-sm font-medium text-grayDark col-span-full">
+														<span class="font-semibold">Fáze:</span> <PropsBadge :color="item.phase_color">
+															{{ item.phase }}
+														</PropsBadge>
+													</p>
+													<p class="text-sm font-medium text-grayDark col-span-full">
+														<span class="font-semibold">Zdroj:</span> <PropsBadge :color="item.source_color">
+															{{ item.source }}
+														</PropsBadge>
+													</p>
 													<p class="text-sm font-medium text-grayDark col-span-full">
 														<span class="font-semibold">E-mail:</span> {{ item.email ?? '-' }}
 													</p>
