@@ -30,6 +30,8 @@ class ContactSimpleResource extends JsonResource
             'occupation' => $this->occupation,
             'goal' => $this->goal,
             'note' => $this->note,
+            'last_contacted_at' => $this->last_contacted_at,
+            'formatted_last_contacted_at' => $this->last_contacted_at?->format('Y-m-d H:i:s'),
         ];
     }
 }

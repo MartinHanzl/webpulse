@@ -129,9 +129,9 @@ async function deleteItem() {
 												{{ item.firstname + ' ' + item.lastname }}
 											</DialogTitle>
 											<div
-												class="mt-6 grid grid-cols-2 gapy-6"
+												class="mt-6 grid grid-cols-2 gap-x-8"
 											>
-												<div class="col-span-1 grid grid-cols-1 gap-y-4">
+												<div class="col-span-1 grid grid-cols-1 gap-y-4 text-wrap">
 													<p class="text-sm font-medium text-grayDark col-span-full">
 														<span class="font-semibold">E-mail:</span> {{ item.email ?? '-' }}
 													</p>
@@ -139,19 +139,25 @@ async function deleteItem() {
 														<span class="font-semibold">Telefon:</span> {{ item.phone ?? '-' }}
 													</p>
 													<p class="text-sm font-medium text-grayDark col-span-full">
-														<span class="font-semibold">Práce/obor/studium:</span> {{ item.email ?? '-' }}
+														<span class="font-semibold">Práce/obor/studium:</span> {{ item.occupation ?? '-' }}
 													</p>
 													<p class="text-sm font-medium text-grayDark col-span-full">
-														<span class="font-semibold">Sen/cíl:</span> {{ item.phone ?? '-' }}
+														<span class="font-semibold">Sen/cíl:</span> {{ item.goal ?? '-' }}
 													</p>
 												</div>
-												<div class="border-l col-span-1 grid grid-cols-1 gap-y-4">
-													<p class="text-sm font-medium text-grayDark col-span-full">
-														<span class="font-semibold">Práce/obor/studium:</span> {{ item.email ?? '-' }}
-													</p>
-													<p class="text-sm font-medium text-grayDark col-span-full">
-														<span class="font-semibold">Sen/cíl:</span> {{ item.phone ?? '-' }}
-													</p>
+												<div class="col-span-1 grid grid-cols-1 gap-y-4 text-wrap">
+                            <BaseFormTextarea
+                              v-model="item.note"
+                              class="text-sm font-medium text-grayDark col-span-full"
+                              label="Poznámka"
+                              rules="required" />
+                          <BaseFormInput
+                              v-model="item.formatted_last_contacted_at"
+                              type="datetime-local"
+                              label="Poslední kontakt/pokus o kontakt"
+                              name="last_contacted_at"
+                              class="text-sm font-medium text-grayDark col-span-full"
+                          />
 												</div>
 											</div>
 										</div>
