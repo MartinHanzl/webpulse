@@ -137,7 +137,7 @@ definePageMeta({
 				:columns="[
 					{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: true },
 					{ key: 'name', name: 'Název', type: 'text', width: 80, hidden: false, sortable: true },
-					{ key: 'phase', name: 'Fáze procesu', type: 'text', width: 80, hidden: true, sortable: true },
+					{ key: 'phase', name: 'Fáze procesu', type: 'badge', width: 80, hidden: true, sortable: true, colorKey: 'phase_color' },
 					{ key: 'contacts_count', name: 'Počet kontaktů', type: 'text', width: 80, hidden: true, sortable: false },
 				]"
 				:actions="[

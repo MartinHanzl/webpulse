@@ -139,6 +139,12 @@ definePageMeta({
 							rules="required|min:3"
 							class="col-span-1"
 						/>
+						<BaseFormColorPicker
+							v-model="item.color"
+							label="Barva"
+							name="color"
+							class="col-span-1"
+						/>
 					</div>
 				</LayoutContainer>
 			</div>
