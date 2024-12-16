@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, watch, computed } from 'vue';
 import {
 	Combobox,
 	ComboboxInput,
@@ -11,12 +11,21 @@ import {
 import { ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 import { debounce } from 'lodash';
 
+defineProps({
+	label: {
+		type: Number,
+		required: true,
+		default: '' as string | null,
+	},
+	name: {
+		type: String,
+		required: true,
+		default: '' as string | null,
+	},
+});
 const toast = useToast();
 
-const model = defineModel({
-	type: String,
-	required: true,
-});
+const model = ref<number | null>(null);
 
 const error = ref(false);
 const loading = ref(false);
@@ -27,6 +36,8 @@ const contacts = ref([
 
 const query = ref('');
 
+const emit = defineEmits(['update:modelValue']);
+
 async function loadItems() {
 	if (query.value === '' || query.value.length < 3) {
 		return;
@@ -35,7 +46,7 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{ id: number }>('/api/admin/contact', {
+	await client<{ id: number; firstname: string; lastname: string }>('/api/admin/contact', {
 		method: 'GET',
 		query: {
 			search: query.value,
@@ -60,25 +71,38 @@ async function loadItems() {
 const debouncedLoadItems = debounce(loadItems, 400);
 
 watch(query, debouncedLoadItems);
+
+const selectedContact = computed(() => {
+	return contacts.value.find(contact => contact.id === model.value) || { firstname: '', lastname: '' };
+});
+
+watch(model, (newValue) => {
+	emit('update:modelValue', newValue);
+});
 </script>
 
 <template>
 	<div class="w-72">
-		<pre>{{ model }}</pre>
 		<Combobox v-model="model">
 			<div class="relative mt-1">
 				<div
-					class="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
+					class="w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
 				>
+					<label
+						:for="name"
+						class="block text-sm/6 font-medium text-grayCustom"
+					>{{ label }}</label>
 					<ComboboxInput
 						class="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+						:name="name"
+						:display-value="() => selectedContact ? `${selectedContact.firstname} ${selectedContact.lastname}` : ''"
 						@change="query = $event.target.value"
 					/>
 					<ComboboxButton
 						class="absolute inset-y-0 right-0 flex items-center pr-2"
 					>
 						<ChevronUpDownIcon
-							class="h-5 w-5 text-gray-400"
+							class="h-5 w-5 text-grayLight"
 							aria-hidden="true"
 						/>
 					</ComboboxButton>
@@ -103,13 +127,13 @@ watch(query, debouncedLoadItems);
 							:key="index"
 							v-slot="{ selected, active }"
 							as="template"
-							:value="contact"
+							:value="contact.id"
 						>
 							<li
 								class="relative cursor-default select-none py-2 pl-10 pr-4"
 								:class="{
-									'bg-teal-600 text-white': active,
-									'text-gray-900': !active,
+									'bg-secondary text-grayDark': active,
+									'text-grayDark': !active,
 								}"
 							>
 								<span

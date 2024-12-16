@@ -420,7 +420,10 @@ definePageMeta({
 							name="contact_source_id"
 							class="col-span-full"
 						/>
-						<!--						<ContactAutocomplete v-model="item.contact_id" /> -->
+						<ContactAutocomplete
+							v-model="item.contact_id"
+							label="Od"
+						/>
 					</div>
 				</LayoutContainer>
 				<LayoutContainer class="col-span-1 w-full">
