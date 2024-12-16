@@ -35,6 +35,11 @@ const props = defineProps({
 		required: false,
 		default: 'primaryCustom',
 	},
+	checked: {
+		type: Boolean,
+		required: false,
+		default: false,
+	},
 });
 defineRule('min', (value, { min }) => {
 	if (value.length < min && props.type === 'text') {
@@ -143,6 +148,7 @@ const badgeClass = computed(() => (color: string) => {
 							:aria-describedby="name"
 							:name="name"
 							type="checkbox"
+							:checked="checked"
 							class="col-start-1 row-start-1 appearance-none rounded border border-grayLight bg-white checked:border-primaryCustom checked:bg-primaryCustom indeterminate:border-primaryCustom indeterminate:bg-primaryCustom disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100"
 						>
 						<svg

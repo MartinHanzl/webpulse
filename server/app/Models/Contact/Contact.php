@@ -5,6 +5,8 @@ namespace App\Models\Contact;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Contact extends Model
 {
@@ -68,5 +70,19 @@ class Contact extends Model
     public function tasks()
     {
         return $this->belongsToMany(ContactTask::class, 'contacts_has_tasks', 'contact_id', 'contact_task_id');
+    }
+
+    public function syncTasks(Request $request)
+    {
+        $tasks = $request->get('tasks', []);
+        if(!empty($tasks)) {
+            DB::table('contacts_has_tasks')->where('contact_id', $this->id)->delete();
+            foreach ($tasks as $task) {
+                DB::table('contacts_has_tasks')->insert([
+                    'contact_id' => $this->id,
+                    'contact_task_id' => $task
+                ]);
+            }
+        }
     }
 }

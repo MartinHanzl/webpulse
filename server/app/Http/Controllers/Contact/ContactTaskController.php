@@ -35,6 +35,8 @@ class ContactTaskController extends Controller
 
         if ($request->has('orderWay') && $request->get('orderBy')) {
             $query->orderBy($request->get('orderBy'), $request->get('orderWay'));
+        } else {
+            $query->orderBy('contact_phase_id', 'asc');
         }
 
         if ($request->has('paginate')) {

@@ -8,8 +8,10 @@ import {
 	ComboboxOption,
 	TransitionRoot,
 } from '@headlessui/vue';
-import { CheckIcon, ChevronUpDownIcon } from '@heroicons/vue/20/solid';
+import { ChevronUpDownIcon } from '@heroicons/vue/20/solid';
 import { debounce } from 'lodash';
+
+const toast = useToast();
 
 const model = defineModel({
 	type: String,
@@ -19,9 +21,10 @@ const model = defineModel({
 const error = ref(false);
 const loading = ref(false);
 
-const contacts = ref([]);
+const contacts = ref([
+	{ id: null, firstname: 'Načítám', lastname: 'kontatky...' },
+]);
 
-const selected = ref(contacts.value[0]);
 const query = ref('');
 
 async function loadItems() {
@@ -42,7 +45,7 @@ async function loadItems() {
 			'Content-Type': 'application/json',
 		},
 	}).then((response) => {
-		contacts.value = response.data;
+		contacts.value = response;
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -61,6 +64,7 @@ watch(query, debouncedLoadItems);
 
 <template>
 	<div class="w-72">
+		<pre>{{ model }}</pre>
 		<Combobox v-model="model">
 			<div class="relative mt-1">
 				<div
@@ -68,7 +72,6 @@ watch(query, debouncedLoadItems);
 				>
 					<ComboboxInput
 						class="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-						:display-value="(person) => person.name"
 						@change="query = $event.target.value"
 					/>
 					<ComboboxButton
@@ -113,7 +116,7 @@ watch(query, debouncedLoadItems);
 									class="block truncate"
 									:class="{ 'font-medium': selected, 'font-normal': !selected }"
 								>
-									{{ contact.name }}
+									{{ `${contact.firstname} ${contact.lastname}` }}
 								</span>
 							</li>
 						</ComboboxOption>

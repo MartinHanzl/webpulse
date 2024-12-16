@@ -133,6 +133,7 @@ class ContactController extends Controller
                 $contact->next_meeting = null;
             }
 
+            $contact->syncTasks($request);
             $contact->save();
 
             DB::commit();

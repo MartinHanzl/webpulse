@@ -18,7 +18,8 @@ class ContactTaskResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'phase' => $this->phase?->name,
-            'contact_phase_id' => $this->contact_phase_id
+            'contact_phase_id' => $this->contact_phase_id,
+            'phase_color' => $this->phase?->color,
         ];
     }
 }

@@ -63,10 +63,10 @@ const item = ref({
 		color: '' as string,
 	},
 	tasks: {
-		id: null as number | null,
-		name: '' as string,
-		phase_id: null as number | null,
-	},
+    id: null as number | null,
+    name: '' as string,
+    phase_id: null as number | null,
+  } as []
 });
 
 async function loadItem() {
@@ -108,7 +108,7 @@ async function loadItem() {
 			id: number | null;
 			name: string;
 			phase_id: string;
-		};
+		}[];
 	}>('/api/admin/contact/' + route.params.id, {
 		method: 'GET',
 		headers: {
@@ -117,6 +117,7 @@ async function loadItem() {
 		},
 	}).then((response) => {
 		item.value = response;
+		item.value.tasks = response.tasks.map(task => task.id);
 		breadcrumbs.value.pop();
 		breadcrumbs.value.push({
 			name: item.value.firstname + ' ' + item.value.lastname,
@@ -256,7 +257,7 @@ async function saveItem() {
 			id: number | null;
 			name: string;
 			phase_id: string;
-		};
+		}[];
 	}>(route.params.id === 'pridat' ? '/api/admin/contact' : '/api/admin/contact/' + route.params.id, {
 		method: 'POST',
 		body: JSON.stringify(item.value),
@@ -267,7 +268,7 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: 'Nový kontakt byl úspěšně vytvořen.',
+			description: `Nový kontakt byl úspěšně ${item.value.id === 'pridat' ? 'vytvořen' : 'uložen'}.`,
 			color: 'green',
 		});
 		router.push('/kontakty');
@@ -281,6 +282,16 @@ async function saveItem() {
 	}).finally(() => {
 		loading.value = false;
 	});
+}
+
+function addRemoveItemTask(taskId) {
+	if (item.value.tasks.includes(taskId)) {
+		item.value.tasks = item.value.tasks.filter(task => task !== taskId);
+		return;
+	}
+	else {
+		item.value.tasks.push(taskId);
+	}
 }
 
 useHead({
@@ -411,7 +422,7 @@ definePageMeta({
 							name="contact_source_id"
 							class="col-span-full"
 						/>
-						<ContactAutocomplete v-model="item.contact_id" />
+						<!--						<ContactAutocomplete v-model="item.contact_id" /> -->
 					</div>
 				</LayoutContainer>
 				<LayoutContainer class="col-span-1 w-full">
@@ -446,16 +457,20 @@ definePageMeta({
 					<h3 class="text-lg font-semibold text-grayCustom mb-8">
 						Úkoly
 					</h3>
-					<BaseFormCheckbox
-						v-for="(task, key) in tasks"
-						:key="task.id"
-						v-model="item.tasks"
-						:label="task.name"
-						:value="task.id"
-						type="checkbox"
-						:name="task.name"
-						class="col-span-1"
-					/>
+					<div class="grid grid-cols-3 gap-4">
+						<BaseFormCheckbox
+							v-for="(task, key) in tasks"
+							:key="key"
+							:label="task.name"
+							:name="task.id"
+							:value="item.tasks.includes(task.id)"
+							:checked="item.tasks.includes(task.id)"
+							class="col-span-1"
+							type="badge"
+							:color="task.phase_color"
+							@change="addRemoveItemTask(task.id)"
+						/>
+					</div>
 				</LayoutContainer>
 				<LayoutContainer class="col-span-full w-full">
 					<h3 class="text-lg font-semibold text-grayCustom mb-8">
