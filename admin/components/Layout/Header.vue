@@ -13,41 +13,41 @@ const quickAccessDialogShow = ref(false);
 const props = defineProps({
 	title: {
 		type: String,
-		required: true,
+		required: true as boolean,
 	},
 	description: {
 		type: String,
-		required: false,
+		required: false as boolean,
 	},
 	breadcrumbs: {
 		type: Array,
 		required: true,
-		default: [],
+		default: [] as [],
 	},
 	actions: {
 		type: Array,
 		required: false,
-		default: [],
+		default: [] as [],
 	},
 	slug: {
 		type: String,
 		required: false,
-		default: '',
+		default: '' as string | null,
 	},
 	links: {
 		type: Array,
 		required: false,
-		default: [],
+		default: [] as [],
 	},
 	filters: {
 		type: Array,
 		required: false,
-		default: [],
+		default: [] as [],
 	},
 	filtersQuery: {
 		type: Object,
 		required: false,
-		default: {},
+		default: null,
 	},
 });
 

@@ -39,7 +39,7 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/quick-access', {
+	await client<{ id: number }>('/api/admin/quick-access', {
 		method: 'GET',
 		query: tableQuery.value,
 		headers: {
@@ -65,13 +65,13 @@ async function deleteItem(id: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/quick-access/' + id, {
+	await client<{ id: number }>('/api/admin/quick-access/' + id, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
-	}).then((response) => {
+	}).then(() => {
 	}).catch(() => {
 		error.value = true;
 		toast.add({

@@ -12,7 +12,7 @@ const router = useRouter();
 const error = ref(false);
 const loading = ref(false);
 
-const { refreshIdentity, logout } = useSanctumAuth();
+const { refreshIdentity } = useSanctumAuth();
 const user = useSanctumUser();
 
 const pageTitle = ref(route.params.id === 'pridat' ? 'Nový uživatel' : 'Detail uživatele');

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import {
 	Combobox,
 	ComboboxInput,
@@ -35,7 +35,7 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/contact', {
+	await client<{ id: number }>('/api/admin/contact', {
 		method: 'GET',
 		query: {
 			search: query.value,

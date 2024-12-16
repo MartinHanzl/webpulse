@@ -37,7 +37,7 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/contact/phase', {
+	await client<{ id: number }>('/api/admin/contact/phase', {
 		method: 'GET',
 		query: tableQuery.value,
 		headers: {
@@ -63,7 +63,7 @@ async function deleteItem(id: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/contact/phase/' + id, {
+	await client<{ id: number }>('/api/admin/contact/phase/' + id, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',

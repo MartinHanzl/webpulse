@@ -1,12 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import { Field, ErrorMessage, defineRule } from 'vee-validate';
+import { defineRule } from 'vee-validate';
 
 const model = defineModel({
 	type: String,
 	required: true,
 });
-const props = defineProps({
+defineProps({
 	rules: {
 		type: String,
 		required: false,

@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Form } from 'vee-validate';
-import { useUserGroupStore } from '~/stores/userGroupStore';
 
-const userGroupStore = useUserGroupStore();
 const toast = useToast();
 
 const route = useRoute();
@@ -63,10 +61,10 @@ const item = ref({
 		color: '' as string,
 	},
 	tasks: {
-    id: null as number | null,
-    name: '' as string,
-    phase_id: null as number | null,
-  } as []
+		id: null as number | null,
+		name: '' as string,
+		phase_id: null as number | null,
+	} as [],
 });
 
 async function loadItem() {
@@ -140,14 +138,14 @@ async function loadPhases() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/contact/phase', {
+	await client<{ id: number }>('/api/admin/contact/phase', {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
 	}).then((response) => {
-		response.forEach((phase: any) => {
+		response.forEach((phase: { id: number; name: string }) => {
 			phases.value.push({
 				value: phase.id,
 				name: phase.name,
@@ -169,14 +167,14 @@ async function loadSources() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/contact/source', {
+	await client<{ id: number }>('/api/admin/contact/source', {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
 	}).then((response) => {
-		response.forEach((source: any) => {
+		response.forEach((source: { id: number; name: string }) => {
 			sources.value.push({
 				value: source.id,
 				name: source.name,
@@ -198,7 +196,7 @@ async function loadTasks() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/contact/task', {
+	await client<{ id: number }>('/api/admin/contact/task', {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',

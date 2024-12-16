@@ -22,7 +22,6 @@ const form = defineModel('form', {
 });
 
 const { refreshIdentity } = useSanctumAuth();
-const route = useRoute();
 
 async function submitForm() {
 	const client = useSanctumClient();

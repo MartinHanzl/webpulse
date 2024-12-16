@@ -13,8 +13,7 @@ const router = useRouter();
 const error = ref(false);
 const loading = ref(false);
 
-const { refreshIdentity, logout } = useSanctumAuth();
-const user = useSanctumUser();
+const { refreshIdentity } = useSanctumAuth();
 
 const pageTitle = ref(route.params.id === 'pridat' ? 'Nová uživatelská skupina' : 'Detail uživatelské skupiny');
 

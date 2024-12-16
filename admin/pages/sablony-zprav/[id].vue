@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Form } from 'vee-validate';
-import { useUserGroupStore } from '~/stores/userGroupStore';
 
-const userGroupStore = useUserGroupStore();
 const toast = useToast();
 
 const route = useRoute();

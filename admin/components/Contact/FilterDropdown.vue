@@ -6,27 +6,27 @@ defineProps({
 	title: {
 		type: String,
 		required: true,
-		default: '',
+		default: '' as string,
 	},
 	data: {
 		type: Array,
 		required: true,
-		default: [],
+		default: [] as [],
 	},
 	multiple: {
 		type: Array,
 		required: true,
-		default: [],
+		default: [] as [],
 	},
 	slug: {
 		type: String,
 		required: true,
-		default: '',
+		default: '' as string,
 	},
 	type: {
 		type: String,
 		required: true,
-		default: '',
+		default: '' as string,
 	},
 });
 

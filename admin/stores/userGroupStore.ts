@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
 
 export const useUserGroupStore = defineStore({
 	id: 'userGroupStore',
@@ -9,7 +8,9 @@ export const useUserGroupStore = defineStore({
 	actions: {
 		async fetchUserGroups() {
 			const client = useSanctumClient();
-			await client<{}>('/api/admin/user/group', {
+			await client<{
+				id: number;
+			}>('/api/admin/user/group', {
 				method: 'GET',
 				headers: {
 					'Accept': 'application/json',
@@ -22,7 +23,7 @@ export const useUserGroupStore = defineStore({
 	},
 	getters: {
 		userGroupsOptions() {
-			return this.userGroups.map((userGroup: any) => ({
+			return this.userGroups.map((userGroup: { name: string; label: string; id: number }) => ({
 				label: userGroup.name,
 				name: userGroup.name,
 				value: userGroup.id,

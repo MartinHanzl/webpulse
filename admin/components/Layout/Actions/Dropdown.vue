@@ -6,7 +6,7 @@ defineProps({
 	links: {
 		type: Array,
 		required: true,
-		default: [],
+		default: [] as [],
 	},
 });
 </script>

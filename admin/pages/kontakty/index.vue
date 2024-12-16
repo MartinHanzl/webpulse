@@ -39,7 +39,9 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/contact', {
+	await client<{
+		id: number;
+	}>('/api/admin/contact', {
 		method: 'GET',
 		query: tableQuery.value,
 		headers: {
@@ -65,7 +67,7 @@ async function loadPhases() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/contact/phase', {
+	await client<{ id: number }>('/api/admin/contact/phase', {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
@@ -89,7 +91,7 @@ async function loadSources() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/contact/source', {
+	await client<{ id: number }>('/api/admin/contact/source', {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
@@ -113,13 +115,13 @@ async function deleteItem(id: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{}>('/api/admin/contact/' + id, {
+	await client<{ id: number }>('/api/admin/contact/' + id, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
-	}).then((response) => {
+	}).then(() => {
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -137,7 +139,7 @@ async function saveItem(item) {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/contact/' + item.id, {
+	await client<{ id: number }>('/api/admin/contact/' + item.id, {
 		method: 'POST',
 		body: JSON.stringify(item),
 		headers: {

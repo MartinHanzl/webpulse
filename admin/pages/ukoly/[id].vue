@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Form } from 'vee-validate';
-import { useUserGroupStore } from '~/stores/userGroupStore';
 
-const userGroupStore = useUserGroupStore();
 const toast = useToast();
 
 const route = useRoute();
@@ -78,14 +76,14 @@ async function loadPhases() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{}>('/api/admin/contact/phase', {
+	await client<{ id: number }>('/api/admin/contact/phase', {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
 	}).then((response) => {
-		response.forEach((phase: any) => {
+		response.forEach((phase: { id: number; name: string }) => {
 			phases.value.push({
 				value: phase.id,
 				name: phase.name,

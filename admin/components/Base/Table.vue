@@ -23,52 +23,52 @@ defineProps({
 	items: {
 		type: Array,
 		required: true,
-		default: [],
+		default: [] as [],
 	},
 	columns: {
 		type: Array,
 		required: true,
-		default: [],
+		default: [] as [],
 	},
 	enums: {
 		type: Object,
 		required: false,
-		default: {},
+		default: null,
 	},
 	actions: {
 		type: Array,
 		required: false,
-		default: [],
+		default: [] as [],
 	},
 	loading: {
 		type: Boolean,
 		required: false,
-		default: false,
+		default: false as boolean,
 	},
 	error: {
 		type: Boolean,
 		required: false,
-		default: false,
+		default: false as boolean,
 	},
 	singular: {
 		type: String,
 		required: false,
-		default: '',
+		default: '' as string,
 	},
 	plural: {
 		type: String,
 		required: false,
-		default: '',
+		default: '' as string,
 	},
 	query: {
 		type: Object,
 		required: false,
-		default: {},
+		default: null,
 	},
 	slug: {
 		type: String,
 		required: false,
-		default: '',
+		default: '' as string,
 	},
 });
 
@@ -194,8 +194,8 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 								</td>
 								<td class="w-[150px] relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8 flex items-center justify-end">
 									<span
-										v-for="(action, key) in actions"
-										:key="key"
+										v-for="(action, index) in actions"
+										:key="index"
 									>
 										<MagnifyingGlassIcon
 											v-if="action.type === 'edit' && canEdit(slug) || action.type === 'edit' && slug === ''"

@@ -5,7 +5,7 @@ defineProps({
 	pages: {
 		type: Array,
 		required: true,
-		default: [],
+		default: [] as [],
 	},
 });
 </script>
