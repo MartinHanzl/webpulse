@@ -13,6 +13,7 @@ use App\Http\Controllers\Contact\ContactSourceController;
 use App\Http\Controllers\Contact\ContactTaskController;
 use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\Message\MessageBlueprintController;
+use App\Http\Controllers\Activity\ActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -133,6 +134,15 @@ Route::group([
                 Route::post('{id?}', [MessageBlueprintController::class, 'store']);
                 Route::delete('{id}', [MessageBlueprintController::class, 'destroy'])->where('id', '[0-9]+');
             });
+        });
+
+        Route::group([
+            'prefix' => 'activity'
+        ], function () {
+            Route::get('', [ActivityController::class, 'index']);
+            Route::get('{id}', [ActivityController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [ActivityController::class, 'store']);
+            Route::delete('{id}', [ActivityController::class, 'destroy'])->where('id', '[0-9]+');
         });
     });
 });
