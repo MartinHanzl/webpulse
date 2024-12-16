@@ -131,14 +131,14 @@ definePageMeta({
 		/>
 		<Form @submit="saveItem">
 			<LayoutContainer>
-				<div class="grid grid-cols-2 gap-x-8 gap-y-4">
+				<div class="grid grid-cols-4 gap-x-8 gap-y-4">
 					<BaseFormInput
 						v-model="item.name"
 						label="Název"
 						type="text"
 						name="name"
 						rules="required|min:3"
-						class="col-span-1"
+						class="col-span-2"
 					/>
 					<BaseFormColorPicker
 						v-model="item.color"
