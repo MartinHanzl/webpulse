@@ -51,6 +51,7 @@ const item = ref({
 	formatted_next_meeting: '' as string,
 	last_contacted_at: '' as string,
 	formatted_last_contacted_at: '' as string,
+	contact_id: null as number | null,
 	source: {
 		id: null as number | null,
 		name: '' as string,
@@ -92,6 +93,7 @@ async function loadItem() {
 		formatted_next_meeting: string;
 		last_contacted_at: string;
 		formatted_last_contacted_at: string;
+		contact_id: number | null;
 		source: {
 			id: number | null;
 			name: string;
@@ -239,6 +241,7 @@ async function saveItem() {
 		formatted_next_meeting: string;
 		last_contacted_at: string;
 		formatted_last_contacted_at: string;
+		contact_id: number | null;
 		source: {
 			id: number | null;
 			name: string;
@@ -408,6 +411,7 @@ definePageMeta({
 							name="contact_source_id"
 							class="col-span-full"
 						/>
+						<ContactAutocomplete v-model="item.contact_id" />
 					</div>
 				</LayoutContainer>
 				<LayoutContainer class="col-span-1 w-full">
