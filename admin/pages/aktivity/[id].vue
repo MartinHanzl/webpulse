@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Form } from 'vee-validate';
+import { useActivityStore } from '~/stores/activityStore';
+
+const activityStore = useActivityStore();
 
 const toast = useToast();
 
@@ -99,6 +102,7 @@ async function saveItem() {
 		});
 	}).finally(() => {
 		loading.value = false;
+		activityStore.fetchActivities();
 	});
 }
 

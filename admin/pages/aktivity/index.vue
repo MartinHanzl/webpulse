@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
 import { debounce } from 'lodash';
+import { useActivityStore } from '~/stores/activityStore';
+
+const activityStore = useActivityStore();
 
 const toast = useToast();
 const pageTitle = ref('Aktivity');
@@ -74,6 +77,7 @@ async function deleteItem(id: number) {
 	}).finally(() => {
 		loading.value = false;
 		loadItems();
+		activityStore.fetchActivities();
 	});
 }
 

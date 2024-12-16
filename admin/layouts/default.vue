@@ -32,8 +32,10 @@ import {
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
+import { useActivityStore } from '~/stores/activityStore';
 
 const userGroupStore = useUserGroupStore();
+const activityStore = useActivityStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -117,6 +119,7 @@ onMounted(() => {
 	getQuickAccess();
 
 	userGroupStore.fetchUserGroups();
+	activityStore.fetchActivities();
 });
 </script>
 
