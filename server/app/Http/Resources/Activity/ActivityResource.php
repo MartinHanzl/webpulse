@@ -19,6 +19,7 @@ class ActivityResource extends JsonResource
             'name' => $this->name,
             'description' => $this->description,
             'color' => $this->color,
+            'updated_at' => $this->updated_at,
         ];
     }
 }
