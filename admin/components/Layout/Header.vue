@@ -64,7 +64,7 @@ function canEdit(slug: string) {
 		const userGroup = userGroupStore.userGroups.find(group => group.id === user.value.user_group_id);
 		if (userGroup && userGroup.permissions) {
 			const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
-			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.edit == true) {
+			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.edit) {
 				return true;
 			}
 		}
@@ -172,6 +172,7 @@ const emitUpdateFilters = (data: { slug: string; value: string }) => {
 				:multiple="filter.multiple"
 				:type="filter.type"
 				:slug="filter.slug"
+				:filters-query="filtersQuery"
 				@update-filters="emitUpdateFilters"
 			/>
 		</div>

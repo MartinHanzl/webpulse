@@ -186,8 +186,9 @@ function updatePage(page: number) {
 	loadItems();
 }
 
-function emitUpdateFilters(data: { slug: string; value: string }) {
-	const filter = tableQuery.value.filters.find(filter => filter.slug === data.slug);
+function updateFilters(data: { slug: string; value: string }) {
+  console.log(data);
+	/* const filter = tableQuery.value.filters.find(filter => filter.slug === data.slug);
 	if (!filter) {
 		tableQuery.value.filters.push({ slug: data.slug, values: [data.value] });
 	}
@@ -195,7 +196,7 @@ function emitUpdateFilters(data: { slug: string; value: string }) {
 		if (!filter.values.includes(data.value)) {
 			filter.values.push(data.value);
 		}
-	}
+	} */
 	loadItems();
 }
 
@@ -240,7 +241,7 @@ definePageMeta({
 				{ name: 'Zdroje', to: '/zdroje' },
 				{ name: 'Úkoly', to: '/ukoly' },
 			]"
-			@update-filters="emitUpdateFilters"
+			@update-filters="updateFilters"
 		/>
 		<LayoutContainer>
 			<BaseTable

@@ -2,7 +2,7 @@
 import { Popover, PopoverButton, PopoverPanel } from '@headlessui/vue';
 import { ChevronDownIcon } from '@heroicons/vue/20/solid';
 
-defineProps({
+const props = defineProps({
 	title: {
 		type: String,
 		required: true,
@@ -28,9 +28,33 @@ defineProps({
 		required: true,
 		default: '' as string,
 	},
+	filtersQuery: {
+		type: Object,
+		required: false,
+		default: {} as {},
+	},
 });
 
 const emit = defineEmits(['update-filters']);
+function addRemoveToFiltersQuery(slug, value) {
+	if (props.filtersQuery === null) {
+		return { [slug]: [value] };
+	}
+
+	if (props.filtersQuery[slug] === undefined) {
+		props.filtersQuery[slug] = [value];
+	}
+	else {
+		if (props.filtersQuery[slug].includes(value)) {
+			props.filtersQuery[slug] = props.filtersQuery[slug].filter(item => item !== value);
+		}
+		else {
+			props.filtersQuery[slug].push(value);
+		}
+	}
+
+	emit('update-filters', props.filtersQuery);
+}
 </script>
 
 <template>
@@ -61,19 +85,21 @@ const emit = defineEmits(['update-filters']);
 					class="absolute left-80 z-10 mt-3 w-screen max-w-sm -translate-x-1/2 transform px-4 sm:px-0 lg:max-w-3xl"
 				>
 					<div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
+						<pre>{{ filtersQuery }}</pre>
 						<div class="relative grid gap-4 bg-white p-7 lg:grid-cols-3">
 							<div
-								v-for="(filter, key) in data"
+								v-for="(filterItem, key) in data"
 								:key="key"
 							>
 								<BaseFormCheckbox
 									v-if="multiple === true"
-									:name="filter.name"
-									:label="filter.name"
-									:model="filter.id"
+									:name="filterItem.name"
+									:label="filterItem.name"
+									:model="filterItem.id"
 									:type="'badge'"
-									:color="filter.color"
-									@change="emit('update-filters', { slug: slug, value: filter.id })"
+									:color="filterItem.color"
+									:checked="filtersQuery && filtersQuery[slug] && filtersQuery[slug].includes(filterItem.id)"
+									@change="addRemoveToFiltersQuery(slug, filterItem.id)"
 								/>
 							</div>
 						</div>

@@ -80,9 +80,9 @@ watch(selectedOption, () => {
 });
 
 watchEffect(() => {
-  if (model.value) {
-    selectedOption.value = options.value.find((option) => option.value === model.value) || options.value[0];
-  }
+	if (model.value) {
+		selectedOption.value = options.value.find(option => option.value === model.value) || options.value[0];
+	}
 });
 </script>
 
