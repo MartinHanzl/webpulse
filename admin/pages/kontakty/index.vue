@@ -27,7 +27,7 @@ const tableQuery = ref({
 	page: 1 as number,
 	orderBy: 'id' as string,
 	orderWay: 'desc' as string,
-	filters: [],
+  filters: {} as Record<string, number[]>,
 });
 
 const showQuickEditDialog = ref(false);
@@ -186,17 +186,7 @@ function updatePage(page: number) {
 	loadItems();
 }
 
-function updateFilters(data: { slug: string; value: string }) {
-  console.log(data);
-	/* const filter = tableQuery.value.filters.find(filter => filter.slug === data.slug);
-	if (!filter) {
-		tableQuery.value.filters.push({ slug: data.slug, values: [data.value] });
-	}
-	else {
-		if (!filter.values.includes(data.value)) {
-			filter.values.push(data.value);
-		}
-	} */
+function updateFilters() {
 	loadItems();
 }
 

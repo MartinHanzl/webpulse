@@ -43,18 +43,22 @@ class ContactController extends Controller
                     ->orWhere('goal', 'like', '%' . $searchString . '%');
             }
         }
-        if($request->has('filters')) {
-            $rawFilters = json_decode($request->get('filters'));
-            switch ($rawFilters->slug) {
-                case 'phase':
-                    $query->whereIn('contact_phase_id', $rawFilters->values);
-                    break;
-                case 'source':
-                    $query->whereIn('contact_source_id', $rawFilters->values);
-                    break;
-                case 'contact':
-                    $query->where('contact_id', $rawFilters->values);
-                    break;
+        if ($request->has('filters')) {
+            $rawFilters = json_decode($request->get('filters'), true);
+            if (!empty($rawFilters)) {
+                foreach ($rawFilters as $key => $rawFilter) {
+                    switch ($key) {
+                        case 'phase':
+                            $query->whereIn('contact_phase_id', $rawFilter);
+                            break;
+                        case 'source':
+                            $query->whereIn('contact_source_id', $rawFilter);
+                            break;
+                        case 'contact':
+                            $query->where('contact_id', $rawFilter);
+                            break;
+                    }
+                }
             }
         }
 
@@ -121,13 +125,13 @@ class ContactController extends Controller
             /*$contact->contact_phase_id = $request->has('contact_phase_id') ? $request->get('contact_phase_id') : null;
             $contact->contact_source_id = $request->has('contact_source_id') ? $request->get('contact_source_id') : null;*/
 
-            if($request->has('formatted_last_contacted_at') && $request->get('formatted_last_contacted_at') != null) {
+            if ($request->has('formatted_last_contacted_at') && $request->get('formatted_last_contacted_at') != null) {
                 $contact->last_contacted_at = Carbon::parse($request->get('formatted_last_contacted_at'));
             } else {
                 $contact->last_contacted_at = null;
             }
 
-            if($request->has('formatted_next_meeting') && $request->get('formatted_next_meeting') != null) {
+            if ($request->has('formatted_next_meeting') && $request->get('formatted_next_meeting') != null) {
                 $contact->next_meeting = Carbon::parse($request->get('formatted_next_meeting'));
             } else {
                 $contact->next_meeting = null;
@@ -137,7 +141,7 @@ class ContactController extends Controller
             $contact->save();
 
             DB::commit();
-        } catch (\Throwable | \Exception $e) {
+        } catch (\Throwable|\Exception $e) {
             DB::rollBack();
             return Response::json(['message' => 'An error occurred while updating contact.'], 500);
         }

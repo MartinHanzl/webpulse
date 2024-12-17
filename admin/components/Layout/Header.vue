@@ -64,7 +64,7 @@ function canEdit(slug: string) {
 		const userGroup = userGroupStore.userGroups.find(group => group.id === user.value.user_group_id);
 		if (userGroup && userGroup.permissions) {
 			const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
-			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.edit) {
+			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.edit == true) {
 				return true;
 			}
 		}
@@ -85,8 +85,8 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 	}
 }
 
-const emitUpdateFilters = (data: { slug: string; value: string }) => {
-	emit('update-filters', data);
+const emitUpdateFilters = () => {
+	emit('update-filters', props.filtersQuery);
 };
 </script>
 
