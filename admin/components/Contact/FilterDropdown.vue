@@ -38,22 +38,26 @@ const props = defineProps({
 const emit = defineEmits(['update-filters']);
 
 function addRemoveToFiltersQuery(slug: string, value: number) {
-  if (!props.filtersQuery.filters) {
-    props.filtersQuery.filters = {};
-  }
+	if (!props.filtersQuery.filters) {
+		props.filtersQuery.filters = {};
+	}
 
-  if (!props.filtersQuery.filters[slug]) {
-    props.filtersQuery.filters[slug] = [];
-  }
+	if (!props.filtersQuery.filters[slug]) {
+		props.filtersQuery.filters[slug] = [];
+	}
 
-  const index = props.filtersQuery.filters[slug].indexOf(value);
-  if (index > -1) {
-    props.filtersQuery.filters[slug].splice(index, 1);
-  } else {
-    props.filtersQuery.filters[slug].push(value);
-  }
+	const index = props.filtersQuery.filters[slug].indexOf(value);
+	if (index > -1) {
+		props.filtersQuery.filters[slug].splice(index, 1);
+	}
+	else {
+		props.filtersQuery.filters[slug].push(value);
+	}
 
-  emit('update-filters', props.filtersQuery);
+	// Save to session storage
+	sessionStorage.setItem('filtersQuery', JSON.stringify(props.filtersQuery));
+
+	emit('update-filters', props.filtersQuery);
 }
 </script>
 
@@ -90,16 +94,16 @@ function addRemoveToFiltersQuery(slug: string, value: number) {
 								v-for="(filterItem, key) in data"
 								:key="key"
 							>
-                <BaseFormCheckbox
-                    v-if="multiple === true"
-                    :name="filterItem.name"
-                    :label="filterItem.name"
-                    :model="filterItem.id"
-                    :type="'badge'"
-                    :color="filterItem.color"
-                    :checked="filtersQuery && filtersQuery.filters && filtersQuery.filters[slug] && filtersQuery.filters[slug].includes(filterItem.id)"
-                    @change="addRemoveToFiltersQuery(slug, filterItem.id)"
-                />
+								<BaseFormCheckbox
+									v-if="multiple === true"
+									:name="filterItem.name"
+									:label="filterItem.name"
+									:model="filterItem.id"
+									:type="'badge'"
+									:color="filterItem.color"
+									:checked="filtersQuery && filtersQuery.filters && filtersQuery.filters[slug] && filtersQuery.filters[slug].includes(filterItem.id)"
+									@change="addRemoveToFiltersQuery(slug, filterItem.id)"
+								/>
 							</div>
 						</div>
 					</div>

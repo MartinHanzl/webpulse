@@ -27,7 +27,7 @@ const tableQuery = ref({
 	page: 1 as number,
 	orderBy: 'id' as string,
 	orderWay: 'desc' as string,
-  filters: {} as Record<string, number[]>,
+	filters: {} as Record<string, number[]>,
 });
 
 const showQuickEditDialog = ref(false);
@@ -201,6 +201,11 @@ useHead({
 });
 
 onMounted(() => {
+	// Load filters from session storage
+	if (sessionStorage.getItem('filtersQuery')) {
+		console.log('sessionStorage.getItem("filtersQuery")', sessionStorage.getItem('filtersQuery'));
+		tableQuery.value = JSON.parse(sessionStorage.getItem('filtersQuery'));
+	}
 	searchString.value = '';
 	loadItems();
 	loadPhases();

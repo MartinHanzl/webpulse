@@ -16,6 +16,13 @@ const tasks = ref([]);
 
 const pageTitle = ref(route.params.id === 'pridat' ? 'Nový kontakt' : 'Detail kontaktu');
 
+const tabs = ref([
+	{ name: 'Základní údaje', link: '#info', current: false },
+	{ name: 'Proces', link: '#proces', current: false },
+	{ name: 'Historie', link: '#historie', current: false },
+	{ name: 'Lidé', link: '#lide', current: false },
+]);
+
 const breadcrumbs = ref([
 	{
 		name: 'Kontakty',
@@ -296,6 +303,13 @@ useHead({
 	title: pageTitle.value,
 });
 
+watchEffect(() => {
+	const routeTabHash = route.hash;
+	tabs.value.forEach((tab) => {
+		tab.current = tab.link === routeTabHash;
+	});
+});
+
 onMounted(() => {
 	if (route.params.id !== 'pridat') {
 		loadItem();
@@ -318,167 +332,226 @@ definePageMeta({
 			slug="contacts"
 			@save="saveItem"
 		/>
-		<Form @submit="saveItem">
-			<div class="grid grid-cols-4 gap-x-10">
-				<LayoutContainer class="col-span-2 w-full">
-					<h3 class="text-lg font-semibold text-grayCustom mb-8">
-						Základní údaje
-					</h3>
-					<div class="grid grid-cols-2 gap-x-8 gap-y-4">
-						<BaseFormInput
-							v-model="item.firstname"
-							label="Jméno"
-							type="text"
-							name="firstname"
-							rules="required|min:3"
-							class="col-span-1"
-						/>
-						<BaseFormInput
-							v-model="item.lastname"
-							label="Příjmení"
-							type="text"
-							name="lastname"
-							rules="required|min:3"
-							class="col-span-1"
-						/>
-						<BaseFormInput
-							v-model="item.email"
-							label="E-mail"
-							type="text"
-							name="email"
-							rules="email"
-							class="col-span-full"
-						/>
-						<BaseFormInput
-							v-model="item.phone"
-							label="Telefon"
-							type="text"
-							name="phone"
-							class="col-span-full"
-						/>
-						<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
-						<BaseFormInput
-							v-model="item.company"
-							label="Firma"
-							type="text"
-							name="company"
-							class="col-span-full"
-						/>
-						<BaseFormInput
-							v-model="item.street"
-							label="Ulice a č.p."
-							type="text"
-							name="street"
-							class="col-span-full"
-						/>
-						<BaseFormInput
-							v-model="item.zip"
-							label="PSČ"
-							type="text"
-							name="zip"
-							class="col-span-1"
-						/>
-						<BaseFormInput
-							v-model="item.city"
-							type="text"
-							label="Město"
-							name="city"
-							class="col-span-1"
-						/>
-					</div>
-				</LayoutContainer>
-				<LayoutContainer class="col-span-2 w-full">
-					<h3 class="text-lg font-semibold text-grayCustom mb-8">
-						Rozšiřující údaje
-					</h3>
-					<div class="grid grid-cols-2 gap-x-8 gap-y-4">
-						<BaseFormInput
-							v-model="item.occupation"
-							type="text"
-							label="Práce/obor/studium"
-							name="occupation"
-							class="col-span-full"
-						/>
-						<BaseFormInput
-							v-model="item.goal"
-							type="text"
-							label="Sen/cíl"
-							name="goal"
-							class="col-span-full"
-						/>
-						<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
-						<BaseFormTextarea
-							v-model="item.note"
-							label="Poznámka"
-							name="note"
-							class="col-span-full"
-						/>
-						<BaseFormSelect
-							v-model="item.contact_source_id"
-							:options="sources"
-							label="Zdroj kontaktu"
-							name="contact_source_id"
-							class="col-span-full"
-						/>
-						<ContactAutocomplete
-							v-model="item.contact_id"
-							label="Od"
-						/>
-					</div>
-				</LayoutContainer>
-				<LayoutContainer class="col-span-1 w-full">
-					<h3 class="text-lg font-semibold text-grayCustom mb-8">
-						Proces
-					</h3>
-					<div class="grid grid-cols-1 gap-x-8 gap-y-4">
-						<BaseFormSelect
-							v-model="item.contact_phase_id"
-							:options="phases"
-							label="Fáze"
-							name="contact_phase_id"
-							class="col-span-1"
-						/>
-						<BaseFormInput
-							v-model="item.formatted_next_meeting"
-							type="datetime-local"
-							label="Další meeting"
-							name="next_meeting"
-							class="col-span-full"
-						/>
-						<BaseFormInput
-							v-model="item.formatted_last_contacted_at"
-							type="datetime-local"
-							label="Poslední kontakt/pokus o kontakt"
-							name="last_contacted_at"
-							class="col-span-full"
-						/>
-					</div>
-				</LayoutContainer>
-				<LayoutContainer class="col-span-3 w-full">
-					<h3 class="text-lg font-semibold text-grayCustom mb-8">
-						Úkoly
-					</h3>
-					<div class="grid grid-cols-3 gap-4">
-						<BaseFormCheckbox
-							v-for="(task, key) in tasks"
-							:key="key"
-							:label="task.name"
-							:name="task.id"
-							:value="item.tasks.includes(task.id)"
-							:checked="item.tasks.includes(task.id)"
-							class="col-span-1"
-							type="badge"
-							:color="task.phase_color"
-							@change="addRemoveItemTask(task.id)"
-						/>
-					</div>
-				</LayoutContainer>
-				<LayoutContainer class="col-span-full w-full">
-					<h3 class="text-lg font-semibold text-grayCustom mb-8">
-						Historie
-					</h3>
-				</LayoutContainer>
+		<div>
+			<div class="grid grid-cols-1 sm:hidden mt-5">
+				<!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+				<select
+					aria-label="Select a tab"
+					class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
+				>
+					<option>My Account</option>
+					<option>Company</option>
+					<option selected>
+						Team Members
+					</option>
+					<option>Billing</option>
+				</select>
+				<svg
+					class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end fill-gray-500"
+					viewBox="0 0 16 16"
+					fill="currentColor"
+					aria-hidden="true"
+					data-slot="icon"
+				>
+					<path
+						fill-rule="evenodd"
+						d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+						clip-rule="evenodd"
+					/>
+				</svg>
 			</div>
+			<div class="hidden sm:block mt-5">
+				<nav
+					class="isolate flex divide-x divide-gray-200 shadow-sm rounded-lg"
+					aria-label="Tabs"
+				>
+					<!-- Current: "text-gray-900", Default: "text-gray-500 hover:text-gray-700" -->
+					<NuxtLink
+						v-for="(tab, index) in tabs"
+						:key="index"
+						:to="tab.link"
+						class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-grayCustom hover:bg-gray-50 hover:text-grayDark focus:z-10"
+					>
+						<span>{{ tab.name }}</span>
+						<span
+							aria-hidden="true"
+							:class="tab.current ? 'absolute inset-x-0 bottom-0 h-0.5 bg-primaryCustom' : 'absolute inset-x-0 bottom-0 h-0.5 bg-transparent'"
+						/>
+					</NuxtLink>
+				</nav>
+			</div>
+		</div>
+		<Form @submit="saveItem">
+			<template v-if="tabs.find(tab => tab.current && tab.link === '#info')">
+				<div class="grid grid-cols-4 gap-x-10">
+					<LayoutContainer class="col-span-2 w-full">
+						<h3 class="text-lg font-semibold text-grayCustom mb-8">
+							Základní údaje
+						</h3>
+						<div class="grid grid-cols-2 gap-x-8 gap-y-4">
+							<BaseFormInput
+								v-model="item.firstname"
+								label="Jméno"
+								type="text"
+								name="firstname"
+								rules="required|min:3"
+								class="col-span-1"
+							/>
+							<BaseFormInput
+								v-model="item.lastname"
+								label="Příjmení"
+								type="text"
+								name="lastname"
+								rules="required|min:3"
+								class="col-span-1"
+							/>
+							<BaseFormInput
+								v-model="item.email"
+								label="E-mail"
+								type="text"
+								name="email"
+								rules="email"
+								class="col-span-full"
+							/>
+							<BaseFormInput
+								v-model="item.phone"
+								label="Telefon"
+								type="text"
+								name="phone"
+								class="col-span-full"
+							/>
+							<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
+							<BaseFormInput
+								v-model="item.company"
+								label="Firma"
+								type="text"
+								name="company"
+								class="col-span-full"
+							/>
+							<BaseFormInput
+								v-model="item.street"
+								label="Ulice a č.p."
+								type="text"
+								name="street"
+								class="col-span-full"
+							/>
+							<BaseFormInput
+								v-model="item.zip"
+								label="PSČ"
+								type="text"
+								name="zip"
+								class="col-span-1"
+							/>
+							<BaseFormInput
+								v-model="item.city"
+								type="text"
+								label="Město"
+								name="city"
+								class="col-span-1"
+							/>
+						</div>
+					</LayoutContainer>
+					<LayoutContainer class="col-span-2 w-full">
+						<h3 class="text-lg font-semibold text-grayCustom mb-8">
+							Rozšiřující údaje
+						</h3>
+						<div class="grid grid-cols-2 gap-x-8 gap-y-4">
+							<BaseFormInput
+								v-model="item.occupation"
+								type="text"
+								label="Práce/obor/studium"
+								name="occupation"
+								class="col-span-full"
+							/>
+							<BaseFormInput
+								v-model="item.goal"
+								type="text"
+								label="Sen/cíl"
+								name="goal"
+								class="col-span-full"
+							/>
+							<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
+							<BaseFormTextarea
+								v-model="item.note"
+								label="Poznámka"
+								name="note"
+								class="col-span-full"
+							/>
+							<BaseFormSelect
+								v-model="item.contact_source_id"
+								:options="sources"
+								label="Zdroj kontaktu"
+								name="contact_source_id"
+								class="col-span-full"
+							/>
+							<ContactAutocomplete
+								v-model="item.contact_id"
+								label="Od"
+							/>
+						</div>
+					</LayoutContainer>
+				</div>
+			</template>
+			<template v-if="tabs.find(tab => tab.current && tab.link === '#proces')">
+				<div class="grid grid-cols-1 gap-x-10">
+          <LayoutContainer class="col-span-full w-full">
+            <h3 class="text-lg font-semibold text-grayCustom mb-8">
+              Úkoly
+            </h3>
+            <div class="grid grid-cols-4 gap-4">
+              <BaseFormCheckbox
+                  v-for="(task, key) in tasks"
+                  :key="key"
+                  :label="task.name"
+                  :name="task.id"
+                  :value="item.tasks.includes(task.id)"
+                  :checked="item.tasks.includes(task.id)"
+                  class="col-span-1"
+                  type="badge"
+                  :color="task.phase_color"
+                  @change="addRemoveItemTask(task.id)"
+              />
+            </div>
+          </LayoutContainer>
+					<LayoutContainer class="col-span-full w-full">
+						<h3 class="text-lg font-semibold text-grayCustom mb-8">
+							Proces
+						</h3>
+						<div class="grid grid-cols-3 gap-x-8 gap-y-4">
+							<BaseFormSelect
+								v-model="item.contact_phase_id"
+								:options="phases"
+								label="Fáze"
+								name="contact_phase_id"
+								class="col-span-1"
+							/>
+							<BaseFormInput
+								v-model="item.formatted_next_meeting"
+								type="datetime-local"
+								label="Další meeting"
+								name="next_meeting"
+								class="col-span-1"
+							/>
+							<BaseFormInput
+								v-model="item.formatted_last_contacted_at"
+								type="datetime-local"
+								label="Poslední kontakt/pokus o kontakt"
+								name="last_contacted_at"
+								class="col-span-1"
+							/>
+						</div>
+					</LayoutContainer>
+				</div>
+			</template>
+			<template v-if="tabs.find(tab => tab.current && tab.link === '#historie')">
+				<div class="grid grid-cols-4 gap-x-10">
+					<LayoutContainer class="col-span-full w-full">
+						<h3 class="text-lg font-semibold text-grayCustom mb-8">
+							Historie
+						</h3>
+					</LayoutContainer>
+				</div>
+			</template>
 		</Form>
 	</div>
 </template>
