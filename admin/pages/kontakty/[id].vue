@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { inject, ref } from 'vue';
 import { Form } from 'vee-validate';
 
 const toast = useToast();
@@ -22,6 +22,11 @@ const tabs = ref([
 	{ name: 'Historie', link: '#historie', current: false },
 	{ name: 'Lidé', link: '#lide', current: false },
 ]);
+
+const historyDialog = ref({
+	open: false,
+	item: null,
+});
 
 const breadcrumbs = ref([
 	{
@@ -57,6 +62,8 @@ const item = ref({
 	last_contacted_at: '' as string,
 	formatted_last_contacted_at: '' as string,
 	contact_id: null as number | null,
+	history: [] as [],
+	contacts: [] as [],
 	source: {
 		id: null as number | null,
 		name: '' as string,
@@ -289,6 +296,67 @@ async function saveItem() {
 	});
 }
 
+async function saveHistoryItem(item: { id: number }) {
+	const client = useSanctumClient();
+	loading.value = true;
+
+	await client<{}>(!item.id ? '/api/admin/contact/history/' + route.params.id : '/api/admin/contact/history/' + route.params.id + '/' + item.id, {
+		method: 'POST',
+		body: JSON.stringify(item),
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then(() => {
+		toast.add({
+			title: 'Hotovo',
+			description: `Záznám historie byl úspěšně ${!item.id ? 'vytvořen' : 'uložen'}.`,
+			color: 'green',
+		});
+	}).catch(() => {
+		error.value = true;
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se uložit záznam historie. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
+			color: 'red',
+		});
+	}).finally(() => {
+		historyDialog.value.open = false;
+		historyDialog.value.item = null;
+		loading.value = false;
+		loadItem();
+	});
+}
+
+async function deleteHistoryItem(item: { id: number }) {
+	const client = useSanctumClient();
+	loading.value = true;
+
+	await client<{}>('/api/admin/contact/history/destroy/' + item.id, {
+		method: 'DELETE',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then(() => {
+		toast.add({
+			title: 'Hotovo',
+			description: `Záznám historie byl úspěšně smazán.`,
+			color: 'green',
+		});
+	}).catch(() => {
+		error.value = true;
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se smazat záznam historie.',
+			color: 'red',
+		});
+	}).finally(() => {
+		loading.value = false;
+		loadItem();
+	});
+}
+
 function addRemoveItemTask(taskId) {
 	if (item.value.tasks.includes(taskId)) {
 		item.value.tasks = item.value.tasks.filter(task => task !== taskId);
@@ -299,20 +367,35 @@ function addRemoveItemTask(taskId) {
 	}
 }
 
+function editHistoryItem(item) {
+	historyDialog.value.item = item;
+	historyDialog.value.open = true;
+}
+
 useHead({
 	title: pageTitle.value,
 });
 
 watchEffect(() => {
 	const routeTabHash = route.hash;
-	tabs.value.forEach((tab) => {
-		tab.current = tab.link === routeTabHash;
-	});
+	if (routeTabHash && routeTabHash !== '') {
+		tabs.value.forEach((tab) => {
+			tab.current = tab.link === routeTabHash;
+		});
+	}
+	else {
+		tabs.value[0].current = true;
+		router.push(route.path + '#info');
+	}
 });
 
 onMounted(() => {
 	if (route.params.id !== 'pridat') {
 		loadItem();
+	}
+	else {
+		tabs.value.pop();
+		tabs.value.pop();
 	}
 	loadPhases();
 	loadSources();
@@ -486,6 +569,7 @@ definePageMeta({
 							/>
 							<ContactAutocomplete
 								v-model="item.contact_id"
+								class="col-span-full"
 								label="Od"
 							/>
 						</div>
@@ -494,25 +578,25 @@ definePageMeta({
 			</template>
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#proces')">
 				<div class="grid grid-cols-1 gap-x-10">
-          <LayoutContainer class="col-span-full w-full">
-            <h3 class="text-lg font-semibold text-grayCustom mb-8">
-              Úkoly
-            </h3>
-            <div class="grid grid-cols-4 gap-4">
-              <BaseFormCheckbox
-                  v-for="(task, key) in tasks"
-                  :key="key"
-                  :label="task.name"
-                  :name="task.id"
-                  :value="item.tasks.includes(task.id)"
-                  :checked="item.tasks.includes(task.id)"
-                  class="col-span-1"
-                  type="badge"
-                  :color="task.phase_color"
-                  @change="addRemoveItemTask(task.id)"
-              />
-            </div>
-          </LayoutContainer>
+					<LayoutContainer class="col-span-full w-full">
+						<h3 class="text-lg font-semibold text-grayCustom mb-8">
+							Úkoly
+						</h3>
+						<div class="grid grid-cols-4 gap-4">
+							<BaseFormCheckbox
+								v-for="(task, key) in tasks"
+								:key="key"
+								:label="task.name"
+								:name="task.id"
+								:value="item.tasks.includes(task.id)"
+								:checked="item.tasks.includes(task.id)"
+								class="col-span-1"
+								type="badge"
+								:color="task.phase_color"
+								@change="addRemoveItemTask(task.id)"
+							/>
+						</div>
+					</LayoutContainer>
 					<LayoutContainer class="col-span-full w-full">
 						<h3 class="text-lg font-semibold text-grayCustom mb-8">
 							Proces
@@ -545,11 +629,63 @@ definePageMeta({
 			</template>
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#historie')">
 				<div class="grid grid-cols-4 gap-x-10">
-					<LayoutContainer class="col-span-full w-full">
-						<h3 class="text-lg font-semibold text-grayCustom mb-8">
+					<LayoutContainer class="col-span-full w-full flex items-center justify-between">
+						<h3 class="text-lg font-semibold text-grayCustom">
 							Historie
 						</h3>
+						<BaseButton
+							variant="primary"
+							size="lg"
+							type="button"
+							@click="historyDialog.open = true;"
+						>
+							Přidat záznam
+						</BaseButton>
 					</LayoutContainer>
+				</div>
+				<div class="grid grid-cols-1 gap-8 mt-5">
+					<ol class="relative border-s border-gray-200 dark:border-gray-700">
+						<ContactHistoryCard
+							v-for="(history, index) in item.history"
+							:key="index"
+							:history="history"
+							@edit-history="editHistoryItem(history)"
+							@delete-item="deleteHistoryItem(history)"
+						/>
+					</ol>
+				</div>
+				<ContactHistoryDialog
+					v-model:show="historyDialog.open"
+					v-model:contact="historyDialog.item"
+					:phases="phases"
+					@save-item="saveHistoryItem"
+				/>
+			</template>
+			<template v-if="tabs.find(tab => tab.current && tab.link === '#lide') && item.contacts && item.contacts.data && item.contacts.data.length">
+				<div class="grid grid-cols-4 gap-x-10">
+					<LayoutContainer class="col-span-full w-full flex items-center justify-between grid grid-cols-1 gap-4">
+						<h3 class="text-lg font-semibold text-grayCustom col-span-full">
+							Kontakty
+						</h3>
+						<BaseTable
+							class="col-span-full"
+							:items="item.contacts"
+							:columns="[
+								{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: false },
+								{ key: 'firstname', name: 'Jméno', type: 'text', width: 80, hidden: false, sortable: false },
+								{ key: 'lastname', name: 'Příjmení', type: 'text', width: 80, hidden: false, sortable: false },
+								{ key: 'phone', name: 'Telefon', type: 'text', width: 80, hidden: true, sortable: false },
+								{ key: 'email', name: 'E-mail', type: 'text', width: 80, hidden: true, sortable: false },
+								{ key: 'phase', name: 'Fáze', type: 'badge', width: 80, hidden: true, sortable: false, colorKey: 'phase_color' },
+								{ key: 'source', name: 'Zdroj', type: 'badge', width: 80, hidden: true, sortable: false, colorKey: 'source_color' },
+							]"
+							:loading="loading"
+							:error="error"
+							singular="Kontakt"
+							plural="Kontakty"
+							slug="contacts"
+						/>
+					</layoutcontainer>
 				</div>
 			</template>
 		</Form>

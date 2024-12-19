@@ -121,6 +121,8 @@ Route::group([
             Route::get('{id}', [ContactController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [ContactController::class, 'store']);
             Route::delete('{id}', [ContactController::class, 'destroy'])->where('id', '[0-9]+');
+            Route::post('history/{id}/{historyId?}', [ContactController::class, 'history'])->where('id', '[0-9]+')->where('historyId', '[0-9]+');
+            Route::delete('history/destroy/{id}', [ContactController::class, 'historyDestroy'])->where('id', '[0-9]+');
         });
 
         Route::group([

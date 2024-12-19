@@ -31,7 +31,7 @@ const error = ref(false);
 const loading = ref(false);
 
 const contacts = ref([
-	{ id: null, firstname: 'Načítám', lastname: 'kontatky...' },
+	{ id: null, firstname: 'Osobní', lastname: 'kontakt' },
 ]);
 
 const query = ref('');
@@ -57,6 +57,7 @@ async function loadItems() {
 		},
 	}).then((response) => {
 		contacts.value = response;
+		contacts.value.unshift({ id: null, firstname: 'Osobní', lastname: 'kontakt' });
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -82,24 +83,24 @@ watch(model, (newValue) => {
 </script>
 
 <template>
-	<div class="w-72">
+	<div class="w-full">
 		<Combobox v-model="model">
 			<div class="relative mt-1">
 				<div
-					class="w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm"
+					class="w-full cursor-default overflow-hidden"
 				>
 					<label
 						:for="name"
 						class="block text-sm/6 font-medium text-grayCustom"
 					>{{ label }}</label>
 					<ComboboxInput
-						class="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
+						class="w-full mt-1.5 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight sm:text-sm/6"
 						:name="name"
 						:display-value="() => selectedContact ? `${selectedContact.firstname} ${selectedContact.lastname}` : ''"
 						@change="query = $event.target.value"
 					/>
 					<ComboboxButton
-						class="absolute inset-y-0 right-0 flex items-center pr-2"
+						class="absolute inset-y-0 top-8 right-0 flex items-center pr-2"
 					>
 						<ChevronUpDownIcon
 							class="h-5 w-5 text-grayLight"

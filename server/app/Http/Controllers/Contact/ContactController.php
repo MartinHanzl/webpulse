@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Contact;
 
+use App\Events\ContactUpdatedEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Contact\ContactResource;
 use App\Http\Resources\Contact\ContactSimpleResource;
 use App\Models\Contact\Contact;
+use App\Models\Contact\ContactHistory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -118,12 +120,13 @@ class ContactController extends Controller
 
         try {
             DB::beginTransaction();
+            $oldContact = null;
+            if ($id) {
+                $oldContact = $contact;
+            }
 
             $contact->fill($request->all());
             $contact->user_id = $request->user()->id;
-
-            /*$contact->contact_phase_id = $request->has('contact_phase_id') ? $request->get('contact_phase_id') : null;
-            $contact->contact_source_id = $request->has('contact_source_id') ? $request->get('contact_source_id') : null;*/
 
             if ($request->has('formatted_last_contacted_at') && $request->get('formatted_last_contacted_at') != null) {
                 $contact->last_contacted_at = Carbon::parse($request->get('formatted_last_contacted_at'));
@@ -137,8 +140,28 @@ class ContactController extends Controller
                 $contact->next_meeting = null;
             }
 
-            $contact->syncTasks($request);
+            if ($id) {
+                $contact->syncTasks($request);
+            }
+
+            if ($request->has('contact_id')) {
+                $contact = $request->contact_id ?? null;
+            }
             $contact->save();
+
+            if ($id) {
+                ContactUpdatedEvent::dispatch($oldContact, $contact);
+            } else {
+                $history = new ContactHistory();
+                $history->fill([
+                    'name' => 'Kontakt vytvořen',
+                    'description' => 'Vytvořili jste nový kontakt!',
+                    'origin' => 'system',
+                    'type' => 'other',
+                ]);
+                $history->contact()->associate($contact);
+                $history->save();
+            }
 
             DB::commit();
         } catch (\Throwable|\Exception $e) {
@@ -158,7 +181,9 @@ class ContactController extends Controller
             App::abort(400);
         }
 
-        $contact = Contact::with(['contact', 'source', 'phase', 'tasks', 'histories'])->find($id);
+        $contact = Contact::with(['contact', 'source', 'contacts', 'phase', 'tasks', 'histories' => function ($query) {
+            return $query->orderBy('id', 'desc');
+        }])->find($id);
         if (!$contact) {
             App::abort(404);
         }
@@ -182,5 +207,71 @@ class ContactController extends Controller
 
         $contact->delete();
         return Response::json();
+    }
+
+    public function history(Request $request, int $id, int $historyId = null): JsonResponse
+    {
+        if (!$id) {
+            App::abort(400);
+        }
+
+        $contact = Contact::find($id);
+        if (!$contact) {
+            App::abort(404);
+        }
+
+        if ($historyId) {
+            $history = ContactHistory::find($historyId);
+            if (!$history) {
+                App::abort(404);
+            }
+        } else {
+            $history = new ContactHistory();
+        }
+
+        try {
+            DB::beginTransaction();
+
+            $history->fill($request->all());
+            $history->contact()->associate($contact);
+
+            if ($request->has('activity_id')) {
+                $history->activity_id = $request->get('activity_id');
+            }
+
+            if ($request->has('contact_phase_id')) {
+                $history->contact_phase_id = $request->get('contact_phase_id');
+            }
+
+            if (!$request->has('description') || $request->get('description') == null) {
+                $history->description = 'Nepřidali jste žádnou poznámku.';
+            }
+            $history->origin = 'user';
+
+            $history->save();
+
+            DB::commit();
+        } catch (\Throwable|\Exception $e) {
+            dd($e->getMessage());
+            DB::rollBack();
+            return Response::json(['message' => 'An error occurred while updating contact history.'], 500);
+        }
+
+        return Response::json([]);
+    }
+
+    public function historyDestroy(int $id): JsonResponse
+    {
+        if (!$id) {
+            App::abort(400);
+        }
+
+        $history = ContactHistory::find($id);
+        if (!$history) {
+            App::abort(404);
+        }
+
+        $history->delete();
+        return Response::json([]);
     }
 }

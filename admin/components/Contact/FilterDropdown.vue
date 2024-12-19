@@ -54,6 +54,10 @@ function addRemoveToFiltersQuery(slug: string, value: number) {
 		props.filtersQuery.filters[slug].push(value);
 	}
 
+	if (props.filtersQuery.filters[slug].length === 0) {
+		delete props.filtersQuery.filters[slug];
+	}
+
 	// Save to session storage
 	sessionStorage.setItem('filtersQuery', JSON.stringify(props.filtersQuery));
 

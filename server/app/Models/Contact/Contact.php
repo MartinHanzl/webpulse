@@ -72,6 +72,11 @@ class Contact extends Model
         return $this->belongsToMany(ContactTask::class, 'contacts_has_tasks', 'contact_id', 'contact_task_id');
     }
 
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class, 'contact_id', 'id');
+    }
+
     public function syncTasks(Request $request)
     {
         $tasks = $request->get('tasks', []);

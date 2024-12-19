@@ -141,11 +141,11 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									<div class="flex items-center">
 										<span>{{ column.name }}</span>
 										<ChevronDownIcon
-											v-if="column.sortable && query.orderBy === column.key && query.orderWay === 'asc'"
+											v-if="query && column.sortable && query.orderBy === column.key && query.orderWay === 'asc'"
 											class="size-4 text-grayCustom ml-2"
 										/>
 										<ChevronUpIcon
-											v-if="column.sortable && query.orderBy === column.key && query.orderWay === 'desc'"
+											v-if="query && column.sortable && query.orderBy === column.key && query.orderWay === 'desc'"
 											class="size-4 text-grayCustom ml-2"
 										/>
 									</div>
@@ -200,7 +200,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 										<MagnifyingGlassIcon
 											v-if="action.type === 'edit' && canEdit(slug) || action.type === 'edit' && slug === ''"
 											class="cursor-pointer size-5 text-primaryCustom hover:text-primaryLight ml-4"
-											@click="router.push(`${route.fullPath}/${item.id}`)"
+											@click="action.to ? router.push(`${route.fullPath}/${item.id}${action.to}`) : router.push(`${route.fullPath}/${item.id}`)"
 										/>
 										<ClipboardDocumentIcon
 											v-if="action.type === 'copy'"
@@ -248,7 +248,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 					</table>
 				</div>
 				<BasePagination
-					v-if="!loading && !error && items.data && items.data.length"
+					v-if="!loading && !error && items.data && items.data.length && query"
 					:page="items.currentPage"
 					:per-page="items.perPage"
 					:total="items.total"

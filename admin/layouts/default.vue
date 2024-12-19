@@ -184,7 +184,7 @@ onMounted(() => {
 								<div class="flex h-24 shrink-0 items-center justify-center">
 									<img
 										class="h-8 w-auto"
-										src="https://cdn-icons-png.flaticon.com/512/3557/3557519.png"
+                    src="public/static/img/logo-gray-300.png"
 										alt="Your Company"
 									>
 								</div>
@@ -197,7 +197,7 @@ onMounted(() => {
 											v-for="(group, index) in navigation"
 											:key="index"
 										>
-											<div class="text-xs/6 font-semibold text-gray-400">
+											<div class="text-xs/6 font-semibold text-gray-300">
 												{{ group.title }}
 											</div>
 											<ul
@@ -210,7 +210,7 @@ onMounted(() => {
 												>
 													<a
 														:href="item.link"
-														:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
+														:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
 													>
 														<component
 															:is="item.icon"
@@ -225,7 +225,7 @@ onMounted(() => {
 										<li class="mt-auto">
 											<a
 												href="#"
-												class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white"
+												class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-300 hover:bg-gray-800 hover:text-white"
 											>
 												<Cog6ToothIcon
 													class="size-6 shrink-0"
@@ -250,7 +250,7 @@ onMounted(() => {
 				<div class="flex h-24 shrink-0 items-center justify-center">
 					<img
 						class="h-12 w-auto"
-						src="https://cdn-icons-png.flaticon.com/512/3557/3557519.png"
+						src="public/static/img/logo-gray-300.png"
 						alt="Your Company"
 					>
 				</div>
@@ -263,7 +263,7 @@ onMounted(() => {
 							v-for="(group, index) in navigation"
 							:key="index"
 						>
-							<div class="text-xs/6 font-semibold text-gray-400">
+							<div class="text-xs/6 font-semibold text-gray-300">
 								{{ group.title }}
 							</div>
 							<ul
@@ -277,7 +277,7 @@ onMounted(() => {
 									<NuxtLink
 										v-if="!item.slug || (item.slug && canView(item.slug))"
 										:to="item.link"
-										:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
+										:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
 									>
 										<component
 											:is="item.icon"
@@ -292,7 +292,7 @@ onMounted(() => {
 						<li class="mt-auto">
 							<a
 								href="#"
-								class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-400 hover:bg-gray-800 hover:text-white"
+								class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-300 hover:bg-gray-800 hover:text-white"
 							>
 								<Cog6ToothIcon
 									class="size-6 shrink-0"
@@ -351,7 +351,7 @@ onMounted(() => {
 					<div class="flex items-center gap-x-4 lg:gap-x-6">
 						<button
 							type="button"
-							class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500"
+							class="-m-2.5 p-2.5 text-gray-300 hover:text-gray-500"
 						>
 							<span class="sr-only">View notifications</span>
 							<BellIcon
@@ -381,7 +381,7 @@ onMounted(() => {
 										aria-hidden="true"
 									>Rychlý přístup</span>
 									<ChevronDownIcon
-										class="ml-2 size-5 text-gray-400"
+										class="ml-2 size-5 text-gray-300"
 										aria-hidden="true"
 									/>
 								</span>
@@ -439,7 +439,7 @@ onMounted(() => {
 										aria-hidden="true"
 									>{{ user.firstname }} {{ user.lastname }}</span>
 									<ChevronDownIcon
-										class="ml-2 size-5 text-gray-400"
+										class="ml-2 size-5 text-gray-300"
 										aria-hidden="true"
 									/>
 								</span>

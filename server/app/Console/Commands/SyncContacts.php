@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\Contact\Contact;
+use App\Models\Contact\ContactHistory;
 use App\Models\Contact\ContactPhase;
 use App\Models\Contact\ContactSource;
 use Illuminate\Console\Command;
@@ -26,8 +27,31 @@ class SyncContacts extends Command
      */
     public function handle()
     {
-        $this->databaseSync();
+        $this->createContactHistories();
+        //$this->databaseSync();
         //$this->writeToExcel();
+    }
+
+    private function createContactHistories(): void
+    {
+        $this->output->title('Creating contact histories...');
+
+        ContactHistory::query()->delete();
+
+        $contacts = Contact::query()->get();
+        foreach ($contacts as $contact) {
+            $history = new ContactHistory();
+            $history->fill([
+                'name' => 'Kontakt vytvořen',
+                'description' => 'Vytvořili jste nový kontakt!',
+                'origin' => 'system',
+                'type' => 'other',
+                'created_at' => $contact->created_at,
+                'updated_at' => $contact->updated_at,
+            ]);
+            $history->contact()->associate($contact);
+            $history->save();
+        }
     }
 
     private function databaseSync(): void
