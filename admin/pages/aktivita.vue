@@ -21,10 +21,10 @@ const year = ref(new Date().getFullYear());
 
 const showQuickEditDialog = ref(false);
 const quickEditDialogItem = ref({
-  id: 0 as number,
+	id: 0 as number,
 	activity_id: 1 as number,
 	completed: false as boolean,
-  formatted_date: null as string | null,
+	formatted_date: null as string | null,
 });
 
 const items = ref([]);
@@ -115,19 +115,19 @@ function showEditDialog() {
 }
 
 function addEditDialogItem(date: string) {
-  const dateObj = new Date(date);
-  dateObj.setDate(dateObj.getDate() + 1);
-  quickEditDialogItem.value = {
-    id: 0,
-    activity_id: 1,
-    completed: false,
-    formatted_date: new Date(dateObj).toISOString().split('T')[0],
-  };
-  showQuickEditDialog.value = true;
+	const dateObj = new Date(date);
+	dateObj.setDate(dateObj.getDate() + 1);
+	quickEditDialogItem.value = {
+		id: 0,
+		activity_id: 1,
+		completed: false,
+		formatted_date: new Date(dateObj).toISOString().split('T')[0],
+	};
+	showQuickEditDialog.value = true;
 }
 
 function showUpdateEditDialog(item) {
-  quickEditDialogItem.value = item;
+	quickEditDialogItem.value = item;
 	showQuickEditDialog.value = true;
 }
 
@@ -155,7 +155,12 @@ definePageMeta({
 			@add-dialog="showEditDialog"
 		/>
 		<LayoutContainer>
-			<UserActivityCalendar :activities="items" @update-item="showUpdateEditDialog" @load-items="loadItems" @add-item="addEditDialogItem"/>
+			<UserActivityCalendar
+				:activities="items"
+				@update-item="showUpdateEditDialog"
+				@load-items="loadItems"
+				@add-item="addEditDialogItem"
+			/>
 		</LayoutContainer>
 		<UserActivityDialog
 			v-model:show="showQuickEditDialog"

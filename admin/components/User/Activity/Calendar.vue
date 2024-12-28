@@ -17,11 +17,15 @@ const selectedDate = ref(new Date());
 
 const startOfMonth = computed(() => {
 	const date = new Date(currentDate.value.getFullYear(), currentDate.value.getMonth(), 1);
-	return date.getDay();
+	let day = date.getDay();
+	if (day === 0) {
+		day = 7; // Adjust Sunday to be the last day of the week
+	}
+	return day - 1; // Adjust to make Monday the first day of the week
 });
 
 const daysInMonth = computed(() => {
-	return new Date(currentDate.value.getFullYear(), currentDate.value.getMonth(), 0).getDate();
+	return new Date(currentDate.value.getFullYear(), currentDate.value.getMonth() + 1, 0).getDate();
 });
 
 const days = computed(() => {
@@ -34,17 +38,17 @@ const days = computed(() => {
 
 function prevMonth() {
 	currentDate.value = new Date(currentDate.value.setMonth(currentDate.value.getMonth() - 1));
-  emit('load-items', currentDate.value.getMonth() + 1, currentDate.value.getFullYear());
+	emit('load-items', currentDate.value.getMonth() + 1, currentDate.value.getFullYear());
 }
 
 function nextMonth() {
 	currentDate.value = new Date(currentDate.value.setMonth(currentDate.value.getMonth() + 1));
-  emit('load-items', currentDate.value.getMonth() + 1, currentDate.value.getFullYear());
+	emit('load-items', currentDate.value.getMonth() + 1, currentDate.value.getFullYear());
 }
 
 function selectDate(date: Date) {
 	selectedDate.value = date;
-  emit('add-item', selectedDate.value);
+	emit('add-item', selectedDate.value);
 }
 
 const activitiesByDay = computed(() => {
@@ -80,9 +84,6 @@ const activitiesByDay = computed(() => {
 		</div>
 		<div class="grid grid-cols-7">
 			<div class="text-center font-semibold bg-grayDark">
-				Ne
-			</div>
-			<div class="text-center font-semibold bg-grayDark">
 				Po
 			</div>
 			<div class="text-center font-semibold bg-grayDark">
@@ -100,6 +101,9 @@ const activitiesByDay = computed(() => {
 			<div class="text-center font-semibold bg-grayDark">
 				So
 			</div>
+			<div class="text-center font-semibold bg-grayDark">
+				Ne
+			</div>
 			<div
 				v-for="n in startOfMonth"
 				:key="n"
@@ -108,7 +112,7 @@ const activitiesByDay = computed(() => {
 			<div
 				v-for="day in days"
 				:key="day"
-				:class="['min-h-[128px] h-auto p-4 flex flex-col cursor-pointer border border-grayDark', { 'bg-grayLight': day.toDateString() === selectedDate.toDateString() }, 'text-primaryCustom']"
+				:class="['min-h-[128px] h-auto p-4 flex flex-col cursor-pointer ring-1 ring-grayLight', { 'bg-gray-50': day.toDateString() === selectedDate.toDateString() }, 'text-primaryCustom']"
 				@click="selectDate(day)"
 			>
 				<div>
@@ -119,7 +123,7 @@ const activitiesByDay = computed(() => {
 						v-for="(activityItem, index) in activitiesByDay(day)"
 						:key="index"
 						class="col-span-1"
-            @click="emit('update-item', activityItem)"
+						@click="emit('update-item', activityItem)"
 					>
 						<div
 							v-if="[6, 8, 11, 12].includes(activityItem.activity.id) && !activityItem.completed"

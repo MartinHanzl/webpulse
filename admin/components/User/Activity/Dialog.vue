@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue';
 import { Form } from 'vee-validate';
-import { useActivityStore} from '~/stores/activityStore';
+import { useActivityStore } from '~/stores/activityStore';
 
 const activityStore = useActivityStore();
 
@@ -60,7 +60,12 @@ const emit = defineEmits(['save-item']);
 												Přidat aktivitu
 											</DialogTitle>
 											<div class="col-span-1 grid grid-cols-1 gap-y-4 text-wrap">
-                        <BaseFormSelect v-model="item.activity_id" :options="activityStore.activitiesOptions" class="text-sm font-medium text-grayDark col-span-full" name="activity_id" />
+												<BaseFormSelect
+													v-model="item.activity_id"
+													:options="activityStore.activitiesOptions"
+													class="text-sm font-medium text-grayDark col-span-full"
+													name="activity_id"
+												/>
 												<BaseFormInput
 													v-model="item.formatted_date"
 													type="date"
@@ -68,7 +73,7 @@ const emit = defineEmits(['save-item']);
 													name="formatted_date"
 													class="text-sm font-medium text-grayDark col-span-full"
 												/>
-                        <BaseFormCheckbox
+												<BaseFormCheckbox
 													v-model="item.completed"
 													label="Kompletní"
 													name="completed"
