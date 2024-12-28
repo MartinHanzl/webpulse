@@ -127,6 +127,7 @@ function addEditDialogItem(date: string) {
 }
 
 function showUpdateEditDialog(item) {
+  console.log(item);
 	quickEditDialogItem.value = item;
 	showQuickEditDialog.value = true;
 }

@@ -151,13 +151,13 @@ const activitiesByDay = computed(() => {
 						/>
 						<div
 							v-if="activityItem.activity.id === 18"
-							class="p-4 flex items-center justify-center col-span-1 text-success font-semibold"
+							class="flex items-center justify-center col-span-1 text-success font-semibold"
 						>
 							K
 						</div>
 						<div
 							v-if="activityItem.activity.id === 20"
-							class="p-4 flex items-center justify-center col-span-1 text-primaryLight font-semibold"
+							class="flex items-center justify-center col-span-1 text-primaryLight font-semibold"
 						>
 							K
 						</div>
