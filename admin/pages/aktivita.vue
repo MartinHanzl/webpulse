@@ -111,6 +111,11 @@ function showEditDialog() {
 	showQuickEditDialog.value = true;
 }
 
+function showUpdateEditDialog(item) {
+  quickEditDialogItem.value = item;
+	showQuickEditDialog.value = true;
+}
+
 useHead({
 	title: pageTitle.value,
 });
@@ -135,7 +140,7 @@ definePageMeta({
 			@add-dialog="showEditDialog"
 		/>
 		<LayoutContainer>
-			<UserActivityCalendar :activities="items" />
+			<UserActivityCalendar :activities="items" @update-item="showUpdateEditDialog" />
 		</LayoutContainer>
 		<UserActivityDialog
 			v-model:show="showQuickEditDialog"

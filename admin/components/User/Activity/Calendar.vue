@@ -10,6 +10,8 @@ const props = defineProps({
 	},
 });
 
+const emit = defineEmits(['update-item']);
+
 const currentDate = ref(new Date());
 const selectedDate = ref(new Date());
 
@@ -114,6 +116,7 @@ const activitiesByDay = computed(() => {
 						v-for="(activityItem, index) in activitiesByDay(day)"
 						:key="index"
 						class="col-span-1"
+            @click="emit('update-item', activityItem)"
 					>
 						<div
 							v-if="[6, 8, 11, 12].includes(activityItem.activity.id)"
