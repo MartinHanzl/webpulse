@@ -16,18 +16,18 @@ class Controller extends BaseController
 
     public function dashboard(Request $request): JsonResponse
     {
-        $lastAddedContacts = Contact::query()
+        $lastAddedContacts = Contact::without(['phase', 'source', 'tasks'])
             ->orderBy('created_at', 'desc')
             ->limit(10)
             ->where('user_id', $request->user()->id)
             ->get();
 
-        $contactsToCall = Contact::query()
+        $contactsToCall = Contact::without(['phase', 'source', 'tasks'])
             ->whereDate('next_meeting', now()->toDateString())
             ->where('user_id', $request->user()->id)
             ->get();
 
-        $comingEvents = Contact::query()
+        $comingEvents = Contact::without(['phase', 'source', 'tasks'])
             ->whereDate('next_meeting', '>', now()->toDateString())
             ->orderBy('next_meeting')
             ->limit(5)
