@@ -26,13 +26,13 @@ const quickEditDialogItem = ref({
 
 const items = ref([]);
 
-async function loadItems() {
+async function loadItems(month: number, year: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
 	await client<{
 		id: number;
-	}>('/api/admin/user/activity', {
+	}>('/api/admin/user/activity?month=' + month + '&year=' + year, {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
@@ -44,7 +44,7 @@ async function loadItems() {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst kontakty. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst aktivity. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -67,7 +67,7 @@ async function deleteItem(id: number) {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se smazat položku kontaktu.',
+			description: 'Nepodařilo se smazat aktivitu.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -90,14 +90,14 @@ async function saveItem(item) {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: 'Kontakt byl úspěšně uložen.',
+			description: 'Aktivita byla úspěšně uložena.',
 			color: 'green',
 		});
 	}).catch(() => {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se uložit kontakt. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
+			description: 'Nepodařilo se uložit aktivitu. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -140,7 +140,7 @@ definePageMeta({
 			@add-dialog="showEditDialog"
 		/>
 		<LayoutContainer>
-			<UserActivityCalendar :activities="items" @update-item="showUpdateEditDialog" />
+			<UserActivityCalendar :activities="items" @update-item="showUpdateEditDialog" @load-items="loadItems"/>
 		</LayoutContainer>
 		<UserActivityDialog
 			v-model:show="showQuickEditDialog"

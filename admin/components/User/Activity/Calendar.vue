@@ -10,7 +10,7 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['update-item']);
+const emit = defineEmits(['update-item', 'load-items']);
 
 const currentDate = ref(new Date());
 const selectedDate = ref(new Date());
@@ -34,10 +34,12 @@ const days = computed(() => {
 
 function prevMonth() {
 	currentDate.value = new Date(currentDate.value.setMonth(currentDate.value.getMonth() - 1));
+  emit('load-items');
 }
 
 function nextMonth() {
 	currentDate.value = new Date(currentDate.value.setMonth(currentDate.value.getMonth() + 1));
+  emit('load-items');
 }
 
 function selectDate(date: Date) {
