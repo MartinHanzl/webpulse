@@ -16,6 +16,9 @@ const breadcrumbs = ref([
 	},
 ]);
 
+const month = ref(new Date().getMonth() + 1);
+const year = ref(new Date().getFullYear());
+
 const showQuickEditDialog = ref(false);
 const quickEditDialogItem = ref({
   id: 0 as number,
@@ -72,7 +75,7 @@ async function deleteItem(id: number) {
 		});
 	}).finally(() => {
 		loading.value = false;
-		loadItems();
+		loadItems(month.value, year.value);
 	});
 }
 
@@ -103,12 +106,24 @@ async function saveItem(item) {
 	}).finally(() => {
 		loading.value = false;
 		showQuickEditDialog.value = false;
-		loadItems();
+		loadItems(month.value, year.value);
 	});
 }
 
 function showEditDialog() {
 	showQuickEditDialog.value = true;
+}
+
+function addEditDialogItem(date: string) {
+  const dateObj = new Date(date);
+  dateObj.setDate(dateObj.getDate() + 1);
+  quickEditDialogItem.value = {
+    id: 0,
+    activity_id: 1,
+    completed: false,
+    formatted_date: new Date(dateObj).toISOString().split('T')[0],
+  };
+  showQuickEditDialog.value = true;
 }
 
 function showUpdateEditDialog(item) {
@@ -121,7 +136,7 @@ useHead({
 });
 
 onMounted(() => {
-	loadItems();
+	loadItems(month.value, year.value);
 });
 definePageMeta({
 	middleware: 'sanctum:auth',
@@ -140,7 +155,7 @@ definePageMeta({
 			@add-dialog="showEditDialog"
 		/>
 		<LayoutContainer>
-			<UserActivityCalendar :activities="items" @update-item="showUpdateEditDialog" @load-items="loadItems"/>
+			<UserActivityCalendar :activities="items" @update-item="showUpdateEditDialog" @load-items="loadItems" @add-item="addEditDialogItem"/>
 		</LayoutContainer>
 		<UserActivityDialog
 			v-model:show="showQuickEditDialog"

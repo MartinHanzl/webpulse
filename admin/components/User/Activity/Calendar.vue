@@ -10,7 +10,7 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['update-item', 'load-items']);
+const emit = defineEmits(['update-item', 'load-items', 'add-item']);
 
 const currentDate = ref(new Date());
 const selectedDate = ref(new Date());
@@ -34,16 +34,17 @@ const days = computed(() => {
 
 function prevMonth() {
 	currentDate.value = new Date(currentDate.value.setMonth(currentDate.value.getMonth() - 1));
-  emit('load-items');
+  emit('load-items', currentDate.value.getMonth() + 1, currentDate.value.getFullYear());
 }
 
 function nextMonth() {
 	currentDate.value = new Date(currentDate.value.setMonth(currentDate.value.getMonth() + 1));
-  emit('load-items');
+  emit('load-items', currentDate.value.getMonth() + 1, currentDate.value.getFullYear());
 }
 
 function selectDate(date: Date) {
 	selectedDate.value = date;
+  emit('add-item', selectedDate.value);
 }
 
 const activitiesByDay = computed(() => {
@@ -141,7 +142,7 @@ const activitiesByDay = computed(() => {
 							class="p-4 border-2 border-grayDark col-span-1"
 						/>
 						<div
-							v-if="[13, 14].includes(activityItem.activity.id)"
+							v-if="[13, 14, 23].includes(activityItem.activity.id)"
 							class="p-4 border-2 border-primaryLight col-span-1"
 						/>
 						<div

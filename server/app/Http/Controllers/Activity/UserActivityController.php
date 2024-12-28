@@ -25,11 +25,11 @@ class UserActivityController extends Controller
             ->where('user_id', $request->user()->id);
 
         if ($request->has('month') && $request->has('year')) {
-            $query->whereMonth('created_at', $request->get('month'))
-                ->whereYear('created_at', $request->get('year'));
+            $query->whereMonth('date', $request->get('month'))
+                ->whereYear('date', $request->get('year'));
         } else {
-            $query->whereMonth('created_at', date('n'))
-                ->whereYear('created_at', date('Y'));
+            $query->whereMonth('date', date('n'))
+                ->whereYear('date', date('Y'));
         }
 
         return Response::json(UserActivityResource::collection($query->get()));
