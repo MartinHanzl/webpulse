@@ -21,7 +21,7 @@ class UserActivityResource extends JsonResource
             'duration' => $this->duration,
             'completed' => $this->completed,
             'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'formatted_day' => $this->created_at->format('d'),
         ];
     }
 }

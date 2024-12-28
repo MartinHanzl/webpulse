@@ -15,6 +15,7 @@ use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\Message\MessageBlueprintController;
 use App\Http\Controllers\Activity\ActivityController;
 use App\Http\Controllers\Controller as BaseController;
+use App\Http\Controllers\Activity\UserActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -76,6 +77,15 @@ Route::group([
                 Route::get('{id}', [UserGroupController::class, 'show'])->where('id', '[0-9]+');
                 Route::post('{id?}', [UserGroupController::class, 'store']);
                 Route::delete('{id}', [UserGroupController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            Route::group([
+                'prefix' => 'activity'
+            ], function () {
+                Route::get('', [UserActivityController::class, 'index']);
+                Route::get('{id}', [UserActivityController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [UserActivityController::class, 'store']);
+                Route::delete('{id}', [UserActivityController::class, 'destroy'])->where('id', '[0-9]+');
             });
 
             Route::get('', [UserController::class, 'index']);
