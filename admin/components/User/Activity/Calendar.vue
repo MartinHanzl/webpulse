@@ -72,7 +72,7 @@ const activitiesByDay = computed(() => {
 				Předchozí měsíc
 			</BaseButton>
 			<h2 class="text-lg font-semibold text-primaryCustom">
-				{{ currentDate.toLocaleDateString('cs-CZ', { month: 'long', year: 'numeric' }) }}
+				{{ currentDate.toLocaleDateString('cs-CZ', { month: 'long', year: 'numeric' })[0].toUpperCase() + currentDate.toLocaleDateString('cs-CZ', { month: 'long', year: 'numeric' }).slice(1) }}
 			</h2>
 			<BaseButton
 				variant="primary"
@@ -83,25 +83,25 @@ const activitiesByDay = computed(() => {
 			</BaseButton>
 		</div>
 		<div class="grid grid-cols-7">
-			<div class="text-center font-semibold bg-grayDark">
+			<div class="text-center py-2 font-semibold bg-grayDark rounded-l-lg">
 				Po
 			</div>
-			<div class="text-center font-semibold bg-grayDark">
+			<div class="text-center py-2 font-semibold bg-grayDark">
 				Út
 			</div>
-			<div class="text-center font-semibold bg-grayDark">
+			<div class="text-center py-2 font-semibold bg-grayDark">
 				St
 			</div>
-			<div class="text-center font-semibold bg-grayDark">
+			<div class="text-center py-2 font-semibold bg-grayDark">
 				Čt
 			</div>
-			<div class="text-center font-semibold bg-grayDark">
+			<div class="text-center py-2 font-semibold bg-grayDark">
 				Pá
 			</div>
-			<div class="text-center font-semibold bg-grayDark">
+			<div class="text-center py-2 font-semibold bg-grayDark">
 				So
 			</div>
-			<div class="text-center font-semibold bg-grayDark">
+			<div class="text-center py-2 font-semibold bg-grayDark rounded-r-lg">
 				Ne
 			</div>
 			<div
