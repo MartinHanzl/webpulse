@@ -28,7 +28,7 @@ class Controller extends BaseController
             ->get();
 
         $comingEvents = Contact::without(['phase', 'source', 'tasks'])
-            ->whereDate('next_meeting', '>', now()->toDateString())
+            ->whereDate('next_meeting', '>=', now()->toDateString())
             ->orderBy('next_meeting')
             ->limit(5)
             ->where('user_id', $request->user()->id)
