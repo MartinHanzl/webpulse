@@ -14,6 +14,7 @@ use App\Http\Controllers\Contact\ContactTaskController;
 use App\Http\Controllers\Contact\ContactController;
 use App\Http\Controllers\Message\MessageBlueprintController;
 use App\Http\Controllers\Activity\ActivityController;
+use App\Http\Controllers\Controller as BaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -138,6 +139,7 @@ Route::group([
             });
         });
 
+        // Activity routes
         Route::group([
             'prefix' => 'activity'
         ], function () {
@@ -146,5 +148,9 @@ Route::group([
             Route::post('{id?}', [ActivityController::class, 'store']);
             Route::delete('{id}', [ActivityController::class, 'destroy'])->where('id', '[0-9]+');
         });
+
+        // Dashboard and statistics routes
+        Route::get('dashboard', [BaseController::class, 'dashboard']);
+        Route::get('statistics', [BaseController::class, 'statistics']);
     });
 });
