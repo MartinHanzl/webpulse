@@ -27,6 +27,13 @@ class Controller extends BaseController
             ->where('user_id', $request->user()->id)
             ->get();
 
+        $comingEvents = Contact::query()
+            ->whereDate('next_meeting', '>', now()->toDateString())
+            ->orderBy('next_meeting')
+            ->limit(5)
+            ->where('user_id', $request->user()->id)
+            ->get();
+
         return Response::json([
             'lastAddedContacts' => [
                 'data' => $lastAddedContacts
@@ -34,6 +41,9 @@ class Controller extends BaseController
             'contactsToCall' => [
                 'data' => $contactsToCall
             ],
+            'comingEvents' => [
+                'data' => $comingEvents
+            ]
         ]);
     }
 
