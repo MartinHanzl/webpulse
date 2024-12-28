@@ -36,7 +36,7 @@ class UserActivityController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, int $id): JsonResponse
+    public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
             $userActivity = UserActivity::query()

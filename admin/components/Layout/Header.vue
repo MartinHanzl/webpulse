@@ -51,7 +51,7 @@ const props = defineProps({
 	},
 });
 
-const emit = defineEmits(['save', 'update-filters']);
+const emit = defineEmits(['save', 'update-filters', 'add-dialog']);
 const quickAccessItem = ref({
 	id: null,
 	name: props.title,
@@ -152,6 +152,14 @@ const emitUpdateFilters = () => {
 						type="primary"
 						size="xl"
 						@click="router.push(route.fullPath + '/pridat')"
+					>
+						{{ action.text }}
+					</BaseButton>
+					<BaseButton
+						v-if="action.type === 'add-dialog' && canEdit(slug)"
+						type="primary"
+						size="xl"
+						@click="emit('add-dialog')"
 					>
 						{{ action.text }}
 					</BaseButton>

@@ -17,7 +17,12 @@ const breadcrumbs = ref([
 ]);
 
 const showQuickEditDialog = ref(false);
-const quickEditDialogItem = ref(null);
+const quickEditDialogItem = ref({
+  id: 0 as number,
+	activity_id: 1 as number,
+	completed: false as boolean,
+	date: null as string | null,
+});
 
 const items = ref([]);
 
@@ -51,7 +56,7 @@ async function deleteItem(id: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{ id: number }>('/api/admin/contact/' + id, {
+	await client<{ id: number }>('/api/admin/user/activity/' + id, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
@@ -75,7 +80,7 @@ async function saveItem(item) {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{ id: number }>('/api/admin/contact/' + item.id, {
+	await client<{ id: number }>(item.id === 0 ? '/api/admin/user/activity' : '/api/admin/user/activity/' + item.id, {
 		method: 'POST',
 		body: JSON.stringify(item),
 		headers: {
@@ -102,6 +107,10 @@ async function saveItem(item) {
 	});
 }
 
+function showEditDialog() {
+	showQuickEditDialog.value = true;
+}
+
 useHead({
 	title: pageTitle.value,
 });
@@ -120,12 +129,18 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 			:actions="[
-				{ type: 'add', text: 'Přidat aktivitu' },
+				{ type: 'add-dialog', text: 'Přidat aktivitu' },
 			]"
 			slug="users_has_activities"
+			@add-dialog="showEditDialog"
 		/>
 		<LayoutContainer>
-			<BaseCalendar :activities="items" />
+			<UserActivityCalendar :activities="items" />
 		</LayoutContainer>
+		<UserActivityDialog
+			v-model:show="showQuickEditDialog"
+			v-model:item="quickEditDialogItem"
+			@save-item="saveItem"
+		/>
 	</div>
 </template>
