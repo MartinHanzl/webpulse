@@ -22,7 +22,7 @@ class UserActivityResource extends JsonResource
             'duration' => $this->duration,
             'completed' => $this->completed,
             'date' => $this->date,
-            'formatted_date' => $this->date?->format('Y-m-d H:i:s'),
+            'formatted_date' => $this->date?->format('Y-m-d'),
             'formatted_day' => $this->date->format('d'),
         ];
     }

@@ -21,7 +21,7 @@ const quickEditDialogItem = ref({
   id: 0 as number,
 	activity_id: 1 as number,
 	completed: false as boolean,
-	date: null as string | null,
+  formatted_date: null as string | null,
 });
 
 const items = ref([]);
