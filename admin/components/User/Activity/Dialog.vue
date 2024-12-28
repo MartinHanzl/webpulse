@@ -57,7 +57,7 @@ const emit = defineEmits(['save-item']);
 												as="h3"
 												class="text-base font-semibold text-grayDark"
 											>
-												Přidat aktivitu
+												{{ item.id !== 0 ? 'Upravit aktivitu' : 'Přidat aktivitu' }}
 											</DialogTitle>
 											<div class="col-span-1 grid grid-cols-1 gap-y-4 text-wrap">
 												<BaseFormSelect

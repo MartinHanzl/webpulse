@@ -47,6 +47,7 @@ function nextMonth() {
 }
 
 function selectDate(date: Date) {
+	console.log(date);
 	selectedDate.value = date;
 	emit('add-item', selectedDate.value);
 }
@@ -112,17 +113,19 @@ const activitiesByDay = computed(() => {
 			<div
 				v-for="day in days"
 				:key="day"
-				:class="['min-h-[128px] h-auto p-4 flex flex-col cursor-pointer ring-1 ring-grayLight', { 'bg-gray-50': day.toDateString() === selectedDate.toDateString() }, 'text-primaryCustom']"
-				@click="selectDate(day)"
+				class="min-h-[128px] h-auto p-2 flex flex-col border border-gray-100"
 			>
-				<div>
+				<div
+					:class="['flex size-6 items-center justify-center text-primaryCustom rounded-full cursor-pointer font-medium p-[16px]', { 'bg-primaryCustom text-white': day.toDateString() === selectedDate.toDateString() }]"
+					@click="selectDate(day)"
+				>
 					{{ day.getDate() }}
 				</div>
 				<div class="mt-4 grid grid-cols-3 gap-4">
 					<div
 						v-for="(activityItem, index) in activitiesByDay(day)"
 						:key="index"
-						class="col-span-1"
+						class="col-span-1 cursor-pointer"
 						@click="emit('update-item', activityItem)"
 					>
 						<div

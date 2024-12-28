@@ -16,20 +16,18 @@ const breadcrumbs = ref([
 	},
 ]);
 
-const month = ref(new Date().getMonth() + 1);
-const year = ref(new Date().getFullYear());
+const currentMonth = ref(new Date().getMonth() + 1);
+const currentYear = ref(new Date().getFullYear());
 
 const showQuickEditDialog = ref(false);
-const quickEditDialogItem = ref({
-	id: 0 as number,
-	activity_id: 1 as number,
-	completed: false as boolean,
-	formatted_date: null as string | null,
-});
+const quickEditDialogItem = ref(null);
 
 const items = ref([]);
 
 async function loadItems(month: number, year: number) {
+	currentMonth.value = month;
+	currentYear.value = year;
+
 	loading.value = true;
 	const client = useSanctumClient();
 
@@ -75,7 +73,7 @@ async function deleteItem(id: number) {
 		});
 	}).finally(() => {
 		loading.value = false;
-		loadItems(month.value, year.value);
+		loadItems(currentMonth.value, currentYear.value);
 	});
 }
 
@@ -106,11 +104,17 @@ async function saveItem(item) {
 	}).finally(() => {
 		loading.value = false;
 		showQuickEditDialog.value = false;
-		loadItems(month.value, year.value);
+		loadItems(currentMonth.value, currentYear.value);
 	});
 }
 
 function showEditDialog() {
+	quickEditDialogItem.value = {
+		id: 0,
+		activity_id: 1,
+		completed: false,
+		formatted_date: new Date().toISOString().split('T')[0],
+	};
 	showQuickEditDialog.value = true;
 }
 
@@ -127,7 +131,6 @@ function addEditDialogItem(date: string) {
 }
 
 function showUpdateEditDialog(item) {
-  console.log(item);
 	quickEditDialogItem.value = item;
 	showQuickEditDialog.value = true;
 }
@@ -137,7 +140,7 @@ useHead({
 });
 
 onMounted(() => {
-	loadItems(month.value, year.value);
+	loadItems(currentMonth.value, currentYear.value);
 });
 definePageMeta({
 	middleware: 'sanctum:auth',
