@@ -7,6 +7,7 @@ use App\Http\Resources\Activity\UserActivityResource;
 use App\Models\Activity\UserActivity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
@@ -49,9 +50,7 @@ class UserActivityController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'activity_id' => 'required|integer',
-            'start_time' => 'required|date',
-            'end_time' => 'required|date',
+            'activity_id' => 'required|integer|exists:activities,id',
         ]);
 
         if ($validator->fails()) {
@@ -61,8 +60,16 @@ class UserActivityController extends Controller
         try {
             DB::beginTransaction();
 
+            $userActivity->fill($request->all());
+
             $userActivity->user_id = $request->user()->id;
             $userActivity->activity_id = $request->get('activity_id');
+
+            if ($request->has('formatted_date') && $request->get('formatted_date') != null) {
+                $userActivity->date = Carbon::parse($request->get('formatted_date'));
+            } else {
+                $userActivity->date = Carbon::now();
+            }
 
             $userActivity->save();
 

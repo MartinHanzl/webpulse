@@ -18,10 +18,12 @@ class UserActivity extends Model
         'description',
         'duration',
         'completed',
+        'date',
     ];
 
     protected $casts = [
         'completed' => 'boolean',
+        'date' => 'datetime',
     ];
 
     public function activity()

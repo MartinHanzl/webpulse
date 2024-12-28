@@ -183,6 +183,9 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									<span v-else-if="column.type === 'date'">
 										{{ new Date(item[column.key]).toLocaleDateString() }}
 									</span>
+									<span v-else-if="column.type === 'datetime'">
+										{{ new Date(item[column.key]).toLocaleString() }}
+									</span>
 									<NuxtLink
 										v-else-if="column.type === 'link'"
 										:to="item[column.key]"

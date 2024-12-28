@@ -20,8 +20,8 @@ class UserActivityResource extends JsonResource
             'description' => $this->description,
             'duration' => $this->duration,
             'completed' => $this->completed,
-            'created_at' => $this->created_at,
-            'formatted_day' => $this->created_at->format('d'),
+            'date' => $this->date,
+            'formatted_day' => $this->date->format('d'),
         ];
     }
 }

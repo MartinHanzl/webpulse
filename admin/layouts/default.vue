@@ -49,7 +49,7 @@ provide('searchString', searchString);
 const navigation = ref([
 	{ title: 'Úvod', menu: [
 		{ name: 'Přehled', link: '/', icon: HomeIcon, current: true },
-		{ name: 'Statistiky', link: '/demo', icon: ChartPieIcon, current: false },
+		{ name: 'Statistiky', link: '/statistiky', icon: ChartPieIcon, current: false },
 	] },
 	{ title: 'Byznys a osobní růst', menu: [
 		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false, slug: 'contacts' },
@@ -184,7 +184,7 @@ onMounted(() => {
 								<div class="flex h-24 shrink-0 items-center justify-center">
 									<img
 										class="h-8 w-auto"
-                    src="public/static/img/logo-gray-300.png"
+										src="public/static/img/logo-gray-300.png"
 										alt="Your Company"
 									>
 								</div>

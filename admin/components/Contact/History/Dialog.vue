@@ -12,7 +12,7 @@ const show = defineModel('show', {
 
 const item = defineModel('item', {
 	type: Object,
-  default: {} as Record<string, any>,
+	default: {} as Record<string, any>,
 });
 
 defineProps({
