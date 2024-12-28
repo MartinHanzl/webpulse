@@ -119,7 +119,7 @@ const activitiesByDay = computed(() => {
             @click="emit('update-item', activityItem)"
 					>
 						<div
-							v-if="[6, 8, 11, 12].includes(activityItem.activity.id)"
+							v-if="[6, 8, 11, 12].includes(activityItem.activity.id) && !activityItem.completed"
 							class="p-4 border-b-2 border-r-2 border-danger"
 						/>
 						<div
