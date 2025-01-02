@@ -78,15 +78,17 @@ class Controller extends BaseController
 
         foreach ($businessActivities as $activity) {
             $activityName = $rawActivities[$activity->activity_id];
+            $activityColor = $activity->activity->color;
             $day = (int)date('j', strtotime($activity->day));
             $activityData[$activityName][$day] = $activity->count;
+            $activityData[$activityName]['color'] = $activityColor;
         }
 
         foreach ($activityData as $name => $data) {
             $series[] = [
                 'name' => $name,
                 'data' => $data,
-                'color' => $this->getColorCode('blue')
+                'color' => $this->getColorCode($activityData['color'])
             ];
         }
 
