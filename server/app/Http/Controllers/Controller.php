@@ -71,9 +71,11 @@ class Controller extends BaseController
             ->get();
 
         $colors = [];
+        $rawColors = [];
         foreach ($activities as $activity) {
             $rawActivities[$activity->id] = $activity->name;
             $colors[$activity->name] = $this->getColorCode($activity->color);
+            $rawColors[] = $this->getColorCode($activity->color);
         }
 
         $series = [];
@@ -107,7 +109,8 @@ class Controller extends BaseController
                 'series' => $series,
                 'axis' => $axis
             ],
-            'businessSummary' => []
+            'businessSummary' => [],
+            'colors' => $rawColors
         ]);
     }
 
