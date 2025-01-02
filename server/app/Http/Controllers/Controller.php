@@ -86,7 +86,7 @@ class Controller extends BaseController
             $series[] = [
                 'name' => $name,
                 'data' => $data,
-                'color' => '#14b8a6', // You can customize the color as needed
+                'color' => $this->getColorCode('blue')
             ];
         }
 
@@ -105,7 +105,73 @@ class Controller extends BaseController
 
     private function getColorCode(string $color): string
     {
-        $code = '';
+        $code = '#020617';
+
+        switch ($color) {
+            case 'slate':
+                $code = '#64748b';
+                break;
+            case 'gray':
+                $code = '#6b7280';
+                break;
+            case 'zinc':
+                $code = '#71717a';
+                break;
+            case 'neutral':
+                $code = '#737373';
+                break;
+            case 'stone':
+                $code = '#78716c';
+                break;
+            case 'red':
+                $code = '#ef4444';
+                break;
+            case 'orange':
+                $code = '#f97316';
+                break;
+            case 'amber':
+                $code = '#f59e0b';
+                break;
+            case 'yellow':
+                $code = '#eab308';
+                break;
+            case 'lime':
+                $code = '#84cc16';
+                break;
+            case 'green':
+                $code = '#22c55e';
+                break;
+            case 'teal':
+                $code = '#14b8a6';
+                break;
+            case 'cyan':
+                $code = '#06b6d4';
+                break;
+            case 'sky':
+                $code = '#0ea5e9';
+                break;
+            case 'blue':
+                $code = '#3b82f6';
+                break;
+            case 'indigo':
+                $code = '#6366f1';
+                break;
+            case 'violet':
+                $code = '#8b5cf6';
+                break;
+            case 'purple':
+                $code = '#a855f7';
+                break;
+            case 'fuchsia':
+                $code = '#d946ef';
+                break;
+            case 'pink':
+                $code = '#ec4899';
+                break;
+            case 'rose':
+                $code = '#f43f5e';
+                break;
+        }
 
         return $code;
     }
