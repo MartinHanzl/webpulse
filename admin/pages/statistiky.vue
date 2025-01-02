@@ -64,6 +64,7 @@ const tableQuery = ref({
 	page: 1 as number,
 	orderBy: 'id' as string,
 	orderWay: 'desc' as string,
+  filter: 'month' as string,
 });
 
 const items = ref([]);
@@ -72,7 +73,7 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{ id: number }>('/api/admin/activity', {
+	await client<{ id: number }>('/api/admin/statistics', {
 		method: 'GET',
 		query: tableQuery.value,
 		headers: {
@@ -91,31 +92,6 @@ async function loadItems() {
 		});
 	}).finally(() => {
 		loading.value = false;
-	});
-}
-
-async function deleteItem(id: number) {
-	loading.value = true;
-	const client = useSanctumClient();
-
-	await client<{ id: number }>('/api/admin/activity/' + id, {
-		method: 'DELETE',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-		},
-	}).then(() => {
-	}).catch(() => {
-		error.value = true;
-		toast.add({
-			title: 'Chyba',
-			description: 'Nepodařilo se smazat pložku aktivity.',
-			color: 'red',
-		});
-	}).finally(() => {
-		loading.value = false;
-		loadItems();
-		activityStore.fetchActivities();
 	});
 }
 
@@ -166,6 +142,11 @@ definePageMeta({
 			<div id="chart">
 				<!-- Correct usage of apexchart component -->
 				<apexchart
+					type="line"
+					height="350"
+					:options="chart.options"
+					:series="chart.series"
+				/><apexchart
 					type="line"
 					height="350"
 					:options="chart.options"

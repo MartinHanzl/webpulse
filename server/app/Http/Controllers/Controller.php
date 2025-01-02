@@ -50,6 +50,15 @@ class Controller extends BaseController
 
     public function statistics(Request $request): JsonResponse
     {
+        $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22];
+        $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
+
+        $activitiesCountCurrentMonth = UserActivity::selectRaw('activity_id, COUNT(*) as count')
+            ->where('user_id', $request->user()->id)
+            ->whereMonth('date', now()->month)
+            ->groupBy('activity_id')
+            ->get();
+
         $activityByMonths = UserActivity::selectRaw('MONTH(date) as month, COUNT(id) as count')
             ->where('user_id', $request->user()->id)
             ->groupBy('month')
@@ -61,15 +70,17 @@ class Controller extends BaseController
             ->get();
 
         return Response::json([
-            'activity' => [
-                'byMonths' => [
-                    'name' => 'Activity by months',
-                    'data' => $activityByMonths
-                ],
-                'byYears' => [
-                    'name' => 'Activity by years',
-                    'data' => $activityByYears
-                ]
+            'month' => [
+                'name' => 'Activity by months',
+                'data' => $activitiesCountCurrentMonth
+            ],
+            'byMonths' => [
+                'name' => 'Activity by months',
+                'data' => $activityByMonths
+            ],
+            'byYears' => [
+                'name' => 'Activity by years',
+                'data' => $activityByYears
             ]
         ]);
     }
