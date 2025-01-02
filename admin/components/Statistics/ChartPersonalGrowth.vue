@@ -14,16 +14,23 @@ const props = defineProps({
 });
 
 const chart = ref<{
-	series: { name: string; data: number[]; color: string }[];
+	series: { name: string; data: number[] }[];
 	options: ApexOptions;
 }>({
-	series: [44, 55, 41, 17, 15],
+	series: props.items.personal.series ?? [],
 	options: {
-		colors: ['#2E93fA', '#66DA26', '#546E7A', '#E91E63', '#FF9800'],
-		labels: ['Čtení knížky', 'Poslech audia', 'Práce s nástěnkou', 'Dreambuilding', 'Práce se sny'],
 		chart: {
-			type: 'donut',
+			height: 350,
+			type: 'heatmap',
+			zoom: { enabled: false },
 		},
+		dataLabels: {
+			enabled: true,
+		},
+		title: {
+			text: 'Osobní růst - heatmapa',
+		},
+		colors: props.items.personalColors ?? ['#008FFB'],
 	},
 });
 </script>
@@ -31,8 +38,8 @@ const chart = ref<{
 <template>
 	<div id="chart">
 		<apexchart
-			type="donut"
-			height="400"
+			type="heatmap"
+			height="350"
 			:options="chart.options"
 			:series="chart.series"
 		/>
