@@ -53,18 +53,18 @@ class Controller extends BaseController
         $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22];
         $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
 
-        $businessActivities = UserActivity::selectRaw('activity_id, COUNT(*) as count')
+        $businessActivities = UserActivity::selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day')
             ->where('user_id', $request->user()->id)
             ->whereIn('activity_id', $businessGrowthActivityIds)
             ->whereMonth('date', now()->month)
-            ->groupBy('activity_id')
+            ->groupBy('activity_id', 'day')
             ->get();
 
-        $personalActivities = UserActivity::selectRaw('activity_id, COUNT(*) as count')
+        $personalActivities = UserActivity::selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day')
             ->where('user_id', $request->user()->id)
             ->whereIn('activity_id', $personalGrowthActivityIds)
             ->whereMonth('date', now()->month)
-            ->groupBy('activity_id')
+            ->groupBy('activity_id', 'day')
             ->get();
 
         return Response::json([
