@@ -89,10 +89,15 @@ class Controller extends BaseController
             ];
         }
 
+        $axis = [];
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+            $axis[] = $day . '. ' . now()->month . '.';
+        }
+
         return Response::json([
             'business' => [
                 'series' => $series,
-                'axis' => $businessActivities->pluck('day')->unique()->values()->toArray(),
+                'axis' => $axis
             ]
         ]);
     }
