@@ -29,8 +29,8 @@ const breadcrumbs = ref([
 const searchString = ref(inject('searchString', ''));
 const tableQuery = ref({
 	filter: 'month' as string,
-  month: new Date().getMonth() + 1,
-  year: new Date().getFullYear(),
+  month: 12,
+  year: 2024,
 });
 
 const items = ref(null);

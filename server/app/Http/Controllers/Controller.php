@@ -65,10 +65,18 @@ class Controller extends BaseController
 
         if ($request->has('filter')) {
             if ($request->get('filter') == 'month') {
-                if ($request->has('month')) {
-                    $businessActivitiesQuery->whereMonth('date', (int)$request->month);
+                if ($request->has('month') && $request->has('year')) {
+                    $businessActivitiesQuery->whereMonth('date', (int)$request->month)
+                        ->whereYear('date', $request->year);
                 } else {
-                    $businessActivitiesQuery->whereMonth('date', now()->month);
+                    $businessActivitiesQuery->whereMonth('date', now()->month)
+                        ->whereYear('date', now()->year);
+                }
+            } else if ($request->get('filter') == 'year') {
+                if ($request->has('year')) {
+                    $businessActivitiesQuery->whereYear('date', $request->year);
+                } else {
+                    $businessActivitiesQuery->whereYear('date', now()->year);
                 }
             }
         }
