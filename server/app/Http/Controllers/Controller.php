@@ -86,7 +86,7 @@ class Controller extends BaseController
             $series[] = [
                 'name' => $name,
                 'data' => $data,
-                'color' => '#0d9488', // You can customize the color as needed
+                'color' => '#14b8a6', // You can customize the color as needed
             ];
         }
 
