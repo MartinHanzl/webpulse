@@ -148,6 +148,9 @@ class Controller extends BaseController
             case 'green':
                 $code = '#22c55e';
                 break;
+            case 'emerald':
+                $code = '#10b981';
+                break;
             case 'teal':
                 $code = '#14b8a6';
                 break;
