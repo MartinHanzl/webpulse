@@ -88,7 +88,6 @@ class Controller extends BaseController
             }
         }
 
-
         $businessActivities = $businessActivitiesQuery->get();
 
         $rawActivities = [];
