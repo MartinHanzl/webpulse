@@ -1,47 +1,8 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
-import { debounce } from 'lodash';
-import type { ApexOptions } from 'apexcharts';
 import { useActivityStore } from '~/stores/activityStore';
 
 const activityStore = useActivityStore();
-
-const chart = ref<{
-	series: { name: string; data: number[]; color: string }[];
-	options: ApexOptions;
-}>({
-	series: [
-		{
-			name: 'KM1',
-			data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
-      color: '#fcd34d',
-		},
-		{
-			name: 'KM2',
-			data: [35, 8, 16, 16, 28, 5, 37, 19, 59],
-			color: '#bef264',
-		},
-	],
-	options: {
-		chart: {
-			height: 250,
-			type: 'area',
-			zoom: { enabled: true },
-		},
-		dataLabels: { enabled: true },
-		stroke: { curve: 'smooth' },
-		title: { text: 'Počet aktivit', align: 'left' },
-		grid: {
-			row: {
-				colors: ['#f3f3f3', 'transparent'],
-				opacity: 0.5,
-			},
-		},
-		xaxis: {
-			categories: ['1.1.', '2.1.', '3.1.', '4.1.', '5.1.', '6.1.', '7.1.', '8.1.', '9.1.'],
-		},
-	},
-});
 
 const toast = useToast();
 const pageTitle = ref('Statistiky');
@@ -52,22 +13,17 @@ const error = ref(false);
 const breadcrumbs = ref([
 	{
 		name: pageTitle.value,
-		link: '/aktivity',
+		link: '/statistiky',
 		current: true,
 	},
 ]);
 
 const searchString = ref(inject('searchString', ''));
 const tableQuery = ref({
-	search: null as string | null,
-	paginate: 12 as number,
-	page: 1 as number,
-	orderBy: 'id' as string,
-	orderWay: 'desc' as string,
-  filter: 'month' as string,
+	filter: 'month' as string,
 });
 
-const items = ref([]);
+const items = ref(null);
 
 async function loadItems() {
 	loading.value = true;
@@ -105,16 +61,6 @@ function updateSort(column: string) {
 	}
 	loadItems();
 }
-function updatePage(page: number) {
-	tableQuery.value.page = page;
-	loadItems();
-}
-
-const debouncedLoadItems = debounce(loadItems, 400);
-watch(searchString, () => {
-	tableQuery.value.search = searchString.value;
-	debouncedLoadItems();
-});
 
 useHead({
 	title: pageTitle.value,
@@ -138,21 +84,11 @@ definePageMeta({
 				{ type: 'add', text: 'Přidat aktivitu' },
 			]"
 		/>
-		<LayoutContainer>
-			<div id="chart">
-				<!-- Correct usage of apexchart component -->
-				<apexchart
-					type="line"
-					height="350"
-					:options="chart.options"
-					:series="chart.series"
-				/><apexchart
-					type="line"
-					height="350"
-					:options="chart.options"
-					:series="chart.series"
-				/>
-			</div>
+		<LayoutContainer v-if="items">
+			<StatisticsChartBusinessGrowth
+				:items="items"
+				:activities="activityStore.activities"
+			/>
 		</LayoutContainer>
 	</div>
 </template>

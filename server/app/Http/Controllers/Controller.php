@@ -106,7 +106,8 @@ class Controller extends BaseController
             'business' => [
                 'series' => $series,
                 'axis' => $axis
-            ]
+            ],
+            'businessSummary' => []
         ]);
     }
 
