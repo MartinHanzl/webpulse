@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity\UserActivity;
 use App\Models\Contact\Contact;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -49,6 +50,27 @@ class Controller extends BaseController
 
     public function statistics(Request $request): JsonResponse
     {
-        return Response::json();
+        $activityByMonths = UserActivity::selectRaw('MONTH(date) as month, COUNT(id) as count')
+            ->where('user_id', $request->user()->id)
+            ->groupBy('month')
+            ->get();
+
+        $activityByYears = UserActivity::selectRaw('YEAR(date) as year, COUNT(id) as count')
+            ->where('user_id', $request->user()->id)
+            ->groupBy('year')
+            ->get();
+
+        return Response::json([
+            'activity' => [
+                'byMonths' => [
+                    'name' => 'Activity by months',
+                    'data' => $activityByMonths
+                ],
+                'byYears' => [
+                    'name' => 'Activity by years',
+                    'data' => $activityByYears
+                ]
+            ]
+        ]);
     }
 }

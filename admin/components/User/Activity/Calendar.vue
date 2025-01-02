@@ -27,7 +27,7 @@ const startOfMonth = computed(() => {
 const isSmile = ref('empty');
 function checkSmile(day: Date) {
 	const activityIds = [];
-  const formattedDay = day.getDate().toString().padStart(2, '0');
+	const formattedDay = day.getDate().toString().padStart(2, '0');
 	props.activities.forEach((activity) => {
 		if (activity.formatted_day === formattedDay) {
 			if ([2, 3, 4, 5, 16].includes(activity.activity.id)) {
@@ -36,19 +36,24 @@ function checkSmile(day: Date) {
 		}
 	});
 
-  if(activityIds.length === 0) {
-    return 'empty';
-  } else if (activityIds.length === 1) {
+	if (activityIds.length === 0) {
+		return 'empty';
+	}
+	else if (activityIds.length === 1) {
 		if (activityIds.includes(3)) return 'book';
 		if (activityIds.includes(4)) return 'audio';
 		if ([2, 5, 16].includes(activityIds[0])) return 'dream';
-	} else if (activityIds.includes(3) && activityIds.includes(4)) {
+	}
+	else if (activityIds.includes(3) && activityIds.includes(4)) {
 		return 'audiobook';
-	} else if (activityIds.includes(3) && [2, 5, 16].some(id => activityIds.includes(id))) {
+	}
+	else if (activityIds.includes(3) && [2, 5, 16].some(id => activityIds.includes(id))) {
 		return 'bookdream';
-	} else if (activityIds.includes(4) && [2, 5, 16].some(id => activityIds.includes(id))) {
+	}
+	else if (activityIds.includes(4) && [2, 5, 16].some(id => activityIds.includes(id))) {
 		return 'audiodream';
-	} else {
+	}
+	else {
 		return 'full';
 	}
 }
@@ -193,25 +198,25 @@ const activitiesByDay = computed(() => {
 							K
 						</div>
 					</div>
-          <div
-              v-if="checkSmile(day) !== 'empty'"
-              class="mt-4 flex items-center justify-center flex-col"
-          >
-            <div class="flex items-center">
-              <div
-                  v-if="['book', 'audiobook', 'bookdream', 'full'].includes(checkSmile(day))"
-                  class="p-1 border-l-2 border-success"
-              />
-              <div
-                  v-if="['audio', 'audiobook', 'audiodream', 'full'].includes(checkSmile(day))"
-                  class="p-1 border-r-2 border-success"
-              />
-            </div>
-            <div
-                v-if="['dream', 'bookdream', 'audiodream', 'full'].includes(checkSmile(day))"
-                class="px-4 py-2 border-b-2 border-success rounded-full"
-            />
-          </div>
+					<div
+						v-if="checkSmile(day) !== 'empty'"
+						class="mt-4 flex items-center justify-center flex-col"
+					>
+						<div class="flex items-center">
+							<div
+								v-if="['book', 'audiobook', 'bookdream', 'full'].includes(checkSmile(day))"
+								class="p-1 border-l-2 border-success"
+							/>
+							<div
+								v-if="['audio', 'audiobook', 'audiodream', 'full'].includes(checkSmile(day))"
+								class="p-1 border-r-2 border-success"
+							/>
+						</div>
+						<div
+							v-if="['dream', 'bookdream', 'audiodream', 'full'].includes(checkSmile(day))"
+							class="px-4 py-2 border-b-2 border-success rounded-full"
+						/>
+					</div>
 				</div>
 			</div>
 		</div>
