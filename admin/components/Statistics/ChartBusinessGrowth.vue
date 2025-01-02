@@ -13,6 +13,10 @@ const props = defineProps({
 	},
 });
 
+function getMax() {
+  const max = Math.max(...props.items.business.series[0].data);
+  return Math.ceil(max / 10) * 10;
+}
 const chart = ref<{
 	series: { name: string; data: number[]; color: string }[];
 	options: ApexOptions;
@@ -28,7 +32,7 @@ const chart = ref<{
 		grid: {
 			row: {
 				colors: ['#f3f3f3', 'transparent'],
-				opacity: 0.5,
+				opacity: 0.35,
 			},
 		},
 		xaxis: {
@@ -37,6 +41,8 @@ const chart = ref<{
 		yaxis: {
 			show: true,
 			stepSize: 1,
+      min: 0,
+      max: getMax(),
 		},
 	},
 });
