@@ -65,9 +65,16 @@ class Controller extends BaseController
             ->groupBy('activity_id', 'day')
             ->get();
 
-        $rawActivities = Activity::query()
+        $rawActivities = [];
+        $activities = Activity::query()
             ->whereIn('id', $businessGrowthActivityIds)
-            ->pluck('name', 'id');
+            ->get();
+
+        $colors = [];
+        foreach ($activities as $activity) {
+            $rawActivities[$activity->id] = $activity->name;
+            $colors[$activity->name] = $this->getColorCode($activity->color);
+        }
 
         $series = [];
         $activityData = [];
@@ -76,21 +83,17 @@ class Controller extends BaseController
             $activityData[$activityName] = array_fill(0, $daysInMonth, 0);
         }
 
-        $colors = [];
         foreach ($businessActivities as $activity) {
             $activityName = $rawActivities[$activity->activity_id];
             $day = (int)date('j', strtotime($activity->day));
             $activityData[$activityName][$day] = $activity->count;
-
-            $colors[$activityName] = $this->getColorCode($activity->activity->color);
         }
 
         foreach ($activityData as $name => $data) {
             $series[] = [
                 'name' => $name,
                 'data' => $data,
-                'color' => '#020617',
-                'colors' => $colors
+                'color' => $colors[$name]
             ];
         }
 
