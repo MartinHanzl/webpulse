@@ -105,7 +105,8 @@ class Controller extends BaseController
         $businessActivities = $businessActivitiesQuery->get();
         $personalActivities = $personalActivitiesQuery->get();
 
-        $rawActivities = [];
+        $rawBusinessActivitiesArr = [];
+        $rawPersonalActivitiesArr = [];
         $businessActivitiesRaw = Activity::query()
             ->whereIn('id', $businessGrowthActivityIds)
             ->get();
@@ -118,12 +119,12 @@ class Controller extends BaseController
         $rawBusinessColors = [];
         $rawPersonalColors = [];
         foreach ($businessActivitiesRaw as $activity) {
-            $rawActivities[$activity->id] = $activity->name;
+            $rawBusinessActivitiesArr[$activity->id] = $activity->name;
             $businessColors[$activity->name] = $this->getColorCode($activity->color);
             $rawBusinessColors[] = $this->getColorCode($activity->color);
         }
         foreach ($personalActivitiesRaw as $activity) {
-            $rawActivities[$activity->id] = $activity->name;
+            $rawPersonalActivitiesArr[$activity->id] = $activity->name;
             $personalColors[$activity->name] = $this->getColorCode($activity->color);
             $rawPersonalColors[] = $this->getColorCode($activity->color);
         }
@@ -133,13 +134,16 @@ class Controller extends BaseController
         $businessActivityData = [];
         $personalActivityData = [];
 
-        foreach ($rawActivities as $activityName) {
+        foreach ($rawBusinessActivitiesArr as $activityName) {
             $businessActivityData[$activityName] = array_fill(0, $daysMonths, 0);
+        }
+
+        foreach ($rawPersonalActivitiesArr as $activityName) {
             $personalActivityData[$activityName] = array_fill(0, $daysMonths, 0);
         }
 
         foreach ($businessActivities as $activity) {
-            $activityName = $rawActivities[$activity->activity_id];
+            $activityName = $rawBusinessActivitiesArr[$activity->activity_id];
             if ($request->has('filter')) {
                 if ($request->get('filter') == 'month' && $request->has('year')) {
                     $day = (int)explode('. ', $activity->day)[0] - 1;
@@ -151,7 +155,7 @@ class Controller extends BaseController
         }
 
         foreach ($personalActivities as $activity) {
-            $activityName = $rawActivities[$activity->activity_id];
+            $activityName = $rawPersonalActivitiesArr[$activity->activity_id];
             if ($request->has('filter')) {
                 if ($request->get('filter') == 'month' && $request->has('year')) {
                     $day = (int)explode('. ', $activity->day)[0] - 1;
