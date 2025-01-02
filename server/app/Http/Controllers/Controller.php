@@ -64,7 +64,9 @@ class Controller extends BaseController
             ->groupBy('activity_id', 'day')
             ->get();
 
-        $rawActivities = Activity::query()->pluck('name', 'id');
+        $rawActivities = Activity::query()
+            ->whereIn('id', $businessGrowthActivityIds)
+            ->pluck('name', 'id');
 
         $series = [];
         $activityData = [];
