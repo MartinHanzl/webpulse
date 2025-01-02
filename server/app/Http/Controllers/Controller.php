@@ -85,7 +85,7 @@ class Controller extends BaseController
 
         foreach ($businessActivities as $activity) {
             $activityName = $rawActivities[$activity->activity_id];
-            $day = (int)date('j', strtotime($activity->day));
+            $day = (int)date('j', strtotime($activity->day)) - 1;
             $activityData[$activityName][$day] = $activity->count;
         }
 
