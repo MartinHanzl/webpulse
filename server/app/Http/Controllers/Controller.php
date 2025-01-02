@@ -56,8 +56,8 @@ class Controller extends BaseController
         if ($request->has('filter')) {
             if ($request->get('filter') == 'month' && $request->has('year')) {
                 $daysMonths = Carbon::createFromDate($request->year, $request->month)->daysInMonth;
-            } else {
-                $daysMonths = now()->daysInMonth;
+            } else if ($request->get('filter') == 'year') {
+                $daysMonths = 12;
             }
         }
 
@@ -125,8 +125,16 @@ class Controller extends BaseController
         }
 
         $axis = [];
-        for ($day = 1; $day <= $daysMonths; $day++) {
-            $axis[] = $day . '. ' . now()->month . '.';
+        if ($request->has('filter')) {
+            if ($request->get('filter') == 'month' && $request->has('year')) {
+                for ($day = 1; $day <= $daysMonths; $day++) {
+                    $axis[] = $day . '. ' . $request->month . '.';
+                }
+            } else if ($request->get('filter') == 'year') {
+                for ($month = 1; $month <= 12; $month++) {
+                    $axis[] = $month . '.';
+                }
+            }
         }
 
         return Response::json([
