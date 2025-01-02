@@ -69,27 +69,41 @@ class Controller extends BaseController
             ->whereIn('activity_id', $businessGrowthActivityIds)
             ->groupBy('activity_id', 'day');
 
+        $personalActivitiesQuery = UserActivity::with('activity')
+            ->where('user_id', $request->user()->id)
+            ->whereIn('activity_id', $personalGrowthActivityIds)
+            ->groupBy('activity_id', 'day');
+
         if ($request->has('filter')) {
             if ($request->get('filter') == 'month') {
                 if ($request->has('month') && $request->has('year')) {
                     $businessActivitiesQuery->whereMonth('date', (int)$request->month)
                         ->whereYear('date', $request->year);
+                    $personalActivitiesQuery->whereMonth('date', (int)$request->month)
+                        ->whereYear('date', $request->year);
                 } else {
                     $businessActivitiesQuery->whereMonth('date', now()->month)
                         ->whereYear('date', now()->year);
+                    $personalActivitiesQuery->whereMonth('date', now()->month)
+                        ->whereYear('date', now()->year);
                 }
                 $businessActivitiesQuery->selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day');
+                $personalActivitiesQuery->selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day');
             } else if ($request->get('filter') == 'year') {
                 if ($request->has('year')) {
                     $businessActivitiesQuery->whereYear('date', $request->year);
+                    $personalActivitiesQuery->whereYear('date', $request->year);
                 } else {
                     $businessActivitiesQuery->whereYear('date', now()->year);
+                    $personalActivitiesQuery->whereYear('date', now()->year);
                 }
                 $businessActivitiesQuery->selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%c.") as day');
+                $personalActivitiesQuery->selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%c.") as day');
             }
         }
 
         $businessActivities = $businessActivitiesQuery->get();
+        $personalActivities = $personalActivitiesQuery->get();
 
         $rawActivities = [];
         $activities = Activity::query()
@@ -104,11 +118,14 @@ class Controller extends BaseController
             $rawColors[] = $this->getColorCode($activity->color);
         }
 
-        $series = [];
-        $activityData = [];
+        $businessSeries = [];
+        $personalSeries = [];
+        $businessActivityData = [];
+        $personalActivityData = [];
 
         foreach ($rawActivities as $activityName) {
-            $activityData[$activityName] = array_fill(0, $daysMonths, 0);
+            $businessActivityData[$activityName] = array_fill(0, $daysMonths, 0);
+            $personalActivityData[$activityName] = array_fill(0, $daysMonths, 0);
         }
 
         foreach ($businessActivities as $activity) {
@@ -120,11 +137,30 @@ class Controller extends BaseController
                     $day = (int)$activity->day - 1;
                 }
             }
-            $activityData[$activityName][$day] = $activity->count;
+            $businessActivityData[$activityName][$day] = $activity->count;
         }
 
-        foreach ($activityData as $name => $data) {
-            $series[] = [
+        foreach ($personalActivities as $activity) {
+            $activityName = $rawActivities[$activity->activity_id];
+            if ($request->has('filter')) {
+                if ($request->get('filter') == 'month' && $request->has('year')) {
+                    $day = (int)explode('. ', $activity->day)[0] - 1;
+                } else if ($request->get('filter') == 'year') {
+                    $day = (int)$activity->day - 1;
+                }
+            }
+            $personalActivityData[$activityName][$day] = $activity->count;
+        }
+
+        foreach ($businessActivityData as $name => $data) {
+            $businessSeries[] = [
+                'name' => $name,
+                'data' => $data,
+                'color' => $colors[$name]
+            ];
+        }
+        foreach ($personalActivityData as $name => $data) {
+            $businessSeries[] = [
                 'name' => $name,
                 'data' => $data,
                 'color' => $colors[$name]
@@ -146,7 +182,11 @@ class Controller extends BaseController
 
         return Response::json([
             'business' => [
-                'series' => $series,
+                'series' => $businessSeries,
+                'axis' => $axis
+            ],
+            'personal' => [
+                'series' => $personalSeries,
                 'axis' => $axis
             ],
             'businessSummary' => [],

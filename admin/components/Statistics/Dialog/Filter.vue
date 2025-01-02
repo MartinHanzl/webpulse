@@ -80,44 +80,44 @@ const years = computed(() => {
 											<div
 												class="mt-6 grid grid-cols-2 gap-4 w-full"
 											>
-														<BaseFormSelect
-															v-model="filter"
-															name="filter"
-															label="Typ"
-															:options="[
-																{ value: 'month', name: 'Podle měsíce' },
-																{ value: 'year', name: 'Podle roku' },
-															]"
-                              class="col-span-full"
-														/>
-														<BaseFormSelect
-															v-model="year"
-															name="year"
-															label="Rok"
-															:options="years"
-                              class="col-span-1"
-														/>
-														<BaseFormSelect
-															v-if="filter === 'month'"
-															v-model="month"
-															name="month"
-															label="Měsíc"
-															:options="[
-																{ value: '1', name: 'Leden' },
-																{ value: '2', name: 'Únor' },
-																{ value: '3', name: 'Březen' },
-																{ value: '4', name: 'Duben' },
-																{ value: '5', name: 'Květen' },
-																{ value: '6', name: 'Červen' },
-																{ value: '7', name: 'Červenec' },
-																{ value: '8', name: 'Srpen' },
-																{ value: '9', name: 'Září' },
-																{ value: '10', name: 'Říjen' },
-																{ value: '11', name: 'Listopad' },
-																{ value: '12', name: 'Prosinec' },
-															]"
-                              class="col-span-1"
-														/>
+												<BaseFormSelect
+													v-model="filter"
+													name="filter"
+													label="Typ"
+													:options="[
+														{ value: 'month', name: 'Podle měsíce' },
+														{ value: 'year', name: 'Podle roku' },
+													]"
+													class="col-span-full"
+												/>
+												<BaseFormSelect
+													v-model="year"
+													name="year"
+													label="Rok"
+													:options="years"
+													class="col-span-1"
+												/>
+												<BaseFormSelect
+													v-if="filter === 'month'"
+													v-model="month"
+													name="month"
+													label="Měsíc"
+													:options="[
+														{ value: '1', name: 'Leden' },
+														{ value: '2', name: 'Únor' },
+														{ value: '3', name: 'Březen' },
+														{ value: '4', name: 'Duben' },
+														{ value: '5', name: 'Květen' },
+														{ value: '6', name: 'Červen' },
+														{ value: '7', name: 'Červenec' },
+														{ value: '8', name: 'Srpen' },
+														{ value: '9', name: 'Září' },
+														{ value: '10', name: 'Říjen' },
+														{ value: '11', name: 'Listopad' },
+														{ value: '12', name: 'Prosinec' },
+													]"
+													class="col-span-1"
+												/>
 											</div>
 										</div>
 									</div>

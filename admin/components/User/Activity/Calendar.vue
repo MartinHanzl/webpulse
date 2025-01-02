@@ -40,9 +40,15 @@ function checkSmile(day: Date) {
 		return 'empty';
 	}
 	else if (activityIds.length === 1) {
-		if (activityIds.includes(3)) return 'book';
-		if (activityIds.includes(4)) return 'audio';
-		if ([2, 5, 16].includes(activityIds[0])) return 'dream';
+		if (activityIds.includes(3)) {
+			return 'book';
+		}
+		if (activityIds.includes(4)) {
+			return 'audio';
+		}
+		if ([2, 5, 16].includes(activityIds[0])) {
+			return 'dream';
+		}
 	}
 	else if (activityIds.includes(3) && activityIds.includes(4)) {
 		return 'audiobook';
@@ -52,6 +58,9 @@ function checkSmile(day: Date) {
 	}
 	else if (activityIds.includes(4) && [2, 5, 16].some(id => activityIds.includes(id))) {
 		return 'audiodream';
+	}
+	else if ([2, 5, 16].some(id => activityIds.includes(id))) {
+		return 'dream';
 	}
 	else {
 		return 'full';
