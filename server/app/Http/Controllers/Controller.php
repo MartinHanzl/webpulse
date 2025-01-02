@@ -89,7 +89,8 @@ class Controller extends BaseController
             $series[] = [
                 'name' => $name,
                 'data' => $data,
-                'color' => $colors[$name]
+                'color' => '#020617',
+                'colors' => $colors
             ];
         }
 
