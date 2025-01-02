@@ -106,8 +106,7 @@ class Controller extends BaseController
         $personalActivities = $personalActivitiesQuery->get();
 
         $rawActivities = [];
-        $activities = Activity::query()
-            ->get();
+        $activities = Activity::all();
 
         $businessColors = [];
         $personalColors = [];
