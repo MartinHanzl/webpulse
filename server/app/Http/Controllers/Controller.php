@@ -85,7 +85,7 @@ class Controller extends BaseController
 
         foreach ($businessActivities as $activity) {
             $activityName = $rawActivities[$activity->activity_id];
-            $day = (int)date('j', strtotime($activity->day));
+            $day = Carbon::createFromFormat('j. n.', $activity->day)->day;
             $activityData[$activityName][$day] = $activity->count;
         }
 
