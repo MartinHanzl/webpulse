@@ -110,12 +110,16 @@ class Controller extends BaseController
             ->whereIn('id', $businessGrowthActivityIds)
             ->get();
 
-        $colors = [];
-        $rawColors = [];
+        $businessColors = [];
+        $personalColors = [];
+        $rawBusinessColors = [];
+        $rawPersonalColors = [];
         foreach ($activities as $activity) {
             $rawActivities[$activity->id] = $activity->name;
-            $colors[$activity->name] = $this->getColorCode($activity->color);
-            $rawColors[] = $this->getColorCode($activity->color);
+            $businessColors[$activity->name] = $this->getColorCode($activity->color);
+            $personalColors[$activity->name] = $this->getColorCode($activity->color);
+            $rawBusinessColors[] = $this->getColorCode($activity->color);
+            $rawPersonalColors[] = $this->getColorCode($activity->color);
         }
 
         $businessSeries = [];
@@ -156,14 +160,14 @@ class Controller extends BaseController
             $businessSeries[] = [
                 'name' => $name,
                 'data' => $data,
-                'color' => $colors[$name]
+                'color' => $businessColors[$name]
             ];
         }
         foreach ($personalActivityData as $name => $data) {
             $businessSeries[] = [
                 'name' => $name,
                 'data' => $data,
-                'color' => $colors[$name]
+                'color' => $personalColors[$name]
             ];
         }
 
@@ -190,7 +194,8 @@ class Controller extends BaseController
                 'axis' => $axis
             ],
             'businessSummary' => [],
-            'colors' => $rawColors
+            'businessColors' => $rawBusinessColors,
+            'personalColors' => $rawPersonalColors
         ]);
     }
 
