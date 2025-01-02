@@ -57,7 +57,8 @@ class Controller extends BaseController
         $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22];
         $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
 
-        $businessActivities = UserActivity::selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day')
+        $businessActivities = UserActivity::with('activity')
+            ->selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day')
             ->where('user_id', $request->user()->id)
             ->whereIn('activity_id', $businessGrowthActivityIds)
             ->whereMonth('date', now()->month)
@@ -85,7 +86,7 @@ class Controller extends BaseController
             $series[] = [
                 'name' => $name,
                 'data' => $data,
-                'color' => '#fcd34d', // You can customize the color as needed
+                'color' => '#0d9488', // You can customize the color as needed
             ];
         }
 
@@ -100,5 +101,12 @@ class Controller extends BaseController
                 'axis' => $axis
             ]
         ]);
+    }
+
+    private function getColorCode(string $color): string
+    {
+        $code = '';
+
+        return $code;
     }
 }
