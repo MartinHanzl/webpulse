@@ -113,7 +113,13 @@ class Controller extends BaseController
 
         foreach ($businessActivities as $activity) {
             $activityName = $rawActivities[$activity->activity_id];
-            $day = Carbon::createFromFormat('j. n.', $activity->day)->day;
+            if ($request->has('filter')) {
+                if ($request->get('filter') == 'month' && $request->has('year')) {
+                    $day = (int)explode('. ', $activity->day)[0] - 1;
+                } else if ($request->get('filter') == 'year') {
+                    $day = (int)$activity->day - 1;
+                }
+            }
             $activityData[$activityName][$day] = $activity->count;
         }
 

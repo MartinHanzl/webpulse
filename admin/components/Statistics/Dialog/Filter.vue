@@ -78,10 +78,8 @@ const years = computed(() => {
 												Filtrovat
 											</DialogTitle>
 											<div
-												class="mt-6 grid grid-cols-1 gap-y-4 w-full"
+												class="mt-6 grid grid-cols-2 gap-4 w-full"
 											>
-												<div class="col-span-full">
-													<div class="col-span-full">
 														<BaseFormSelect
 															v-model="filter"
 															name="filter"
@@ -90,8 +88,17 @@ const years = computed(() => {
 																{ value: 'month', name: 'Podle měsíce' },
 																{ value: 'year', name: 'Podle roku' },
 															]"
+                              class="col-span-full"
 														/>
 														<BaseFormSelect
+															v-model="year"
+															name="year"
+															label="Rok"
+															:options="years"
+                              class="col-span-1"
+														/>
+														<BaseFormSelect
+															v-if="filter === 'month'"
 															v-model="month"
 															name="month"
 															label="Měsíc"
@@ -109,15 +116,8 @@ const years = computed(() => {
 																{ value: '11', name: 'Listopad' },
 																{ value: '12', name: 'Prosinec' },
 															]"
+                              class="col-span-1"
 														/>
-														<BaseFormSelect
-															v-model="year"
-															name="year"
-															label="Rok"
-															:options="years"
-														/>
-													</div>
-												</div>
 											</div>
 										</div>
 									</div>

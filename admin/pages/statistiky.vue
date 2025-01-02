@@ -161,7 +161,7 @@ definePageMeta({
 		</div>
 		<template v-if="tabs.find(tab => tab.current && tab.link === '#byznys')">
 			<!--      <StatisticsStatsBusinessGrowth /> -->
-      <LayoutContainer v-if="items && !error && !loading">
+			<LayoutContainer v-if="items && !error && !loading">
 				<StatisticsChartBusinessGrowth
 					:items="items"
 					:activities="activityStore.activities"
