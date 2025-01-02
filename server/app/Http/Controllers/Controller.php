@@ -110,7 +110,7 @@ class Controller extends BaseController
             ->whereIn('id', $businessGrowthActivityIds)
             ->get();
         $personalActivitiesRaw = Activity::query()
-            ->whereIn('id', $businessGrowthActivityIds)
+            ->whereIn('id', $personalGrowthActivityIds)
             ->get();
 
         $businessColors = [];
