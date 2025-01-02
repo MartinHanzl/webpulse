@@ -85,17 +85,10 @@ class Controller extends BaseController
             ];
         }
 
-        $businessAxis = [
-            'categories' => $businessActivities->pluck('day')->unique()->values()->toArray(),
-            'title' => [
-                'text' => 'Business Growth Activities'
-            ]
-        ];
-
         return Response::json([
             'business' => [
                 'series' => $series,
-                'axis' => $businessAxis
+                'axis' => $businessActivities->pluck('day')->unique()->values()->toArray(),
             ]
         ]);
     }
