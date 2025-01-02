@@ -161,7 +161,7 @@ definePageMeta({
 		</div>
 		<template v-if="tabs.find(tab => tab.current && tab.link === '#byznys')">
 			<!--      <StatisticsStatsBusinessGrowth /> -->
-			<LayoutContainer v-if="items">
+      <LayoutContainer v-if="items && !error && !loading">
 				<StatisticsChartBusinessGrowth
 					:items="items"
 					:activities="activityStore.activities"
@@ -173,7 +173,7 @@ definePageMeta({
 			</LayoutContainer>
 		</template>
 		<template v-if="tabs.find(tab => tab.current && tab.link === '#osobni')">
-			<LayoutContainer v-if="items">
+			<LayoutContainer v-if="items && !error && !loading">
 				<StatisticsChartPersonalGrowth
 					:items="items"
 					:activities="activityStore.activities"

@@ -65,7 +65,6 @@ class Controller extends BaseController
         $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
 
         $businessActivitiesQuery = UserActivity::with('activity')
-            ->selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day')
             ->where('user_id', $request->user()->id)
             ->whereIn('activity_id', $businessGrowthActivityIds)
             ->groupBy('activity_id', 'day');
@@ -79,12 +78,14 @@ class Controller extends BaseController
                     $businessActivitiesQuery->whereMonth('date', now()->month)
                         ->whereYear('date', now()->year);
                 }
+                $businessActivitiesQuery->selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day');
             } else if ($request->get('filter') == 'year') {
                 if ($request->has('year')) {
                     $businessActivitiesQuery->whereYear('date', $request->year);
                 } else {
                     $businessActivitiesQuery->whereYear('date', now()->year);
                 }
+                $businessActivitiesQuery->selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%c.") as day');
             }
         }
 
