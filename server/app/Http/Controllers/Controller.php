@@ -107,7 +107,6 @@ class Controller extends BaseController
 
         $rawActivities = [];
         $activities = Activity::query()
-            ->whereIn('id', $businessGrowthActivityIds)
             ->get();
 
         $businessColors = [];
