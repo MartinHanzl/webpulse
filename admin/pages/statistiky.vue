@@ -13,6 +13,8 @@ const pageTitle = ref('Statistiky');
 const loading = ref(false);
 const error = ref(false);
 
+const filterDialogIsOpen = ref(false);
+
 const tabs = ref([
 	{ name: 'Růst byznysu', link: '#byznys', current: false },
 	{ name: 'Osobní růst', link: '#osobni', current: false },
@@ -29,8 +31,8 @@ const breadcrumbs = ref([
 const searchString = ref(inject('searchString', ''));
 const tableQuery = ref({
 	filter: 'month' as string,
-  month: 12,
-  year: 2024,
+	month: new Date().getMonth() + 1,
+	year: new Date().getFullYear(),
 });
 
 const items = ref(null);
@@ -102,6 +104,11 @@ definePageMeta({
 		<LayoutHeader
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
+			:actions="[{
+				type: 'filter-dialog',
+				text: 'Filtrovat',
+			}]"
+			@filter-dialog="filterDialogIsOpen = true"
 		/>
 		<div>
 			<div class="grid grid-cols-1 sm:hidden mt-5">
@@ -153,13 +160,13 @@ definePageMeta({
 			</div>
 		</div>
 		<template v-if="tabs.find(tab => tab.current && tab.link === '#byznys')">
-      <StatisticsStatsBusinessGrowth />
+			<!--      <StatisticsStatsBusinessGrowth /> -->
 			<LayoutContainer v-if="items">
 				<StatisticsChartBusinessGrowth
 					:items="items"
 					:activities="activityStore.activities"
 				/>
-        <StatisticsChartBusinessGrowthHeatmap
+				<StatisticsChartBusinessGrowthHeatmap
 					:items="items"
 					:activities="activityStore.activities"
 				/>
@@ -173,5 +180,12 @@ definePageMeta({
 				/>
 			</LayoutContainer>
 		</template>
+		<StatisticsDialogFilter
+			v-model:show="filterDialogIsOpen"
+			v-model:filter="tableQuery.filter"
+			v-model:year="tableQuery.year"
+			v-model:month="tableQuery.month"
+			@submit="loadItems"
+		/>
 	</div>
 </template>

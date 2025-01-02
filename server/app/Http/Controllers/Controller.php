@@ -52,7 +52,14 @@ class Controller extends BaseController
 
     public function statistics(Request $request): JsonResponse
     {
-        $daysInMonth = now()->daysInMonth;
+        $daysMonths = now()->daysInMonth;
+        if ($request->has('filter')) {
+            if ($request->get('filter') == 'month' && $request->has('year')) {
+                $daysMonths = Carbon::createFromDate($request->year, $request->month)->daysInMonth;
+            } else {
+                $daysMonths = now()->daysInMonth;
+            }
+        }
 
         $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22];
         $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
@@ -101,7 +108,7 @@ class Controller extends BaseController
         $activityData = [];
 
         foreach ($rawActivities as $activityName) {
-            $activityData[$activityName] = array_fill(0, $daysInMonth, 0);
+            $activityData[$activityName] = array_fill(0, $daysMonths, 0);
         }
 
         foreach ($businessActivities as $activity) {
@@ -119,7 +126,7 @@ class Controller extends BaseController
         }
 
         $axis = [];
-        for ($day = 1; $day <= $daysInMonth; $day++) {
+        for ($day = 1; $day <= $daysMonths; $day++) {
             $axis[] = $day . '. ' . now()->month . '.';
         }
 
