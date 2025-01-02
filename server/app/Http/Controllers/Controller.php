@@ -106,10 +106,10 @@ class Controller extends BaseController
         $personalActivities = $personalActivitiesQuery->get();
 
         $rawActivities = [];
-        $businessActivities = Activity::query()
+        $businessActivitiesRaw = Activity::query()
             ->whereIn('id', $businessGrowthActivityIds)
             ->get();
-        $personalActivities = Activity::query()
+        $personalActivitiesRaw = Activity::query()
             ->whereIn('id', $businessGrowthActivityIds)
             ->get();
 
@@ -117,12 +117,12 @@ class Controller extends BaseController
         $personalColors = [];
         $rawBusinessColors = [];
         $rawPersonalColors = [];
-        foreach ($businessActivities as $activity) {
+        foreach ($businessActivitiesRaw as $activity) {
             $rawActivities[$activity->id] = $activity->name;
             $businessColors[$activity->name] = $this->getColorCode($activity->color);
             $rawBusinessColors[] = $this->getColorCode($activity->color);
         }
-        foreach ($personalActivities as $activity) {
+        foreach ($personalActivitiesRaw as $activity) {
             $rawActivities[$activity->id] = $activity->name;
             $personalColors[$activity->name] = $this->getColorCode($activity->color);
             $rawPersonalColors[] = $this->getColorCode($activity->color);
