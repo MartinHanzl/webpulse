@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity\Activity;
 use App\Models\Activity\UserActivity;
 use App\Models\Contact\Contact;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -53,6 +54,9 @@ class Controller extends BaseController
         $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22];
         $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
 
+        $rawActivities = Activity::query()
+            ->pluck('name', 'id');
+
         $businessActivities = UserActivity::selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day')
             ->where('user_id', $request->user()->id)
             ->whereIn('activity_id', $businessGrowthActivityIds)
@@ -60,34 +64,29 @@ class Controller extends BaseController
             ->groupBy('activity_id', 'day')
             ->get();
 
-        $personalActivities = UserActivity::selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day')
-            ->where('user_id', $request->user()->id)
-            ->whereIn('activity_id', $personalGrowthActivityIds)
-            ->whereMonth('date', now()->month)
-            ->groupBy('activity_id', 'day')
-            ->get();
+        $rawActivities = Activity::query()->pluck('name', 'id');
 
-        $businessAxis = [];
+        $series = [];
+        $activityData = [];
+
         foreach ($businessActivities as $activity) {
-            $businessAxis[$activity->day] = $activity->day;
+            $activityName = $rawActivities[$activity->activity_id];
+            if (!isset($activityData[$activityName])) {
+                $activityData[$activityName] = [];
+            }
+            $activityData[$activityName][] = $activity->count;
         }
 
-        $personalAxis = [];
-        foreach ($personalActivities as $activity) {
-            $personalAxis[$activity->day] = $activity->day;
+        foreach ($activityData as $name => $data) {
+            $series[] = [
+                'name' => $name,
+                'data' => $data,
+                'color' => '#fcd34d', // You can customize the color as needed
+            ];
         }
 
         return Response::json([
-            'business' => [
-                'name' => 'Business by months',
-                'data' => $businessActivities
-            ],
-            'personal' => [
-                'name' => 'Personal by months',
-                'data' => $personalActivities
-            ],
-            'businessAxis' => array_values($businessAxis),
-            'personalAxis' => array_values($personalAxis)
+            'series' => $series
         ]);
     }
 }
