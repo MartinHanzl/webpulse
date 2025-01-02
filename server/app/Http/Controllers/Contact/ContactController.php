@@ -182,7 +182,7 @@ class ContactController extends Controller
         }
 
         $contact = Contact::with(['contact', 'source', 'contacts', 'phase', 'tasks', 'histories' => function ($query) {
-            return $query->orderBy('id', 'desc');
+            return $query->orderBy('created_at', 'desc');
         }])->find($id);
         if (!$contact) {
             App::abort(404);
