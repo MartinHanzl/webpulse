@@ -10,6 +10,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Response;
 
 class Controller extends BaseController
@@ -51,11 +52,10 @@ class Controller extends BaseController
 
     public function statistics(Request $request): JsonResponse
     {
+        $daysInMonth = now()->daysInMonth;
+
         $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22];
         $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
-
-        $rawActivities = Activity::query()
-            ->pluck('name', 'id');
 
         $businessActivities = UserActivity::selectRaw('activity_id, COUNT(*) as count, DATE_FORMAT(date, "%e. %c.") as day')
             ->where('user_id', $request->user()->id)
@@ -69,12 +69,14 @@ class Controller extends BaseController
         $series = [];
         $activityData = [];
 
+        foreach ($rawActivities as $activityName) {
+            $activityData[$activityName] = array_fill(0, $daysInMonth, 0);
+        }
+
         foreach ($businessActivities as $activity) {
             $activityName = $rawActivities[$activity->activity_id];
-            if (!isset($activityData[$activityName])) {
-                $activityData[$activityName] = [];
-            }
-            $activityData[$activityName][] = $activity->count;
+            $day = (int)date('j', strtotime($activity->day)) - 1;
+            $activityData[$activityName][$day] = $activity->count;
         }
 
         foreach ($activityData as $name => $data) {
