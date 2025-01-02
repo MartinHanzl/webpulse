@@ -52,6 +52,9 @@ class Controller extends BaseController
 
     public function statistics(Request $request): JsonResponse
     {
+        $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22];
+        $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
+
         $daysMonths = now()->daysInMonth;
         if ($request->has('filter')) {
             if ($request->get('filter') == 'month' && $request->has('year')) {
@@ -60,9 +63,6 @@ class Controller extends BaseController
                 $daysMonths = 12;
             }
         }
-
-        $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22];
-        $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18];
 
         $businessActivitiesQuery = UserActivity::with('activity')
             ->where('user_id', $request->user()->id)
@@ -164,7 +164,7 @@ class Controller extends BaseController
             ];
         }
         foreach ($personalActivityData as $name => $data) {
-            $businessSeries[] = [
+            $personalSeries[] = [
                 'name' => $name,
                 'data' => $data,
                 'color' => $personalColors[$name]

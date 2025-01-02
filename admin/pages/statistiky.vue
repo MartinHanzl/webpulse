@@ -39,6 +39,7 @@ const items = ref(null);
 
 async function loadItems() {
 	loading.value = true;
+  error.value = false;
 	const client = useSanctumClient();
 
 	await client<{ id: number }>('/api/admin/statistics', {
@@ -50,7 +51,6 @@ async function loadItems() {
 		},
 	}).then((response) => {
 		items.value = response;
-		tableQuery.value.page = response.page;
 	}).catch(() => {
 		error.value = true;
 		toast.add({

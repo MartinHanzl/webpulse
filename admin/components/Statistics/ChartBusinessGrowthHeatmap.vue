@@ -45,7 +45,7 @@ const chart = ref<{
 		title: {
 			text: 'Růst byznysu - heatmapa',
 		},
-		colors: props.items.colors ?? ['#008FFB'],
+		colors: props.items.businessColors ?? ['#008FFB'],
 	},
 });
 </script>
