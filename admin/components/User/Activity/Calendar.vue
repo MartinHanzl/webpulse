@@ -158,7 +158,7 @@ const activitiesByDay = computed(() => {
 					<div
 						v-for="(activityItem, index) in activitiesByDay(day)"
 						:key="index"
-						class="col-span-1 cursor-pointer"
+						:class="['col-span-1 cursor-pointer', { hidden: [2, 3, 4, 5, 16].includes(activityItem.activity.id) }]"
 						@click="emit('update-item', activityItem)"
 					>
 						<div

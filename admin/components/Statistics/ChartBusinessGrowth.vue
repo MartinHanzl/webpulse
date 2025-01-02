@@ -14,8 +14,8 @@ const props = defineProps({
 });
 
 function getMax() {
-  const max = Math.max(...props.items.business.series[0].data);
-  return Math.ceil(max / 10) * 10;
+	const max = Math.max(...props.items.business.series[0].data);
+	return Math.ceil(max / 10);
 }
 const chart = ref<{
 	series: { name: string; data: number[]; color: string }[];
@@ -41,8 +41,8 @@ const chart = ref<{
 		yaxis: {
 			show: true,
 			stepSize: 1,
-      min: 0,
-      max: getMax(),
+			min: 0,
+			max: getMax(),
 		},
 	},
 });
