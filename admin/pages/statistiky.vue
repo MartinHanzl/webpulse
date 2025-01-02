@@ -2,8 +2,41 @@
 import { ref, inject } from 'vue';
 import { debounce } from 'lodash';
 import { useActivityStore } from '~/stores/activityStore';
+import type { ApexOptions } from 'apexcharts';
 
 const activityStore = useActivityStore();
+
+const chart = ref<{
+  series: { name: string; data: number[] }[];
+  options: ApexOptions;
+}>({
+  series: [
+    {
+      name: 'Počet aktivit',
+      data: [30, 40, 35, 50, 49, 60, 70, 91, 125],
+    },
+  ],
+  options: {
+    chart: {
+      height: 350,
+      type: 'line',
+      zoom: { enabled: true },
+    },
+    dataLabels: { enabled: true },
+    stroke: { curve: 'straight' },
+    title: { text: 'Počet aktivit', align: 'left' },
+    grid: {
+      row: {
+        colors: ['#f3f3f3', 'transparent'],
+        opacity: 0.5,
+      },
+    },
+    xaxis: {
+      categories: ['1.1.', '2.1.', '3.1.', '4.1.', '5.1.', '6.1.', '7.1.', '8.1.', '9.1.'],
+    },
+  },
+});
+
 
 const toast = useToast();
 const pageTitle = ref('Statistiky');
@@ -115,37 +148,21 @@ definePageMeta({
 </script>
 
 <template>
-	<div>
-		<LayoutHeader
-			:title="pageTitle"
-			:breadcrumbs="breadcrumbs"
-			slug="activities"
-			:actions="[
-				{ type: 'add', text: 'Přidat aktivitu' },
-			]"
-		/>
-		<LayoutContainer>
-			<BaseTable
-				:items="items"
-				:columns="[
-					{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: true },
-					{ key: 'name', name: 'Jméno', type: 'badge', width: 80, hidden: false, sortable: true, colorKey: 'color' },
-					{ key: 'updated_at', name: 'Poslední úprava', type: 'date', width: 80, hidden: true, sortable: true },
-				]"
-				:actions="[
-					{ type: 'edit' },
-					{ type: 'delete' },
-				]"
-				:loading="loading"
-				:error="error"
-				singular="Aktivita"
-				plural="Aktivity"
-				:query="tableQuery"
-				slug="activities"
-				@delete-item="deleteItem"
-				@update-sort="updateSort"
-				@update-page="updatePage"
-			/>
-		</LayoutContainer>
-	</div>
+  <div>
+    <LayoutHeader
+        :title="pageTitle"
+        :breadcrumbs="breadcrumbs"
+        slug="activities"
+        :actions="[
+        { type: 'add', text: 'Přidat aktivitu' },
+      ]"
+    />
+    <LayoutContainer>
+      <div id="chart">
+        <!-- Correct usage of apexchart component -->
+        <apexchart type="line" height="350" :options="chart.options" :series="chart.series" />
+      </div>
+    </LayoutContainer>
+  </div>
 </template>
+

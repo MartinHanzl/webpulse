@@ -20,6 +20,7 @@
     "@types/lodash": "^4.17.13",
     "@vee-validate/nuxt": "^4.14.7",
     "@vee-validate/rules": "^4.14.7",
+    "apexcharts": "^4.3.0",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "nuxt": "^3.14.1592",
@@ -27,7 +28,8 @@
     "pinia": "^2.2.8",
     "vee-validate": "^4.14.7",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "vue3-apexcharts": "^1.8.0"
   },
   "devDependencies": {
     "@nuxt/eslint": "^0.7.1",
