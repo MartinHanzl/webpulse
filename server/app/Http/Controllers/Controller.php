@@ -67,9 +67,14 @@ class Controller extends BaseController
             ->groupBy('activity_id', 'day')
             ->get();
 
-        $axis = [];
+        $businessAxis = [];
         foreach ($businessActivities as $activity) {
-            $axis[$activity->day] = $activity->day;
+            $businessAxis[$activity->day] = $activity->day;
+        }
+
+        $personalAxis = [];
+        foreach ($personalActivities as $activity) {
+            $personalAxis[$activity->day] = $activity->day;
         }
 
         return Response::json([
@@ -81,7 +86,8 @@ class Controller extends BaseController
                 'name' => 'Personal by months',
                 'data' => $personalActivities
             ],
-            'axis' => array_values($axis)
+            'businessAxis' => array_values($businessAxis),
+            'personalAxis' => array_values($personalAxis)
         ]);
     }
 }
