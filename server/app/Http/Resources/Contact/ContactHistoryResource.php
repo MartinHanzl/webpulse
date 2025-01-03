@@ -22,7 +22,9 @@ class ContactHistoryResource extends JsonResource
             'origin' => $this->origin,
             'type' => $this->type,
             'contact_id' => $this->contact_id,
+            'contact_phase_id' => $this->contact_phase_id,
             'phase' => ContactPhaseResource::make($this->phase),
+            'activity_id' => $this->activity_id,
             'activity' => ActivityResource::make($this->activity),
             'created_at' => $this->created_at,
         ];
