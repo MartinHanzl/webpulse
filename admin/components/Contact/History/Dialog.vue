@@ -66,7 +66,7 @@ const emit = defineEmits(['save-item']);
 												as="h3"
 												class="text-base font-semibold text-grayDark"
 											>
-												Přidat záznam historie
+                        {{ item.id ? 'Upravit záznam historie' : 'Přidat záznam historie' }}
 											</DialogTitle>
 											<div
 												class="mt-8 grid grid-cols-3 gap-x-8"
@@ -122,7 +122,7 @@ const emit = defineEmits(['save-item']);
 											size="lg"
 											class="ml-4"
 										>
-											Přidat
+                      {{ item.id ? 'Uložit' : 'Přidat' }}
 										</BaseButton>
 										<BaseButton
 											ref="cancelButtonRef"

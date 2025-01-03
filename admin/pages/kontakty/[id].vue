@@ -322,7 +322,7 @@ async function saveHistoryItem(item: { id: number }) {
 		});
 	}).finally(() => {
 		historyDialog.value.open = false;
-		historyDialog.value.item = null;
+		historyDialog.value.item = {};
 		loading.value = false;
 		loadItem();
 	});
@@ -369,7 +369,6 @@ function addRemoveItemTask(taskId) {
 
 function editHistoryItem(history) {
 	historyDialog.value.item = history;
-  console.log(historyDialog.value.item);
 	historyDialog.value.open = true;
 }
 
