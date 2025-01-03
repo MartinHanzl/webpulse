@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { PauseCircleIcon, StarIcon } from '@heroicons/vue/24/outline';
+import SmileFullIcon from '~/public/static/img/icon/smile-full.svg';
+import SmileAudioIcon from '~/public/static/img/icon/smile-audio.svg';
+import SmileAudioBookIcon from '~/public/static/img/icon/smile-audiobook.svg';
+import SmileAudioDreamIcon from '~/public/static/img/icon/smile-audiodream.svg';
+import SmileBookIcon from '~/public/static/img/icon/smile-book.svg';
+import SmileBookDreamIcon from '~/public/static/img/icon/smile-bookdream.svg';
+import SmileDreamIcon from '~/public/static/img/icon/smile-dream.svg';
 
 const props = defineProps({
 	activities: {
@@ -50,6 +57,9 @@ function checkSmile(day: Date) {
 			return 'dream';
 		}
 	}
+	else if (activityIds.includes(3) && activityIds.includes(4) && [2, 5, 16].some(id => activityIds.includes(id))) {
+		return 'full';
+	}
 	else if (activityIds.includes(3) && activityIds.includes(4)) {
 		return 'audiobook';
 	}
@@ -63,7 +73,7 @@ function checkSmile(day: Date) {
 		return 'dream';
 	}
 	else {
-		return 'full';
+		return 'empty';
 	}
 }
 
@@ -209,21 +219,39 @@ const activitiesByDay = computed(() => {
 					</div>
 					<div
 						v-if="checkSmile(day) !== 'empty'"
-						class="mt-4 flex items-center justify-center flex-col"
+						class="flex justify-center flex-col col-span-1"
 					>
-						<div class="flex items-center">
-							<div
-								v-if="['book', 'audiobook', 'bookdream', 'full'].includes(checkSmile(day))"
-								class="p-1 border-l-2 border-success"
-							/>
-							<div
-								v-if="['audio', 'audiobook', 'audiodream', 'full'].includes(checkSmile(day))"
-								class="p-1 border-r-2 border-success"
-							/>
-						</div>
-						<div
-							v-if="['dream', 'bookdream', 'audiodream', 'full'].includes(checkSmile(day))"
-							class="px-4 py-2 border-b-2 border-success rounded-full"
+						<SmileBookIcon
+							v-if="checkSmile(day) === 'book'"
+							class="size-6 fill-success"
+						/>
+						<SmileAudioIcon
+							v-else-if="checkSmile(day) === 'audio'"
+							class="size-6 fill-success"
+						/>
+						<SmileBookIcon
+							v-else-if="checkSmile(day) === 'book'"
+							class="size-6 fill-success"
+						/>
+						<SmileDreamIcon
+							v-else-if="checkSmile(day) === 'dream'"
+							class="size-6 fill-success"
+						/>
+						<SmileAudioBookIcon
+							v-else-if="checkSmile(day) === 'audiobook'"
+							class="size-6 fill-success"
+						/>
+						<SmileBookDreamIcon
+							v-else-if="checkSmile(day) === 'bookdream'"
+							class="size-6 fill-success"
+						/>
+						<SmileAudioDreamIcon
+							v-else-if="checkSmile(day) === 'audiodream'"
+							class="size-6 fill-success"
+						/>
+						<SmileFullIcon
+							v-else-if="checkSmile(day) === 'full'"
+							class="size-6 fill-success"
 						/>
 					</div>
 				</div>
