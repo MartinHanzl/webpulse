@@ -223,35 +223,35 @@ const activitiesByDay = computed(() => {
 					>
 						<SmileBookIcon
 							v-if="checkSmile(day) === 'book'"
-							class="size-6 fill-success"
+							class="size-8 fill-success"
 						/>
 						<SmileAudioIcon
 							v-else-if="checkSmile(day) === 'audio'"
-							class="size-6 fill-success"
+							class="size-8 fill-success"
 						/>
 						<SmileBookIcon
 							v-else-if="checkSmile(day) === 'book'"
-							class="size-6 fill-success"
+							class="size-8 fill-success"
 						/>
 						<SmileDreamIcon
 							v-else-if="checkSmile(day) === 'dream'"
-							class="size-6 fill-success"
+							class="size-8 fill-success"
 						/>
 						<SmileAudioBookIcon
 							v-else-if="checkSmile(day) === 'audiobook'"
-							class="size-6 fill-success"
+							class="size-8 fill-success"
 						/>
 						<SmileBookDreamIcon
 							v-else-if="checkSmile(day) === 'bookdream'"
-							class="size-6 fill-success"
+							class="size-8 fill-success"
 						/>
 						<SmileAudioDreamIcon
 							v-else-if="checkSmile(day) === 'audiodream'"
-							class="size-6 fill-success"
+							class="size-8 fill-success"
 						/>
 						<SmileFullIcon
 							v-else-if="checkSmile(day) === 'full'"
-							class="size-6 fill-success"
+							class="size-8 fill-success"
 						/>
 					</div>
 				</div>
