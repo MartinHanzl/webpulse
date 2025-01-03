@@ -367,8 +367,9 @@ function addRemoveItemTask(taskId) {
 	}
 }
 
-function editHistoryItem(item) {
-	historyDialog.value.item = item;
+function editHistoryItem(history) {
+	historyDialog.value.item = history;
+  console.log(historyDialog.value.item);
 	historyDialog.value.open = true;
 }
 
@@ -637,7 +638,7 @@ definePageMeta({
 							variant="primary"
 							size="lg"
 							type="button"
-							@click="historyDialog.open = true;"
+							@click="historyDialog.item = {};historyDialog.open = true;"
 						>
 							Přidat záznam
 						</BaseButton>
@@ -656,7 +657,7 @@ definePageMeta({
 				</div>
 				<ContactHistoryDialog
 					v-model:show="historyDialog.open"
-					v-model:contact="historyDialog.item"
+					v-model:item="historyDialog.item"
 					:phases="phases"
 					@save-item="saveHistoryItem"
 				/>
