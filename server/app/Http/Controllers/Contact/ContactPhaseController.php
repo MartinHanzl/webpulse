@@ -35,6 +35,8 @@ class ContactPhaseController extends Controller
 
         if ($request->has('orderWay') && $request->get('orderBy')) {
             $query->orderBy($request->get('orderBy'), $request->get('orderWay'));
+        } else {
+            $query->orderBy('name', 'asc');
         }
 
         if ($request->has('paginate')) {

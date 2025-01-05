@@ -145,7 +145,7 @@ class ContactController extends Controller
             }
 
             if ($request->has('contact_id')) {
-                $contact = $request->contact_id ?? null;
+                $contact->contact_id = $request->contact_id ?? null;
             }
             $contact->save();
 
@@ -166,6 +166,7 @@ class ContactController extends Controller
             DB::commit();
         } catch (\Throwable|\Exception $e) {
             DB::rollBack();
+            dd($e->getMessage() . ' ' . $e->getLine() . ' ' . $e->getFile());
             return Response::json(['message' => 'An error occurred while updating contact.'], 500);
         }
 
