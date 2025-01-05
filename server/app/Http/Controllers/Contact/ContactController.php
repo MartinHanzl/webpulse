@@ -166,7 +166,6 @@ class ContactController extends Controller
             DB::commit();
         } catch (\Throwable|\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage() . ' ' . $e->getLine() . ' ' . $e->getFile());
             return Response::json(['message' => 'An error occurred while updating contact.'], 500);
         }
 
