@@ -6,14 +6,14 @@ const props = defineProps({
 	history: {
 		type: Object,
 		required: true,
-    default: {} as Record<string, any>,
+		default: {} as Record<string, any>,
 	},
 });
 const emit = defineEmits(['edit-history', 'delete-item']);
 
 const deleteDialog = ref({
 	show: false,
-  item: {}
+	item: {},
 });
 
 function openDeleteDialog() {

@@ -290,7 +290,8 @@ onMounted(() => {
 							</ul>
 						</li>
 						<li class="mt-auto">
-							<a
+							<LayoutPropsCountdown class="bg-gray-900 z-50 px-4 py-10 rounded-lg text-center border border-gray-300" />
+							<!--							<a
 								href="#"
 								class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-300 hover:bg-gray-800 hover:text-white"
 							>
@@ -299,7 +300,7 @@ onMounted(() => {
 									aria-hidden="true"
 								/>
 								Nastavení
-							</a>
+							</a> -->
 						</li>
 					</ul>
 				</nav>
