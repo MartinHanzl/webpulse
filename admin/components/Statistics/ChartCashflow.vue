@@ -6,7 +6,7 @@ const props = defineProps({
 	items: {
 		type: Object,
 		required: true,
-	}
+	},
 });
 
 function getMax() {
@@ -14,38 +14,38 @@ function getMax() {
 	return Math.ceil(max / 10) * 10 + 2;
 }
 const chart = ref<{
-	series: { name: string; data: number[];}[]
-  options: ApexOptions;
+	series: { name: string; data: number[] }[];
+	options: ApexOptions;
 }>({
-  series: [
-    {
-      name: 'Actual',
-      data: props.items.cashflow
-    }
-  ],
-  options: {
-    chart: {
-      height: 400,
-      type: 'bar'
-    },
-    plotOptions: {
-      bar: {
-        columnWidth: '60%'
-      }
-    },
-    colors: ['#0284c7'],
-    dataLabels: {
-      enabled: false
-    },
-    legend: {
-      show: true,
-      showForSingleSeries: true,
-      customLegendItems: ['Utraceno', 'Budget'],
-      markers: {
-        fillColors: ['#0284c7', '#ca8a04']
-      }
-    }
-  }
+	series: [
+		{
+			name: 'Actual',
+			data: props.items.cashflow,
+		},
+	],
+	options: {
+		chart: {
+			height: 400,
+			type: 'bar',
+		},
+		plotOptions: {
+			bar: {
+				columnWidth: '60%',
+			},
+		},
+		colors: ['#7dd3fc'],
+		dataLabels: {
+			enabled: false,
+		},
+		legend: {
+			show: true,
+			showForSingleSeries: true,
+			customLegendItems: ['Utraceno', 'Budget'],
+			markers: {
+				fillColors: ['#7dd3fc', '#7f1d1d'],
+			},
+		},
+	},
 });
 </script>
 

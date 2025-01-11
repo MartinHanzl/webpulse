@@ -243,15 +243,42 @@ class Controller extends BaseController
         }
 
         foreach ($cashflow as $cashflowCategory) {
+            $spent = round($cashflowCategory->cashflows->sum('amount'), 2);
+            $budget = round($cashflowCategory->budgets->sum('amount'), 2);
+            $name = $cashflowCategory->name;
+
+            $percentageLeft = $spent / $budget * 100;
+
+            if ($percentageLeft >= 50) {
+                $stroke = [
+                    'name' => $name,
+                    'value' => $budget,
+                    'strokeHeight' => 1,
+                    'strokeColor' => '#7f1d1d',
+                ];
+            } elseif ($percentageLeft >= 25) {
+                $stroke = [
+                    'name' => $name,
+                    'value' => $budget,
+                    'strokeHeight' => 1,
+                    'strokeDashArray' => 2,
+                    'strokeColor' => '#7f1d1d',
+                ];
+            } else {
+                $stroke = [
+                    'name' => $name,
+                    'value' => $budget,
+                    'strokeHeight' => 12,
+                    'strokeWidth' => 0,
+                    'strokeLineCap' => 'round',
+                    'strokeColor' => '#7f1d1d',
+                ];
+            }
+
             $cashflowData[] = [
                 'x' => $cashflowCategory->name,
-                'y' => sprintf('%s Kč', round($cashflowCategory->cashflows->sum('amount'), 2)),
-                'goals' => [[
-                    'name' => $cashflowCategory->name,
-                    'value' => $cashflowCategory->budgets->sum('amount'),
-                    'strokeHeight' => 5,
-                    'strokeColor' => '#ca8a04'
-                ]]
+                'y' => $spent,
+                'goals' => [$stroke]
             ];
         }
 
