@@ -140,6 +140,12 @@ class ContactController extends Controller
                 $contact->next_meeting = null;
             }
 
+            if ($request->has('formatted_next_contact') && $request->get('formatted_next_contact') != null) {
+                $contact->next_contact = Carbon::parse($request->get('formatted_next_contact'));
+            } else {
+                $contact->next_contact = null;
+            }
+
             if ($id) {
                 $contact->syncTasks($request);
             }

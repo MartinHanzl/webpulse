@@ -32,6 +32,7 @@ class Contact extends Model
         'contact_source_id',
         'contact_phase_id',
         'next_meeting',
+        'next_contact',
         'last_contacted_at'
     ];
 

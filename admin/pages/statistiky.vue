@@ -16,8 +16,9 @@ const error = ref(false);
 const filterDialogIsOpen = ref(false);
 
 const tabs = ref([
-	{ name: 'Růst byznysu', link: '#byznys', current: false },
+	{ name: 'Růst byznysu', link: '#byznys', current: true },
 	{ name: 'Osobní růst', link: '#osobni', current: false },
+	{ name: 'Cashflow', link: '#cashflow', current: false },
 ]);
 
 const breadcrumbs = ref([
@@ -175,6 +176,14 @@ definePageMeta({
 		<template v-if="tabs.find(tab => tab.current && tab.link === '#osobni')">
 			<LayoutContainer v-if="items && !error && !loading">
 				<StatisticsChartPersonalGrowth
+					:items="items"
+					:activities="activityStore.activities"
+				/>
+			</LayoutContainer>
+		</template>
+		<template v-if="tabs.find(tab => tab.current && tab.link === '#cashflow')">
+			<LayoutContainer v-if="items && !error && !loading">
+				<StatisticsChartCashflow
 					:items="items"
 					:activities="activityStore.activities"
 				/>

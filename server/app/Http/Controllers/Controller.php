@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activity\Activity;
 use App\Models\Activity\UserActivity;
+use App\Models\Cashflow\CashflowCategory;
 use App\Models\Contact\Contact;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -74,6 +75,64 @@ class Controller extends BaseController
             ->whereIn('activity_id', $personalGrowthActivityIds)
             ->groupBy('activity_id', 'day');
 
+        $cashflowQuery = CashflowCategory::with([
+            'cashflows' => function ($query) use ($request) {
+                if ($request->has('filter')) {
+                    if ($request->get('filter') == 'month') {
+                        if ($request->has('month') && $request->has('year')) {
+                            $query->whereMonth('date', $request->month)
+                                ->whereYear('date', $request->year)
+                                ->whereMonth('date', $request->month)
+                                ->whereYear('date', $request->year);
+                        } else {
+                            $query->whereMonth('date', now()->month)
+                                ->whereYear('date', now()->year)
+                                ->whereMonth('date', now()->month)
+                                ->whereYear('date', now()->year);
+                        }
+                    } else if ($request->get('filter') == 'year') {
+                        if ($request->has('year')) {
+                            $query->whereYear('date', $request->year)
+                                ->whereYear('date', $request->year);
+                        } else {
+                            $query->whereYear('date', now()->year)
+                                ->whereYear('date', now()->year);
+                        }
+                    }
+                }
+            },
+            'budgets' => function ($query) use ($request) {
+                if ($request->has('filter')) {
+                    if ($request->get('filter') == 'month') {
+                        if ($request->has('month') && $request->has('year')) {
+                            $query->whereMonth('start_date', $request->month)
+                                ->whereYear('start_date', $request->year)
+                                ->whereMonth('end_date', $request->month)
+                                ->whereYear('end_date', $request->year);
+                        } else {
+                            $query->whereMonth('start_date', now()->month)
+                                ->whereYear('start_date', now()->year)
+                                ->whereMonth('end_date', now()->month)
+                                ->whereYear('end_date', now()->year);
+                        }
+                    } else if ($request->get('filter') == 'year') {
+                        if ($request->has('year')) {
+                            $query->whereYear('start_date', $request->year)
+                                ->whereYear('start_date', $request->year)
+                                ->whereYear('end_date', $request->year)
+                                ->whereYear('end_date', $request->year);
+                        } else {
+                            $query->whereYear('start_date', now()->year)
+                                ->whereYear('start_date', now()->year)
+                                ->whereYear('end_date', now()->year)
+                                ->whereYear('end_date', now()->year);
+                        }
+                    }
+                }
+            }
+        ])
+            ->where('user_id', $request->user()->id);
+
         if ($request->has('filter')) {
             if ($request->get('filter') == 'month') {
                 if ($request->has('month') && $request->has('year')) {
@@ -104,6 +163,7 @@ class Controller extends BaseController
 
         $businessActivities = $businessActivitiesQuery->get();
         $personalActivities = $personalActivitiesQuery->get();
+        $cashflow = $cashflowQuery->get();
 
         $rawBusinessActivitiesArr = [];
         $rawPersonalActivitiesArr = [];
@@ -133,6 +193,7 @@ class Controller extends BaseController
         $personalSeries = [];
         $businessActivityData = [];
         $personalActivityData = [];
+        $cashflowData = [];
 
         foreach ($rawBusinessActivitiesArr as $activityName) {
             $businessActivityData[$activityName] = array_fill(0, $daysMonths, 0);
@@ -181,6 +242,19 @@ class Controller extends BaseController
             ];
         }
 
+        foreach ($cashflow as $cashflowCategory) {
+            $cashflowData[] = [
+                'x' => $cashflowCategory->name,
+                'y' => sprintf('%s Kč', round($cashflowCategory->cashflows->sum('amount'), 2)),
+                'goals' => [[
+                    'name' => $cashflowCategory->name,
+                    'value' => $cashflowCategory->budgets->sum('amount'),
+                    'strokeHeight' => 5,
+                    'strokeColor' => '#ca8a04'
+                ]]
+            ];
+        }
+
         $axis = [];
         if ($request->has('filter')) {
             if ($request->get('filter') == 'month' && $request->has('year')) {
@@ -203,6 +277,7 @@ class Controller extends BaseController
                 'series' => $personalSeries,
                 'axis' => $axis
             ],
+            'cashflow' => $cashflowData,
             'businessSummary' => [],
             'businessColors' => $rawBusinessColors,
             'personalColors' => $rawPersonalColors

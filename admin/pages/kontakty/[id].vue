@@ -59,6 +59,8 @@ const item = ref({
 	contact_phase_id: null as number | string | null,
 	next_meeting: '' as string,
 	formatted_next_meeting: '' as string,
+	next_contact: '' as string,
+	formatted_next_contact: '' as string,
 	last_contacted_at: '' as string,
 	formatted_last_contacted_at: '' as string,
 	contact_id: null as number | null,
@@ -103,6 +105,8 @@ async function loadItem() {
 		contact_phase_id: number | null;
 		next_meeting: string;
 		formatted_next_meeting: string;
+		next_contact: string;
+		formatted_next_contact: string;
 		last_contacted_at: string;
 		formatted_last_contacted_at: string;
 		contact_id: number | null;
@@ -252,6 +256,8 @@ async function saveItem() {
 		contact_phase_id: number | null;
 		next_meeting: string;
 		formatted_next_meeting: string;
+		next_contact: string;
+		formatted_next_contact: string;
 		last_contacted_at: string;
 		formatted_last_contacted_at: string;
 		contact_id: number | null;
@@ -577,12 +583,12 @@ definePageMeta({
 				</div>
 			</template>
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#proces')">
-				<div class="grid grid-cols-1 gap-x-10">
-					<LayoutContainer class="col-span-full w-full">
+				<div class="grid grid-cols-7 gap-x-10">
+					<LayoutContainer class="col-span-5 w-full">
 						<h3 class="text-lg font-semibold text-grayCustom mb-8">
 							Úkoly
 						</h3>
-						<div class="grid grid-cols-4 gap-4">
+						<div class="grid grid-cols-5 gap-x-4 gap-y-8">
 							<BaseFormCheckbox
 								v-for="(task, key) in tasks"
 								:key="key"
@@ -597,7 +603,7 @@ definePageMeta({
 							/>
 						</div>
 					</LayoutContainer>
-					<LayoutContainer class="col-span-full w-full">
+					<LayoutContainer class="col-span-2 w-full">
 						<h3 class="text-lg font-semibold text-grayCustom mb-8">
 							Proces
 						</h3>
@@ -607,21 +613,28 @@ definePageMeta({
 								:options="phases"
 								label="Fáze"
 								name="contact_phase_id"
-								class="col-span-1"
+								class="col-span-full"
 							/>
 							<BaseFormInput
 								v-model="item.formatted_next_meeting"
 								type="datetime-local"
 								label="Další meeting"
 								name="next_meeting"
-								class="col-span-1"
+								class="col-span-full"
+							/>
+							<BaseFormInput
+								v-model="item.formatted_next_contact"
+								type="datetime-local"
+								label="Zavolat/kontaktovat"
+								name="last_contacted_at"
+								class="col-span-full"
 							/>
 							<BaseFormInput
 								v-model="item.formatted_last_contacted_at"
 								type="datetime-local"
-								label="Poslední kontakt/pokus o kontakt"
+								label="Poslední kontakt/pokus"
 								name="last_contacted_at"
-								class="col-span-1"
+								class="col-span-full"
 							/>
 						</div>
 					</LayoutContainer>

@@ -44,6 +44,8 @@ class ContactResource extends JsonResource
             'formatted_last_contacted_at' => $this->last_contacted_at?->format('Y-m-d H:i:s'),
             'next_meeting' => $this->next_meeting,
             'formatted_next_meeting' => $this->next_meeting?->format('Y-m-d H:i:s'),
+            'next_contact' => $this->next_contact,
+            'formatted_next_contact' => $this->next_contact?->format('Y-m-d H:i:s'),
         ];
     }
 }

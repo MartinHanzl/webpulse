@@ -191,6 +191,24 @@ function leftFromBudgetTextClass(categoryId: number) {
 	}
 }
 
+function summaryMonthlySpent() {
+	return props.categories.reduce((acc: number, category: any) => {
+		return acc + category.cashflows.reduce((acc: number, cashflow: any) => {
+			return acc + cashflow.amount;
+		}, 0);
+	}, 0);
+}
+
+function summaryMonthlyBudget() {
+	return props.categories.reduce((acc: number, category: any) => {
+		return acc + category.budgets[0].amount;
+	}, 0);
+}
+
+function summaryMonthlyLeft() {
+	return summaryMonthlyBudget() - summaryMonthlySpent();
+}
+
 function formatAmount(amount: number) {
 	return amount.toLocaleString('cs-CZ');
 }
@@ -278,7 +296,9 @@ function formatAmount(amount: number) {
 								>
 									{{ formatAmount(totalSpent(category.id)) + ' Kč' }}
 								</td>
-								<td class="p-2 text-xs whitespace-nowrap text-gray-500" />
+								<td class="p-2 text-sm text-center font-semibold whitespace-nowrap text-sky-500">
+									{{ formatAmount(summaryMonthlySpent()) }} Kč
+								</td>
 							</tr>
 							<tr
 								class="divide-x divide-gray-200"
@@ -297,7 +317,9 @@ function formatAmount(amount: number) {
 								>
 									{{ formatAmount(monthlyCategoryBudget(category.id)) + ' Kč' }}
 								</td>
-								<td class="p-2 text-sm whitespace-nowrap text-gray-500" />
+								<td class="p-2 text-sm text-center font-semibold whitespace-nowrap text-sky-500">
+									{{ formatAmount(summaryMonthlyLeft()) }} Kč
+								</td>
 							</tr>
 							<tr class="divide-x divide-gray-200">
 								<td
@@ -313,7 +335,9 @@ function formatAmount(amount: number) {
 								>
 									{{ formatAmount(leftFromBudget(category.id)) + ' Kč' }}
 								</td>
-								<td class="p-2 text-sm whitespace-nowrap text-gray-500" />
+								<td class="p-2 text-sm text-center font-semibold whitespace-nowrap text-sky-500">
+									{{ formatAmount(summaryMonthlySpent()) }} Kč
+								</td>
 							</tr>
 						</tbody>
 					</table>
