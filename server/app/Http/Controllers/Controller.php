@@ -247,16 +247,18 @@ class Controller extends BaseController
             $budget = round($cashflowCategory->budgets->sum('amount'), 2);
             $name = $cashflowCategory->name;
 
-            $percentageLeft = $spent / $budget * 100;
+            $percentageLeft = (($budget - $spent) / $budget) * 100;
 
-            if ($percentageLeft >= 50) {
+            if ($percentageLeft <= 0) {
                 $stroke = [
                     'name' => $name,
                     'value' => $budget,
-                    'strokeHeight' => 1,
+                    'strokeHeight' => 12,
+                    'strokeWidth' => 0,
+                    'strokeLineCap' => 'round',
                     'strokeColor' => '#7f1d1d',
                 ];
-            } elseif ($percentageLeft >= 25) {
+            } else if ($percentageLeft <= 25) {
                 $stroke = [
                     'name' => $name,
                     'value' => $budget,
@@ -268,17 +270,17 @@ class Controller extends BaseController
                 $stroke = [
                     'name' => $name,
                     'value' => $budget,
-                    'strokeHeight' => 12,
-                    'strokeWidth' => 0,
-                    'strokeLineCap' => 'round',
+                    'strokeHeight' => 1,
                     'strokeColor' => '#7f1d1d',
                 ];
+
             }
 
             $cashflowData[] = [
                 'x' => $cashflowCategory->name,
                 'y' => $spent,
-                'goals' => [$stroke]
+                'goals' => [$stroke],
+                'percentage' => $percentageLeft
             ];
         }
 
