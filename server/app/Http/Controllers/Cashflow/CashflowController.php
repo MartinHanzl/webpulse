@@ -41,7 +41,7 @@ class CashflowController extends Controller
             try {
                 DB::beginTransaction();
 
-                if ($record['amount'] <= 0) {
+                if ($record['amount'] == 0) {
                     Cashflow::query()
                         ->where('user_id', $request->user()->id)
                         ->where('id', $record['id'])
@@ -51,7 +51,7 @@ class CashflowController extends Controller
                 if ($record['id']) {
                     $cashflow = Cashflow::query()
                         ->where('user_id', $request->user()->id)
-                        ->find($id);
+                        ->find($record['id']);
                     if (!$cashflow) {
                         throw new \Exception('Cashflow not found');
                     }
