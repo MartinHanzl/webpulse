@@ -56,7 +56,7 @@ async function loadItems() {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst aktivity. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst cashflow. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -149,7 +149,7 @@ async function saveDayRecords(categoryId: number | null, day: number, type: stri
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: 'Kategorie byla úspěšně uložena.',
+			description: 'Záznamy byly úspěšně uložen.',
 			color: 'green',
 		});
 	}).catch(() => {
@@ -188,14 +188,14 @@ async function saveBudget(categoryId: number, budget: number) {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: 'Kategorie byla úspěšně uložena.',
+			description: 'Měsíční budget byl úspěšně uložena.',
 			color: 'green',
 		});
 	}).catch(() => {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se uložit záznamy. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
+			description: 'Nepodařilo se uložit měsíční budget. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -205,7 +205,7 @@ async function saveBudget(categoryId: number, budget: number) {
 }
 
 watch(tableQuery, () => {
-  pageTitle.value = `Cashflow ─ ${tableQuery.value.year}/${tableQuery.value.month}`;
+	pageTitle.value = `Cashflow ─ ${tableQuery.value.year}/${tableQuery.value.month}`;
 }, { deep: true });
 
 useHead({
