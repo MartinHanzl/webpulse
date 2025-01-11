@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
@@ -41,6 +43,8 @@ class RegisterController extends Controller
             $user->save();
 
             //TODO:: send email verification
+            //Artisan::call(sprintf('app:registration --userId=%s', $user->id));
+
             DB::commit();
         } catch (\Throwable|\Exception $e) {
             DB::rollBack();

@@ -14,10 +14,10 @@ export default defineNuxtConfig({
 			cookie: 'XSRF-TOKEN',
 			header: 'X-XSRF-TOKEN',
 		},
-	}], '@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@vee-validate/nuxt', '@pinia/nuxt'],
-	devtools: { enabled: true },
+	}], '@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@vee-validate/nuxt', '@pinia/nuxt', '@nuxtjs/tailwindcss'],
+	devtools: { enabled: false },
 
-	css: ['~/assets/css/main.css'],
+	css: ['~/assets/css/style.css'],
 
 	routeRules: {
 		'/api/**': {
@@ -30,13 +30,6 @@ export default defineNuxtConfig({
 		plugins: [
 			require('vite-svg-loader')(),
 		],
-	},
-
-	postcss: {
-		plugins: {
-			tailwindcss: {},
-			autoprefixer: {},
-		},
 	},
 
 	eslint: {

@@ -16,6 +16,9 @@ use App\Http\Controllers\Message\MessageBlueprintController;
 use App\Http\Controllers\Activity\ActivityController;
 use App\Http\Controllers\Controller as BaseController;
 use App\Http\Controllers\Activity\UserActivityController;
+use App\Http\Controllers\Cashflow\CashflowCategoryController;
+use App\Http\Controllers\Cashflow\CashflowBudgetController;
+use App\Http\Controllers\Cashflow\CashflowController;
 
 /*
 |--------------------------------------------------------------------------
@@ -157,6 +160,30 @@ Route::group([
             Route::get('{id}', [ActivityController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [ActivityController::class, 'store']);
             Route::delete('{id}', [ActivityController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        // Cashflow routes
+        Route::group([
+            'prefix' => 'cashflow'
+        ], function () {
+            // Cashflow category routes
+            Route::group([
+                'prefix' => 'category'
+            ], function () {
+                Route::get('', [CashflowCategoryController::class, 'index']);
+                Route::get('{id}', [CashflowCategoryController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [CashflowCategoryController::class, 'store']);
+                Route::delete('{id}', [CashflowCategoryController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            // Cashflow budget routes
+            Route::group([
+                'prefix' => 'budget'
+            ], function () {
+                Route::post('{id?}', [CashflowBudgetController::class, 'store']);
+            });
+
+            Route::post('{id?}', [CashflowController::class, 'store']);
         });
 
         // Dashboard and statistics routes

@@ -56,7 +56,7 @@ const navigation = ref([
 		{ name: 'Aktivita', link: '/aktivita', icon: ChartBarIcon, current: false, slug: 'users_has_activities' },
 		{ name: 'Šablony zpráv', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'message_blueprints' },
 		{ name: 'Kalendář', link: '/demo', icon: CalendarIcon, current: false, slug: 'calendars' },
-		{ name: 'Cashflow', link: '/demo', icon: BanknotesIcon, current: false, slug: 'cashflows' },
+		{ name: 'Cashflow', link: '/cashflow', icon: BanknotesIcon, current: false, slug: 'cashflows' },
 	] },
 	{ title: 'Osobní sekce', menu: [
 		{ name: 'Projekty', link: '/demo', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
