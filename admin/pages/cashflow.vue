@@ -8,7 +8,7 @@ const tableQuery = ref({
 	year: new Date().getFullYear(),
 });
 
-const pageTitle = ref(`Cashflow ─ ${tableQuery.value.year}/${tableQuery.value.month}`);
+const pageTitle = ref(`Cashflow ─ ${tableQuery.value.month}/${tableQuery.value.year}`);
 
 const loading = ref(false);
 const error = ref(false);
@@ -130,7 +130,7 @@ async function saveDayRecords(categoryId: number | null, day: number, type: stri
 	const month = tableQuery.value.month;
 	const year = tableQuery.value.year;
 
-	const formattedDate = new Date(`${year}-${month}-${day}`).toISOString();
+	const formattedDate = new Date(Date.UTC(year, month - 1, day)).toISOString();
 
 	await client<{
 		id: number;
@@ -205,7 +205,7 @@ async function saveBudget(categoryId: number, budget: number) {
 }
 
 watch(tableQuery, () => {
-	pageTitle.value = `Cashflow ─ ${tableQuery.value.year}/${tableQuery.value.month}`;
+	pageTitle.value = `Cashflow ─ ${tableQuery.value.month}/${tableQuery.value.year}`;
 }, { deep: true });
 
 useHead({
@@ -233,17 +233,20 @@ definePageMeta({
 			}]"
 			@filter-dialog="filterDialogIsOpen = true"
 		/>
-		<CashflowTable
-			v-if="!loading && !error"
-			:categories="items.categories"
-			:income="items.income"
-			:year="tableQuery.year"
-			:month="tableQuery.month"
-			@create-category="categoryDialog.show = true"
-			@load-items="loadItems"
-			@save-day-records="saveDayRecords"
-			@save-budget="saveBudget"
-		/>
+		<div class="overflow-x-scroll w-full lg:overflow-hidden">
+			<CashflowTable
+				v-if="!loading && !error"
+				:categories="items.categories"
+				:income="items.income"
+				:year="tableQuery.year"
+				:month="tableQuery.month"
+				class="min-w-full"
+				@create-category="categoryDialog.show = true"
+				@load-items="loadItems"
+				@save-day-records="saveDayRecords"
+				@save-budget="saveBudget"
+			/>
+		</div>
 		<CashflowCategoryDialog
 			v-model:show="categoryDialog.show"
 			v-model:category="categoryDialog.category"
