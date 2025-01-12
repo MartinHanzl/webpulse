@@ -112,44 +112,16 @@ definePageMeta({
 			@filter-dialog="filterDialogIsOpen = true"
 		/>
 		<div>
-			<div class="grid grid-cols-1 sm:hidden mt-5">
-				<!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
-				<select
-					aria-label="Select a tab"
-					class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-				>
-					<option>My Account</option>
-					<option>Company</option>
-					<option selected>
-						Team Members
-					</option>
-					<option>Billing</option>
-				</select>
-				<svg
-					class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end fill-gray-500"
-					viewBox="0 0 16 16"
-					fill="currentColor"
-					aria-hidden="true"
-					data-slot="icon"
-				>
-					<path
-						fill-rule="evenodd"
-						d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
-						clip-rule="evenodd"
-					/>
-				</svg>
-			</div>
-			<div class="hidden sm:block mt-5">
+			<div class="block mt-5">
 				<nav
 					class="isolate flex divide-x divide-gray-200 shadow-sm rounded-lg"
 					aria-label="Tabs"
 				>
-					<!-- Current: "text-gray-900", Default: "text-gray-500 hover:text-gray-700" -->
 					<NuxtLink
 						v-for="(tab, index) in tabs"
 						:key="index"
 						:to="tab.link"
-						class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-grayCustom hover:bg-gray-50 hover:text-grayDark focus:z-10"
+						class="group relative min-w-0 flex-1 overflow-hidden bg-white px-2 lg:px-4 py-2.5 lg:py-4 text-center text-xs lg:text-sm font-medium text-grayCustom hover:bg-gray-50 hover:text-grayDark focus:z-10"
 					>
 						<span>{{ tab.name }}</span>
 						<span
