@@ -151,7 +151,7 @@ const badgeClass = computed(() => (color: string) => {
 							class="col-start-1 row-start-1 appearance-none rounded border border-grayLight bg-white checked:border-primaryCustom checked:bg-primaryCustom indeterminate:border-primaryCustom indeterminate:bg-primaryCustom disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100"
 						>
 						<svg
-							class="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
+							class="pointer-events-none col-start-1 row-start-1 size-1.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
 							viewBox="0 0 14 14"
 							fill="none"
 						>
@@ -173,7 +173,7 @@ const badgeClass = computed(() => (color: string) => {
 					</div>
 				</div>
 
-				<div class="text-sm/6">
+				<div class="text-xs lg:text-sm/6">
 					<label
 						v-if="type === 'badge'"
 						:for="name"

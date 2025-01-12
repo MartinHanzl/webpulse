@@ -137,7 +137,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 	<div class="px-4 sm:px-6 lg:px-8">
 		<div class="flow-root">
 			<div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
-				<div class="inline-block min-w-full py-2 align-middle">
+				<div class="inline-block min-w-full py-2 pb-0 align-middle">
 					<table class="min-w-full divide-y divide-grayLight">
 						<thead>
 							<tr>

@@ -474,11 +474,9 @@ definePageMeta({
 		</div>
 		<Form @submit="saveItem">
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#info')">
-				<div class="grid grid-cols-4 gap-x-10">
-					<LayoutContainer class="col-span-2 w-full">
-						<h3 class="text-lg font-semibold text-grayCustom mb-8">
-							Základní údaje
-						</h3>
+				<div class="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-2 lg:gap-y-4">
+					<LayoutContainer class="col-span-1 w-full">
+						<LayoutTitle>Základní údaje</LayoutTitle>
 						<div class="grid grid-cols-2 gap-x-8 gap-y-4">
 							<BaseFormInput
 								v-model="item.firstname"
@@ -542,10 +540,8 @@ definePageMeta({
 							/>
 						</div>
 					</LayoutContainer>
-					<LayoutContainer class="col-span-2 w-full">
-						<h3 class="text-lg font-semibold text-grayCustom mb-8">
-							Rozšiřující údaje
-						</h3>
+					<LayoutContainer class="col-span-1 w-full">
+						<LayoutTitle>Rozšiřující údaje</LayoutTitle>
 						<div class="grid grid-cols-2 gap-x-8 gap-y-4">
 							<BaseFormInput
 								v-model="item.occupation"
@@ -585,12 +581,10 @@ definePageMeta({
 				</div>
 			</template>
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#proces')">
-				<div class="grid grid-cols-7 gap-x-10">
+				<div class="grid grid-cols-1 lg:grid-cols-7 gap-x-4 gap-y-8">
 					<LayoutContainer class="col-span-5 w-full">
-						<h3 class="text-lg font-semibold text-grayCustom mb-8">
-							Úkoly
-						</h3>
-						<div class="grid grid-cols-5 gap-x-4 gap-y-8">
+						<LayoutTitle>Úkoly</LayoutTitle>
+						<div class="grid grid-cols-1 lg:grid-cols-5 gap-x-4 gap-y-8">
 							<BaseFormCheckbox
 								v-for="(task, key) in tasks"
 								:key="key"
@@ -606,9 +600,7 @@ definePageMeta({
 						</div>
 					</LayoutContainer>
 					<LayoutContainer class="col-span-2 w-full">
-						<h3 class="text-lg font-semibold text-grayCustom mb-8">
-							Proces
-						</h3>
+						<LayoutTitle>Proces</LayoutTitle>
 						<div class="grid grid-cols-3 gap-x-8 gap-y-4">
 							<BaseFormSelect
 								v-model="item.contact_phase_id"
@@ -645,9 +637,7 @@ definePageMeta({
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#historie')">
 				<div class="grid grid-cols-4 gap-x-10">
 					<LayoutContainer class="col-span-full w-full flex items-center justify-between">
-						<h3 class="text-lg font-semibold text-grayCustom">
-							Historie
-						</h3>
+						<LayoutTitle>Historie</LayoutTitle>
 						<BaseButton
 							variant="primary"
 							size="lg"

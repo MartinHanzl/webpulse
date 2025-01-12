@@ -91,10 +91,10 @@ watch(model, (newValue) => {
 				>
 					<label
 						:for="name"
-						class="block text-sm/6 font-medium text-grayCustom"
+						class="block text-xs lg:text-sm/6 font-medium text-grayCustom"
 					>{{ label }}</label>
 					<ComboboxInput
-						class="w-full mt-1.5 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight sm:text-sm/6"
+						class="w-full mt-1.5 block rounded-md border-0 py-1.5 lg:py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight text-xs lg:text-sm/6"
 						:name="name"
 						:display-value="() => selectedContact ? `${selectedContact.firstname} ${selectedContact.lastname}` : ''"
 						@change="query = $event.target.value"
@@ -103,7 +103,7 @@ watch(model, (newValue) => {
 						class="absolute inset-y-0 top-8 right-0 flex items-center pr-2"
 					>
 						<ChevronUpDownIcon
-							class="h-5 w-5 text-grayLight"
+							class="h-3 w-3 lg:w-5 lg:h-5 text-grayLight"
 							aria-hidden="true"
 						/>
 					</ComboboxButton>
@@ -114,11 +114,11 @@ watch(model, (newValue) => {
 					leave-to="opacity-0"
 				>
 					<ComboboxOptions
-						class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+						class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none text-xs lg:text-sm"
 					>
 						<div
 							v-if="contacts.length === 0"
-							class="relative cursor-default select-none px-4 py-2 text-gray-700"
+							class="relative cursor-default select-none px-2 lg:px-4 py-1.5 lg:py-2 text-gray-700"
 						>
 							Žádné kontakty.
 						</div>
@@ -131,7 +131,7 @@ watch(model, (newValue) => {
 							:value="contact.id"
 						>
 							<li
-								class="relative cursor-default select-none py-2 pl-10 pr-4"
+								class="relative cursor-default select-none py-1.5 lg:py-2 pl-5 lg:pl-10 pr-4"
 								:class="{
 									'bg-secondary text-grayDark': active,
 									'text-grayDark': !active,
