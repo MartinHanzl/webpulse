@@ -22,13 +22,14 @@ class Controller extends BaseController
     {
         $lastAddedContacts = Contact::without(['phase', 'source', 'tasks'])
             ->orderBy('created_at', 'desc')
-            ->limit(10)
+            ->limit(5)
             ->where('user_id', $request->user()->id)
             ->get();
 
         $contactsToCall = Contact::without(['phase', 'source', 'tasks'])
-            ->whereDate('next_meeting', now()->toDateString())
+            ->whereDate('next_contact', now()->toDateString())
             ->where('user_id', $request->user()->id)
+            ->limit(5)
             ->get();
 
         $comingEvents = Contact::without(['phase', 'source', 'tasks'])
