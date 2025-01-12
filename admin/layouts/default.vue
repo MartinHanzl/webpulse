@@ -88,12 +88,18 @@ watchEffect(() => {
 	});
 });
 
-function canView(slug: string) {
-	if (user && user.value && user.value.user_group_id && userGroupStore.userGroups) {
-		const userGroup = userGroupStore.userGroups.find(group => group.id === user.value.user_group_id);
+function filterNavigationGroups(navigation: any[]): any[] {
+	return navigation.filter((group: any) =>
+		group.menu.some((item: any) => !item.slug || (item.slug && canView(item.slug))),
+	);
+}
+
+function canView(slug: string): boolean {
+	if (user && user.value && (user.value as any).user_group_id && userGroupStore.userGroups) {
+		const userGroup = userGroupStore.userGroups.find((group: any) => group.id === (user.value as any).user_group_id);
 		if (userGroup && userGroup.permissions) {
-			const currentPermissionSlug = userGroup.permissions.find(permission => permission.slug === slug);
-			if (currentPermissionSlug && currentPermissionSlug.slug === slug && currentPermissionSlug.permissions.view == true) {
+			const currentPermissionSlug = userGroup.permissions.find((permission: any) => permission.slug === slug);
+			if (currentPermissionSlug && currentPermissionSlug.permissions.view === true) {
 				return true;
 			}
 		}
@@ -120,6 +126,9 @@ onMounted(() => {
 
 	userGroupStore.fetchUserGroups();
 	activityStore.fetchActivities();
+	setTimeout(() => {
+		navigation.value = filterNavigationGroups(navigation.value);
+	}, 1000);
 });
 </script>
 
