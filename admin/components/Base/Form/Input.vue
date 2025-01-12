@@ -91,6 +91,8 @@ defineRule('email', (value) => {
 			:disabled="disabled"
 			aria-autocomplete="none"
 			autocomplete="off"
+			:autofocus="false"
+			tabindex="-1"
 			:class="[
 				'mt-2 block w-full rounded-md border-0 py-1.5 lg:py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight text-xs lg:text-sm/6',
 				{ 'bg-grayLight': disabled },
@@ -109,6 +111,8 @@ defineRule('email', (value) => {
 			autocomplete="off"
 			:min="min > 0 ? min : 3"
 			:max="max > 0 ? max : 45"
+			:autofocus="false"
+			tabindex="-1"
 			:class="[
 				'mt-2 block w-full rounded-md border-0 py-1.5 lg:py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight text-xs lg:text-sm/6',
 				{ 'bg-grayLight': disabled },

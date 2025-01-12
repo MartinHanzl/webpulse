@@ -59,6 +59,8 @@ defineRule('required', (value) => {
 				:rows="rows"
 				:name="name"
 				maxlength="255"
+				:autofocus="false"
+				tabindex="-1"
 				:class="[
 					'mt-2 block w-full rounded-md border-0 py-1.5 lg:py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight text-xs lg:text-sm/6',
 					{ 'bg-grayLight': disabled },
