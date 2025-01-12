@@ -15,7 +15,7 @@ const props = defineProps({
 
 function getMax() {
 	const max = Math.max(...props.items.business.series[0].data);
-	return Math.ceil(max / 10) * 10 + 2;
+	return Math.ceil(max / 10) + 1;
 }
 const chart = ref<{
 	series: { name: string; data: number[]; color: string }[];
