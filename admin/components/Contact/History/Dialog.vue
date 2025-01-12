@@ -56,7 +56,7 @@ const emit = defineEmits(['save-item']);
 							leave-from="opacity-100 translate-y-0 sm:scale-100"
 							leave-to="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 						>
-							<DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-2xl sm:p-6">
+							<DialogPanel class="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-xl sm:p-6">
 								<Form
 									@submit="emit('save-item', item)"
 								>
@@ -69,7 +69,7 @@ const emit = defineEmits(['save-item']);
 												{{ item.id ? 'Upravit záznam historie' : 'Přidat záznam historie' }}
 											</DialogTitle>
 											<div
-												class="mt-8 grid grid-cols-3 gap-x-8"
+												class="mt-8 grid grid-cols-2 gap-x-8 gap-y-4"
 											>
 												<BaseFormInput
 													v-model="item.name"
@@ -85,13 +85,13 @@ const emit = defineEmits(['save-item']);
 													name="description"
 													rules="required"
 												/>
-												<BaseFormSelect
+												<!-- <BaseFormSelect
 													v-model="item.contact_phase_id"
 													:options="phases"
 													label="Fáze"
 													name="contact_phase_id"
 													class="col-span-1"
-												/>
+												/> -->
 												<BaseFormSelect
 													v-model="item.activity_id"
 													:options="activityStore.activitiesOptions"

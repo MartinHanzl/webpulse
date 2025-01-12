@@ -84,12 +84,12 @@ function openDeleteDialog() {
 						</div>
 					</div>
 					<div class="col-span-1 text-center flex items-end justify-evenly">
-						<PropsBadge
+						<!-- <PropsBadge
 							v-if="history.phase"
 							:color="history.phase.color"
 						>
 							{{ history.phase.name }}
-						</PropsBadge>
+						</PropsBadge> -->
 						<PropsBadge
 							v-if="history.activity"
 							:color="history.activity.color"

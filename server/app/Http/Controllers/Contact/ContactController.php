@@ -245,9 +245,9 @@ class ContactController extends Controller
                 $history->activity_id = $request->get('activity_id');
             }
 
-            if ($request->has('contact_phase_id')) {
+            /*if ($request->has('contact_phase_id')) {
                 $history->contact_phase_id = $request->get('contact_phase_id');
-            }
+            }*/
 
             if (!$request->has('description') || $request->get('description') == null) {
                 $history->description = 'Nepřidali jste žádnou poznámku.';
@@ -258,7 +258,6 @@ class ContactController extends Controller
 
             DB::commit();
         } catch (\Throwable|\Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
             return Response::json(['message' => 'An error occurred while updating contact history.'], 500);
         }
