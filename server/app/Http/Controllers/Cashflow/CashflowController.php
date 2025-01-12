@@ -38,15 +38,14 @@ class CashflowController extends Controller
         }
 
         foreach ($records as $record) {
+            if ($record['amount'] == 0) {
+                Cashflow::query()
+                    ->where('id', (int)$record['id'])
+                    ->delete();
+            }
+
             try {
                 DB::beginTransaction();
-
-                if ($record['amount'] == 0) {
-                    Cashflow::query()
-                        ->where('user_id', $request->user()->id)
-                        ->where('id', $record['id'])
-                        ->delete();
-                }
 
                 if ($record['id']) {
                     $cashflow = Cashflow::query()

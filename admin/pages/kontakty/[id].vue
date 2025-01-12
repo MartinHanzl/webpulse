@@ -626,7 +626,7 @@ definePageMeta({
 								v-model="item.formatted_next_contact"
 								type="datetime-local"
 								label="Zavolat/kontaktovat"
-								name="last_contacted_at"
+								name="next_contact"
 								class="col-span-full"
 							/>
 							<BaseFormInput

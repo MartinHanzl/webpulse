@@ -38,7 +38,8 @@ class Contact extends Model
 
     protected $casts = [
         'next_meeting' => 'datetime',
-        'last_contacted_at' => 'datetime'
+        'last_contacted_at' => 'datetime',
+        'next_contact' => 'datetime'
     ];
 
     protected $with = ['phase', 'source'];

@@ -124,7 +124,7 @@ async function saveCategory(item) {
 
 async function saveDayRecords(categoryId: number | null, day: number, type: string, records: []) {
 	const client = useSanctumClient();
-	loading.value = true;
+	//loading.value = true;
 	error.value = false;
 
 	const month = tableQuery.value.month;
@@ -167,7 +167,8 @@ async function saveDayRecords(categoryId: number | null, day: number, type: stri
 
 async function saveBudget(categoryId: number, budget: number) {
 	const client = useSanctumClient();
-	loading.value = true;
+	//loading.value = true;
+  error.value = false;
 
 	const month = tableQuery.value.month;
 	const year = tableQuery.value.year;
