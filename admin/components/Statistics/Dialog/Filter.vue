@@ -73,7 +73,7 @@ const years = computed(() => {
 										<div class="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left w-full">
 											<DialogTitle
 												as="h3"
-												class="text-base font-semibold text-grayDark"
+												class="text-sm lg:text-base font-semibold text-grayDark mb-4 lg:mb-6"
 											>
 												Filtrovat
 											</DialogTitle>
@@ -121,12 +121,11 @@ const years = computed(() => {
 											</div>
 										</div>
 									</div>
-									<div class="mt-5 sm:mt-6 sm:flex sm:flex-row-reverse">
+									<div class="mt-4 lg:mt-6 flex justify-end lg:flex-row-reverse lg:justify-start gap-x-4">
 										<BaseButton
 											type="submit"
 											variant="success"
 											size="lg"
-											class="ml-4"
 										>
 											Filtrovat
 										</BaseButton>
@@ -135,7 +134,6 @@ const years = computed(() => {
 											type="button"
 											variant="secondary"
 											size="lg"
-											class="ml-4"
 											@click="show = false"
 										>
 											Zavřít

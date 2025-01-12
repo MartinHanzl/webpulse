@@ -75,7 +75,7 @@ defineRule('email', (value) => {
 	<div>
 		<label
 			:for="name"
-			class="block text-xs lg:text-sm/6 font-medium text-grayCustom"
+			class="block text-xs lg:text-sm/6 font-medium text-grayCustom text-left"
 		>{{ label }}<span
 			v-if="rules.includes('required')"
 			class="text-danger ml-1"
