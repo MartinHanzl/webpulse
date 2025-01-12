@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { PauseCircleIcon, StarIcon } from '@heroicons/vue/24/outline';
+import DumbbellIcon from 'public/static/img/icon/dumbbell.svg';
 import SmileFullIcon from '~/public/static/img/icon/smile-full.svg';
 import SmileAudioIcon from '~/public/static/img/icon/smile-audio.svg';
 import SmileAudioBookIcon from '~/public/static/img/icon/smile-audiobook.svg';
@@ -215,6 +216,14 @@ const activitiesByDay = computed(() => {
 							class="flex items-center justify-center col-span-1 text-md lg:text-lg text-primaryLight font-semibold"
 						>
 							K
+						</div>
+						<div
+							v-if="activityItem.activity.id === 25"
+							class="flex items-center justify-center col-span-1 text-md lg:text-lg text-primaryLight font-semibold"
+						>
+							<DumbbellIcon
+								class="size-5 lg:size-8 fill-warning"
+							/>
 						</div>
 					</div>
 					<div

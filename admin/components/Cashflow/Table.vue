@@ -209,6 +209,31 @@ function summaryMonthlyLeft() {
 	return summaryMonthlyBudget() - summaryMonthlySpent();
 }
 
+function markRowColumn(event: MouseEvent) {
+	const target = event.currentTarget as HTMLElement;
+	const row = target.parentElement as HTMLElement;
+	const table = row.parentElement?.parentElement as HTMLElement;
+	const columnIndex = Array.from(row.children).indexOf(target);
+
+	// Reset all cells
+	table.querySelectorAll('td, th').forEach((cell) => {
+		cell.classList.remove('highlight');
+	});
+
+	// Highlight the row
+	row.querySelectorAll('td').forEach((cell) => {
+		cell.classList.add('highlight');
+	});
+
+	// Highlight the column
+	table.querySelectorAll(`tr`).forEach((row) => {
+		const cell = row.children[columnIndex];
+		if (cell) {
+			cell.classList.add('highlight');
+		}
+	});
+}
+
 function formatAmount(amount: number) {
 	return amount.toLocaleString('cs-CZ');
 }
@@ -273,6 +298,7 @@ function formatAmount(amount: number) {
 									:key="index"
 									class="p-1 lg:p-2 text-xs whitespace-nowrap text-gray-500 text-end hover:bg-gray-100 cursor-pointer"
 									@click="updateCashflow('expense', category.id, day)"
+									@mouseover="markRowColumn"
 								>
 									<span v-if="summaryByDay(category.id, day) > 0">{{ formatAmount(summaryByDay(category.id, day)) }} Kč</span>
 								</td>
@@ -382,5 +408,13 @@ function formatAmount(amount: number) {
 
 .vertical-line:hover::after {
   display: flex;
+}
+
+.highlight {
+  background-color: #f9fafb;
+}
+
+th {
+  background-color: #111827 !important;
 }
 </style>
