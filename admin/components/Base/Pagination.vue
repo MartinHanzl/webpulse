@@ -55,11 +55,11 @@ generatePages();
 	<div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
 		<div class="flex flex-1 justify-between sm:hidden">
 			<span
-				class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+				class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-2 lg:px-4 py-1 lg:py-2 text-xs lg:text-sm font-medium text-gray-700 hover:bg-gray-50"
 				@click="page !== 1 ? emit('update-page', Number(page-1)) : null"
 			>Předchozí</span>
 			<span
-				class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+				class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-2 lg:px-4 py-1 lg:py-2 text-xs lg:text-sm font-medium text-gray-700 hover:bg-gray-50"
 				@click="page !== lastPage ? emit('update-page', Number(page+1)) : null"
 			>Následující</span>
 		</div>

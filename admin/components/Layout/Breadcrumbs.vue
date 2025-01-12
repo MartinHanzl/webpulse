@@ -17,7 +17,7 @@ defineProps({
 	>
 		<ol
 			role="list"
-			class="flex items-center space-x-4"
+			class="flex items-center space-x-2"
 		>
 			<li>
 				<div>
@@ -26,7 +26,7 @@ defineProps({
 						class="text-gray-400 hover:text-grayCustom"
 					>
 						<HomeIcon
-							class="size-5 shrink-0"
+							class="size-3 lg:size-4 shrink-0"
 							aria-hidden="true"
 						/>
 						<span class="sr-only">Home</span>
@@ -39,12 +39,12 @@ defineProps({
 			>
 				<div class="flex items-center">
 					<ChevronRightIcon
-						class="size-5 shrink-0 text-gray-400"
+						class="size-3 lg:size-4 shrink-0 text-gray-400"
 						aria-hidden="true"
 					/>
 					<NuxtLink
 						:to="page.link"
-						class="ml-4 text-sm font-medium text-grayCustom hover:text-gray-700"
+						class="ml-2 text-xs lg:text-sm font-medium text-grayCustom hover:text-gray-700"
 						:aria-current="page.current ? 'page' : undefined"
 					>{{ page.name }}</NuxtLink>
 				</div>

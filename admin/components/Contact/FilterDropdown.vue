@@ -72,7 +72,7 @@ function addRemoveToFiltersQuery(slug: string, value: number) {
 			class="relative"
 		>
 			<PopoverButton
-				class="w-full group inline-flex items-center justify-between bg-white ring-1 ring-inset ring-grayLight hover:bg-gray-50 focus-visible:outline-grayLight text-grayDark px-3.5 py-2.5 text-sm shadow-sm rounded-md"
+				class="w-full group inline-flex items-center justify-between bg-white ring-1 ring-inset ring-grayLight hover:bg-gray-50 focus-visible:outline-grayLight text-grayDark px-2 lg:px-3.5 py-1.5 lg:py-2.5 text-xs lg:text-sm shadow-sm rounded-md"
 			>
 				<span>{{ title }}</span>
 				<ChevronDownIcon

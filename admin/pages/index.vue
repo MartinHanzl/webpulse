@@ -53,12 +53,10 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 		/>
-		<div class="flex items-start justify-between gap-x-10 gap-y-4">
-			<div class="w-1/2">
+		<div class="grid grid-cols-1 lg:grid-cols-2 items-start justify-between gap-x-8 gap-y-2 lg:gap-y-4">
+			<div class="col-span-full lg:col-span-1">
 				<LayoutContainer>
-					<h3 class="text-lg font-semibold text-grayCustom mb-1">
-						Naposledy přidané kontakty
-					</h3>
+					<LayoutTitle>Naposledy přidané kontakty</LayoutTitle>
 					<BaseTable
 						:items="dashboard.lastAddedContacts"
 						:columns="[
@@ -76,11 +74,9 @@ definePageMeta({
 					/>
 				</LayoutContainer>
 			</div>
-			<div class="w-1/2">
+			<div class="col-span-full lg:col-span-1">
 				<LayoutContainer>
-					<h3 class="text-lg font-semibold text-grayCustom mb-1">
-						Dnes máš zavolat těmto kontaktům
-					</h3>
+					<LayoutTitle>Dnes máš zavolat těmto kontaktům</LayoutTitle>
 					<BaseTable
 						:items="dashboard.contactsToCall"
 						:columns="[
@@ -98,9 +94,7 @@ definePageMeta({
 					/>
 				</LayoutContainer>
 				<LayoutContainer>
-					<h3 class="text-lg font-semibold text-grayCustom mb-1">
-						Nadcházející schůzky
-					</h3>
+					<LayoutTitle>Nadcházející schůzky</LayoutTitle>
 					<BaseTable
 						:items="dashboard.comingEvents"
 						:columns="[

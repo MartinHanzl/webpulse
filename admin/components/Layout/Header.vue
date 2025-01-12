@@ -92,40 +92,40 @@ const emitUpdateFilters = () => {
 
 <template>
 	<div
-		class="py-6 pb-6 pr-8 pl-8 bg-white rounded-lg shadow"
+		class="py-4 lg:py-6 pb-4 lg:pb-6 pr-5 lg:pr-8 pl-5 lg:pl-8 bg-white rounded-lg shadow"
 	>
 		<LayoutBreadcrumbs
 			:pages="breadcrumbs"
 			class="mb-4"
 		/>
-		<div class="mt-2 md:flex md:items-center md:justify-between">
+		<div class="mt-2 flex items-center justify-between">
 			<div class="min-w-0 flex-1">
-				<h2 class="text-2xl/7 font-bold text-grayDark sm:truncate sm:text-3xl sm:tracking-tight">
+				<h2 class="text-xl lg:text-3xl/7 font-bold text-grayDark sm:truncate sm:tracking-tight">
 					{{ title }}
 				</h2>
 			</div>
 			<div
-				class="mt-4 flex shrink-0 md:ml-4 md:mt-0"
+				class="flex shrink-0 md:ml-4 md:mt-0"
 			>
 				<button
 					v-if="isInQuickAccess"
 					type="button"
-					class="rounded-full px-2.5 py-2.5 text-sm font-semibold shadow-sm hover:shadow-md ring-1 ring-slate-200"
+					class="rounded-full px-1.5 lg:px-2.5 py-1.5 lg:py-2.5 text-sm shadow-sm hover:shadow-md ring-1 ring-slate-200"
 					@click="openQuickAccessDialog(true)"
 				>
 					<StarIcon
-						class="size-5 text-yellow-600 fill-yellow-600"
+						class="size-4 lg:size-5 text-yellow-600 fill-yellow-600"
 						aria-hidden="true"
 					/>
 				</button>
 				<button
 					v-else
 					type="button"
-					class="rounded-full px-2.5 py-2.5 text-sm font-semibold shadow-sm hover:shadow-md ring-1 ring-slate-200"
+					class="rounded-full px-1.5 lg:px-2.5 py-1.5 lg:py-2.5 text-sm shadow-sm hover:shadow-md ring-1 ring-slate-200"
 					@click="openQuickAccessDialog(false)"
 				>
 					<StarIcon
-						class="size-5 text-yellow-600"
+						class="size-4 lg:size-5 text-yellow-600"
 						aria-hidden="true"
 					/>
 				</button>
@@ -133,10 +133,16 @@ const emitUpdateFilters = () => {
 					v-if="links && links.length"
 					:links="links"
 				/>
+				<!--				<LayoutActionsMobileDropdown
+					v-if="actions && actions.length"
+					:actions="actions"
+					:slug="slug"
+				/> -->
 				<div
 					v-for="(action, key) in actions"
 					v-if="actions && actions.length"
 					:key="key"
+					class="hidden lg:block"
 				>
 					<BaseButton
 						v-if="action.type === 'save' && canEdit(slug) || action.type === 'save' && slug === ''"
@@ -145,7 +151,7 @@ const emitUpdateFilters = () => {
 						class="ml-4"
 						@click="emit('save', true)"
 					>
-						Uložit
+						Uložit a odejít
 					</BaseButton>
 					<BaseButton
 						v-if="action.type === 'save' && canEdit(slug) || action.type === 'save' && slug === ''"
@@ -154,7 +160,7 @@ const emitUpdateFilters = () => {
 						class="ml-4"
 						@click="emit('save', false)"
 					>
-						Uložit a zůstat
+						Uložit
 					</BaseButton>
 					<BaseButton
 						v-if="action.type === 'add' && canEdit(slug)"
@@ -187,14 +193,61 @@ const emitUpdateFilters = () => {
 			</div>
 		</div>
 		<div
+			v-for="(action, key) in actions"
+			v-if="actions && actions.length"
+			:key="key"
+			class="lg:hidden flex gap-x-4 mt-4"
+		>
+			<BaseButton
+				v-if="action.type === 'save' && canEdit(slug) || action.type === 'save' && slug === ''"
+				variant="secondary"
+				size="md"
+				@click="emit('save', true)"
+			>
+				Uložit a odejít
+			</BaseButton>
+			<BaseButton
+				v-if="action.type === 'save' && canEdit(slug) || action.type === 'save' && slug === ''"
+				variant="primary"
+				size="md"
+				@click="emit('save', false)"
+			>
+				Uložit
+			</BaseButton>
+			<BaseButton
+				v-if="action.type === 'add' && canEdit(slug)"
+				variant="primary"
+				size="md"
+				@click="router.push(route.fullPath + '/pridat')"
+			>
+				{{ action.text }}
+			</BaseButton>
+			<BaseButton
+				v-if="action.type === 'add-dialog' && canEdit(slug)"
+				variant="primary"
+				size="md"
+				@click="emit('add-dialog')"
+			>
+				{{ action.text }}
+			</BaseButton>
+			<BaseButton
+				v-if="action.type === 'filter-dialog'"
+				variant="primary"
+				size="md"
+				@click="emit('filter-dialog')"
+			>
+				{{ action.text }}
+			</BaseButton>
+		</div>
+		<div
 			v-if="filters && filters.length"
 			class="grid grid-cols-12 gap-4"
 		>
-			<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
+			<div class="col-span-full border-b border-grayLight mt-4" />
 			<ContactFilterDropdown
 				v-for="(filter, key) in filters"
 				:key="key"
-				class="col-span-2"
+				class="col-span-4 lg:col-span-2"
 				:title="filter.title"
 				:data="filter.data"
 				:multiple="filter.multiple"

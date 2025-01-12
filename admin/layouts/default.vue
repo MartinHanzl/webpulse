@@ -208,8 +208,9 @@ onMounted(() => {
 													v-for="(item, key) in group.menu"
 													:key="key"
 												>
-													<a
-														:href="item.link"
+													<NuxtLink
+														v-if="!item.slug || (item.slug && canView(item.slug))"
+														:to="item.link"
 														:class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-300 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']"
 													>
 														<component
@@ -218,7 +219,7 @@ onMounted(() => {
 															aria-hidden="true"
 														/>
 														<span class="truncate">{{ item.name }}</span>
-													</a>
+													</NuxtLink>
 												</li>
 											</ul>
 										</li>

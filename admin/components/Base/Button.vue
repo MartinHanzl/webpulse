@@ -3,6 +3,7 @@ import { ref, computed } from 'vue';
 
 const sizeClasses = ref({
 	sm: 'px-2 py-1 text-xs shadow-sm rounded',
+	md: 'px-2.5 py-1.5 text-xs shadow-sm rounded',
 	lg: 'px-3 py-2 text-sm shadow-sm rounded-md',
 	xl: 'px-3.5 py-2.5 text-sm shadow-sm rounded-md',
 });

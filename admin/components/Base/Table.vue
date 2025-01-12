@@ -147,7 +147,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									scope="col"
 									:class="{
 										'hidden md:table-cell': column.hidden,
-										'py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-grayDark sm:pl-6 lg:pl-8': true,
+										'py-2.5 lg:py-3.5 pl-2 lg:pl-8 pr-1.5 lg:pr-3 text-left text-xs lg:text-sm font-semibold text-grayDark': true,
 										'cursor-pointer': column.sortable,
 										[`w-[${column.width}px]`]: column.width,
 									}"
@@ -157,11 +157,11 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 										<span>{{ column.name }}</span>
 										<ChevronDownIcon
 											v-if="query && column.sortable && query.orderBy === column.key && query.orderWay === 'asc'"
-											class="size-4 text-grayCustom ml-2"
+											class="size-3 lg:size-4 text-primaryCustom ml-2"
 										/>
 										<ChevronUpIcon
 											v-if="query && column.sortable && query.orderBy === column.key && query.orderWay === 'desc'"
-											class="size-4 text-grayCustom ml-2"
+											class="size-3 lg:size-4 text-primaryCustom ml-2"
 										/>
 									</div>
 								</th>
@@ -181,7 +181,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									v-for="(column, index) in columns"
 									:key="index"
 									scope="col"
-									:class="[column.hidden ? 'hidden md:table-cell' : '', `w-[${column.width}px] whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-grayCustom sm:pl-6 lg:pl-8`]"
+									:class="[column.hidden ? 'hidden md:table-cell' : '', `w-[${column.width}px] whitespace-nowrap py-2 lg:py-4 pl-2 lg:pl-8 pr-1.5 lg:pr-3 text-xs lg:text-sm font-medium text-grayCustom`]"
 								>
 									<span v-if="column.type === 'text' || column.type === 'number'">
 										{{ item[column.key] ?? '-' }}
@@ -210,29 +210,29 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 										{{ item[column.key] }}
 									</NuxtLink>
 								</td>
-								<td class="w-[150px] relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 lg:pr-8 flex items-center justify-end">
+								<td class="w-[150px] relative whitespace-nowrap py-2 lg:py-4 pl-1.5 lg:pl-3 pr-2 lg:pr-8 text-right text-xs lg:text-sm font-medium sm:pr-6 flex items-center justify-end">
 									<span
 										v-for="(action, index) in actions"
 										:key="index"
 									>
 										<MagnifyingGlassIcon
 											v-if="action.type === 'edit' && canEdit(slug) || action.type === 'edit' && slug === ''"
-											class="cursor-pointer size-5 text-primaryCustom hover:text-primaryLight ml-4"
+											class="cursor-pointer size-3 lg:size-5 text-primaryCustom hover:text-primaryLight ml-2 lg:ml-4"
 											@click="redirect(item.id, action)"
 										/>
 										<ClipboardDocumentIcon
 											v-if="action.type === 'copy'"
-											class="cursor-pointer size-5 text-secondary hover:text-secondaryLight ml-4"
+											class="cursor-pointer size-4 lg:size-5 text-secondary hover:text-secondaryLight ml-2 lg:ml-4"
 											@click="copyToClipboard(item, action.key)"
 										/>
 										<BoltIcon
 											v-if="action.type === 'edit-dialog' && canEdit(slug) || action.type === 'edit-dialog' && slug === ''"
-											class="cursor-pointer size-5 text-warning hover:text-warningLight ml-4"
+											class="cursor-pointer size-4 lg:size-5 text-warning hover:text-warningLight ml-2 lg:ml-4"
 											@click="emit('open-dialog', item)"
 										/>
 										<TrashIcon
 											v-if="action.type === 'delete' && canDelete(slug) || action.type === 'delete' && slug === ''"
-											class="cursor-pointer size-5 text-danger hover:text-dangerLight ml-4"
+											class="cursor-pointer size-4 lg:size-5 text-danger hover:text-dangerLight ml-2 lg:ml-4"
 											@click="showDeleteDialog = true; deleteDialogItem = item"
 										/>
 									</span>
@@ -241,7 +241,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 							<tr v-else-if="!loading && error">
 								<td
 									:colspan="columns.length + 1"
-									class="relative whitespace-nowrap py-8 pl-3 pr-4 text-center text-grayCustom text-sm font-semibold sm:pr-6 lg:pr-8"
+									class="relative whitespace-nowrap py-8 pl-3 pr-4 text-center text-grayCustom text-xs lg:text-sm font-semibold sm:pr-6 lg:pr-8"
 								>
 									{{ `${plural} se nepodařilo načíst` }}
 								</td>
@@ -249,7 +249,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 							<tr v-else-if="!loading && !error && items.data && items.data.length === 0">
 								<td
 									:colspan="columns.length + 1"
-									class="relative whitespace-nowrap py-8 pl-3 pr-4 text-center text-grayCustom text-sm font-semibold sm:pr-6 lg:pr-8"
+									class="relative whitespace-nowrap py-8 pl-3 pr-4 text-center text-grayCustom text-xs lg:text-sm font-semibold sm:pr-6 lg:pr-8"
 								>
 									{{ `Nemáte žádné ${plural.toLowerCase()}` }}
 								</td>
@@ -257,7 +257,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 							<tr v-else-if="loading">
 								<td
 									:colspan="columns.length + 1"
-									class="relative whitespace-nowrap py-8 pl-3 pr-4 text-center text-grayCustom text-sm font-semibold sm:pr-6 lg:pr-8"
+									class="relative whitespace-nowrap py-8 pl-3 pr-4 text-center text-grayCustom text-xs lg:text-sm font-semibold sm:pr-6 lg:pr-8"
 								>
 									{{ `${plural} se načítají` }}
 								</td>
