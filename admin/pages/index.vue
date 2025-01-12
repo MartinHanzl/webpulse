@@ -67,7 +67,7 @@ definePageMeta({
 							{ key: 'phone', name: 'Telefon', type: 'text', width: 80, hidden: true, sortable: false },
 						]"
 						:actions="[
-							{ type: 'edit' },
+							{ type: 'edit', path: '/kontakty', hash: '#proces' },
 						]"
 						:loading="loading"
 						:error="error"
@@ -89,7 +89,7 @@ definePageMeta({
 							{ key: 'phone', name: 'Telefon', type: 'text', width: 80, hidden: true, sortable: false },
 						]"
 						:actions="[
-							{ type: 'edit' },
+							{ type: 'edit', path: '/kontakty', hash: '#proces' },
 						]"
 						:loading="loading"
 						:error="error"
@@ -109,7 +109,7 @@ definePageMeta({
 							{ key: 'next_meeting', name: 'Datum a čas', type: 'datetime', width: 80, hidden: true, sortable: false },
 						]"
 						:actions="[
-							{ type: 'edit' },
+							{ type: 'edit', path: '/kontakty', hash: '#proces' },
 						]"
 						:loading="loading"
 						:error="error"

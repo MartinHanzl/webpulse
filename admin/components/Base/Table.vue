@@ -115,6 +115,21 @@ async function copyToClipboard(item, key) {
 	});
 }
 
+function redirect(itemId: number, action: object) {
+	if (action.path && action.hash) {
+		router.push(`${action.path}/${itemId}${action.hash}`);
+	}
+	else if (action.hash) {
+		router.push(`${route.fullPath}/${itemId}${action.hash}`);
+	}
+	else if (action.path) {
+		router.push(`${action.path}/${itemId}`);
+	}
+	else {
+		router.push(`${route.fullPath}/${itemId}`);
+	}
+}
+
 const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dialog']);
 </script>
 
@@ -203,7 +218,7 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 										<MagnifyingGlassIcon
 											v-if="action.type === 'edit' && canEdit(slug) || action.type === 'edit' && slug === ''"
 											class="cursor-pointer size-5 text-primaryCustom hover:text-primaryLight ml-4"
-											@click="action.to ? router.push(`${route.fullPath}/${item.id}${action.to}`) : router.push(`${route.fullPath}/${item.id}`)"
+											@click="redirect(item.id, action)"
 										/>
 										<ClipboardDocumentIcon
 											v-if="action.type === 'copy'"

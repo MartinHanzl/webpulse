@@ -251,7 +251,7 @@ definePageMeta({
 					{ key: 'source', name: 'Zdroj', type: 'badge', width: 80, hidden: true, sortable: false, colorKey: 'source_color' },
 				]"
 				:actions="[
-					{ type: 'edit', to: '#proces' },
+					{ type: 'edit', hash: '#proces' },
 					{ type: 'edit-dialog' },
 					{ type: 'delete' },
 				]"
