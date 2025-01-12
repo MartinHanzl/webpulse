@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, inject } from 'vue';
-import { debounce } from 'lodash';
+import _ from 'lodash';
 import { useUserGroupStore } from '~/stores/userGroupStore';
 
 const userGroupStore = useUserGroupStore();
@@ -101,7 +101,7 @@ function updatePage(page: number) {
 	loadItems();
 }
 
-const debouncedLoadItems = debounce(loadItems, 400);
+const debouncedLoadItems = _.debounce(loadItems, 400);
 watch(searchString, () => {
 	tableQuery.value.search = searchString.value;
 	debouncedLoadItems();
