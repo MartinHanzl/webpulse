@@ -556,7 +556,7 @@ definePageMeta({
 				<div class="grid grid-cols-1 lg:grid-cols-7 gap-x-4 gap-y-8">
 					<LayoutContainer class="col-span-5 w-full">
 						<LayoutTitle>Úkoly</LayoutTitle>
-						<div class="grid grid-cols-1 lg:grid-cols-5 gap-x-4 gap-y-8">
+						<div class="grid grid-cols-1 lg:grid-cols-4 gap-x-4 gap-y-8">
 							<BaseFormCheckbox
 								v-for="(task, key) in tasks"
 								:key="key"

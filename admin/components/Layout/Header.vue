@@ -145,7 +145,7 @@ const emitUpdateFilters = () => {
 					class="hidden lg:block"
 				>
 					<BaseButton
-						v-if="action.type === 'save' && canEdit(slug) || action.type === 'save' && slug === ''"
+						v-if="action.type === 'save-and-stay' && canEdit(slug) || action.type === 'save-and-stay' && slug === ''"
 						variant="secondary"
 						size="xl"
 						class="ml-4"
