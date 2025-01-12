@@ -192,7 +192,7 @@ definePageMeta({
 			:actions="[{ type: 'save' }]"
 			@save="saveItem"
 		/>
-		<div class="grid grid-cols-4 gap-x-10">
+		<div class="grid grid-cols-1 lg:grid-cols-4 gap-x-8 gap-y-4">
 			<LayoutContainer class="col-span-3 w-full">
 				<Form @submit="saveItem">
 					<div class="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -246,8 +246,8 @@ definePageMeta({
 					</div>
 				</Form>
 			</LayoutContainer>
-			<LayoutContainer class="col-span-1 w-full">
-				<div class="grid grid-cols-2 gap-x-8 gap-y-4">
+			<LayoutContainer class="col-span-3 lg:col-span-1 w-full">
+				<div class="grid grid-cols-2 gap-x-8 gap-y-4 w-full">
 					<div class="col-span-full text-center">
 						<NuxtImg
 							class="mx-auto size-full rounded-full"
@@ -275,18 +275,18 @@ definePageMeta({
 					/>
 				</div>
 			</LayoutContainer>
-			<LayoutContainer class="col-span-full w-full">
+			<LayoutContainer class="col-span-3 lg:col-span-full w-full">
 				<Form @submit="savePassword">
-					<div class="grid grid-cols-3 gap-x-8 gap-y-4">
+					<div class="grid grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-4">
 						<BaseFormInput
 							v-model="passwords.current_password"
 							label="Současné heslo"
 							type="password"
 							name="password"
 							rules="required"
-							class="col-span-1"
+							class="col-span-full lg:col-span-1"
 						/>
-						<div class="col-span-2">
+						<div class="hidden lg:block col-span-2">
 &nbsp;
 						</div>
 						<BaseFormInput
@@ -305,7 +305,7 @@ definePageMeta({
 							rules="required"
 							class="col-span-1"
 						/>
-						<div class="col-span-1 flex items-end justify-end">
+						<div class="col-span-full lg:col-span-1 flex items-end justify-end">
 							<BaseButton
 								type="submit"
 								variant="primary"

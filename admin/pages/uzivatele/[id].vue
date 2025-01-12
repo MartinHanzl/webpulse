@@ -187,7 +187,7 @@ definePageMeta({
 			slug="users"
 			@save="saveItem"
 		/>
-		<div class="grid grid-cols-4 gap-x-10">
+		<div class="grid grid-cols-1 lg:grid-cols-4 gap-x-10">
 			<LayoutContainer class="col-span-3 w-full">
 				<Form @submit="saveItem">
 					<div class="grid grid-cols-2 gap-x-8 gap-y-4">
@@ -275,7 +275,7 @@ definePageMeta({
 					</div>
 				</Form>
 			</LayoutContainer>
-			<LayoutContainer class="col-span-1 w-full">
+			<LayoutContainer class="col-span-3 lg:col-span-1 w-full">
 				<div class="grid grid-cols-2 gap-x-8 gap-y-4">
 					<div class="col-span-full text-center">
 						<NuxtImg

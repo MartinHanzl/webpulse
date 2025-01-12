@@ -145,7 +145,7 @@ definePageMeta({
 						label="Barva"
 						name="color"
 						rules="min:3"
-						class="col-span-1"
+						class="col-span-2 lg:col-span-1"
 					/>
 					<BaseFormTextarea
 						v-model="item.description"

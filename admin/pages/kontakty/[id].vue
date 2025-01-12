@@ -599,7 +599,7 @@ definePageMeta({
 							/>
 						</div>
 					</LayoutContainer>
-					<LayoutContainer class="col-span-2 w-full">
+					<LayoutContainer class="col-span-5 lg:col-span-2 w-full">
 						<LayoutTitle>Proces</LayoutTitle>
 						<div class="grid grid-cols-3 gap-x-8 gap-y-4">
 							<BaseFormSelect
