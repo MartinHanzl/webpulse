@@ -30,7 +30,10 @@ const buttonClasses = computed(() => {
 </script>
 
 <template>
-	<button :class="buttonClasses">
+	<button
+		:class="buttonClasses"
+		class="no-print"
+	>
 		<slot />
 	</button>
 </template>

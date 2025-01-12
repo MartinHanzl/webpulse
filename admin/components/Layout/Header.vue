@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { StarIcon } from '@heroicons/vue/24/outline';
+import { StarIcon, PrinterIcon, ServerIcon } from '@heroicons/vue/24/outline';
 import { ref } from 'vue';
 import { useUserGroupStore } from '~/stores/userGroupStore';
 
@@ -85,6 +85,10 @@ function openQuickAccessDialog(searchForItem: boolean = false) {
 	}
 }
 
+function print() {
+	window.print();
+}
+
 const emitUpdateFilters = () => {
 	emit('update-filters', props.filtersQuery);
 };
@@ -92,7 +96,7 @@ const emitUpdateFilters = () => {
 
 <template>
 	<div
-		class="py-4 lg:py-6 pb-4 lg:pb-6 pr-5 lg:pr-8 pl-5 lg:pl-8 bg-white rounded-lg shadow"
+		class="py-4 lg:py-6 pb-4 lg:pb-6 pr-5 lg:pr-8 pl-5 lg:pl-8 bg-white rounded-lg shadow no-print"
 	>
 		<LayoutBreadcrumbs
 			:pages="breadcrumbs"
@@ -188,6 +192,15 @@ const emitUpdateFilters = () => {
 						@click="emit('filter-dialog')"
 					>
 						{{ action.text }}
+					</BaseButton>
+					<BaseButton
+						v-if="action.type === 'print'"
+						variant="secondary"
+						size="xl"
+						class="ml-4 hidden lg:block"
+						@click="print"
+					>
+						<PrinterIcon class="size-5 text-primaryLight" />
 					</BaseButton>
 				</div>
 			</div>

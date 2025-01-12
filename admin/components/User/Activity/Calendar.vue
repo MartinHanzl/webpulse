@@ -124,7 +124,7 @@ const activitiesByDay = computed(() => {
 			>
 				Předchozí měsíc
 			</BaseButton>
-			<h2 class="text-sm lg:text-md font-semibold text-primaryCustom">
+			<h2 class="text-sm lg:text-lg font-semibold text-primaryCustom">
 				{{ currentDate.toLocaleDateString('cs-CZ', { month: 'long', year: 'numeric' })[0].toUpperCase() + currentDate.toLocaleDateString('cs-CZ', { month: 'long', year: 'numeric' }).slice(1) }}
 			</h2>
 			<BaseButton

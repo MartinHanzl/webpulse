@@ -153,6 +153,7 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 			:actions="[
+				{ type: 'print', text: 'Tisknout' },
 				{ type: 'add-dialog', text: 'Přidat aktivitu' },
 			]"
 			slug="users_has_activities"
