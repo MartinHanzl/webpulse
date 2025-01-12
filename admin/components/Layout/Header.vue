@@ -137,36 +137,48 @@ const emitUpdateFilters = () => {
 					v-for="(action, key) in actions"
 					v-if="actions && actions.length"
 					:key="key"
-					class="ml-4"
 				>
 					<BaseButton
 						v-if="action.type === 'save' && canEdit(slug) || action.type === 'save' && slug === ''"
-						type="primary"
+						variant="secondary"
 						size="xl"
-						@click="emit('save')"
+						class="ml-4"
+						@click="emit('save', true)"
 					>
 						Uložit
 					</BaseButton>
 					<BaseButton
-						v-if="action.type === 'add' && canEdit(slug)"
-						type="primary"
+						v-if="action.type === 'save' && canEdit(slug) || action.type === 'save' && slug === ''"
+						variant="primary"
 						size="xl"
+						class="ml-4"
+						@click="emit('save', false)"
+					>
+						Uložit a zůstat
+					</BaseButton>
+					<BaseButton
+						v-if="action.type === 'add' && canEdit(slug)"
+						variant="primary"
+						size="xl"
+						class="ml-4"
 						@click="router.push(route.fullPath + '/pridat')"
 					>
 						{{ action.text }}
 					</BaseButton>
 					<BaseButton
 						v-if="action.type === 'add-dialog' && canEdit(slug)"
-						type="primary"
+						variant="primary"
 						size="xl"
+						class="ml-4"
 						@click="emit('add-dialog')"
 					>
 						{{ action.text }}
 					</BaseButton>
 					<BaseButton
 						v-if="action.type === 'filter-dialog'"
-						type="primary"
+						variant="primary"
 						size="xl"
+						class="ml-4"
 						@click="emit('filter-dialog')"
 					>
 						{{ action.text }}

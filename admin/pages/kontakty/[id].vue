@@ -234,7 +234,7 @@ async function loadTasks() {
 	});
 }
 
-async function saveItem() {
+async function saveItem(redirect = true as boolean) {
 	const client = useSanctumClient();
 	loading.value = true;
 
@@ -289,7 +289,9 @@ async function saveItem() {
 			description: `Nový kontakt byl úspěšně ${item.value.id === 'pridat' ? 'vytvořen' : 'uložen'}.`,
 			color: 'green',
 		});
-		router.push('/kontakty');
+		if (redirect) {
+			router.push('/kontakty');
+		}
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -417,7 +419,7 @@ definePageMeta({
 		<LayoutHeader
 			:title="route.params.id === 'pridat' ? 'Nový kontakt' : item.firstname + ' ' + item.lastname"
 			:breadcrumbs="breadcrumbs"
-			:actions="[{ type: 'save' }]"
+			:actions="[{ type: 'save' }, { type: 'save-and-stay' }]"
 			slug="contacts"
 			@save="saveItem"
 		/>

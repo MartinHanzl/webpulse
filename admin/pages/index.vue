@@ -62,7 +62,6 @@ definePageMeta({
 					<BaseTable
 						:items="dashboard.lastAddedContacts"
 						:columns="[
-							{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: true, sortable: false },
 							{ key: 'firstname', name: 'Jméno', type: 'text', width: 80, hidden: false, sortable: false },
 							{ key: 'lastname', name: 'Příjmení', type: 'text', width: 80, hidden: false, sortable: false },
 							{ key: 'phone', name: 'Telefon', type: 'text', width: 80, hidden: true, sortable: false },
@@ -85,7 +84,6 @@ definePageMeta({
 					<BaseTable
 						:items="dashboard.contactsToCall"
 						:columns="[
-							{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: true, sortable: false },
 							{ key: 'firstname', name: 'Jméno', type: 'text', width: 80, hidden: false, sortable: false },
 							{ key: 'lastname', name: 'Příjmení', type: 'text', width: 80, hidden: false, sortable: false },
 							{ key: 'phone', name: 'Telefon', type: 'text', width: 80, hidden: true, sortable: false },
@@ -106,7 +104,6 @@ definePageMeta({
 					<BaseTable
 						:items="dashboard.comingEvents"
 						:columns="[
-							{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: true, sortable: false },
 							{ key: 'firstname', name: 'Jméno', type: 'text', width: 80, hidden: false, sortable: false },
 							{ key: 'lastname', name: 'Příjmení', type: 'text', width: 80, hidden: false, sortable: false },
 							{ key: 'next_meeting', name: 'Datum a čas', type: 'datetime', width: 80, hidden: true, sortable: false },

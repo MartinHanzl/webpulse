@@ -58,7 +58,7 @@ defineRule('required', (value) => {
 				v-model="model"
 				:rows="rows"
 				:name="name"
-        maxlength="255"
+				maxlength="255"
 				:class="[
 					'mt-2 block w-full rounded-md border-0 py-2 text-grayDark shadow-sm ring-1 ring-inset ring-grayLight placeholder:text-grayLight focus:ring-1 focus:ring-inset focus:ring-primaryLight sm:text-sm/6',
 					{ 'bg-grayLight': disabled },
