@@ -15,7 +15,7 @@ import {
 	BellIcon,
 	CalendarIcon,
 	ChartPieIcon,
-	Cog6ToothIcon,
+	StarIcon,
 	HomeIcon,
 	UsersIcon,
 	XMarkIcon,
@@ -207,6 +207,7 @@ onMounted(() => {
 												<li
 													v-for="(item, key) in group.menu"
 													:key="key"
+													@click="sidebarOpen = false"
 												>
 													<NuxtLink
 														v-if="!item.slug || (item.slug && canView(item.slug))"
@@ -223,7 +224,7 @@ onMounted(() => {
 												</li>
 											</ul>
 										</li>
-										<li class="mt-auto">
+										<!--										<li class="mt-auto">
 											<a
 												href="#"
 												class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -234,7 +235,7 @@ onMounted(() => {
 												/>
 												Settings
 											</a>
-										</li>
+										</li> -->
 									</ul>
 								</nav>
 							</div>
@@ -337,13 +338,13 @@ onMounted(() => {
 							class="sr-only"
 						>Hledat</label>
 						<MagnifyingGlassIcon
-							class="pointer-events-none absolute inset-y-0 left-0 h-full w-5 text-grayCustom"
+							class="pointer-events-none absolute inset-y-0 left-0 h-full w-3 lg:w-5 text-grayCustom"
 							aria-hidden="true"
 						/>
 						<input
 							id="search-field"
 							v-model="searchString"
-							class="block size-full border-0 py-0 pl-8 pr-0 text-grayDark placeholder:text-grayCustom focus:ring-0 sm:text-sm"
+							class="block size-full border-0 py-0 pl-6 lg:pl-8 pr-0 text-grayDark placeholder:text-grayCustom focus:ring-0 text-xs lg:text-sm"
 							placeholder="Hledat..."
 							type="search"
 							name="search"
@@ -351,7 +352,7 @@ onMounted(() => {
 						>
 					</div>
 					<div class="flex items-center gap-x-4 lg:gap-x-6">
-						<button
+						<!--						<button
 							type="button"
 							class="-m-2.5 p-2.5 text-gray-300 hover:text-gray-500"
 						>
@@ -360,12 +361,12 @@ onMounted(() => {
 								class="size-6"
 								aria-hidden="true"
 							/>
-						</button>
+						</button> -->
 
 						<!-- Separator -->
 						<div
 							v-if="quickAccess && quickAccess.length"
-							class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
+							class="block lg:h-6 lg:w-px lg:bg-gray-900/10"
 							aria-hidden="true"
 						/>
 
@@ -377,13 +378,17 @@ onMounted(() => {
 						>
 							<MenuButton class="-m-1.5 flex items-center p-1.5">
 								<span class="sr-only">Open qick access menu</span>
-								<span class="hidden lg:flex lg:items-center">
+								<span class="flex lg:items-center">
 									<span
-										class="text-sm/6 font-semibold text-gray-900"
+										class="hidden lg:block text-sm/6 font-semibold text-gray-900"
 										aria-hidden="true"
 									>Rychlý přístup</span>
 									<ChevronDownIcon
-										class="ml-2 size-5 text-gray-300"
+										class="hidden lg:block ml-2 size-5 text-gray-300"
+										aria-hidden="true"
+									/>
+									<StarIcon
+										class="lg:hidden ml-2 size-5 text-yellow-600"
 										aria-hidden="true"
 									/>
 								</span>
@@ -420,7 +425,7 @@ onMounted(() => {
 						</Menu>
 						<!-- Separator -->
 						<div
-							class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10"
+							class="h-6 w-px bg-gray-900/10"
 							aria-hidden="true"
 						/>
 						<!-- Profile dropdown -->

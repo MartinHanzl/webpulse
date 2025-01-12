@@ -36,8 +36,8 @@ definePageMeta({
 </script>
 
 <template>
-	<LayoutContainer class="max-w-md w-full mt-60">
-		<h1 class="text-2xl font-semibold text-grayDark text-center mb-4">
+	<LayoutContainer class="max-w-md w-full mt-24 lg:mt-60">
+		<h1 class="text-md lg:text-2xl font-semibold text-grayDark text-center mb-4">
 			Přihlášení
 		</h1>
 		<Form @submit="handleSubmit">
