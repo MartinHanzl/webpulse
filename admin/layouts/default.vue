@@ -29,6 +29,8 @@ import {
 	ChatBubbleBottomCenterTextIcon,
 	ChartBarSquareIcon,
 	ChartBarIcon,
+	TrophyIcon,
+	CalendarDaysIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
@@ -53,12 +55,15 @@ const navigation = ref([
 	] },
 	{ title: 'Byznys a osobní růst', menu: [
 		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false, slug: 'contacts' },
-		{ name: 'Aktivita', link: '/aktivita', icon: ChartBarIcon, current: false, slug: 'users_has_activities' },
+		{ name: 'Aktivita', link: '/aktivita', icon: CalendarIcon, current: false, slug: 'users_has_activities' },
 		{ name: 'Šablony zpráv', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'message_blueprints' },
 		{ name: 'Kalendář', link: '/demo', icon: CalendarIcon, current: false, slug: 'calendars' },
 		{ name: 'Cashflow', link: '/cashflow', icon: BanknotesIcon, current: false, slug: 'cashflows' },
+		{ name: 'Ligy', link: '/demo', icon: TrophyIcon, current: false, slug: 'leagues' },
+		{ name: 'Akce', link: '/demo', icon: CalendarDaysIcon, current: false, slug: 'events' },
 	] },
 	{ title: 'Osobní sekce', menu: [
+		{ name: 'Hodnocení', link: '/demo', icon: StarIcon, current: false, slug: 'ratings' },
 		{ name: 'Projekty', link: '/demo', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
 		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
 		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
