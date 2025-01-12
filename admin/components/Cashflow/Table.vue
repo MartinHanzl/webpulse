@@ -224,13 +224,13 @@ function formatAmount(amount: number) {
 							<tr class="divide-x divide-gray-200">
 								<th
 									scope="col"
-									class="text-center px-4 w-[80px] py-3.5 text-sm font-semibold text-gray-300 bg-gray-900"
+									class="text-center px-2 lg:px-4 w-[80px] py-2 lg:py-3.5 text-xs lg:text-sm font-semibold text-gray-300 bg-gray-900"
 								>
 									Datum
 								</th>
 								<th
 									scope="col"
-									class="w-[110px] py-3.5 pr-4 pl-4 text-left text-sm font-semibold text-gray-300 sm:pr-0 bg-gray-900"
+									class="w-[110px] py-2 lg:py-3.5 pr-2 lg:pr-4 pl-2 lg:pl-4 text-left text-xs lg:text-sm font-semibold text-gray-300 sm:pr-0 bg-gray-900"
 								>
 									Příjem
 								</th>
@@ -238,7 +238,7 @@ function formatAmount(amount: number) {
 									v-for="(category, index) in categories"
 									:key="index"
 									scope="col"
-									class="w-[110px] px-4 py-3.5 text-left text-sm font-semibold text-gray-300 bg-gray-900"
+									class="w-[110px] px-2 lg:px-4 py-2 lg:py-3.5 text-left text-xs lg:text-sm font-semibold text-gray-300 bg-gray-900"
 									:class="{ 'vertical-line': index === categories.length - 1 }"
 									@mouseover="handleMouseOver"
 									@click="handleClick"
@@ -247,7 +247,7 @@ function formatAmount(amount: number) {
 								</th>
 								<th
 									scope="col"
-									class="py-3.5 pr-4 pl-4 text-left text-sm font-semibold text-gray-300 sm:pr-0 bg-gray-900"
+									class="py-2 lg:py-3.5 pr-2 lg:pr-4 pl-2 lg:pl-4 text-left text-xs lg:text-sm font-semibold text-gray-300 sm:pr-0 bg-gray-900"
 								>
 									Poznámky
 								</th>
@@ -259,11 +259,11 @@ function formatAmount(amount: number) {
 								:key="index"
 								class="divide-x divide-gray-200"
 							>
-								<td class="p-2 text-sm whitespace-nowrap text-gray-500 font-semibold text-center">
+								<td class="p-1 lg:p-2 text-sm lg:text-sm whitespace-nowrap text-gray-500 font-semibold text-center">
 									{{ day }}
 								</td>
 								<td
-									class="p-2 text-xs whitespace-nowrap text-gray-500 text-end hover:bg-gray-100 cursor-pointer"
+									class="p-1 lg:p-2 text-xs whitespace-nowrap text-gray-500 text-end hover:bg-gray-100 cursor-pointer"
 									@click="updateCashflowIncome(day)"
 								>
 									<span v-if="incomeByDay(day) > 0">{{ formatAmount(incomeByDay(day)) }} Kč</span>
@@ -271,12 +271,12 @@ function formatAmount(amount: number) {
 								<td
 									v-for="(category, index) in categories"
 									:key="index"
-									class="p-2 text-xs whitespace-nowrap text-gray-500 text-end hover:bg-gray-100 cursor-pointer"
+									class="p-1 lg:p-2 text-xs whitespace-nowrap text-gray-500 text-end hover:bg-gray-100 cursor-pointer"
 									@click="updateCashflow('expense', category.id, day)"
 								>
 									<span v-if="summaryByDay(category.id, day) > 0">{{ formatAmount(summaryByDay(category.id, day)) }} Kč</span>
 								</td>
-								<td class="p-2 text-xs whitespace-nowrap text-gray-500">
+								<td class="p-1 lg:p-2 text-xs whitespace-nowrap text-gray-500">
 									{{ descriptionByDay(day) }}
 								</td>
 							</tr>
@@ -284,7 +284,7 @@ function formatAmount(amount: number) {
 								class="divide-x divide-gray-200"
 							>
 								<td
-									class="p-2 text-sm whitespace-nowrap text-gray-500 font-semibold text-center"
+									class="p-1 lg:p-2 text-xs lg:text-sm whitespace-nowrap text-gray-500 font-semibold text-center"
 									colspan="2"
 								>
 									Celkem utraceno
@@ -292,11 +292,11 @@ function formatAmount(amount: number) {
 								<td
 									v-for="(category, index) in categories"
 									:key="index"
-									class="p-2 text-sm font-semibold whitespace-nowrap text-gray-500 text-end"
+									class="p-1 lg:p-2 text-xs lg:text-sm font-semibold whitespace-nowrap text-gray-500 text-end"
 								>
 									{{ formatAmount(totalSpent(category.id)) + ' Kč' }}
 								</td>
-								<td class="p-2 text-sm text-center font-semibold whitespace-nowrap text-sky-500">
+								<td class="p-1 lg:p-2 text-xs lg:text-sm text-center font-semibold whitespace-nowrap text-sky-500">
 									{{ formatAmount(summaryMonthlySpent()) }} Kč
 								</td>
 							</tr>
@@ -304,7 +304,7 @@ function formatAmount(amount: number) {
 								class="divide-x divide-gray-200"
 							>
 								<td
-									class="p-2 text-sm whitespace-nowrap text-gray-500 font-semibold text-center"
+									class="p-1 lg:p-2 text-xs lg:text-sm whitespace-nowrap text-gray-500 font-semibold text-center"
 									colspan="2"
 								>
 									Měsíční budget
@@ -312,18 +312,18 @@ function formatAmount(amount: number) {
 								<td
 									v-for="(category, index) in categories"
 									:key="index"
-									class="p-2 text-sm font-semibold whitespace-nowrap text-gray-500 text-end cursor-pointer hover:bg-gray-100"
+									class="p-1 lg:p-2 text-xs lg:text-sm font-semibold whitespace-nowrap text-gray-500 text-end cursor-pointer hover:bg-gray-100"
 									@click="updateBudget(category.id, monthlyCategoryBudget(category.id))"
 								>
 									{{ formatAmount(monthlyCategoryBudget(category.id)) + ' Kč' }}
 								</td>
-								<td class="p-2 text-sm text-center font-semibold whitespace-nowrap text-sky-500">
+								<td class="p-1 lg:p-2 text-xs lg:text-sm text-center font-semibold whitespace-nowrap text-sky-500">
 									{{ formatAmount(summaryMonthlyLeft()) }} Kč
 								</td>
 							</tr>
 							<tr class="divide-x divide-gray-200">
 								<td
-									class="p-2 text-sm whitespace-nowrap text-gray-500 font-semibold text-center"
+									class="p-1 lg:p-2 text-xs lg:text-sm whitespace-nowrap text-gray-500 font-semibold text-center"
 									colspan="2"
 								>
 									Zůstává z budgetu
@@ -331,11 +331,11 @@ function formatAmount(amount: number) {
 								<td
 									v-for="(category, index) in categories"
 									:key="index"
-									:class="leftFromBudgetTextClass(category.id) + ' p-2 text-sm font-semibold whitespace-nowrap text-end'"
+									:class="leftFromBudgetTextClass(category.id) + ' p-1 lg:p-2 text-xs lg:text-sm font-semibold whitespace-nowrap text-end'"
 								>
 									{{ formatAmount(leftFromBudget(category.id)) + ' Kč' }}
 								</td>
-								<td class="p-2 text-sm text-center font-semibold whitespace-nowrap text-sky-500">
+								<td class="p-1 lg:p-2 text-xs lg:text-sm text-center font-semibold whitespace-nowrap text-sky-500">
 									{{ formatAmount(summaryMonthlySpent()) }} Kč
 								</td>
 							</tr>
