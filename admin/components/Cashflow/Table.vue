@@ -344,7 +344,7 @@ function formatAmount(amount: number) {
 									{{ formatAmount(monthlyCategoryBudget(category.id)) + ' Kč' }}
 								</td>
 								<td class="p-1 lg:p-2 text-xs lg:text-sm text-center font-semibold whitespace-nowrap text-sky-500">
-									{{ formatAmount(summaryMonthlyLeft()) }} Kč
+									{{ formatAmount(summaryMonthlyBudget()) }} Kč
 								</td>
 							</tr>
 							<tr class="divide-x divide-gray-200">
