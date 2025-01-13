@@ -21,3 +21,8 @@ pre {
         display: none;
     }
 }
+
+.ProseMirror {
+    min-height: 256px;
+    outline: none;
+}

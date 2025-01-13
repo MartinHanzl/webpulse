@@ -63,7 +63,7 @@ const navigation = ref([
 		{ name: 'Akce', link: '/demo', icon: CalendarDaysIcon, current: false, slug: 'events' },
 	] },
 	{ title: 'Osobní sekce', menu: [
-		{ name: 'Hodnocení', link: '/demo', icon: StarIcon, current: false, slug: 'ratings' },
+		{ name: 'Hodnocení', link: '/demo', icon: StarIcon, current: false, slug: 'contacts' },
 		{ name: 'Projekty', link: '/demo', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
 		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
 		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
