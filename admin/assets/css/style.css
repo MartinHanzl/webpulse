@@ -26,3 +26,18 @@ pre {
     min-height: 256px;
     outline: none;
 }
+
+.apexcharts-datalabel {
+    fill: #111827;
+    font-weight: 100;
+}
+
+.apexcharts-tooltip {
+    background: #f3f3f3;
+    color: #111827;
+}
+
+#editor ol, #editor ul {
+    padding-left: 20px;
+    list-style: disc;
+}

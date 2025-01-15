@@ -2,9 +2,11 @@ import { EditorState } from 'prosemirror-state';
 import { EditorView } from 'prosemirror-view';
 import { history, undo, redo } from 'prosemirror-history';
 import { Schema } from 'prosemirror-model';
+import { keymap } from 'prosemirror-keymap';
+import { baseKeymap, toggleMark, chainCommands, newlineInCode, createParagraphNear, liftEmptyBlock, splitBlock } from 'prosemirror-commands';
+
+import { sinkListItem, liftListItem } from 'prosemirror-schema-list';
 import { defineNuxtPlugin } from '#app';
-import { keymap } from "prosemirror-keymap";
-import { baseKeymap } from "prosemirror-commands";
 
 // Define your custom schema here
 const mySchema = new Schema({
@@ -29,6 +31,28 @@ const mySchema = new Schema({
 				{ tag: 'h3', attrs: { level: 3 } },
 			],
 		},
+		bullet_list: {
+			content: 'list_item+',
+			group: 'block',
+			parseDOM: [{ tag: 'ul' }],
+			toDOM() { return ['ul', 0]; },
+		},
+		ordered_list: {
+			content: 'list_item+',
+			group: 'block',
+			attrs: { order: { default: 1 } },
+			parseDOM: [{ tag: 'ol' }],
+			toDOM(node) {
+				return node.attrs.order === 1
+					? ['ol', 0]
+					: ['ol', { start: node.attrs.order }, 0];
+			},
+		},
+		list_item: {
+			content: 'paragraph block*',
+			parseDOM: [{ tag: 'li' }],
+			toDOM() { return ['li', 0]; },
+		},
 	},
 	marks: {
 		bold: {
@@ -46,13 +70,24 @@ const mySchema = new Schema({
 	},
 });
 
+const customKeymap = keymap({
+	'Enter': chainCommands(newlineInCode, createParagraphNear, liftEmptyBlock, splitBlock),
+	'Mod-b': toggleMark(mySchema.marks.bold),
+	'Mod-i': toggleMark(mySchema.marks.italic),
+	'Mod-u': toggleMark(mySchema.marks.underline),
+	'Mod-z': undo,
+	'Mod-y': redo,
+	'Tab': sinkListItem(mySchema.nodes.list_item),
+	'Shift-Tab': liftListItem(mySchema.nodes.list_item),
+});
+
 export default defineNuxtPlugin(() => {
 	return {
 		provide: {
 			createWysiwygEditor: (element: HTMLElement) => {
 				const state = EditorState.create({
 					schema: mySchema, // Ensure schema is correctly passed here
-					plugins: [history(), keymap(baseKeymap)],
+					plugins: [history(), customKeymap, keymap(baseKeymap)],
 				});
 
 				const view = new EditorView(element, {
