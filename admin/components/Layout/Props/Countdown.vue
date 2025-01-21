@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 const countdown = ref('');
 
-const targetDate = dayjs('2025-03-08T14:00:00');
+const targetDate = dayjs('2025-03-09T14:00:00');
 
 function updateCountdown() {
 	const now = dayjs();
