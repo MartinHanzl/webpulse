@@ -109,7 +109,7 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: `Uživatelská skupina byla úspěšně ${route.params.id === 'pridat' ? 'vytvořena' : 'uložena'}.`,
+			description: route.params.id === 'pridat' ? 'Skupina uživatelů byla úspěšně vytvořena.' : 'Skupina uživatelů byla úspěšně upravena.',
 			color: 'green',
 		});
 		router.push('/uzivatele/skupiny');

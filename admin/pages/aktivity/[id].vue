@@ -89,7 +89,7 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: `Aktivita byla úspěšně ${route.params.id === 'pridat' ? 'vytvořena' : 'uložena'}.`,
+			description: route.params.id === 'pridat' ? 'Aktivita byla úspěšně vytvořena.' : 'Aktivita byla úspěšně upravena.',
 			color: 'green',
 		});
 		router.push('/aktivity');

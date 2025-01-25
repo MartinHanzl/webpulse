@@ -88,7 +88,7 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: 'Nová fáze procesu byla úspěšně vytvořena.',
+			description: route.params.id === 'pridat' ? 'Fáze procesu byla úspěšně vytvořena.' : 'Fáze procesu byla úspěšně upravena.',
 			color: 'green',
 		});
 		router.push('/faze');

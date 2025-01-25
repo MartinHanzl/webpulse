@@ -34,6 +34,11 @@ defineProps({
 		required: false,
 		default: 4,
 	},
+	max: {
+		type: Number,
+		required: false,
+		default: 255,
+	},
 });
 defineRule('required', (value) => {
 	if (!value) {
@@ -58,7 +63,7 @@ defineRule('required', (value) => {
 				v-model="model"
 				:rows="rows"
 				:name="name"
-				maxlength="255"
+				:maxlength="max"
 				:autofocus="false"
 				tabindex="-1"
 				:class="[
@@ -66,6 +71,12 @@ defineRule('required', (value) => {
 					{ 'bg-grayLight': disabled },
 				]"
 			/>
+			<p
+				v-if="model"
+				class="text-end text-grayLight text-xs pt-1"
+			>
+				{{ model.length }} / {{ max }}
+			</p>
 		</div>
 	</div>
 </template>

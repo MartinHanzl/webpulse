@@ -95,7 +95,7 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: 'Nová šablona byla úspěšně vytvořena.',
+			description: route.params.id === 'pridat' ? 'Šablona zpráv byla úspěšně vytvořena.' : 'Šablona zpráv byla úspěšně upravena.',
 			color: 'green',
 		});
 		router.push('/sablony-zprav');

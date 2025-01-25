@@ -88,7 +88,7 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: 'Nový zdroj kontaktů byl úspěšně vytvořen.',
+			description: route.params.id === 'pridat' ? 'Zdroj kontaktů byl úspěšně vytvořen.' : 'Zdroj kontaktů byl úspěšně upraven.',
 			color: 'green',
 		});
 		router.push('/zdroje');

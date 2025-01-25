@@ -97,6 +97,11 @@ async function saveItem() {
 	}).then((response) => {
 		item.value = response;
 	}).then(() => {
+		toast.add({
+			title: 'Hotovo',
+			description: 'Uživatelský profil byl úspěšně upraven.',
+			color: 'green',
+		});
 		refreshIdentity();
 	}).catch(() => {
 		error.value = true;

@@ -140,6 +140,9 @@ async function loadItem() {
 			link: '/uzivatele/' + route.params.id,
 			current: true,
 		});
+		if (item.value.contacts && item.value.contacts.data && !item.value.contacts.data.length) {
+			tabs.value.pop();
+		}
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -286,7 +289,7 @@ async function saveItem(redirect = true as boolean) {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: `Nový kontakt byl úspěšně ${item.value.id === 'pridat' ? 'vytvořen' : 'uložen'}.`,
+			description: route.params.id === 'pridat' ? 'Kontakt byl úspěšně vytvořen.' : 'Kontakt byl úspěšně upraven.',
 			color: 'green',
 		});
 		if (redirect) {
@@ -554,23 +557,6 @@ definePageMeta({
 			</template>
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#proces')">
 				<div class="grid grid-cols-1 lg:grid-cols-7 gap-x-4 gap-y-8">
-					<LayoutContainer class="col-span-5 w-full">
-						<LayoutTitle>Úkoly</LayoutTitle>
-						<div class="grid grid-cols-1 lg:grid-cols-4 gap-x-4 gap-y-8">
-							<BaseFormCheckbox
-								v-for="(task, key) in tasks"
-								:key="key"
-								:label="task.name"
-								:name="task.id"
-								:value="item.tasks.includes(task.id)"
-								:checked="item.tasks.includes(task.id)"
-								class="col-span-1"
-								type="badge"
-								:color="task.phase_color"
-								@change="addRemoveItemTask(task.id)"
-							/>
-						</div>
-					</LayoutContainer>
 					<LayoutContainer class="col-span-5 lg:col-span-2 w-full">
 						<LayoutTitle>Proces</LayoutTitle>
 						<div class="grid grid-cols-3 gap-x-8 gap-y-4">
@@ -601,6 +587,23 @@ definePageMeta({
 								label="Poslední kontakt/pokus"
 								name="last_contacted_at"
 								class="col-span-full"
+							/>
+						</div>
+					</LayoutContainer>
+					<LayoutContainer class="col-span-5 w-full">
+						<LayoutTitle>Úkoly</LayoutTitle>
+						<div class="grid grid-cols-1 lg:grid-cols-4 gap-x-4 gap-y-8">
+							<BaseFormCheckbox
+								v-for="(task, key) in tasks"
+								:key="key"
+								:label="task.name"
+								:name="task.id"
+								:value="item.tasks.includes(task.id)"
+								:checked="item.tasks.includes(task.id)"
+								class="col-span-1"
+								type="badge"
+								:color="task.phase_color"
+								@change="addRemoveItemTask(task.id)"
 							/>
 						</div>
 					</LayoutContainer>
@@ -655,6 +658,9 @@ definePageMeta({
 								{ key: 'email', name: 'E-mail', type: 'text', width: 80, hidden: true, sortable: false },
 								{ key: 'phase', name: 'Fáze', type: 'badge', width: 80, hidden: true, sortable: false, colorKey: 'phase_color' },
 								{ key: 'source', name: 'Zdroj', type: 'badge', width: 80, hidden: true, sortable: false, colorKey: 'source_color' },
+							]"
+							:actions="[
+								{ type: 'edit', path: '/kontakty', hash: '#proces' },
 							]"
 							:loading="loading"
 							:error="error"
