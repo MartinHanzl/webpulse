@@ -140,7 +140,7 @@ async function loadItem() {
 			link: '/uzivatele/' + route.params.id,
 			current: true,
 		});
-		if (item.value.contacts && item.value.contacts.data && !item.value.contacts.data.length) {
+		if (item.value.contacts && item.value.contacts.data && !item.value.contacts.data.length && tabs.value.find(tab => tab.link === '#lide')) {
 			tabs.value.pop();
 		}
 	}).catch(() => {
