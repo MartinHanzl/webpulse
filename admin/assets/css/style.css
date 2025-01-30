@@ -25,6 +25,7 @@ pre {
 .ProseMirror {
     min-height: 256px;
     outline: none;
+    line-height: 24px;
 }
 
 .apexcharts-datalabel {
@@ -39,5 +40,12 @@ pre {
 
 #editor ol, #editor ul {
     padding-left: 20px;
-    list-style: disc;
+}
+
+#editor ol {
+    list-style-type: decimal;
+}
+
+#editor ul {
+    list-style-type: disc;
 }

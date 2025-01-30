@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { PauseCircleIcon, StarIcon } from '@heroicons/vue/24/outline';
+import { PauseCircleIcon, StarIcon, HeartIcon, ChatBubbleBottomCenterIcon, PhoneIcon } from '@heroicons/vue/24/outline';
 import DumbbellIcon from 'public/static/img/icon/dumbbell.svg';
 import SmileFullIcon from '~/public/static/img/icon/smile-full.svg';
 import SmileAudioIcon from '~/public/static/img/icon/smile-audio.svg';
@@ -178,7 +178,7 @@ const activitiesByDay = computed(() => {
 					<div
 						v-for="(activityItem, index) in activitiesByDay(day)"
 						:key="index"
-						:class="['col-span-1 cursor-pointer', { hidden: [1, 2, 3, 4, 5, 9, 16, 17, 24].includes(activityItem.activity.id) }]"
+						:class="['col-span-1 cursor-pointer', { hidden: [2, 3, 4, 5, 9, 16, 17, 24].includes(activityItem.activity.id) }]"
 						@click="emit('update-item', activityItem)"
 					>
 						<div
@@ -189,13 +189,29 @@ const activitiesByDay = computed(() => {
 							v-else-if="[6, 8, 11, 12].includes(activityItem.activity.id) && activityItem.completed"
 							class="p-2 lg:p-4 border-2 border-danger bg-danger"
 						/>
+            <PhoneIcon
+                v-if="activityItem.activity.id === 1"
+                class="text-amber-600 size-5 lg:size-8 col-span-1"
+            />
+            <ChatBubbleBottomCenterIcon
+                v-if="activityItem.activity.id === 27"
+                class="text-purple-600 size-5 lg:size-8 col-span-1"
+            />
+            <HeartIcon
+                v-if="activityItem.activity.id === 28 && !activityItem.completed"
+                class="text-pink-600 size-5 lg:size-8 col-span-1"
+            />
+            <HeartIcon
+                v-if="activityItem.activity.id === 28 && activityItem.completed"
+                class="text-danger size-5 lg:size-8 fill-pink-600 col-span-1"
+            />
 						<PauseCircleIcon
 							v-if="activityItem.activity.id === 10"
-							class="text-danger size-5 lg:size-8"
+							class="text-danger size-5 lg:size-8 col-span-1"
 						/>
 						<StarIcon
 							v-if="activityItem.activity.id === 22"
-							class="text-danger size-5 lg:size-8 col-span-1 fill-danger"
+							class="text-danger size-5 lg:size-8 col-span-1 fill-danger col-span-1"
 						/>
 						<div
 							v-if="activityItem.activity.id === 21"
@@ -232,35 +248,35 @@ const activitiesByDay = computed(() => {
 					>
 						<SmileBookIcon
 							v-if="checkSmile(day) === 'book'"
-							class="size-5 lg:size-8 fill-success"
+							class="size-5 lg:size-8 fill-success col-span-1"
 						/>
 						<SmileAudioIcon
 							v-else-if="checkSmile(day) === 'audio'"
-							class="size-5 lg:size-8 fill-success"
+							class="size-5 lg:size-8 fill-success col-span-1"
 						/>
 						<SmileBookIcon
 							v-else-if="checkSmile(day) === 'book'"
-							class="size-5 lg:size-8 fill-success"
+							class="size-5 lg:size-8 fill-success col-span-1"
 						/>
 						<SmileDreamIcon
 							v-else-if="checkSmile(day) === 'dream'"
-							class="size-5 lg:size-8 fill-success"
+							class="size-5 lg:size-8 fill-success col-span-1"
 						/>
 						<SmileAudioBookIcon
 							v-else-if="checkSmile(day) === 'audiobook'"
-							class="size-5 lg:size-8 fill-success"
+							class="size-5 lg:size-8 fill-success col-span-1"
 						/>
 						<SmileBookDreamIcon
 							v-else-if="checkSmile(day) === 'bookdream'"
-							class="size-5 lg:size-8 fill-success"
+							class="size-5 lg:size-8 fill-success col-span-1"
 						/>
 						<SmileAudioDreamIcon
 							v-else-if="checkSmile(day) === 'audiodream'"
-							class="size-5 lg:size-8 fill-success"
+							class="size-5 lg:size-8 fill-success col-span-1"
 						/>
 						<SmileFullIcon
 							v-else-if="checkSmile(day) === 'full'"
-							class="size-5 lg:size-8 fill-success"
+							class="size-5 lg:size-8 fill-success col-span-1"
 						/>
 					</div>
 				</div>

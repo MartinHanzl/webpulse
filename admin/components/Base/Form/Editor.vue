@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import { BoldIcon, ItalicIcon, UnderlineIcon, ArrowLongLeftIcon, ArrowLongRightIcon, ListBulletIcon, NumberedListIcon, CodeBracketIcon, CommandLineIcon } from '@heroicons/vue/24/outline';
+import { BoldIcon, ItalicIcon, UnderlineIcon, ArrowUturnLeftIcon, ArrowUturnRightIcon, ListBulletIcon, NumberedListIcon, CodeBracketIcon, CommandLineIcon } from '@heroicons/vue/24/outline';
 import { toggleMark } from 'prosemirror-commands';
 import { schema } from 'prosemirror-schema-basic';
 import { wrapInList, splitListItem } from 'prosemirror-schema-list';
@@ -56,12 +56,12 @@ function format(command: string) {
 		<div class="bg-gray-100 px-4 py-4 text-grayDark flex gap-x-6">
 			<UTooltip text="Zpět">
 				<button @click="undo">
-					<ArrowLongLeftIcon class="size-5" />
+					<ArrowUturnLeftIcon class="size-5" />
 				</button>
 			</UTooltip>
 			<UTooltip text="Vpřed">
 				<button @click="redo">
-					<ArrowLongRightIcon class="size-5" />
+					<ArrowUturnRightIcon class="size-5" />
 				</button>
 			</UTooltip>
 			<div class="h-6 w-px bg-gray-900/20" />
