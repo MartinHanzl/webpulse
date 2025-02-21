@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: admin
+  - appRoot: .
     frontend:
       phases:
         preBuild:
@@ -20,7 +20,7 @@ applications:
     name: admin
     domain: admin.martinhanzl.cz
 
-  - appRoot: client
+  - appRoot: .
     frontend:
       phases:
         preBuild:
