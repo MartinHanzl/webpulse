@@ -26,4 +26,16 @@ applications:
       phases:
         preBuild:
           commands:
-            - cd webpulse/client
+            - cd webpulse/client && npm install
+        build:
+          commands:
+            - cd webpulse/client && npm run generate
+      artifacts:
+        baseDirectory: webpulse/client/.output/public
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - webpulse/client/node_modules/**/*
+    name: client
+    domain: martinhanzl.cz
