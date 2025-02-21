@@ -10,7 +10,7 @@ applications:
           commands:
             - cd admin && npm run generate
       artifacts:
-        baseDirectory: admin/.output/public  # Correct output path for Nuxt
+        baseDirectory: admin/.output/public  # Correct output path
         files:
           - '**/*'
       cache:
@@ -29,7 +29,7 @@ applications:
           commands:
             - cd client && npm run generate
       artifacts:
-        baseDirectory: client/.output/public  # Correct output path for Nuxt
+        baseDirectory: client/.output/public  # Correct output path
         files:
           - '**/*'
       cache:
