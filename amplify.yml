@@ -1,36 +1,40 @@
 version: 1
 applications:
-  -
-    appRoot: .
+  - appRoot: .
     frontend:
       phases:
         preBuild:
-          commands: ['ls -la', 'cd admin && npm install']
+          commands:
+            - ls -la # Debugging step to see files
+            - cd admin && npm install
         build:
-          commands: ['cd admin && npm run generate']
+          commands:
+            - cd admin && npm run generate
       artifacts:
         baseDirectory: admin/.output/public
         files:
           - '**/*'
       cache:
         paths:
-          - 'admin/node_modules/**/*'
+          - admin/node_modules/**/*
     name: admin
     domain: admin.martinhanzl.cz
-  -
-    appRoot: .
+
+  - appRoot: .
     frontend:
       phases:
         preBuild:
-          commands: ['cd client && npm install']
+          commands:
+            - cd client && npm install
         build:
-          commands: ['cd client && npm run generate']
+          commands:
+            - cd client && npm run generate
       artifacts:
         baseDirectory: client/.output/public
         files:
           - '**/*'
       cache:
         paths:
-          - 'client/node_modules/**/*'
+          - client/node_modules/**/*
     name: client
     domain: martinhanzl.cz
