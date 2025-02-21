@@ -8,10 +8,10 @@ applications:
             - npm install
         build:
           commands:
-            - mkdir -p .output/public
+            - mkdir -p admin/.output/public
             - npm run generate
       artifacts:
-        baseDirectory: .output/public
+        baseDirectory: admin/.output/public
         files:
           - '**/*'
       cache:
@@ -28,10 +28,10 @@ applications:
             - npm install
         build:
           commands:
-            - mkdir -p .output/public
+            - mkdir -p client/.output/public
             - npm run generate
       artifacts:
-        baseDirectory: .output/public
+        baseDirectory: client/.output/public
         files:
           - '**/*'
       cache:
