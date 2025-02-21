@@ -10,7 +10,7 @@ applications:
           commands:
             - npm run generate
       artifacts:
-        baseDirectory: .output/public
+        baseDirectory: .output/public  # Correct Nuxt 3 output directory
         files:
           - '**/*'
       cache:
@@ -31,7 +31,7 @@ applications:
           commands:
             - npm run generate
       artifacts:
-        baseDirectory: .output/public
+        baseDirectory: .output/public  # Correct output directory for Nuxt 3
         files:
           - '**/*'
       cache:
