@@ -2,6 +2,14 @@
 export default defineNuxtConfig({
 
 	modules: [['nuxt-auth-sanctum', {
+		ssr: false,
+		target: 'static', // Required for Amplify
+		generate: {
+			fallback: '404.html' // Ensures a fallback page
+		},
+		nitro: {
+			preset: 'static' // Forces static build
+		},
 		baseUrl: process.env.API_URL ?? 'https://api.martinhanzl.cz/',
 		mode: 'token',
 		endpoints: {

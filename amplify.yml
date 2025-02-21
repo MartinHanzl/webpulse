@@ -5,19 +5,17 @@ applications:
       phases:
         preBuild:
           commands:
-            - npm install
+            - cd admin && npm install
         build:
           commands:
-            - npm run generate
+            - cd admin && npm run generate
       artifacts:
-        baseDirectory: .output/public  # Correct Nuxt 3 output directory
+        baseDirectory: admin/.output/public  # Correct output path for Nuxt
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
-    environment:
-      NUXT_PUBLIC_API_BASE: "https://api.martinhanzl.cz"
+          - admin/node_modules/**/*
     name: admin
     domain: admin.martinhanzl.cz
 
@@ -26,18 +24,16 @@ applications:
       phases:
         preBuild:
           commands:
-            - npm install
+            - cd client && npm install
         build:
           commands:
-            - npm run generate
+            - cd client && npm run generate
       artifacts:
-        baseDirectory: .output/public  # Correct output directory for Nuxt 3
+        baseDirectory: client/.output/public  # Correct output path for Nuxt
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
-    environment:
-      NUXT_PUBLIC_API_BASE: "https://api.martinhanzl.cz"
+          - client/node_modules/**/*
     name: client
     domain: martinhanzl.cz
