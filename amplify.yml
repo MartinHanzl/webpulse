@@ -9,7 +9,9 @@ applications:
         build:
           commands:
             - mkdir -p admin/.output/public
+            - ls -la admin/.output
             - npm run generate
+            - ls -la admin/.output/public
       artifacts:
         baseDirectory: admin/.output/public
         files:
@@ -29,7 +31,9 @@ applications:
         build:
           commands:
             - mkdir -p client/.output/public
+            - ls -la client/.output
             - npm run generate
+            - ls -la client/.output/public
       artifacts:
         baseDirectory: client/.output/public
         files:
