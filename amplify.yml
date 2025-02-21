@@ -1,39 +1,39 @@
 version: 1
 applications:
-  - appRoot: .
+  - appRoot: admin
     frontend:
       phases:
         preBuild:
           commands:
-            - cd admin && npm install
+            - npm install
         build:
           commands:
-            - cd admin && npm run generate
+            - npm run generate
       artifacts:
-        baseDirectory: admin/.output/public
+        baseDirectory: .output/public
         files:
           - '**/*'
       cache:
         paths:
-          - admin/node_modules/**/*
+          - node_modules/**/*
     name: admin
     domain: admin.martinhanzl.cz
 
-  - appRoot: .
+  - appRoot: client
     frontend:
       phases:
         preBuild:
           commands:
-            - cd client && npm install
+            - npm install
         build:
           commands:
-            - cd client && npm run generate
+            - npm run generate
       artifacts:
-        baseDirectory: client/.output/public
+        baseDirectory: .output/public
         files:
           - '**/*'
       cache:
         paths:
-          - client/node_modules/**/*
+          - node_modules/**/*
     name: client
     domain: martinhanzl.cz
