@@ -9,7 +9,6 @@ applications:
         build:
           commands:
             - mkdir -p admin/.output/public
-            - ls -la
             - npm run generate
       artifacts:
         baseDirectory: admin/.output/public
