@@ -1,39 +1,39 @@
 version: 1
 applications:
-  - appRoot: webpulse/admin
+  - appRoot: admin
     frontend:
       phases:
         preBuild:
           commands:
-            - cd webpulse/admin && npm install
+            - cd admin && npm install
         build:
           commands:
-            - cd webpulse/admin && npm run generate
+            - cd admin && npm run generate
       artifacts:
-        baseDirectory: webpulse/admin/.output/public
+        baseDirectory: admin/.output/public
         files:
           - '**/*'
       cache:
         paths:
-          - webpulse/admin/node_modules/**/*
+          - admin/node_modules/**/*
     name: admin
     domain: admin.martinhanzl.cz
 
-  - appRoot: webpulse/client
+  - appRoot: client
     frontend:
       phases:
         preBuild:
           commands:
-            - cd webpulse/client && npm install
+            - cd client && npm install
         build:
           commands:
-            - cd webpulse/client && npm run generate
+            - cd client && npm run generate
       artifacts:
-        baseDirectory: webpulse/client/.output/public
+        baseDirectory: client/.output/public
         files:
           - '**/*'
       cache:
         paths:
-          - webpulse/client/node_modules/**/*
+          - client/node_modules/**/*
     name: client
     domain: martinhanzl.cz
