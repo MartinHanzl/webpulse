@@ -7,6 +7,7 @@ applications:
           commands:
             - ls -la # Debugging step to see files
             - cd admin && npm install
+            - ls -la # Debugging step to see files
         build:
           commands:
             - cd admin && npm run generate
