@@ -1,0 +1,43 @@
+version: 1
+applications:
+  - appRoot: admin
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm install
+        build:
+          commands:
+            - npm run generate
+      artifacts:
+        baseDirectory: .output/public
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+    environment:
+      NUXT_PUBLIC_API_BASE: "https://api.martinhanzl.cz"
+    name: admin
+    domain: admin.martinhanzl.cz
+
+  - appRoot: client
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm install
+        build:
+          commands:
+            - npm run generate
+      artifacts:
+        baseDirectory: .output/public
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
+    environment:
+      NUXT_PUBLIC_API_BASE: "https://api.martinhanzl.cz"
+    name: client
+    domain: martinhanzl.cz
