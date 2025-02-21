@@ -10,7 +10,7 @@ applications:
           commands:
             - npm run generate
       artifacts:
-        baseDirectory: .output/public
+        baseDirectory: admin/.output/public
         files:
           - '**/*'
       cache:
@@ -29,7 +29,7 @@ applications:
           commands:
             - npm run generate
       artifacts:
-        baseDirectory: .output/public
+        baseDirectory: client/.output/public
         files:
           - '**/*'
       cache:
