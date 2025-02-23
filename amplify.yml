@@ -10,24 +10,8 @@ applications:
           commands:
             - pnpm --filter admin build
       artifacts:
-        baseDirectory: admin/.amplify-hosting
+        baseDirectory: apps/admin/.amplify-hosting
         files:
           - '**/*'
       buildPath: /
-    appRoot: admin
-
-  - frontend:
-      phases:
-        preBuild:
-          commands:
-            - nvm use 22 && node --version
-            - corepack enable && npx --yes nypm install
-        build:
-          commands:
-            - pnpm --filter admin build
-      artifacts:
-        baseDirectory: client/.amplify-hosting
-        files:
-          - '**/*'
-      buildPath: /
-    appRoot: client
+    appRoot: apps/admin
