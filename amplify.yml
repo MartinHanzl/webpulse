@@ -5,20 +5,18 @@ applications:
       phases:
         preBuild:
           commands:
+            - cd admin
             - npm install
         build:
           commands:
-            - mkdir -p admin/.output/public
-            - ls -la admin/.output
             - npm run generate
-            - ls -la admin/.output/public
       artifacts:
         baseDirectory: admin/.output/public
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
+          - admin/node_modules/**/*
     name: admin
     domain: admin.martinhanzl.cz
 
@@ -27,19 +25,17 @@ applications:
       phases:
         preBuild:
           commands:
+            - cd client
             - npm install
         build:
           commands:
-            - mkdir -p client/.output/public
-            - ls -la client/.output
             - npm run generate
-            - ls -la client/.output/public
       artifacts:
         baseDirectory: client/.output/public
         files:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
+          - client/node_modules/**/*
     name: client
     domain: martinhanzl.cz
