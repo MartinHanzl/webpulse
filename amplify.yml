@@ -1,41 +1,33 @@
 version: 1
 applications:
-  - appRoot: admin
-    frontend:
+  - frontend:
       phases:
         preBuild:
           commands:
-            - cd admin
-            - npm install
+            - nvm use 22 && node --version
+            - corepack enable && npx --yes nypm install
         build:
           commands:
-            - npm run generate
+            - pnpm --filter admin build
       artifacts:
-        baseDirectory: admin/.output/public
+        baseDirectory: admin/.amplify-hosting
         files:
           - '**/*'
-      cache:
-        paths:
-          - admin/node_modules/**/*
-    name: admin
-    domain: admin.martinhanzl.cz
+      buildPath: /
+    appRoot: admin
 
-  - appRoot: client
-    frontend:
+  - frontend:
       phases:
         preBuild:
           commands:
-            - cd client
-            - npm install
+            - nvm use 22 && node --version
+            - corepack enable && npx --yes nypm install
         build:
           commands:
-            - npm run generate
+            - pnpm --filter admin build
       artifacts:
-        baseDirectory: client/.output/public
+        baseDirectory: client/.amplify-hosting
         files:
           - '**/*'
-      cache:
-        paths:
-          - client/node_modules/**/*
-    name: client
-    domain: martinhanzl.cz
+      buildPath: /
+    appRoot: client
