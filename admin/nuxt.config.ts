@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 		nitro: {
 			preset: 'node'
 		},
-		baseUrl: process.env.API_URL ?? 'https://api.martinhanzl.cz/',
+		baseUrl: process.env.API_URL ?? 'https://web-pulse.cz/',
 		mode: 'token',
 		endpoints: {
 			csrf: '/sanctum/csrf-cookie',
