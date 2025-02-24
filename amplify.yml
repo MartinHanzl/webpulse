@@ -18,7 +18,7 @@ applications:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
+          - frontend/admin/node_modules/**/*
     name: admin
     domain: admin.martinhanzl.cz
 
@@ -40,6 +40,6 @@ applications:
           - '**/*'
       cache:
         paths:
-          - node_modules/**/*
+          - frontend/client/node_modules/**/*
     name: client
     domain: martinhanzl.cz
