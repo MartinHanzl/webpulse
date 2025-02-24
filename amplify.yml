@@ -5,19 +5,21 @@ applications:
       phases:
         preBuild:
           commands:
+            - nvm install 22
+            - nvm use 22
             - npm install
         build:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: .output/public
+        baseDirectory: .output
         files:
-          - "**/*"
+          - '**/*'
       cache:
         paths:
           - node_modules/**/*
     customHeaders:
-      - pattern: "**/*"
+      - pattern: '**/*'
         headers:
           - key: Cache-Control
             value: max-age=0, no-cache, no-store, must-revalidate
@@ -26,19 +28,21 @@ applications:
       phases:
         preBuild:
           commands:
+            - nvm install 22
+            - nvm use 22
             - npm install
         build:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: .output/public
+        baseDirectory: .output
         files:
-          - "**/*"
+          - '**/*'
       cache:
         paths:
           - node_modules/**/*
     customHeaders:
-      - pattern: "**/*"
+      - pattern: '**/*'
         headers:
           - key: Cache-Control
             value: max-age=0, no-cache, no-store, must-revalidate
