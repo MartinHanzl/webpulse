@@ -1,0 +1,44 @@
+version: 1
+applications:
+  - appRoot: frontend/client
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm install
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: .output/public
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+    customHeaders:
+      - pattern: "**/*"
+        headers:
+          - key: Cache-Control
+            value: max-age=0, no-cache, no-store, must-revalidate
+  - appRoot: frontend/admin
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm install
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: .output/public
+        files:
+          - "**/*"
+      cache:
+        paths:
+          - node_modules/**/*
+    customHeaders:
+      - pattern: "**/*"
+        headers:
+          - key: Cache-Control
+            value: max-age=0, no-cache, no-store, must-revalidate
