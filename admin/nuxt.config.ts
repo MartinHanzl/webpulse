@@ -10,7 +10,7 @@ export default defineNuxtConfig({
 		nitro: {
 			preset: 'static' // Forces a static build
 		},
-		baseUrl: process.env.API_URL ?? 'https://api.martinhanzl.cz/',
+		baseUrl: process.env.API_URL ?? 'https://web-pulse.cz/',
 		mode: 'token',
 		endpoints: {
 			csrf: '/sanctum/csrf-cookie',
