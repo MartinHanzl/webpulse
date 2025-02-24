@@ -1,27 +1,5 @@
 version: 1
 applications:
-  - appRoot: frontend/admin
-    frontend:
-      phases:
-        preBuild:
-          commands:
-            - npm install
-        build:
-          commands:
-            - mkdir -p frontend/admin/.output/public
-            - ls -la frontend/admin/.output
-            - npm run generate
-            - ls -la frontend/admin/.output/public
-      artifacts:
-        baseDirectory: frontend/admin/.output/public
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - frontend/admin/node_modules/**/*
-    name: admin
-    domain: admin.martinhanzl.cz
-
   - appRoot: frontend/client
     frontend:
       phases:
@@ -30,16 +8,27 @@ applications:
             - npm install
         build:
           commands:
-            - mkdir -p frontend/client/.output/public
-            - ls -la frontend/client/.output
-            - npm run generate
-            - ls -la frontend/client/.output/public
+            - npm run build
       artifacts:
-        baseDirectory: frontend/client/.output/public
+        baseDirectory: .output/public
         files:
           - '**/*'
       cache:
         paths:
-          - frontend/client/node_modules/**/*
-    name: client
-    domain: martinhanzl.cz
+          - node_modules/**/*
+  - appRoot: frontend/admin
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm install
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: .output/public
+        files:
+          - '**/*'
+      cache:
+        paths:
+          - node_modules/**/*
