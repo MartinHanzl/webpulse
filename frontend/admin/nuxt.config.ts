@@ -2,8 +2,9 @@
 export default defineNuxtConfig({
 
 	modules: [['nuxt-auth-sanctum', {
+		ssr: true,
 		nitro: {
-			preset: 'node' // Forces a static build
+			preset: 'node'
 		},
 		baseUrl: process.env.API_URL ?? 'https://api.martinhanzl.cz/',
 		mode: 'token',
