@@ -2,13 +2,8 @@
 export default defineNuxtConfig({
 
 	modules: [['nuxt-auth-sanctum', {
-		ssr: false, // Disable Server-Side Rendering
-		target: 'static', // Ensure static generation
-		generate: {
-			fallback: '404.html' // Ensures a fallback page for routing
-		},
 		nitro: {
-			preset: 'static' // Forces a static build
+			preset: 'node' // Forces a static build
 		},
 		baseUrl: process.env.API_URL ?? 'https://api.martinhanzl.cz/',
 		mode: 'token',
