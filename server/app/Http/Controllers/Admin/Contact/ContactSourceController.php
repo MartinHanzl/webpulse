@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Activity;
+namespace App\Http\Controllers\Admin\Contact;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Activity\ActivityResource;
-use App\Models\Activity\Activity;
+use App\Http\Resources\Contact\ContactSourceResource;
+use App\Models\Contact\ContactSource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -12,14 +12,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
-class ActivityController extends Controller
+class ContactSourceController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): JsonResponse
     {
-        $query = Activity::query();
+        $query = ContactSource::query()
+            //->with(['contacts'])
+            ->where('user_id', $request->user()->id);
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
             $searchString = $request->get('search');
@@ -38,19 +40,19 @@ class ActivityController extends Controller
         }
 
         if ($request->has('paginate')) {
-            $activities = $query->paginate($request->get('paginate'));
+            $contactSources = $query->paginate($request->get('paginate'));
 
             return Response::json([
-                'data' => ActivityResource::collection($activities->items()),
-                'total' => $activities->total(),
-                'perPage' => $activities->perPage(),
-                'currentPage' => $activities->currentPage(),
-                'lastPage' => $activities->lastPage(),
+                'data' => ContactSourceResource::collection($contactSources->items()),
+                'total' => $contactSources->total(),
+                'perPage' => $contactSources->perPage(),
+                'currentPage' => $contactSources->currentPage(),
+                'lastPage' => $contactSources->lastPage(),
             ]);
         }
 
-        $activities = $query->get();
-        return Response::json(ActivityResource::collection($activities));
+        $contactSources = $query->get();
+        return Response::json(ContactSourceResource::collection($contactSources));
     }
 
     /**
@@ -59,19 +61,17 @@ class ActivityController extends Controller
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
-            $activity = Activity::find($id);
-
-            if (!$activity) {
+            $contactSource = ContactSource::find($id);
+            if (!$contactSource) {
                 App::abort(404);
             }
         } else {
-            $activity = new Activity();
+            $contactSource = new ContactSource();
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'description' => 'nullable|string',
-            'color' => 'nullable|string',
+            'name' => 'required|string|max:255',
+            'color' => 'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
@@ -81,16 +81,17 @@ class ActivityController extends Controller
         try {
             DB::beginTransaction();
 
-            $activity->fill($request->all());
-            $activity->save();
+            $contactSource->fill($request->all());
+            $contactSource->user_id = $request->user()->id;
+            $contactSource->save();
 
             DB::commit();
-        } catch (\Throwable|\Exception $e) {
+        } catch (\Throwable | \Exception $e) {
             DB::rollBack();
-            return Response::json(['message' => 'An error occurred while updating activity.'], 500);
+            return Response::json(['message' => 'An error occurred while updating contact source.'], 500);
         }
 
-        return Response::json(ActivityResource::make($activity));
+        return Response::json(ContactSourceResource::make($contactSource));
     }
 
     /**
@@ -102,31 +103,29 @@ class ActivityController extends Controller
             App::abort(400);
         }
 
-        $activity = Activity::find($id);
-
-        if (!$activity) {
+        $contactSource = ContactSource::find($id);
+        if (!$contactSource) {
             App::abort(404);
         }
 
-        return Response::json(ActivityResource::make($activity));
+        return Response::json(ContactSourceResource::make($contactSource));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id): JsonResponse
+    public function destroy(int $id)
     {
         if (!$id) {
             App::abort(400);
         }
 
-        $activity = Activity::find($id);
-
-        if (!$activity) {
+        $contactSource = ContactSource::find($id);
+        if (!$contactSource) {
             App::abort(404);
         }
-        $activity->delete();
 
-        return Response::json([]);
+        $contactSource->delete();
+        return Response::json();
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Contact;
+namespace App\Http\Controllers\Admin\Contact;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contact\ContactSourceResource;
-use App\Models\Contact\ContactSource;
+use App\Http\Resources\Contact\ContactPhaseResource;
+use App\Models\Contact\ContactPhase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
-class ContactSourceController extends Controller
+class ContactPhaseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): JsonResponse
     {
-        $query = ContactSource::query()
-            //->with(['contacts'])
+        $query = ContactPhase::query()
+            //->with(['tasks'])
             ->where('user_id', $request->user()->id);
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
@@ -40,19 +40,19 @@ class ContactSourceController extends Controller
         }
 
         if ($request->has('paginate')) {
-            $contactSources = $query->paginate($request->get('paginate'));
+            $contactPhases = $query->paginate($request->get('paginate'));
 
             return Response::json([
-                'data' => ContactSourceResource::collection($contactSources->items()),
-                'total' => $contactSources->total(),
-                'perPage' => $contactSources->perPage(),
-                'currentPage' => $contactSources->currentPage(),
-                'lastPage' => $contactSources->lastPage(),
+                'data' => ContactPhaseResource::collection($contactPhases->items()),
+                'total' => $contactPhases->total(),
+                'perPage' => $contactPhases->perPage(),
+                'currentPage' => $contactPhases->currentPage(),
+                'lastPage' => $contactPhases->lastPage(),
             ]);
         }
 
-        $contactSources = $query->get();
-        return Response::json(ContactSourceResource::collection($contactSources));
+        $contactPhases = $query->get();
+        return Response::json(ContactPhaseResource::collection($contactPhases));
     }
 
     /**
@@ -61,12 +61,12 @@ class ContactSourceController extends Controller
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
-            $contactSource = ContactSource::find($id);
-            if (!$contactSource) {
+            $contactPhase = ContactPhase::find($id);
+            if (!$contactPhase) {
                 App::abort(404);
             }
         } else {
-            $contactSource = new ContactSource();
+            $contactPhase = new ContactPhase();
         }
 
         $validator = Validator::make($request->all(), [
@@ -81,17 +81,17 @@ class ContactSourceController extends Controller
         try {
             DB::beginTransaction();
 
-            $contactSource->fill($request->all());
-            $contactSource->user_id = $request->user()->id;
-            $contactSource->save();
+            $contactPhase->fill($request->all());
+            $contactPhase->user_id = $request->user()->id;
+            $contactPhase->save();
 
             DB::commit();
         } catch (\Throwable | \Exception $e) {
             DB::rollBack();
-            return Response::json(['message' => 'An error occurred while updating contact source.'], 500);
+            return Response::json(['message' => 'An error occurred while updating contact phase.'], 500);
         }
 
-        return Response::json(ContactSourceResource::make($contactSource));
+        return Response::json(ContactPhaseResource::make($contactPhase));
     }
 
     /**
@@ -103,12 +103,12 @@ class ContactSourceController extends Controller
             App::abort(400);
         }
 
-        $contactSource = ContactSource::find($id);
-        if (!$contactSource) {
+        $contactPhase = ContactPhase::find($id);
+        if (!$contactPhase) {
             App::abort(404);
         }
 
-        return Response::json(ContactSourceResource::make($contactSource));
+        return Response::json(ContactPhaseResource::make($contactPhase));
     }
 
     /**
@@ -120,12 +120,12 @@ class ContactSourceController extends Controller
             App::abort(400);
         }
 
-        $contactSource = ContactSource::find($id);
-        if (!$contactSource) {
+        $contactPhase = ContactPhase::find($id);
+        if (!$contactPhase) {
             App::abort(404);
         }
 
-        $contactSource->delete();
+        $contactPhase->delete();
         return Response::json();
     }
 }

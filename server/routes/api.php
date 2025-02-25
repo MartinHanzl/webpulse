@@ -1,24 +1,23 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\QuickAccessController;
-use App\Http\Controllers\User\UserController;
-use App\Http\Controllers\User\UserGroupController;
-use App\Http\Controllers\User\ProfileController;
-use App\Http\Controllers\Contact\ContactPhaseController;
-use App\Http\Controllers\Contact\ContactSourceController;
-use App\Http\Controllers\Contact\ContactTaskController;
-use App\Http\Controllers\Contact\ContactController;
-use App\Http\Controllers\Message\MessageBlueprintController;
-use App\Http\Controllers\Activity\ActivityController;
+use App\Http\Controllers\Admin\Activity\ActivityController;
+use App\Http\Controllers\Admin\Activity\UserActivityController;
+use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\RegisterController;
+use App\Http\Controllers\Admin\Cashflow\CashflowBudgetController;
+use App\Http\Controllers\Admin\Cashflow\CashflowCategoryController;
+use App\Http\Controllers\Admin\Cashflow\CashflowController;
+use App\Http\Controllers\Admin\Contact\ContactController;
+use App\Http\Controllers\Admin\Contact\ContactPhaseController;
+use App\Http\Controllers\Admin\Contact\ContactSourceController;
+use App\Http\Controllers\Admin\Contact\ContactTaskController;
+use App\Http\Controllers\Admin\Message\MessageBlueprintController;
+use App\Http\Controllers\Admin\User\ProfileController;
+use App\Http\Controllers\Admin\User\QuickAccessController;
+use App\Http\Controllers\Admin\User\UserController;
+use App\Http\Controllers\Admin\User\UserGroupController;
 use App\Http\Controllers\Controller as BaseController;
-use App\Http\Controllers\Activity\UserActivityController;
-use App\Http\Controllers\Cashflow\CashflowCategoryController;
-use App\Http\Controllers\Cashflow\CashflowBudgetController;
-use App\Http\Controllers\Cashflow\CashflowController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

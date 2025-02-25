@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Activity;
+namespace App\Http\Controllers\Admin\Activity;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Activity\UserActivityResource;
@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use function Symfony\Component\String\b;
 
 class UserActivityController extends Controller
 {

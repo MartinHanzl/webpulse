@@ -1,27 +1,25 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Admin\Activity;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserGroupResource;
-use App\Models\User\UserGroup;
+use App\Http\Resources\Activity\ActivityResource;
+use App\Models\Activity\Activity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
-class UserGroupController extends Controller
+class ActivityController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): JsonResponse
     {
-        $query = UserGroup::query();
+        $query = Activity::query();
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
             $searchString = $request->get('search');
@@ -35,26 +33,24 @@ class UserGroupController extends Controller
 
         if ($request->has('orderWay') && $request->get('orderBy')) {
             $query->orderBy($request->get('orderBy'), $request->get('orderWay'));
+        } else {
+            $query->orderBy('name', 'asc');
         }
 
         if ($request->has('paginate')) {
-            $userGroups = $query->paginate($request->get('paginate'));
-
-            foreach ($userGroups as $userGroup) {
-                $userGroup->users_count = $userGroup->users()->count();
-            }
+            $activities = $query->paginate($request->get('paginate'));
 
             return Response::json([
-                'data' => UserGroupResource::collection($userGroups->items()),
-                'total' => $userGroups->total(),
-                'perPage' => $userGroups->perPage(),
-                'currentPage' => $userGroups->currentPage(),
-                'lastPage' => $userGroups->lastPage(),
+                'data' => ActivityResource::collection($activities->items()),
+                'total' => $activities->total(),
+                'perPage' => $activities->perPage(),
+                'currentPage' => $activities->currentPage(),
+                'lastPage' => $activities->lastPage(),
             ]);
         }
 
-        $userGroups = $query->get();
-        return Response::json(UserGroupResource::collection($userGroups));
+        $activities = $query->get();
+        return Response::json(ActivityResource::collection($activities));
     }
 
     /**
@@ -63,16 +59,19 @@ class UserGroupController extends Controller
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
-            $userGroup = UserGroup::find($id);
-            if (!$userGroup) {
+            $activity = Activity::find($id);
+
+            if (!$activity) {
                 App::abort(404);
             }
         } else {
-            $userGroup = new UserGroup();
+            $activity = new Activity();
         }
 
         $validator = Validator::make($request->all(), [
-            'name' => 'required|string|max:255',
+            'name' => 'required|string',
+            'description' => 'nullable|string',
+            'color' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -82,24 +81,16 @@ class UserGroupController extends Controller
         try {
             DB::beginTransaction();
 
-            if ($request->has('new_password') && $request->get('new_password') == $request->get('confirm_new_password')) {
-                $userGroup->password = Hash::make($request->get('new_password'));
-            }
-
-
-            $userGroup->fill($request->all());
-            if ($request->has('permissions')) {
-                $userGroup->permissions = json_encode($request->get('permissions'));
-            }
-            $userGroup->save();
+            $activity->fill($request->all());
+            $activity->save();
 
             DB::commit();
         } catch (\Throwable|\Exception $e) {
             DB::rollBack();
-            return Response::json(['error' => $e->getMessage()], 500);
+            return Response::json(['message' => 'An error occurred while updating activity.'], 500);
         }
 
-        return Response::json(UserGroupResource::make($userGroup));
+        return Response::json(ActivityResource::make($activity));
     }
 
     /**
@@ -111,29 +102,31 @@ class UserGroupController extends Controller
             App::abort(400);
         }
 
-        $userGroup = UserGroup::find($id);
-        if (!$userGroup) {
+        $activity = Activity::find($id);
+
+        if (!$activity) {
             App::abort(404);
         }
 
-        return Response::json(UserGroupResource::make($userGroup));
+        return Response::json(ActivityResource::make($activity));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(int $id)
+    public function destroy(int $id): JsonResponse
     {
         if (!$id) {
             App::abort(400);
         }
 
-        $userGroup = UserGroup::find($id);
-        if (!$userGroup) {
+        $activity = Activity::find($id);
+
+        if (!$activity) {
             App::abort(404);
         }
+        $activity->delete();
 
-        $userGroup->delete();
-        return Response::json();
+        return Response::json([]);
     }
 }

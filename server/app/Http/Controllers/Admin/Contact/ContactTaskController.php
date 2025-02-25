@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Contact;
+namespace App\Http\Controllers\Admin\Contact;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contact\ContactPhaseResource;
-use App\Models\Contact\ContactPhase;
+use App\Http\Resources\Contact\ContactTaskResource;
+use App\Models\Contact\ContactTask;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -12,15 +12,15 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
-class ContactPhaseController extends Controller
+class ContactTaskController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request): JsonResponse
     {
-        $query = ContactPhase::query()
-            //->with(['tasks'])
+        $query = ContactTask::query()
+            ->with(['contacts'])
             ->where('user_id', $request->user()->id);
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
@@ -36,23 +36,23 @@ class ContactPhaseController extends Controller
         if ($request->has('orderWay') && $request->get('orderBy')) {
             $query->orderBy($request->get('orderBy'), $request->get('orderWay'));
         } else {
-            $query->orderBy('name', 'asc');
+            $query->orderBy('contact_phase_id', 'asc');
         }
 
         if ($request->has('paginate')) {
-            $contactPhases = $query->paginate($request->get('paginate'));
+            $contactTasks = $query->paginate($request->get('paginate'));
 
             return Response::json([
-                'data' => ContactPhaseResource::collection($contactPhases->items()),
-                'total' => $contactPhases->total(),
-                'perPage' => $contactPhases->perPage(),
-                'currentPage' => $contactPhases->currentPage(),
-                'lastPage' => $contactPhases->lastPage(),
+                'data' => ContactTaskResource::collection($contactTasks->items()),
+                'total' => $contactTasks->total(),
+                'perPage' => $contactTasks->perPage(),
+                'currentPage' => $contactTasks->currentPage(),
+                'lastPage' => $contactTasks->lastPage(),
             ]);
         }
 
-        $contactPhases = $query->get();
-        return Response::json(ContactPhaseResource::collection($contactPhases));
+        $contactTasks = $query->get();
+        return Response::json(ContactTaskResource::collection($contactTasks));
     }
 
     /**
@@ -61,17 +61,17 @@ class ContactPhaseController extends Controller
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
-            $contactPhase = ContactPhase::find($id);
-            if (!$contactPhase) {
+            $contactTask = ContactTask::find($id);
+            if (!$contactTask) {
                 App::abort(404);
             }
         } else {
-            $contactPhase = new ContactPhase();
+            $contactTask = new ContactTask();
         }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'color' => 'nullable|string|max:255',
+            'phase_id' => 'nullable|integer|exists:contact_phases,id',
         ]);
 
         if ($validator->fails()) {
@@ -81,17 +81,18 @@ class ContactPhaseController extends Controller
         try {
             DB::beginTransaction();
 
-            $contactPhase->fill($request->all());
-            $contactPhase->user_id = $request->user()->id;
-            $contactPhase->save();
+            $contactTask->fill($request->all());
+            $contactTask->user_id = $request->user()->id;
+
+            $contactTask->save();
 
             DB::commit();
         } catch (\Throwable | \Exception $e) {
             DB::rollBack();
-            return Response::json(['message' => 'An error occurred while updating contact phase.'], 500);
+            return Response::json(['message' => 'An error occurred while updating contact task.'], 500);
         }
 
-        return Response::json(ContactPhaseResource::make($contactPhase));
+        return Response::json(ContactTaskResource::make($contactTask));
     }
 
     /**
@@ -103,12 +104,12 @@ class ContactPhaseController extends Controller
             App::abort(400);
         }
 
-        $contactPhase = ContactPhase::find($id);
-        if (!$contactPhase) {
+        $contactTask = ContactTask::find($id);
+        if (!$contactTask) {
             App::abort(404);
         }
 
-        return Response::json(ContactPhaseResource::make($contactPhase));
+        return Response::json(ContactTaskResource::make($contactTask));
     }
 
     /**
@@ -120,12 +121,12 @@ class ContactPhaseController extends Controller
             App::abort(400);
         }
 
-        $contactPhase = ContactPhase::find($id);
-        if (!$contactPhase) {
+        $contactTask = ContactTask::find($id);
+        if (!$contactTask) {
             App::abort(404);
         }
 
-        $contactPhase->delete();
+        $contactTask->delete();
         return Response::json();
     }
 }

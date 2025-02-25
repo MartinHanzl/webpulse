@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\QickAccess\QuickAccessResource;
 use App\Models\QuickAccess\QuickAccess;
 use Illuminate\Http\JsonResponse;

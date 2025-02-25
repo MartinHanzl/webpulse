@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Cashflow;
+namespace App\Http\Controllers\Admin\Cashflow;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Cashflow\CashflowCategoryResource;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Message;
+namespace App\Http\Controllers\Admin\Message;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Message\MessageBlueprintResource;

@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Cashflow;
+namespace App\Http\Controllers\Admin\Cashflow;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cashflow\Cashflow;
-use App\Models\Cashflow\CashflowCategory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
