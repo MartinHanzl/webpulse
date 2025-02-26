@@ -2,6 +2,7 @@
 
 namespace App\Models\Contact;
 
+use App\Models\Project\Project;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -77,6 +78,11 @@ class Contact extends Model
     public function contacts()
     {
         return $this->hasMany(Contact::class, 'contact_id', 'id');
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class, 'client_id', 'id');
     }
 
     public function syncTasks(Request $request)

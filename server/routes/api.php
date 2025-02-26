@@ -19,6 +19,8 @@ use App\Http\Controllers\Admin\User\UserGroupController;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\TaxRate\TaxRateController;
+use App\Http\Controllers\Admin\Project\ProjectController;
+use App\Http\Controllers\Admin\Project\ProjectStatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -186,7 +188,7 @@ Route::group([
             Route::post('{id?}', [CashflowController::class, 'store']);
         });
 
-        // Activity routes
+        // Tax-rate routes
         Route::group([
             'prefix' => 'tax-rate'
         ], function () {
@@ -194,6 +196,26 @@ Route::group([
             Route::get('{id}', [TaxRateController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [TaxRateController::class, 'store']);
             Route::delete('{id}', [TaxRateController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        // Projects routes
+        Route::group([
+            'prefix' => 'project'
+        ], function () {
+            // Project status routes
+            Route::group([
+                'prefix' => 'status'
+            ], function () {
+                Route::get('', [ProjectStatusController::class, 'index']);
+                Route::get('{id}', [ProjectStatusController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [ProjectStatusController::class, 'store']);
+                Route::delete('{id}', [ProjectStatusController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            Route::get('', [ProjectController::class, 'index']);
+            Route::get('{id}', [ProjectController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [ProjectController::class, 'store']);
+            Route::delete('{id}', [ProjectController::class, 'destroy'])->where('id', '[0-9]+');
         });
 
         // Dashboard and statistics routes

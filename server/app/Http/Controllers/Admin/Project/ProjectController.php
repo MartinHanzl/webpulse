@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin\TaxRate;
+namespace App\Http\Controllers\Admin\Project;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Admin\TaxRate\TaxRateResource;
-use App\Models\TaxRate\TaxRate;
+use App\Http\Resources\Admin\Project\ProjectResource;
+use App\Http\Resources\Admin\Project\ProjectSimpleResource;
+use App\Models\Project\Project;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -12,11 +13,11 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
-class TaxRateController extends Controller
+class ProjectController extends Controller
 {
     public function index(Request $request): JsonResponse
     {
-        $query = TaxRate::query();
+        $query = Project::query();
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
             $searchString = $request->get('search');
@@ -25,7 +26,7 @@ class TaxRateController extends Controller
                 $query->where($searchString[0], 'like', '%' . $searchString[1] . '%');
             } else {
                 $query->where('name', 'like', '%' . $searchString . '%')
-                    ->orWhere('rate', 'like', '%' . $searchString . '%');
+                    ->orWhere('color', 'like', '%' . $searchString . '%');
             }
         }
 
@@ -34,35 +35,38 @@ class TaxRateController extends Controller
         }
 
         if ($request->has('paginate')) {
-            $taxRates = $query->paginate($request->get('paginate'));
+            $projects = $query->paginate($request->get('paginate'));
 
             return Response::json([
-                'data' => TaxRateResource::collection($taxRates->items()),
-                'total' => $taxRates->total(),
-                'perPage' => $taxRates->perPage(),
-                'currentPage' => $taxRates->currentPage(),
-                'lastPage' => $taxRates->lastPage(),
+                'data' => ProjectSimpleResource::collection($projects->items()),
+                'total' => $projects->total(),
+                'perPage' => $projects->perPage(),
+                'currentPage' => $projects->currentPage(),
+                'lastPage' => $projects->lastPage(),
             ]);
         }
 
-        $taxRates = $query->get();
-        return Response::json(TaxRateResource::collection($taxRates));
+        $projects = $query->get();
+        return Response::json(ProjectSimpleResource::collection($projects));
     }
 
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
-            $taxRate = TaxRate::find($id);
-            if (!$taxRate) {
+            $project = Project::find($id);
+            if (!$project) {
                 App::abort(404);
             }
         } else {
-            $taxRate = new TaxRate();
+            $project = new Project();
         }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'rate' => 'required|numeric',
+            'description' => 'nullable|text',
+            'expected_price' => 'required|decimal',
+            'tax_rate_id' => 'nullable|integer|exists:tax_rates,id',
+            'client_id' => 'nullable|integer|exists:contacts,id',
         ]);
 
         if ($validator->fails()) {
@@ -72,8 +76,8 @@ class TaxRateController extends Controller
         try {
             DB::beginTransaction();
 
-            $taxRate->fill($request->all());
-            $taxRate->save();
+            $project->fill($request->all());
+            $project->save();
 
             DB::commit();
         } catch (\Throwable|\Exception $e) {
@@ -81,7 +85,7 @@ class TaxRateController extends Controller
             return Response::json(['message' => 'An error occurred while updating tax rate.'], 500);
         }
 
-        return Response::json(TaxRateResource::make($taxRate));
+        return Response::json(ProjectResource::make($project));
     }
 
     public function show(int $id): JsonResponse
@@ -90,12 +94,12 @@ class TaxRateController extends Controller
             App::abort(400);
         }
 
-        $taxRate = TaxRate::find($id);
-        if (!$taxRate) {
+        $project = Project::find($id);
+        if (!$project) {
             App::abort(404);
         }
 
-        return Response::json(TaxRateResource::make($taxRate));
+        return Response::json(ProjectResource::make($project));
     }
 
     public function destroy(int $id)
@@ -104,12 +108,12 @@ class TaxRateController extends Controller
             App::abort(400);
         }
 
-        $taxRate = TaxRate::find($id);
-        if (!$taxRate) {
+        $project = Project::find($id);
+        if (!$project) {
             App::abort(404);
         }
 
-        $taxRate->delete();
+        $project->delete();
         return Response::json();
     }
 }
