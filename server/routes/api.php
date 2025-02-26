@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Admin\User\UserGroupController;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\TaxRate\TaxRateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -183,6 +184,16 @@ Route::group([
             });
 
             Route::post('{id?}', [CashflowController::class, 'store']);
+        });
+
+        // Activity routes
+        Route::group([
+            'prefix' => 'tax-rate'
+        ], function () {
+            Route::get('', [TaxRateController::class, 'index']);
+            Route::get('{id}', [TaxRateController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [TaxRateController::class, 'store']);
+            Route::delete('{id}', [TaxRateController::class, 'destroy'])->where('id', '[0-9]+');
         });
 
         // Dashboard and statistics routes
