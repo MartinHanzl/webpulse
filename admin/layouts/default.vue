@@ -31,7 +31,7 @@ import {
 	ChartBarIcon,
 	TrophyIcon,
 	CalendarDaysIcon,
-    DocumentCurrencyEuroIcon
+	DocumentCurrencyEuroIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
@@ -60,13 +60,13 @@ const navigation = ref([
 		{ name: 'Služby', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'demo' },
 		{ name: 'Rezervace', link: '/demo', icon: CalendarIcon, current: false, slug: 'demo' },
 	] },
-  { title: 'Uživatelé', menu: [
+	{ title: 'Uživatelé', menu: [
 		{ name: 'Uživatelé', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'demo' },
 		{ name: 'Odběry newsletteru', link: '/kontakty', icon: UsersIcon, current: false, slug: 'demo' },
 		{ name: 'Požadavky', link: '/aktivita', icon: CalendarIcon, current: false, slug: 'demo' },
 		{ name: 'Rezervace', link: '/demo', icon: CalendarIcon, current: false, slug: 'demo' },
 	] },
-  { title: 'Byznys a osobní růst', menu: [
+	{ title: 'Byznys a osobní růst', menu: [
 		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false, slug: 'contacts' },
 		{ name: 'Aktivita', link: '/aktivita', icon: CalendarIcon, current: false, slug: 'users_has_activities' },
 		{ name: 'Šablony zpráv', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'message_blueprints' },

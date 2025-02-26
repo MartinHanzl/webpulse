@@ -4,7 +4,7 @@ export default defineNuxtConfig({
 	modules: [['nuxt-auth-sanctum', {
 		ssr: true,
 		nitro: {
-			preset: 'node'
+			preset: 'node',
 		},
 		baseUrl: process.env.API_URL ?? 'https://web-pulse.cz/',
 		mode: 'token',

@@ -189,22 +189,22 @@ const activitiesByDay = computed(() => {
 							v-else-if="[6, 8, 11, 12].includes(activityItem.activity.id) && activityItem.completed"
 							class="p-2 lg:p-4 border-2 border-danger bg-danger"
 						/>
-            <PhoneIcon
-                v-if="activityItem.activity.id === 1"
-                class="text-amber-600 size-5 lg:size-8 col-span-1"
-            />
-            <ChatBubbleBottomCenterIcon
-                v-if="activityItem.activity.id === 27"
-                class="text-purple-600 size-5 lg:size-8 col-span-1"
-            />
-            <HeartIcon
-                v-if="activityItem.activity.id === 28 && !activityItem.completed"
-                class="text-pink-600 size-5 lg:size-8 col-span-1"
-            />
-            <HeartIcon
-                v-if="activityItem.activity.id === 28 && activityItem.completed"
-                class="text-danger size-5 lg:size-8 fill-pink-600 col-span-1"
-            />
+						<PhoneIcon
+							v-if="activityItem.activity.id === 1"
+							class="text-amber-600 size-5 lg:size-8 col-span-1"
+						/>
+						<ChatBubbleBottomCenterIcon
+							v-if="activityItem.activity.id === 27"
+							class="text-purple-600 size-5 lg:size-8 col-span-1"
+						/>
+						<HeartIcon
+							v-if="activityItem.activity.id === 28 && !activityItem.completed"
+							class="text-pink-600 size-5 lg:size-8 col-span-1"
+						/>
+						<HeartIcon
+							v-if="activityItem.activity.id === 28 && activityItem.completed"
+							class="text-danger size-5 lg:size-8 fill-pink-600 col-span-1"
+						/>
 						<PauseCircleIcon
 							v-if="activityItem.activity.id === 10"
 							class="text-danger size-5 lg:size-8 col-span-1"

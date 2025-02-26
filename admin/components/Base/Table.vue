@@ -186,6 +186,9 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									<span v-if="column.type === 'text' || column.type === 'number'">
 										{{ item[column.key] ?? '-' }}
 									</span>
+									<span v-if="column.type === 'percent'">
+										{{ item[column.key] ?? '-' }}%
+									</span>
 									<PropsBadge
 										v-else-if="column.type === 'badge'"
 										:color="item[column.colorKey]"

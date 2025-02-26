@@ -76,7 +76,7 @@ class TaxRateController extends Controller
             $taxRate->fill($request->all());
             $taxRate->save();
 
-            DB::rollBack();
+            DB::commit();
         } catch (\Throwable|\Exception $e) {
             DB::rollBack();
             return Response::json(['message' => 'An error occurred while updating tax rate.'], 500);
