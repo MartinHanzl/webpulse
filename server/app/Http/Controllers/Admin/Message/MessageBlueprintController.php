@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Message;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Message\MessageBlueprintResource;
+use App\Http\Resources\Admin\Message\MessageBlueprintResource;
 use App\Models\Message\MessageBlueprint;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class MessageBlueprintController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = MessageBlueprint::query()
@@ -50,12 +48,9 @@ class MessageBlueprintController extends Controller
         }
 
         $messageBlueprints = $query->get();
-        return Response::json(MessageBlueprintResource::collection($messageBlueprints));
+        return Response::json(\App\Http\Resources\Admin\Message\MessageBlueprintResource::collection($messageBlueprints));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -90,12 +85,9 @@ class MessageBlueprintController extends Controller
             return Response::json(['message' => 'An error occurred while updating message blueprint.'], 500);
         }
 
-        return Response::json(MessageBlueprintResource::make($messageBlueprint));
+        return Response::json(\App\Http\Resources\Admin\Message\MessageBlueprintResource::make($messageBlueprint));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id): JsonResponse
     {
         if (!$id) {
@@ -110,9 +102,6 @@ class MessageBlueprintController extends Controller
         return Response::json(MessageBlueprintResource::make($messageBlueprint));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         if (!$id) {

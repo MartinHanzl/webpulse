@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin\Contact;
 
 use App\Events\ContactUpdatedEvent;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contact\ContactResource;
-use App\Http\Resources\Contact\ContactSimpleResource;
+use App\Http\Resources\Admin\Contact\ContactSimpleResource;
 use App\Models\Contact\Contact;
 use App\Models\Contact\ContactHistory;
 use Illuminate\Http\JsonResponse;
@@ -18,9 +17,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = Contact::query()
@@ -84,9 +81,6 @@ class ContactController extends Controller
         return Response::json(ContactSimpleResource::collection($contacts));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -175,12 +169,9 @@ class ContactController extends Controller
             return Response::json(['message' => 'An error occurred while updating contact.'], 500);
         }
 
-        return Response::json(ContactResource::make($contact));
+        return Response::json(\App\Http\Resources\Admin\Contact\ContactResource::make($contact));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id): JsonResponse
     {
         if (!$id) {
@@ -194,12 +185,9 @@ class ContactController extends Controller
             App::abort(404);
         }
 
-        return Response::json(ContactResource::make($contact));
+        return Response::json(\App\Http\Resources\Admin\Contact\ContactResource::make($contact));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         if (!$id) {

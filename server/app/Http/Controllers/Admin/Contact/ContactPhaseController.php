@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Contact;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contact\ContactPhaseResource;
 use App\Models\Contact\ContactPhase;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,9 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactPhaseController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = ContactPhase::query()
@@ -43,7 +40,7 @@ class ContactPhaseController extends Controller
             $contactPhases = $query->paginate($request->get('paginate'));
 
             return Response::json([
-                'data' => ContactPhaseResource::collection($contactPhases->items()),
+                'data' => \App\Http\Resources\Admin\Contact\ContactPhaseResource::collection($contactPhases->items()),
                 'total' => $contactPhases->total(),
                 'perPage' => $contactPhases->perPage(),
                 'currentPage' => $contactPhases->currentPage(),
@@ -52,12 +49,9 @@ class ContactPhaseController extends Controller
         }
 
         $contactPhases = $query->get();
-        return Response::json(ContactPhaseResource::collection($contactPhases));
+        return Response::json(\App\Http\Resources\Admin\Contact\ContactPhaseResource::collection($contactPhases));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -91,12 +85,9 @@ class ContactPhaseController extends Controller
             return Response::json(['message' => 'An error occurred while updating contact phase.'], 500);
         }
 
-        return Response::json(ContactPhaseResource::make($contactPhase));
+        return Response::json(\App\Http\Resources\Admin\Contact\ContactPhaseResource::make($contactPhase));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id): JsonResponse
     {
         if (!$id) {
@@ -108,12 +99,9 @@ class ContactPhaseController extends Controller
             App::abort(404);
         }
 
-        return Response::json(ContactPhaseResource::make($contactPhase));
+        return Response::json(\App\Http\Resources\Admin\Contact\ContactPhaseResource::make($contactPhase));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         if (!$id) {

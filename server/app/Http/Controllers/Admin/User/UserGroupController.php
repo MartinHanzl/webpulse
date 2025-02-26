@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserGroupResource;
+use App\Http\Resources\Admin\User\UserGroupResource;
 use App\Models\User\UserGroup;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserGroupController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = UserGroup::query();
@@ -53,12 +51,9 @@ class UserGroupController extends Controller
         }
 
         $userGroups = $query->get();
-        return Response::json(UserGroupResource::collection($userGroups));
+        return Response::json(\App\Http\Resources\Admin\User\UserGroupResource::collection($userGroups));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -98,12 +93,9 @@ class UserGroupController extends Controller
             return Response::json(['error' => $e->getMessage()], 500);
         }
 
-        return Response::json(UserGroupResource::make($userGroup));
+        return Response::json(\App\Http\Resources\Admin\User\UserGroupResource::make($userGroup));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id): JsonResponse
     {
         if (!$id) {
@@ -118,9 +110,6 @@ class UserGroupController extends Controller
         return Response::json(UserGroupResource::make($userGroup));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         if (!$id) {

@@ -3,8 +3,7 @@
 namespace App\Http\Controllers\Admin\Cashflow;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Cashflow\CashflowCategoryResource;
-use App\Http\Resources\Cashflow\CashflowResource;
+use App\Http\Resources\Admin\Cashflow\CashflowCategoryResource;
 use App\Models\Cashflow\Cashflow;
 use App\Models\Cashflow\CashflowBudget;
 use App\Models\Cashflow\CashflowCategory;
@@ -17,9 +16,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CashflowCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $month = (int)$request->month;
@@ -66,13 +63,10 @@ class CashflowCategoryController extends Controller
 
         return Response::json([
             'categories' => CashflowCategoryResource::collection($categories),
-            'income' => CashflowResource::collection($incomeQuery->get())
+            'income' => \App\Http\Resources\Admin\Cashflow\CashflowResource::collection($incomeQuery->get())
         ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -115,9 +109,6 @@ class CashflowCategoryController extends Controller
         return Response::json();
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request, int $id): JsonResponse
     {
         if (!$id) {
@@ -143,9 +134,6 @@ class CashflowCategoryController extends Controller
         return Response::json(CashflowCategoryResource::make($cashflowCategory));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request, int $id): JsonResponse
     {
         if (!$id) {

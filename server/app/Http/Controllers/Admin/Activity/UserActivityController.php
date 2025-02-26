@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Activity;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Activity\UserActivityResource;
 use App\Models\Activity\UserActivity;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,9 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class UserActivityController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = UserActivity::query()
@@ -31,12 +28,9 @@ class UserActivityController extends Controller
                 ->whereYear('date', date('Y'));
         }
 
-        return Response::json(UserActivityResource::collection($query->get()));
+        return Response::json(\App\Http\Resources\Admin\Activity\UserActivityResource::collection($query->get()));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -80,12 +74,9 @@ class UserActivityController extends Controller
             return Response::json(['errors' => $e->getMessage()], 500);
         }
 
-        return Response::json(UserActivityResource::make($userActivity));
+        return Response::json(\App\Http\Resources\Admin\Activity\UserActivityResource::make($userActivity));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request, int $id): JsonResponse
     {
         if (!$id) {
@@ -100,12 +91,9 @@ class UserActivityController extends Controller
             App::abort(404);
         }
 
-        return Response::json(UserActivityResource::make($userActivity));
+        return Response::json(\App\Http\Resources\Admin\Activity\UserActivityResource::make($userActivity));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request, int $id): JsonResponse
     {
         if (!$id) {

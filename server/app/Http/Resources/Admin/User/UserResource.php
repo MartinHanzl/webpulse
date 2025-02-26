@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Admin\User;
 
-use App\Http\Resources\QickAccess\QuickAccessResource;
+use App\Http\Resources\Admin\QickAccess\QuickAccessResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 

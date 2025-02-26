@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\User;
+namespace App\Http\Resources\Admin\Cashflow;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserGroupResource extends JsonResource
+class CashflowCategoryResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,8 +17,9 @@ class UserGroupResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'permissions' => json_decode($this->permissions),
-            'users_count' => $this->users_count
+            //'icon' => $this->icon,
+            'budgets' => CashflowBudgetResource::collection($this->budgets),
+            'cashflows' => CashflowResource::collection($this->cashflows)
         ];
     }
 }

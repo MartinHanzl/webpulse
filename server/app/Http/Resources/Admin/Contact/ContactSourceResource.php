@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Activity;
+namespace App\Http\Resources\Admin\Contact;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ActivityResource extends JsonResource
+class ContactSourceResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,8 @@ class ActivityResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'description' => $this->description,
             'color' => $this->color,
-            'updated_at' => $this->updated_at,
+            'contacts_count' => $this->contacts->count(),
         ];
     }
 }

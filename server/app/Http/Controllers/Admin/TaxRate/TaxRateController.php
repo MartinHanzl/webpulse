@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Activity;
+namespace App\Http\Controllers\Admin\TaxRate;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Admin\Activity\ActivityResource;
-use App\Models\Activity\Activity;
+use App\Http\Resources\Admin\TaxRate\TaxRateResource;
+use App\Models\TaxRate\TaxRate;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
-class ActivityController extends Controller
+class TaxRateController extends Controller
 {
 
     public function index(Request $request): JsonResponse
     {
-        $query = Activity::query();
+        $query = TaxRate::query();
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
             $searchString = $request->get('search');
@@ -25,67 +25,64 @@ class ActivityController extends Controller
                 $searchString = explode(':', $searchString);
                 $query->where($searchString[0], 'like', '%' . $searchString[1] . '%');
             } else {
-                $query->where('name', 'like', '%' . $searchString . '%');
+                $query->where('name', 'like', '%' . $searchString . '%')
+                    ->orWhere('rate', 'like', '%' . $searchString . '%');
             }
         }
 
         if ($request->has('orderWay') && $request->get('orderBy')) {
             $query->orderBy($request->get('orderBy'), $request->get('orderWay'));
-        } else {
-            $query->orderBy('name', 'asc');
         }
 
         if ($request->has('paginate')) {
-            $activities = $query->paginate($request->get('paginate'));
+            $taxRates = $query->paginate($request->get('paginate'));
 
             return Response::json([
-                'data' => ActivityResource::collection($activities->items()),
-                'total' => $activities->total(),
-                'perPage' => $activities->perPage(),
-                'currentPage' => $activities->currentPage(),
-                'lastPage' => $activities->lastPage(),
+                'data' => TaxRateResource::collection($taxRates->items()),
+                'total' => $taxRates->total(),
+                'perPage' => $taxRates->perPage(),
+                'currentPage' => $taxRates->currentPage(),
+                'lastPage' => $taxRates->lastPage(),
             ]);
         }
 
-        $activities = $query->get();
-        return Response::json(ActivityResource::collection($activities));
+        $taxRates = $query->get();
+        return Response::json(TaxRateResource::collection($taxRates));
     }
 
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
-            $activity = Activity::find($id);
-
-            if (!$activity) {
+            $taxRate = TaxRate::find($id);
+            if (!$taxRate) {
                 App::abort(404);
             }
         } else {
-            $activity = new Activity();
+            $taxRate = new TaxRate();
         }
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'description' => 'nullable|string',
-            'color' => 'nullable|string',
+            'rate' => 'required|numeric',
         ]);
 
         if ($validator->fails()) {
-            return Response::json(['errors' => $validator->errors()], 422);
+            return Response::json($validator->errors(), 400);
         }
 
         try {
             DB::beginTransaction();
 
-            $activity->fill($request->all());
-            $activity->save();
+            $taxRate->fill($request->all());
+            $taxRate->save();
 
-            DB::commit();
+            DB::rollBack();
         } catch (\Throwable|\Exception $e) {
             DB::rollBack();
-            return Response::json(['message' => 'An error occurred while updating activity.'], 500);
+            return Response::json(['message' => 'An error occurred while updating tax rate.'], 500);
         }
 
-        return Response::json(\App\Http\Resources\Admin\Activity\ActivityResource::make($activity));
+        return Response::json(TaxRateResource::make($taxRate));
     }
 
     public function show(int $id): JsonResponse
@@ -94,28 +91,26 @@ class ActivityController extends Controller
             App::abort(400);
         }
 
-        $activity = Activity::find($id);
-
-        if (!$activity) {
+        $taxRate = TaxRate::find($id);
+        if (!$taxRate) {
             App::abort(404);
         }
 
-        return Response::json(ActivityResource::make($activity));
+        return Response::json(TaxRateResource::make($taxRate));
     }
 
-    public function destroy(int $id): JsonResponse
+    public function destroy(int $id)
     {
         if (!$id) {
             App::abort(400);
         }
 
-        $activity = Activity::find($id);
-
-        if (!$activity) {
+        $taxRate = TaxRate::find($id);
+        if (!$taxRate) {
             App::abort(404);
         }
-        $activity->delete();
 
-        return Response::json([]);
+        $taxRate->delete();
+        return Response::json();
     }
 }

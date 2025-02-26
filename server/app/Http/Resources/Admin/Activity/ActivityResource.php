@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Cashflow;
+namespace App\Http\Resources\Admin\Activity;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CashflowCategoryResource extends JsonResource
+class ActivityResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,9 @@ class CashflowCategoryResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            //'icon' => $this->icon,
-            'budgets' => CashflowBudgetResource::collection($this->budgets),
-            'cashflows' => CashflowResource::collection($this->cashflows)
+            'description' => $this->description,
+            'color' => $this->color,
+            'updated_at' => $this->updated_at,
         ];
     }
 }

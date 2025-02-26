@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\Admin\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -15,9 +15,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $authUser = $request->user();
@@ -97,6 +95,6 @@ class ProfileController extends Controller
             return Response::json(['message' => 'An error occurred while updating the user password.'], 500);
         }
 
-        return Response::json(UserResource::make($user));
+        return Response::json(\App\Http\Resources\Admin\User\UserResource::make($user));
     }
 }

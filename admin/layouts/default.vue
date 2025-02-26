@@ -31,6 +31,7 @@ import {
 	ChartBarIcon,
 	TrophyIcon,
 	CalendarDaysIcon,
+    DocumentCurrencyEuroIcon
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
@@ -53,7 +54,19 @@ const navigation = ref([
 		{ name: 'Přehled', link: '/', icon: HomeIcon, current: true },
 		{ name: 'Statistiky', link: '/statistiky', icon: ChartPieIcon, current: false },
 	] },
-	{ title: 'Byznys a osobní růst', menu: [
+	{ title: 'Obsah', menu: [
+		{ name: 'Blog', link: '/kontakty', icon: UsersIcon, current: false, slug: 'demo' },
+		{ name: 'Informační stránky', link: '/aktivita', icon: CalendarIcon, current: false, slug: 'demo' },
+		{ name: 'Služby', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'demo' },
+		{ name: 'Rezervace', link: '/demo', icon: CalendarIcon, current: false, slug: 'demo' },
+	] },
+  { title: 'Uživatelé', menu: [
+		{ name: 'Uživatelé', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'demo' },
+		{ name: 'Odběry newsletteru', link: '/kontakty', icon: UsersIcon, current: false, slug: 'demo' },
+		{ name: 'Požadavky', link: '/aktivita', icon: CalendarIcon, current: false, slug: 'demo' },
+		{ name: 'Rezervace', link: '/demo', icon: CalendarIcon, current: false, slug: 'demo' },
+	] },
+  { title: 'Byznys a osobní růst', menu: [
 		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false, slug: 'contacts' },
 		{ name: 'Aktivita', link: '/aktivita', icon: CalendarIcon, current: false, slug: 'users_has_activities' },
 		{ name: 'Šablony zpráv', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'message_blueprints' },
@@ -63,7 +76,7 @@ const navigation = ref([
 		{ name: 'Akce', link: '/demo', icon: CalendarDaysIcon, current: false, slug: 'events' },
 	] },
 	{ title: 'Osobní sekce', menu: [
-		{ name: 'Hodnocení', link: '/demo', icon: StarIcon, current: false, slug: 'contacts' },
+		{ name: 'Hodnocení', link: '/demo', icon: StarIcon, current: false, slug: 'ratings' },
 		{ name: 'Projekty', link: '/demo', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
 		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
 		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
@@ -73,6 +86,8 @@ const navigation = ref([
 		{ name: 'Uživatelé', link: '/uzivatele', icon: UsersIcon, current: false, slug: 'users' },
 		{ name: 'Uživatelské skupiny', link: '/uzivatele/skupiny', icon: AdjustmentsHorizontalIcon, current: false, slug: 'user_groups' },
 		{ name: 'Aktivity', link: '/aktivity', icon: ChartBarSquareIcon, current: false, slug: 'activities' },
+		{ name: 'Sazby DPH', link: '/dph', icon: DocumentCurrencyEuroIcon, current: false, slug: 'tax_rates' },
+		{ name: 'Odkazy', link: '/aktivity', icon: ChartBarSquareIcon, current: false, slug: 'demo' },
 	] },
 ]);
 

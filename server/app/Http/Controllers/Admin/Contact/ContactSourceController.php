@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Contact;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contact\ContactSourceResource;
+use App\Http\Resources\Admin\Contact\ContactSourceResource;
 use App\Models\Contact\ContactSource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactSourceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = ContactSource::query()
@@ -55,9 +53,6 @@ class ContactSourceController extends Controller
         return Response::json(ContactSourceResource::collection($contactSources));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -94,9 +89,6 @@ class ContactSourceController extends Controller
         return Response::json(ContactSourceResource::make($contactSource));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id): JsonResponse
     {
         if (!$id) {
@@ -111,9 +103,6 @@ class ContactSourceController extends Controller
         return Response::json(ContactSourceResource::make($contactSource));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         if (!$id) {

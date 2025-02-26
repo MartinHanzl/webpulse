@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Contact;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\Contact\ContactTaskResource;
+use App\Http\Resources\Admin\Contact\ContactTaskResource;
 use App\Models\Contact\ContactTask;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactTaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = ContactTask::query()
@@ -43,7 +41,7 @@ class ContactTaskController extends Controller
             $contactTasks = $query->paginate($request->get('paginate'));
 
             return Response::json([
-                'data' => ContactTaskResource::collection($contactTasks->items()),
+                'data' => \App\Http\Resources\Admin\Contact\ContactTaskResource::collection($contactTasks->items()),
                 'total' => $contactTasks->total(),
                 'perPage' => $contactTasks->perPage(),
                 'currentPage' => $contactTasks->currentPage(),
@@ -55,9 +53,6 @@ class ContactTaskController extends Controller
         return Response::json(ContactTaskResource::collection($contactTasks));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -92,12 +87,9 @@ class ContactTaskController extends Controller
             return Response::json(['message' => 'An error occurred while updating contact task.'], 500);
         }
 
-        return Response::json(ContactTaskResource::make($contactTask));
+        return Response::json(\App\Http\Resources\Admin\Contact\ContactTaskResource::make($contactTask));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id): JsonResponse
     {
         if (!$id) {
@@ -109,12 +101,9 @@ class ContactTaskController extends Controller
             App::abort(404);
         }
 
-        return Response::json(ContactTaskResource::make($contactTask));
+        return Response::json(\App\Http\Resources\Admin\Contact\ContactTaskResource::make($contactTask));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         if (!$id) {

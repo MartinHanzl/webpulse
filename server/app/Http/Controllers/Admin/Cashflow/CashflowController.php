@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class CashflowController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         $categoryId = $request->input('categoryId');

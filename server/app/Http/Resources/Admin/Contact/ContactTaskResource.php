@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\QickAccess;
+namespace App\Http\Resources\Admin\Contact;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class QuickAccessResource extends JsonResource
+class ContactTaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,9 +17,9 @@ class QuickAccessResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'link' => $this->link,
-            'target' => $this->target,
-            'position' => $this->position,
+            'phase' => $this->phase?->name,
+            'contact_phase_id' => $this->contact_phase_id,
+            'phase_color' => $this->phase?->color,
         ];
     }
 }

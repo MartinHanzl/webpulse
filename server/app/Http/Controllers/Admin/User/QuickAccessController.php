@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\QickAccess\QuickAccessResource;
+use App\Http\Resources\Admin\QickAccess\QuickAccessResource;
 use App\Models\QuickAccess\QuickAccess;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -13,9 +13,7 @@ use Illuminate\Support\Facades\Response;
 
 class QuickAccessController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = QuickAccess::query()
@@ -52,9 +50,6 @@ class QuickAccessController extends Controller
         return Response::json(QuickAccessResource::collection($items));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -85,9 +80,6 @@ class QuickAccessController extends Controller
         return Response::json(QuickAccessResource::make($item));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(Request $request, int $id)
     {
         if (!$id) {
@@ -106,9 +98,6 @@ class QuickAccessController extends Controller
         return Response::json(QuickAccessResource::make($item));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Request $request, int $id)
     {
         if (!$id) {

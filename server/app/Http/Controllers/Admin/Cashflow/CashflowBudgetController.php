@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Validator;
 
 class CashflowBudgetController extends Controller
 {
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         $validator = Validator::make($request->all(), [

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\User\UserResource;
+use App\Http\Resources\Admin\User\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -16,9 +16,7 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index(Request $request): JsonResponse
     {
         $query = User::query();
@@ -53,12 +51,9 @@ class UserController extends Controller
         }
 
         $users = $query->get();
-        return Response::json(UserResource::collection($users));
+        return Response::json(\App\Http\Resources\Admin\User\UserResource::collection($users));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request, int $id = null): JsonResponse
     {
         if ($id) {
@@ -103,12 +98,9 @@ class UserController extends Controller
             return Response::json(['error' => $e->getMessage()], 500);
         }
 
-        return Response::json(UserResource::make($user));
+        return Response::json(\App\Http\Resources\Admin\User\UserResource::make($user));
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(int $id): JsonResponse
     {
         if (!$id) {
@@ -123,9 +115,6 @@ class UserController extends Controller
         return Response::json(UserResource::make($user));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(int $id)
     {
         if (!$id) {

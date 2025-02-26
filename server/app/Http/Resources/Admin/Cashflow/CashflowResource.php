@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Resources\Message;
+namespace App\Http\Resources\Admin\Cashflow;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class MessageBlueprintResource extends JsonResource
+class CashflowResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,12 +16,11 @@ class MessageBlueprintResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'message' => $this->message,
+            'cashflow_category_id' => $this->category ? $this->category->id : null,
+            'amount' => (float)$this->amount,
             'type' => $this->type,
-            'user_id' => $this->user_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
+            'description' => $this->description,
+            'date' => $this->date->format('Y-m-d')
         ];
     }
 }
