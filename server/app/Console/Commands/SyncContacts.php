@@ -27,7 +27,19 @@ class SyncContacts extends Command
      */
     public function handle()
     {
-        $this->createContactHistories();
+        $contacts = Contact::query()
+            ->whereNotNull('phone')
+            ->get();
+
+        $this->output->progressStart(count($contacts));
+
+        foreach ($contacts as $contact) {
+            $newPhone = preg_replace('/(\d{3})(?=\d)/', '$1 ', preg_replace('/\s+/', '', $contact->phone));            $contact->phone = $newPhone;
+            $contact->save();
+            $this->output->progressAdvance();
+        }
+        $this->output->progressFinish();
+        //$this->createContactHistories();
         //$this->databaseSync();
         //$this->writeToExcel();
     }

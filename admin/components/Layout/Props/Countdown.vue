@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 
 const countdown = ref('');
 
-const targetDate = dayjs('2025-03-09T14:00:00');
+const targetDate = dayjs('2025-06-06T18:00:00');
 
 function updateCountdown() {
 	const now = dayjs();
@@ -38,7 +38,7 @@ onUnmounted(() => {
 <template>
 	<div>
 		<p class="mb-4 font-semibold text-gray-300">
-			Do <span class="underline font-bold">HINTRU</span> zbývá:
+			Do <span class="underline font-bold">SC</span> zbývá:
 		</p>
 		<p class="text-dangerLight font-bold">
 			{{ countdown }}
