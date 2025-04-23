@@ -22,35 +22,27 @@ const userNavigation = [
 </script>
 
 <template>
-  <!--
-    This example requires updating your template:
-
-    ```
-    <html class="h-full">
-    <body class="h-full">
-    ```
-  -->
   <div class="min-h-full">
-    <Disclosure as="nav" class="border-b border-gray-200 bg-white" v-slot="{ open }">
+    <Disclosure as="nav" v-slot="{ open }">
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div class="flex h-16 justify-between">
+        <div class="flex py-8 justify-between">
           <div class="flex">
             <div class="flex shrink-0 items-center">
-              <img class="block h-8 w-auto lg:hidden" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
-              <img class="hidden h-8 w-auto lg:block" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company" />
+              <img class="block h-8 w-auto lg:hidden" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=gray&shade=50" alt="Your Company" />
+              <img class="hidden h-8 w-auto lg:block" src="https://tailwindui.com/plus-assets/img/logos/mark.svg?color=gray&shade=50" alt="Your Company" />
             </div>
             <div class="hidden sm:-my-px sm:ml-6 sm:flex sm:space-x-8">
-              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'border-indigo-500 text-gray-900' : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700', 'inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
+              <a v-for="item in navigation" :key="item.name" :href="item.href" :class="[item.current ? 'text-gray-100 font-bold' : 'border-transparent hover:border-gray-100 hover:text-gray-100', 'text-gray-100 inline-flex items-center border-b-2 px-4 py-2 text-sm font-medium border border-gray-100 rounded-xl']" :aria-current="item.current ? 'page' : undefined">{{ item.name }}</a>
             </div>
           </div>
           <div class="hidden sm:ml-6 sm:flex sm:items-center">
-            <button type="button" class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+<!--            <button type="button" class="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
               <span class="absolute -inset-1.5" />
               <span class="sr-only">View notifications</span>
               <BellIcon class="size-6" aria-hidden="true" />
             </button>
 
-            <!-- Profile dropdown -->
+            &lt;!&ndash; Profile dropdown &ndash;&gt;
             <Menu as="div" class="relative ml-3">
               <div>
                 <MenuButton class="relative flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
@@ -66,7 +58,7 @@ const userNavigation = [
                   </MenuItem>
                 </MenuItems>
               </transition>
-            </Menu>
+            </Menu>-->
           </div>
           <div class="-mr-2 flex items-center sm:hidden">
             <!-- Mobile menu button -->
@@ -107,11 +99,6 @@ const userNavigation = [
     </Disclosure>
 
     <div class="py-10">
-      <header>
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h1>
-        </div>
-      </header>
       <main>
         <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <slot />

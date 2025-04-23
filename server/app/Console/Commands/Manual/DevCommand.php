@@ -37,12 +37,12 @@ class DevCommand extends Command
                 }
             }
 
-            $linkRaw['redirect'] = $linkRaw['redirect'] == 'CHYBÍ STRÁNKA' ? '/' : $linkRaw['origin'];
-            $linkRaw['redirect'] = str_contains('wp-', $linkRaw['redirect']) ? '/' : $linkRaw['redirect'];
+            $linkRaw['redirect'] = $linkRaw['redirect'] == 'CHYBÍ STRÁNKA' ? '/' : $linkRaw['redirect'];
+            $linkRaw['redirect'] = str_contains($linkRaw['redirect'], 'wp-', ) ? '/' : $linkRaw['redirect'];
 
             $correctLinks[] = [
-                'from' => str_replace(['https://www.etool.cz', 'http://www.etool.cz'], '/', $linkRaw['origin']),
-                'to' => $linkRaw['redirect'],
+                'from' => str_replace(['https://www.etool.cz', 'http://www.etool.cz', 'https://etool.monster-media.cz/', 'http://etool.monster-media.cz/'], '/', $linkRaw['origin']),
+                'to' => str_replace(['https://www.etool.cz', 'http://www.etool.cz', 'https://etool.monster-media.cz/', 'http://etool.monster-media.cz/'], '/', $linkRaw['redirect']),
             ];
         }
         $correctLinks = json_encode($correctLinks, JSON_PRESERVE_ZERO_FRACTION);
