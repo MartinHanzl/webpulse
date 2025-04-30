@@ -77,6 +77,7 @@ const navigation = ref([
 	] },
 	{ title: 'Osobní sekce', menu: [
 		{ name: 'Projekty', link: '/projekty', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
+		{ name: 'Klienti', link: '/klienti', icon: BuildingOfficeIcon, current: false, slug: 'clients' },
 		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
 		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
 		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false, slug: 'pricings' },

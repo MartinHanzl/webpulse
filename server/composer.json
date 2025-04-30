@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "fakturoid/fakturoid-php": "^2.1",
         "google/apiclient": "2.15.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
@@ -14,7 +15,7 @@
         "revolution/laravel-google-sheets": "^6.4",
         "spatie/laravel-permission": "^6.9",
         "spatie/laravel-settings": "^3.4",
-        "spatie/laravel-translatable": "^6.8",
+        "spatie/laravel-translatable": "*",
         "spatie/simple-excel": "^3.7",
         "tymon/jwt-auth": "^2.1"
     },
