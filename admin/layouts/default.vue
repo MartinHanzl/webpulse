@@ -32,13 +32,18 @@ import {
 	TrophyIcon,
 	CalendarDaysIcon,
 	DocumentCurrencyEuroIcon,
+	LanguageIcon,
+	GlobeEuropeAfricaIcon,
+	CurrencyEuroIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
 import { useActivityStore } from '~/stores/activityStore';
+import { useLanguageStore } from '~/stores/languageStore';
 
 const userGroupStore = useUserGroupStore();
 const activityStore = useActivityStore();
+const languageStore = useLanguageStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -87,7 +92,10 @@ const navigation = ref([
 		{ name: 'Uživatelé', link: '/uzivatele', icon: UsersIcon, current: false, slug: 'users' },
 		{ name: 'Uživatelské skupiny', link: '/uzivatele/skupiny', icon: AdjustmentsHorizontalIcon, current: false, slug: 'user_groups' },
 		{ name: 'Aktivity', link: '/aktivity', icon: ChartBarSquareIcon, current: false, slug: 'activities' },
-		{ name: 'Sazby DPH', link: '/dph', icon: DocumentCurrencyEuroIcon, current: false, slug: 'tax_rates' },
+		{ name: 'Sazby DPH', link: '/nastaveni/dph', icon: DocumentCurrencyEuroIcon, current: false, slug: 'tax_rates' },
+		{ name: 'Jazyky', link: '/nastaveni/jazyky', icon: LanguageIcon, current: false, slug: 'languages' },
+		{ name: 'Země', link: '/nastaveni/zeme', icon: GlobeEuropeAfricaIcon, current: false, slug: 'countries' },
+		{ name: 'Měny', link: '/nastaveni/meny', icon: CurrencyEuroIcon, current: false, slug: 'currencies' },
 		{ name: 'Odkazy', link: '/aktivity', icon: ChartBarSquareIcon, current: false, slug: 'demo' },
 	] },
 ]);
@@ -147,9 +155,10 @@ onMounted(() => {
 
 	userGroupStore.fetchUserGroups();
 	activityStore.fetchActivities();
+	languageStore.fetchLanguages();
 	setTimeout(() => {
 		navigation.value = filterNavigationGroups(navigation.value);
-	}, 1000);
+	}, 100000);
 });
 </script>
 

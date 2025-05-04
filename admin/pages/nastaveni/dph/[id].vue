@@ -17,12 +17,12 @@ const pageTitle = ref(route.params.id === 'pridat' ? 'Nová sazba' : 'Detail saz
 const breadcrumbs = ref([
 	{
 		name: 'Sazby DPH',
-		link: '/dph',
+		link: '/nastaveni/dph',
 		current: false,
 	},
 	{
 		name: 'Nová sazba',
-		link: '/dph/pridat',
+		link: '/nastaveni/dph',
 		current: true,
 	},
 ]);
@@ -52,7 +52,7 @@ async function loadItem() {
 		breadcrumbs.value.pop();
 		breadcrumbs.value.push({
 			name: item.value.name,
-			link: '/dph/' + route.params.id,
+			link: '/nastaveni/dph/' + route.params.id,
 			current: true,
 		});
 	}).catch(() => {
@@ -88,7 +88,7 @@ async function saveItem() {
 			description: route.params.id === 'pridat' ? 'Sazba DPH byla úspěšně vytvořena.' : 'Sazba DPH byla úspěšně upravena.',
 			color: 'green',
 		});
-		router.push('/dph');
+		router.push('/nastaveni/dph');
 	}).catch(() => {
 		error.value = true;
 		toast.add({

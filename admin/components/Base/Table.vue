@@ -5,6 +5,8 @@ import {
 	MagnifyingGlassIcon,
 	TrashIcon,
 	ClipboardDocumentIcon,
+	CheckIcon,
+	XMarkIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
@@ -203,6 +205,16 @@ const emit = defineEmits(['delete-item', 'update-sort', 'update-page', 'open-dia
 									</span>
 									<span v-else-if="column.type === 'datetime'">
 										{{ new Date(item[column.key]).toLocaleString() }}
+									</span>
+									<span v-else-if="column.type === 'status'">
+										<CheckIcon
+											v-if="item[column.key]"
+											class="cursor-pointer size-3 lg:size-5 text-success"
+										/>
+										<XMarkIcon
+											v-else
+											class="cursor-pointer size-3 lg:size-5 text-danger"
+										/>
 									</span>
 									<NuxtLink
 										v-else-if="column.type === 'link'"

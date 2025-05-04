@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { definePageMeta } from '#imports';
 
 const toast = useToast();
-const pageTitle = ref('Statusy projektů');
+const pageTitle = ref('Sazby DPH');
 
 const loading = ref(false);
 const error = ref(false);
@@ -12,7 +12,7 @@ const error = ref(false);
 const breadcrumbs = ref([
 	{
 		name: pageTitle.value,
-		link: '/jazyky',
+		link: '/nastaveni/dph',
 		current: true,
 	},
 ]);
@@ -32,7 +32,7 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{ id: number }>('/api/admin/project/status', {
+	await client<{ id: number }>('/api/admin/tax-rate', {
 		method: 'GET',
 		query: tableQuery.value,
 		headers: {
@@ -46,7 +46,7 @@ async function loadItems() {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst statusy projektů. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst sazby DPH. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -58,7 +58,7 @@ async function deleteItem(id: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{ id: number }>('/api/admin/project/status/' + id, {
+	await client<{ id: number }>('/api/admin/tax-rate/' + id, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
@@ -68,7 +68,7 @@ async function deleteItem(id: number) {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se smazat položku statusu projektu.',
+			description: 'Nepodařilo se smazat položku sazby DPH.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -116,9 +116,9 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 			:actions="[
-				{ type: 'add', text: 'Přidat status' },
+				{ type: 'add', text: 'Přidat sazbu' },
 			]"
-			slug="projects"
+			slug="tax_rates"
 		/>
 		<LayoutContainer>
 			<BaseTable
@@ -126,6 +126,7 @@ definePageMeta({
 				:columns="[
 					{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: true },
 					{ key: 'name', name: 'Název', type: 'text', width: 80, hidden: false, sortable: true },
+					{ key: 'rate', name: 'Sazba', type: 'percent', width: 80, hidden: true, sortable: true, colorKey: 'phase_color' },
 				]"
 				:actions="[
 					{ type: 'edit' },
@@ -133,10 +134,10 @@ definePageMeta({
 				]"
 				:loading="loading"
 				:error="error"
-				singular="Status projektu"
-				plural="Statusy projektů"
+				singular="Sazbu DPH"
+				plural="Sazby DPH"
 				:query="tableQuery"
-				slug="projects"
+				slug="tax_rates"
 				@delete-item="deleteItem"
 				@update-sort="updateSort"
 				@update-page="updatePage"

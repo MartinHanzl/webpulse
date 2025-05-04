@@ -3,7 +3,7 @@
 namespace App\Models\Project;
 
 use App\Models\Contact\Contact;
-use App\Models\TaxRate\TaxRate;
+use App\Models\TaxRate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 

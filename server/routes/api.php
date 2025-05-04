@@ -12,15 +12,16 @@ use App\Http\Controllers\Admin\Contact\ContactPhaseController;
 use App\Http\Controllers\Admin\Contact\ContactSourceController;
 use App\Http\Controllers\Admin\Contact\ContactTaskController;
 use App\Http\Controllers\Admin\Message\MessageBlueprintController;
+use App\Http\Controllers\Admin\Project\ProjectController;
+use App\Http\Controllers\Admin\Project\ProjectStatusController;
+use App\Http\Controllers\Admin\TaxRate\TaxRateController;
+use \App\Http\Controllers\Admin\Language\LanguageController;
 use App\Http\Controllers\Admin\User\ProfileController;
 use App\Http\Controllers\Admin\User\QuickAccessController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Admin\User\UserGroupController;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Admin\TaxRate\TaxRateController;
-use App\Http\Controllers\Admin\Project\ProjectController;
-use App\Http\Controllers\Admin\Project\ProjectStatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -196,6 +197,16 @@ Route::group([
             Route::get('{id}', [TaxRateController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [TaxRateController::class, 'store']);
             Route::delete('{id}', [TaxRateController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        // Language routes
+        Route::group([
+            'prefix' => 'language'
+        ], function () {
+            Route::get('', [LanguageController::class, 'index']);
+            Route::get('{id}', [LanguageController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [LanguageController::class, 'store']);
+            Route::delete('{id}', [LanguageController::class, 'destroy'])->where('id', '[0-9]+');
         });
 
         // Projects routes

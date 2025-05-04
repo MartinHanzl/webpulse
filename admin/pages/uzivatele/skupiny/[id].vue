@@ -49,6 +49,9 @@ const allowedPermissions = ref([
 	{ name: 'Aktivita', value: 'Aktivita', slug: 'users_has_activities' },
 	{ name: 'Aktivity', value: 'Aktivity', slug: 'activities' },
 	{ name: 'Sazby DPH', value: 'Sazby DPH', slug: 'tax_rates' },
+	{ name: 'Jazyky', value: 'Jazyky', slug: 'languages' },
+	{ name: 'Země', value: 'Země', slug: 'countries' },
+	{ name: 'Měny', value: 'Měny', slug: 'currencies' },
 ]);
 
 const item = ref({
