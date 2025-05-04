@@ -39,6 +39,16 @@ const props = defineProps({
 		required: false,
 		default: false,
 	},
+  labelColor: {
+    type: String,
+    required: false,
+    default: 'gray-900',
+  },
+  reverse: {
+    type: Boolean,
+    required: false,
+    default: false,
+  }
 });
 defineRule('min', (value, { min }) => {
 	if (value.length < min && props.type === 'text') {
@@ -138,7 +148,7 @@ const badgeClass = computed(() => (color: string) => {
 <template>
 	<fieldset>
 		<div class="space-y-5">
-			<div class="flex gap-3">
+			<div :class="[reverse ? 'justify-between flex-row-reverse' : 'flex-row', 'flex gap-3']">
 				<div class="flex h-6 shrink-0 items-center">
 					<div class="group grid size-4 grid-cols-1">
 						<input
@@ -148,7 +158,7 @@ const badgeClass = computed(() => (color: string) => {
 							:name="name"
 							type="checkbox"
 							:checked="checked"
-							class="col-start-1 row-start-1 appearance-none rounded border border-grayLight bg-white checked:border-primaryCustom checked:bg-primaryCustom indeterminate:border-primaryCustom indeterminate:bg-primaryCustom disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100"
+							class="col-start-1 row-start-1 appearance-none rounded border border-grayLight bg-white checked:border-primaryCustom checked:bg-primaryCustom indeterminate:border-primaryCustom indeterminate:bg-primaryCustom disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 active:border-primaryCustom active:bg-primaryCustom focus:border-primaryCustom focus:ring-primaryCustom"
 						>
 						<svg
 							class="pointer-events-none col-start-1 row-start-1 size-1.5 self-center justify-self-center stroke-white group-has-[:disabled]:stroke-gray-950/25"
@@ -182,7 +192,7 @@ const badgeClass = computed(() => (color: string) => {
 					<label
 						v-else
 						:for="name"
-						class="font-medium text-gray-900"
+						:class="'font-medium' + ' text-' + labelColor"
 					>{{ label }}</label>
 				</div>
 			</div>

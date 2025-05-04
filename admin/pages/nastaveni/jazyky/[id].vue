@@ -33,6 +33,7 @@ const item = ref({
 	name: '' as string,
 	code: '' as string,
 	iso: '' as string,
+	active: true as boolean,
 	translations: {} as object,
 });
 const translatableAttributes = ref([
@@ -47,6 +48,7 @@ async function loadItem() {
 		id: number | null;
 		code: string;
 		iso: string;
+		active: boolean;
 		translations: object;
 	}>('/api/admin/language/' + route.params.id, {
 		method: 'GET',
@@ -83,6 +85,7 @@ async function saveItem() {
 		id: number | null;
 		code: string;
 		iso: string;
+		active: boolean;
 		translations: object;
 	}>(route.params.id === 'pridat' ? '/api/admin/language' : '/api/admin/language/' + route.params.id, {
 		method: 'POST',
@@ -187,6 +190,15 @@ definePageMeta({
 						name="locale"
 						class="col-span-1"
 						:options="languageStore.languageOptions"
+					/>
+					<BaseFormCheckbox
+						name="active"
+						label="Aktivní"
+						v-model="item.active"
+            class="col-span-1 justify-between flex-row-reverse mt-4"
+            :checked="item.active"
+            label-color="grayCustom"
+            :reverse="true"
 					/>
 				</LayoutContainer>
 			</div>

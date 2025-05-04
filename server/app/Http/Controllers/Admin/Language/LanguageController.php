@@ -83,7 +83,6 @@ class LanguageController extends Controller
 
             DB::commit();
         } catch (\Throwable|\Exception $e) {
-            dd($e->getMessage());
             DB::rollBack();
             return Response::json(['message' => 'An error occurred while updating language.'], 500);
         }
