@@ -39,16 +39,16 @@ const props = defineProps({
 		required: false,
 		default: false,
 	},
-  labelColor: {
-    type: String,
-    required: false,
-    default: 'gray-900',
-  },
-  reverse: {
-    type: Boolean,
-    required: false,
-    default: false,
-  }
+	labelColor: {
+		type: String,
+		required: false,
+		default: 'gray-900',
+	},
+	reverse: {
+		type: Boolean,
+		required: false,
+		default: false,
+	},
 });
 defineRule('min', (value, { min }) => {
 	if (value.length < min && props.type === 'text') {

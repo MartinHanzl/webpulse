@@ -44,6 +44,11 @@ const props = defineProps({
 		required: false,
 		default: 0,
 	},
+	step: {
+		type: Number,
+		required: false,
+		default: 1,
+	},
 });
 defineRule('min', (value, { min }) => {
 	if (value.length < min && props.type === 'text') {
@@ -109,8 +114,9 @@ defineRule('email', (value) => {
 			:disabled="disabled"
 			aria-autocomplete="none"
 			autocomplete="off"
-			:min="min > 0 ? min : 3"
+			:min="min >= 0 ? min : 3"
 			:max="max > 0 ? max : 45"
+			:step="step"
 			:autofocus="false"
 			tabindex="-1"
 			:class="[
