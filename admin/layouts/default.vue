@@ -40,10 +40,14 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
 import { useActivityStore } from '~/stores/activityStore';
 import { useLanguageStore } from '~/stores/languageStore';
+import { useCountryStore} from "~/stores/countryStore";
+import { useCurrencyStore} from "~/stores/currencyStore";
 
 const userGroupStore = useUserGroupStore();
 const activityStore = useActivityStore();
 const languageStore = useLanguageStore();
+const countryStore = useCountryStore();
+const currencyStore = useCurrencyStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -63,13 +67,12 @@ const navigation = ref([
 		{ name: 'Blog', link: '/kontakty', icon: UsersIcon, current: false, slug: 'demo' },
 		{ name: 'Informační stránky', link: '/aktivita', icon: CalendarIcon, current: false, slug: 'demo' },
 		{ name: 'Služby', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'demo' },
-		{ name: 'Rezervace', link: '/demo', icon: CalendarIcon, current: false, slug: 'demo' },
+		{ name: 'Události a akce', link: '/demo', icon: CalendarIcon, current: false, slug: 'demo' },
 	] },
 	{ title: 'Uživatelé', menu: [
 		{ name: 'Uživatelé', link: '/sablony-zprav', icon: ChatBubbleBottomCenterTextIcon, current: false, slug: 'demo' },
 		{ name: 'Odběry newsletteru', link: '/kontakty', icon: UsersIcon, current: false, slug: 'demo' },
 		{ name: 'Požadavky', link: '/aktivita', icon: CalendarIcon, current: false, slug: 'demo' },
-		{ name: 'Rezervace', link: '/demo', icon: CalendarIcon, current: false, slug: 'demo' },
 	] },
 	{ title: 'Byznys a osobní růst', menu: [
 		{ name: 'Kontakty', link: '/kontakty', icon: UsersIcon, current: false, slug: 'contacts' },
@@ -80,13 +83,16 @@ const navigation = ref([
 		{ name: 'Ligy', link: '/demo', icon: TrophyIcon, current: false, slug: 'leagues' },
 		{ name: 'Akce', link: '/demo', icon: CalendarDaysIcon, current: false, slug: 'events' },
 	] },
-	{ title: 'Osobní sekce', menu: [
-		{ name: 'Projekty', link: '/projekty', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
+	{ title: 'Vedení firmy', menu: [
 		{ name: 'Klienti', link: '/klienti', icon: BuildingOfficeIcon, current: false, slug: 'clients' },
-		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
-		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
+		{ name: 'Projekty', link: '/projekty', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
 		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false, slug: 'pricings' },
-		{ name: 'Hodnocení', link: '/demo', icon: StarIcon, current: false, slug: 'ratings' },
+		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
+		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
+    { name: 'Dodavatelé', link: '/dodavatele', icon: BuildingOfficeIcon, current: false, slug: 'suppliers' },
+    { name: 'Zaměstnanci', link: '/zamestnanci', icon: UsersIcon, current: false, slug: 'employees' },
+    { name: 'Úkoly', link: '/ukoly', icon: ChartBarSquareIcon, current: false, slug: 'tasks' },
+    { name: 'Smlouvy', link: '/smlouvy', icon: DocumentTextIcon, current: false, slug: 'contracts' },
 	] },
 	{ title: 'Nastavení a správa', menu: [
 		{ name: 'Uživatelé', link: '/uzivatele', icon: UsersIcon, current: false, slug: 'users' },
@@ -156,6 +162,8 @@ onMounted(() => {
 	userGroupStore.fetchUserGroups();
 	activityStore.fetchActivities();
 	languageStore.fetchLanguages();
+  countryStore.fetchCountries();
+  currencyStore.fetchCurrencies();
 	setTimeout(() => {
 		navigation.value = filterNavigationGroups(navigation.value);
 	}, 100000);
