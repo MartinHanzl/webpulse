@@ -171,7 +171,7 @@ definePageMeta({
 			@save="saveItem"
 		/>
 		<Form @submit="saveItem">
-			<div class="grid grid-cols-1 lg:grid-cols-7 gap-x-4 gap-y-8">
+			<div class="grid grid-cols-1 lg:grid-cols-7 gap-x-4 gap-y-8 items-baseline">
 				<LayoutContainer class="col-span-5 w-full">
 					<div class="grid grid-cols-2 gap-x-8 gap-y-4 pb-6 border-b">
 						<BaseFormInput
