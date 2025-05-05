@@ -125,8 +125,9 @@ definePageMeta({
 				:items="items"
 				:columns="[
 					{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: true },
-					{ key: 'name', name: 'Název', type: 'text', width: 80, hidden: false, sortable: true },
+					{ key: 'name', name: 'Název', type: 'text', width: 80, hidden: false, sortable: false },
 					{ key: 'code', name: 'Kód', type: 'text', width: 80, hidden: true, sortable: true },
+					{ key: 'iso', name: 'ISO', type: 'text', width: 80, hidden: true, sortable: true },
 					{ key: 'active', name: 'Aktivní', type: 'status', width: 80, hidden: true, sortable: true },
 				]"
 				:actions="[

@@ -4,7 +4,7 @@ import _ from 'lodash';
 import { definePageMeta } from '#imports';
 
 const toast = useToast();
-const pageTitle = ref('Měny');
+const pageTitle = ref('Země');
 
 const loading = ref(false);
 const error = ref(false);
@@ -12,7 +12,7 @@ const error = ref(false);
 const breadcrumbs = ref([
 	{
 		name: pageTitle.value,
-		link: '/nastaveni/meny',
+		link: '/nastaveni/zeme',
 		current: true,
 	},
 ]);
@@ -32,7 +32,7 @@ async function loadItems() {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{ id: number }>('/api/admin/currency', {
+	await client<{ id: number }>('/api/admin/country', {
 		method: 'GET',
 		query: tableQuery.value,
 		headers: {
@@ -46,7 +46,7 @@ async function loadItems() {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst měny. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst země. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -58,7 +58,7 @@ async function deleteItem(id: number) {
 	loading.value = true;
 	const client = useSanctumClient();
 
-	await client<{ id: number }>('/api/admin/currency/' + id, {
+	await client<{ id: number }>('/api/admin/country/' + id, {
 		method: 'DELETE',
 		headers: {
 			'Accept': 'application/json',
@@ -68,7 +68,7 @@ async function deleteItem(id: number) {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se smazat položku měny.',
+			description: 'Nepodařilo se smazat položku země.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -116,9 +116,9 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 			:actions="[
-				{ type: 'add', text: 'Přidat měnu' },
+				{ type: 'add', text: 'Přidat zemi' },
 			]"
-			slug="currencies"
+			slug="countries"
 		/>
 		<LayoutContainer>
 			<BaseTable
@@ -127,8 +127,7 @@ definePageMeta({
 					{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: true },
 					{ key: 'name', name: 'Název', type: 'text', width: 80, hidden: false, sortable: false },
 					{ key: 'code', name: 'Kód', type: 'text', width: 80, hidden: true, sortable: true },
-					{ key: 'symbol_before', name: 'Symbol před', type: 'text', width: 80, hidden: true, sortable: false },
-					{ key: 'symbol_after', name: 'Symbol za', type: 'text', width: 80, hidden: true, sortable: false },
+					{ key: 'iso', name: 'ISO', type: 'text', width: 80, hidden: true, sortable: true },
 					{ key: 'active', name: 'Aktivní', type: 'status', width: 80, hidden: true, sortable: true },
 				]"
 				:actions="[
@@ -137,10 +136,10 @@ definePageMeta({
 				]"
 				:loading="loading"
 				:error="error"
-				singular="Měnu"
-				plural="Měny"
+				singular="Země"
+				plural="Země"
 				:query="tableQuery"
-				slug="currencies"
+				slug="countries"
 				@delete-item="deleteItem"
 				@update-sort="updateSort"
 				@update-page="updatePage"

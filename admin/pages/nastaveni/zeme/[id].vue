@@ -13,17 +13,17 @@ const selectedLocale = ref('cs');
 const error = ref(false);
 const loading = ref(false);
 
-const pageTitle = ref(route.params.id === 'pridat' ? 'Nová měna' : 'Detail měny');
+const pageTitle = ref(route.params.id === 'pridat' ? 'Nová země' : 'Detail země');
 
 const breadcrumbs = ref([
 	{
-		name: 'Měny',
-		link: '/nastaveni/měny',
+		name: 'Země',
+		link: '/nastaveni/zeme',
 		current: false,
 	},
 	{
-		name: 'Nová měna',
-		link: '/nastaveni/meny/pridat',
+		name: 'Nový jazyk',
+		link: '/nastaveni/zeme/pridat',
 		current: true,
 	},
 ]);
@@ -32,19 +32,13 @@ const item = ref({
 	id: null as number | null,
 	name: '' as string,
 	code: '' as string,
-	rate: 0 as number,
-	decimals: 0 as number,
+	iso: '' as string,
+	phone_prefix: '' as string,
 	active: true as boolean,
-	bank_account_number: '' as string,
-	bank_account_name: '' as string,
-	bank_account_iban: '' as string,
-	bank_account_swift: '' as string,
 	translations: {} as object,
 });
 const translatableAttributes = ref([
 	{ field: 'name' as string, label: 'Název' as string },
-	{ field: 'symbol_before' as string, label: 'Symbol před' as string },
-	{ field: 'symbol_after' as string, label: 'Symbol za' as string },
 ]);
 
 async function loadItem() {
@@ -53,17 +47,12 @@ async function loadItem() {
 
 	await client<{
 		id: number | null;
-		name: string;
 		code: string;
-		rate: number;
-		decimals: number;
+		iso: string;
+		phone_prefix: string;
 		active: boolean;
-		bank_account_number: string;
-		bank_account_name: string;
-		bank_account_iban: string;
-		bank_account_swift: string;
 		translations: object;
-	}>('/api/admin/currency/' + route.params.id, {
+	}>('/api/admin/country/' + route.params.id, {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
@@ -74,7 +63,7 @@ async function loadItem() {
 		breadcrumbs.value.pop();
 		breadcrumbs.value.push({
 			name: item.value.name,
-			link: '/nastaveni/meny/' + route.params.id,
+			link: '/nastaveni/zeme/' + route.params.id,
 			current: true,
 		});
 		fillEmptyTranslations();
@@ -82,7 +71,7 @@ async function loadItem() {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst měnu. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst zemi. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -96,17 +85,12 @@ async function saveItem() {
 
 	await client<{
 		id: number | null;
-		name: string;
 		code: string;
-		rate: number;
-		decimals: number;
+		iso: string;
+		phone_prefix: string;
 		active: boolean;
-		bank_account_number: string;
-		bank_account_name: string;
-		bank_account_iban: string;
-		bank_account_swift: string;
 		translations: object;
-	}>(route.params.id === 'pridat' ? '/api/admin/currency' : '/api/admin/currency/' + route.params.id, {
+	}>(route.params.id === 'pridat' ? '/api/admin/country' : '/api/admin/country/' + route.params.id, {
 		method: 'POST',
 		body: JSON.stringify(item.value),
 		headers: {
@@ -116,15 +100,16 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: route.params.id === 'pridat' ? 'Měna byla úspěšně vytvořena.' : 'Měna byla úspěšně upravena.',
+			description: route.params.id === 'pridat' ? 'Země byla úspěšně vytvořena.' : 'Země byla úspěšně upravena.',
 			color: 'green',
 		});
-		router.push('/nastaveni/meny');
+		router.push('/nastaveni/zeme');
+		languageStore.fetchLanguages();
 	}).catch(() => {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se upravit měnu. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
+			description: 'Nepodařilo se upravit zemi. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -164,16 +149,16 @@ definePageMeta({
 <template>
 	<div>
 		<LayoutHeader
-			:title="route.params.id === 'pridat' ? 'Nová měna' : item.name"
+			:title="route.params.id === 'pridat' ? 'Nová země' : item.name"
 			:breadcrumbs="breadcrumbs"
 			:actions="[{ type: 'save' }]"
-			slug="currencies"
+			slug="countries"
 			@save="saveItem"
 		/>
 		<Form @submit="saveItem">
 			<div class="grid grid-cols-1 lg:grid-cols-7 gap-x-4 gap-y-8">
 				<LayoutContainer class="col-span-5 w-full">
-					<div class="grid grid-cols-2 gap-x-8 gap-y-4 pb-6 border-b">
+					<div class="grid grid-cols-2 gap-x-8 gap-y-4">
 						<BaseFormInput
 							v-if="item.translations && item.translations[selectedLocale] !== undefined && item.translations[selectedLocale].name !== undefined"
 							v-model="item.translations[selectedLocale].name"
@@ -185,77 +170,26 @@ definePageMeta({
 						/>
 						<BaseFormInput
 							v-model="item.code"
-							label="Kód"
+							label="Kód země"
 							type="text"
 							name="code"
 							rules="required|min:2"
 							class="col-span-1"
 						/>
 						<BaseFormInput
-							v-model="item.rate"
-							label="Převod"
-							type="number"
-							name="rate"
-							rules="required"
-							class="col-span-1"
-							:min="0"
-							:step="0.000001"
-						/>
-						<BaseFormInput
-							v-model="item.decimals"
-							label="Počet desetinných míst"
-							type="number"
-							name="decimals"
-							rules="required"
-							class="col-span-1"
-							:min="0"
-						/>
-						<BaseFormInput
-							v-if="item.translations && item.translations[selectedLocale] !== undefined && item.translations[selectedLocale].symbol_before !== undefined"
-							v-model="item.translations[selectedLocale].symbol_before"
-							label="Symbol před"
+							v-model="item.iso"
+							label="ISO kód země"
 							type="text"
-							name="symbol_before"
-							rules="required|min:1"
+							name="iso"
+							rules="required|min:2"
 							class="col-span-1"
 						/>
 						<BaseFormInput
-							v-if="item.translations && item.translations[selectedLocale] !== undefined && item.translations[selectedLocale].symbol_after !== undefined"
-							v-model="item.translations[selectedLocale].symbol_after"
-							label="Symbol za"
+							v-model="item.phone_prefix"
+							label="Telefonní předvolba země"
 							type="text"
-							name="symbol_after"
-							rules="required|min:1"
-							class="col-span-1"
-						/>
-					</div>
-					<div class="grid grid-cols-2 gap-x-8 gap-y-4 pt-6">
-						<BaseFormInput
-							v-model="item.bank_account_number"
-							label="Číslo bankovního účtu"
-							type="text"
-							name="bank_account_number"
-							class="col-span-1"
-						/>
-						<BaseFormInput
-							v-model="item.bank_account_name"
-							label="Jméno majitele bankovního účtu"
-							type="text"
-							name="bank_account_name"
-							class="col-span-1"
-						/>
-						<BaseFormInput
-							v-model="item.bank_account_iban"
-							label="IBAN bankovního účtu"
-							type="text"
-							name="bank_account_iban"
-							class="col-span-1"
-						/>
-						<BaseFormInput
-							v-model="item.bank_account_swift"
-							label="SWIFT bankovního účtu"
-							type="text"
-							name="bank_account_swift"
+							name="phone_prefix"
+							rules="required|min:2"
 							class="col-span-1"
 						/>
 					</div>

@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\User\UserGroupController;
 use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Currency\CurrencyController;
+use App\Http\Controllers\Admin\Country\CountryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -218,6 +219,16 @@ Route::group([
             Route::get('{id}', [CurrencyController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [CurrencyController::class, 'store']);
             Route::delete('{id}', [CurrencyController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        // Country routes
+        Route::group([
+            'prefix' => 'country'
+        ], function () {
+            Route::get('', [CountryController::class, 'index']);
+            Route::get('{id}', [CountryController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [CountryController::class, 'store']);
+            Route::delete('{id}', [CountryController::class, 'destroy'])->where('id', '[0-9]+');
         });
 
         // Projects routes

@@ -184,13 +184,15 @@ definePageMeta({
 					</div>
 				</LayoutContainer>
 				<LayoutContainer class="col-span-2 w-full">
-					<BaseFormSelect
-						v-model="selectedLocale"
-						label="Jazyk"
-						name="locale"
-						class="col-span-1"
-						:options="languageStore.languageOptions"
-					/>
+					<div class="col-span-1 pb-6 border-b">
+						<BaseFormSelect
+							v-model="selectedLocale"
+							label="Jazyk"
+							name="locale"
+							class="w-full"
+							:options="languageStore.languageOptions"
+						/>
+					</div>
 					<BaseFormCheckbox
 						v-model="item.active"
 						name="active"
