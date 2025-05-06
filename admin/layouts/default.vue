@@ -88,7 +88,7 @@ const navigation = ref([
 	{ title: 'Vedení firmy', menu: [
 		{ name: 'Klienti', link: '/klienti', icon: BuildingOfficeIcon, current: false, slug: 'clients' },
 		{ name: 'Projekty', link: '/projekty', icon: BuildingOfficeIcon, current: false, slug: 'projects' },
-		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false, slug: 'pricings' },
+		{ name: 'Cenové nabídky', link: '/demo', icon: DocumentTextIcon, current: false, slug: 'price_offers' },
 		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
 		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
 		{ name: 'Dodavatelé', link: '/dodavatele', icon: BuildingOfficeIcon, current: false, slug: 'suppliers' },

@@ -20,14 +20,14 @@ class ProjectSimpleResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'expected_price' => $this->expected_price,
-            'total_price' => $this->total_price,
+            'expected_price_vat' => $this->expected_price,
             'total_price_vat' => $this->total_price_vat,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'tax_rate' => TaxRateResource::make($this->taxRate),
             'client' => ContactSimpleResource::make($this->client),
-            'status' => $this->status,
+            'status_name' => $this->status?->name,
+            'status_color' => $this->status?->color,
             'updated_at' => $this->updated_at,
             'currency' => CurrencyResource::make($this->currency),
         ];

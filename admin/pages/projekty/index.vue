@@ -129,6 +129,9 @@ definePageMeta({
 				:columns="[
 					{ key: 'id', name: 'ID', type: 'text', width: 80, hidden: false, sortable: true },
 					{ key: 'name', name: 'Název', type: 'text', width: 80, hidden: false, sortable: true },
+					{ key: 'expected_price_vat', name: 'Očekávaná cena (vč. DPH)', type: 'number', width: 80, hidden: true, sortable: true },
+					{ key: 'total_price_vat', name: 'Konečená cena (vč. DPH)', type: 'number', width: 80, hidden: true, sortable: true },
+					{ key: 'status_name', name: 'Stav projektu', type: 'badge', width: 80, hidden: false, sortable: false, colorKey: 'status_color' },
 				]"
 				:actions="[
 					{ type: 'edit', hash: '#info' },

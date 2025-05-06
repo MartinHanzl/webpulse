@@ -42,7 +42,7 @@ const allowedPermissions = ref([
 	{ name: 'Projekty', value: 'Projekty', slug: 'projects' },
 	{ name: 'Faktury', value: 'Faktury', slug: 'invoices' },
 	{ name: 'Trackování', value: 'Trackování', slug: 'trackings' },
-	{ name: 'Nacenění', value: 'Nacenění', slug: 'pricings' },
+	{ name: 'Cenové nabídky', value: 'Nacenění', slug: 'price_offers' },
 	{ name: 'Uživatelé', value: 'Uživatelé', slug: 'users' },
 	{ name: 'Uživatelské skupiny', value: 'Uživatelské skupiny', slug: 'user_groups' },
 	{ name: 'Šablony zpráv', value: 'Šablony zpráv', slug: 'message_blueprints' },
