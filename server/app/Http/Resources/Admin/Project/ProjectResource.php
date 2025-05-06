@@ -58,9 +58,9 @@ class ProjectResource extends JsonResource
             'client' => ContactSimpleResource::make($this->client),
             'events' => $this->events,
             'start_date' => $this->start_date,
-            'formatted_start_date' => $this->start_date?->format('Y-m-d H:i:s'),
+            'formatted_start_date' => $this->start_date?->format('Y-m-d'),
             'end_date' => $this->end_date,
-            'formatted_end_date' => $this->end_date?->format('Y-m-d H:i:s'),
+            'formatted_end_date' => $this->end_date?->format('Y-m-d'),
             'currency_id' => $this->currency_id,
             'currency' => CurrencyResource::make($this->currency),
         ];
