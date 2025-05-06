@@ -119,7 +119,7 @@ definePageMeta({
 				{ type: 'add', text: 'Přidat projekt' },
 			]"
       :links="[
-				{ name: 'Stavy projektů', to: '/projekty/stavy' },
+				{ name: 'Stavy projektů', to: 'projekty-stavy' },
 			]"
 			slug="projects"
 		/>
