@@ -3,6 +3,7 @@
 namespace App\Http\Resources\Admin\Project;
 
 use App\Http\Resources\Admin\Contact\ContactSimpleResource;
+use App\Http\Resources\Admin\Currency\CurrencyResource;
 use App\Http\Resources\Admin\TaxRate\TaxRateResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -26,8 +27,9 @@ class ProjectSimpleResource extends JsonResource
             'end_date' => $this->end_date,
             'tax_rate' => TaxRateResource::make($this->taxRate),
             'client' => ContactSimpleResource::make($this->client),
-            'statuses' => $this->statuses,
+            'status' => $this->status,
             'updated_at' => $this->updated_at,
+            'currency' => CurrencyResource::make($this->currency),
         ];
     }
 }

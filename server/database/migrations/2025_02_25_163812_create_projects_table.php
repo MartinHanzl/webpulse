@@ -24,9 +24,9 @@ return new class extends Migration {
             $table->string('note')->nullable();
             $table->string('image')->nullable();
 
-            $table->decimal('expected_price', 5, 2);
-            $table->decimal('total_price', 5, 2)->nullable();
-            $table->decimal('total_price_vat', 5, 2)->nullable();
+            $table->decimal('expected_price', 10, 2);
+            $table->decimal('total_price', 10, 2)->nullable();
+            $table->decimal('total_price_vat', 10, 2)->nullable();
 
             $table->string('invoice_firstname')->nullable();
             $table->string('invoice_lastname')->nullable();
@@ -60,15 +60,6 @@ return new class extends Migration {
             $table->date('end_date')->nullable();
             $table->timestamps();
         });
-
-        Schema::create('projects_has_statuses', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            $table->unsignedBigInteger('project_status_id');
-            $table->foreign('project_status_id')->references('id')->on('project_statuses')->onDelete('cascade');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -78,6 +69,5 @@ return new class extends Migration {
     {
         Schema::dropIfExists('project_statuses');
         Schema::dropIfExists('projects');
-        Schema::dropIfExists('projects_has_statuses');
     }
 };

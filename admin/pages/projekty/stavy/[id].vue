@@ -10,7 +10,7 @@ const router = useRouter();
 const error = ref(false);
 const loading = ref(false);
 
-const pageTitle = ref(route.params.id === 'pridat' ? 'Nový status projektu' : 'Statusu projektu');
+const pageTitle = ref(route.params.id === 'pridat' ? 'Nový stav projektu' : 'Stav projektu');
 
 const breadcrumbs = ref([
 	{
@@ -20,12 +20,12 @@ const breadcrumbs = ref([
 	},
 	{
 		name: 'Statusy projektů',
-		link: '/projekty/statusy',
-		current: true,
+		link: '/projekty/stavy',
+		current: false,
 	},
 	{
 		name: 'Nový status projektu',
-		link: '/projekty/statusy/pridat',
+		link: '/projekty/stavy/pridat',
 		current: true,
 	},
 ]);
@@ -55,14 +55,14 @@ async function loadItem() {
 		breadcrumbs.value.pop();
 		breadcrumbs.value.push({
 			name: item.value.name,
-			link: '/projekty/statusy/' + route.params.id,
+			link: '/projekty/stavy/' + route.params.id,
 			current: true,
 		});
 	}).catch(() => {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst status projektu. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst stav projektu. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -88,15 +88,15 @@ async function saveItem() {
 	}).then(() => {
 		toast.add({
 			title: 'Hotovo',
-			description: route.params.id === 'pridat' ? 'Status projektu byl úspěšně vytvořen.' : 'Status projektu byl úspěšně upraven.',
+			description: route.params.id === 'pridat' ? 'Stav projektu byl úspěšně vytvořen.' : 'Stav projektu byl úspěšně upraven.',
 			color: 'green',
 		});
-		router.push('/projekty/statusy');
+		router.push('/projekty/stavy');
 	}).catch(() => {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se uložit status projektu. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
+			description: 'Nepodařilo se uložit stav projektu. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -121,7 +121,7 @@ definePageMeta({
 <template>
 	<div>
 		<LayoutHeader
-			:title="route.params.id === 'pridat' ? 'Nový status projektu' : item.name"
+			:title="route.params.id === 'pridat' ? 'Nový stav projektu' : item.name"
 			:breadcrumbs="breadcrumbs"
 			:actions="[{ type: 'save' }]"
 			slug="projects"

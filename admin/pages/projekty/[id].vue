@@ -1,8 +1,61 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { Form } from 'vee-validate';
+import { useCurrencyStore } from '~/stores/currencyStore';
+import { useCountryStore } from '~/stores/countryStore';
+import { useTaxRateStore } from "~/stores/taxRateStore";
+
+interface Project {
+  id: number | null;
+  name: string;
+  description: string;
+  note: string;
+  image: string;
+  hourly_rate: number;
+  expected_price: number;
+  expected_price_vat: number;
+  expected_hours: number;
+  total_price: number;
+  total_price_vat: number;
+  total_hours: number;
+  start_date: string;
+  formatted_start_date: string;
+  end_date: string;
+  formatted_end_date: string;
+  invoice_firstname: string;
+  invoice_lastname: string;
+  invoice_email: string;
+  invoice_phone_prefix: string;
+  invoice_phone: string;
+  invoice_street: string;
+  invoice_city: string;
+  invoice_zip: string;
+  invoice_country_id: number | null;
+  is_delivery_address_same: boolean;
+  invoice_ico: string;
+  invoice_dic: string;
+  delivery_firstname: string;
+  delivery_lastname: string;
+  delivery_email: string;
+  delivery_phone_prefix: string;
+  delivery_phone: string;
+  delivery_street: string;
+  delivery_city: string;
+  delivery_zip: string;
+  delivery_country_id: number | null;
+  currency_id: number | null;
+  client_id: number | null;
+  tax_rate_id: number | null;
+  status_id: number | null;
+}
+
+const statuses = ref([]);
 
 const toast = useToast();
+
+const countryStore = useCountryStore();
+const currencyStore = useCurrencyStore();
+const taxRateStore = useTaxRateStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -31,21 +84,13 @@ const breadcrumbs = ref([
 	},
 ]);
 
-const item = ref({
-	id: null as number | null,
-	name: '' as string,
-	rate: 0 as number,
-});
+const item = ref({} as Project);
 
 async function loadItem() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{
-		id: number | null;
-		name: string;
-		rate: number;
-	}>('/api/admin/project/' + route.params.id, {
+	await client<Project>('/api/admin/project/' + route.params.id, {
 		method: 'GET',
 		headers: {
 			'Accept': 'application/json',
@@ -75,11 +120,7 @@ async function saveItem() {
 	const client = useSanctumClient();
 	loading.value = true;
 
-	await client<{
-		id: number | null;
-		name: string;
-		rate: number;
-	}>(route.params.id === 'pridat' ? '/api/admin/project' : '/api/admin/project/' + route.params.id, {
+	await client<Project>(route.params.id === 'pridat' ? '/api/admin/project' : '/api/admin/project/' + route.params.id, {
 		method: 'POST',
 		body: JSON.stringify(item.value),
 		headers: {
@@ -92,7 +133,7 @@ async function saveItem() {
 			description: route.params.id === 'pridat' ? 'Projekt byl úspěšně vytvořen.' : 'Projekt byl úspěšně upraven.',
 			color: 'green',
 		});
-		router.push('/jazyky');
+		router.push('/projekty');
 	}).catch(() => {
 		error.value = true;
 		toast.add({
@@ -103,6 +144,41 @@ async function saveItem() {
 	}).finally(() => {
 		loading.value = false;
 	});
+}
+
+async function loadStatuses() {
+  const client = useSanctumClient();
+  loading.value = true;
+
+  await client<Project>('/api/admin/project/status', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then((response) => {
+    statuses.value = response.map((status: any) => ({
+      value: status.id,
+      name: status.name,
+    }));
+  }).catch(() => {
+    error.value = true;
+    toast.add({
+      title: 'Chyba',
+      description: 'Nepodařilo se načíst stavy projektů. Zkuste to prosím později.',
+      color: 'red',
+    });
+  }).finally(() => {
+    loading.value = false;
+  });
+}
+
+function calculatePriceWithVAT(rate: number = 0, type: string = 'expected_price') {
+  if(type === 'expected_price') {
+  item.value.expected_price_vat = item.value.expected_price * (1 + (rate / 100));
+  } else if (type === 'total_price') {
+  item.value.total_price_vat = item.value.total_price * (1 + (rate / 100));
+}
 }
 
 watchEffect(() => {
@@ -118,11 +194,37 @@ watchEffect(() => {
 	}
 });
 
+watch(
+    () => item.value.expected_hours,
+    () => {
+      if(item.value.hourly_rate === 0) {
+        item.value.expected_price = 0;
+      } else {
+        item.value.expected_price = item.value.expected_hours * item.value.hourly_rate;
+      }
+    }
+)
+watch(
+    () => item.value.expected_price,
+    () => {
+      const currentRate = taxRateStore.taxRates.find((rate) => rate.id === item.value.tax_rate_id);
+        calculatePriceWithVAT(currentRate?.rate, 'expected_price');
+    }
+)
+watch(
+    () => item.value.total_price,
+    () => {
+      const currentRate = taxRateStore.taxRates.find((rate) => rate.id === item.value.tax_rate_id);
+        calculatePriceWithVAT(currentRate?.rate, 'total_price');
+    }
+)
+
 useHead({
 	title: pageTitle.value,
 });
 
 onMounted(() => {
+  loadStatuses();
 	if (route.params.id !== 'pridat') {
 		loadItem();
 	}
@@ -164,77 +266,151 @@ definePageMeta({
 		</div>
 		<Form @submit="saveItem">
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#info')">
-				<div class="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-2 lg:gap-y-4">
-					<LayoutContainer class="col-span-9 w-full">
-						<LayoutTitle>Základní údaje</LayoutTitle>
-						<div class="grid grid-cols-2 gap-x-8 gap-y-4">
-							<BaseFormInput
-								v-model="item.name"
-								label="Název"
-								type="text"
-								name="firstname"
-								rules="required|min:3"
-								class="col-span-full"
-							/>
-							<BaseFormTextarea
-								v-model="item.description"
-								label="Příjmení"
-								name="lastname"
-								rules="required|min:3"
-								class="col-span-full"
-							/>
-							<BaseFormTextarea
-								v-model="item.note"
-								label="E-mail"
-								name="email"
-								rules="email"
-								class="col-span-full"
-							/>
-							<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
-							<BaseFormInput
-								v-model="item.company"
-								label="Očekáváná cena"
-								type="text"
-								name="company"
-								class="col-span-1"
-							/>
-							<BaseFormInput
-								v-model="item.company"
-								label="Celková cena"
-								type="text"
-								name="company"
-								class="col-span-1"
-							/>
-							<BaseFormInput
-								v-model="item.company"
-								label="Celková cena vč. DPH"
-								type="text"
-								name="company"
-								class="col-span-1"
-							/>
-							<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
-							<BaseFormInput
-								v-model="item.company"
-								label="Datum začátku"
-								type="text"
-								name="company"
-								class="col-span-1"
-							/>
-							<BaseFormInput
-								v-model="item.company"
-								label="Datum ukončení"
-								type="text"
-								name="company"
-								class="col-span-1"
-							/>
-						</div>
+				<div class="grid grid-cols-1 lg:grid-cols-12 gap-x-8 gap-y-2 lg:gap-y-4 items-baseline">
+					<div class="col-span-9 grid grid-cols-1 lg:grid-cols-12">
+						<LayoutContainer class="col-span-full w-full">
+							<LayoutTitle>Základní údaje</LayoutTitle>
+							<div class="grid grid-cols-4 gap-x-8 gap-y-4">
+								<BaseFormInput
+									v-model="item.name"
+									label="Název"
+									type="text"
+									name="firstname"
+									rules="required|min:3"
+									class="col-span-full"
+								/>
+								<BaseFormTextarea
+									v-model="item.description"
+									label="Popis projektu"
+									name="description"
+									rules="required|min:3"
+									class="col-span-3"
+                  :max="1000"
+								/>
+								<BaseFormTextarea
+									v-model="item.note"
+									label="Interní poznámka"
+									name="note"
+									class="col-span-1"
+								/>
+                <BaseFormInput
+                    v-model="item.formatted_start_date"
+                    label="Datum začátku"
+                    type="datetime-local"
+                    name="formatted_start_date"
+                    class="col-span-1"
+                />
+                <BaseFormInput
+                    v-model="item.formatted_end_date"
+                    label="Datum ukončení"
+                    type="datetime-local"
+                    name="formatted_end_date"
+                    class="col-span-1"
+                />
+							</div>
+						</LayoutContainer>
+						<LayoutContainer class="col-span-full w-full">
+							<LayoutTitle>Cenotvorba</LayoutTitle>
+							<div class="grid grid-cols-6 gap-x-8 gap-y-4">
+                <BaseFormSelect
+                    v-model="item.tax_rate_id"
+                    label="Sazba DPH"
+                    name="tax_rate_id"
+                    rules="required"
+                    class="col-span-2"
+                    :options="taxRateStore.taxRateOptions"
+                />
+                <BaseFormSelect
+                    v-model="item.currency_id"
+                    label="Měna"
+                    name="currency_id"
+                    rules="required"
+                    class="col-span-2"
+                    :options="currencyStore.currenciesOptions"
+                />
+                <BaseFormInput
+                    v-model="item.hourly_rate"
+                    :max="100000"
+                    label="Hodinová sazba (bez DPH)"
+                    type="number"
+                    name="hourly_rate"
+                    class="col-span-2"
+                />
+                <div class="col-span-full border-b border-grayLight mb-2 mt-4" />
+                <BaseFormInput
+                    v-model="item.expected_hours"
+                    label="Očekávané hodiny"
+                    :max="10000000"
+                    type="number"
+                    name="expected_hours"
+                    :step="0.01"
+                    class="col-span-3"
+                />
+                <BaseFormInput
+                    v-model="item.total_hours"
+                    label="Celkové hodiny"
+                    :max="10000000"
+                    type="text"
+                    name="total_hours"
+                    class="col-span-3"
+                />
+								<BaseFormInput
+									v-model="item.expected_price"
+                  :max="10000000"
+									label="Očekávaná cena"
+									type="number"
+									name="expected_price"
+									class="col-span-3"
+								/>
+                <BaseFormInput
+									v-model="item.expected_price_vat"
+									label="Očekávaná cena vč. DPH"
+									type="text"
+									name="expected_price_vat"
+                  disabled
+									class="col-span-3"
+								/>
+								<BaseFormInput
+									v-model="item.total_price"
+									label="Celková cena"
+                  :max="10000000"
+									type="number"
+									name="total_price"
+									class="col-span-3"
+								/>
+								<BaseFormInput
+									v-model="item.total_price_vat"
+									label="Celková cena vč. DPH"
+									type="text"
+									name="total_price_vat"
+                  disabled
+									class="col-span-3"
+								/>
+							</div>
+						</LayoutContainer>
+					</div>
+          <div class="col-span-3 grid grid-cols-1">
+					<LayoutContainer class="col-span-1 w-full">
+						<LayoutTitle>Stav projektu</LayoutTitle>
+            <BaseFormSelect
+                v-model="item.status_id"
+                label="Stav projektu"
+                name="status_id"
+                rules="required"
+                class="col-span-2"
+                :options="statuses"
+            />
 					</LayoutContainer>
-					<LayoutContainer class="col-span-3 w-full">
+            <LayoutContainer v-if="item.events && item.events.length" class="col-span-1 w-full">
 						<LayoutTitle>Historie</LayoutTitle>
-						<div class="grid grid-cols-2 gap-x-8 gap-y-4">
-							<LayoutTitle>todo: historie</LayoutTitle>
-						</div>
+              <div class="grid grid-cols-1">
+                <div class="col-span-full" v-for="(event, index) in item.events" :key="index">
+                  <p class="block text-xs lg:text-sm/6 font-medium text-grayCustom text-left">{{ new Date(event.created_at).toLocaleString() }}</p>
+                  <p class="block text-xs lg:text-sm/6 font-medium text-grayCustom text-left">{{ event.description }}</p>
+                </div>
+              </div>
 					</LayoutContainer>
+          </div>
 				</div>
 			</template>
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#adresy')">
@@ -243,169 +419,178 @@ definePageMeta({
 						<LayoutTitle>Fakturační údaje</LayoutTitle>
 						<div class="grid grid-cols-2 gap-x-8 gap-y-4">
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_firstname"
 								label="Jméno"
 								type="text"
-								name="firstname"
+								name="invoice_firstname"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_lastname"
 								label="Příjmení"
 								type="text"
-								name="firstname"
+								name="invoice_lastname"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_ico"
 								label="IČO"
 								type="text"
-								name="firstname"
+								name="invoice_ico"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_dic"
 								label="DIČ"
 								type="text"
-								name="firstname"
-								rules="required|min:3"
+								name="invoice_dic"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_email"
 								label="E-mail"
 								type="text"
-								name="firstname"
-								rules="required|min:3"
+								rules="email"
+								name="invoice_email"
 								class="col-span-full"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_phone_prefix"
 								label="Předčíslí"
 								type="text"
-								name="firstname"
+								name="invoice_phone_prefix"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_phone"
 								label="Telefonní číslo"
 								type="text"
-								name="firstname"
+								name="invoice_phone"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_street"
 								label="Ulice a č. p."
 								type="text"
-								name="firstname"
+								name="invoice_street"
 								rules="required|min:3"
 								class="col-span-full"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_city"
 								label="PSČ"
 								type="text"
-								name="firstname"
+								name="invoice_city"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.invoice_zip"
 								label="Město"
 								type="text"
-								name="firstname"
+								name="invoice_zip"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
-							<BaseFormInput
-								v-model="item.name"
+							<BaseFormSelect
+								v-model="item.invoice_country_id"
 								label="Země"
-								type="text"
-								name="firstname"
-								rules="required|min:3"
+								name="invoice_country_id"
+								rules="required"
 								class="col-span-1"
+								:options="countryStore.countriesOptions"
+							/>
+							<BaseFormCheckbox
+								v-model="item.is_delivery_address_same"
+								:checked="item.is_delivery_address_same"
+								label="Dodací adresa je stejná jako fakturační"
+								name="is_delivery_address_same"
+								label-color="grayCustom"
 							/>
 						</div>
 					</LayoutContainer>
-					<LayoutContainer class="col-span-1 w-full">
+					<LayoutContainer
+						v-if="!item.is_delivery_address_same"
+						class="col-span-1 w-full"
+					>
 						<LayoutTitle>Dodací údaje</LayoutTitle>
 						<div class="grid grid-cols-2 gap-x-8 gap-y-4">
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.delivery_firstname"
 								label="Jméno"
 								type="text"
-								name="firstname"
+								name="delivery_firstname"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.delivery_lastname"
 								label="Příjmení"
 								type="text"
-								name="firstname"
+								name="delivery_lastname"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.delivery_email"
 								label="E-mail"
 								type="text"
-								name="firstname"
+								name="delivery_email"
 								rules="required|min:3"
 								class="col-span-full"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.delivery_phone_prefix"
 								label="Předčíslí"
 								type="text"
-								name="firstname"
+								name="delivery_phone_prefix"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.delivery_phone"
 								label="Telefonní číslo"
 								type="text"
-								name="firstname"
+								name="delivery_phone"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.delivery_street"
 								label="Ulice a č. p."
 								type="text"
-								name="firstname"
+								name="delivery_street"
 								rules="required|min:3"
 								class="col-span-full"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.delivery_zip"
 								label="PSČ"
 								type="text"
-								name="firstname"
+								name="delivery_city"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
 							<BaseFormInput
-								v-model="item.name"
+								v-model="item.delivery_city"
 								label="Město"
 								type="text"
-								name="firstname"
+								name="delivery_city"
 								rules="required|min:3"
 								class="col-span-1"
 							/>
-							<BaseFormInput
-								v-model="item.name"
+							<BaseFormSelect
+								v-model="item.delivery_country_id"
 								label="Země"
-								type="text"
-								name="firstname"
-								rules="required|min:3"
+								name="delivery_country_id"
+								rules="required"
 								class="col-span-1"
+								:options="countryStore.countriesOptions"
 							/>
 						</div>
 					</LayoutContainer>

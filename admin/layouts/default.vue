@@ -40,14 +40,16 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useUserGroupStore } from '~/stores/userGroupStore';
 import { useActivityStore } from '~/stores/activityStore';
 import { useLanguageStore } from '~/stores/languageStore';
-import { useCountryStore} from "~/stores/countryStore";
-import { useCurrencyStore} from "~/stores/currencyStore";
+import { useCountryStore } from '~/stores/countryStore';
+import { useCurrencyStore } from '~/stores/currencyStore';
+import { useTaxRateStore} from "~/stores/taxRateStore";
 
 const userGroupStore = useUserGroupStore();
 const activityStore = useActivityStore();
 const languageStore = useLanguageStore();
 const countryStore = useCountryStore();
 const currencyStore = useCurrencyStore();
+const taxRateStore = useTaxRateStore();
 
 const route = useRoute();
 const router = useRouter();
@@ -89,10 +91,10 @@ const navigation = ref([
 		{ name: 'Nacenění', link: '/demo', icon: DocumentTextIcon, current: false, slug: 'pricings' },
 		{ name: 'Trackování', link: '/demo', icon: ClockIcon, current: false, slug: 'trackings' },
 		{ name: 'Faktury', link: '/demo', icon: WalletIcon, current: false, slug: 'invoices' },
-    { name: 'Dodavatelé', link: '/dodavatele', icon: BuildingOfficeIcon, current: false, slug: 'suppliers' },
-    { name: 'Zaměstnanci', link: '/zamestnanci', icon: UsersIcon, current: false, slug: 'employees' },
-    { name: 'Úkoly', link: '/ukoly', icon: ChartBarSquareIcon, current: false, slug: 'tasks' },
-    { name: 'Smlouvy', link: '/smlouvy', icon: DocumentTextIcon, current: false, slug: 'contracts' },
+		{ name: 'Dodavatelé', link: '/dodavatele', icon: BuildingOfficeIcon, current: false, slug: 'suppliers' },
+		{ name: 'Zaměstnanci', link: '/zamestnanci', icon: UsersIcon, current: false, slug: 'employees' },
+		{ name: 'Úkoly', link: '/ukoly', icon: ChartBarSquareIcon, current: false, slug: 'tasks' },
+		{ name: 'Smlouvy', link: '/smlouvy', icon: DocumentTextIcon, current: false, slug: 'contracts' },
 	] },
 	{ title: 'Nastavení a správa', menu: [
 		{ name: 'Uživatelé', link: '/uzivatele', icon: UsersIcon, current: false, slug: 'users' },
@@ -162,8 +164,9 @@ onMounted(() => {
 	userGroupStore.fetchUserGroups();
 	activityStore.fetchActivities();
 	languageStore.fetchLanguages();
-  countryStore.fetchCountries();
-  currencyStore.fetchCurrencies();
+	countryStore.fetchCountries();
+	currencyStore.fetchCurrencies();
+  taxRateStore.fetchTaxRates();
 	setTimeout(() => {
 		navigation.value = filterNavigationGroups(navigation.value);
 	}, 100000);

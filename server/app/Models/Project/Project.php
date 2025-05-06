@@ -3,6 +3,8 @@
 namespace App\Models\Project;
 
 use App\Models\Contact\Contact;
+use App\Models\Country\Country;
+use App\Models\Currency\Currency;
 use App\Models\TaxRate;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,9 +20,14 @@ class Project extends Model
         'description',
         'note',
         'image',
+        'hourly_rate',
         'expected_price',
+        'expected_price_vat',
+        'expected_hours',
         'total_price',
         'total_price_vat',
+        'total_hours',
+        'currency_id',
         'invoice_firstname',
         'invoice_lastname',
         'invoice_ico',
@@ -31,7 +38,8 @@ class Project extends Model
         'invoice_street',
         'invoice_city',
         'invoice_zip',
-        'invoice_country',
+        'invoice_country_id',
+        'is_delivery_address_same',
         'delivery_firstname',
         'delivery_lastname',
         'delivery_email',
@@ -40,7 +48,8 @@ class Project extends Model
         'delivery_street',
         'delivery_city',
         'delivery_zip',
-        'delivery_country',
+        'delivery_country_id',
+        'status_id',
         'tax_rate_id',
         'client_id',
         'start_date',
@@ -49,10 +58,20 @@ class Project extends Model
 
     protected $casts = [
         'expected_price' => 'decimal:2',
+        'expected_price_vat' => 'decimal:2',
         'total_price' => 'decimal:2',
         'total_price_vat' => 'decimal:2',
         'start_date' => 'date',
         'end_date' => 'date',
+        'is_delivery_address_same' => 'boolean',
+    ];
+
+    protected $with = [
+        'status',
+        'taxRate',
+        'currency',
+        'client',
+        'events',
     ];
 
     public function status()
@@ -65,13 +84,28 @@ class Project extends Model
         return $this->belongsTo(TaxRate::class, 'tax_rate_id', 'id');
     }
 
+    public function invoiceCountry()
+    {
+        return $this->belongsTo(Country::class, 'invoice_country_id', 'id');
+    }
+
+    public function deliveryCountry()
+    {
+        return $this->belongsTo(Country::class, 'delivery_country_id', 'id');
+    }
+
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class, 'currency_id', 'id');
+    }
+
     public function client()
     {
         return $this->belongsTo(Contact::class, 'client_id', 'id');
     }
 
-    public function statuses()
+    public function events()
     {
-        return $this->belongsToMany(ProjectStatus::class, 'projects_has_statuses', 'project_id', 'project_status_id');
+        return $this->hasMany(ProjectEvent::class, 'project_id', 'id');
     }
 }

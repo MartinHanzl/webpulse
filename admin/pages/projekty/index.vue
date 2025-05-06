@@ -118,6 +118,9 @@ definePageMeta({
 			:actions="[
 				{ type: 'add', text: 'Přidat projekt' },
 			]"
+      :links="[
+				{ name: 'Stavy projektů', to: '/projekty/stavy' },
+			]"
 			slug="projects"
 		/>
 		<LayoutContainer>

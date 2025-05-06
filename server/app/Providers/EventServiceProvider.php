@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\ContactUpdatedEvent;
+use App\Events\ProjectSavedEvent;
+use App\Events\ProjectSavedListener;
 use App\Listeners\ContactUpdated;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -22,7 +24,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         ContactUpdatedEvent::class => [
             ContactUpdated::class
-        ]
+        ],
+        ProjectSavedEvent::class => [
+            ProjectSavedListener::class
+        ],
     ];
 
     /**

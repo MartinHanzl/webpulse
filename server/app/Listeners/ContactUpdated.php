@@ -7,9 +7,6 @@ use App\Models\Contact\ContactHistory;
 
 class ContactUpdated
 {
-    /**
-     * Handle the event.
-     */
     public function handle(Event $event): void
     {
         $oldContact = $event->getOldContact();

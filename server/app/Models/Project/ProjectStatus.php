@@ -18,4 +18,9 @@ class ProjectStatus extends Model
     {
         return $this->hasMany(Project::class, 'status_id', 'id');
     }
+
+    public function events()
+    {
+        return $this->hasMany(ProjectEvent::class, 'status_id', 'id');
+    }
 }

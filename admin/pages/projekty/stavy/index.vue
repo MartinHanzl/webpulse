@@ -4,15 +4,20 @@ import _ from 'lodash';
 import { definePageMeta } from '#imports';
 
 const toast = useToast();
-const pageTitle = ref('Statusy projektů');
+const pageTitle = ref('Stavy projektů');
 
 const loading = ref(false);
 const error = ref(false);
 
 const breadcrumbs = ref([
 	{
-		name: pageTitle.value,
+		name: 'Projekty',
 		link: '/jazyky',
+		current: false,
+	},
+  {
+		name: pageTitle.value,
+		link: '/projekty/stavy',
 		current: true,
 	},
 ]);
@@ -46,7 +51,7 @@ async function loadItems() {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se načíst statusy projektů. Zkuste to prosím později.',
+			description: 'Nepodařilo se načíst stavy projektů. Zkuste to prosím později.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -68,7 +73,7 @@ async function deleteItem(id: number) {
 		error.value = true;
 		toast.add({
 			title: 'Chyba',
-			description: 'Nepodařilo se smazat položku statusu projektu.',
+			description: 'Nepodařilo se smazat položku stavu projektu.',
 			color: 'red',
 		});
 	}).finally(() => {
@@ -116,7 +121,7 @@ definePageMeta({
 			:title="pageTitle"
 			:breadcrumbs="breadcrumbs"
 			:actions="[
-				{ type: 'add', text: 'Přidat status' },
+				{ type: 'add', text: 'Přidat stav' },
 			]"
 			slug="projects"
 		/>
@@ -133,8 +138,8 @@ definePageMeta({
 				]"
 				:loading="loading"
 				:error="error"
-				singular="Status projektu"
-				plural="Statusy projektů"
+				singular="Stav projektu"
+				plural="Stavy projektů"
 				:query="tableQuery"
 				slug="projects"
 				@delete-item="deleteItem"
