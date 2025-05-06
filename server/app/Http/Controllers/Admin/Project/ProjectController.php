@@ -101,7 +101,6 @@ class ProjectController extends Controller
 
             DB::commit();
         } catch (\Throwable|\Exception $e) {
-            dd($e->getLine() . ' ' . $e->getMessage());
             DB::rollBack();
             return Response::json(['message' => 'An error occurred while updating project.'], 500);
         }

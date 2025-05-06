@@ -30,7 +30,7 @@ class ProjectSavedListener
             $event = new ProjectEvent();
             $event->fill([
                 'name' => 'Změna stavu',
-                'description' => 'Projekt byl přpnut do stavu ',
+                'description' => 'Projekt byl přepnut do stavu ',
                 'project_id' => $project->id,
                 'user_id' => auth()->user()->id,
                 'status_id' => $project->status_id,

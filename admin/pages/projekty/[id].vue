@@ -296,14 +296,14 @@ definePageMeta({
                 <BaseFormInput
                     v-model="item.formatted_start_date"
                     label="Datum začátku"
-                    type="datetime-local"
+                    type="date"
                     name="formatted_start_date"
                     class="col-span-1"
                 />
                 <BaseFormInput
                     v-model="item.formatted_end_date"
                     label="Datum ukončení"
-                    type="datetime-local"
+                    type="date"
                     name="formatted_end_date"
                     class="col-span-1"
                 />
