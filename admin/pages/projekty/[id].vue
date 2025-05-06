@@ -3,50 +3,50 @@ import { ref } from 'vue';
 import { Form } from 'vee-validate';
 import { useCurrencyStore } from '~/stores/currencyStore';
 import { useCountryStore } from '~/stores/countryStore';
-import { useTaxRateStore } from "~/stores/taxRateStore";
+import { useTaxRateStore } from '~/stores/taxRateStore';
 
 interface Project {
-  id: number | null;
-  name: string;
-  description: string;
-  note: string;
-  image: string;
-  hourly_rate: number;
-  expected_price: number;
-  expected_price_vat: number;
-  expected_hours: number;
-  total_price: number;
-  total_price_vat: number;
-  total_hours: number;
-  start_date: string;
-  formatted_start_date: string;
-  end_date: string;
-  formatted_end_date: string;
-  invoice_firstname: string;
-  invoice_lastname: string;
-  invoice_email: string;
-  invoice_phone_prefix: string;
-  invoice_phone: string;
-  invoice_street: string;
-  invoice_city: string;
-  invoice_zip: string;
-  invoice_country_id: number | null;
-  is_delivery_address_same: boolean;
-  invoice_ico: string;
-  invoice_dic: string;
-  delivery_firstname: string;
-  delivery_lastname: string;
-  delivery_email: string;
-  delivery_phone_prefix: string;
-  delivery_phone: string;
-  delivery_street: string;
-  delivery_city: string;
-  delivery_zip: string;
-  delivery_country_id: number | null;
-  currency_id: number | null;
-  client_id: number | null;
-  tax_rate_id: number | null;
-  status_id: number | null;
+	id: number | null;
+	name: string;
+	description: string;
+	note: string;
+	image: string;
+	hourly_rate: number;
+	expected_price: number;
+	expected_price_vat: number;
+	expected_hours: number;
+	total_price: number;
+	total_price_vat: number;
+	total_hours: number;
+	start_date: string;
+	formatted_start_date: string;
+	end_date: string;
+	formatted_end_date: string;
+	invoice_firstname: string;
+	invoice_lastname: string;
+	invoice_email: string;
+	invoice_phone_prefix: string;
+	invoice_phone: string;
+	invoice_street: string;
+	invoice_city: string;
+	invoice_zip: string;
+	invoice_country_id: number | null;
+	is_delivery_address_same: boolean;
+	invoice_ico: string;
+	invoice_dic: string;
+	delivery_firstname: string;
+	delivery_lastname: string;
+	delivery_email: string;
+	delivery_phone_prefix: string;
+	delivery_phone: string;
+	delivery_street: string;
+	delivery_city: string;
+	delivery_zip: string;
+	delivery_country_id: number | null;
+	currency_id: number | null;
+	client_id: number | null;
+	tax_rate_id: number | null;
+	status_id: number | null;
 }
 
 const statuses = ref([]);
@@ -147,38 +147,39 @@ async function saveItem() {
 }
 
 async function loadStatuses() {
-  const client = useSanctumClient();
-  loading.value = true;
+	const client = useSanctumClient();
+	loading.value = true;
 
-  await client<Project>('/api/admin/project/status', {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  }).then((response) => {
-    statuses.value = response.map((status: any) => ({
-      value: status.id,
-      name: status.name,
-    }));
-  }).catch(() => {
-    error.value = true;
-    toast.add({
-      title: 'Chyba',
-      description: 'Nepodařilo se načíst stavy projektů. Zkuste to prosím později.',
-      color: 'red',
-    });
-  }).finally(() => {
-    loading.value = false;
-  });
+	await client<Project>('/api/admin/project/status', {
+		method: 'GET',
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json',
+		},
+	}).then((response) => {
+		statuses.value = response.map((status: any) => ({
+			value: status.id,
+			name: status.name,
+		}));
+	}).catch(() => {
+		error.value = true;
+		toast.add({
+			title: 'Chyba',
+			description: 'Nepodařilo se načíst stavy projektů. Zkuste to prosím později.',
+			color: 'red',
+		});
+	}).finally(() => {
+		loading.value = false;
+	});
 }
 
 function calculatePriceWithVAT(rate: number = 0, type: string = 'expected_price') {
-  if(type === 'expected_price') {
-  item.value.expected_price_vat = item.value.expected_price * (1 + (rate / 100));
-  } else if (type === 'total_price') {
-  item.value.total_price_vat = item.value.total_price * (1 + (rate / 100));
-}
+	if (type === 'expected_price') {
+		item.value.expected_price_vat = item.value.expected_price * (1 + (rate / 100));
+	}
+	else if (type === 'total_price') {
+		item.value.total_price_vat = item.value.total_price * (1 + (rate / 100));
+	}
 }
 
 watchEffect(() => {
@@ -195,36 +196,37 @@ watchEffect(() => {
 });
 
 watch(
-    () => item.value.expected_hours,
-    () => {
-      if(item.value.hourly_rate === 0) {
-        item.value.expected_price = 0;
-      } else {
-        item.value.expected_price = item.value.expected_hours * item.value.hourly_rate;
-      }
-    }
-)
+	() => item.value.expected_hours,
+	() => {
+		if (item.value.hourly_rate === 0) {
+			item.value.expected_price = 0;
+		}
+		else {
+			item.value.expected_price = item.value.expected_hours * item.value.hourly_rate;
+		}
+	},
+);
 watch(
-    () => item.value.expected_price,
-    () => {
-      const currentRate = taxRateStore.taxRates.find((rate) => rate.id === item.value.tax_rate_id);
-        calculatePriceWithVAT(currentRate?.rate, 'expected_price');
-    }
-)
+	() => item.value.expected_price,
+	() => {
+		const currentRate = taxRateStore.taxRates.find(rate => rate.id === item.value.tax_rate_id);
+		calculatePriceWithVAT(currentRate?.rate, 'expected_price');
+	},
+);
 watch(
-    () => item.value.total_price,
-    () => {
-      const currentRate = taxRateStore.taxRates.find((rate) => rate.id === item.value.tax_rate_id);
-        calculatePriceWithVAT(currentRate?.rate, 'total_price');
-    }
-)
+	() => item.value.total_price,
+	() => {
+		const currentRate = taxRateStore.taxRates.find(rate => rate.id === item.value.tax_rate_id);
+		calculatePriceWithVAT(currentRate?.rate, 'total_price');
+	},
+);
 
 useHead({
 	title: pageTitle.value,
 });
 
 onMounted(() => {
-  loadStatuses();
+	loadStatuses();
 	if (route.params.id !== 'pridat') {
 		loadItem();
 	}
@@ -285,7 +287,7 @@ definePageMeta({
 									name="description"
 									rules="required|min:3"
 									class="col-span-3"
-                  :max="1000"
+									:max="1000"
 								/>
 								<BaseFormTextarea
 									v-model="item.note"
@@ -293,87 +295,87 @@ definePageMeta({
 									name="note"
 									class="col-span-1"
 								/>
-                <BaseFormInput
-                    v-model="item.formatted_start_date"
-                    label="Datum začátku"
-                    type="date"
-                    name="formatted_start_date"
-                    class="col-span-1"
-                />
-                <BaseFormInput
-                    v-model="item.formatted_end_date"
-                    label="Datum ukončení"
-                    type="date"
-                    name="formatted_end_date"
-                    class="col-span-1"
-                />
+								<BaseFormInput
+									v-model="item.formatted_start_date"
+									label="Datum začátku"
+									type="date"
+									name="formatted_start_date"
+									class="col-span-1"
+								/>
+								<BaseFormInput
+									v-model="item.formatted_end_date"
+									label="Datum ukončení"
+									type="date"
+									name="formatted_end_date"
+									class="col-span-1"
+								/>
 							</div>
 						</LayoutContainer>
 						<LayoutContainer class="col-span-full w-full">
 							<LayoutTitle>Cenotvorba</LayoutTitle>
 							<div class="grid grid-cols-6 gap-x-8 gap-y-4">
-                <BaseFormSelect
-                    v-model="item.tax_rate_id"
-                    label="Sazba DPH"
-                    name="tax_rate_id"
-                    rules="required"
-                    class="col-span-2"
-                    :options="taxRateStore.taxRateOptions"
-                />
-                <BaseFormSelect
-                    v-model="item.currency_id"
-                    label="Měna"
-                    name="currency_id"
-                    rules="required"
-                    class="col-span-2"
-                    :options="currencyStore.currenciesOptions"
-                />
-                <BaseFormInput
-                    v-model="item.hourly_rate"
-                    :max="100000"
-                    label="Hodinová sazba (bez DPH)"
-                    type="number"
-                    name="hourly_rate"
-                    class="col-span-2"
-                />
-                <div class="col-span-full border-b border-grayLight mb-2 mt-4" />
-                <BaseFormInput
-                    v-model="item.expected_hours"
-                    label="Očekávané hodiny"
-                    :max="10000000"
-                    type="number"
-                    name="expected_hours"
-                    :step="0.01"
-                    class="col-span-3"
-                />
-                <BaseFormInput
-                    v-model="item.total_hours"
-                    label="Celkové hodiny"
-                    :max="10000000"
-                    type="text"
-                    name="total_hours"
-                    class="col-span-3"
-                />
+								<BaseFormSelect
+									v-model="item.tax_rate_id"
+									label="Sazba DPH"
+									name="tax_rate_id"
+									rules="required"
+									class="col-span-2"
+									:options="taxRateStore.taxRateOptions"
+								/>
+								<BaseFormSelect
+									v-model="item.currency_id"
+									label="Měna"
+									name="currency_id"
+									rules="required"
+									class="col-span-2"
+									:options="currencyStore.currenciesOptions"
+								/>
+								<BaseFormInput
+									v-model="item.hourly_rate"
+									:max="100000"
+									label="Hodinová sazba (bez DPH)"
+									type="number"
+									name="hourly_rate"
+									class="col-span-2"
+								/>
+								<div class="col-span-full border-b border-grayLight mb-2 mt-4" />
+								<BaseFormInput
+									v-model="item.expected_hours"
+									label="Očekávané hodiny"
+									:max="10000000"
+									type="number"
+									name="expected_hours"
+									:step="0.01"
+									class="col-span-3"
+								/>
+								<BaseFormInput
+									v-model="item.total_hours"
+									label="Celkové hodiny"
+									:max="10000000"
+									type="text"
+									name="total_hours"
+									class="col-span-3"
+								/>
 								<BaseFormInput
 									v-model="item.expected_price"
-                  :max="10000000"
+									:max="10000000"
 									label="Očekávaná cena"
 									type="number"
 									name="expected_price"
 									class="col-span-3"
 								/>
-                <BaseFormInput
+								<BaseFormInput
 									v-model="item.expected_price_vat"
 									label="Očekávaná cena vč. DPH"
 									type="text"
 									name="expected_price_vat"
-                  disabled
+									disabled
 									class="col-span-3"
 								/>
 								<BaseFormInput
 									v-model="item.total_price"
 									label="Celková cena"
-                  :max="10000000"
+									:max="10000000"
 									type="number"
 									name="total_price"
 									class="col-span-3"
@@ -383,34 +385,45 @@ definePageMeta({
 									label="Celková cena vč. DPH"
 									type="text"
 									name="total_price_vat"
-                  disabled
+									disabled
 									class="col-span-3"
 								/>
 							</div>
 						</LayoutContainer>
 					</div>
-          <div class="col-span-3 grid grid-cols-1">
-					<LayoutContainer class="col-span-1 w-full">
-						<LayoutTitle>Stav projektu</LayoutTitle>
-            <BaseFormSelect
-                v-model="item.status_id"
-                label="Stav projektu"
-                name="status_id"
-                rules="required"
-                class="col-span-2"
-                :options="statuses"
-            />
-					</LayoutContainer>
-            <LayoutContainer v-if="item.events && item.events.length" class="col-span-1 w-full">
-						<LayoutTitle>Historie</LayoutTitle>
-              <div class="grid grid-cols-1">
-                <div class="col-span-full" v-for="(event, index) in item.events" :key="index">
-                  <p class="block text-xs lg:text-sm/6 font-medium text-grayCustom text-left">{{ new Date(event.created_at).toLocaleString() }}</p>
-                  <p class="block text-xs lg:text-sm/6 font-medium text-grayCustom text-left">{{ event.description }}</p>
-                </div>
-              </div>
-					</LayoutContainer>
-          </div>
+					<div class="col-span-3 grid grid-cols-1">
+						<LayoutContainer class="col-span-1 w-full">
+							<LayoutTitle>Stav projektu</LayoutTitle>
+							<BaseFormSelect
+								v-model="item.status_id"
+								label="Stav projektu"
+								name="status_id"
+								rules="required"
+								class="col-span-2"
+								:options="statuses"
+							/>
+						</LayoutContainer>
+						<LayoutContainer
+							v-if="item.events && item.events.length"
+							class="col-span-1 w-full"
+						>
+							<LayoutTitle>Historie</LayoutTitle>
+							<div class="grid grid-cols-1">
+								<div
+									v-for="(event, index) in item.events"
+									:key="index"
+									class="col-span-full"
+								>
+									<p class="block text-xs lg:text-sm/6 font-medium text-grayCustom text-left">
+										{{ new Date(event.created_at).toLocaleString() }}
+									</p>
+									<p class="block text-xs lg:text-sm/6 font-medium text-grayCustom text-left">
+										{{ event.description }}
+									</p>
+								</div>
+							</div>
+						</LayoutContainer>
+					</div>
 				</div>
 			</template>
 			<template v-if="tabs.find(tab => tab.current && tab.link === '#adresy')">

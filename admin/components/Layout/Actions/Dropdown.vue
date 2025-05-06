@@ -47,7 +47,7 @@ defineProps({
 							v-slot="{ active }"
 						>
 							<NuxtLink
-								:to="{name: link.to}"
+								:to="{ name: link.to }"
 								:class="[
 									active ? 'bg-gray-100 text-grayDark' : 'text-grayDark',
 									'group flex w-full items-center rounded-md px-2 py-2 text-sm',

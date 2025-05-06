@@ -42,7 +42,7 @@ import { useActivityStore } from '~/stores/activityStore';
 import { useLanguageStore } from '~/stores/languageStore';
 import { useCountryStore } from '~/stores/countryStore';
 import { useCurrencyStore } from '~/stores/currencyStore';
-import { useTaxRateStore} from "~/stores/taxRateStore";
+import { useTaxRateStore } from '~/stores/taxRateStore';
 
 const userGroupStore = useUserGroupStore();
 const activityStore = useActivityStore();
@@ -166,7 +166,7 @@ onMounted(() => {
 	languageStore.fetchLanguages();
 	countryStore.fetchCountries();
 	currencyStore.fetchCurrencies();
-  taxRateStore.fetchTaxRates();
+	taxRateStore.fetchTaxRates();
 	setTimeout(() => {
 		navigation.value = filterNavigationGroups(navigation.value);
 	}, 100000);

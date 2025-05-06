@@ -15,7 +15,7 @@ const breadcrumbs = ref([
 		link: '/jazyky',
 		current: false,
 	},
-  {
+	{
 		name: pageTitle.value,
 		link: '/projekty/stavy',
 		current: true,
