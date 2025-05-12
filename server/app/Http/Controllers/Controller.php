@@ -55,7 +55,7 @@ class Controller extends BaseController
     public function statistics(Request $request): JsonResponse
     {
         $businessGrowthActivityIds = [1, 6, 7, 8, 9, 10, 11, 12, 21, 22, 24];
-        $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18, 27, 28, 29];
+        $personalGrowthActivityIds = [2, 3, 4, 5, 16, 17, 18, 27, 28, 29, 30];
 
         $daysMonths = now()->daysInMonth;
         if ($request->has('filter')) {
