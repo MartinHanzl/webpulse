@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { PauseCircleIcon, StarIcon, HeartIcon, ChatBubbleBottomCenterIcon, PhoneIcon } from '@heroicons/vue/24/outline';
+import { PauseCircleIcon, StarIcon, HeartIcon, ChatBubbleBottomCenterIcon, PhoneIcon, LifebuoyIcon } from '@heroicons/vue/24/outline';
 import DumbbellIcon from 'public/static/img/icon/dumbbell.svg';
 import SmileFullIcon from '~/public/static/img/icon/smile-full.svg';
 import SmileAudioIcon from '~/public/static/img/icon/smile-audio.svg';
@@ -9,6 +9,7 @@ import SmileAudioDreamIcon from '~/public/static/img/icon/smile-audiodream.svg';
 import SmileBookIcon from '~/public/static/img/icon/smile-book.svg';
 import SmileBookDreamIcon from '~/public/static/img/icon/smile-bookdream.svg';
 import SmileDreamIcon from '~/public/static/img/icon/smile-dream.svg';
+import NoPepsiIcon from '~/public/static/img/icon/no-pepsi.svg';
 
 const props = defineProps({
 	activities: {
@@ -241,6 +242,14 @@ const activitiesByDay = computed(() => {
 								class="size-5 lg:size-8 fill-warning"
 							/>
 						</div>
+            <LifebuoyIcon
+                v-if="activityItem.activity.id === 29"
+                class="text-success size-5 lg:size-8 col-span-1 fill-success"
+            />
+            <NoPepsiIcon
+                v-if="activityItem.activity.id === 30"
+                class="size-5 lg:size-8 fill-success col-span-1"
+            />
 					</div>
 					<div
 						v-if="checkSmile(day) !== 'empty'"
