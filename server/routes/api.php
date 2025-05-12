@@ -24,6 +24,7 @@ use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Currency\CurrencyController;
 use App\Http\Controllers\Admin\Country\CountryController;
+use App\Http\Controllers\Admin\PriceOffer\PriceOfferController;
 
 /*
 |--------------------------------------------------------------------------
@@ -254,5 +255,15 @@ Route::group([
         // Dashboard and statistics routes
         Route::get('dashboard', [BaseController::class, 'dashboard']);
         Route::get('statistics', [BaseController::class, 'statistics']);
+    });
+
+    // Price offer routes
+    Route::group([
+        'prefix' => 'price-offer'
+    ], function () {
+        Route::get('', [PriceOfferController::class, 'index']);
+        Route::get('{id}', [PriceOfferController::class, 'show'])->where('id', '[0-9]+');
+        Route::post('{id?}', [PriceOfferController::class, 'store']);
+        Route::delete('{id}', [PriceOfferController::class, 'destroy'])->where('id', '[0-9]+');
     });
 });
