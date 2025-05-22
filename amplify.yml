@@ -1,25 +1,25 @@
 version: 1
-applications:
-  - appRoot: admin
-    frontend:
-      phases:
-        preBuild:
-          commands:
-            - corepack enable
-            - corepack prepare npm@latest --activate
-            - npm install
-        build:
-          commands:
-            - npm run build
-      artifacts:
-        baseDirectory: .output/public
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
-    customHeaders:
-      - pattern: '**/*'
-        headers:
-          - key: Cache-Control
-            value: max-age=0, no-cache, no-store, must-revalidate
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - echo "Installing dependencies..."
+        - cd $AMPLIFY_APP_ROOT
+        - npm install
+    build:
+      commands:
+        - echo "Building project in $AMPLIFY_APP_ROOT..."
+        - cd $AMPLIFY_APP_ROOT
+        - npm run build
+  artifacts:
+    baseDirectory: $AMPLIFY_APP_ROOT/.output/public
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - $AMPLIFY_APP_ROOT/node_modules/**/*
+  customHeaders:
+    - pattern: '**/*'
+      headers:
+        - key: Cache-Control
+          value: max-age=0, no-cache, no-store, must-revalidate
