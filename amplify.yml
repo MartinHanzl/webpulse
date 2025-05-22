@@ -1,6 +1,6 @@
 version: 1
 applications:
-  - appRoot: frontend/client
+  - appRoot: /client
     frontend:
       phases:
         preBuild:
@@ -23,7 +23,7 @@ applications:
         headers:
           - key: Cache-Control
             value: max-age=0, no-cache, no-store, must-revalidate
-  - appRoot: frontend/admin
+  - appRoot: /admin
     frontend:
       phases:
         preBuild:
