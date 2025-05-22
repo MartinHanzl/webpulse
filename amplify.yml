@@ -1,23 +1,27 @@
 version: 1
+env:
+  variables:
+    PROJECT_PATH: admin
+
 frontend:
   phases:
     preBuild:
       commands:
-        - echo "Installing dependencies..."
-        - cd $AMPLIFY_APP_ROOT
+        - echo "Installing dependencies for $PROJECT_PATH..."
+        - cd $PROJECT_PATH
         - npm install
     build:
       commands:
-        - echo "Building project in $AMPLIFY_APP_ROOT..."
-        - cd $AMPLIFY_APP_ROOT
+        - echo "Building $PROJECT_PATH..."
+        - cd $PROJECT_PATH
         - npm run build
   artifacts:
-    baseDirectory: $AMPLIFY_APP_ROOT/.output/public
+    baseDirectory: $PROJECT_PATH/.output/public
     files:
       - '**/*'
   cache:
     paths:
-      - $AMPLIFY_APP_ROOT/node_modules/**/*
+      - $PROJECT_PATH/node_modules/**/*
   customHeaders:
     - pattern: '**/*'
       headers:
