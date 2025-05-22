@@ -1,41 +1,18 @@
 version: 1
 applications:
-  - appRoot: /client
+  - appRoot: admin
     frontend:
       phases:
         preBuild:
           commands:
-            - nvm install 22
-            - nvm use 22
+            - corepack enable
+            - corepack prepare npm@latest --activate
             - npm install
         build:
           commands:
             - npm run build
       artifacts:
-        baseDirectory: .amplify-hosting/compute/default
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - node_modules/**/*
-    customHeaders:
-      - pattern: '**/*'
-        headers:
-          - key: Cache-Control
-            value: max-age=0, no-cache, no-store, must-revalidate
-  - appRoot: /admin
-    frontend:
-      phases:
-        preBuild:
-          commands:
-            - nvm install 22
-            - nvm use 22
-            - npm install
-        build:
-          commands:
-            - npm run build
-      artifacts:
-        baseDirectory: .amplify-hosting/compute/default
+        baseDirectory: .output/public
         files:
           - '**/*'
       cache:
