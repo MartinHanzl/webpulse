@@ -7,21 +7,23 @@ frontend:
   phases:
     preBuild:
       commands:
+        - echo "Entering main repo folder..."
+        - cd webpulse
         - echo "Installing dependencies for $PROJECT_PATH..."
         - cd $PROJECT_PATH
         - npm install
     build:
       commands:
         - echo "Building $PROJECT_PATH..."
-        - cd $PROJECT_PATH
+        - cd webpulse/$PROJECT_PATH
         - npm run build
   artifacts:
-    baseDirectory: $PROJECT_PATH/.output/public
+    baseDirectory: webpulse/$PROJECT_PATH/.output/public
     files:
       - '**/*'
   cache:
     paths:
-      - $PROJECT_PATH/node_modules/**/*
+      - webpulse/$PROJECT_PATH/node_modules/**/*
   customHeaders:
     - pattern: '**/*'
       headers:
