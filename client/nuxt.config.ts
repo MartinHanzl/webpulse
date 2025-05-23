@@ -4,7 +4,7 @@ export default defineNuxtConfig({
 	modules: [['nuxt-auth-sanctum', {
 		ssr: true,
 		nitro: {
-			preset: 'node'
+			preset: 'node',
 		},
 		baseUrl: process.env.API_URL ?? 'https://api.martinhanzl.cz/',
 		mode: 'token',
@@ -18,7 +18,7 @@ export default defineNuxtConfig({
 			cookie: 'XSRF-TOKEN',
 			header: 'X-XSRF-TOKEN',
 		},
-	}], '@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@vee-validate/nuxt', '@pinia/nuxt', '@nuxtjs/tailwindcss'],
+	}], '@nuxt/eslint', '@nuxt/ui', '@nuxt/image', '@vee-validate/nuxt', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
 	devtools: { enabled: false },
 
 	app: {
@@ -70,6 +70,14 @@ export default defineNuxtConfig({
 		plugins: [
 			require('vite-svg-loader')(),
 		],
+	},
+
+	i18n: {
+		locales: [
+			{ code: 'cs', language: 'cs-CZ' },
+			{ code: 'sk', language: 'sk-SK' }
+		],
+		defaultLocale: 'cs',
 	},
 
 	eslint: {
