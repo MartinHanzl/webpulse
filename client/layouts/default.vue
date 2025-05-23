@@ -10,17 +10,19 @@ const availableLocales = computed(() => {
 <template>
   <div>
     <div class="relative flex w-full flex-col">
-      <NuxtLink
-        v-for="locale in availableLocales"
-        :key="locale.code"
-        :to="switchLocalePath(locale.code)"
-      >
-        <img
-          :src="'/static/img/flags/' + locale.code + '.svg'"
-          class="w-8 h-8"
-          alt="Locale Flag"
-        />
-      </NuxtLink>
+      <div class="absolute">
+        <NuxtLink
+          v-for="locale in availableLocales"
+          :key="locale.code"
+          :to="switchLocalePath(locale.code)"
+        >
+          <img
+            :src="'/static/img/flags/' + locale.code + '.svg'"
+            class="w-8 h-8"
+            alt="Locale Flag"
+          />
+        </NuxtLink>
+      </div>
       <main class="flex-auto">
         <slot />
       </main>

@@ -8,9 +8,9 @@ const showSettings = ref(false);
 
 <template>
   <div
-    class="z-10 absolute bottom-8 left-8 right-8 p-6 border border-secondary rounded w-full max-w-md bg-dark"
+    class="z-10 absolute bottom-0 left-0 max-w-full w-full md:bottom-4 md:left-4 right-8 p-6 border border-secondary rounded md:max-w-md bg-dark"
   >
-    <p class="mb-4">
+    <p class="mb-4 text-sm md:text-xsl">
       {{ t("cookies.description") }}
     </p>
     <div class="flex gap-x-4">
