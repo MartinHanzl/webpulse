@@ -1,12 +1,11 @@
 <script setup lang="ts">
-const url = window.location.href;
 </script>
 
 <template>
   <div class="relative w-full h-screen bg-gradient-to-br from-sky-500 via-violet-600 to-fuchsia-500 animate-gradient">
     <div class="absolute inset-0 bg-black/50 flex items-center justify-center">
       <h1 class="text-white text-1xl md:text-3xl font-bold tracking-wide font-inter animate-pulse">
-        {{ url === 'https://web-pulse.cz' ? 'web-pulse.cz' : 'martinhanzl.cz' }}
+        404
       </h1>
     </div>
   </div>
