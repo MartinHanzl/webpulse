@@ -96,12 +96,27 @@ export default defineNuxtConfig({
       {
         code: "cs",
         name: "Čeština",
-        file: "cs.json",
+        file: "cs.ts",
       },
       {
         code: "sk",
         name: "Slovenčina",
-        file: "sk.json",
+        file: "sk.ts",
+      },
+      {
+        code: "en",
+        name: "English",
+        file: "en.ts",
+      },
+      {
+        code: "de",
+        name: "Deutsch",
+        file: "de.ts",
+      },
+      {
+        code: "pl",
+        name: "Polski",
+        file: "pl.ts",
       },
     ],
   },
