@@ -3,7 +3,7 @@ const { locale, locales } = useI18n();
 const switchLocalePath = useSwitchLocalePath();
 
 const availableLocales = computed(() => {
-  return locales.value.filter((i) => i.code !== locale.value);
+  return locales.value;
 });
 </script>
 
@@ -11,12 +11,15 @@ const availableLocales = computed(() => {
   <div>
     <div class="relative flex w-full flex-col">
       <NuxtLink
-        class="hidden"
         v-for="locale in availableLocales"
         :key="locale.code"
         :to="switchLocalePath(locale.code)"
       >
-        {{ locale.name }}
+        <img
+          :src="'/static/img/flags/' + locale.code + '.svg'"
+          class="w-8 h-8"
+          alt="Locale Flag"
+        />
       </NuxtLink>
       <main class="flex-auto">
         <slot />
