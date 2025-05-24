@@ -6,6 +6,7 @@
 		<main>
 			<NuxtPage />
 		</main>
+		<LayoutFooter />
 		<LayoutCookiesBar />
 	</div>
 </template>

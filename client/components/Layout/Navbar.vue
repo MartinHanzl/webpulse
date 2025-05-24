@@ -44,7 +44,7 @@ const mobileMenuOpen = ref(false);
 <template>
 	<header class="backdrop-blur-md w-full">
 		<nav
-			class="mx-auto flex max-w-xxl items-center justify-between lg:px-16 p-6 lg:p-0"
+			class="mx-auto flex max-w-xxl items-center justify-between lg:px-32 p-6 lg:p-0"
 			aria-label="Global"
 		>
 			<div class="flex lg:flex-1">
