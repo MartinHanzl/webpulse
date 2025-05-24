@@ -16,10 +16,6 @@ return [
         'en',
         'de',
         'pl'
-        /*'es' => [
-            'MX', // mexican spanish
-            'CO', // colombian spanish
-        ],*/
     ],
 
     /*
@@ -111,7 +107,7 @@ return [
     | application, set this to 'Trans'.
     |
     */
-    'translation_suffix' => 'Translation',
+    'translation_suffix' => 'translations',
 
     /*
     |--------------------------------------------------------------------------
