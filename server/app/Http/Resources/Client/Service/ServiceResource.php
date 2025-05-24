@@ -7,7 +7,6 @@ use App\Http\Resources\Admin\TaxRate\TaxRateResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Arr;
 
 class ServiceResource extends JsonResource
 {
@@ -18,16 +17,7 @@ class ServiceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        $translated = [];
-
-        $translation = $this->translate(App::getLocale(), false); // false zajistí, že to nevyhodí exception, ale vrátí null
-        if ($translation) {
-            foreach ($this->translatedAttributes as $attribute) {
-                $translated[$attribute] = $translation->$attribute;
-            }
-        }
-
-        return array_merge([
+        return [
             'id' => $this->id,
             'type' => $this->type,
             'price_type' => $this->price_type,
@@ -38,6 +28,12 @@ class ServiceResource extends JsonResource
             'currency' => CurrencyResource::make($this->currency),
             'image' => $this->image,
             'active' => $this->active,
-        ], $translated);
+            'name' => $this->translate(App::getLocale())->name,
+            'slug' => $this->translate(App::getLocale())->slug,
+            'perex' => $this->translate(App::getLocale())->perex,
+            'description' => $this->translate(App::getLocale())->description,
+            'meta_title' => $this->translate(App::getLocale())->meta_title,
+            'meta_description' => $this->translate(App::getLocale())->meta_description,
+        ];
     }
 }
