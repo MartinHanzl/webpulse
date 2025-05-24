@@ -17,7 +17,15 @@ class ServiceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return [
+        $translated = [];
+        if ($this->relationLoaded('translations') || $this->hasTranslation(App::getLocale())) {
+            $translation = $this->translate(App::getLocale());
+            foreach ($this->translatedAttributes as $attribute) {
+                $translated[$attribute] = $translation->$attribute;
+            }
+        }
+
+        return array_merge([
             'id' => $this->id,
             'type' => $this->type,
             'price_type' => $this->price_type,
@@ -28,12 +36,6 @@ class ServiceResource extends JsonResource
             'currency' => CurrencyResource::make($this->currency),
             'image' => $this->image,
             'active' => $this->active,
-            'name' => $this->translate(App::getLocale())->name,
-            'slug' => $this->slug,
-            'perex' => $this->perex,
-            'description' => $this->description,
-            'meta_title' => $this->meta_title,
-            'meta_description' => $this->meta_description,
-        ];
+        ], $translated);
     }
 }
