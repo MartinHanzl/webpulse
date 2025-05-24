@@ -43,6 +43,7 @@
     "prosemirror-state": "^1.4.3",
     "prosemirror-view": "^1.37.1",
     "vee-validate": "^4.14.7",
+    "video.js": "^8.22.0",
     "vue": "latest",
     "vue-router": "latest",
     "vue3-apexcharts": "^1.8.0"
