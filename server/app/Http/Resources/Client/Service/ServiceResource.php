@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Resources\Admin\Country;
+namespace App\Http\Resources\Client\Service;
 
 use App\Http\Resources\Admin\Currency\CurrencyResource;
 use App\Http\Resources\Admin\TaxRate\TaxRateResource;
@@ -28,7 +28,11 @@ class ServiceResource extends JsonResource
             'image' => $this->image,
             'active' => $this->active,
             'name' => $this->name,
-            'translations' => array_column($this->translations->toArray(), null, 'locale'),
+            'slug' => $this->slug,
+            'perex' => $this->perex,
+            'description' => $this->description,
+            'meta_title' => $this->meta_title,
+            'meta_description' => $this->meta_description,
         ];
     }
 }

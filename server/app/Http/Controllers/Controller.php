@@ -12,11 +12,23 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
+
+    public function handleLanguage(?string $lang = null): string
+    {
+        if ($lang) {
+            App::setLocale($lang);
+        } else {
+            App::setLocale('cs');
+        }
+
+        return $lang;
+    }
 
     public function dashboard(Request $request): JsonResponse
     {
