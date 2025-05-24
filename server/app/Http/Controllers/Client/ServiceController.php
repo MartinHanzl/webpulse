@@ -38,6 +38,8 @@ class ServiceController extends Controller
 
         if ($request->has('orderWay') && $request->get('orderBy')) {
             $query->orderBy($request->get('orderBy'), $request->get('orderWay'));
+        } else {
+            $query->orderBy('id', 'desc');
         }
 
         if ($request->has('paginate')) {
