@@ -16,7 +16,7 @@ function loadServices() {
   loading.value = true;
   const client = useSanctumClient();
 
-  client("/api/service/" + locale.value, {
+  client("/api/service", {
     method: "GET",
     headers: {
       Accept: "application/json",

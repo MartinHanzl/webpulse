@@ -14,9 +14,8 @@ class ServiceController extends Controller
 {
     public function index(Request $request, string $lang = null): JsonResponse
     {
-        echo 'Deprecated: This endpoint is deprecated and will be removed in the future. Please use the new API endpoints.' . PHP_EOL;
         $this->handleLanguage($lang);
-        echo 'Blah: This endpoint is deprecated and will be removed in the future. Please use the new API endpoints.' . PHP_EOL;
+        dd(true);
 
         $query = Service::query();
 
