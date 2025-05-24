@@ -146,7 +146,7 @@ definePageMeta({
           {
             key: 'price',
             name: 'Cena',
-            type: 'price',
+            type: 'number',
             width: 80,
             hidden: true,
             sortable: true,
