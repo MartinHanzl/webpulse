@@ -21,11 +21,10 @@ class Controller extends BaseController
 
     public function handleLanguage(?string $lang = null): string
     {
-        if ($lang) {
-            App::setLocale($lang);
-        } else {
-            App::setLocale('cs');
+        if (!$lang) {
+            $lang = 'cs';
         }
+        App::setLocale($lang);
 
         return $lang;
     }
