@@ -22,7 +22,7 @@ class Controller extends BaseController
     public function handleLanguage(?string $lang = null): string
     {
         if (!$lang) {
-            $lang = 'cs';
+            $lang = App::getLocale();
         }
         App::setLocale($lang);
 
