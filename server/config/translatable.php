@@ -14,6 +14,8 @@ return [
         'cs',
         'sk',
         'en',
+        'de',
+        'pl'
         /*'es' => [
             'MX', // mexican spanish
             'CO', // colombian spanish
