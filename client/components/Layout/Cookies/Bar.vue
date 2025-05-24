@@ -84,7 +84,6 @@ watch(
 );
 onMounted(() => {
 	const showCookieBar = useCookie('showCookieBar').value;
-	console.log('showCookieBar', showCookieBar);
 
 	if (!showCookieBar || typeof showCookieBar !== 'undefined') {
 		showBar.value = false;
@@ -106,11 +105,12 @@ onMounted(() => {
 	<div>
 		<div
 			v-if="showBar"
-			class="z-10 absolute bottom-0 left-0 max-w-full w-full md:bottom-4 md:left-4 right-8 p-6 border border-secondary rounded md:max-w-md bg-dark"
+			class="z-10 fixed bottom-0 left-0 max-w-full w-full md:bottom-4 md:left-4 right-8 p-6 border border-light rounded md:max-w-md bg-primary text-light shadow-lg"
 		>
 			<BasePropsParagraph
 				class="mb-4"
 				size="base"
+				color="light"
 			>
 				{{ t("cookies.description") }}
 			</BasePropsParagraph>
@@ -119,17 +119,13 @@ onMounted(() => {
 					size="lg"
 					@click="acceptAllCookies"
 				>
-					{{
-						t("cookies.acceptAll")
-					}}
+					{{ t("cookies.acceptAll") }}
 				</BaseButton>
 				<BaseButton
 					size="lg"
 					@click="showSettings = true"
 				>
-					{{
-						t("cookies.settings")
-					}}
+					{{ t("cookies.settings") }}
 				</BaseButton>
 			</div>
 			<LayoutCookiesDialog
@@ -141,7 +137,7 @@ onMounted(() => {
 		</div>
 		<div
 			v-if="showIcon"
-			class="z-10 absolute flex justify-center items-center bottom-0 left-0 md:bottom-4 md:left-4 right-8 p-2 border border-secondary rounded bg-dark cursor-pointer h-12 w-12"
+			class="z-10 fixed flex justify-center items-center bottom-0 left-0 md:bottom-4 md:left-4 right-8 p-2 border border-secondary rounded bg-dark cursor-pointer h-12 w-12"
 		>
 			<CookieIcon
 				class="w-6 h-6 cursor-pointer"

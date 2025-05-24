@@ -5,12 +5,13 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				primary: '#fafafa',
-				secondary: '#71717b',
-				dark: '#18181b',
+				primary: '#083344',
+				secondary: '#155e75',
+				dark: '#164e63',
+				light: '#cffafe',
 			},
 			fontFamily: {
-				sans: ['Inter', 'sans-serif'],
+				sans: ['Montserrat', 'sans-serif'],
 			},
 		},
 	},

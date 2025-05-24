@@ -1,21 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html, body {
-    @apply bg-[#09090b] text-primary font-sans;
+    @apply bg-[#ecfeff] text-primary font-sans;
     min-height: 100vh;
     color: #fafafa; /* záloha, kdyby Tailwind neaplikoval správně */
 }
 
 body, html {
-    background: #09090b;
+    background: #ecfeff;
     min-height: 100vh;
-    color: #fafafa;
-    font-family: 'Inter', sans-serif;
-}
-
-::marker {
-    color: #fafafa;
+    color: #082f49;
+    font-family: 'Montserrat', sans-serif;
 }

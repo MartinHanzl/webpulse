@@ -28,6 +28,7 @@ export default defineNuxtConfig({
 		'@pinia/nuxt',
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/i18n',
+		'v-gsap-nuxt',
 	],
 	devtools: { enabled: false },
 
@@ -119,5 +120,12 @@ export default defineNuxtConfig({
 				file: 'pl.ts',
 			},
 		],
+	},
+
+	vgsap: {
+		presets: [],
+		breakpoint: 768,
+		scroller: '',
+		composable: true,
 	},
 });

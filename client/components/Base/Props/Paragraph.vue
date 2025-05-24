@@ -8,6 +8,14 @@ const boldClasses = ref({
 	bold: 'font-bold',
 	bolder: 'font-extrabold',
 });
+const colorClasses = ref({
+	primary: 'text-primary',
+	secondary: 'text-secondary',
+	success: 'text-success',
+	warning: 'text-warning',
+	danger: 'text-danger',
+	light: 'text-light',
+});
 const props = defineProps({
 	size: {
 		type: String,
@@ -19,9 +27,14 @@ const props = defineProps({
 		default: 'base',
 		required: false,
 	},
+	color: {
+		type: String,
+		default: 'primary',
+		required: false,
+	},
 });
 const baseClass = computed(() => {
-	return `${sizeClasses.value[props.size] || ''} ${boldClasses.value[props.bold] || ''} text-grayDark leading-6 tracking-tight`;
+	return `${sizeClasses.value[props.size] || ''} ${boldClasses.value[props.bold] || ''} ${colorClasses.value[props.color] || ''} leading-6 tracking-tight`;
 });
 </script>
 

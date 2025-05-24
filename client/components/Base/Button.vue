@@ -8,10 +8,13 @@ const sizeClasses = ref({
 	xl: 'px-2 lg:px-3.5 py-1.5 lg:py-2.5 text-xs lg:text-sm shadow-sm rounded',
 });
 const variantClasses = ref({
-	primary: 'hover:bg-primary hover:text-dark border border-secondary',
-	secondary: 'bg-white ring-1 ring-inset ring-grayLight hover:bg-gray-50 focus-visible:outline-grayLight text-grayDark',
-	success: 'bg-success hover:bg-successLight focus-visible:outline-successLight text-white',
-	danger: 'bg-danger hover:bg-dangerLight focus-visible:outline-dangerLight text-white',
+	primary: 'bg-primary hover:bg-dark text-light border border-secondary',
+	secondary:
+    'bg-white ring-1 ring-inset ring-grayLight hover:bg-gray-50 focus-visible:outline-grayLight text-grayDark',
+	success:
+    'bg-success hover:bg-successLight focus-visible:outline-successLight text-white',
+	danger:
+    'bg-danger hover:bg-dangerLight focus-visible:outline-dangerLight text-white',
 });
 const props = defineProps({
 	variant: {
