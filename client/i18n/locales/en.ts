@@ -30,4 +30,10 @@ export default {
 		services: 'Services',
 		contact: 'Contact',
 	},
+	home: {
+		hero: {
+			description:
+        'Every project is unique. We create custom websites and applications tailored to your needs.',
+		},
+	},
 };

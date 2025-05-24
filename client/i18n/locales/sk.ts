@@ -30,4 +30,10 @@ export default {
 		services: 'Služby',
 		contact: 'Kontakt',
 	},
+	home: {
+		hero: {
+			description:
+        'Každý projekt je originál. Tvoríme weby a aplikácie na mieru vašim potrebám.',
+		},
+	},
 };

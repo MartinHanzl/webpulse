@@ -30,4 +30,10 @@ export default {
 		services: 'Dienstleistungen',
 		contact: 'Kontakt',
 	},
+	home: {
+		hero: {
+			description:
+        'Jedes Projekt ist einzigartig. Wir erstellen maßgeschneiderte Websites und Anwendungen für Ihre Bedürfnisse.',
+		},
+	},
 };

@@ -30,4 +30,10 @@ export default {
 		services: 'Usługi',
 		contact: 'Kontakt',
 	},
+	home: {
+		hero: {
+			description:
+        'Każdy projekt jest wyjątkowy. Tworzymy strony internetowe i aplikacje dostosowane do Twoich potrzeb.',
+		},
+	},
 };

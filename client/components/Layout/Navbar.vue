@@ -76,23 +76,23 @@ const mobileMenuOpen = ref(false);
 			<PopoverGroup class="hidden lg:flex lg:gap-x-2">
 				<a
 					href="#"
-					class="text-sm/6 text-primary px-6 py-6 hover:bg-primary hover:text-light"
+					class="text-base font-semibold text-primary px-6 py-6 hover:bg-primary hover:text-light"
 				>{{ t("navbar.home") }}</a>
 				<a
 					href="#"
-					class="text-sm/6 text-primary px-6 py-6 hover:bg-primary hover:text-light"
+					class="text-base font-semibold text-primary px-6 py-6 hover:bg-primary hover:text-light"
 				>{{ t("navbar.about") }}</a>
 				<a
 					href="#"
-					class="text-sm/6 text-primary px-6 py-6 hover:bg-primary hover:text-light"
+					class="text-base font-semibold text-primary px-6 py-6 hover:bg-primary hover:text-light"
 				>{{ t("navbar.portfolio") }}</a>
 				<a
 					href="#"
-					class="text-sm/6 text-primary px-6 py-6 hover:bg-primary hover:text-light"
+					class="text-base font-semibold text-primary px-6 py-6 hover:bg-primary hover:text-light"
 				>{{ t("navbar.services") }}</a>
 				<a
 					href="#"
-					class="text-sm/6 text-primary px-6 py-6 hover:bg-primary hover:text-light"
+					class="text-base font-semibold text-primary px-6 py-6 hover:bg-primary hover:text-light"
 				>{{ t("navbar.contact") }}</a>
 				<Popover class="relative px-6 py-6 hover:bg-primary hover:text-dark">
 					<PopoverButton
@@ -175,23 +175,23 @@ const mobileMenuOpen = ref(false);
 						<div class="space-y-2 py-6">
 							<a
 								href="#"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-primary hover:bg-primary hover:text-light"
+								class="-mx-3 block rounded-lg px-3 py-2 text-base text-primary hover:bg-primary hover:text-light font-medium"
 							>{{ t("navbar.home") }}</a>
 							<a
 								href="#"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-primary hover:bg-primary hover:text-light"
+								class="-mx-3 block rounded-lg px-3 py-2 text-base text-primary hover:bg-primary hover:text-light font-medium"
 							>{{ t("navbar.about") }}</a>
 							<a
 								href="#"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-primary hover:bg-primary hover:text-light"
+								class="-mx-3 block rounded-lg px-3 py-2 text-base text-primary hover:bg-primary hover:text-light font-medium"
 							>{{ t("navbar.portfolio") }}</a>
 							<a
 								href="#"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-primary hover:bg-primary hover:text-light"
+								class="-mx-3 block rounded-lg px-3 py-2 text-base text-primary hover:bg-primary hover:text-light font-medium"
 							>{{ t("navbar.services") }}</a>
 							<a
 								href="#"
-								class="-mx-3 block rounded-lg px-3 py-2 text-base/7 text-primary hover:bg-primary hover:text-light"
+								class="-mx-3 block rounded-lg px-3 py-2 text-base text-primary hover:bg-primary hover:text-light font-medium"
 							>{{ t("navbar.technologies") }}</a>
 						</div>
 						<div class="py-6 flex justify-between">

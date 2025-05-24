@@ -58,7 +58,10 @@ const emit = defineEmits(['acceptSelected', 'acceptAll']);
 						>
 							<div>
 								<div class="mt-3 sm:mt-5">
-									<BasePropsHeading type="h3">
+									<BasePropsHeading
+										type="h3"
+										color="light"
+									>
 										{{ t("cookies.title") }}
 									</BasePropsHeading>
 									<div class="mt-5 sm:mt-6 text-light">

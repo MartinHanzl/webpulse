@@ -1,47 +1,70 @@
 <script setup lang="ts">
+const colorClasses = {
+	light: 'text-light',
+	primary: 'text-primary',
+};
+
+const typeClasses = {
+	h1: 'text-5xl font-bold tracking-tight sm:text-7xl',
+	h2: 'text-4xl font-semibold tracking-tight sm:text-5xl',
+	h3: 'text-3xl font-semibold tracking-tight sm:text-4xl',
+	h4: 'text-2xl font-medium tracking-tight sm:text-3xl',
+	h5: 'text-xl font-medium tracking-tight sm:text-2xl',
+	h6: 'text-lg font-medium tracking-tight sm:text-xl',
+};
+
 const props = defineProps({
 	type: {
 		type: String,
 		default: 'h1',
 		required: false,
 	},
+	color: {
+		type: String,
+		default: 'primary',
+		required: false,
+	},
+});
+
+const baseClass = computed(() => {
+	return `${typeClasses[props.type] || typeClasses.h1} ${colorClasses[props.color] || colorClasses.light} text-balance`;
 });
 </script>
 
 <template>
 	<h1
 		v-if="type === 'h1'"
-		class="text-balance text-5xl font-bold tracking-tight text-light sm:text-6xl"
+		:class="baseClass"
 	>
 		<slot />
 	</h1>
 	<h2
 		v-if="type === 'h2'"
-		class="text-balance text-4xl font-semibold tracking-tight text-light sm:text-5xl"
+		:class="baseClass"
 	>
 		<slot />
 	</h2>
 	<h3
 		v-if="type === 'h3'"
-		class="text-balance text-3xl font-semibold tracking-tight text-light sm:text-4xl"
+		:class="baseClass"
 	>
 		<slot />
 	</h3>
 	<h4
 		v-if="type === 'h4'"
-		class="text-balance text-2xl font-medium tracking-tight text-light sm:text-3xl"
+		:class="baseClass"
 	>
 		<slot />
 	</h4>
 	<h5
 		v-if="type === 'h5'"
-		class="text-balance text-xl font-medium tracking-tight text-light sm:text-2xl"
+		:class="baseClass"
 	>
 		<slot />
 	</h5>
 	<h6
 		v-if="type === 'h6'"
-		class="text-balance text-lg font-medium tracking-tight text-light sm:text-xl"
+		:class="baseClass"
 	>
 		<slot />
 	</h6>
