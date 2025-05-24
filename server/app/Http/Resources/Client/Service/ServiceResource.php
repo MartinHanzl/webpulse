@@ -28,6 +28,11 @@ class ServiceResource extends JsonResource
             'image' => $this->image,
             'active' => $this->active,
             'name' => $this->name,
+            'slug' => $this->slug,
+            'perex' => $this->perex,
+            'description' => $this->description,
+            'meta_title' => $this->meta_title,
+            'meta_description' => $this->meta_description,
         ];
     }
 }
