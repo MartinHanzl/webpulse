@@ -7,6 +7,7 @@ use App\Http\Resources\Admin\TaxRate\TaxRateResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Arr;
 
 class ServiceResource extends JsonResource
 {
@@ -18,8 +19,9 @@ class ServiceResource extends JsonResource
     public function toArray(Request $request): array
     {
         $translated = [];
-        if ($this->relationLoaded('translations') || $this->hasTranslation(App::getLocale())) {
-            $translation = $this->translate(App::getLocale());
+
+        $translation = $this->translate(App::getLocale(), false); // false zajistí, že to nevyhodí exception, ale vrátí null
+        if ($translation) {
             foreach ($this->translatedAttributes as $attribute) {
                 $translated[$attribute] = $translation->$attribute;
             }
