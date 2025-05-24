@@ -92,6 +92,7 @@ class ServiceController extends Controller
             DB::commit();
         } catch (\Throwable|\Exception $e) {
             DB::rollBack();
+            echo $e->getMessage();
             return Response::json(['message' => 'An error occurred while updating language.'], 500);
         }
 
