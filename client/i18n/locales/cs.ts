@@ -11,15 +11,15 @@ export default {
     settingsTitle: "Nastavení cookies",
     technicalCookiesTitle: "Technické cookies",
     technicalCookiesDescription:
-      "Technické cookies jsou nezbytné kvůli správnému fungování, bezpečnosti, řádnému zobrazování na počítači nebo na mobilu, fungujícímu vyplňování i odesílání formulářů a podobně. Jedná se např. o správu košíku a přihlášení. Bez těchto cookies nebude e-shop fungovat. Tyto cookies nelze odmítnout.",
+      "Technické cookies jsou nezbytné pro správné fungování webu. Zajišťují bezpečnost, správné zobrazení na různých zařízeních, umožňují vyplňování a odesílání formulářů, správu košíku a přihlašování. Bez těchto cookies e-shop nefunguje. Tyto cookies nelze odmítnout.",
     marketingCookiesTitle: "Marketingové cookies",
     marketingCookiesDescription:
-      "Marketingové cookies slouží k tomu, abychom vám mohli zobrazovat relevantní reklamu. Pomáhají nám také sledovat úspěšnost našich reklamních kampaní. Tyto cookies můžete odmítnout.",
+      "Marketingové cookies slouží k zobrazování reklam, které jsou pro vás relevantní. Pomáhají nám sledovat a vyhodnocovat účinnost našich reklamních kampaní. Tyto cookies můžete odmítnout.",
     analyticsCookiesTitle: "Analytické cookies",
     analyticsCookiesDescription:
-      "Analytické cookies nám pomáhají zlepšovat naše webové stránky a služby tím, že nám poskytují informace o tom, jak je používáte. Pomáhají nám také sledovat úspěšnost našich reklamních kampaní. Tyto cookies můžete odmítnout.",
+      "Analytické cookies nám poskytují informace o tom, jak používáte naše webové stránky a služby. Díky nim můžeme neustále zlepšovat obsah i uživatelský zážitek a sledovat úspěšnost reklamních kampaní. Tyto cookies můžete odmítnout.",
     advertisementCookiesTitle: "Reklamní cookies",
     advertisementCookiesDescription:
-      "Reklamní cookies nám pomáhají zobrazovat reklamy, které jsou pro vás relevantní. Pomáhají nám také sledovat úspěšnost našich reklamních kampaní. Tyto cookies můžete odmítnout.",
+      "Reklamní cookies nám umožňují zobrazovat reklamy, které odpovídají vašim zájmům, a sledovat jejich účinnost. Tyto cookies můžete odmítnout.",
   },
 };
