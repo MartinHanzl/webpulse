@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Response;
 
-class CPServiceController extends Controller
+class ServiceController extends Controller
 {
     public function index(Request $request, string $lang = null): JsonResponse
     {
