@@ -29,13 +29,11 @@ use \App\Http\Controllers\Admin\Service\ServiceController;
 use App\Http\Controllers\Client\Service\ServiceController as ClientServiceController;
 
 
-Route::group(['prefix' => 'v1'], function () {
-    Route::group([
-        'prefix' => 'service'
-    ], function () {
-        Route::get('', [ClientServiceController::class, 'index']);
-        Route::get('{id}/{lang?}', [ClientServiceController::class, 'show'])->where('id', '[0-9]+');
-    });
+Route::group([
+    'prefix' => 'service'
+], function () {
+    Route::get('', [ClientServiceController::class, 'index']);
+    Route::get('{id}/{lang?}', [ClientServiceController::class, 'show'])->where('id', '[0-9]+');
 });
 
 Route::group([
