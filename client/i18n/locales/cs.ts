@@ -35,6 +35,7 @@ export default {
       description:
         "Každý projekt je originál. Tvoříme weby a aplikace na míru vašim potřebám.",
     },
+    technologiesTitle: "Technologie, které používáme",
   },
   benefits: {
     title: "Proč si vybrat nás?",

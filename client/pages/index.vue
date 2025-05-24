@@ -11,11 +11,11 @@ const benefits = Array.from({ length: 5 }, (_, i) => ({
 
 <template>
   <div>
-    <LayoutContainer class="space-y-16">
+    <LayoutContainer class="space-y-24">
       <HomeHero />
       <div>
         <BasePropsHeading type="h2">{{ t("benefits.title") }}</BasePropsHeading>
-        <div class="flex flex-wrap gap-4 mt-6">
+        <div class="flex flex-wrap gap-6">
           <HomeBenefitCard
             v-gsap.whenVisible.from="{ autoAlpha: 0 }"
             v-for="(benefit, index) in benefits"
@@ -26,6 +26,7 @@ const benefits = Array.from({ length: 5 }, (_, i) => ({
           />
         </div>
       </div>
+      <HomeTechnologies />
     </LayoutContainer>
   </div>
 </template>
