@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -82,6 +83,7 @@ class ServiceController extends Controller
             $service->fill($request->all());
 
             foreach ($request->translations as $locale => $translation) {
+                $translation['slug'] = Str::slug($translation['name'], '-');
                 $service->translateOrNew($locale)->fill($translation);
             }
             $service->save();
