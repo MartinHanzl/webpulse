@@ -28,7 +28,7 @@ class ServiceResource extends JsonResource
             'currency' => CurrencyResource::make($this->currency),
             'image' => $this->image,
             'active' => $this->active,
-            'name' => $this->translate(App::getLocale())->name,
+            'name' => $this->name,
             'slug' => $this->translate(App::getLocale())->slug,
             'perex' => $this->translate(App::getLocale())->perex,
             'description' => $this->translate(App::getLocale())->description,
