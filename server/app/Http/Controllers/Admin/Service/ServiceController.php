@@ -84,7 +84,7 @@ class ServiceController extends Controller
 
             foreach ($request->translations as $locale => $translation) {
                 $slug = Str::slug($translation['name']);
-                $translation[] =['slug' => $slug];
+                $translation[] = ['slug' => $slug];
                 $service->translateOrNew($locale)->fill($translation);
             }
             $service->save();
@@ -92,8 +92,7 @@ class ServiceController extends Controller
             DB::commit();
         } catch (\Throwable|\Exception $e) {
             DB::rollBack();
-            echo $e->getMessage();
-            return Response::json(['message' => 'An error occurred while updating language.'], 500);
+            return Response::json(['message' => 'An error occurred while updating service.'], 500);
         }
 
         return Response::json(ServiceResource::make($service));

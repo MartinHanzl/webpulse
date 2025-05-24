@@ -2,6 +2,8 @@
 
 namespace App\Models\Service;
 
+use App\Models\Currency\Currency;
+use App\Models\TaxRate;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -42,11 +44,11 @@ class Service extends Model
 
     public function currency()
     {
-        return $this->belongsTo('App\Models\Currency\Currency', 'currency_id');
+        return $this->belongsTo(Currency::class, 'currency_id', 'id');
     }
 
     public function taxRate()
     {
-        return $this->belongsTo('App\Models\TaxRate\TaxRate', 'tax_rate_id');
+        return $this->belongsTo(TaxRate::class, 'tax_rate_id', 'id');
     }
 }

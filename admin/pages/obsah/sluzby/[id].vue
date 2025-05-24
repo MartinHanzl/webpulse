@@ -37,8 +37,8 @@ const breadcrumbs = ref([
 
 const item = ref({
   id: null as number | null,
-  type: "" as string,
-  price_type: "" as string,
+  type: "service" as string,
+  price_type: "hourly" as string,
   price: 0 as number,
   tax_rate_id: 5 as number,
   currency_id: 1 as number,
@@ -205,6 +205,26 @@ definePageMeta({
               name="price"
               rules="required|min:1"
               class="col-span-1"
+            />
+            <BaseFormSelect
+              v-model="item.type"
+              label="Typ služby"
+              name="type"
+              class="col-span-1"
+              :options="[
+                { value: 'service', name: 'Služba' },
+                { value: 'product', name: 'Produkt' },
+              ]"
+            />
+            <BaseFormSelect
+              v-model="item.price_type"
+              label="Typ ceny"
+              name="price_type"
+              class="col-span-1"
+              :options="[
+                { value: 'total', name: 'Celkem za službu' },
+                { value: 'hourly', name: 'Cena za hodinu' },
+              ]"
             />
             <br />
             <BaseFormSelect
