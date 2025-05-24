@@ -29,7 +29,7 @@ use \App\Http\Controllers\Admin\Service\ServiceController;
 use App\Http\Controllers\Client\Service\ServiceController as ClientServiceController;
 
 
-Route::group(['prefix' => 'v1', 'middleware' => ['api']], function () {
+Route::group(['prefix' => 'v1'], function () {
     Route::group([
         'prefix' => 'service'
     ], function () {
