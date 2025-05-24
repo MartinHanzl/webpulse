@@ -83,7 +83,7 @@ class ServiceController extends Controller
             $service->fill($request->all());
 
             foreach ($request->translations as $locale => $translation) {
-                $translation['slug'] = Str::slug($translation['name'], '-');
+                $translation['slug'] = Str::slug($translation['name']);
                 $service->translateOrNew($locale)->fill($translation);
             }
             $service->save();
