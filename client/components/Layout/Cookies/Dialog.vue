@@ -1,9 +1,7 @@
 <script setup>
-import { ref } from "vue";
 import {
   Dialog,
   DialogPanel,
-  DialogTitle,
   TransitionChild,
   TransitionRoot,
 } from "@headlessui/vue";
@@ -54,13 +52,11 @@ const emit = defineEmits(["acceptSelected", "acceptAll"]);
             >
               <div>
                 <div class="mt-3 sm:mt-5">
-                  <DialogTitle
-                    as="h3"
-                    class="text-base font-semibold text-primary"
-                    >{{ t("cookies.settingsTitle") }}
-                  </DialogTitle>
-                  <div class="mt-2">
-                    <div class="flex py-2">
+                  <BasePropsHeading type="h3">
+                    {{ t("cookies.title") }}
+                  </BasePropsHeading>
+                  <div class="mt-5 sm:mt-6">
+                    <div class="flex py-3">
                       <BaseFormCheckbox
                         v-model="cookies.technical"
                         :checked="cookies.technical"
@@ -76,7 +72,7 @@ const emit = defineEmits(["acceptSelected", "acceptAll"]);
                         </BasePropsParagraph>
                       </div>
                     </div>
-                    <div class="flex py-2">
+                    <div class="flex py-3">
                       <BaseFormCheckbox
                         v-model="cookies.marketing"
                         :checked="cookies.marketing"
@@ -91,7 +87,7 @@ const emit = defineEmits(["acceptSelected", "acceptAll"]);
                         </BasePropsParagraph>
                       </div>
                     </div>
-                    <div class="flex py-2">
+                    <div class="flex py-3">
                       <BaseFormCheckbox
                         v-model="cookies.analytics"
                         :checked="cookies.analytics"
@@ -106,7 +102,7 @@ const emit = defineEmits(["acceptSelected", "acceptAll"]);
                         </BasePropsParagraph>
                       </div>
                     </div>
-                    <div class="flex py-2">
+                    <div class="flex py-3">
                       <BaseFormCheckbox
                         v-model="cookies.advertisement"
                         :checked="cookies.advertisement"
