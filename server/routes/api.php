@@ -26,7 +26,7 @@ use App\Http\Controllers\Admin\Currency\CurrencyController;
 use App\Http\Controllers\Admin\Country\CountryController;
 use App\Http\Controllers\Admin\PriceOffer\PriceOfferController;
 use \App\Http\Controllers\Admin\Service\ServiceController;
-use App\Http\Controllers\Client\Service\ServiceController as ClientServiceController;
+use App\Http\Controllers\Client\Service\CPServiceController as ClientServiceController;
 
 
 Route::group([
