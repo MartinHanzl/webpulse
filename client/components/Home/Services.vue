@@ -12,13 +12,13 @@ defineProps({
     <BasePropsHeading type="h2">
       {{ t("services.title") }}
     </BasePropsHeading>
-    <div class="space-y-4">
+    <div>
       <div
         v-for="(service, index) in services"
         :key="index"
         :class="[
           index % 2 === 0 ? 'text-right' : 'text-left',
-          'border-b border-b-primary py-4',
+          'border-b border-b-primary py-6',
         ]"
       >
         <BasePropsHeading type="h3">
