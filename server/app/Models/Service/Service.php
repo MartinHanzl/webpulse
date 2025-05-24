@@ -6,6 +6,7 @@ use App\Models\Currency\Currency;
 use App\Models\TaxRate;
 use Astrotomic\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 
 class Service extends Model
 {
