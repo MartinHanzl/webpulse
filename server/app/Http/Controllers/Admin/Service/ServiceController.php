@@ -24,9 +24,15 @@ class ServiceController extends Controller
                 $searchString = explode(':', $searchString);
                 $query->where($searchString[0], 'like', '%' . $searchString[1] . '%');
             } else {
-                $query->where('code', '=', $searchString)
-                    ->orWhere('iso', 'like', '%' . $searchString . '%')
-                    ->orWhereTranslation('name', 'like', '%' . $searchString . '%');
+                $query->where('type', 'like', '%' . $searchString . '%')
+                    ->orWhere('price_type', 'like', '%' . $searchString . '%')
+                    ->orWhere('price', '=', $searchString)
+                    ->orWhereTranslation('name', 'like', '%' . $searchString . '%')
+                    ->orWhereTranslation('slug', 'like', '%' . $searchString . '%')
+                    ->orWhereTranslation('perex', 'like', '%' . $searchString . '%')
+                    ->orWhereTranslation('description', 'like', '%' . $searchString . '%')
+                    ->orWhereTranslation('meta_title', 'like', '%' . $searchString . '%')
+                    ->orWhereTranslation('meta_description', 'like', '%' . $searchString . '%');
             }
         }
 
@@ -62,7 +68,6 @@ class ServiceController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'code' => 'required|string',
             'translations' => 'required|array',
             'translations.*.name' => 'required|string',
         ]);

@@ -15,7 +15,11 @@ const loading = ref(false);
 
 const { refreshIdentity } = useSanctumAuth();
 
-const pageTitle = ref(route.params.id === 'pridat' ? 'Nová uživatelská skupina' : 'Detail uživatelské skupiny');
+const pageTitle = ref(
+	route.params.id === 'pridat'
+		? 'Nová uživatelská skupina'
+		: 'Detail uživatelské skupiny',
+);
 
 const breadcrumbs = ref([
 	{
@@ -44,7 +48,11 @@ const allowedPermissions = ref([
 	{ name: 'Trackování', value: 'Trackování', slug: 'trackings' },
 	{ name: 'Cenové nabídky', value: 'Nacenění', slug: 'price_offers' },
 	{ name: 'Uživatelé', value: 'Uživatelé', slug: 'users' },
-	{ name: 'Uživatelské skupiny', value: 'Uživatelské skupiny', slug: 'user_groups' },
+	{
+		name: 'Uživatelské skupiny',
+		value: 'Uživatelské skupiny',
+		slug: 'user_groups',
+	},
 	{ name: 'Šablony zpráv', value: 'Šablony zpráv', slug: 'message_blueprints' },
 	{ name: 'Aktivita', value: 'Aktivita', slug: 'users_has_activities' },
 	{ name: 'Aktivity', value: 'Aktivity', slug: 'activities' },
@@ -52,6 +60,7 @@ const allowedPermissions = ref([
 	{ name: 'Jazyky', value: 'Jazyky', slug: 'languages' },
 	{ name: 'Země', value: 'Země', slug: 'countries' },
 	{ name: 'Měny', value: 'Měny', slug: 'currencies' },
+	{ name: 'Služby', value: 'Služby', slug: 'services' },
 ]);
 
 const item = ref({
@@ -74,24 +83,28 @@ async function loadItem() {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json',
 		},
-	}).then((response) => {
-		item.value = response;
-		breadcrumbs.value.pop();
-		breadcrumbs.value.push({
-			name: item.value.name,
-			link: '/uzivatele/skupiny/' + route.params.id,
-			current: true,
+	})
+		.then((response) => {
+			item.value = response;
+			breadcrumbs.value.pop();
+			breadcrumbs.value.push({
+				name: item.value.name,
+				link: '/uzivatele/skupiny/' + route.params.id,
+				current: true,
+			});
+		})
+		.catch(() => {
+			error.value = true;
+			toast.add({
+				title: 'Chyba',
+				description:
+          'Nepodařilo se načíst uživatelskou skupinu. Zkuste to prosím později.',
+				color: 'red',
+			});
+		})
+		.finally(() => {
+			loading.value = false;
 		});
-	}).catch(() => {
-		error.value = true;
-		toast.add({
-			title: 'Chyba',
-			description: 'Nepodařilo se načíst uživatelskou skupinu. Zkuste to prosím později.',
-			color: 'red',
-		});
-	}).finally(() => {
-		loading.value = false;
-	});
 }
 
 async function saveItem() {
@@ -102,34 +115,46 @@ async function saveItem() {
 		id: number | null;
 		name: string;
 		permissions: [];
-		confirm_new_password: string ;
-	}>(route.params.id === 'pridat' ? '/api/admin/user/group' : '/api/admin/user/group/' + route.params.id, {
-		method: 'POST',
-		body: JSON.stringify(item.value),
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
+		confirm_new_password: string;
+	}>(
+		route.params.id === 'pridat'
+			? '/api/admin/user/group'
+			: '/api/admin/user/group/' + route.params.id,
+		{
+			method: 'POST',
+			body: JSON.stringify(item.value),
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
 		},
-	}).then(() => {
-		toast.add({
-			title: 'Hotovo',
-			description: route.params.id === 'pridat' ? 'Skupina uživatelů byla úspěšně vytvořena.' : 'Skupina uživatelů byla úspěšně upravena.',
-			color: 'green',
+	)
+		.then(() => {
+			toast.add({
+				title: 'Hotovo',
+				description:
+          route.params.id === 'pridat'
+          	? 'Skupina uživatelů byla úspěšně vytvořena.'
+          	: 'Skupina uživatelů byla úspěšně upravena.',
+				color: 'green',
+			});
+			router.push('/uzivatele/skupiny');
+		})
+		.then(() => {
+			refreshIdentity();
+		})
+		.catch(() => {
+			error.value = true;
+			toast.add({
+				title: 'Chyba',
+				description: `Nepodařilo se ${route.params.id === 'pridat' ? 'vytvořit' : 'uložit'} uživatelskou skupinu. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.`,
+				color: 'red',
+			});
+		})
+		.finally(() => {
+			loading.value = false;
+			userGroupStore.fetchUserGroups();
 		});
-		router.push('/uzivatele/skupiny');
-	}).then(() => {
-		refreshIdentity();
-	}).catch(() => {
-		error.value = true;
-		toast.add({
-			title: 'Chyba',
-			description: `Nepodařilo se ${route.params.id === 'pridat' ? 'vytvořit' : 'uložit'} uživatelskou skupinu. Zkontrolujte, že máte vyplněna všechna pole správně a zkuste to znovu.`,
-			color: 'red',
-		});
-	}).finally(() => {
-		loading.value = false;
-		userGroupStore.fetchUserGroups();
-	});
 }
 
 function addPermission() {
@@ -152,7 +177,9 @@ watch(
 	() => item.value.permissions,
 	(newPermissions) => {
 		newPermissions.forEach((permission) => {
-			const selectedPermission = allowedPermissions.value.find(p => p.value === permission.name);
+			const selectedPermission = allowedPermissions.value.find(
+				p => p.value === permission.name,
+			);
 			if (selectedPermission) {
 				permission.slug = selectedPermission.slug;
 			}
@@ -178,7 +205,9 @@ definePageMeta({
 <template>
 	<div>
 		<LayoutHeader
-			:title="route.params.id === 'pridat' ? 'Nová uživatelská skupina' : item.name"
+			:title="
+				route.params.id === 'pridat' ? 'Nová uživatelská skupina' : item.name
+			"
 			:breadcrumbs="breadcrumbs"
 			:actions="[{ type: 'save' }]"
 			slug="user_groups"

@@ -38,6 +38,8 @@ class Service extends Model
         'meta_description',
     ];
 
+    protected $with = ['currency', 'taxRate'];
+
     public function currency()
     {
         return $this->belongsTo('App\Models\Currency\Currency', 'currency_id');

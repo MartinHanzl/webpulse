@@ -291,16 +291,32 @@ definePageMeta({
 					<div class="col-span-3 grid grid-cols-1 lg:grid-cols-12">
 						<LayoutContainer class="col-span-full w-full">
 							<LayoutTitle>Souhrn</LayoutTitle>
-              <div class="grid grid-cols-3">
-                <p class="col-span-2 text-xs lg:text-sm/6 font-semibold text-grayDark">Celková cena:</p>
-                <p class="col-span-1 text-xs lg:text-sm/6 font-medium text-grayDark">xxx ,-</p>
-                <p class="col-span-2 text-xs lg:text-sm/6 font-semibold text-grayDark">DPH:</p>
-                <p class="col-span-1 text-xs lg:text-sm/6 font-medium text-grayDark">xxx ,-</p>
-                <p class="col-span-2 text-xs lg:text-sm/6 font-semibold text-grayDark">Celková cena vč. DPH:</p>
-                <p class="col-span-1 text-xs lg:text-sm/6 font-medium text-grayDark">xxx ,-</p>
-                <p class="col-span-2 text-xs lg:text-sm/6 font-semibold text-grayDark">Celkový počet hodin:</p>
-                <p class="col-span-1 text-xs lg:text-sm/6 font-medium text-grayDark">xxx</p>
-              </div>
+							<div class="grid grid-cols-3">
+								<p class="col-span-2 text-xs lg:text-sm/6 font-semibold text-grayDark">
+									Celková cena:
+								</p>
+								<p class="col-span-1 text-xs lg:text-sm/6 font-medium text-grayDark">
+									xxx ,-
+								</p>
+								<p class="col-span-2 text-xs lg:text-sm/6 font-semibold text-grayDark">
+									DPH:
+								</p>
+								<p class="col-span-1 text-xs lg:text-sm/6 font-medium text-grayDark">
+									xxx ,-
+								</p>
+								<p class="col-span-2 text-xs lg:text-sm/6 font-semibold text-grayDark">
+									Celková cena vč. DPH:
+								</p>
+								<p class="col-span-1 text-xs lg:text-sm/6 font-medium text-grayDark">
+									xxx ,-
+								</p>
+								<p class="col-span-2 text-xs lg:text-sm/6 font-semibold text-grayDark">
+									Celkový počet hodin:
+								</p>
+								<p class="col-span-1 text-xs lg:text-sm/6 font-medium text-grayDark">
+									xxx
+								</p>
+							</div>
 						</LayoutContainer>
 					</div>
 				</div>

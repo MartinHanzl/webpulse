@@ -25,17 +25,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Currency\CurrencyController;
 use App\Http\Controllers\Admin\Country\CountryController;
 use App\Http\Controllers\Admin\PriceOffer\PriceOfferController;
+use \App\Http\Controllers\Admin\Service\ServiceController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
 Route::group([
     'prefix' => 'admin'
 ], function () {
@@ -230,6 +221,16 @@ Route::group([
             Route::get('{id}', [CountryController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [CountryController::class, 'store']);
             Route::delete('{id}', [CountryController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        // Service routes
+        Route::group([
+            'prefix' => 'service'
+        ], function () {
+            Route::get('', [ServiceController::class, 'index']);
+            Route::get('{id}', [ServiceController::class, 'show'])->where('id', '[0-9]+');
+            Route::post('{id?}', [ServiceController::class, 'store']);
+            Route::delete('{id}', [ServiceController::class, 'destroy'])->where('id', '[0-9]+');
         });
 
         // Projects routes

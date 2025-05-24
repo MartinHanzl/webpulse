@@ -242,14 +242,14 @@ const activitiesByDay = computed(() => {
 								class="size-5 lg:size-8 fill-warning"
 							/>
 						</div>
-            <LifebuoyIcon
-                v-if="activityItem.activity.id === 29"
-                class="text-success size-5 lg:size-8 col-span-1 fill-success"
-            />
-            <NoPepsiIcon
-                v-if="activityItem.activity.id === 30"
-                class="size-5 lg:size-8 fill-success col-span-1"
-            />
+						<LifebuoyIcon
+							v-if="activityItem.activity.id === 29"
+							class="text-success size-5 lg:size-8 col-span-1 fill-success"
+						/>
+						<NoPepsiIcon
+							v-if="activityItem.activity.id === 30"
+							class="size-5 lg:size-8 fill-success col-span-1"
+						/>
 					</div>
 					<div
 						v-if="checkSmile(day) !== 'empty'"
