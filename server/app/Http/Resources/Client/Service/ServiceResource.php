@@ -6,6 +6,7 @@ use App\Http\Resources\Admin\Currency\CurrencyResource;
 use App\Http\Resources\Admin\TaxRate\TaxRateResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\App;
 
 class ServiceResource extends JsonResource
 {
@@ -27,7 +28,7 @@ class ServiceResource extends JsonResource
             'currency' => CurrencyResource::make($this->currency),
             'image' => $this->image,
             'active' => $this->active,
-            'name' => $this->name,
+            'name' => $this->translate(App::getLocale())->name,
             'slug' => $this->slug,
             'perex' => $this->perex,
             'description' => $this->description,

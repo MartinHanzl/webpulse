@@ -30,7 +30,7 @@ defineProps({
         <BasePropsParagraph class="mt-2">
           Cena:
           {{ $formatPrice(service.price, service.currency, service.tax_rate) }}
-          (cena je za
+          (cena za
           {{ service.price_type === "hourly" ? "hodinu" : "projekt" }})
         </BasePropsParagraph>
       </div>
