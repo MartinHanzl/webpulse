@@ -17,6 +17,7 @@ const benefits = Array.from({ length: 5 }, (_, i) => ({
         <BasePropsHeading type="h2">{{ t("benefits.title") }}</BasePropsHeading>
         <div class="flex flex-wrap gap-4 mt-6">
           <HomeBenefitCard
+            v-gsap.whenVisible.from="{ autoAlpha: 0 }"
             v-for="(benefit, index) in benefits"
             :key="index"
             :title="benefit.title"
