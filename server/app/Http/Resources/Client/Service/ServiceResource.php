@@ -2,7 +2,7 @@
 
 namespace App\Http\Resources\Client\Service;
 
-use App\Http\Resources\Admin\Currency\CurrencyResource;
+use App\Http\Resources\Client\Currency\CurrencyResource;
 use App\Http\Resources\Admin\TaxRate\TaxRateResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -29,11 +29,11 @@ class ServiceResource extends JsonResource
             'image' => $this->image,
             'active' => $this->active,
             'name' => $this->name,
-            'slug' => $this->translate(App::getLocale())->slug,
-            'perex' => $this->translate(App::getLocale())->perex,
-            'description' => $this->translate(App::getLocale())->description,
-            'meta_title' => $this->translate(App::getLocale())->meta_title,
-            'meta_description' => $this->translate(App::getLocale())->meta_description,
+            'slug' => $this->slug,
+            'perex' => $this->perex,
+            'description' => $this->description,
+            'meta_title' => $this->meta_title,
+            'meta_description' => $this->meta_description,
         ];
     }
 }
