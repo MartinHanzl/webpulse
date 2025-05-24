@@ -15,7 +15,6 @@ class ServiceController extends Controller
     public function index(Request $request, string $lang = null): JsonResponse
     {
         $this->handleLanguage($lang);
-        dd(true);
 
         $query = Service::query();
 
