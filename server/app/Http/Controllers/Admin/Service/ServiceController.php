@@ -77,9 +77,8 @@ class ServiceController extends Controller
             return Response::json($validator->errors(), 400);
         }
 
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-
             $service->fill($request->all());
 
             foreach ($request->translations as $locale => $translation) {
