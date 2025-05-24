@@ -122,6 +122,8 @@ export default defineNuxtConfig({
     ],
   },
 
+  plugins: ["~/plugins/formatPrice.client.ts"],
+
   vgsap: {
     presets: [],
     breakpoint: 768,

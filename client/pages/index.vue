@@ -59,6 +59,7 @@ onMounted(() => {
           />
         </div>
       </div>
+      <HomeServices v-if="services && services.length" :services="services" />
       <HomeTechnologies />
     </LayoutContainer>
   </div>
