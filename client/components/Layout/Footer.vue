@@ -1,6 +1,6 @@
 <template>
   <footer class="bg-primary">
-    <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32">
+    <div class="mx-auto max-w-7xl px-6 pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-24">
       <div class="xl:grid xl:grid-cols-3 xl:gap-8">
         <div class="space-y-8">
           <img
@@ -9,8 +9,8 @@
             alt="Company name"
           />
           <p class="text-balance text-sm/6 text-gray-300">
-            Making the world a better place through constructing elegant
-            hierarchies.
+            Tvoříme moderní a funkční webové stránky a aplikace na míru vašim
+            potřebám. Společně najdeme řešení, které rozhýbe vaše podnikání.
           </p>
           <div class="flex gap-x-6">
             <a
@@ -81,7 +81,7 @@
       </div>
       <div class="mt-16 border-t border-white/10 pt-8 sm:mt-20 lg:mt-24">
         <p class="text-sm/6 text-gray-400">
-          &copy; {{ new Date().getFullYear() }} web-pulse, All rights reserved.
+          &copy; {{ new Date().getFullYear() }} Webpulse, All rights reserved.
         </p>
       </div>
     </div>
