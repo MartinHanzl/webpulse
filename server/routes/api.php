@@ -32,7 +32,7 @@ use App\Http\Controllers\Client\Service\ServiceController as ClientServiceContro
 Route::group([
     'prefix' => 'service'
 ], function () {
-    Route::get('', [ClientServiceController::class, 'index']);
+    Route::get('{lang?}', [ClientServiceController::class, 'index']);
     Route::get('{id}/{lang?}', [ClientServiceController::class, 'show'])->where('id', '[0-9]+');
 });
 

@@ -2,6 +2,7 @@
 import { useI18n } from "vue-i18n";
 
 const { locale, t } = useI18n();
+console.log(locale);
 
 const loading = inject("loading", ref(false));
 
@@ -16,7 +17,7 @@ function loadServices() {
   loading.value = true;
   const client = useSanctumClient();
 
-  client("/api/v1/service", {
+  client("/api/service/" + locale.value, {
     method: "GET",
     headers: {
       Accept: "application/json",
