@@ -2,7 +2,6 @@
 import { useI18n } from "vue-i18n";
 
 const { locale, t } = useI18n();
-console.log(locale);
 
 const loading = inject("loading", ref(false));
 
