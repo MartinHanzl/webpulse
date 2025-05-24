@@ -5,7 +5,6 @@ namespace App\Models\Service;
 use App\Models\Currency\Currency;
 use App\Models\TaxRate;
 use Astrotomic\Translatable\Translatable;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
