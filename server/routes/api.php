@@ -26,14 +26,13 @@ use App\Http\Controllers\Admin\Currency\CurrencyController;
 use App\Http\Controllers\Admin\Country\CountryController;
 use App\Http\Controllers\Admin\PriceOffer\PriceOfferController;
 use App\Http\Controllers\Admin\Service\ServiceController;
-use App\Http\Controllers\Client\Service\ServiceController as ClientServiceController;
 
 
 Route::group([
     'prefix' => 'service'
 ], function () {
-    Route::get('{lang?}', [ClientServiceController::class, 'index']);
-    Route::get('{id}/{lang?}', [ClientServiceController::class, 'show'])->where('id', '[0-9]+');
+    Route::get('{lang?}', [App\Http\Controllers\Client\Service\ServiceController::class, 'index']);
+    Route::get('{id}/{lang?}', [App\Http\Controllers\Client\Service\ServiceController::class, 'show'])->where('id', '[0-9]+');
 });
 
 Route::group([
