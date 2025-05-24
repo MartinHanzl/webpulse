@@ -8,8 +8,12 @@ export default defineNuxtPlugin((nuxtApp) => {
   ): string => {
     const rate = 1 + taxRate.rate / 100;
     const finalPrice = price * rate;
+    const symbolBefore =
+      currency.symbol_before !== null ? currency.symbol_before + " " : "";
+    const symbolAfter =
+      currency.symbol_after !== null ? " " + currency.symbol_after : "";
 
-    return `${finalPrice},- Kč`;
+    return `${symbolBefore}${finalPrice}${symbolAfter}`;
 
     /*const priceWithTax = price * (1 + taxRate);
     return new Intl.NumberFormat("cs-CZ", {
