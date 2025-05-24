@@ -38,7 +38,7 @@ class Service extends Model
         'meta_title',
         'meta_description',
     ];
-    protected $translationForeignKey = 'service_id';
+
     protected $with = ['currency', 'taxRate'];
 
     public function currency()

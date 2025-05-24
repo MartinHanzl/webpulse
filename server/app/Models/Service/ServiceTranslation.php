@@ -19,4 +19,6 @@ class ServiceTranslation extends Model
         'meta_title',
         'meta_description',
     ];
+
+    protected $translationForeignKey = 'service_id';
 }
