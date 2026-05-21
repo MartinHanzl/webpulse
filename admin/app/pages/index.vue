@@ -49,6 +49,7 @@ const cashflowActionDialog = ref({
   show: false as boolean,
   day: 0 as number,
   categoryId: null as number | null,
+  type: 'expense' as string,
 });
 
 async function loadConfig() {
@@ -105,6 +106,7 @@ function openCashflowDialog() {
   cashflowActionDialog.value.show = true;
   cashflowActionDialog.value.categoryId = 50;
   cashflowActionDialog.value.day = new Date().getDate();
+  cashflowActionDialog.value.type = 'expense';
 }
 
 async function saveDayRecords(data: {
@@ -112,10 +114,16 @@ async function saveDayRecords(data: {
   currencyId: number;
   day: number;
   type: string;
-  dayRecords: Array<{ id: number | null; amount: number; description: string }>;
+  dayRecords: Array<{
+    id: number | null;
+    amount: number;
+    description: string;
+    is_repeated?: boolean;
+  }>;
 }) {
   const client = useSanctumClient();
   error.value = false;
+  loading.value = true;
 
   const month = new Date().getMonth() + 1;
   const year = new Date().getFullYear();
@@ -127,8 +135,9 @@ async function saveDayRecords(data: {
   const type = data.type ? data.type : 'expense';
   const records = data.dayRecords.map((record) => ({
     id: record.id,
-    amount: record.amount,
-    description: record.description,
+    amount: Number(record.amount),
+    description: record.description ?? '',
+    is_repeated: !!record.is_repeated,
   }));
 
   await client(categoryId ? '/api/admin/cashflow/' + categoryId : '/api/admin/cashflow', {
@@ -148,7 +157,7 @@ async function saveDayRecords(data: {
     .then(() => {
       $toast.show({
         summary: 'Hotovo',
-        detail: 'Záznamy byly úspěšně uložen.',
+        detail: 'Záznamy byly úspěšně uloženy.',
         severity: 'success',
       });
     })

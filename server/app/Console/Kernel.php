@@ -22,7 +22,7 @@ class Kernel extends ConsoleKernel
             });
 
         $schedule->command('currency:sync-rates')
-            ->everyThirtyMinutes()
+            ->everyTenMinutes()
             ->withoutOverlapping()
             ->runInBackground()
             ->onFailure(function () {
