@@ -46,6 +46,11 @@ const games = ref([
     imageUrl: '/static/img/cards/arena.png',
     linkUrl: '/arena',
   },
+  {
+    name: 'Timer výzva',
+    imageUrl: '/static/img/cards/timer.svg',
+    linkUrl: '/timer',
+  },
 ]);
 </script>
 

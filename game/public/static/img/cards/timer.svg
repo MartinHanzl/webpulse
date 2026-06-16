@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f1f23"/>
+      <stop offset="1" stop-color="#0a0a0b"/>
+    </linearGradient>
+    <linearGradient id="case" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34343a"/>
+      <stop offset="0.55" stop-color="#19191c"/>
+      <stop offset="1" stop-color="#0c0c0d"/>
+    </linearGradient>
+    <radialGradient id="dome" cx="50%" cy="35%" r="65%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.5" stop-color="#f0f0f0"/>
+      <stop offset="1" stop-color="#cfcfcf"/>
+    </radialGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="600" height="400" fill="url(#bg)"/>
+
+  <!-- displej -->
+  <g transform="translate(70 70)">
+    <rect width="460" height="150" rx="22" fill="url(#case)" stroke="#000" stroke-width="2"/>
+    <rect x="120" y="14" width="220" height="8" rx="4" fill="#000"/>
+    <rect x="36" y="44" width="388" height="86" rx="10" fill="#050807"/>
+    <text x="230" y="112" text-anchor="middle" font-family="'Courier New',monospace"
+          font-size="62" font-weight="700" letter-spacing="4"
+          fill="#2bff88" filter="url(#glow)">00:00:00</text>
+  </g>
+
+  <!-- velké tlačítko -->
+  <g transform="translate(300 300)">
+    <circle r="62" fill="url(#case)" stroke="#000" stroke-width="2"/>
+    <circle r="48" fill="url(#dome)"/>
+    <text y="8" text-anchor="middle" font-family="ui-monospace,monospace"
+          font-size="18" font-weight="700" letter-spacing="2" fill="#3a3a3a">START</text>
+  </g>
+</svg>
