@@ -229,7 +229,7 @@ definePageMeta({ layout: 'clean' });
 </template>
 
 <style>
-html, body { height: 100%; margin: 0; padding: 0; overflow: hidden; }
+html, body { height: 100%; margin: 0; padding: 0; overflow-x: hidden; }
 .leaflet-container { background: #f1f5f9 !important; cursor: crosshair !important; font-family: inherit; }
 .marker-dot { width: 16px; height: 16px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
 .card-pop-enter-active, .card-pop-leave-active { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
