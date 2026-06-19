@@ -417,6 +417,18 @@ onBeforeUnmount(stopTimer);
             imposter.
           </template>
         </p>
+
+        <!-- otázka pro věrné (jen režim Otázka) -->
+        <div
+          v-if="mode === 'question'"
+          class="w-full rounded-2xl border border-blue-200 bg-blue-50 px-5 py-4"
+        >
+          <span class="text-xs uppercase tracking-wide text-blue-400">Otázka pro věrné</span>
+          <div class="mt-1 font-winky text-lg font-bold text-blue-700">
+            {{ roundCrewQuestion }}
+          </div>
+        </div>
+
         <div class="rounded-2xl bg-primary/10 px-5 py-3">
           <span class="text-xs uppercase tracking-wide text-gray-400">Začíná</span>
           <div class="font-winky text-xl font-bold text-primaryDark">{{ starterName }}</div>
