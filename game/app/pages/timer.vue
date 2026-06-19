@@ -74,6 +74,37 @@ const toneClass: Record<string, string> = {
   bad: 'text-rose-400',
 };
 
+// ---- zvuk (Web Audio, bez assetů) ----
+let audioCtx: AudioContext | null = null;
+
+function beep(freq: number, durationMs = 120) {
+  if (typeof window === 'undefined') return;
+  try {
+    const Ctx = window.AudioContext || (window as any).webkitAudioContext;
+    if (!Ctx) return;
+    if (!audioCtx) audioCtx = new Ctx();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    const now = audioCtx.currentTime;
+    const dur = durationMs / 1000;
+
+    osc.type = 'square';
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(0.0001, now);
+    gain.gain.exponentialRampToValueAtTime(0.25, now + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+    osc.connect(gain).connect(audioCtx.destination);
+    osc.start(now);
+    osc.stop(now + dur);
+  } catch {
+    /* zvuk nedostupný – ignorovat */
+  }
+}
+
 // ---- časovač ----
 function loop() {
   elapsedMs.value = performance.now() - startPerf;
@@ -81,6 +112,7 @@ function loop() {
 }
 
 function start() {
+  beep(880, 110); // vyšší tón – start
   cancelAnimationFrame(rafId);
   status.value = 'running';
   elapsedMs.value = 0;
@@ -89,6 +121,7 @@ function start() {
 }
 
 function stop() {
+  beep(440, 160); // nižší tón – stop
   cancelAnimationFrame(rafId);
   elapsedMs.value = performance.now() - startPerf;
   status.value = 'done';

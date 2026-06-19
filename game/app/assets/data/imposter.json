@@ -1,0 +1,56 @@
+{
+	"wordCategories": [
+		{
+			"name": "Jídlo",
+			"words": ["Pizza", "Sushi", "Guláš", "Palačinky", "Hamburger", "Špagety", "Řízek", "Tacos", "Zmrzlina", "Knedlíky", "Lasagne", "Croissant", "Bramborák", "Ramen", "Čokoláda", "Salát"]
+		},
+		{
+			"name": "Zvířata",
+			"words": ["Slon", "Tygr", "Delfín", "Tučňák", "Klokan", "Žirafa", "Ježek", "Liška", "Velryba", "Sova", "Krokodýl", "Panda", "Vlk", "Chameleón", "Medvěd", "Netopýr"]
+		},
+		{
+			"name": "Místa",
+			"words": ["Pláž", "Hory", "Letiště", "Knihovna", "Nemocnice", "Hřbitov", "Kino", "Zoo", "Pyramidy", "Maják", "Hrad", "Jeskyně", "Vesmírná stanice", "Tržnice", "Akvárium", "Vlakové nádraží"]
+		},
+		{
+			"name": "Sport",
+			"words": ["Fotbal", "Hokej", "Tenis", "Basketbal", "Plavání", "Lyžování", "Box", "Golf", "Šachy", "Volejbal", "Jóga", "Surfing", "Krasobruslení", "Horolezectví", "Curling", "Šerm"]
+		},
+		{
+			"name": "Povolání",
+			"words": ["Hasič", "Doktor", "Učitel", "Pilot", "Kuchař", "Policista", "Programátor", "Zubař", "Zahradník", "Astronaut", "Soudce", "Novinář", "Fotograf", "Knihovník", "Veterinář", "Klaun"]
+		},
+		{
+			"name": "Filmy a seriály",
+			"words": ["Star Wars", "Harry Potter", "Matrix", "Titanic", "Pán prstenů", "Avatar", "Shrek", "Hra o trůny", "Přátelé", "Simpsonovi", "Pulp Fiction", "Forrest Gump", "Frozen", "Jurský park", "Rocky", "Breaking Bad"]
+		},
+		{
+			"name": "Předměty doma",
+			"words": ["Lednička", "Žehlička", "Vysavač", "Mikrovlnka", "Polštář", "Zubní kartáček", "Deštník", "Budík", "Pračka", "Svíčka", "Zrcadlo", "Hřeben", "Konvice", "Klíče", "Brýle", "Hodinky"]
+		},
+		{
+			"name": "Dopravní prostředky",
+			"words": ["Letadlo", "Loď", "Vlak", "Motorka", "Tramvaj", "Vrtulník", "Ponorka", "Balón", "Koloběžka", "Kamion", "Metro", "Kanoe", "Traktor", "Raketa", "Skútr", "Cisterna"]
+		}
+	],
+	"questionPairs": [
+		{ "crew": "Jaké je tvé oblíbené roční období?", "imposter": "Jaké roční období nemáš rád/a?" },
+		{ "crew": "Co bys snědl/a k snídani každý den?", "imposter": "Jaké jídlo bys už nikdy nechtěl/a vidět?" },
+		{ "crew": "Kam bys nejradši odjel/a na dovolenou?", "imposter": "Kam by ses nikdy nechtěl/a vrátit?" },
+		{ "crew": "Jakou superschopnost bys chtěl/a mít?", "imposter": "Jaké schopnosti se nejvíc bojíš?" },
+		{ "crew": "Co děláš nejradši o víkendu?", "imposter": "Co tě o víkendu nejvíc otravuje?" },
+		{ "crew": "Které zvíře by bylo nejlepší mazlíček?", "imposter": "Kterého zvířete se nejvíc bojíš?" },
+		{ "crew": "Jaký dárek by tě nejvíc potěšil?", "imposter": "Jaký dárek bys nikdy nechtěl/a dostat?" },
+		{ "crew": "S kým slavným by sis dal/a večeři?", "imposter": "Koho slavného nemůžeš vystát?" },
+		{ "crew": "Jaký film by sis pustil/a stokrát?", "imposter": "U jakého filmu jsi usnul/a nudou?" },
+		{ "crew": "Co je tvůj nejlepší skill do kuchyně?", "imposter": "Co se ti v kuchyni vždycky nepovede?" },
+		{ "crew": "Kterou dovednost by ses chtěl/a naučit?", "imposter": "Která dovednost ti přijde k ničemu?" },
+		{ "crew": "Jaké město bys chtěl/a navštívit?", "imposter": "Ve kterém městě bys nechtěl/a bydlet?" },
+		{ "crew": "Jaký nápoj máš nejradši?", "imposter": "Jaký nápoj ti vůbec nechutná?" },
+		{ "crew": "Co je tvůj oblíbený svátek?", "imposter": "Který svátek nemáš rád/a?" },
+		{ "crew": "Jakou barvu bys dal/a celému pokoji?", "imposter": "Jakou barvu v interiéru nesnášíš?" },
+		{ "crew": "Co bys dělal/a, kdyby ses nemusel/a starat o peníze?", "imposter": "Jaká práce ti přijde nejnudnější?" },
+		{ "crew": "Jakou hudbu si pouštíš nejčastěji?", "imposter": "Jaký hudební žánr ti rve uši?" },
+		{ "crew": "Co tě dokáže spolehlivě rozesmát?", "imposter": "Co ti vůbec nepřijde vtipné?" }
+	]
+}
