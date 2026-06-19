@@ -1,3 +1,3 @@
 <template>
-  <div class="mx-auto max-w-8xl"><slot /></div>
+  <div class="max-w-8xl mx-auto"><slot /></div>
 </template>

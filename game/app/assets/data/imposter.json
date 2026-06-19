@@ -33,24 +33,4006 @@
 			"words": ["Letadlo", "Loď", "Vlak", "Motorka", "Tramvaj", "Vrtulník", "Ponorka", "Balón", "Koloběžka", "Kamion", "Metro", "Kanoe", "Traktor", "Raketa", "Skútr", "Cisterna"]
 		}
 	],
-	"questionPairs": [
-		{ "crew": "Jaké je tvé oblíbené roční období?", "imposter": "Jaké roční období nemáš rád/a?" },
-		{ "crew": "Co bys snědl/a k snídani každý den?", "imposter": "Jaké jídlo bys už nikdy nechtěl/a vidět?" },
-		{ "crew": "Kam bys nejradši odjel/a na dovolenou?", "imposter": "Kam by ses nikdy nechtěl/a vrátit?" },
-		{ "crew": "Jakou superschopnost bys chtěl/a mít?", "imposter": "Jaké schopnosti se nejvíc bojíš?" },
-		{ "crew": "Co děláš nejradši o víkendu?", "imposter": "Co tě o víkendu nejvíc otravuje?" },
-		{ "crew": "Které zvíře by bylo nejlepší mazlíček?", "imposter": "Kterého zvířete se nejvíc bojíš?" },
-		{ "crew": "Jaký dárek by tě nejvíc potěšil?", "imposter": "Jaký dárek bys nikdy nechtěl/a dostat?" },
-		{ "crew": "S kým slavným by sis dal/a večeři?", "imposter": "Koho slavného nemůžeš vystát?" },
-		{ "crew": "Jaký film by sis pustil/a stokrát?", "imposter": "U jakého filmu jsi usnul/a nudou?" },
-		{ "crew": "Co je tvůj nejlepší skill do kuchyně?", "imposter": "Co se ti v kuchyni vždycky nepovede?" },
-		{ "crew": "Kterou dovednost by ses chtěl/a naučit?", "imposter": "Která dovednost ti přijde k ničemu?" },
-		{ "crew": "Jaké město bys chtěl/a navštívit?", "imposter": "Ve kterém městě bys nechtěl/a bydlet?" },
-		{ "crew": "Jaký nápoj máš nejradši?", "imposter": "Jaký nápoj ti vůbec nechutná?" },
-		{ "crew": "Co je tvůj oblíbený svátek?", "imposter": "Který svátek nemáš rád/a?" },
-		{ "crew": "Jakou barvu bys dal/a celému pokoji?", "imposter": "Jakou barvu v interiéru nesnášíš?" },
-		{ "crew": "Co bys dělal/a, kdyby ses nemusel/a starat o peníze?", "imposter": "Jaká práce ti přijde nejnudnější?" },
-		{ "crew": "Jakou hudbu si pouštíš nejčastěji?", "imposter": "Jaký hudební žánr ti rve uši?" },
-		{ "crew": "Co tě dokáže spolehlivě rozesmát?", "imposter": "Co ti vůbec nepřijde vtipné?" }
-	]
+  "questionPairs": [
+    {
+      "crew": "Jaké počasí ti nejvíc zvedne náladu?",
+      "imposter": "Jaké počasí tě nejvíc otravuje?"
+    },
+    {
+      "crew": "Který měsíc v roce máš nejradši?",
+      "imposter": "Který měsíc bys nejradši přeskočil/a?"
+    },
+    {
+      "crew": "Jaký je tvůj ideální den venku?",
+      "imposter": "Jaký den tě nejradši zažene domů?"
+    },
+    {
+      "crew": "Co máš nejradši na zimě?",
+      "imposter": "Co tě na zimě nejvíc štve?"
+    },
+    {
+      "crew": "Co je podle tebe nejlepší na létě?",
+      "imposter": "Co je na létě nesnesitelné?"
+    },
+    {
+      "crew": "Jak nejradši trávíš deštivý den?",
+      "imposter": "Co tě na deštivém dni deprimuje?"
+    },
+    {
+      "crew": "Co se ti vybaví u slova podzim?",
+      "imposter": "Co se ti na podzimu nelíbí?"
+    },
+    {
+      "crew": "Jaká teplota je pro tebe ideální?",
+      "imposter": "Jaká teplota je pro tebe nesnesitelná?"
+    },
+    {
+      "crew": "Co je nejlepší na prvním sněhu?",
+      "imposter": "Co tě na sněhu nejvíc otravuje?"
+    },
+    {
+      "crew": "Na co se v létě nejvíc těšíš?",
+      "imposter": "Čeho se v létě nejvíc obáváš?"
+    },
+    {
+      "crew": "Jak podle tebe voní jaro?",
+      "imposter": "Co ti na jaru vadí?"
+    },
+    {
+      "crew": "Co děláš nejradši za bouřky?",
+      "imposter": "Čeho se za bouřky nejvíc bojíš?"
+    },
+    {
+      "crew": "Jaký je tvůj ideální zimní víkend?",
+      "imposter": "Co bys v zimě nikdy dobrovolně nedělal/a?"
+    },
+    {
+      "crew": "Co máš rád/a na mlhavém ránu?",
+      "imposter": "Co ti na mlze vadí?"
+    },
+    {
+      "crew": "Jaké roční období je nejlepší na focení?",
+      "imposter": "Jaké roční období je k focení nuda?"
+    },
+    {
+      "crew": "Co je nejlepší na horkém létě?",
+      "imposter": "Co je na vedru nesnesitelné?"
+    },
+    {
+      "crew": "Jaké je tvé oblíbené počasí na spaní?",
+      "imposter": "Při jakém počasí se ti nejhůř usíná?"
+    },
+    {
+      "crew": "Co je krásného na podzimním listí?",
+      "imposter": "Co tě na padajícím listí otravuje?"
+    },
+    {
+      "crew": "Kdy je podle tebe nejkrásnější ráno?",
+      "imposter": "Které ráno je pro tebe utrpení?"
+    },
+    {
+      "crew": "Jak nejradši trávíš horký letní večer?",
+      "imposter": "Co tě na tropických nocích ničí?"
+    },
+    {
+      "crew": "Co máš rád/a na sychravém dni?",
+      "imposter": "Co je na sychravu nejhorší?"
+    },
+    {
+      "crew": "Jaká je tvá nejoblíbenější roční slavnost počasí?",
+      "imposter": "Jaké výkyvy počasí nesnášíš?"
+    },
+    {
+      "crew": "Co tě nejvíc potěší na jarním slunci?",
+      "imposter": "Co tě na ostrém slunci nejvíc obtěžuje?"
+    },
+    {
+      "crew": "Jak vypadá tvůj dokonalý sněhový den?",
+      "imposter": "Co je na zasněženém dni nepříjemné?"
+    },
+    {
+      "crew": "Co se ti líbí na větrném dni?",
+      "imposter": "Co tě na větru nejvíc rozčiluje?"
+    },
+    {
+      "crew": "Jaké jídlo bys jedl/a každý den?",
+      "imposter": "Jaké jídlo už nikdy nechceš vidět?"
+    },
+    {
+      "crew": "Co je tvá oblíbená pochoutka?",
+      "imposter": "Jaká pochoutka ti vůbec nechutná?"
+    },
+    {
+      "crew": "Jaké jídlo ti vždycky zlepší náladu?",
+      "imposter": "Po jakém jídle se cítíš mizerně?"
+    },
+    {
+      "crew": "Co si dáš, když oslavuješ?",
+      "imposter": "Co bys si nedal/a ani z hladu?"
+    },
+    {
+      "crew": "Jaké jídlo umíš nejlíp?",
+      "imposter": "Co se ti v kuchyni nikdy nepovede?"
+    },
+    {
+      "crew": "Co je nejlepší jídlo na cestách?",
+      "imposter": "Jaké jídlo na cestách nesnášíš?"
+    },
+    {
+      "crew": "Jaká kuchyně tě nejvíc baví?",
+      "imposter": "Jaká kuchyně ti vůbec nesedí?"
+    },
+    {
+      "crew": "Co bys dal/a na poslední večeři?",
+      "imposter": "Co by sis nikdy nevybral/a na talíř?"
+    },
+    {
+      "crew": "Jaké jídlo ti připomíná domov?",
+      "imposter": "Jaké jídlo ti kazí náladu?"
+    },
+    {
+      "crew": "Co je tvá ideální snídaně?",
+      "imposter": "Jaká snídaně tě naprosto nenadchne?"
+    },
+    {
+      "crew": "Co si rád/a dáš k obědu?",
+      "imposter": "Jaký oběd je pro tebe nejhorší?"
+    },
+    {
+      "crew": "Co je dokonalá večeře po náročném dni?",
+      "imposter": "Co bys večer nikdy nejedl/a?"
+    },
+    {
+      "crew": "Jaké ovoce máš nejradši?",
+      "imposter": "Jaké ovoce ti vůbec nechutná?"
+    },
+    {
+      "crew": "Jaká zelenina ti chutná nejvíc?",
+      "imposter": "Kterou zeleninu odsuneš na kraj talíře?"
+    },
+    {
+      "crew": "Jaký sýr je podle tebe nejlepší?",
+      "imposter": "Jaký sýr nesnášíš ani cítit?"
+    },
+    {
+      "crew": "Co je nejlepší pizza topping?",
+      "imposter": "Jaký topping na pizzu je zločin?"
+    },
+    {
+      "crew": "Jaká polévka tě zahřeje nejlíp?",
+      "imposter": "Jaká polévka ti vůbec nejede?"
+    },
+    {
+      "crew": "Co je tvůj oblíbený dezert?",
+      "imposter": "Jaký dezert je pro tebe zklamání?"
+    },
+    {
+      "crew": "Jaká sladkost ti udělá radost?",
+      "imposter": "Jaká sladkost je podle tebe přeceňovaná?"
+    },
+    {
+      "crew": "Co je nejlepší jídlo k pití piva?",
+      "imposter": "Co se k pivu vůbec nehodí?"
+    },
+    {
+      "crew": "Jaké jídlo bys vzal/a na piknik?",
+      "imposter": "Co na pikniku nikdy nechceš mít?"
+    },
+    {
+      "crew": "Co je ideální jídlo na kocovinu?",
+      "imposter": "Co bys na kocovinu nepozřel/a?"
+    },
+    {
+      "crew": "Jaké jídlo zvládneš sníst v jakoukoli hodinu?",
+      "imposter": "Jaké jídlo bys ráno nesnesl/a?"
+    },
+    {
+      "crew": "Co je nejlepší street food?",
+      "imposter": "Jaký street food bys minul/a?"
+    },
+    {
+      "crew": "Jaká příloha je podle tebe nejlepší?",
+      "imposter": "Jaká příloha je úplně zbytečná?"
+    },
+    {
+      "crew": "Co je dokonalá svačina do práce?",
+      "imposter": "Jaká svačina tě vůbec nezasytí?"
+    },
+    {
+      "crew": "Jaké koření používáš nejradši?",
+      "imposter": "Jaké koření ti všechno zkazí?"
+    },
+    {
+      "crew": "Co je nejlepší jídlo k filmu?",
+      "imposter": "Co u filmu nesnášíš jíst?"
+    },
+    {
+      "crew": "Jaká omáčka ke všemu sedne?",
+      "imposter": "Jaká omáčka ti přijde nechutná?"
+    },
+    {
+      "crew": "Co je tvůj guilty pleasure v jídle?",
+      "imposter": "Jaké jídlo ti přijde absurdně přeceňované?"
+    },
+    {
+      "crew": "Jaké pečivo máš nejradši k snídani?",
+      "imposter": "Jaké pečivo bys nechal/a ležet?"
+    },
+    {
+      "crew": "Co je nejlepší jídlo na grilu?",
+      "imposter": "Co na grilu vždycky dopadne špatně?"
+    },
+    {
+      "crew": "Jaká těstovina je podle tebe nejlepší?",
+      "imposter": "Jaký těstovinový pokrm tě nudí?"
+    },
+    {
+      "crew": "Co bys snědl/a, kdyby nebyly kalorie?",
+      "imposter": "Jaké jídlo ti přijde zbytečně těžké?"
+    },
+    {
+      "crew": "Jaké jídlo objednáš, když nevíš?",
+      "imposter": "Co bys nikdy neobjednal/a naslepo?"
+    },
+    {
+      "crew": "Co je nejlepší jídlo k snídani o víkendu?",
+      "imposter": "Jaká víkendová snídaně tě zklame?"
+    },
+    {
+      "crew": "Jaká pomazánka ti chutná nejvíc?",
+      "imposter": "Jaká pomazánka ti vadí už pohledem?"
+    },
+    {
+      "crew": "Co je ideální jídlo na pláž?",
+      "imposter": "Co bys na pláž nikdy nevzal/a?"
+    },
+    {
+      "crew": "Jaké jídlo si dáš, když máš málo času?",
+      "imposter": "Jaké rychlé jídlo nesnášíš?"
+    },
+    {
+      "crew": "Co je nejlepší fast food?",
+      "imposter": "Jaký fast food je pro tebe zklamání?"
+    },
+    {
+      "crew": "Jaký nápoj máš nejradši?",
+      "imposter": "Jaký nápoj ti vůbec nechutná?"
+    },
+    {
+      "crew": "Co si dáš ráno na rozjezd?",
+      "imposter": "Co bys ráno nikdy nepil/a?"
+    },
+    {
+      "crew": "Jaká káva je podle tebe nejlepší?",
+      "imposter": "Jaká káva ti vůbec nejede?"
+    },
+    {
+      "crew": "Jaký čaj tě nejvíc zklidní?",
+      "imposter": "Jaký čaj ti vůbec nechutná?"
+    },
+    {
+      "crew": "Co si dáš k oslavě?",
+      "imposter": "Co bys k přípitku nikdy nezvolil/a?"
+    },
+    {
+      "crew": "Jaký drink máš nejradši v létě?",
+      "imposter": "Jaký letní drink ti přijde odporný?"
+    },
+    {
+      "crew": "Co je nejlepší limonáda?",
+      "imposter": "Jaká limonáda je podle tebe nechutná?"
+    },
+    {
+      "crew": "Jaké pivo máš nejradši?",
+      "imposter": "Jaké pivo bys nedopil/a?"
+    },
+    {
+      "crew": "Jaké víno si vybereš k večeři?",
+      "imposter": "Jaké víno ti vůbec nesedne?"
+    },
+    {
+      "crew": "Co je dokonalý nápoj po sportu?",
+      "imposter": "Co bys po sportu nikdy nepil/a?"
+    },
+    {
+      "crew": "Jaký horký nápoj tě v zimě zahřeje?",
+      "imposter": "Jaký horký nápoj nesnášíš?"
+    },
+    {
+      "crew": "Co piješ nejradši na večírku?",
+      "imposter": "Co na večírku nikdy nepiješ?"
+    },
+    {
+      "crew": "Jaký smoothie kombinace ti chutná?",
+      "imposter": "Jaké smoothie ti přijde nechutné?"
+    },
+    {
+      "crew": "Co je nejlepší nápoj k snídani?",
+      "imposter": "Jaký nápoj se k snídani vůbec nehodí?"
+    },
+    {
+      "crew": "Jaký koktejl by sis objednal/a?",
+      "imposter": "Jaký koktejl bys nikdy nezkusil/a?"
+    },
+    {
+      "crew": "Co piješ, když máš žízeň?",
+      "imposter": "Co bys nepil/a, ani kdybys umíral/a žízní?"
+    },
+    {
+      "crew": "Jaká minerálka ti chutná?",
+      "imposter": "Jaká minerálka ti přijde divná?"
+    },
+    {
+      "crew": "Co je nejlepší nápoj k dezertu?",
+      "imposter": "Co se k dezertu vůbec nehodí?"
+    },
+    {
+      "crew": "Jaký nápoj ti připomíná dětství?",
+      "imposter": "Jaký nápoj ti připomíná něco nepříjemného?"
+    },
+    {
+      "crew": "Co je ideální drink k posezení s přáteli?",
+      "imposter": "Co bys s přáteli nikdy nepil/a?"
+    },
+    {
+      "crew": "Jaký energy drink ti sedí?",
+      "imposter": "Jaký energy drink je podle tebe hrozný?"
+    },
+    {
+      "crew": "Co je nejlepší nealko na párty?",
+      "imposter": "Jaké nealko je na párty trapné?"
+    },
+    {
+      "crew": "Jaký nápoj si dáš k filmu?",
+      "imposter": "Jaký nápoj ti k filmu vůbec nesedne?"
+    },
+    {
+      "crew": "Co je dokonalý nápoj na horké odpoledne?",
+      "imposter": "Co je v horku to nejhorší pití?"
+    },
+    {
+      "crew": "Jaký teplý nápoj si dáš večer?",
+      "imposter": "Jaký večerní nápoj ti naruší spánek?"
+    },
+    {
+      "crew": "Kam bys nejradši odjel/a na dovolenou?",
+      "imposter": "Kam by ses nikdy nechtěl/a vrátit?"
+    },
+    {
+      "crew": "Jaké město bys chtěl/a navštívit?",
+      "imposter": "Ve kterém městě bys nechtěl/a bydlet?"
+    },
+    {
+      "crew": "Jaká země tě nejvíc láká?",
+      "imposter": "Do jaké země by ses bál/a jet?"
+    },
+    {
+      "crew": "Co je tvá vysněná destinace?",
+      "imposter": "Jaké místo tě vůbec neláká?"
+    },
+    {
+      "crew": "Jaký typ dovolené máš nejradši?",
+      "imposter": "Jaký typ dovolené je pro tebe utrpení?"
+    },
+    {
+      "crew": "Hory, nebo moře?",
+      "imposter": "Co je na horách otravnější než na moři?"
+    },
+    {
+      "crew": "Co je nejlepší na cestování?",
+      "imposter": "Co na cestování nesnášíš nejvíc?"
+    },
+    {
+      "crew": "Jaké místo bys ukázal/a kamarádovi?",
+      "imposter": "Jaké místo bys nikomu nedoporučil/a?"
+    },
+    {
+      "crew": "Kde bys chtěl/a strávit rok života?",
+      "imposter": "Kde bys nevydržel/a ani týden?"
+    },
+    {
+      "crew": "Jaký je tvůj vysněný roadtrip?",
+      "imposter": "Jaká cesta autem by tě zničila?"
+    },
+    {
+      "crew": "Co je nejhezčí na cestování vlakem?",
+      "imposter": "Co tě na cestování vlakem otravuje?"
+    },
+    {
+      "crew": "Jaké přírodní místo tě uchvátilo?",
+      "imposter": "Jaké turistické místo tě zklamalo?"
+    },
+    {
+      "crew": "Kam bys jel/a hned, kdyby byl letní víkend?",
+      "imposter": "Kam bys o víkendu nikdy nejel/a?"
+    },
+    {
+      "crew": "Co je nejlepší způsob, jak poznat nové město?",
+      "imposter": "Co tě při poznávání města nejvíc unaví?"
+    },
+    {
+      "crew": "Jaký ostrov bys chtěl/a navštívit?",
+      "imposter": "Jaký ostrov tě vůbec neláká?"
+    },
+    {
+      "crew": "Co je nejkrásnější město, kde jsi byl/a?",
+      "imposter": "Které město tě zklamalo nejvíc?"
+    },
+    {
+      "crew": "Kam bys vyrazil/a na poslední chvíli?",
+      "imposter": "Kam bys nikdy nejel/a bez plánu?"
+    },
+    {
+      "crew": "Jaká je tvá ideální dovolená u vody?",
+      "imposter": "Co tě na dovolené u vody otravuje?"
+    },
+    {
+      "crew": "Co bys chtěl/a vidět na vlastní oči?",
+      "imposter": "Co tě na slavných památkách nudí?"
+    },
+    {
+      "crew": "Jaký kontinent bys chtěl/a procestovat?",
+      "imposter": "Kam na světě bys vůbec nejel/a?"
+    },
+    {
+      "crew": "Co je nejlepší na letním kempování?",
+      "imposter": "Co tě na kempování nejvíc štve?"
+    },
+    {
+      "crew": "Jaké je tvé ideální letní město?",
+      "imposter": "Jaké město je v létě nesnesitelné?"
+    },
+    {
+      "crew": "Kam by ses rád/a vrátil/a?",
+      "imposter": "Kam už nikdy nevkročíš?"
+    },
+    {
+      "crew": "Co je nejhezčí na cestování na vlastní pěst?",
+      "imposter": "Co tě na sólo cestování děsí?"
+    },
+    {
+      "crew": "Jaký zájezd by sis vybral/a?",
+      "imposter": "Jaký zájezd by tě otrávil?"
+    },
+    {
+      "crew": "Co bys chtěl/a zažít na cestách?",
+      "imposter": "Co bys na cestách nikdy nepodstoupil/a?"
+    },
+    {
+      "crew": "Jaké je nejlepší místo na východ slunce?",
+      "imposter": "Které ranní vstávání kvůli výhledu by tě naštvalo?"
+    },
+    {
+      "crew": "Co máš rád/a na letištích?",
+      "imposter": "Co na letištích nesnášíš?"
+    },
+    {
+      "crew": "Jaký hotel je pro tebe ideální?",
+      "imposter": "Jaké ubytování by ti zkazilo dovolenou?"
+    },
+    {
+      "crew": "Co je dokonalý plán na víkend ve městě?",
+      "imposter": "Jaký výlet do města tě nebaví?"
+    },
+    {
+      "crew": "Jaké místo má pro tebe nejlepší atmosféru?",
+      "imposter": "Které slavné místo je podle tebe přeceňované?"
+    },
+    {
+      "crew": "Co bys chtěl/a ochutnat na cestách?",
+      "imposter": "Jaké zahraniční jídlo by ses bál/a zkusit?"
+    },
+    {
+      "crew": "Jaká byla tvá nejlepší dovolená?",
+      "imposter": "Jaká dovolená byla katastrofa?"
+    },
+    {
+      "crew": "Kam bys jel/a za teplem v zimě?",
+      "imposter": "Kam by ses v zimě nehnul/a?"
+    },
+    {
+      "crew": "Co je nejhezčí na cestování s kamarády?",
+      "imposter": "Co tě na cestování ve skupině štve?"
+    },
+    {
+      "crew": "Které zvíře by bylo nejlepší mazlíček?",
+      "imposter": "Kterého zvířete se nejvíc bojíš?"
+    },
+    {
+      "crew": "Jaké zvíře bys chtěl/a být?",
+      "imposter": "Jakým zvířetem bys nikdy nechtěl/a být?"
+    },
+    {
+      "crew": "Které zvíře je podle tebe nejroztomilejší?",
+      "imposter": "Které zvíře ti přijde nechutné?"
+    },
+    {
+      "crew": "Jakého psa by sis pořídil/a?",
+      "imposter": "Jaký pes by ti k povaze vůbec nesedl?"
+    },
+    {
+      "crew": "Co máš rád/a na kočkách?",
+      "imposter": "Co tě na kočkách štve?"
+    },
+    {
+      "crew": "Které divoké zvíře bys chtěl/a vidět?",
+      "imposter": "Které divoké zvíře by tě vyděsilo?"
+    },
+    {
+      "crew": "Jaký pták je podle tebe nejkrásnější?",
+      "imposter": "Jaký pták ti leze na nervy?"
+    },
+    {
+      "crew": "Které zvíře v zoo musíš vidět?",
+      "imposter": "Které zvíře v zoo tě nudí?"
+    },
+    {
+      "crew": "Jaké mořské zvíře tě fascinuje?",
+      "imposter": "Jakého mořského tvora se bojíš?"
+    },
+    {
+      "crew": "Které zvíře je nejchytřejší?",
+      "imposter": "Které zvíře ti přijde k ničemu?"
+    },
+    {
+      "crew": "Co je nejlepší na životě se psem?",
+      "imposter": "Co je na chovu psa nejotravnější?"
+    },
+    {
+      "crew": "Jaký exotický mazlíček by tě bavil?",
+      "imposter": "Jaké zvíře bys doma nikdy nechtěl/a?"
+    },
+    {
+      "crew": "Které zvíře bys chtěl/a pohladit?",
+      "imposter": "Kterého zvířete by ses nedotkl/a?"
+    },
+    {
+      "crew": "Jaký hmyz je podle tebe užitečný?",
+      "imposter": "Jaký hmyz nesnášíš nejvíc?"
+    },
+    {
+      "crew": "Co je fascinujícího na pavoucích?",
+      "imposter": "Čeho se na pavoucích nejvíc bojíš?"
+    },
+    {
+      "crew": "Které zvíře má nejlepší schopnost?",
+      "imposter": "Které zvíře bys nechtěl/a potkat o samotě?"
+    },
+    {
+      "crew": "Jaký kůň by se ti líbil?",
+      "imposter": "Co tě na koních znervózňuje?"
+    },
+    {
+      "crew": "Které zvíře bys chtěl/a mít na farmě?",
+      "imposter": "Které zvíře by ti na farmě vadilo?"
+    },
+    {
+      "crew": "Co máš rád/a na ptačím zpěvu?",
+      "imposter": "Jaký zvuk zvířat tě ráno vzbudí a štve?"
+    },
+    {
+      "crew": "Jaké zvíře je nejlepší společník na výlet?",
+      "imposter": "Jaké zvíře by ti výlet zničilo?"
+    },
+    {
+      "crew": "Které zvíře bys chtěl/a chránit?",
+      "imposter": "Které zvíře ti nahání hrůzu?"
+    },
+    {
+      "crew": "Co je nejhezčí na rybách v akváriu?",
+      "imposter": "Co tě na akváriu otravuje?"
+    },
+    {
+      "crew": "Jaké zvíře tě rozesměje?",
+      "imposter": "Jaké zvíře ti přijde protivné?"
+    },
+    {
+      "crew": "Které zvíře by bylo dobrý parťák na běhání?",
+      "imposter": "Které zvíře bys na procházku nikdy nevzal/a?"
+    },
+    {
+      "crew": "Co je úžasného na delfínech?",
+      "imposter": "Jaký mořský živočich tě děsí?"
+    },
+    {
+      "crew": "Co děláš nejradši o víkendu?",
+      "imposter": "Co tě o víkendu nejvíc otravuje?"
+    },
+    {
+      "crew": "Jaký koníček tě nejvíc baví?",
+      "imposter": "Jaký koníček ti přijde ztráta času?"
+    },
+    {
+      "crew": "Co děláš, když si chceš odpočinout?",
+      "imposter": "Co ti odpočinek spíš zkazí?"
+    },
+    {
+      "crew": "Jakou aktivitu by sis zkusil/a?",
+      "imposter": "Jakou aktivitu bys nikdy nezkusil/a?"
+    },
+    {
+      "crew": "Co je tvůj ideální večer doma?",
+      "imposter": "Jaký večer doma tě nudí k smrti?"
+    },
+    {
+      "crew": "Jaké hobby by ses chtěl/a naučit?",
+      "imposter": "Jaké hobby ti přijde nudné?"
+    },
+    {
+      "crew": "Co tě dokáže pohltit na hodiny?",
+      "imposter": "Co tě po pěti minutách přestane bavit?"
+    },
+    {
+      "crew": "Jakou kreativní činnost máš rád/a?",
+      "imposter": "Jaká kreativní činnost ti nejde?"
+    },
+    {
+      "crew": "Co bys dělal/a, kdybys měl/a den volna?",
+      "imposter": "Jak bys den volna rozhodně nestrávil/a?"
+    },
+    {
+      "crew": "Jaký večírek tě baví nejvíc?",
+      "imposter": "Jaký večírek bys nejradši vynechal/a?"
+    },
+    {
+      "crew": "Co je nejlepší na čtení knih?",
+      "imposter": "Co tě na čtení otravuje?"
+    },
+    {
+      "crew": "Jakou deskovku si rád/a zahraješ?",
+      "imposter": "Jaká hra tě naprosto nebaví?"
+    },
+    {
+      "crew": "Co tě baví dělat venku?",
+      "imposter": "Co tě venku rychle unaví?"
+    },
+    {
+      "crew": "Jaké hobby je podle tebe relaxační?",
+      "imposter": "Jaké hobby tě spíš stresuje?"
+    },
+    {
+      "crew": "Co bys dělal/a celý deštivý den?",
+      "imposter": "Co bys za deštivý den nezvládl/a?"
+    },
+    {
+      "crew": "Jakou sbírku by sis založil/a?",
+      "imposter": "Jaká sbírka ti přijde zbytečná?"
+    },
+    {
+      "crew": "Co tě baví na fotografování?",
+      "imposter": "Co tě na focení štve?"
+    },
+    {
+      "crew": "Jaký kurz by ses chtěl/a přihlásit?",
+      "imposter": "Jaký kurz by tě nudil?"
+    },
+    {
+      "crew": "Co je nejlepší na zahradničení?",
+      "imposter": "Co tě na práci na zahradě otravuje?"
+    },
+    {
+      "crew": "Jakou ruční práci máš rád/a?",
+      "imposter": "Jaká ruční práce ti vůbec nejde?"
+    },
+    {
+      "crew": "Co děláš pro radost úplně sám/sama?",
+      "imposter": "Co bys o samotě nikdy nedělal/a?"
+    },
+    {
+      "crew": "Jaké hobby bys sdílel/a s partnerem?",
+      "imposter": "Jaké hobby by ti partner zkazil?"
+    },
+    {
+      "crew": "Co tě baví na vaření jako koníčku?",
+      "imposter": "Co tě na vaření otravuje?"
+    },
+    {
+      "crew": "Jakou hru bys hrál/a celou noc?",
+      "imposter": "U jaké hry bys usnul/a nudou?"
+    },
+    {
+      "crew": "Co je tvá oblíbená činnost na dovolené?",
+      "imposter": "Jaká aktivita na dovolené tě nudí?"
+    },
+    {
+      "crew": "Jaké hobby je podle tebe podceňované?",
+      "imposter": "Jaké hobby je podle tebe přeceňované?"
+    },
+    {
+      "crew": "Co tě baví tvořit vlastníma rukama?",
+      "imposter": "Co bys ručně nikdy nedělal/a?"
+    },
+    {
+      "crew": "Jaký volnočasový klub by tě bavil?",
+      "imposter": "Do jakého kroužku by tě nikdo nedostal?"
+    },
+    {
+      "crew": "Co děláš pro dobrou náladu?",
+      "imposter": "Co ti náladu spolehlivě zkazí?"
+    },
+    {
+      "crew": "Jakou novou věc by ses rád/a naučil/a?",
+      "imposter": "Co se učit vůbec nechceš?"
+    },
+    {
+      "crew": "Jaký sport tě nejvíc baví?",
+      "imposter": "Jaký sport tě vůbec nebaví?"
+    },
+    {
+      "crew": "Který sport bys chtěl/a vyzkoušet?",
+      "imposter": "Který sport bys nikdy nezkusil/a?"
+    },
+    {
+      "crew": "Co je nejlepší na běhání?",
+      "imposter": "Co tě na běhání ničí?"
+    },
+    {
+      "crew": "Jaký sport rád/a sleduješ v televizi?",
+      "imposter": "Jaký sport tě v televizi nudí?"
+    },
+    {
+      "crew": "Co máš rád/a na týmových sportech?",
+      "imposter": "Co tě na týmových sportech štve?"
+    },
+    {
+      "crew": "Jaký zimní sport tě baví?",
+      "imposter": "Jaký zimní sport bys vynechal/a?"
+    },
+    {
+      "crew": "Co je nejlepší na plavání?",
+      "imposter": "Co tě na plavání otravuje?"
+    },
+    {
+      "crew": "Jaký sport bys hrál/a každý den?",
+      "imposter": "Jaký sport tě po chvíli zničí?"
+    },
+    {
+      "crew": "Co tě baví na posilovně?",
+      "imposter": "Co tě na posilovně otravuje?"
+    },
+    {
+      "crew": "Jaká sportovní akce stojí za to vidět naživo?",
+      "imposter": "Jaká sportovní akce tě nezajímá?"
+    },
+    {
+      "crew": "Co je nejlepší na cyklistice?",
+      "imposter": "Co tě na kole štve?"
+    },
+    {
+      "crew": "Jaký adrenalinový sport bys zkusil/a?",
+      "imposter": "Jaký adrenalinový sport tě děsí?"
+    },
+    {
+      "crew": "Co tě baví na míčových hrách?",
+      "imposter": "Jaká míčová hra ti vůbec nejde?"
+    },
+    {
+      "crew": "Jaký sport je podle tebe nejnáročnější?",
+      "imposter": "Jaký sport ti přijde zbytečný?"
+    },
+    {
+      "crew": "Co je nejlepší na ranním cvičení?",
+      "imposter": "Co tě na ranním cvičení zabíjí?"
+    },
+    {
+      "crew": "Jaký sport bys dělal/a s partou?",
+      "imposter": "Jaký sport by ti parta zkazila?"
+    },
+    {
+      "crew": "Co máš rád/a na vodních sportech?",
+      "imposter": "Jaký vodní sport tě děsí?"
+    },
+    {
+      "crew": "Jaký sport ti dělá nejlepší formu?",
+      "imposter": "Jaký sport tě jen unaví bez výsledku?"
+    },
+    {
+      "crew": "Co je nejlepší na turistice?",
+      "imposter": "Co tě na túrách otravuje?"
+    },
+    {
+      "crew": "Jaký sport bys chtěl/a umět profesionálně?",
+      "imposter": "Jaký sport bys nedělal/a ani za peníze?"
+    },
+    {
+      "crew": "Co tě baví na lyžování?",
+      "imposter": "Co tě na lyžování štve?"
+    },
+    {
+      "crew": "Jaký pálkovací sport máš rád/a?",
+      "imposter": "Jaký raketový sport ti nejde?"
+    },
+    {
+      "crew": "Co je nejlepší na ranní rozcvičce?",
+      "imposter": "Co na cvičení nesnášíš?"
+    },
+    {
+      "crew": "Jaký fanouškovský zážitek byl nejlepší?",
+      "imposter": "Jaký zápas tě zklamal?"
+    },
+    {
+      "crew": "Co tě baví na bojových sportech?",
+      "imposter": "Co tě na kontaktních sportech odrazuje?"
+    },
+    {
+      "crew": "Jaký sport bys hrál/a v parku?",
+      "imposter": "Jaký sport do parku vůbec nepatří?"
+    },
+    {
+      "crew": "Co je super na padlu nebo tenisu?",
+      "imposter": "Co tě na raketových sportech štve?"
+    },
+    {
+      "crew": "Jaký outdoorový sport tě láká?",
+      "imposter": "Jaký outdoorový sport bys odmítl/a?"
+    },
+    {
+      "crew": "Co máš rád/a na jízdě na kole do práce?",
+      "imposter": "Co tě na dojíždění na kole otravuje?"
+    },
+    {
+      "crew": "Jaký sport zvládneš i bez tréninku?",
+      "imposter": "Jaký sport by tě hned položil?"
+    },
+    {
+      "crew": "Jakou hudbu si pouštíš nejčastěji?",
+      "imposter": "Jaký hudební žánr ti rve uši?"
+    },
+    {
+      "crew": "Jaká písnička ti zvedne náladu?",
+      "imposter": "Jaká písnička tě dokáže naštvat?"
+    },
+    {
+      "crew": "Jaký koncert by sis nenechal/a ujít?",
+      "imposter": "Na jaký koncert by tě nikdo nedostal?"
+    },
+    {
+      "crew": "Jaký interpret tě nikdy neomrzí?",
+      "imposter": "Jaký interpret ti leze na nervy?"
+    },
+    {
+      "crew": "Co posloucháš při práci?",
+      "imposter": "Co tě při práci ruší?"
+    },
+    {
+      "crew": "Jaká hudba ti pomáhá usnout?",
+      "imposter": "Jaká hudba ti nedá spát?"
+    },
+    {
+      "crew": "Co si pustíš na párty?",
+      "imposter": "Jaká hudba párty zabije?"
+    },
+    {
+      "crew": "Jaký žánr bys chtěl/a víc objevit?",
+      "imposter": "Jaký žánr prostě nedáš?"
+    },
+    {
+      "crew": "Jaká písnička ti připomíná léto?",
+      "imposter": "Jaká písnička ti připomíná něco nepříjemného?"
+    },
+    {
+      "crew": "Co posloucháš v autě na dlouhé cestě?",
+      "imposter": "Co bys v autě nepustil/a?"
+    },
+    {
+      "crew": "Jaký nástroj by ses chtěl/a naučit?",
+      "imposter": "Jaký nástroj zní podle tebe hrozně?"
+    },
+    {
+      "crew": "Jaká hudba ti dodá energii?",
+      "imposter": "Jaká hudba tě uspí?"
+    },
+    {
+      "crew": "Co si pustíš při úklidu?",
+      "imposter": "Jaká hudba ti úklid znechutí?"
+    },
+    {
+      "crew": "Jaká kapela má nejlepší koncerty?",
+      "imposter": "Jaká kapela je podle tebe přeceňovaná?"
+    },
+    {
+      "crew": "Co posloucháš, když jsi smutný/á?",
+      "imposter": "Jaká hudba ti náladu ještě zhorší?"
+    },
+    {
+      "crew": "Jaký song bys zpíval/a na karaoke?",
+      "imposter": "Jaký song bys na karaoke nikdy nezpíval/a?"
+    },
+    {
+      "crew": "Jaká hudba se hodí k běhání?",
+      "imposter": "Jaká hudba ti rytmus rozhodí?"
+    },
+    {
+      "crew": "Co je nejlepší hudba na ráno?",
+      "imposter": "Jaká hudba ti ráno vadí?"
+    },
+    {
+      "crew": "Jaký festival bys chtěl/a zažít?",
+      "imposter": "Jaký festival by tě otrávil?"
+    },
+    {
+      "crew": "Co posloucháš při cvičení?",
+      "imposter": "Co ti při cvičení vůbec nesedí?"
+    },
+    {
+      "crew": "Jaká melodie ti utkví v hlavě?",
+      "imposter": "Jaká melodie tě dohání k šílenství?"
+    },
+    {
+      "crew": "Jaká hudba navodí pohodu u večeře?",
+      "imposter": "Jaká hudba ti k jídlu vadí?"
+    },
+    {
+      "crew": "Co si pustíš na romantický večer?",
+      "imposter": "Jaká hudba zabije romantiku?"
+    },
+    {
+      "crew": "Jaký retro hit máš rád/a?",
+      "imposter": "Jaký starý hit už nemůžeš slyšet?"
+    },
+    {
+      "crew": "Jaká hudba tě nakopne před akcí?",
+      "imposter": "Jaká hudba tě před akcí spíš znervózní?"
+    },
+    {
+      "crew": "Co posloucháš o samotě, když tě nikdo neslyší?",
+      "imposter": "Co bys před lidmi nikdy nepustil/a?"
+    },
+    {
+      "crew": "Jaký hudební styl ti sedí k podzimu?",
+      "imposter": "Jaký hudební styl ti vůbec nesedí?"
+    },
+    {
+      "crew": "Jaká skladba ti vždy zvedne náladu?",
+      "imposter": "Jaká skladba ti spolehlivě zkazí den?"
+    },
+    {
+      "crew": "Jaký film by sis pustil/a stokrát?",
+      "imposter": "U jakého filmu jsi usnul/a nudou?"
+    },
+    {
+      "crew": "Jaký žánr filmů máš nejradši?",
+      "imposter": "Jaký filmový žánr nesnášíš?"
+    },
+    {
+      "crew": "Jaký seriál bys binge-watchnul/a celou noc?",
+      "imposter": "Jaký seriál jsi nedokázal/a dokoukat?"
+    },
+    {
+      "crew": "Jaký film tě dojal nejvíc?",
+      "imposter": "Jaký film tě naprosto nudil?"
+    },
+    {
+      "crew": "Co je nejlepší filmová klasika?",
+      "imposter": "Jaká klasika je podle tebe přeceňovaná?"
+    },
+    {
+      "crew": "Jaký film tě rozesměje pokaždé?",
+      "imposter": "Jaká komedie ti vůbec nepřišla vtipná?"
+    },
+    {
+      "crew": "Jakou postavu z filmu bys chtěl/a být?",
+      "imposter": "Jakou filmovou postavu nemůžeš vystát?"
+    },
+    {
+      "crew": "Jaký film bys ukázal/a kamarádovi?",
+      "imposter": "Jaký film bys nikomu nedoporučil/a?"
+    },
+    {
+      "crew": "Co máš rád/a na sci-fi?",
+      "imposter": "Co tě na sci-fi nudí?"
+    },
+    {
+      "crew": "Jaký horor stojí za to vidět?",
+      "imposter": "Jaký horor je podle tebe trapný?"
+    },
+    {
+      "crew": "Jaký animák máš nejradši?",
+      "imposter": "Jaký animák tě nebavil?"
+    },
+    {
+      "crew": "Co je nejlepší film na deštivý večer?",
+      "imposter": "Jaký film by ti večer zkazil náladu?"
+    },
+    {
+      "crew": "Jaký film bys chtěl/a zažít naživo?",
+      "imposter": "Do jakého filmového světa bys nikdy nešel/nešla?"
+    },
+    {
+      "crew": "Jaká filmová scéna tě dostala?",
+      "imposter": "Jaká filmová scéna tě otrávila?"
+    },
+    {
+      "crew": "Jaký seriál sleduješ pořád dokola?",
+      "imposter": "Jaký populární seriál tě míjí?"
+    },
+    {
+      "crew": "Co máš rád/a na akčních filmech?",
+      "imposter": "Co tě na akčňácích unavuje?"
+    },
+    {
+      "crew": "Jaký film má nejlepší hudbu?",
+      "imposter": "Jaký film má podle tebe otravnou hudbu?"
+    },
+    {
+      "crew": "Jaké filmové překvapení tě dostalo?",
+      "imposter": "Jaký zvrat ti přišel hloupý?"
+    },
+    {
+      "crew": "Jaký dokument tě zaujal?",
+      "imposter": "Jaký dokument tě uspal?"
+    },
+    {
+      "crew": "Co je nejlepší film na první rande?",
+      "imposter": "Jaký film se na rande vůbec nehodí?"
+    },
+    {
+      "crew": "Jaký film by sis pustil/a o svátcích?",
+      "imposter": "Jaký vánoční film už nemůžeš vidět?"
+    },
+    {
+      "crew": "Jaká filmová série je nejlepší?",
+      "imposter": "Jaká filmová série je podle tebe natahovaná?"
+    },
+    {
+      "crew": "Jaký film tě inspiroval?",
+      "imposter": "Jaký film byl ztráta času?"
+    },
+    {
+      "crew": "Co máš rád/a na romantických komediích?",
+      "imposter": "Co tě na romantičkách štve?"
+    },
+    {
+      "crew": "Jaký seriál bys doporučil/a všem?",
+      "imposter": "Jaký hype seriál tě zklamal?"
+    },
+    {
+      "crew": "Jakou knihu by sis vzal/a na pustý ostrov?",
+      "imposter": "Jakou knihu jsi nedokázal/a dočíst?"
+    },
+    {
+      "crew": "Jaký žánr knih čteš nejradši?",
+      "imposter": "Jaký žánr knih tě nebaví?"
+    },
+    {
+      "crew": "Jaká kniha tě pohltila?",
+      "imposter": "Jaká kniha tě uspala?"
+    },
+    {
+      "crew": "Co máš rád/a na čtení před spaním?",
+      "imposter": "Co tě na čtení otravuje?"
+    },
+    {
+      "crew": "Jakou knihu bys četl/a znovu?",
+      "imposter": "Jakou knihu už nikdy neotevřeš?"
+    },
+    {
+      "crew": "Jaký autor tě nikdy nezklame?",
+      "imposter": "Jaký autor ti nesedí?"
+    },
+    {
+      "crew": "Co je nejlepší na audioknihách?",
+      "imposter": "Co ti na audioknihách vadí?"
+    },
+    {
+      "crew": "Jaká kniha tě naučila něco nového?",
+      "imposter": "Jaká povinná četba tě otrávila?"
+    },
+    {
+      "crew": "Jakou postavu z knihy máš rád/a?",
+      "imposter": "Jakou knižní postavu nemůžeš vystát?"
+    },
+    {
+      "crew": "Co je nejlepší místo na čtení?",
+      "imposter": "Kde se ti čte nejhůř?"
+    },
+    {
+      "crew": "Jaká kniha by se hodila na dovolenou?",
+      "imposter": "Jaká kniha na dovolenou nepatří?"
+    },
+    {
+      "crew": "Jaký příběh tě chytil za srdce?",
+      "imposter": "Jaký příběh ti přišel přitažený za vlasy?"
+    },
+    {
+      "crew": "Co tě baví na detektivkách?",
+      "imposter": "Co tě na detektivkách nebaví?"
+    },
+    {
+      "crew": "Jakou knihu bys dal/a jako dárek?",
+      "imposter": "Jakou knihu bys nikomu nedal/a?"
+    },
+    {
+      "crew": "Jaká kniha změnila tvůj pohled?",
+      "imposter": "Jaká kniha tě naprosto nadchla... vůbec ne?"
+    },
+    {
+      "crew": "Co je nejlepší na čtení v MHD?",
+      "imposter": "Co tě na čtení v MHD ruší?"
+    },
+    {
+      "crew": "Jaký komiks tě baví?",
+      "imposter": "Jaký komiks ti nic neříká?"
+    },
+    {
+      "crew": "Jakou knihu by měl číst každý?",
+      "imposter": "Jaká přeceňovaná kniha tě zklamala?"
+    },
+    {
+      "crew": "Co máš rád/a na fantasy?",
+      "imposter": "Co tě na fantasy odrazuje?"
+    },
+    {
+      "crew": "Jakou knihu sis užil/a víc než film?",
+      "imposter": "Jaký film byl lepší než kniha?"
+    },
+    {
+      "crew": "Co tě v práci nejvíc naplňuje?",
+      "imposter": "Co tě v práci nejvíc vysává?"
+    },
+    {
+      "crew": "Jaká práce by tě bavila?",
+      "imposter": "Jaká práce ti přijde nejnudnější?"
+    },
+    {
+      "crew": "Co bys dělal/a, kdyby ses nemusel/a starat o peníze?",
+      "imposter": "Jaká práce ti přijde k uzoufání?"
+    },
+    {
+      "crew": "Jaký pracovní úspěch tě potěšil?",
+      "imposter": "Jaký pracovní úkol nesnášíš?"
+    },
+    {
+      "crew": "Co je nejlepší na práci z domova?",
+      "imposter": "Co tě na home office štve?"
+    },
+    {
+      "crew": "Jaký kolega je ten nejlepší?",
+      "imposter": "Jaký typ kolegy nesnášíš?"
+    },
+    {
+      "crew": "Co máš rád/a na pondělcích?",
+      "imposter": "Co je na pondělí nejhorší?"
+    },
+    {
+      "crew": "Jaká schopnost ti v práci pomáhá?",
+      "imposter": "Jaký úkol ti v práci nikdy nejde?"
+    },
+    {
+      "crew": "Co tě motivuje vstát do práce?",
+      "imposter": "Co tě do práce nutí jen z povinnosti?"
+    },
+    {
+      "crew": "Jaké pracovní prostředí ti vyhovuje?",
+      "imposter": "Jaké pracovní prostředí tě ničí?"
+    },
+    {
+      "crew": "Co je nejlepší na práci v týmu?",
+      "imposter": "Co tě na práci v týmu štve?"
+    },
+    {
+      "crew": "Jakou poradu bys nevynechal/a?",
+      "imposter": "Jaká porada je čistá ztráta času?"
+    },
+    {
+      "crew": "Co tě na tvém oboru baví?",
+      "imposter": "Co tě na tvém oboru nudí?"
+    },
+    {
+      "crew": "Jakou dovednost ti práce dala?",
+      "imposter": "Jaký pracovní zlozvyk bys chtěl/a zrušit?"
+    },
+    {
+      "crew": "Co je ideální způsob, jak začít pracovní den?",
+      "imposter": "Co ti pracovní den dokáže zkazit hned ráno?"
+    },
+    {
+      "crew": "Jaká firemní akce tě baví?",
+      "imposter": "Jaký teambuilding bys nejradši vynechal/a?"
+    },
+    {
+      "crew": "Co je nejlepší na obědové pauze?",
+      "imposter": "Co tě na obědové pauze otravuje?"
+    },
+    {
+      "crew": "Jakou práci bys zkusil/a na zkoušku?",
+      "imposter": "Jakou práci bys nedělal/a ani za milion?"
+    },
+    {
+      "crew": "Co tě dokáže v práci nadchnout?",
+      "imposter": "Co tě v práci spolehlivě otráví?"
+    },
+    {
+      "crew": "Jaký šéf je ten ideální?",
+      "imposter": "Jaký styl vedení nesnášíš?"
+    },
+    {
+      "crew": "Co máš rád/a na služebních cestách?",
+      "imposter": "Co tě na služebních cestách štve?"
+    },
+    {
+      "crew": "Jaký projekt by tě bavil?",
+      "imposter": "Jaký projekt by tě zničil?"
+    },
+    {
+      "crew": "Co je nejlepší benefit v práci?",
+      "imposter": "Jaký benefit je podle tebe k ničemu?"
+    },
+    {
+      "crew": "Jak nejradši trávíš konec pracovního týdne?",
+      "imposter": "Co ti zkazí pátek odpoledne?"
+    },
+    {
+      "crew": "Co tě naučila tvoje první práce?",
+      "imposter": "Co bylo na tvé první práci nejhorší?"
+    },
+    {
+      "crew": "Jaký předmět tě ve škole bavil?",
+      "imposter": "Jaký předmět jsi ve škole nesnášel/a?"
+    },
+    {
+      "crew": "Kterou dovednost by ses chtěl/a naučit?",
+      "imposter": "Která dovednost ti přijde k ničemu?"
+    },
+    {
+      "crew": "Co bylo nejlepší na školních letech?",
+      "imposter": "Co bylo na škole nejhorší?"
+    },
+    {
+      "crew": "Jakého učitele si pamatuješ v dobrém?",
+      "imposter": "Jaký typ učitele tě otravoval?"
+    },
+    {
+      "crew": "Co tě baví se učit i dnes?",
+      "imposter": "Co se učit vůbec nechceš?"
+    },
+    {
+      "crew": "Jaká školní akce byla nejlepší?",
+      "imposter": "Jaká školní akce byla utrpení?"
+    },
+    {
+      "crew": "Co máš rád/a na získávání nových znalostí?",
+      "imposter": "Co tě na učení odrazuje?"
+    },
+    {
+      "crew": "Jaký jazyk by ses chtěl/a naučit?",
+      "imposter": "Jaký jazyk ti přijde těžký k nezvládnutí?"
+    },
+    {
+      "crew": "Co bylo super na školních výletech?",
+      "imposter": "Co bylo na školních výletech otravné?"
+    },
+    {
+      "crew": "Jaký test ti šel vždycky?",
+      "imposter": "Jaká zkouška tě děsila?"
+    },
+    {
+      "crew": "Co je nejlepší způsob, jak se učit?",
+      "imposter": "Jaký způsob učení ti nesedí?"
+    },
+    {
+      "crew": "Jaký obor by tě dnes lákal studovat?",
+      "imposter": "Jaký obor bys nestudoval/a ani omylem?"
+    },
+    {
+      "crew": "Co máš rád/a na samostudiu?",
+      "imposter": "Co tě na samostudiu brzdí?"
+    },
+    {
+      "crew": "Jaká přednáška by tě bavila?",
+      "imposter": "Jaká přednáška by tě uspala?"
+    },
+    {
+      "crew": "Co tě na škole připravilo na život?",
+      "imposter": "Co tě škola naučila zbytečně?"
+    },
+    {
+      "crew": "Jaké školní jídlo ti chutnalo?",
+      "imposter": "Jaké školní jídlo bylo katastrofa?"
+    },
+    {
+      "crew": "Co bylo nejlepší o velké přestávce?",
+      "imposter": "Co tě o přestávce štvalo?"
+    },
+    {
+      "crew": "Jaký projekt do školy tě bavil?",
+      "imposter": "Jaký školní úkol byl peklo?"
+    },
+    {
+      "crew": "Co máš rád/a na novém začátku semestru?",
+      "imposter": "Co tě na začátku školy stresovalo?"
+    },
+    {
+      "crew": "Jakou knihu z povinné četby sis užil/a?",
+      "imposter": "Jaká povinná četba tě zničila?"
+    },
+    {
+      "crew": "Jakou superschopnost bys chtěl/a mít?",
+      "imposter": "Jaké schopnosti se nejvíc bojíš?"
+    },
+    {
+      "crew": "Kdybys mohl/a létat, kam bys letěl/a?",
+      "imposter": "Čeho by ses při létání bál/a?"
+    },
+    {
+      "crew": "Jakou kouzelnou moc by sis přál/a?",
+      "imposter": "Jaká magická schopnost by tě děsila?"
+    },
+    {
+      "crew": "Kdybys byl/a neviditelný/á, co bys udělal/a?",
+      "imposter": "Co by tě na neviditelnosti děsilo?"
+    },
+    {
+      "crew": "Do jaké doby by ses chtěl/a podívat?",
+      "imposter": "Do jaké doby by ses bál/a cestovat?"
+    },
+    {
+      "crew": "Jakou schopnost bys chtěl/a mít v práci?",
+      "imposter": "Jakou schopnost bys nikdy nechtěl/a?"
+    },
+    {
+      "crew": "Kdybys mohl/a číst myšlenky, čí bys četl/a?",
+      "imposter": "Čí myšlenky bys nikdy nechtěl/a znát?"
+    },
+    {
+      "crew": "Jaké zvíře bys chtěl/a umět ovládat?",
+      "imposter": "Jaké zvíře bys ovládat nechtěl/a?"
+    },
+    {
+      "crew": "Kdybys měl/a jedno přání, jaké by bylo?",
+      "imposter": "Jaké přání by ses bál/a vyslovit?"
+    },
+    {
+      "crew": "Jakou věc bys chtěl/a umět vykouzlit?",
+      "imposter": "Co by ses bál/a, že vykouzlíš omylem?"
+    },
+    {
+      "crew": "Kdyby čas zastavil, co bys dělal/a?",
+      "imposter": "Co by tě na zastaveném čase děsilo?"
+    },
+    {
+      "crew": "Jaký vynález budoucnosti tě láká?",
+      "imposter": "Jaký vynález budoucnosti tě děsí?"
+    },
+    {
+      "crew": "Kdybys měl/a robota, co by dělal?",
+      "imposter": "Co bys robotovi nikdy nesvěřil/a?"
+    },
+    {
+      "crew": "Jakou nadlidskou sílu bys využil/a?",
+      "imposter": "Jaká síla by tě dostala do problémů?"
+    },
+    {
+      "crew": "Kdybys uměl/a teleportovat, kam bys šel/šla?",
+      "imposter": "Kam by ses teleportovat bál/a?"
+    },
+    {
+      "crew": "Jaký kouzelný předmět by ses ti hodil?",
+      "imposter": "Jaký kouzelný předmět by tě vyděsil?"
+    },
+    {
+      "crew": "Kdybys mohl/a mluvit všemi jazyky, s kým bys mluvil/a?",
+      "imposter": "Jaký jazyk by ti k ničemu nebyl?"
+    },
+    {
+      "crew": "Jakou schopnost by měl mít tvůj superhrdina?",
+      "imposter": "Jaká slabina by ho zničila?"
+    },
+    {
+      "crew": "Kdybys ovládal/a počasí, jaké bys udělal/a?",
+      "imposter": "Jaké počasí bys nikdy nevyvolal/a?"
+    },
+    {
+      "crew": "Jakou moc by ses chtěl/a naučit ovládnout?",
+      "imposter": "Jaká moc je podle tebe nebezpečná?"
+    },
+    {
+      "crew": "Kdybys měl/a křídla, kam bys zaletěl/a?",
+      "imposter": "Čeho by ses s křídly bál/a?"
+    },
+    {
+      "crew": "Jaký fantasy svět by ses chtěl/a navštívit?",
+      "imposter": "Do jakého fantasy světa bys nešel/nešla?"
+    },
+    {
+      "crew": "Jakou věc bys chtěl/a měnit silou vůle?",
+      "imposter": "Co bys silou vůle radši neměnil/a?"
+    },
+    {
+      "crew": "Kdybys byl/a hrdina, jaké by bylo tvé jméno?",
+      "imposter": "Jaký záporák by tě vyděsil?"
+    },
+    {
+      "crew": "Jakou super schopnost by sis přál/a pro lenost?",
+      "imposter": "Jaká schopnost by tě jen znervózňovala?"
+    },
+    {
+      "crew": "Co tě dokáže uklidnit?",
+      "imposter": "Co tě dokáže spolehlivě vyděsit?"
+    },
+    {
+      "crew": "Jaké místo ti dává pocit bezpečí?",
+      "imposter": "Jaké místo ti nahání hrůzu?"
+    },
+    {
+      "crew": "Co máš rád/a na tmě?",
+      "imposter": "Čeho se ve tmě bojíš?"
+    },
+    {
+      "crew": "Jaká výška ti nevadí?",
+      "imposter": "Jaká výška ti podlomí kolena?"
+    },
+    {
+      "crew": "Co tě na bouřce fascinuje?",
+      "imposter": "Co tě na bouřce děsí?"
+    },
+    {
+      "crew": "Co tě uklidní, když máš nervy?",
+      "imposter": "Co tvé nervy spolehlivě rozhodí?"
+    },
+    {
+      "crew": "Jaký zvuk je pro tebe příjemný?",
+      "imposter": "Jaký zvuk nesnášíš?"
+    },
+    {
+      "crew": "Co ti pomáhá zvládnout stres?",
+      "imposter": "Co tě stresuje úplně nejvíc?"
+    },
+    {
+      "crew": "V jaké situaci se cítíš sebejistě?",
+      "imposter": "V jaké situaci se cítíš trapně?"
+    },
+    {
+      "crew": "Co tě dokáže okamžitě potěšit?",
+      "imposter": "Co tě dokáže okamžitě vykolejit?"
+    },
+    {
+      "crew": "Jaký pohled na svět tě uklidňuje?",
+      "imposter": "Jaký pohled ti nahání úzkost?"
+    },
+    {
+      "crew": "Co máš rád/a na samotě?",
+      "imposter": "Co tě na samotě děsí?"
+    },
+    {
+      "crew": "Co tě v davu baví?",
+      "imposter": "Co tě v davu stresuje?"
+    },
+    {
+      "crew": "Co tě dokáže rozesmát i ve špatný den?",
+      "imposter": "Co tě dokáže rozhodit i v dobrý den?"
+    },
+    {
+      "crew": "Jaké překvapení by tě potěšilo?",
+      "imposter": "Jaké překvapení by tě vyděsilo?"
+    },
+    {
+      "crew": "Jaký dárek by tě nejvíc potěšil?",
+      "imposter": "Jaký dárek bys nikdy nechtěl/a dostat?"
+    },
+    {
+      "crew": "Co je nejlepší dárek, jaký jsi dostal/a?",
+      "imposter": "Jaký dárek byl zklamání?"
+    },
+    {
+      "crew": "Jaký dárek rád/a dáváš?",
+      "imposter": "Jaký dárek bys nikomu nedal/a?"
+    },
+    {
+      "crew": "Co by sis přál/a k narozeninám?",
+      "imposter": "Co bys k narozeninám nechtěl/a?"
+    },
+    {
+      "crew": "Jaký zážitkový dárek by tě nadchl?",
+      "imposter": "Jaký zážitek bys nechtěl/a dostat?"
+    },
+    {
+      "crew": "Co je dokonalý dárek na poslední chvíli?",
+      "imposter": "Jaký dárek na poslední chvíli je trapný?"
+    },
+    {
+      "crew": "Jaký ručně dělaný dárek tě potěší?",
+      "imposter": "Jaký dárek ti přijde laciný?"
+    },
+    {
+      "crew": "Co bys koupil/a kamarádovi?",
+      "imposter": "Co bys kamarádovi nikdy nedal/a?"
+    },
+    {
+      "crew": "Jaký dárek vydrží navždy?",
+      "imposter": "Jaký dárek skončí hned v koši?"
+    },
+    {
+      "crew": "Co je nejlepší dárek pro partnera?",
+      "imposter": "Jaký dárek by partnera urazil?"
+    },
+    {
+      "crew": "Jaký dárek tě překvapil v dobrém?",
+      "imposter": "Jaký dárek tě překvapil v špatném?"
+    },
+    {
+      "crew": "Co bys chtěl/a dostat jen tak bez důvodu?",
+      "imposter": "Co bys nechtěl/a dostat ani omylem?"
+    },
+    {
+      "crew": "Jaký dárek umí vykouzlit úsměv?",
+      "imposter": "Jaký dárek vykouzlí jen předstíraný úsměv?"
+    },
+    {
+      "crew": "Co je nejlepší dárek pro dítě?",
+      "imposter": "Jaký dárek pro dítě je špatný nápad?"
+    },
+    {
+      "crew": "Jaký praktický dárek oceníš?",
+      "imposter": "Jaký praktický dárek je nuda?"
+    },
+    {
+      "crew": "Co je tvůj oblíbený svátek?",
+      "imposter": "Který svátek nemáš rád/a?"
+    },
+    {
+      "crew": "Co máš rád/a na Vánocích?",
+      "imposter": "Co tě na Vánocích nejvíc otravuje?"
+    },
+    {
+      "crew": "Jak nejradši slavíš narozeniny?",
+      "imposter": "Co tě na oslavách narozenin štve?"
+    },
+    {
+      "crew": "Co je nejlepší na Silvestru?",
+      "imposter": "Co tě na Silvestru otravuje?"
+    },
+    {
+      "crew": "Jaká rodinná tradice tě baví?",
+      "imposter": "Jaká tradice ti přijde otravná?"
+    },
+    {
+      "crew": "Co máš rád/a na Velikonocích?",
+      "imposter": "Co tě na Velikonocích štve?"
+    },
+    {
+      "crew": "Jaká oslava byla nejlepší?",
+      "imposter": "Jaká oslava byla katastrofa?"
+    },
+    {
+      "crew": "Co je super na svatbách?",
+      "imposter": "Co tě na svatbách otravuje?"
+    },
+    {
+      "crew": "Jaký svátek bys přidal/a do kalendáře?",
+      "imposter": "Jaký svátek bys zrušil/a?"
+    },
+    {
+      "crew": "Co máš rád/a na vánočním cukroví?",
+      "imposter": "Jaké cukroví bys nepekl/a?"
+    },
+    {
+      "crew": "Jak vypadá tvůj ideální Štědrý den?",
+      "imposter": "Co ti dokáže Štědrý den zkazit?"
+    },
+    {
+      "crew": "Co je nejlepší na novoročních předsevzetích?",
+      "imposter": "Jaké předsevzetí je podle tebe k ničemu?"
+    },
+    {
+      "crew": "Jaká oslava s přáteli byla top?",
+      "imposter": "Jaká party byla průšvih?"
+    },
+    {
+      "crew": "Co máš rád/a na rozdávání dárků?",
+      "imposter": "Co tě na shánění dárků štve?"
+    },
+    {
+      "crew": "Jaký svátek bys slavil/a v cizině?",
+      "imposter": "Jaký svátek by ti v cizině chyběl?"
+    },
+    {
+      "crew": "Co je nejlepší na sváteční výzdobě?",
+      "imposter": "Jaká výzdoba ti přijde přehnaná?"
+    },
+    {
+      "crew": "Jak nejradši trávíš sváteční volno?",
+      "imposter": "Co ti sváteční volno dokáže zkazit?"
+    },
+    {
+      "crew": "Co máš rád/a na sváteční hostině?",
+      "imposter": "Jaké sváteční jídlo nemusíš?"
+    },
+    {
+      "crew": "Jaká oslava by tě donutila tančit?",
+      "imposter": "Jaká akce tě donutí jen sedět v koutě?"
+    },
+    {
+      "crew": "Co je nejlepší na letních festivalech?",
+      "imposter": "Co tě na festivalech otravuje?"
+    },
+    {
+      "crew": "Jakou barvu bys dal/a celému pokoji?",
+      "imposter": "Jakou barvu v interiéru nesnášíš?"
+    },
+    {
+      "crew": "Jaká barva tě uklidňuje?",
+      "imposter": "Jaká barva tě dráždí?"
+    },
+    {
+      "crew": "Co je tvůj oblíbený styl bydlení?",
+      "imposter": "Jaký styl bydlení ti nesedí?"
+    },
+    {
+      "crew": "Jaký nábytek by sis pořídil/a?",
+      "imposter": "Jaký nábytek ti přijde otřesný?"
+    },
+    {
+      "crew": "Co je nejlepší doplněk do bytu?",
+      "imposter": "Jaký bytový doplněk je zbytečný?"
+    },
+    {
+      "crew": "Jaká barva ti sluší nejvíc?",
+      "imposter": "Jaká barva ti vůbec nesedí?"
+    },
+    {
+      "crew": "Co máš rád/a na minimalismu?",
+      "imposter": "Co tě na minimalismu odrazuje?"
+    },
+    {
+      "crew": "Jaká kombinace barev je elegantní?",
+      "imposter": "Jaká kombinace barev je katastrofa?"
+    },
+    {
+      "crew": "Co je nejhezčí na útulném obýváku?",
+      "imposter": "Co dokáže obývák zničit?"
+    },
+    {
+      "crew": "Jaké osvětlení máš rád/a?",
+      "imposter": "Jaké osvětlení tě otravuje?"
+    },
+    {
+      "crew": "Co bys dal/a na zeď v ložnici?",
+      "imposter": "Co by se ti na zdi vůbec nelíbilo?"
+    },
+    {
+      "crew": "Jaký materiál je v bytě nejhezčí?",
+      "imposter": "Jaký materiál je podle tebe laciný?"
+    },
+    {
+      "crew": "Co je super na rostlinách v bytě?",
+      "imposter": "Co tě na pokojovkách otravuje?"
+    },
+    {
+      "crew": "Jaká barva auta se ti líbí?",
+      "imposter": "Jaká barva auta je podle tebe hrozná?"
+    },
+    {
+      "crew": "Co je nejlepší na otevřeném prostoru v bytě?",
+      "imposter": "Co tě na malých bytech štve?"
+    },
+    {
+      "crew": "Jaký styl kuchyně by ses líbil?",
+      "imposter": "Jaká kuchyně ti přijde nepraktická?"
+    },
+    {
+      "crew": "Co máš rád/a na barevných stěnách?",
+      "imposter": "Jaká stěna ti přijde příliš?"
+    },
+    {
+      "crew": "Jaký koberec by ses ti hodil?",
+      "imposter": "Jaký koberec je podle tebe ohyzdný?"
+    },
+    {
+      "crew": "Co je nejlepší na velkých oknech?",
+      "imposter": "Co tě na tmavých místnostech deprimuje?"
+    },
+    {
+      "crew": "Jakou atmosféru chceš mít doma?",
+      "imposter": "Jaká atmosféra doma tě deprimuje?"
+    },
+    {
+      "crew": "Jaký kousek oblečení nosíš nejradši?",
+      "imposter": "Jaký kousek oblečení bys nikdy neoblékl/a?"
+    },
+    {
+      "crew": "Co je tvůj oblíbený styl?",
+      "imposter": "Jaký módní styl ti nesedí?"
+    },
+    {
+      "crew": "Jaké boty máš nejradši?",
+      "imposter": "Jaké boty bys nikdy nenosil/a?"
+    },
+    {
+      "crew": "Co máš rád/a na pohodlném oblečení?",
+      "imposter": "Jaké oblečení je podle tebe nepohodlné?"
+    },
+    {
+      "crew": "Jaká barva oblečení ti sluší?",
+      "imposter": "Jaká barva oblečení ti vůbec nesedne?"
+    },
+    {
+      "crew": "Co bys oblékl/a na párty?",
+      "imposter": "Co bys na párty nikdy nevzal/a?"
+    },
+    {
+      "crew": "Jaký doplněk dotvoří outfit?",
+      "imposter": "Jaký doplněk je podle tebe trapný?"
+    },
+    {
+      "crew": "Co je nejlepší na nakupování oblečení?",
+      "imposter": "Co tě na nákupech oblečení štve?"
+    },
+    {
+      "crew": "Jaké oblečení je ideální na léto?",
+      "imposter": "Jaké letní oblečení nesnášíš?"
+    },
+    {
+      "crew": "Co nosíš, když chceš zazářit?",
+      "imposter": "Co by ses styděl/a obléknout?"
+    },
+    {
+      "crew": "Jaký módní trend se ti líbí?",
+      "imposter": "Jaký módní trend nechápeš?"
+    },
+    {
+      "crew": "Co je super na vintage oblečení?",
+      "imposter": "Jaký starý kousek bys vyhodil/a?"
+    },
+    {
+      "crew": "Jakou bundu nosíš nejradši?",
+      "imposter": "Jakou bundu bys nikdy neoblékl/a?"
+    },
+    {
+      "crew": "Co je nejlepší na pohodlných teplákách?",
+      "imposter": "Kdy ti tepláky přijdou nevhodné?"
+    },
+    {
+      "crew": "Jaký styl by ses chtěl/a zkusit?",
+      "imposter": "Jaký styl by ti vůbec neseděl?"
+    },
+    {
+      "crew": "Co máš rád/a na oblékání na zimu?",
+      "imposter": "Co tě na zimním oblékání otravuje?"
+    },
+    {
+      "crew": "Jaký kousek je v šatníku nepostradatelný?",
+      "imposter": "Jaký kousek v šatníku jen zabírá místo?"
+    },
+    {
+      "crew": "Co je nejlepší outfit na rande?",
+      "imposter": "Co by ses na rande nikdy neoblékl/a?"
+    },
+    {
+      "crew": "Jaké klobouky nebo čepice máš rád/a?",
+      "imposter": "Jaká pokrývka hlavy ti nesedí?"
+    },
+    {
+      "crew": "Co je super na elegantním oblečení?",
+      "imposter": "Co tě na formálním oblečení obtěžuje?"
+    },
+    {
+      "crew": "Jaká technologie ti usnadňuje život?",
+      "imposter": "Jaká technologie tě nejvíc otravuje?"
+    },
+    {
+      "crew": "Jakou appku používáš nejčastěji?",
+      "imposter": "Jaká aplikace ti leze na nervy?"
+    },
+    {
+      "crew": "Co je nejlepší na chytrém telefonu?",
+      "imposter": "Co tě na mobilu nejvíc štve?"
+    },
+    {
+      "crew": "Jaký gadget by ses chtěl/a pořídit?",
+      "imposter": "Jaký gadget je podle tebe zbytečný?"
+    },
+    {
+      "crew": "Co máš rád/a na sociálních sítích?",
+      "imposter": "Co tě na sociálních sítích otravuje?"
+    },
+    {
+      "crew": "Jaká nová technologie tě fascinuje?",
+      "imposter": "Jaká technologie tě děsí?"
+    },
+    {
+      "crew": "Co je super na chytré domácnosti?",
+      "imposter": "Co tě na chytré domácnosti znervózňuje?"
+    },
+    {
+      "crew": "Jakou hru na mobilu hraješ?",
+      "imposter": "Jaká mobilní hra ti přijde otravná?"
+    },
+    {
+      "crew": "Co máš rád/a na umělé inteligenci?",
+      "imposter": "Co tě na AI znepokojuje?"
+    },
+    {
+      "crew": "Jaký web navštěvuješ nejčastěji?",
+      "imposter": "Jaký web tě dokáže nejvíc rozčílit?"
+    },
+    {
+      "crew": "Co je nejlepší na bezdrátových sluchátkách?",
+      "imposter": "Co tě na nich štve?"
+    },
+    {
+      "crew": "Jakou funkci v mobilu používáš pořád?",
+      "imposter": "Jaká funkce ti přijde zbytečná?"
+    },
+    {
+      "crew": "Co je super na online nakupování?",
+      "imposter": "Co tě na e-shopech otravuje?"
+    },
+    {
+      "crew": "Jaký smart hodinky by ses chtěl/a?",
+      "imposter": "Co je na chytrých hodinkách otravné?"
+    },
+    {
+      "crew": "Co máš rád/a na videohovorech?",
+      "imposter": "Co tě na videohovorech štve?"
+    },
+    {
+      "crew": "Jaká stará technologie ti chybí?",
+      "imposter": "Jaká stará technologie byla otravná?"
+    },
+    {
+      "crew": "Co je nejlepší na streamovacích službách?",
+      "imposter": "Co tě na streamovačkách otravuje?"
+    },
+    {
+      "crew": "Jaký notifikační zvuk ti nevadí?",
+      "imposter": "Jaké notifikace tě dohánějí k šílenství?"
+    },
+    {
+      "crew": "Co tě baví na nových technologiích?",
+      "imposter": "Co tě na technice frustruje?"
+    },
+    {
+      "crew": "Jakou techniku bys vzal/a na pustý ostrov?",
+      "imposter": "Bez jaké techniky by ses obešel/obešla rád/a?"
+    },
+    {
+      "crew": "Jaká krajina tě uchvátí?",
+      "imposter": "Jaká krajina ti nic neříká?"
+    },
+    {
+      "crew": "Co máš rád/a na lese?",
+      "imposter": "Co tě v lese znervózňuje?"
+    },
+    {
+      "crew": "Jaké přírodní místo tě nabíjí?",
+      "imposter": "Jaké prostředí tě vysává?"
+    },
+    {
+      "crew": "Co je nejhezčí na západu slunce?",
+      "imposter": "Co tě na brzkém ránu ničí?"
+    },
+    {
+      "crew": "Jaký výhled bys chtěl/a vidět?",
+      "imposter": "Jaký výhled tě nechává chladným?"
+    },
+    {
+      "crew": "Co máš rád/a na řekách a jezerech?",
+      "imposter": "Co tě na vodě znervózňuje?"
+    },
+    {
+      "crew": "Jaké roční období je v přírodě nejhezčí?",
+      "imposter": "Jaké roční období je venku nepříjemné?"
+    },
+    {
+      "crew": "Co je super na procházce v dešti?",
+      "imposter": "Co tě na mokré procházce otravuje?"
+    },
+    {
+      "crew": "Jaká hora tě láká vylézt?",
+      "imposter": "Jaký výstup by tě zničil?"
+    },
+    {
+      "crew": "Co tě fascinuje na oceánu?",
+      "imposter": "Co tě na hloubce děsí?"
+    },
+    {
+      "crew": "Jaké přírodní úkazy tě nadchnou?",
+      "imposter": "Jaký přírodní jev tě děsí?"
+    },
+    {
+      "crew": "Co máš rád/a na rozkvetlé louce?",
+      "imposter": "Co tě na louce v létě otravuje?"
+    },
+    {
+      "crew": "Jaký strom je podle tebe nejkrásnější?",
+      "imposter": "Co tě na zahradě nejvíc zlobí?"
+    },
+    {
+      "crew": "Co je nejhezčí na hvězdné obloze?",
+      "imposter": "Co tě v noci venku znervózňuje?"
+    },
+    {
+      "crew": "Jaké přírodní zvuky tě uklidňují?",
+      "imposter": "Jaké přírodní zvuky tě ruší?"
+    },
+    {
+      "crew": "Co tě baví na pozorování zvířat v přírodě?",
+      "imposter": "Jaké setkání v přírodě by tě vyděsilo?"
+    },
+    {
+      "crew": "Jaké počasí je nejlepší na túru?",
+      "imposter": "Jaké počasí túru zničí?"
+    },
+    {
+      "crew": "Co máš rád/a na podzimní přírodě?",
+      "imposter": "Co tě na blátivém podzimu štve?"
+    },
+    {
+      "crew": "Jaký národní park bys navštívil/a?",
+      "imposter": "Jaké přírodní místo je podle tebe přeceňované?"
+    },
+    {
+      "crew": "Co je super na koupání v jezeře?",
+      "imposter": "Co tě na koupání v přírodě odrazuje?"
+    },
+    {
+      "crew": "Co ti udělá nejlepší náladu?",
+      "imposter": "Co ti nejrychleji zkazí náladu?"
+    },
+    {
+      "crew": "Co tě dokáže rozesmát?",
+      "imposter": "Co ti vůbec nepřijde vtipné?"
+    },
+    {
+      "crew": "Co tě naplní pocitem klidu?",
+      "imposter": "Co tě vždycky rozčílí?"
+    },
+    {
+      "crew": "Z čeho míváš radost?",
+      "imposter": "Z čeho míváš špatný pocit?"
+    },
+    {
+      "crew": "Co ti dodá sebevědomí?",
+      "imposter": "Co tě dokáže shodit?"
+    },
+    {
+      "crew": "Co tě dojme k slzám štěstí?",
+      "imposter": "Co tě dokáže naštvat do běla?"
+    },
+    {
+      "crew": "Co tě nakopne ráno?",
+      "imposter": "Co tě ráno otráví?"
+    },
+    {
+      "crew": "Co tě naplní hrdostí?",
+      "imposter": "Z čeho se cítíš trapně?"
+    },
+    {
+      "crew": "Co ti přinese pocit klidu po náročném dni?",
+      "imposter": "Co tě po náročném dni dorazí?"
+    },
+    {
+      "crew": "Co tě umí pobavit i bez důvodu?",
+      "imposter": "Co tě rozčílí i bez důvodu?"
+    },
+    {
+      "crew": "Co ti vrátí dobrou náladu?",
+      "imposter": "Co tvou dobrou náladu spolehlivě zničí?"
+    },
+    {
+      "crew": "Co tě naplní vděčností?",
+      "imposter": "Co v tobě vyvolá závist?"
+    },
+    {
+      "crew": "Co tě uvolní?",
+      "imposter": "Co tě napne jako struna?"
+    },
+    {
+      "crew": "Co tě dokáže nadchnout?",
+      "imposter": "Co tě dokáže znechutit?"
+    },
+    {
+      "crew": "Co tě potěší na maličkostech?",
+      "imposter": "Jaká maličkost tě dokáže rozhodit?"
+    },
+    {
+      "crew": "Jaký typ člověka tě baví?",
+      "imposter": "Jaký typ člověka nesnášíš?"
+    },
+    {
+      "crew": "Co máš rád/a na velkých akcích?",
+      "imposter": "Co tě na velkých akcích vyčerpává?"
+    },
+    {
+      "crew": "Jaký rozhovor tě baví?",
+      "imposter": "Jaký rozhovor tě nudí?"
+    },
+    {
+      "crew": "Co je super na poznávání nových lidí?",
+      "imposter": "Co tě na seznamování stresuje?"
+    },
+    {
+      "crew": "Jaká vlastnost tě na lidech přitahuje?",
+      "imposter": "Jaká vlastnost tě na lidech odpuzuje?"
+    },
+    {
+      "crew": "Co máš rád/a na večírcích?",
+      "imposter": "Co tě na večírcích otravuje?"
+    },
+    {
+      "crew": "Jaký kompliment tě potěší?",
+      "imposter": "Jaká poznámka tě naštve?"
+    },
+    {
+      "crew": "Co je nejlepší na setkání s přáteli?",
+      "imposter": "Co tě na velké společnosti vyčerpává?"
+    },
+    {
+      "crew": "Jaké téma s lidmi rád/a probíráš?",
+      "imposter": "Jaké téma tě v hovoru nudí?"
+    },
+    {
+      "crew": "Co oceníš na dobrém kamarádovi?",
+      "imposter": "Co ti na lidech vadí nejvíc?"
+    },
+    {
+      "crew": "Jakou společnost vyhledáváš?",
+      "imposter": "Jaké společnosti se vyhýbáš?"
+    },
+    {
+      "crew": "Co tě baví na hluboké konverzaci?",
+      "imposter": "Co tě na povrchním tlachání otravuje?"
+    },
+    {
+      "crew": "Jak nejradši trávíš čas s lidmi?",
+      "imposter": "Jaká společenská akce tě ničí?"
+    },
+    {
+      "crew": "Co je super na spontánních plánech?",
+      "imposter": "Co tě na rušení plánů štve?"
+    },
+    {
+      "crew": "Jaký typ humoru ti sedí?",
+      "imposter": "Jaký humor ti vůbec nesedí?"
+    },
+    {
+      "crew": "Co oceníš na novém kolegovi?",
+      "imposter": "Co tě na nových lidech znervózňuje?"
+    },
+    {
+      "crew": "Jakou roli máš ve skupině rád/a?",
+      "imposter": "Jaká role ve skupině ti nesedí?"
+    },
+    {
+      "crew": "Co tě baví na rodinných setkáních?",
+      "imposter": "Co tě na rodinných sešlostech otravuje?"
+    },
+    {
+      "crew": "Jaký společný zážitek lidi spojí?",
+      "imposter": "Jaká situace mezi lidmi vyvolá napětí?"
+    },
+    {
+      "crew": "Co máš rád/a na malých sešlostech?",
+      "imposter": "Co tě na velkých davech stresuje?"
+    },
+    {
+      "crew": "Za co rád/a utratíš peníze?",
+      "imposter": "Za co bys peníze nikdy nedal/a?"
+    },
+    {
+      "crew": "Co je tvůj nejlepší nákup?",
+      "imposter": "Jaký nákup byl vyhozené peníze?"
+    },
+    {
+      "crew": "Do čeho bys investoval/a?",
+      "imposter": "Do čeho bys nikdy neinvestoval/a?"
+    },
+    {
+      "crew": "Co bys koupil/a, kdybys vyhrál/a v loterii?",
+      "imposter": "Co bys ani s milionem nekoupil/a?"
+    },
+    {
+      "crew": "Co máš rád/a na nakupování?",
+      "imposter": "Co tě na nakupování otravuje?"
+    },
+    {
+      "crew": "Na čem si rád/a dopřeješ?",
+      "imposter": "Na čem zásadně šetříš?"
+    },
+    {
+      "crew": "Co je super na slevách?",
+      "imposter": "Co tě na výprodejích štve?"
+    },
+    {
+      "crew": "Jaký luxus by ses dopřál/a?",
+      "imposter": "Jaký luxus je podle tebe zbytečný?"
+    },
+    {
+      "crew": "Za co utrácíš nejradši?",
+      "imposter": "Co ti přijde jako mrhání penězi?"
+    },
+    {
+      "crew": "Co bys koupil/a jako dárek sobě?",
+      "imposter": "Co bys si nikdy nekoupil/a?"
+    },
+    {
+      "crew": "Jaký nákup tě potěší pokaždé?",
+      "imposter": "Jaký nákup tě vždycky zklame?"
+    },
+    {
+      "crew": "Co je nejlepší na online nákupech?",
+      "imposter": "Co tě na vracení zboží štve?"
+    },
+    {
+      "crew": "Na co rád/a šetříš?",
+      "imposter": "Co ti připadá jako zbytečný výdaj?"
+    },
+    {
+      "crew": "Jaké jídlo si rád/a připlatíš?",
+      "imposter": "Za jaké jídlo bys nepřeplatil/a?"
+    },
+    {
+      "crew": "Co je super na nakupování na trzích?",
+      "imposter": "Co tě na nákupech v obchoďáku otravuje?"
+    },
+    {
+      "crew": "Jaký zážitek stojí za každou korunu?",
+      "imposter": "Jaký zážitek byl předražený?"
+    },
+    {
+      "crew": "Co bys koupil/a pro domácnost?",
+      "imposter": "Jaký nákup do domácnosti je zbytečný?"
+    },
+    {
+      "crew": "Jaký předmět ti vydělanou korunu vrátí?",
+      "imposter": "Jaký nákup hned ztratí hodnotu?"
+    },
+    {
+      "crew": "Co máš rád/a na šetření?",
+      "imposter": "Co tě na šetření otravuje?"
+    },
+    {
+      "crew": "Za jaký zážitek bys utratil/a víc?",
+      "imposter": "Za jaký zážitek bys nedal/a ani korunu?"
+    },
+    {
+      "crew": "Jaká domácí práce ti nevadí?",
+      "imposter": "Jaká domácí práce tě nejvíc otravuje?"
+    },
+    {
+      "crew": "Co tě na uklízení baví?",
+      "imposter": "Co na úklidu nesnášíš?"
+    },
+    {
+      "crew": "Co děláš rád/a, když uklízíš?",
+      "imposter": "Jakou domácí činnost odkládáš nejdél?"
+    },
+    {
+      "crew": "Jaká část bytu se ti uklízí dobře?",
+      "imposter": "Jakou místnost uklízíš nejneraději?"
+    },
+    {
+      "crew": "Co je super na čistém bytě?",
+      "imposter": "Co tě na nepořádku štve?"
+    },
+    {
+      "crew": "Jakou domácí práci zvládneš v pohodě?",
+      "imposter": "Jaká domácí práce je pro tebe peklo?"
+    },
+    {
+      "crew": "Co tě baví na vaření doma?",
+      "imposter": "Co tě na mytí nádobí otravuje?"
+    },
+    {
+      "crew": "Jak nejradši organizuješ věci?",
+      "imposter": "Jaký nepořádek tě dohání k šílenství?"
+    },
+    {
+      "crew": "Co máš rád/a na praní a věšení prádla?",
+      "imposter": "Co tě na žehlení štve?"
+    },
+    {
+      "crew": "Co je nejlepší na úklidovém víkendu?",
+      "imposter": "Co tě na velkém úklidu ničí?"
+    },
+    {
+      "crew": "Jakou domácí vůni máš rád/a?",
+      "imposter": "Jaký pach v bytě nesnášíš?"
+    },
+    {
+      "crew": "Co děláš, aby byl byt útulný?",
+      "imposter": "Co dokáže útulnost bytu zničit?"
+    },
+    {
+      "crew": "Jaká domácí rutina ti vyhovuje?",
+      "imposter": "Jaká domácí povinnost tě otravuje?"
+    },
+    {
+      "crew": "Co je super na pořádku ve skříni?",
+      "imposter": "Co tě na skříni plné věcí štve?"
+    },
+    {
+      "crew": "Jaký domácí spotřebič ti ušetří práci?",
+      "imposter": "Jaký spotřebič ti přijde zbytečný?"
+    },
+    {
+      "crew": "Jaké auto by ses chtěl/a řídit?",
+      "imposter": "Jaké auto bys nechtěl/a ani zadarmo?"
+    },
+    {
+      "crew": "Co máš rád/a na řízení?",
+      "imposter": "Co tě na řízení nejvíc štve?"
+    },
+    {
+      "crew": "Co je nejlepší na dlouhé jízdě autem?",
+      "imposter": "Co tě na dlouhých cestách autem ničí?"
+    },
+    {
+      "crew": "Jaký dopravní prostředek máš rád/a?",
+      "imposter": "Jaký dopravní prostředek nesnášíš?"
+    },
+    {
+      "crew": "Co je super na cestování vlakem?",
+      "imposter": "Co tě na vlacích otravuje?"
+    },
+    {
+      "crew": "Co máš rád/a na jízdě na kole?",
+      "imposter": "Co tě na jízdě po městě na kole stresuje?"
+    },
+    {
+      "crew": "Jaká cesta autem byla nejhezčí?",
+      "imposter": "Jaká cesta byla noční můra?"
+    },
+    {
+      "crew": "Co je nejlepší na MHD?",
+      "imposter": "Co tě na MHD nejvíc štve?"
+    },
+    {
+      "crew": "Jaký výlet autem bys podnikl/a?",
+      "imposter": "Jaká cesta autem by tě otrávila?"
+    },
+    {
+      "crew": "Co máš rád/a na ranní cestě do práce?",
+      "imposter": "Co tě na cestě do práce ničí?"
+    },
+    {
+      "crew": "Jaké auto je podle tebe krásné?",
+      "imposter": "Jaké auto je podle tebe ošklivé?"
+    },
+    {
+      "crew": "Co je super na cestování letadlem?",
+      "imposter": "Co tě na letech otravuje?"
+    },
+    {
+      "crew": "Jaký zvuk motoru se ti líbí?",
+      "imposter": "Jaký zvuk v autě tě otravuje?"
+    },
+    {
+      "crew": "Co máš rád/a na nočních jízdách?",
+      "imposter": "Co tě na noční jízdě znervózňuje?"
+    },
+    {
+      "crew": "Jaká funkce v autě tě potěší?",
+      "imposter": "Jaká funkce v autě je zbytečná?"
+    },
+    {
+      "crew": "Co je nejlepší na cestě na dovolenou?",
+      "imposter": "Co tě na cestě zpět z dovolené deprimuje?"
+    },
+    {
+      "crew": "Jakou hudbu pustíš v autě?",
+      "imposter": "Co v autě nikdy nepustíš?"
+    },
+    {
+      "crew": "Co je super na parkování u domu?",
+      "imposter": "Co tě na hledání parkování štve?"
+    },
+    {
+      "crew": "Jaký dopravní prostředek je do města ideální?",
+      "imposter": "Jaký dopravní prostředek je ve městě peklo?"
+    },
+    {
+      "crew": "Co máš rád/a na cestování bez plánu?",
+      "imposter": "Co tě na zácpě nejvíc rozčiluje?"
+    },
+    {
+      "crew": "Co děláš pro dobrý pocit z těla?",
+      "imposter": "Co ti dělá ze zdravého životního stylu otravu?"
+    },
+    {
+      "crew": "Jaká forma pohybu tě baví?",
+      "imposter": "Jaký pohyb pro tebe znamená utrpení?"
+    },
+    {
+      "crew": "Co ti dodá energii na celý den?",
+      "imposter": "Co tě dokáže celý den vysílit?"
+    },
+    {
+      "crew": "Jak nejradši relaxuješ?",
+      "imposter": "Jaký relax ti vůbec nefunguje?"
+    },
+    {
+      "crew": "Co máš rád/a na zdravém jídle?",
+      "imposter": "Jaké zdravé jídlo ti nechutná?"
+    },
+    {
+      "crew": "Co ti pomáhá dobře spát?",
+      "imposter": "Co ti spánek spolehlivě naruší?"
+    },
+    {
+      "crew": "Jaká wellness procedura tě láká?",
+      "imposter": "Jaká procedura ti přijde nepříjemná?"
+    },
+    {
+      "crew": "Co je super na ranní rozcvičce?",
+      "imposter": "Co tě na ranním cvičení odrazuje?"
+    },
+    {
+      "crew": "Jaký druh masáže ti vyhovuje?",
+      "imposter": "Jaký druh masáže bys nechtěl/a?"
+    },
+    {
+      "crew": "Co tě motivuje ke cvičení?",
+      "imposter": "Co tě od cvičení odrazuje?"
+    },
+    {
+      "crew": "Jaký zdravý zvyk by ses chtěl/a osvojit?",
+      "imposter": "Jaký zlozvyk bys chtěl/a zrušit?"
+    },
+    {
+      "crew": "Co ti udělá dobře po náročném dni?",
+      "imposter": "Co ti náročný den ještě zhorší?"
+    },
+    {
+      "crew": "Jak nejradši dobíjíš baterky?",
+      "imposter": "Co tě místo odpočinku vyčerpá?"
+    },
+    {
+      "crew": "Co je super na pobytu v sauně?",
+      "imposter": "Co tě na horku v sauně odrazuje?"
+    },
+    {
+      "crew": "Jaký sport ti udělá dobře na hlavu?",
+      "imposter": "Jaký pohyb tě jen frustruje?"
+    },
+    {
+      "crew": "Jaké jídlo tě nakopne?",
+      "imposter": "Po jakém jídle se cítíš těžce?"
+    },
+    {
+      "crew": "Co máš rád/a na ranní procházce?",
+      "imposter": "Co tě na brzkém vstávání ničí?"
+    },
+    {
+      "crew": "Jaká rutina ti dělá dobře?",
+      "imposter": "Jaká rutina tě nudí?"
+    },
+    {
+      "crew": "Co je super na pití dostatku vody?",
+      "imposter": "Co je na hlídání pitného režimu otravné?"
+    },
+    {
+      "crew": "S kým slavným by sis dal/a večeři?",
+      "imposter": "Koho slavného nemůžeš vystát?"
+    },
+    {
+      "crew": "Jakého umělce obdivuješ?",
+      "imposter": "Jaký umělec je podle tebe přeceňovaný?"
+    },
+    {
+      "crew": "S jakou slavnou osobností bys chtěl/a mluvit?",
+      "imposter": "S jakou celebritou bys nechtěl/a být zavřený/á v místnosti?"
+    },
+    {
+      "crew": "Koho bys chtěl/a potkat naživo?",
+      "imposter": "Koho bys radši minul/a?"
+    },
+    {
+      "crew": "Jaký sportovec tě inspiruje?",
+      "imposter": "Jaký sportovec ti přijde protivný?"
+    },
+    {
+      "crew": "Jakého hudebníka bys chtěl/a vidět naživo?",
+      "imposter": "Jaký hudebník je podle tebe přeceňovaný?"
+    },
+    {
+      "crew": "S kým slavným by ses chtěl/a kamarádit?",
+      "imposter": "S kým slavným by sis nerozuměl/a?"
+    },
+    {
+      "crew": "Jaká slavná osobnost je vzor?",
+      "imposter": "Jaká celebrita je špatný vzor?"
+    },
+    {
+      "crew": "Koho slavného bys pozval/a na kafe?",
+      "imposter": "Koho slavného bys nepozval/a ani na minutu?"
+    },
+    {
+      "crew": "Jaký herec ti nikdy nezklame?",
+      "imposter": "Jaký herec tě v rolích nudí?"
+    },
+    {
+      "crew": "S jakou ikonou minulosti bys mluvil/a?",
+      "imposter": "Jaká historická postava ti nahání hrůzu?"
+    },
+    {
+      "crew": "Jaký youtuber tě baví?",
+      "imposter": "Jaký influencer ti leze na nervy?"
+    },
+    {
+      "crew": "Koho bys chtěl/a mít za mentora?",
+      "imposter": "Čí rady bys nikdy neposlouchal/a?"
+    },
+    {
+      "crew": "Jaká celebrita má styl, co se ti líbí?",
+      "imposter": "Jaká celebrita má styl, co nechápeš?"
+    },
+    {
+      "crew": "S kým by ses vyfotil/a?",
+      "imposter": "S kým by ses fotit nechtěl/a?"
+    },
+    {
+      "crew": "Jakou videohru bys hrál/a celou noc?",
+      "imposter": "U jaké hry bys usnul/a nudou?"
+    },
+    {
+      "crew": "Jaká desková hra tě baví?",
+      "imposter": "Jaká desková hra tě nudí?"
+    },
+    {
+      "crew": "Co je super na hraní s přáteli?",
+      "imposter": "Co tě na herních večerech štve?"
+    },
+    {
+      "crew": "Jaký herní žánr máš nejradši?",
+      "imposter": "Jaký herní žánr ti nesedí?"
+    },
+    {
+      "crew": "Jakou hru bys doporučil/a?",
+      "imposter": "Jakou hru bys nikomu nedoporučil/a?"
+    },
+    {
+      "crew": "Co tě baví na strategiích?",
+      "imposter": "Co tě na strategiích frustruje?"
+    },
+    {
+      "crew": "Jaká hra tě chytla na první dobrou?",
+      "imposter": "Jaká hyped hra tě zklamala?"
+    },
+    {
+      "crew": "Co máš rád/a na soutěživých hrách?",
+      "imposter": "Co tě na soutěživosti štve?"
+    },
+    {
+      "crew": "Jakou postavu rád/a hraješ?",
+      "imposter": "Jaká herní postava ti nesedí?"
+    },
+    {
+      "crew": "Co je nejlepší na retro hrách?",
+      "imposter": "Co tě na starých hrách otravuje?"
+    },
+    {
+      "crew": "Jakou hru bys vzal/a na dovolenou?",
+      "imposter": "Jaká hra by ti dovolenou zkazila?"
+    },
+    {
+      "crew": "Co tě baví na hádankách a kvízech?",
+      "imposter": "Jaký typ hádanky tě frustruje?"
+    },
+    {
+      "crew": "Jaká party hra rozproudí večer?",
+      "imposter": "Jaká party hra je trapná?"
+    },
+    {
+      "crew": "Co je super na multiplayeru?",
+      "imposter": "Co tě na online hraní štve?"
+    },
+    {
+      "crew": "Jaká hra tě naučila něco užitečného?",
+      "imposter": "Jaká hra byla čistá ztráta času?"
+    },
+    {
+      "crew": "Co bys chtěl/a stihnout do konce roku?",
+      "imposter": "Co bys letos nejradši přeskočil/a?"
+    },
+    {
+      "crew": "Jaký sen by sis chtěl/a splnit?",
+      "imposter": "Jaký cíl ti přijde zbytečný?"
+    },
+    {
+      "crew": "Kde se vidíš za deset let?",
+      "imposter": "Kde by ses za deset let vidět nechtěl/a?"
+    },
+    {
+      "crew": "Co by ses chtěl/a naučit?",
+      "imposter": "Co se učit vůbec nehodláš?"
+    },
+    {
+      "crew": "Jaké dobrodružství tě láká?",
+      "imposter": "Jaké dobrodružství tě děsí?"
+    },
+    {
+      "crew": "Co bys chtěl/a zažít aspoň jednou?",
+      "imposter": "Co bys nezažil/a ani za nic?"
+    },
+    {
+      "crew": "Jaký velký cíl tě motivuje?",
+      "imposter": "Jaký úkol tě jen vyčerpává?"
+    },
+    {
+      "crew": "Co bys změnil/a ve svém životě k lepšímu?",
+      "imposter": "Co bys raději nechal/a být?"
+    },
+    {
+      "crew": "Jakou výzvu by sis dal/a?",
+      "imposter": "Jaká výzva ti přijde nesmyslná?"
+    },
+    {
+      "crew": "Co tě těší na budoucnosti?",
+      "imposter": "Co tě na budoucnosti znepokojuje?"
+    },
+    {
+      "crew": "Jaký koníček by ses chtěl/a věnovat víc?",
+      "imposter": "Jaký koníček bys nejradši opustil/a?"
+    },
+    {
+      "crew": "Co bys chtěl/a zvládnout sám/sama?",
+      "imposter": "Co bys raději nikdy nemusel/a řešit?"
+    },
+    {
+      "crew": "Jakou zemi bys chtěl/a poznat za rok?",
+      "imposter": "Kam by ses ani za rok nepodíval/a?"
+    },
+    {
+      "crew": "Co by ti udělalo radost příští rok?",
+      "imposter": "Co by tě příští rok otrávilo?"
+    },
+    {
+      "crew": "Jaký malý sen máš?",
+      "imposter": "Jaký velký závazek tě děsí?"
+    },
+    {
+      "crew": "Jak vypadá tvé ideální ráno?",
+      "imposter": "Co ti dokáže zkazit ráno?"
+    },
+    {
+      "crew": "Co děláš jako první po probuzení?",
+      "imposter": "Co tě po probuzení nejvíc otravuje?"
+    },
+    {
+      "crew": "Co máš rád/a na ranní kávě?",
+      "imposter": "Co tě na ranním shonu štve?"
+    },
+    {
+      "crew": "Jak nejradši zakončíš den?",
+      "imposter": "Co ti večer dokáže zkazit náladu?"
+    },
+    {
+      "crew": "Co ti pomáhá usnout?",
+      "imposter": "Co tě v noci drží vzhůru?"
+    },
+    {
+      "crew": "Jaká večerní rutina tě uklidní?",
+      "imposter": "Jaká večerní povinnost tě otravuje?"
+    },
+    {
+      "crew": "Co je super na líném nedělním ránu?",
+      "imposter": "Co tě na pondělním ránu ničí?"
+    },
+    {
+      "crew": "Jak nejradši začínáš víkend?",
+      "imposter": "Co ti dokáže zkazit víkend?"
+    },
+    {
+      "crew": "Co máš rád/a na brzkém ránu?",
+      "imposter": "Proč nesnášíš vstávání do tmy?"
+    },
+    {
+      "crew": "Jaký ranní rituál ti dělá dobře?",
+      "imposter": "Jaký ranní zlozvyk bys chtěl/a zrušit?"
+    },
+    {
+      "crew": "Co tě naladí na dobrý den?",
+      "imposter": "Co ti naladí den špatným směrem?"
+    },
+    {
+      "crew": "Jak relaxuješ před spaním?",
+      "imposter": "Co tě před spaním rozčílí?"
+    },
+    {
+      "crew": "Co je nejlepší na spánku o víkendu?",
+      "imposter": "Co ti spánek o víkendu naruší?"
+    },
+    {
+      "crew": "Jaké snídaňové ráno máš nejradši?",
+      "imposter": "Jaké uspěchané ráno nesnášíš?"
+    },
+    {
+      "crew": "Co ti dodá klid na konci dne?",
+      "imposter": "Co tě na konci dne ještě napne?"
+    },
+    {
+      "crew": "Co je tvůj nejlepší skill do kuchyně?",
+      "imposter": "Co se ti v kuchyni vždycky nepovede?"
+    },
+    {
+      "crew": "Co vaříš nejradši?",
+      "imposter": "Co vařit nesnášíš?"
+    },
+    {
+      "crew": "Jaké jídlo umíš naslepo?",
+      "imposter": "Jaký recept ti nikdy nevyjde?"
+    },
+    {
+      "crew": "Co máš rád/a na pečení?",
+      "imposter": "Co tě na pečení otravuje?"
+    },
+    {
+      "crew": "Jaká kuchyňská pomůcka ti pomáhá?",
+      "imposter": "Jaká pomůcka v kuchyni je zbytečná?"
+    },
+    {
+      "crew": "Co je super na vaření pro hosty?",
+      "imposter": "Co tě na vaření pro lidi stresuje?"
+    },
+    {
+      "crew": "Jaké jídlo tě naučila rodina?",
+      "imposter": "Jaké jídlo se ti nikdy nepovedlo jako babičce?"
+    },
+    {
+      "crew": "Co máš rád/a na experimentování v kuchyni?",
+      "imposter": "Jaký kuchyňský experiment dopadl špatně?"
+    },
+    {
+      "crew": "Jaký recept zvládneš za pět minut?",
+      "imposter": "Jaký recept ti zabere celé odpoledne zbytečně?"
+    },
+    {
+      "crew": "Co je nejlepší na společném vaření?",
+      "imposter": "Co tě na vaření s někým štve?"
+    },
+    {
+      "crew": "Jaké koření tvé jídlo zachrání?",
+      "imposter": "Jaké koření ti pokrm zničí?"
+    },
+    {
+      "crew": "Co máš rád/a na nedělním obědě?",
+      "imposter": "Co tě na velkém vaření otravuje?"
+    },
+    {
+      "crew": "Jaký dezert si troufneš upéct?",
+      "imposter": "Jaký dezert se ti vždy slehne?"
+    },
+    {
+      "crew": "Co je super na grilování?",
+      "imposter": "Co se ti na grilu vždycky připálí?"
+    },
+    {
+      "crew": "Jaké jídlo zvládneš i bez receptu?",
+      "imposter": "U jakého jídla se ztratíš bez návodu?"
+    },
+    {
+      "crew": "Jaká vůně tě potěší?",
+      "imposter": "Jaký pach nesnášíš?"
+    },
+    {
+      "crew": "Jaká vůně ti připomíná dětství?",
+      "imposter": "Jaký zápach ti připomíná něco nepříjemného?"
+    },
+    {
+      "crew": "Jaký zvuk tě uklidňuje?",
+      "imposter": "Jaký zvuk tě dohání k šílenství?"
+    },
+    {
+      "crew": "Co rád/a posloucháš na pozadí?",
+      "imposter": "Jaký hluk tě ruší nejvíc?"
+    },
+    {
+      "crew": "Jaká vůně v kuchyni tě potěší?",
+      "imposter": "Jaký pach z kuchyně nesnášíš?"
+    },
+    {
+      "crew": "Jaký zvuk přírody tě uklidní?",
+      "imposter": "Jaký zvuk tě v noci vzbudí?"
+    },
+    {
+      "crew": "Co máš rád/a na vůni deště?",
+      "imposter": "Jaký pach po dešti ti vadí?"
+    },
+    {
+      "crew": "Jaká vůně parfému se ti líbí?",
+      "imposter": "Jaký parfém je podle tebe moc?"
+    },
+    {
+      "crew": "Jaký zvuk znamená pohodu?",
+      "imposter": "Jaký zvuk znamená stres?"
+    },
+    {
+      "crew": "Jaká vůně tě naladí na Vánoce?",
+      "imposter": "Jaká vánoční vůně už ti leze krkem?"
+    },
+    {
+      "crew": "Co máš rád/a na vůni čerstvé kávy?",
+      "imposter": "Jaký ranní pach ti vadí?"
+    },
+    {
+      "crew": "Jaký zvuk ti dělá radost?",
+      "imposter": "Jaký zvuk tě ihned naštve?"
+    },
+    {
+      "crew": "Jaká hudba na pozadí ti sedí?",
+      "imposter": "Jaký zvuk na pozadí tě ruší?"
+    },
+    {
+      "crew": "Co máš rád/a na tichu?",
+      "imposter": "Co tě na úplném tichu znervózňuje?"
+    },
+    {
+      "crew": "Jaká vůně tě přenese na dovolenou?",
+      "imposter": "Jaký pach ti připomene nepříjemné místo?"
+    },
+    {
+      "crew": "Jakou svou vlastnost máš nejradši?",
+      "imposter": "Jakou svou vlastnost bys změnil/a?"
+    },
+    {
+      "crew": "Co na sobě oceňuješ?",
+      "imposter": "Co bys na sobě nejradši vylepšil/a?"
+    },
+    {
+      "crew": "Jakou vlastnost obdivuješ u druhých?",
+      "imposter": "Jaká vlastnost tě u lidí odpuzuje?"
+    },
+    {
+      "crew": "Co tě dělá dobrým kamarádem?",
+      "imposter": "Jaký zlozvyk přiznáváš?"
+    },
+    {
+      "crew": "V čem jsi dobrý/á?",
+      "imposter": "V čem se ti vůbec nedaří?"
+    },
+    {
+      "crew": "Co ti jde přirozeně?",
+      "imposter": "Co ti dělá problémy?"
+    },
+    {
+      "crew": "Jaká je tvá silná stránka?",
+      "imposter": "Jaká je tvá slabá stránka?"
+    },
+    {
+      "crew": "Za co tě lidé chválí?",
+      "imposter": "Za co tě lidé kritizují?"
+    },
+    {
+      "crew": "Co tě dělá jedinečným?",
+      "imposter": "Jaký zlozvyk bys u sebe zrušil/a?"
+    },
+    {
+      "crew": "Jaký rys povahy ti pomáhá?",
+      "imposter": "Jaký rys tě někdy brzdí?"
+    },
+    {
+      "crew": "V čem se rád/a zlepšuješ?",
+      "imposter": "V čem to vzdáváš?"
+    },
+    {
+      "crew": "Co tě činí klidným člověkem?",
+      "imposter": "Co tě dokáže rozhodit?"
+    },
+    {
+      "crew": "Jakou dovednost na sobě ceníš?",
+      "imposter": "Jakou neschopnost na sobě přiznáváš?"
+    },
+    {
+      "crew": "Co je tvá nejlepší stránka v týmu?",
+      "imposter": "Co je tvá nejhorší stránka pod tlakem?"
+    },
+    {
+      "crew": "Jaký jsi, když je ti dobře?",
+      "imposter": "Jaký jsi, když máš špatný den?"
+    },
+    {
+      "crew": "Jaká outdoorová aktivita tě baví?",
+      "imposter": "Jaká aktivita venku tě ničí?"
+    },
+    {
+      "crew": "Co máš rád/a na túrách?",
+      "imposter": "Co tě na dlouhých túrách otravuje?"
+    },
+    {
+      "crew": "Jaký výlet do přírody tě nabíjí?",
+      "imposter": "Jaký výlet by tě vyčerpal?"
+    },
+    {
+      "crew": "Co je super na kempování?",
+      "imposter": "Co tě na spaní ve stanu štve?"
+    },
+    {
+      "crew": "Jaká vodní aktivita tě láká?",
+      "imposter": "Jaká vodní aktivita tě děsí?"
+    },
+    {
+      "crew": "Co máš rád/a na cyklovýletech?",
+      "imposter": "Co tě na dlouhém kole ničí?"
+    },
+    {
+      "crew": "Jaké lezení nebo via ferrata tě láká?",
+      "imposter": "Jaký výstup by tě vyděsil?"
+    },
+    {
+      "crew": "Co je nejlepší na pikniku v přírodě?",
+      "imposter": "Co ti piknik dokáže zkazit?"
+    },
+    {
+      "crew": "Jaký zimní outdoor tě baví?",
+      "imposter": "Jaký zimní pobyt venku nesnášíš?"
+    },
+    {
+      "crew": "Co tě baví na sbírání hub nebo plodů?",
+      "imposter": "Co tě na lese v létě otravuje?"
+    },
+    {
+      "crew": "Jaké dobrodružství venku by ses zkusil/a?",
+      "imposter": "Jaké dobrodružství venku bys odmítl/a?"
+    },
+    {
+      "crew": "Co máš rád/a na nočním pobytu v přírodě?",
+      "imposter": "Co tě v noci venku děsí?"
+    },
+    {
+      "crew": "Jaká aktivita u vody je nejlepší?",
+      "imposter": "Jaká aktivita u vody tě nudí?"
+    },
+    {
+      "crew": "Co je super na výhledu z vrcholu?",
+      "imposter": "Co tě na výstupu nahoru ničí?"
+    },
+    {
+      "crew": "Jaký outdoorový sport bys zkusil/a poprvé?",
+      "imposter": "Jaký outdoorový sport bys nezkusil/a?"
+    },
+    {
+      "crew": "Jaká restaurace je tvá oblíbená?",
+      "imposter": "Jaká restaurace tě zklamala?"
+    },
+    {
+      "crew": "Co si objednáš naslepo?",
+      "imposter": "Co bys si nikdy neobjednal/a?"
+    },
+    {
+      "crew": "Co máš rád/a na večeři venku?",
+      "imposter": "Co tě na restauracích otravuje?"
+    },
+    {
+      "crew": "Jaká kuchyně tě v restauraci nadchne?",
+      "imposter": "Jaká kuchyně tě v restauraci zklame?"
+    },
+    {
+      "crew": "Co je super na snídani venku?",
+      "imposter": "Co tě na brunchi štve?"
+    },
+    {
+      "crew": "Jaký podnik bys doporučil/a?",
+      "imposter": "Jaký podnik bys nikomu nedoporučil/a?"
+    },
+    {
+      "crew": "Co máš rád/a na kavárnách?",
+      "imposter": "Co tě v kavárnách otravuje?"
+    },
+    {
+      "crew": "Jaké jídlo v restauraci tě nikdy nezklame?",
+      "imposter": "Jaké jídlo si v restauraci nedáš?"
+    },
+    {
+      "crew": "Co je nejlepší na rychlém občerstvení?",
+      "imposter": "Co tě na fast foodu odrazuje?"
+    },
+    {
+      "crew": "Jaká atmosféra podniku ti sedí?",
+      "imposter": "Jaká atmosféra podniku tě odradí?"
+    },
+    {
+      "crew": "Co si dáš k pití v restauraci?",
+      "imposter": "Co bys v restauraci k pití nikdy nedal/a?"
+    },
+    {
+      "crew": "Jaký dezert si objednáš?",
+      "imposter": "Jaký dezert v menu přeskočíš?"
+    },
+    {
+      "crew": "Co máš rád/a na obsluze?",
+      "imposter": "Co tě na špatné obsluze naštve?"
+    },
+    {
+      "crew": "Jaké jídlo venku tě překvapilo?",
+      "imposter": "Jaké jídlo venku tě zklamalo?"
+    },
+    {
+      "crew": "Co je super na posezení na zahrádce?",
+      "imposter": "Co tě na venkovním posezení otravuje?"
+    },
+    {
+      "crew": "Co děláš nejradši v létě?",
+      "imposter": "Co tě v létě nejvíc otravuje?"
+    },
+    {
+      "crew": "Jaká zimní aktivita tě baví?",
+      "imposter": "Jaká zimní aktivita tě ničí?"
+    },
+    {
+      "crew": "Co máš rád/a na podzimu?",
+      "imposter": "Co tě na podzimu deprimuje?"
+    },
+    {
+      "crew": "Jaká jarní činnost tě potěší?",
+      "imposter": "Co tě na jaru otravuje?"
+    },
+    {
+      "crew": "Co je super na letních večerech?",
+      "imposter": "Co tě na letních nocích štve?"
+    },
+    {
+      "crew": "Jak nejradši trávíš sněhový den?",
+      "imposter": "Co tě na zasněženém dni otravuje?"
+    },
+    {
+      "crew": "Co máš rád/a na grilování v létě?",
+      "imposter": "Co tě na letním vedru ničí?"
+    },
+    {
+      "crew": "Jaká vánoční aktivita tě baví?",
+      "imposter": "Jaká vánoční povinnost tě otravuje?"
+    },
+    {
+      "crew": "Co je super na letní dovolené u vody?",
+      "imposter": "Co tě na přeplněné pláži štve?"
+    },
+    {
+      "crew": "Jak nejradši slavíš příchod jara?",
+      "imposter": "Co tě na začátku jara otravuje?"
+    },
+    {
+      "crew": "Co máš rád/a na adventu?",
+      "imposter": "Co tě na předvánočním shonu štve?"
+    },
+    {
+      "crew": "Jaká aktivita patří k Silvestru?",
+      "imposter": "Co tě na Silvestru otravuje?"
+    },
+    {
+      "crew": "Co je nejlepší na prázdninách?",
+      "imposter": "Co ti prázdniny dokáže zkazit?"
+    },
+    {
+      "crew": "Jaký sezónní rituál máš rád/a?",
+      "imposter": "Jaký sezónní rituál ti přijde otravný?"
+    },
+    {
+      "crew": "Co máš rád/a na babím létě?",
+      "imposter": "Co tě na konci léta deprimuje?"
+    },
+    {
+      "crew": "Jaká hra z dětství tě bavila?",
+      "imposter": "Jaká hra z dětství tě nebavila?"
+    },
+    {
+      "crew": "Jakou hračku sis nejvíc užil/a?",
+      "imposter": "Jaká hračka tě nikdy nezaujala?"
+    },
+    {
+      "crew": "Co bylo super na školních prázdninách?",
+      "imposter": "Co bylo na prázdninách nuda?"
+    },
+    {
+      "crew": "Jakou pohádku sis pouštěl/a dokola?",
+      "imposter": "Jaká pohádka tě nudila?"
+    },
+    {
+      "crew": "Co máš rád/a na vzpomínkách z dětství?",
+      "imposter": "Jaká vzpomínka z dětství je nepříjemná?"
+    },
+    {
+      "crew": "Jaký dětský sen sis přál/a splnit?",
+      "imposter": "Jaký dětský strach tě provázel?"
+    },
+    {
+      "crew": "Co bylo nejlepší na hraní venku?",
+      "imposter": "Co tě jako dítě venku otravovalo?"
+    },
+    {
+      "crew": "Jaké dětské jídlo ti chutnalo?",
+      "imposter": "Jaké jídlo tě jako dítě děsilo na talíři?"
+    },
+    {
+      "crew": "Co bylo super na narozeninových oslavách?",
+      "imposter": "Co tě na dětských oslavách otravovalo?"
+    },
+    {
+      "crew": "Jakou knížku sis nechal/a číst pořád?",
+      "imposter": "Jaká dětská kniha tě nudila?"
+    },
+    {
+      "crew": "Co tě jako dítě fascinovalo?",
+      "imposter": "Čeho ses jako dítě bál/a?"
+    },
+    {
+      "crew": "Jaký dárek z dětství si pamatuješ?",
+      "imposter": "Jaký dárek tě jako dítě zklamal?"
+    },
+    {
+      "crew": "Co bylo nejlepší na družině nebo táboře?",
+      "imposter": "Co tě na táboře otravovalo?"
+    },
+    {
+      "crew": "Jaký kreslený seriál máš v srdci?",
+      "imposter": "Jaký dětský pořad jsi nesnášel/a?"
+    },
+    {
+      "crew": "Co tě bavilo dělat s kamarády venku?",
+      "imposter": "Co tě jako dítě venku štvalo?"
+    },
+    {
+      "crew": "Jaké rande je podle tebe romantické?",
+      "imposter": "Jaké rande by tě otrávilo?"
+    },
+    {
+      "crew": "Co oceníš na prvním rande?",
+      "imposter": "Co tě na rande dokáže odradit?"
+    },
+    {
+      "crew": "Jaký společný zážitek s partnerem máš rád/a?",
+      "imposter": "Jaká aktivita s partnerem tě nebaví?"
+    },
+    {
+      "crew": "Co je super na dlouhých rozhovorech?",
+      "imposter": "Jaké téma na rande zabíjí náladu?"
+    },
+    {
+      "crew": "Jaký dárek pro partnera potěší?",
+      "imposter": "Jaký dárek partnera urazí?"
+    },
+    {
+      "crew": "Co oceníš u protějšku?",
+      "imposter": "Jaká vlastnost je pro tebe nepřijatelná?"
+    },
+    {
+      "crew": "Jaké rande bys naplánoval/a?",
+      "imposter": "Jaké rande bys nikdy nezvolil/a?"
+    },
+    {
+      "crew": "Co máš rád/a na společné večeři?",
+      "imposter": "Co dokáže společnou večeři zkazit?"
+    },
+    {
+      "crew": "Jaký kompliment potěší?",
+      "imposter": "Jaká poznámka tě odpudí?"
+    },
+    {
+      "crew": "Co je super na poznávání nového člověka?",
+      "imposter": "Co tě na seznamování stresuje?"
+    },
+    {
+      "crew": "Jaký gentlemanský gesto oceníš?",
+      "imposter": "Jaké gesto ti přijde přehnané?"
+    },
+    {
+      "crew": "Co tě na vztahu naplňuje?",
+      "imposter": "Co tě ve vztahu otravuje?"
+    },
+    {
+      "crew": "Jak nejradši trávíš večer ve dvou?",
+      "imposter": "Co ti večer ve dvou dokáže pokazit?"
+    },
+    {
+      "crew": "Co je super na společných výletech?",
+      "imposter": "Co tě na výletech ve dvou štve?"
+    },
+    {
+      "crew": "Jaké překvapení od partnera potěší?",
+      "imposter": "Jaké překvapení by tě naštvalo?"
+    },
+    {
+      "crew": "Kdybys vyhrál/a milion, co bys udělal/a?",
+      "imposter": "Co bys ani s milionem neudělal/a?"
+    },
+    {
+      "crew": "Kdybys mohl/a žít kdekoli, kde by to bylo?",
+      "imposter": "Kde bys nechtěl/a žít ani omylem?"
+    },
+    {
+      "crew": "Kdybys měl/a den navíc, co bys dělal/a?",
+      "imposter": "Co bys s dnem navíc rozhodně nedělal/a?"
+    },
+    {
+      "crew": "Kdybys mohl/a změnit povolání, jaké by bylo?",
+      "imposter": "Jaké povolání bys nikdy nechtěl/a?"
+    },
+    {
+      "crew": "Kdybys měl/a stroj času, kam bys jel/a?",
+      "imposter": "Do jaké doby by ses bál/a vrátit?"
+    },
+    {
+      "crew": "Kdybys byl/a slavný/á, čím bys chtěl/a být?",
+      "imposter": "Za co bys slavný/á být nechtěl/a?"
+    },
+    {
+      "crew": "Kdyby ses mohl/a stěhovat hned, kam bys šel/šla?",
+      "imposter": "Kam by ses nestěhoval/a ani zadarmo?"
+    },
+    {
+      "crew": "Kdybys mohl/a mít cokoli k večeři, co by to bylo?",
+      "imposter": "Co bys k večeři nechtěl/a ani náhodou?"
+    },
+    {
+      "crew": "Kdybys měl/a vlastní firmu, co bys dělal/a?",
+      "imposter": "Jaký byznys by tě vůbec nebavil?"
+    },
+    {
+      "crew": "Kdybys mohl/a zrušit jeden den v týdnu, který?",
+      "imposter": "Který den v týdnu máš nejradši?"
+    },
+    {
+      "crew": "Kdybys mohl/a mluvit se zvířaty, s kterým?",
+      "imposter": "S kterým zvířetem bys mluvit nechtěl/a?"
+    },
+    {
+      "crew": "Kdybys mohl/a být neviditelný/á na den, co bys udělal/a?",
+      "imposter": "Co by tě na neviditelnosti děsilo?"
+    },
+    {
+      "crew": "Kdybys měl/a vlastní ostrov, jak by vypadal?",
+      "imposter": "Co by na pustém ostrově bylo k nesnesení?"
+    },
+    {
+      "crew": "Kdybys mohl/a ovládat jednu věc silou mysli, jakou?",
+      "imposter": "Co bys silou mysli ovládat nechtěl/a?"
+    },
+    {
+      "crew": "Kdybys byl/a na týden králem/královnou, co bys udělal/a?",
+      "imposter": "Jaká povinnost krále by tě otravovala?"
+    },
+    {
+      "crew": "Jaká práce snů by tě naplnila?",
+      "imposter": "Jaká práce by tě zničila?"
+    },
+    {
+      "crew": "Co bys dělal/a, kdyby šlo o cokoli?",
+      "imposter": "Co bys nedělal/a ani za nejlepší plat?"
+    },
+    {
+      "crew": "Jaké povolání obdivuješ?",
+      "imposter": "Jaké povolání bys nezvládl/a?"
+    },
+    {
+      "crew": "V jakém oboru by ses chtěl/a vidět?",
+      "imposter": "Jaký obor ti přijde nezáživný?"
+    },
+    {
+      "crew": "Jaká práce je podle tebe smysluplná?",
+      "imposter": "Jaká práce ti přijde zbytečná?"
+    },
+    {
+      "crew": "Co je super na práci s lidmi?",
+      "imposter": "Co tě na práci s lidmi vyčerpává?"
+    },
+    {
+      "crew": "Jaká práce venku by tě bavila?",
+      "imposter": "Jaká práce venku by tě otrávila?"
+    },
+    {
+      "crew": "Co je nejlepší na kreativní práci?",
+      "imposter": "Co tě na rutinní práci nudí?"
+    },
+    {
+      "crew": "Jakou živnost by ses chtěl/a rozjet?",
+      "imposter": "Jaký byznys by tě stresoval?"
+    },
+    {
+      "crew": "Co tě láká na cestování za prací?",
+      "imposter": "Co tě na pracovních cestách vyčerpává?"
+    },
+    {
+      "crew": "Jaká práce by ti dala svobodu?",
+      "imposter": "Jaká práce by tě svazovala?"
+    },
+    {
+      "crew": "Co je super na práci z kavárny?",
+      "imposter": "Co tě na práci v kanceláři dusí?"
+    },
+    {
+      "crew": "Jakou dovednost bys zpeněžil/a?",
+      "imposter": "Jakou práci bys nedělal/a ani z nouze?"
+    },
+    {
+      "crew": "Co tě na podnikání láká?",
+      "imposter": "Co tě na podnikání děsí?"
+    },
+    {
+      "crew": "Jaká profese má podle tebe budoucnost?",
+      "imposter": "Jaká profese ti přijde bez perspektivy?"
+    },
+    {
+      "crew": "Co je nejlepší čokoláda?",
+      "imposter": "Jaká čokoláda ti nechutná?"
+    },
+    {
+      "crew": "Jaký zákusek si dáš ke kávě?",
+      "imposter": "Jaký zákusek bys nechal/a ležet?"
+    },
+    {
+      "crew": "Co máš rád/a na slaných svačinách?",
+      "imposter": "Jaká slaná pochoutka ti vadí?"
+    },
+    {
+      "crew": "Jaká zmrzlina je nejlepší?",
+      "imposter": "Jaká příchuť zmrzliny tě odpuzuje?"
+    },
+    {
+      "crew": "Co je super na domácím koláči?",
+      "imposter": "Jaký koláč ti nikdy nechutnal?"
+    },
+    {
+      "crew": "Jaké chipsy máš nejradši?",
+      "imposter": "Jaké chipsy bys nejedl/a?"
+    },
+    {
+      "crew": "Jaká bonbóny si vybereš?",
+      "imposter": "Jaké bonbóny tě odrazují?"
+    },
+    {
+      "crew": "Co máš rád/a na hořké chuti?",
+      "imposter": "Jaká hořká chuť ti vadí?"
+    },
+    {
+      "crew": "Jaká kombinace chutí tě překvapila v dobrém?",
+      "imposter": "Jaká kombinace chutí ti přijde divná?"
+    },
+    {
+      "crew": "Co je nejlepší k čaji?",
+      "imposter": "Co se k čaji vůbec nehodí?"
+    },
+    {
+      "crew": "Jaký med nebo sirup máš rád/a?",
+      "imposter": "Co ti přijde příliš sladké?"
+    },
+    {
+      "crew": "Co máš rád/a na kyselých chutích?",
+      "imposter": "Jaká kyselá chuť tě odpuzuje?"
+    },
+    {
+      "crew": "Jaká palačinková náplň je nejlepší?",
+      "imposter": "Jaká náplň do palačinek ti nesedí?"
+    },
+    {
+      "crew": "Co je super na ovocném dezertu?",
+      "imposter": "Jaký dezert je podle tebe přeslazený?"
+    },
+    {
+      "crew": "Jaký druh videí tě baví?",
+      "imposter": "Jaký druh videí tě otravuje?"
+    },
+    {
+      "crew": "Co tě na internetu rozesměje?",
+      "imposter": "Co tě na internetu rozčiluje?"
+    },
+    {
+      "crew": "Jaký podcast posloucháš rád/a?",
+      "imposter": "Jaký typ podcastu tě nudí?"
+    },
+    {
+      "crew": "Co máš rád/a na memech?",
+      "imposter": "Jaký humor na netu ti nesedí?"
+    },
+    {
+      "crew": "Jaký youtube kanál tě baví?",
+      "imposter": "Jaký typ obsahu přeskakuješ?"
+    },
+    {
+      "crew": "Co je super na krátkých videích?",
+      "imposter": "Co tě na nekonečném scrollování štve?"
+    },
+    {
+      "crew": "Jaká online komunita tě baví?",
+      "imposter": "Jaká diskuze na netu tě otráví?"
+    },
+    {
+      "crew": "Co tě na sociálních sítích baví?",
+      "imposter": "Co tě na sociálních sítích deprimuje?"
+    },
+    {
+      "crew": "Jaký typ příspěvků sdílíš?",
+      "imposter": "Jaký typ příspěvků nesnášíš?"
+    },
+    {
+      "crew": "Co máš rád/a na live streamech?",
+      "imposter": "Co tě na streamech nudí?"
+    },
+    {
+      "crew": "Jaký online kvíz tě pobaví?",
+      "imposter": "Jaký řetězový obsah tě otravuje?"
+    },
+    {
+      "crew": "Co je super na vzdělávacích videích?",
+      "imposter": "Jaký druh tutorialů tě frustruje?"
+    },
+    {
+      "crew": "Jakou appku otevřeš z nudy?",
+      "imposter": "Jaká appka ti jen krade čas?"
+    },
+    {
+      "crew": "Co tě na internetu inspiruje?",
+      "imposter": "Co tě na internetu vytáčí?"
+    },
+    {
+      "crew": "Jaký druh humoru online sdílíš?",
+      "imposter": "Jaký online humor ti přijde trapný?"
+    },
+    {
+      "crew": "Jak vypadá tvůj dokonalý víkend?",
+      "imposter": "Co ti dokonalý víkend dokáže zkazit?"
+    },
+    {
+      "crew": "Co je nejlepší na pátečním večeru?",
+      "imposter": "Co ti páteční večer pokazí?"
+    },
+    {
+      "crew": "Jak nejradši trávíš neděli?",
+      "imposter": "Co tě na nedělním večeru deprimuje?"
+    },
+    {
+      "crew": "Co máš rád/a na spontánních akcích?",
+      "imposter": "Co tě na nečekaných plánech štve?"
+    },
+    {
+      "crew": "Jaký výlet na den tě potěší?",
+      "imposter": "Jaký výlet by tě otrávil?"
+    },
+    {
+      "crew": "Co je super na líném dni doma?",
+      "imposter": "Co tě na celém dni doma nudí?"
+    },
+    {
+      "crew": "Jak nejradši začínáš víkendové ráno?",
+      "imposter": "Co ti víkendové ráno dokáže pokazit?"
+    },
+    {
+      "crew": "Co máš rád/a na večeru s přáteli?",
+      "imposter": "Co tě na večírku dokáže unavit?"
+    },
+    {
+      "crew": "Jaký volný den by tě nabil?",
+      "imposter": "Jaký volný den bys promarnil/a?"
+    },
+    {
+      "crew": "Co je nejlepší na víkendovém spánku?",
+      "imposter": "Co ti spánek o víkendu naruší?"
+    },
+    {
+      "crew": "Jak rád/a trávíš deštivý víkend?",
+      "imposter": "Co tě na deštivém víkendu deprimuje?"
+    },
+    {
+      "crew": "Co tě baví dělat o prázdninách?",
+      "imposter": "Co tě o prázdninách nudí?"
+    },
+    {
+      "crew": "Jaký volnočasový rituál máš rád/a?",
+      "imposter": "Jaký rituál ti přijde otravný?"
+    },
+    {
+      "crew": "Co je super na víkendu na chatě?",
+      "imposter": "Co tě na chatě otravuje?"
+    },
+    {
+      "crew": "Jak nejradši vyplníš odpoledne?",
+      "imposter": "Čím bys odpoledne nikdy nestrávil/a?"
+    },
+    {
+      "crew": "Jaké je tvé oblíbené roční období?",
+      "imposter": "Jaké roční období nemáš rád/a?"
+    },
+    {
+      "crew": "Co máš rád/a na slunečném dni?",
+      "imposter": "Co tě na vedru ničí?"
+    },
+    {
+      "crew": "Jaké počasí je ideální na výlet?",
+      "imposter": "Jaké počasí výlet zničí?"
+    },
+    {
+      "crew": "Co je super na chladném ránu?",
+      "imposter": "Co tě na mrazu nejvíc štve?"
+    },
+    {
+      "crew": "Jak rád/a trávíš první teplý den?",
+      "imposter": "Co tě na nestálém počasí otravuje?"
+    },
+    {
+      "crew": "Co tě těší na příchodu léta?",
+      "imposter": "Co tě na konci léta deprimuje?"
+    },
+    {
+      "crew": "Jaké počasí ti sedne na náladu?",
+      "imposter": "Jaké počasí ti náladu srazí?"
+    },
+    {
+      "crew": "Co máš rád/a na zasněžené krajině?",
+      "imposter": "Co tě na rozbředlém sněhu štve?"
+    },
+    {
+      "crew": "Jaký den je ideální na lenošení?",
+      "imposter": "Jaký den tě nutí jen sedět doma proti vůli?"
+    },
+    {
+      "crew": "Co je super na teplé letní noci?",
+      "imposter": "Co tě na dusné noci ničí?"
+    },
+    {
+      "crew": "Jaký talent bys chtěl/a mít?",
+      "imposter": "Jaký talent ti přijde k ničemu?"
+    },
+    {
+      "crew": "Co bys dělal/a navždy zadarmo?",
+      "imposter": "Co bys nedělal/a ani za peníze?"
+    },
+    {
+      "crew": "Jaké slovo se ti líbí?",
+      "imposter": "Jaké slovo nesnášíš?"
+    },
+    {
+      "crew": "Jaký zlozvyk u sebe toleruješ?",
+      "imposter": "Jaký zlozvyk u druhých nesnášíš?"
+    },
+    {
+      "crew": "Co bys vzal/a na pustý ostrov?",
+      "imposter": "Bez čeho by ses na pustém ostrově obešel/obešla?"
+    },
+    {
+      "crew": "Jaké překvapení by tě nadchlo?",
+      "imposter": "Jaké překvapení by tě vykolejilo?"
+    },
+    {
+      "crew": "Co tě baví na ranním rituálu?",
+      "imposter": "Co tě na rutině otravuje?"
+    },
+    {
+      "crew": "Jaký luxusní zážitek by tě potěšil?",
+      "imposter": "Jaký luxus je podle tebe zbytečný?"
+    },
+    {
+      "crew": "Co bys změnil/a na světě k lepšímu?",
+      "imposter": "Co tě na světě nejvíc štve?"
+    },
+    {
+      "crew": "Jakou věc bys uměl/a celý den?",
+      "imposter": "Jakou činnost bys nevydržel/a ani hodinu?"
+    },
+    {
+      "crew": "Co je tvůj malý rituál pro štěstí?",
+      "imposter": "Jaká pověra ti přijde k smíchu?"
+    },
+    {
+      "crew": "Jaký okamžik dne máš nejradši?",
+      "imposter": "Jaká část dne tě nejvíc unavuje?"
+    },
+    {
+      "crew": "Co tě dokáže rozesmát do slz?",
+      "imposter": "Co ti vůbec nepřijde vtipné?"
+    },
+    {
+      "crew": "Jakou drobnost si dopřáváš?",
+      "imposter": "Jaká drobnost tě umí naštvat?"
+    },
+    {
+      "crew": "Co bys dělal/a, kdyby nikdo nekoukal?",
+      "imposter": "Co bys nedělal/a, ani kdyby nikdo nekoukal?"
+    },
+    {
+      "crew": "Jaký zvyk by sis chtěl/a osvojit?",
+      "imposter": "Jaký zvyk by ses chtěl/a zbavit?"
+    },
+    {
+      "crew": "Co tě dělá šťastným v běžný den?",
+      "imposter": "Co ti běžný den dokáže zkazit?"
+    },
+    {
+      "crew": "Jaký malý úspěch tě potěší?",
+      "imposter": "Jaká maličkost tě dokáže rozhodit?"
+    },
+    {
+      "crew": "Co bys chtěl/a umět hned bez učení?",
+      "imposter": "Co se ti učit vůbec nechce?"
+    },
+    {
+      "crew": "Jaké roční období je nejlepší na lásku?",
+      "imposter": "Jaké období je podle tebe nejvíc depresivní?"
+    },
+    {
+      "crew": "Co bys dělal/a, kdyby byl věčný víkend?",
+      "imposter": "Co by ti na věčném víkendu vadilo?"
+    },
+    {
+      "crew": "Jaký dárek od života bys přijal/a?",
+      "imposter": "Jaká životní komplikace tě nejvíc štve?"
+    },
+    {
+      "crew": "Co tě nabíjí energií?",
+      "imposter": "Co tě nejvíc vysává?"
+    },
+    {
+      "crew": "Jaký okamžik bys chtěl/a zažít znovu?",
+      "imposter": "Jaký okamžik bys nechtěl/a opakovat?"
+    },
+    {
+      "crew": "Co si dáš na nedělní brunch?",
+      "imposter": "Co bys na brunch nikdy nedal/a?"
+    },
+    {
+      "crew": "Jaké vejce máš nejradši k snídani?",
+      "imposter": "Jak připravené vejce ti nechutná?"
+    },
+    {
+      "crew": "Co je super na vydatné snídani?",
+      "imposter": "Co tě na těžké snídani odrazuje?"
+    },
+    {
+      "crew": "Jaké müsli nebo kaše ti chutná?",
+      "imposter": "Jaká snídaňová kaše ti nesedí?"
+    },
+    {
+      "crew": "Co máš rád/a na croissantu?",
+      "imposter": "Jaké pečivo k snídani je podle tebe nuda?"
+    },
+    {
+      "crew": "Jaký džus si dáš ráno?",
+      "imposter": "Jaký džus ti vůbec nechutná?"
+    },
+    {
+      "crew": "Co je nejlepší na pomalém ranním kávičkování?",
+      "imposter": "Co tě na ranním shonu před prací štve?"
+    },
+    {
+      "crew": "Jaká asijská kuchyně tě baví?",
+      "imposter": "Jaká exotická kuchyně ti nesedí?"
+    },
+    {
+      "crew": "Co máš rád/a na italské kuchyni?",
+      "imposter": "Jaké zahraniční jídlo bys nezkusil/a?"
+    },
+    {
+      "crew": "Jaký druh sushi máš rád/a?",
+      "imposter": "Jaké sushi by ses neodvážil/a ochutnat?"
+    },
+    {
+      "crew": "Co je super na mexickém jídle?",
+      "imposter": "Jaké pálivé jídlo ti vadí?"
+    },
+    {
+      "crew": "Jaké jídlo z ciziny tě překvapilo?",
+      "imposter": "Jaké zahraniční jídlo tě zklamalo?"
+    },
+    {
+      "crew": "Jakou exotickou pochoutku bys ochutnal/a?",
+      "imposter": "Jakou exotickou pochoutku bys nikdy nepozřel/a?"
+    },
+    {
+      "crew": "Co máš rád/a na indickém kari?",
+      "imposter": "Jaké koření ti v jídle vadí?"
+    },
+    {
+      "crew": "Co je nejlepší na ranní procházce se psem?",
+      "imposter": "Co tě na venčení za deště štve?"
+    },
+    {
+      "crew": "Co máš rád/a na péči o mazlíčka?",
+      "imposter": "Která péče o mazlíčka tě otravuje?"
+    },
+    {
+      "crew": "Jaké zvíře je nenáročný mazlíček?",
+      "imposter": "Jaké zvíře je podle tebe moc práce?"
+    },
+    {
+      "crew": "Co tě baví na hraní s mazlíčkem?",
+      "imposter": "Co tě na úklidu po mazlíčkovi štve?"
+    },
+    {
+      "crew": "Jaký mazlíček by se hodil do bytu?",
+      "imposter": "Jaký mazlíček do bytu nepatří?"
+    },
+    {
+      "crew": "Co je super na mazlení s kočkou?",
+      "imposter": "Co tě na chování koček mate?"
+    },
+    {
+      "crew": "Co je nejlepší na poznávací dovolené?",
+      "imposter": "Co tě na nabitém programu vyčerpává?"
+    },
+    {
+      "crew": "Jaký relax na dovolené ti sedí?",
+      "imposter": "Jaký typ dovolené je pro tebe nuda?"
+    },
+    {
+      "crew": "Co máš rád/a na dovolené v horách?",
+      "imposter": "Co tě na horské dovolené unaví?"
+    },
+    {
+      "crew": "Jaká aktivita patří k dovolené u moře?",
+      "imposter": "Co tě na pláži po pár hodinách otráví?"
+    },
+    {
+      "crew": "Co je super na cestě s batohem?",
+      "imposter": "Co tě na batůžkaření vyčerpává?"
+    },
+    {
+      "crew": "Jaký výlet z dovolené si zapamatuješ?",
+      "imposter": "Jaký výlet byl ztráta času?"
+    },
+    {
+      "crew": "Co máš rád/a na luxusní dovolené?",
+      "imposter": "Co ti na all inclusive vadí?"
+    },
+    {
+      "crew": "Jak nejradši odpočíváš na dovolené?",
+      "imposter": "Co ti dovolenou dokáže zkazit?"
+    },
+    {
+      "crew": "Co je super na padlu?",
+      "imposter": "Jaký raketový sport tě nebaví?"
+    },
+    {
+      "crew": "Co máš rád/a na disc golfu?",
+      "imposter": "Jaký venkovní sport tě nudí?"
+    },
+    {
+      "crew": "Jaký zimní svah by ses chtěl/a sjet?",
+      "imposter": "Jaký zimní sport tě děsí?"
+    },
+    {
+      "crew": "Co tě baví na běhu v přírodě?",
+      "imposter": "Co tě na běhu po městě otravuje?"
+    },
+    {
+      "crew": "Jaká kolektivní hra tě baví?",
+      "imposter": "Jaká kolektivní hra ti nesedí?"
+    },
+    {
+      "crew": "Co je nejlepší na ranním plavání?",
+      "imposter": "Co tě na bazénu plném lidí štve?"
+    },
+    {
+      "crew": "Jaký sport bys hrál/a celé léto?",
+      "imposter": "Jaký sport bys v zimě nedělal/a?"
+    },
+    {
+      "crew": "Co máš rád/a na jízdě na koloběžce?",
+      "imposter": "Co tě na koloběžce ve městě štve?"
+    },
+    {
+      "crew": "Co tě každý den potěší?",
+      "imposter": "Co tě každý den dokáže naštvat?"
+    },
+    {
+      "crew": "Jaká drobnost ti zlepší den?",
+      "imposter": "Jaká maličkost ti den pokazí?"
+    },
+    {
+      "crew": "Co máš rád/a na ranní cestě?",
+      "imposter": "Co tě na cestě ráno spolehlivě štve?"
+    },
+    {
+      "crew": "Jaký zvyk ti šetří čas?",
+      "imposter": "Jaký zlozvyk ti krade čas?"
+    },
+    {
+      "crew": "Co tě potěší v práci hned po příchodu?",
+      "imposter": "Co tě v práci naštve hned po příchodu?"
+    },
+    {
+      "crew": "Jaká maličkost ti udělá radost?",
+      "imposter": "Jaká maličkost tě dokáže rozhodit?"
+    },
+    {
+      "crew": "Co je super na klidném večeru?",
+      "imposter": "Co ti klidný večer dokáže narušit?"
+    },
+    {
+      "crew": "Jaký okamžik dne tě nabije?",
+      "imposter": "Jaký okamžik dne tě vyčerpá?"
+    },
+    {
+      "crew": "Co na svém vzhledu máš rád/a?",
+      "imposter": "Co bys na svém vzhledu změnil/a?"
+    },
+    {
+      "crew": "Jaký účes ti sluší?",
+      "imposter": "Jaký účes by ti vůbec neseděl?"
+    },
+    {
+      "crew": "Co je super na novém oblečení?",
+      "imposter": "Co tě na zkoušení oblečení otravuje?"
+    },
+    {
+      "crew": "Jaký styl tě dělá sebejistým?",
+      "imposter": "V čem se cítíš nesvůj/nesvá?"
+    },
+    {
+      "crew": "Co máš rád/a na svém úsměvu?",
+      "imposter": "Co tě na fotkách sebe samého/samé štve?"
+    },
+    {
+      "crew": "Jaké boty jsou pohodlné i hezké?",
+      "imposter": "Jaké boty tě dřou?"
+    },
+    {
+      "crew": "Jaký rodinný rituál máš rád/a?",
+      "imposter": "Jaký rituál ti přijde zbytečný?"
+    },
+    {
+      "crew": "Co je super na společné nedělní snídani?",
+      "imposter": "Co tě na povinných sešlostech otravuje?"
+    },
+    {
+      "crew": "Jaká tradice tě spojuje s rodinou?",
+      "imposter": "Jaká tradice ti přijde otravná?"
+    },
+    {
+      "crew": "Co máš rád/a na oslavách výročí?",
+      "imposter": "Co tě na formálních oslavách nudí?"
+    },
+    {
+      "crew": "Jaký každoroční zvyk dodržuješ rád/a?",
+      "imposter": "Jaký každoroční zvyk bys zrušil/a?"
+    },
+    {
+      "crew": "Co je super na rodinném setkání?",
+      "imposter": "Co tě na rodinné sešlosti vyčerpává?"
+    },
+    {
+      "crew": "Jaká karetní hra tě baví?",
+      "imposter": "Jaká karetní hra tě nudí?"
+    },
+    {
+      "crew": "Co je super na kvízových večerech?",
+      "imposter": "Jaký typ kvízu tě frustruje?"
+    },
+    {
+      "crew": "Jaká hra rozproudí každou párty?",
+      "imposter": "Jaká hra párty zabije?"
+    },
+    {
+      "crew": "Co máš rád/a na hádankách?",
+      "imposter": "Jaká hádanka tě dohání k šílenství?"
+    },
+    {
+      "crew": "Jaká hra tě baví hrát s rodinou?",
+      "imposter": "Jaká hra s rodinou skončí hádkou?"
+    },
+    {
+      "crew": "Co je nejlepší na herním večeru?",
+      "imposter": "Co ti herní večer dokáže zkazit?"
+    },
+    {
+      "crew": "Za jaký zážitek rád/a zaplatíš?",
+      "imposter": "Za jaký zážitek bys nedal/a ani korunu?"
+    },
+    {
+      "crew": "Co je super na nakupování na trhu?",
+      "imposter": "Co tě na nákupech v obchodním centru štve?"
+    },
+    {
+      "crew": "Jaký zážitkový poukaz by tě potěšil?",
+      "imposter": "Jaký zážitek bys nechtěl/a dostat?"
+    },
+    {
+      "crew": "Co máš rád/a na vánočních trzích?",
+      "imposter": "Co tě na předvánočních frontách štve?"
+    },
+    {
+      "crew": "Jakou hudbu pustíš na grilovačku?",
+      "imposter": "Jaká hudba grilovačku zkazí?"
+    },
+    {
+      "crew": "Co posloucháš při vaření?",
+      "imposter": "Jaká hudba ti při vaření vadí?"
+    },
+    {
+      "crew": "Jakou hudbu si dáš na procházku?",
+      "imposter": "Jaká hudba ti na procházce nesedí?"
+    },
+    {
+      "crew": "Co je super na živé hudbě?",
+      "imposter": "Co tě na hlučných koncertech otravuje?"
+    },
+    {
+      "crew": "Jakou písničku zpíváš ve sprše?",
+      "imposter": "Jakou písničku už nemůžeš slyšet?"
+    },
+    {
+      "crew": "Jaká hudba ti navodí klid?",
+      "imposter": "Jaká hudba tě napne?"
+    },
+    {
+      "crew": "Jaký dárek bys vyrobil/a vlastnoručně?",
+      "imposter": "Jaký vyrobený dárek by ti přišel trapný?"
+    },
+    {
+      "crew": "Co máš rád/a na dešti za oknem?",
+      "imposter": "Co tě na dešti venku štve?"
+    },
+    {
+      "crew": "Jaký koníček bys předal/a dětem?",
+      "imposter": "Jaký koníček bys nikomu nevnucoval/a?"
+    },
+    {
+      "crew": "Co tě baví na plánování?",
+      "imposter": "Co tě na plánování stresuje?"
+    },
+    {
+      "crew": "Jaký výhled z okna by tě těšil?",
+      "imposter": "Jaký výhled z okna by tě deprimoval?"
+    },
+    {
+      "crew": "Co je super na úplném tichu večer?",
+      "imposter": "Co tě na hluku večer ruší?"
+    },
+    {
+      "crew": "Jakou vzpomínku si schováváš?",
+      "imposter": "Jakou vzpomínku bys nejradši zapomněl/a?"
+    },
+    {
+      "crew": "Co tě nabije na začátku týdne?",
+      "imposter": "Co tě na začátku týdne deptá?"
+    },
+    {
+      "crew": "Jaký pocit máš rád/a po dobře odvedené práci?",
+      "imposter": "Jaký pocit míváš po promarněném dni?"
+    },
+    {
+      "crew": "Co je super na novém začátku?",
+      "imposter": "Co tě na změnách znervózňuje?"
+    },
+    {
+      "crew": "Jakou novou věc by ses chtěl/a osmělit zkusit?",
+      "imposter": "Jakou věc bys nezkusil/a ani na výzvu?"
+    },
+    {
+      "crew": "Co tě dokáže nadchnout u stolu s přáteli?",
+      "imposter": "Co tě u stolu s lidmi dokáže otrávit?"
+    },
+    {
+      "crew": "Jaký okamžik ti vykouzlí úsměv?",
+      "imposter": "Jaký okamžik ti spolehlivě zkazí náladu?"
+    },
+    {
+      "crew": "Co máš rád/a na klidném ránu o samotě?",
+      "imposter": "Co tě na samotě večer tíží?"
+    },
+    {
+      "crew": "Jakou výzvu by sis dal/a na rok?",
+      "imposter": "Jaké předsevzetí ti přijde nesmyslné?"
+    },
+    {
+      "crew": "Jaký koláč by sis dal/a k odpolední kávě?",
+      "imposter": "Jaký koláč ti vůbec nechutná?"
+    },
+    {
+      "crew": "Co máš rád/a na čerstvém pečivu?",
+      "imposter": "Jaké pečivo ti přijde suché a mdlé?"
+    },
+    {
+      "crew": "Jaký salát si dáš nejradši?",
+      "imposter": "Jaký salát bys nikdy nejedl/a?"
+    },
+    {
+      "crew": "Co je super na polévce k obědu?",
+      "imposter": "Jaká polévka ti vůbec nesedí?"
+    },
+    {
+      "crew": "Jaké jídlo ti vždy zvedne náladu?",
+      "imposter": "Jaké jídlo ti náladu spíš zkazí?"
+    },
+    {
+      "crew": "Jaký nápoj si dáš na večer u filmu?",
+      "imposter": "Jaký večerní nápoj ti narušuje spánek?"
+    },
+    {
+      "crew": "Co máš rád/a na ranní sprše?",
+      "imposter": "Co tě na studené sprše odrazuje?"
+    },
+    {
+      "crew": "Jaký zvyk před spaním tě uklidní?",
+      "imposter": "Jaký zvyk před spaním ti spánek pokazí?"
+    },
+    {
+      "crew": "Co tě baví na plánování dovolené?",
+      "imposter": "Co tě na balení kufru otravuje?"
+    },
+    {
+      "crew": "Jaký suvenýr z cest si schováš?",
+      "imposter": "Jaký suvenýr je podle tebe zbytečný?"
+    },
+    {
+      "crew": "Co je super na dlouhé procházce?",
+      "imposter": "Co tě na dlouhé chůzi unaví?"
+    },
+    {
+      "crew": "Jaké roční období je nejlepší na svatbu?",
+      "imposter": "Jaké roční období je na akce nevhodné?"
+    },
+    {
+      "crew": "Co máš rád/a na večerním grilování?",
+      "imposter": "Co tě na úklidu po grilu štve?"
+    },
+    {
+      "crew": "Jaký film bys pustil/a dětem?",
+      "imposter": "Jaký film je podle tebe pro děti nevhodný?"
+    },
+    {
+      "crew": "Co tě baví na deskovkách s rodinou?",
+      "imposter": "Jaká hra v rodině vyvolá hádku?"
+    },
+    {
+      "crew": "Jaký výlet na kole tě potěší?",
+      "imposter": "Jaká trasa na kole by tě zničila?"
+    },
+    {
+      "crew": "Co máš rád/a na podzimním počasí?",
+      "imposter": "Co tě na podzimním blátě štve?"
+    },
+    {
+      "crew": "Jaký dárek bys dal/a nejlepšímu kamarádovi?",
+      "imposter": "Jaký dárek by kamaráda zklamal?"
+    },
+    {
+      "crew": "Co je super na ranní józe?",
+      "imposter": "Co tě na ranním protahování otravuje?"
+    },
+    {
+      "crew": "Jakou kávu si dáš odpoledne?",
+      "imposter": "Jaká káva ti večer nedá spát?"
+    },
+    {
+      "crew": "Co máš rád/a na čtení v posteli?",
+      "imposter": "Co tě na čtení večer ruší?"
+    },
+    {
+      "crew": "Jaký společenský večer tě baví?",
+      "imposter": "Jaký večer ve velké společnosti tě vyčerpá?"
+    },
+    {
+      "crew": "Co je nejlepší na novém telefonu?",
+      "imposter": "Co tě na nastavování nového telefonu štve?"
+    },
+    {
+      "crew": "Jaký výhled na hory tě uchvátí?",
+      "imposter": "Jaký výstup na horu by tě odradil?"
+    },
+    {
+      "crew": "Co tě baví na vaření o víkendu?",
+      "imposter": "Co tě na vaření každý den otravuje?"
+    },
+    {
+      "crew": "Jaký nápoj tě v létě osvěží?",
+      "imposter": "Jaký letní nápoj ti přijde moc sladký?"
+    },
+    {
+      "crew": "Co máš rád/a na klidné neděli?",
+      "imposter": "Co tě na nedělním večeru deptá?"
+    },
+    {
+      "crew": "Jaký sport bys sledoval/a naživo?",
+      "imposter": "Jaký sport tě v hledišti nudí?"
+    },
+    {
+      "crew": "Co je super na společné dovolené s partou?",
+      "imposter": "Co tě na cestování ve velké skupině štve?"
+    },
+    {
+      "crew": "Jaký film tě pobaví pokaždé?",
+      "imposter": "Jaká komedie ti přišla trapná?"
+    },
+    {
+      "crew": "Co máš rád/a na ranní kávě na balkoně?",
+      "imposter": "Co tě na chladném ránu venku odrazuje?"
+    },
+    {
+      "crew": "Jaký výlet do přírody tě nabije?",
+      "imposter": "Jaký výlet by tě jen unavil?"
+    },
+    {
+      "crew": "Co tě baví na fotografování přírody?",
+      "imposter": "Co tě na focení lidí stresuje?"
+    }
+  ]
 }
