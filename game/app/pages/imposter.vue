@@ -14,7 +14,7 @@ useHead({
 });
 
 type Mode = 'word' | 'question';
-type Phase = 'setup' | 'reveal' | 'discuss' | 'result';
+type Phase = 'setup' | 'reveal' | 'pass' | 'discuss' | 'result';
 type RevealStep = 'handoff' | 'shown';
 
 interface Assignment {
@@ -139,6 +139,7 @@ function buildRound() {
 
 const current = computed(() => assignments.value[revealIndex.value]);
 const isLast = computed(() => revealIndex.value === assignments.value.length - 1);
+const firstReaderName = computed(() => assignments.value[0]?.name ?? '');
 
 function showCard() {
   revealStep.value = 'shown';
@@ -146,11 +147,17 @@ function showCard() {
 
 function hideAndNext() {
   if (isLast.value) {
-    phase.value = 'discuss';
+    // otázkový mód: nejdřív předat zpět prvnímu hráči, ať poslední (možný imposter)
+    // nevidí odhalenou otázku pro věrné
+    phase.value = mode.value === 'question' ? 'pass' : 'discuss';
     return;
   }
   revealIndex.value += 1;
   revealStep.value = 'handoff';
+}
+
+function startDiscuss() {
+  phase.value = 'discuss';
 }
 
 function revealResult() {
@@ -396,7 +403,29 @@ onBeforeUnmount(stopTimer);
           class="rounded-2xl bg-gray-800 px-8 py-3 text-base font-bold text-white shadow-md transition hover:bg-gray-700"
           @click="hideAndNext"
         >
-          {{ isLast ? 'Schovat a začít diskuzi' : 'Schovat a předat dál' }}
+          {{ isLast && mode === 'word' ? 'Schovat a začít diskuzi' : 'Schovat a předat dál' }}
+        </button>
+      </div>
+    </section>
+
+    <!-- ====================== PŘEDAT ZPĚT (otázkový mód) ====================== -->
+    <section v-else-if="phase === 'pass'" class="flex w-full flex-col items-center gap-6">
+      <div
+        class="flex w-full flex-col items-center gap-6 rounded-3xl border border-gray-200 bg-white p-8 text-center shadow-sm"
+      >
+        <div class="text-5xl">📱⬅️</div>
+        <div>
+          <div class="text-xs uppercase tracking-wide text-gray-400">Vrať zařízení hráči</div>
+          <div class="mt-1 font-winky text-2xl font-bold text-primaryDark">{{ firstReaderName }}</div>
+        </div>
+        <p class="max-w-sm text-sm text-gray-500">
+          Teprve po předání se odhalí otázka pro věrné – ať ji poslední hráč nevidí.
+        </p>
+        <button
+          class="rounded-2xl bg-primary px-8 py-3 text-base font-bold text-white shadow-md transition hover:bg-primaryDark"
+          @click="startDiscuss"
+        >
+          Začít diskuzi
         </button>
       </div>
     </section>
