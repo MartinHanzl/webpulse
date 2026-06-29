@@ -16,6 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $gitPath = '/var/www/html/api.web-pulse.cz';          // Kde je složka .git
     $laravelPath = '/var/www/html/api.web-pulse.cz/server'; // Kde je Laravel (artisan, composer.json)
 
+    // Binárky zapíchnuté napevno – www-data nemusí mít v PATH správnou verzi.
+    // Laravel 13 vyžaduje PHP >= 8.4.1, proto explicitně php8.4.
+    $php = '/usr/bin/php8.4';
+    $composer = '/usr/local/bin/composer';
+
     $output .= '<pre>';
 
     // --- 1. ČÁST: GIT ---
@@ -37,19 +42,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $output .= "<span style=\"color: #eab308;\">--- Přesun do: {$laravelPath} ---</span>\n";
 
     $laravelCommands = [
-        // Přidán COMPOSER_HOME=/tmp
-        'COMPOSER_HOME=/tmp composer install --no-interaction --no-ansi --prefer-dist --optimize-autoloader 2>&1',
+        // composer install z lock filu (NE update), bez dev balíčků, přes php8.4
+        "COMPOSER_HOME=/tmp {$php} {$composer} install --no-dev --no-interaction --no-ansi --prefer-dist --optimize-autoloader 2>&1",
 
         // Oprava oprávnění – storage a bootstrap/cache musí být zapisovatelné webserverem
         'chmod -R 777 '.escapeshellarg($laravelPath.'/storage').' 2>&1',
         'chmod -R 777 '.escapeshellarg($laravelPath.'/bootstrap/cache').' 2>&1',
 
-        'php artisan migrate --force 2>&1',
-        'php artisan optimize:clear 2>&1',
-        'php artisan config:cache 2>&1',
-        'php artisan event:cache 2>&1',
-        'php artisan route:cache 2>&1',
-        'php artisan view:cache 2>&1',
+        "{$php} artisan migrate --force 2>&1",
+        "{$php} artisan optimize:clear 2>&1",
+        "{$php} artisan config:cache 2>&1",
+        "{$php} artisan event:cache 2>&1",
+        "{$php} artisan route:cache 2>&1",
+        "{$php} artisan view:cache 2>&1",
+
+        // Workery musí nabrat nový kód, jinak jedou na starém vendoru
+        "{$php} artisan queue:restart 2>&1",
     ];
 
     foreach ($laravelCommands as $command) {
