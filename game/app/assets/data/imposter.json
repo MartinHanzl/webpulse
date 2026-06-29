@@ -1,0 +1,2038 @@
+{
+	"wordCategories": [
+		{
+			"name": "Jídlo",
+			"words": ["Pizza", "Sushi", "Guláš", "Palačinky", "Hamburger", "Špagety", "Řízek", "Tacos", "Zmrzlina", "Knedlíky", "Lasagne", "Croissant", "Bramborák", "Ramen", "Čokoláda", "Salát"]
+		},
+		{
+			"name": "Zvířata",
+			"words": ["Slon", "Tygr", "Delfín", "Tučňák", "Klokan", "Žirafa", "Ježek", "Liška", "Velryba", "Sova", "Krokodýl", "Panda", "Vlk", "Chameleón", "Medvěd", "Netopýr"]
+		},
+		{
+			"name": "Místa",
+			"words": ["Pláž", "Hory", "Letiště", "Knihovna", "Nemocnice", "Hřbitov", "Kino", "Zoo", "Pyramidy", "Maják", "Hrad", "Jeskyně", "Vesmírná stanice", "Tržnice", "Akvárium", "Vlakové nádraží"]
+		},
+		{
+			"name": "Sport",
+			"words": ["Fotbal", "Hokej", "Tenis", "Basketbal", "Plavání", "Lyžování", "Box", "Golf", "Šachy", "Volejbal", "Jóga", "Surfing", "Krasobruslení", "Horolezectví", "Curling", "Šerm"]
+		},
+		{
+			"name": "Povolání",
+			"words": ["Hasič", "Doktor", "Učitel", "Pilot", "Kuchař", "Policista", "Programátor", "Zubař", "Zahradník", "Astronaut", "Soudce", "Novinář", "Fotograf", "Knihovník", "Veterinář", "Klaun"]
+		},
+		{
+			"name": "Filmy a seriály",
+			"words": ["Star Wars", "Harry Potter", "Matrix", "Titanic", "Pán prstenů", "Avatar", "Shrek", "Hra o trůny", "Přátelé", "Simpsonovi", "Pulp Fiction", "Forrest Gump", "Frozen", "Jurský park", "Rocky", "Breaking Bad"]
+		},
+		{
+			"name": "Předměty doma",
+			"words": ["Lednička", "Žehlička", "Vysavač", "Mikrovlnka", "Polštář", "Zubní kartáček", "Deštník", "Budík", "Pračka", "Svíčka", "Zrcadlo", "Hřeben", "Konvice", "Klíče", "Brýle", "Hodinky"]
+		},
+		{
+			"name": "Dopravní prostředky",
+			"words": ["Letadlo", "Loď", "Vlak", "Motorka", "Tramvaj", "Vrtulník", "Ponorka", "Balón", "Koloběžka", "Kamion", "Metro", "Kanoe", "Traktor", "Raketa", "Skútr", "Cisterna"]
+		}
+	],
+  "questionPairs": [
+    {
+      "crew": "Kam by ses chtěl/a podívat na vysněné dovolené?",
+      "imposter": "Jmenuj nějaký stát nebo zemi."
+    },
+    {
+      "crew": "Které město bys nejradši navštívil/a?",
+      "imposter": "Jmenuj nějaké velké město."
+    },
+    {
+      "crew": "Kde bys chtěl/a strávit rok života?",
+      "imposter": "Jmenuj zemi, kterou bys našel/našla na mapě."
+    },
+    {
+      "crew": "Jaké je nejkrásnější místo, kde jsi byl/a?",
+      "imposter": "Jmenuj nějaké známé turistické místo."
+    },
+    {
+      "crew": "Kam by ses vydal/a na cestu snů?",
+      "imposter": "Jmenuj nějaký ostrov."
+    },
+    {
+      "crew": "Kde se ti nejlíp odpočívá?",
+      "imposter": "Jmenuj nějaké místo u vody."
+    },
+    {
+      "crew": "Do jakého města by ses přestěhoval/a?",
+      "imposter": "Jmenuj hlavní město nějaké země."
+    },
+    {
+      "crew": "Jaké místo ti učarovalo nejvíc?",
+      "imposter": "Jmenuj nějakou evropskou zemi."
+    },
+    {
+      "crew": "Kam by ses rád/a vrátil/a?",
+      "imposter": "Jmenuj místo, kde jsi byl/a na dovolené."
+    },
+    {
+      "crew": "Jaká destinace je na tvém seznamu snů?",
+      "imposter": "Jmenuj nějakou exotickou zemi."
+    },
+    {
+      "crew": "Kde bys chtěl/a mít chatu?",
+      "imposter": "Jmenuj nějaké pohoří nebo hory."
+    },
+    {
+      "crew": "Kam by ses vydal/a na romantický víkend?",
+      "imposter": "Jmenuj nějaké menší město."
+    },
+    {
+      "crew": "Jaké místo musí každý vidět?",
+      "imposter": "Jmenuj nějakou slavnou památku."
+    },
+    {
+      "crew": "Kde bys chtěl/a sledovat západ slunce?",
+      "imposter": "Jmenuj nějakou pláž."
+    },
+    {
+      "crew": "Kam by ses vypravil/a na dobrodružství?",
+      "imposter": "Jmenuj nějaký kontinent."
+    },
+    {
+      "crew": "Kdo je tvá největší celebritní láska?",
+      "imposter": "Jmenuj herce nebo herečku, které jsi naposledy viděl/a."
+    },
+    {
+      "crew": "S kým slavným by sis dal/a večeři?",
+      "imposter": "Jmenuj nějakou slavnou osobnost."
+    },
+    {
+      "crew": "Koho slavného nejvíc obdivuješ?",
+      "imposter": "Jmenuj někoho, koho dávají v televizi."
+    },
+    {
+      "crew": "S jakou hvězdou by ses chtěl/a vyfotit?",
+      "imposter": "Jmenuj nějakou celebritu."
+    },
+    {
+      "crew": "Kdo je podle tebe nejpřitažlivější člověk na světě?",
+      "imposter": "Jmenuj nějakou slavnou osobu."
+    },
+    {
+      "crew": "Koho bys chtěl/a mít za nejlepšího kamaráda?",
+      "imposter": "Jmenuj někoho slavného ze sociálních sítí."
+    },
+    {
+      "crew": "Komu slavnému bys napsal/a zprávu?",
+      "imposter": "Jmenuj nějakého influencera."
+    },
+    {
+      "crew": "Kdo je tvůj největší idol?",
+      "imposter": "Jmenuj slavného sportovce."
+    },
+    {
+      "crew": "Koho z historie bys chtěl/a potkat?",
+      "imposter": "Jmenuj nějakou historickou postavu."
+    },
+    {
+      "crew": "Kdo tě v životě nejvíc inspiroval?",
+      "imposter": "Jmenuj někoho slavného z minulosti."
+    },
+    {
+      "crew": "S kým by ses chtěl/a vrátit v čase na kávu?",
+      "imposter": "Jmenuj osobnost z učebnice dějepisu."
+    },
+    {
+      "crew": "Kdo je podle tebe největší génius?",
+      "imposter": "Jmenuj slavného vědce nebo vynálezce."
+    },
+    {
+      "crew": "Koho bys chtěl/a mít za mentora?",
+      "imposter": "Jmenuj nějakého slavného myslitele."
+    },
+    {
+      "crew": "Po kom bys pojmenoval/a ulici?",
+      "imposter": "Jmenuj slavnou osobnost z dějin."
+    },
+    {
+      "crew": "Který interpret je tvůj favorit?",
+      "imposter": "Jmenuj nějakého zpěváka nebo kapelu."
+    },
+    {
+      "crew": "Na čí koncert bys nejradši šel/šla?",
+      "imposter": "Jmenuj kapelu, kterou znáš."
+    },
+    {
+      "crew": "Jaká písnička ti vždy zvedne náladu?",
+      "imposter": "Jmenuj nějakou písničku."
+    },
+    {
+      "crew": "Koho posloucháš nejradši?",
+      "imposter": "Jmenuj hudebníka, kterého hrají v rádiu."
+    },
+    {
+      "crew": "Jaký song bys zpíval/a na karaoke?",
+      "imposter": "Jmenuj nějaký známý hit."
+    },
+    {
+      "crew": "Která skladba tě dojme?",
+      "imposter": "Jmenuj nějakou pomalou písničku."
+    },
+    {
+      "crew": "Jaké jídlo bys jedl/a každý den?",
+      "imposter": "Jmenuj nějaké hlavní jídlo."
+    },
+    {
+      "crew": "Co je nejlepší jídlo na první rande?",
+      "imposter": "Jaký předkrm máš rád/a?"
+    },
+    {
+      "crew": "Co by sis dal/a jako poslední večeři?",
+      "imposter": "Co sis dal/a včera k večeři?"
+    },
+    {
+      "crew": "Jaké jídlo ti připomíná domov?",
+      "imposter": "Jmenuj nějaké tradiční české jídlo."
+    },
+    {
+      "crew": "Co umíš uvařit nejlíp?",
+      "imposter": "Jmenuj jídlo, které jde udělat za pět minut."
+    },
+    {
+      "crew": "Jaké jídlo si dáš, když slavíš?",
+      "imposter": "Jmenuj nějaké jídlo z restaurace."
+    },
+    {
+      "crew": "Co bys snědl/a, kdyby nebyly kalorie?",
+      "imposter": "Jmenuj nějaké kalorické jídlo."
+    },
+    {
+      "crew": "Jaká je tvá vysněná snídaně?",
+      "imposter": "Co lidé běžně jedí k snídani?"
+    },
+    {
+      "crew": "Co si v restauraci objednáš naslepo?",
+      "imposter": "Jmenuj jídlo z jídelního lístku."
+    },
+    {
+      "crew": "Jaké jídlo zvládneš sníst v jakoukoli hodinu?",
+      "imposter": "Jmenuj nějaké rychlé občerstvení."
+    },
+    {
+      "crew": "Co je tvůj guilty pleasure v jídle?",
+      "imposter": "Jmenuj nějakou slanou dobrotu."
+    },
+    {
+      "crew": "Jaké jídlo bys vzal/a na piknik?",
+      "imposter": "Jmenuj jídlo, co se jí rukama."
+    },
+    {
+      "crew": "Co je nejlepší jídlo po náročném dni?",
+      "imposter": "Jmenuj nějaké teplé jídlo."
+    },
+    {
+      "crew": "Jaká sladkost ti udělá radost?",
+      "imposter": "Jmenuj nějaký dezert."
+    },
+    {
+      "crew": "Jaká zmrzlina je nejlepší?",
+      "imposter": "Jmenuj příchuť zmrzliny."
+    },
+    {
+      "crew": "Po jaké dobrotě se ti sbíhají sliny?",
+      "imposter": "Jmenuj nějakou čokoládu nebo bonbón."
+    },
+    {
+      "crew": "Jaký dort by sis přál/a k narozeninám?",
+      "imposter": "Jmenuj nějaký druh dortu."
+    },
+    {
+      "crew": "Jaký zákusek si dáš ke kávě?",
+      "imposter": "Jmenuj nějaký moučník."
+    },
+    {
+      "crew": "Co je tvoje oblíbená sladká pochoutka z dětství?",
+      "imposter": "Jmenuj nějakou sušenku nebo oplatku."
+    },
+    {
+      "crew": "Co si dáš k oslavě?",
+      "imposter": "Jmenuj nějaký nápoj."
+    },
+    {
+      "crew": "Jaký drink tě osvěží v horkém létě?",
+      "imposter": "Jmenuj nějaké studené pití."
+    },
+    {
+      "crew": "Co piješ nejradši ráno?",
+      "imposter": "Jmenuj nějaký teplý nápoj."
+    },
+    {
+      "crew": "Jaký koktejl by sis objednal/a?",
+      "imposter": "Jmenuj nějaký alkoholický nápoj."
+    },
+    {
+      "crew": "Co si dáš k dobrému filmu?",
+      "imposter": "Jmenuj nějaký nealkoholický nápoj."
+    },
+    {
+      "crew": "Jaký nápoj ti připomíná dětství?",
+      "imposter": "Jmenuj nějakou limonádu."
+    },
+    {
+      "crew": "Jaké ovoce máš nejradši?",
+      "imposter": "Jmenuj nějaké ovoce."
+    },
+    {
+      "crew": "Jaká zelenina ti chutná nejvíc?",
+      "imposter": "Jmenuj nějakou zeleninu."
+    },
+    {
+      "crew": "Co by sis natrhal/a na zahradě?",
+      "imposter": "Jmenuj nějaké letní ovoce."
+    },
+    {
+      "crew": "Které zvíře by bylo nejlepší mazlíček?",
+      "imposter": "Jmenuj nějaké domácí zvíře."
+    },
+    {
+      "crew": "Jaké zvíře bys chtěl/a být?",
+      "imposter": "Jmenuj nějaké divoké zvíře."
+    },
+    {
+      "crew": "Které zvíře je podle tebe nejroztomilejší?",
+      "imposter": "Jmenuj zvíře, které žije v zoo."
+    },
+    {
+      "crew": "Jakého psa by sis pořídil/a?",
+      "imposter": "Jmenuj nějaké plemeno psa."
+    },
+    {
+      "crew": "Které zvíře bys chtěl/a vidět v divočině?",
+      "imposter": "Jmenuj zvíře z Afriky."
+    },
+    {
+      "crew": "Jaké zvíře tě nejvíc fascinuje?",
+      "imposter": "Jmenuj nějakého mořského živočicha."
+    },
+    {
+      "crew": "Které zvíře má podle tebe nejlepší schopnost?",
+      "imposter": "Jmenuj nějakého ptáka."
+    },
+    {
+      "crew": "Jaký mazlíček by se hodil do bytu?",
+      "imposter": "Jmenuj nějaké malé zvíře."
+    },
+    {
+      "crew": "Jaký předmět by sis vzal/a na pustý ostrov?",
+      "imposter": "Jakou věc z domácnosti jsi naposledy použil/a?"
+    },
+    {
+      "crew": "Bez jaké věci se neobejdeš?",
+      "imposter": "Jmenuj nějaký předmět ve své tašce."
+    },
+    {
+      "crew": "Co bys zachránil/a z hořícího domu?",
+      "imposter": "Jmenuj věc, kterou máš na stole."
+    },
+    {
+      "crew": "Jaká věc ti zásadně zlepšila život?",
+      "imposter": "Jmenuj nějaký kuchyňský spotřebič."
+    },
+    {
+      "crew": "Jakou věc by sis koupil/a jako první po výhře?",
+      "imposter": "Jmenuj nějaký drahý předmět."
+    },
+    {
+      "crew": "Co máš vždy po ruce?",
+      "imposter": "Jmenuj nějakou věc z kapsy."
+    },
+    {
+      "crew": "Jakou věc nikomu nepůjčíš?",
+      "imposter": "Jmenuj nějaký osobní předmět."
+    },
+    {
+      "crew": "Co je tvůj nejlepší nákup?",
+      "imposter": "Jmenuj věc, kterou používáš denně."
+    },
+    {
+      "crew": "Jaké je tvé vysněné auto?",
+      "imposter": "Jmenuj nějakou značku auta."
+    },
+    {
+      "crew": "V čem by ses chtěl/a projet?",
+      "imposter": "Jmenuj nějaký dopravní prostředek."
+    },
+    {
+      "crew": "Jaké auto je podle tebe nejkrásnější?",
+      "imposter": "Jmenuj auto, co vídáš na ulici."
+    },
+    {
+      "crew": "Jaký film by sis pustil/a stokrát?",
+      "imposter": "Jmenuj nějaký film."
+    },
+    {
+      "crew": "Jaký film tě dojal nejvíc?",
+      "imposter": "Jmenuj film, který běžel nedávno v kině."
+    },
+    {
+      "crew": "Jaká je tvá nejoblíbenější filmová klasika?",
+      "imposter": "Jmenuj nějaký starší film."
+    },
+    {
+      "crew": "Jaký film bys ukázal/a kamarádovi?",
+      "imposter": "Jmenuj nějakou komedii."
+    },
+    {
+      "crew": "Který film tě vyděsil?",
+      "imposter": "Jmenuj nějaký horor."
+    },
+    {
+      "crew": "Jaký film by ses chtěl/a ocitnout?",
+      "imposter": "Jmenuj nějaký akční film."
+    },
+    {
+      "crew": "Jaký seriál bys sjel/sjela celou noc?",
+      "imposter": "Jmenuj nějaký seriál."
+    },
+    {
+      "crew": "Jaký seriál sleduješ pořád dokola?",
+      "imposter": "Jmenuj seriál, co dávají v televizi."
+    },
+    {
+      "crew": "Jaký seriál bys doporučil/a všem?",
+      "imposter": "Jmenuj nějaký populární seriál."
+    },
+    {
+      "crew": "Jakou knihu by sis vzal/a na pustý ostrov?",
+      "imposter": "Jmenuj nějakou knihu."
+    },
+    {
+      "crew": "Jaká kniha tě pohltila?",
+      "imposter": "Jmenuj knihu z povinné četby."
+    },
+    {
+      "crew": "Jakou knihu bys dal/a jako dárek?",
+      "imposter": "Jmenuj nějakého spisovatele."
+    },
+    {
+      "crew": "Jakou barvou bys vymaloval/a celý pokoj?",
+      "imposter": "Jmenuj nějakou barvu."
+    },
+    {
+      "crew": "Jaká barva ti nejvíc sluší?",
+      "imposter": "Jmenuj barvu duhy."
+    },
+    {
+      "crew": "Jaká barva tě uklidňuje?",
+      "imposter": "Jmenuj nějakou tmavou barvu."
+    },
+    {
+      "crew": "Jaký sport bys hrál/a každý den?",
+      "imposter": "Jmenuj nějaký sport."
+    },
+    {
+      "crew": "Jaký sport rád/a sleduješ?",
+      "imposter": "Jmenuj nějaký olympijský sport."
+    },
+    {
+      "crew": "Jaký sport by ses chtěl/a naučit?",
+      "imposter": "Jmenuj nějaký míčový sport."
+    },
+    {
+      "crew": "Jaký adrenalinový sport bys zkusil/a?",
+      "imposter": "Jmenuj nějaký zimní sport."
+    },
+    {
+      "crew": "U jakého sportu bys fandil/a naživo?",
+      "imposter": "Jmenuj nějaký týmový sport."
+    },
+    {
+      "crew": "Co děláš nejradši o víkendu?",
+      "imposter": "Jmenuj nějakou volnočasovou aktivitu."
+    },
+    {
+      "crew": "Jaký koníček tě nejvíc baví?",
+      "imposter": "Jmenuj nějaký koníček."
+    },
+    {
+      "crew": "Co bys dělal/a, kdybys měl/a den volna?",
+      "imposter": "Jmenuj činnost, co se dělá venku."
+    },
+    {
+      "crew": "Jakou novou věc by ses chtěl/a naučit?",
+      "imposter": "Jmenuj nějakou dovednost."
+    },
+    {
+      "crew": "Co tě dokáže pohltit na hodiny?",
+      "imposter": "Jmenuj nějakou kreativní činnost."
+    },
+    {
+      "crew": "Jaká je tvá vysněná práce?",
+      "imposter": "Jmenuj nějaké povolání."
+    },
+    {
+      "crew": "Čím jsi chtěl/a být jako dítě?",
+      "imposter": "Jmenuj práci, ve které se nosí uniforma."
+    },
+    {
+      "crew": "Co bys dělal/a, kdyby nešlo o peníze?",
+      "imposter": "Jmenuj nějakou profesi."
+    },
+    {
+      "crew": "Jakou práci bys zvládl/a levou zadní?",
+      "imposter": "Jmenuj práci, co se dělá venku."
+    },
+    {
+      "crew": "Jaké povolání nejvíc obdivuješ?",
+      "imposter": "Jmenuj práci, co pomáhá lidem."
+    },
+    {
+      "crew": "Jakou superschopnost by sis přál/a?",
+      "imposter": "Jmenuj nějakou superschopnost."
+    },
+    {
+      "crew": "Co bys dělal/a, kdybys uměl/a kouzlit?",
+      "imposter": "Jmenuj schopnost nějakého superhrdiny."
+    },
+    {
+      "crew": "Jaká nadlidská síla by se ti hodila?",
+      "imposter": "Jmenuj něco, co umí jen ve filmech."
+    },
+    {
+      "crew": "Jaké je tvé oblíbené roční období?",
+      "imposter": "Jmenuj roční období."
+    },
+    {
+      "crew": "Který měsíc máš nejradši?",
+      "imposter": "Jmenuj měsíc v roce."
+    },
+    {
+      "crew": "Který den v týdnu je tvůj nejlepší?",
+      "imposter": "Jmenuj nějaký den v týdnu."
+    },
+    {
+      "crew": "Co si oblečeš, když chceš zazářit?",
+      "imposter": "Jmenuj nějaký kus oblečení."
+    },
+    {
+      "crew": "Jaké boty nosíš nejradši?",
+      "imposter": "Jmenuj nějaký druh obuvi."
+    },
+    {
+      "crew": "Co by ti v šatníku nesmělo chybět?",
+      "imposter": "Jmenuj nějaké oblečení na zimu."
+    },
+    {
+      "crew": "Jakou hru bys hrál/a celou noc?",
+      "imposter": "Jmenuj nějakou hru."
+    },
+    {
+      "crew": "Jaká desková hra tě baví?",
+      "imposter": "Jmenuj nějakou společenskou hru."
+    },
+    {
+      "crew": "Jakou videohru máš nejradši?",
+      "imposter": "Jmenuj nějakou počítačovou hru."
+    },
+    {
+      "crew": "Jaká hra rozproudí každou párty?",
+      "imposter": "Jmenuj nějakou karetní hru."
+    },
+    {
+      "crew": "Jakou appku používáš nejvíc?",
+      "imposter": "Jmenuj nějakou mobilní aplikaci."
+    },
+    {
+      "crew": "Jaký web navštěvuješ denně?",
+      "imposter": "Jmenuj nějakou sociální síť."
+    },
+    {
+      "crew": "Kolik dětí bys chtěl/a mít?",
+      "imposter": "Řekni nějaké číslo od jedné do deseti."
+    },
+    {
+      "crew": "V kolik hodin nejradši vstáváš?",
+      "imposter": "Řekni nějaký čas během dne."
+    },
+    {
+      "crew": "Kolik by sis přál/a mít volných dní v týdnu?",
+      "imposter": "Řekni nějaké číslo."
+    },
+    {
+      "crew": "Kolik je podle tebe ideální počet hostů na párty?",
+      "imposter": "Řekni nějaké větší číslo."
+    },
+    {
+      "crew": "Jaká místnost je v bytě tvá oblíbená?",
+      "imposter": "Jmenuj nějakou místnost v domě."
+    },
+    {
+      "crew": "Jaký nábytek by ti doma nesměl chybět?",
+      "imposter": "Jmenuj nějaký kus nábytku."
+    },
+    {
+      "crew": "Kde se ti doma nejlíp relaxuje?",
+      "imposter": "Jmenuj místo v bytě, kde trávíš čas."
+    },
+    {
+      "crew": "Jaká rostlina ti dělá radost?",
+      "imposter": "Jmenuj nějakou květinu."
+    },
+    {
+      "crew": "Jaký strom je podle tebe nejkrásnější?",
+      "imposter": "Jmenuj nějaký strom."
+    },
+    {
+      "crew": "Co by sis zasadil/a na zahrádku?",
+      "imposter": "Jmenuj nějakou bylinku."
+    },
+    {
+      "crew": "Jaký jazyk by ses chtěl/a naučit?",
+      "imposter": "Jmenuj nějaký cizí jazyk."
+    },
+    {
+      "crew": "Kterou zemi bys chtěl/a poznat?",
+      "imposter": "Jmenuj nějakou zemi v Evropě."
+    },
+    {
+      "crew": "Odkud by sis přivezl/a recept?",
+      "imposter": "Jmenuj nějakou zemi se zajímavou kuchyní."
+    },
+    {
+      "crew": "Jaká kuchyně tě nejvíc baví?",
+      "imposter": "Jmenuj nějakou národní kuchyni."
+    },
+    {
+      "crew": "Do jaké restaurace bys zašel/zašla?",
+      "imposter": "Jmenuj nějaký typ restaurace."
+    },
+    {
+      "crew": "Po jaké zahraniční pochoutce bys sáhl/a?",
+      "imposter": "Jmenuj nějaké asijské jídlo."
+    },
+    {
+      "crew": "Jaký hudební nástroj by ses chtěl/a naučit?",
+      "imposter": "Jmenuj nějaký hudební nástroj."
+    },
+    {
+      "crew": "Jakou hudbu si pustíš na párty?",
+      "imposter": "Jmenuj nějaký hudební žánr."
+    },
+    {
+      "crew": "Jaký gadget by sis pořídil/a?",
+      "imposter": "Jmenuj nějaké elektronické zařízení."
+    },
+    {
+      "crew": "Bez jaké techniky bys nepřežil/a den?",
+      "imposter": "Jmenuj nějakou značku elektroniky."
+    },
+    {
+      "crew": "Jaký svátek slavíš nejradši?",
+      "imposter": "Jmenuj nějaký svátek."
+    },
+    {
+      "crew": "Jaká oslava ti utkvěla v paměti?",
+      "imposter": "Jmenuj nějakou společenskou událost."
+    },
+    {
+      "crew": "Jak bys pojmenoval/a dítě?",
+      "imposter": "Jmenuj nějaké křestní jméno."
+    },
+    {
+      "crew": "Jak by ses jmenoval/a, kdyby sis mohl/a vybrat?",
+      "imposter": "Jmenuj nějaké jméno."
+    },
+    {
+      "crew": "Jak bys pojmenoval/a psa?",
+      "imposter": "Jmenuj nějaké jméno pro zvíře."
+    },
+    {
+      "crew": "Jaký účes ti sluší nejvíc?",
+      "imposter": "Jmenuj nějaký druh účesu."
+    },
+    {
+      "crew": "Jaký doplněk dotvoří tvůj outfit?",
+      "imposter": "Jmenuj nějaký módní doplněk."
+    },
+    {
+      "crew": "Jaká krajina tě uchvátí?",
+      "imposter": "Jmenuj nějaký typ krajiny."
+    },
+    {
+      "crew": "Kam by ses vydal/a na túru?",
+      "imposter": "Jmenuj nějaké pohoří."
+    },
+    {
+      "crew": "Kde bys chtěl/a postavit dům?",
+      "imposter": "Jmenuj místo blízko přírody."
+    },
+    {
+      "crew": "Jaký dárek by tě nejvíc potěšil?",
+      "imposter": "Jmenuj nějaký dárek pod stromeček."
+    },
+    {
+      "crew": "Co bys dal/a kamarádovi k narozeninám?",
+      "imposter": "Jmenuj nějakou věc, co se dává jako dárek."
+    },
+    {
+      "crew": "Jaký zážitek by sis splnil/a z bucket listu?",
+      "imposter": "Jmenuj nějaký adrenalinový zážitek."
+    },
+    {
+      "crew": "Co bys chtěl/a zažít aspoň jednou?",
+      "imposter": "Jmenuj nějaké dobrodružství."
+    },
+    {
+      "crew": "Jaký okamžik bys chtěl/a prožít znovu?",
+      "imposter": "Jmenuj nějakou rodinnou událost."
+    },
+    {
+      "crew": "Jaká snídaně tě nakopne do dne?",
+      "imposter": "Jmenuj jídlo, co se dává k snídani."
+    },
+    {
+      "crew": "Co si dáš o víkendovém brunchi?",
+      "imposter": "Jmenuj nějaké pečivo."
+    },
+    {
+      "crew": "Co si objednáš v kavárně?",
+      "imposter": "Jmenuj nějaký druh kávy."
+    },
+    {
+      "crew": "Po čem nejradši sáhneš, když máš mlsnou?",
+      "imposter": "Jmenuj nějakou pochutinu."
+    },
+    {
+      "crew": "Jaká chuť ti udělá radost?",
+      "imposter": "Jmenuj nějakou základní chuť."
+    },
+    {
+      "crew": "Jaká vůně tě potěší?",
+      "imposter": "Jmenuj nějakou vůni."
+    },
+    {
+      "crew": "Co ti voní v kuchyni nejvíc?",
+      "imposter": "Jmenuj nějakou kuchyňskou vůni."
+    },
+    {
+      "crew": "Jaký exotický mazlíček by tě bavil?",
+      "imposter": "Jmenuj nějaké zvíře do terária nebo akvária."
+    },
+    {
+      "crew": "Jaké zvíře bys choval/a na farmě?",
+      "imposter": "Jmenuj nějaké hospodářské zvíře."
+    },
+    {
+      "crew": "Jaký typ dovolené máš nejradši?",
+      "imposter": "Jmenuj nějaký způsob, jak trávit dovolenou."
+    },
+    {
+      "crew": "Jaký suvenýr by sis přivezl/a z cest?",
+      "imposter": "Jmenuj nějakou drobnost na památku."
+    },
+    {
+      "crew": "Co děláš jako první po probuzení?",
+      "imposter": "Jmenuj nějakou ranní činnost."
+    },
+    {
+      "crew": "Jak nejradši zakončíš den?",
+      "imposter": "Jmenuj nějakou večerní činnost."
+    },
+    {
+      "crew": "Kdybys mohl/a žít v jiné době, jaké?",
+      "imposter": "Jmenuj nějaké historické období."
+    },
+    {
+      "crew": "Do jakého fantasy světa by ses vydal/a?",
+      "imposter": "Jmenuj nějaký vymyšlený svět z filmu nebo knihy."
+    },
+    {
+      "crew": "Jaké bájné stvoření by sis ochočil/a?",
+      "imposter": "Jmenuj nějakou bájnou bytost."
+    },
+    {
+      "crew": "Co tě baví na padlu nebo tenisu?",
+      "imposter": "Jmenuj nějaký raketový sport."
+    },
+    {
+      "crew": "Jaký vodní sport bys zkusil/a?",
+      "imposter": "Jmenuj nějakou aktivitu u vody."
+    },
+    {
+      "crew": "Co si dáš na pořádné oslavě?",
+      "imposter": "Jmenuj nějaký druh alkoholu."
+    },
+    {
+      "crew": "Jaké víno si vybereš k večeři?",
+      "imposter": "Jmenuj barvu nebo druh vína."
+    },
+    {
+      "crew": "Kam by ses vydal/a, kdyby byla letenka zdarma?",
+      "imposter": "Jmenuj nějaké letiště nebo zemi."
+    },
+    {
+      "crew": "Jaké město má podle tebe nejlepší atmosféru?",
+      "imposter": "Jmenuj nějaké hlavní město."
+    },
+    {
+      "crew": "Kam by ses chtěl/a podívat na podzim?",
+      "imposter": "Jmenuj nějaké město v zahraničí."
+    },
+    {
+      "crew": "Jaké přírodní místo bys chtěl/a vidět na vlastní oči?",
+      "imposter": "Jmenuj nějaký národní park nebo přírodní úkaz."
+    },
+    {
+      "crew": "Kde bys chtěl/a strávit líbánky?",
+      "imposter": "Jmenuj nějaké romantické místo."
+    },
+    {
+      "crew": "Kam bys jel/a za teplem v zimě?",
+      "imposter": "Jmenuj nějakou jižní zemi."
+    },
+    {
+      "crew": "Jaké město bys doporučil/a na prodloužený víkend?",
+      "imposter": "Jmenuj nějaké evropské město."
+    },
+    {
+      "crew": "Co je tvoje comfort food?",
+      "imposter": "Jmenuj nějaké jídlo, co tě zasytí."
+    },
+    {
+      "crew": "Jaké jídlo bys uměl/a uvařit i poslepu?",
+      "imposter": "Jmenuj nějaké jednoduché jídlo."
+    },
+    {
+      "crew": "Co si dáš, když nemáš čas vařit?",
+      "imposter": "Jmenuj nějaký fast food."
+    },
+    {
+      "crew": "Jaké jídlo objednáš na rozvoz?",
+      "imposter": "Jmenuj jídlo, co se nosí v krabici."
+    },
+    {
+      "crew": "Jaká polévka tě zahřeje nejlíp?",
+      "imposter": "Jmenuj nějakou polévku."
+    },
+    {
+      "crew": "Jaká příloha k jídlu je podle tebe nejlepší?",
+      "imposter": "Jmenuj nějakou přílohu."
+    },
+    {
+      "crew": "Co dáš na gril jako první?",
+      "imposter": "Jmenuj jídlo, co se griluje."
+    },
+    {
+      "crew": "Jaký sýr by ti nesměl chybět?",
+      "imposter": "Jmenuj nějaký druh sýra."
+    },
+    {
+      "crew": "Co si namažeš na chleba k snídani?",
+      "imposter": "Jmenuj nějakou pomazánku nebo nátěr."
+    },
+    {
+      "crew": "Jaké jídlo si dáš na horách po lyžování?",
+      "imposter": "Jmenuj nějaké vydatné jídlo."
+    },
+    {
+      "crew": "Jaký domácí moučník máš nejradši?",
+      "imposter": "Jmenuj nějaký koláč nebo buchtu."
+    },
+    {
+      "crew": "Co si dáš k odpolední kávě?",
+      "imposter": "Jmenuj nějaký zákusek."
+    },
+    {
+      "crew": "Jaká cukrovinka tě dostane pokaždé?",
+      "imposter": "Jmenuj nějaký bonbón."
+    },
+    {
+      "crew": "Co si dáš po náročném tréninku?",
+      "imposter": "Jmenuj nějaký osvěžující nápoj."
+    },
+    {
+      "crew": "Jaký teplý nápoj tě v zimě zahřeje?",
+      "imposter": "Jmenuj nějaký horký nápoj."
+    },
+    {
+      "crew": "Co si objednáš v baru?",
+      "imposter": "Jmenuj nějaký míchaný nápoj."
+    },
+    {
+      "crew": "Jaké zvíře by bylo dobrý parťák na výlet?",
+      "imposter": "Jmenuj nějaké zvíře, co se dá vodit na vodítku."
+    },
+    {
+      "crew": "Které zvíře tě nikdy neomrzí pozorovat?",
+      "imposter": "Jmenuj nějaké zvíře z lesa."
+    },
+    {
+      "crew": "Jakého ptáka bys chtěl/a vidět zblízka?",
+      "imposter": "Jmenuj nějakého ptáka."
+    },
+    {
+      "crew": "Které zvíře je podle tebe nejchytřejší?",
+      "imposter": "Jmenuj nějakého savce."
+    },
+    {
+      "crew": "Jaký sport bys dělal/a celé léto?",
+      "imposter": "Jmenuj nějaký letní sport."
+    },
+    {
+      "crew": "U jakého sportu si nejlíp odpočineš?",
+      "imposter": "Jmenuj nějakou venkovní aktivitu."
+    },
+    {
+      "crew": "Jaký sport bys hrál/a s partou?",
+      "imposter": "Jmenuj nějaký sport pro víc lidí."
+    },
+    {
+      "crew": "Jaký film by sis pustil/a o Vánocích?",
+      "imposter": "Jmenuj nějaký rodinný film."
+    },
+    {
+      "crew": "Jaký animák tě baví dodnes?",
+      "imposter": "Jmenuj nějaký kreslený film."
+    },
+    {
+      "crew": "Jaký film má podle tebe nejlepší hudbu?",
+      "imposter": "Jmenuj nějaký slavný film."
+    },
+    {
+      "crew": "Jaká filmová série je nejlepší?",
+      "imposter": "Jmenuj nějakou filmovou ságu."
+    },
+    {
+      "crew": "Jaké hobby by ses chtěl/a věnovat víc?",
+      "imposter": "Jmenuj nějakou zájmovou činnost."
+    },
+    {
+      "crew": "Co děláš pro radost úplně sám/sama?",
+      "imposter": "Jmenuj nějakou klidnou aktivitu."
+    },
+    {
+      "crew": "Jakou sbírku by sis založil/a?",
+      "imposter": "Jmenuj nějakou věc, co lidé sbírají."
+    },
+    {
+      "crew": "Jakou práci bys zkusil/a na zkoušku?",
+      "imposter": "Jmenuj nějaké neobvyklé povolání."
+    },
+    {
+      "crew": "V jakém oboru by ses chtěl/a vidět?",
+      "imposter": "Jmenuj nějakou oblast práce."
+    },
+    {
+      "crew": "Jaké řemeslo by ses chtěl/a naučit?",
+      "imposter": "Jmenuj nějaké řemeslo."
+    },
+    {
+      "crew": "Jaký školní předmět tě bavil nejvíc?",
+      "imposter": "Jmenuj nějaký školní předmět."
+    },
+    {
+      "crew": "Co by ses chtěl/a doučit z dospělého pohledu?",
+      "imposter": "Jmenuj nějaký obor ke studiu."
+    },
+    {
+      "crew": "Jaká značka má podle tebe styl?",
+      "imposter": "Jmenuj nějakou módní značku."
+    },
+    {
+      "crew": "Po jaké značce telefonu bys sáhl/a?",
+      "imposter": "Jmenuj nějakou značku telefonu."
+    },
+    {
+      "crew": "V jakém dopravním prostředku se ti cestuje nejlíp?",
+      "imposter": "Jmenuj nějaký dopravní prostředek."
+    },
+    {
+      "crew": "Čím by ses chtěl/a svézt aspoň jednou?",
+      "imposter": "Jmenuj nějaké neobvyklé vozidlo."
+    },
+    {
+      "crew": "Kdyby ses mohl/a teleportovat kamkoli, kam?",
+      "imposter": "Jmenuj nějaké místo na světě."
+    },
+    {
+      "crew": "Kdybys měl/a robota, co by pro tebe dělal?",
+      "imposter": "Jmenuj nějakou domácí práci."
+    },
+    {
+      "crew": "Kdybys byl/a hrdina, jaké by bylo tvé jméno?",
+      "imposter": "Jmenuj nějakou přezdívku."
+    },
+    {
+      "crew": "Kdybys mohl/a mít jakékoli zvíře, jaké?",
+      "imposter": "Jmenuj nějaké velké zvíře."
+    },
+    {
+      "crew": "Co ti spolehlivě udělá radost?",
+      "imposter": "Jmenuj nějakou příjemnou maličkost."
+    },
+    {
+      "crew": "Co tě dokáže nakopnout ráno?",
+      "imposter": "Jmenuj nějakou ranní rutinu."
+    },
+    {
+      "crew": "Co tě dokáže rozesmát?",
+      "imposter": "Jmenuj nějakou vtipnou věc."
+    },
+    {
+      "crew": "Jaký spotřebič ti nejvíc usnadní život?",
+      "imposter": "Jmenuj nějaký domácí spotřebič."
+    },
+    {
+      "crew": "Bez čeho v kuchyni se neobejdeš?",
+      "imposter": "Jmenuj nějaké kuchyňské náčiní."
+    },
+    {
+      "crew": "Jaká vánoční tradice tě baví nejvíc?",
+      "imposter": "Jmenuj nějaký vánoční zvyk."
+    },
+    {
+      "crew": "Co k Vánocům neodmyslitelně patří?",
+      "imposter": "Jmenuj nějaké vánoční jídlo nebo cukroví."
+    },
+    {
+      "crew": "Kde bys chtěl/a vidět hvězdnou oblohu?",
+      "imposter": "Jmenuj nějaké odlehlé místo v přírodě."
+    },
+    {
+      "crew": "Jaké město by sis chtěl/a projít pěšky?",
+      "imposter": "Jmenuj nějaké historické město."
+    },
+    {
+      "crew": "Kam by ses vrátil/a z dětství?",
+      "imposter": "Jmenuj místo, kam jsi jezdil/a na prázdniny."
+    },
+    {
+      "crew": "Jaký kout světa tě láká nejvíc?",
+      "imposter": "Jmenuj nějaký vzdálený kontinent."
+    },
+    {
+      "crew": "Kde bys chtěl/a ochutnat místní kuchyni?",
+      "imposter": "Jmenuj nějakou zemi se známým jídlem."
+    },
+    {
+      "crew": "Koho slavného bys pozval/a na grilovačku?",
+      "imposter": "Jmenuj nějakého baviče nebo moderátora."
+    },
+    {
+      "crew": "Čí životní příběh tě fascinuje?",
+      "imposter": "Jmenuj nějakou známou osobnost."
+    },
+    {
+      "crew": "S kým bys chtěl/a natočit video?",
+      "imposter": "Jmenuj nějakého youtubera nebo influencera."
+    },
+    {
+      "crew": "Jaká hudba ti dodá energii před akcí?",
+      "imposter": "Jmenuj nějaký svižný žánr."
+    },
+    {
+      "crew": "Jakou písničku si pustíš do sprchy?",
+      "imposter": "Jmenuj nějaký známý song."
+    },
+    {
+      "crew": "Na jaký festival by ses chtěl/a podívat?",
+      "imposter": "Jmenuj nějaký hudební festival."
+    },
+    {
+      "crew": "Co je tvoje oblíbená pizza?",
+      "imposter": "Jmenuj nějakou ingredienci na pizzu."
+    },
+    {
+      "crew": "Jaké těstoviny si dáš nejradši?",
+      "imposter": "Jmenuj nějaký druh těstovin."
+    },
+    {
+      "crew": "Co by sis dal/a k snídani o líné neděli?",
+      "imposter": "Jmenuj jídlo na snídani."
+    },
+    {
+      "crew": "Jaké jídlo ti připomíná léto?",
+      "imposter": "Jmenuj nějaké lehké letní jídlo."
+    },
+    {
+      "crew": "Co si dáš na svátečním obědě?",
+      "imposter": "Jmenuj nějaké nedělní jídlo."
+    },
+    {
+      "crew": "Jaké jídlo z dětství ti chybí?",
+      "imposter": "Jmenuj nějaké jídlo z jídelny."
+    },
+    {
+      "crew": "Jaká buchta od babičky je nejlepší?",
+      "imposter": "Jmenuj nějaké domácí pečivo."
+    },
+    {
+      "crew": "Co si dáš jako odměnu?",
+      "imposter": "Jmenuj nějakou sladkost."
+    },
+    {
+      "crew": "Jaké zvíře bys chtěl/a pozorovat na safari?",
+      "imposter": "Jmenuj nějaké velké africké zvíře."
+    },
+    {
+      "crew": "Které zvíře má nejhezčí zbarvení?",
+      "imposter": "Jmenuj nějaké barevné zvíře nebo rybu."
+    },
+    {
+      "crew": "Jaký zimní svah by ses chtěl/a sjet?",
+      "imposter": "Jmenuj nějaké lyžařské středisko nebo zimní sport."
+    },
+    {
+      "crew": "Jaký sport bys chtěl/a umět profesionálně?",
+      "imposter": "Jmenuj nějaký profesionální sport."
+    },
+    {
+      "crew": "Jaká věc by ti zpříjemnila dlouhou cestu?",
+      "imposter": "Jmenuj nějakou věc, co bereš na cesty."
+    },
+    {
+      "crew": "Co bys nikdy nezapomněl/a sbalit?",
+      "imposter": "Jmenuj věc do kufru."
+    },
+    {
+      "crew": "Jaký dárek dlouho vydrží?",
+      "imposter": "Jmenuj nějaký trvanlivý předmět."
+    },
+    {
+      "crew": "Jaký dokument tě zaujal?",
+      "imposter": "Jmenuj nějaké téma dokumentu."
+    },
+    {
+      "crew": "Jaký komiks nebo manga tě baví?",
+      "imposter": "Jmenuj nějakého komiksového hrdinu."
+    },
+    {
+      "crew": "Jaká pohádka ti utkvěla z dětství?",
+      "imposter": "Jmenuj nějakou pohádku."
+    },
+    {
+      "crew": "Co tě baví dělat venku za hezkého počasí?",
+      "imposter": "Jmenuj nějakou venkovní aktivitu."
+    },
+    {
+      "crew": "Jaká kreativní činnost tě uklidní?",
+      "imposter": "Jmenuj nějakou tvořivou činnost."
+    },
+    {
+      "crew": "Co by sis zahrál/a na pikniku?",
+      "imposter": "Jmenuj nějakou hru do přírody."
+    },
+    {
+      "crew": "Jaký byznys by ses chtěl/a rozjet?",
+      "imposter": "Jmenuj nějaký druh podnikání."
+    },
+    {
+      "crew": "Jaké povolání má podle tebe budoucnost?",
+      "imposter": "Jmenuj nějakou moderní profesi."
+    },
+    {
+      "crew": "Jakou barvu auta bys chtěl/a?",
+      "imposter": "Jmenuj nějakou barvu."
+    },
+    {
+      "crew": "Jaký styl bydlení se ti líbí?",
+      "imposter": "Jmenuj nějaký interiérový styl."
+    },
+    {
+      "crew": "Kdyby sis mohl/a splnit jedno přání, jaké?",
+      "imposter": "Jmenuj nějakou věc, co si lidé přejí."
+    },
+    {
+      "crew": "Kdybys měl/a vlastní ostrov, jak by vypadal?",
+      "imposter": "Jmenuj nějakou věc, co by na ostrově byla."
+    },
+    {
+      "crew": "Kdybys mohl/a ovládat počasí, jaké bys udělal/a?",
+      "imposter": "Jmenuj nějaký typ počasí."
+    },
+    {
+      "crew": "Jaké počasí ti nejvíc zvedne náladu?",
+      "imposter": "Jmenuj nějaký typ počasí."
+    },
+    {
+      "crew": "Jaký přírodní úkaz tě fascinuje?",
+      "imposter": "Jmenuj nějaký jev na obloze nebo v přírodě."
+    },
+    {
+      "crew": "Jaký zvuk tě uklidní?",
+      "imposter": "Jmenuj nějaký příjemný zvuk."
+    },
+    {
+      "crew": "Jaká vůně ti připomene Vánoce?",
+      "imposter": "Jmenuj nějaké koření nebo vůni."
+    },
+    {
+      "crew": "Co tě dokáže okamžitě uklidnit?",
+      "imposter": "Jmenuj nějakou relaxační činnost."
+    },
+    {
+      "crew": "Co ti dodá sebevědomí?",
+      "imposter": "Jmenuj nějakou věc, co tě nakopne."
+    },
+    {
+      "crew": "Co ti pomáhá usnout?",
+      "imposter": "Jmenuj nějakou večerní rutinu."
+    },
+    {
+      "crew": "Jak vypadá tvé ideální ráno?",
+      "imposter": "Jmenuj nějakou ranní činnost."
+    },
+    {
+      "crew": "Jak nejradši trávíš volný den?",
+      "imposter": "Jmenuj nějakou činnost na den volna."
+    },
+    {
+      "crew": "Co je super na líném víkendu?",
+      "imposter": "Jmenuj nějakou víkendovou aktivitu."
+    },
+    {
+      "crew": "Co umíš upéct nejlíp?",
+      "imposter": "Jmenuj nějaký pečený moučník."
+    },
+    {
+      "crew": "Jaké koření používáš nejčastěji?",
+      "imposter": "Jmenuj nějaké koření."
+    },
+    {
+      "crew": "Jakou slavnou památku bys chtěl/a vidět naživo?",
+      "imposter": "Jmenuj nějakou slavnou stavbu nebo památku."
+    },
+    {
+      "crew": "Kam by ses chtěl/a podívat na dobrodružnou výpravu?",
+      "imposter": "Jmenuj nějaké divoké místo na světě."
+    },
+    {
+      "crew": "Které pobřeží by tě uchvátilo?",
+      "imposter": "Jmenuj nějaké moře nebo oceán."
+    },
+    {
+      "crew": "Kde bys chtěl/a bydlet ve stáří?",
+      "imposter": "Jmenuj nějaké klidné místo."
+    },
+    {
+      "crew": "Jaké velkoměsto bys chtěl/a poznat?",
+      "imposter": "Jmenuj nějakou světovou metropoli."
+    },
+    {
+      "crew": "Kam by ses vydal/a na lyže?",
+      "imposter": "Jmenuj nějakou horskou destinaci."
+    },
+    {
+      "crew": "Jaké maso si dáš nejradši?",
+      "imposter": "Jmenuj nějaký druh masa."
+    },
+    {
+      "crew": "Jaká ryba ti chutná?",
+      "imposter": "Jmenuj nějakou rybu."
+    },
+    {
+      "crew": "Jaké pečivo si koupíš ráno?",
+      "imposter": "Jmenuj nějaké pečivo."
+    },
+    {
+      "crew": "Jaký salát si dáš k obědu?",
+      "imposter": "Jmenuj nějaký druh salátu."
+    },
+    {
+      "crew": "Jaké ořechy máš nejradši?",
+      "imposter": "Jmenuj nějaký druh ořechů."
+    },
+    {
+      "crew": "Jaké koláče pečeš na svátky?",
+      "imposter": "Jmenuj nějaké cukroví."
+    },
+    {
+      "crew": "Co si dáš k pivu?",
+      "imposter": "Jmenuj nějakou slanou pochutinu."
+    },
+    {
+      "crew": "Do jaké země by ses vydal/a za zážitky?",
+      "imposter": "Jmenuj nějakou asijskou zemi."
+    },
+    {
+      "crew": "Kterou kulturu bys chtěl/a poznat?",
+      "imposter": "Jmenuj nějakou zemi s odlišnou kulturou."
+    },
+    {
+      "crew": "Odkud by sis přivezl/a oblečení?",
+      "imposter": "Jmenuj nějakou zemi nebo region."
+    },
+    {
+      "crew": "Jakou olympijskou disciplínu bys chtěl/a zkusit?",
+      "imposter": "Jmenuj nějakou olympijskou disciplínu."
+    },
+    {
+      "crew": "Jaký extrémní sport tě láká?",
+      "imposter": "Jmenuj nějaký nebezpečný sport."
+    },
+    {
+      "crew": "Jaký sport bys sledoval/a na stadionu?",
+      "imposter": "Jmenuj nějaký populární sport."
+    },
+    {
+      "crew": "Jaký nástroj bys chtěl/a slyšet naživo?",
+      "imposter": "Jmenuj nějaký smyčcový nebo dechový nástroj."
+    },
+    {
+      "crew": "Jakou hudbu si dáš na cestu autem?",
+      "imposter": "Jmenuj nějaký hudební styl."
+    },
+    {
+      "crew": "Jakou filmovou postavou bys chtěl/a být?",
+      "imposter": "Jmenuj nějakou filmovou postavu."
+    },
+    {
+      "crew": "Jaký záporák je podle tebe nejlepší?",
+      "imposter": "Jmenuj nějakého filmového padoucha."
+    },
+    {
+      "crew": "Jaký superhrdina je tvůj favorit?",
+      "imposter": "Jmenuj nějakého superhrdinu."
+    },
+    {
+      "crew": "Jaká párty hra rozjede večer?",
+      "imposter": "Jmenuj nějakou společenskou hru."
+    },
+    {
+      "crew": "Jakou hru sis hrál/a jako dítě?",
+      "imposter": "Jmenuj nějakou dětskou hru."
+    },
+    {
+      "crew": "Jakou hru bys vzal/a na chatu?",
+      "imposter": "Jmenuj nějakou hru s kartami nebo kostkami."
+    },
+    {
+      "crew": "Jakou práci bys dělal/a venku v přírodě?",
+      "imposter": "Jmenuj práci spojenou s přírodou."
+    },
+    {
+      "crew": "Jaká profese ti přijde dobrodružná?",
+      "imposter": "Jmenuj nějaké dobrodružné povolání."
+    },
+    {
+      "crew": "Jaké vozidlo by ses chtěl/a naučit řídit?",
+      "imposter": "Jmenuj nějaký dopravní prostředek."
+    },
+    {
+      "crew": "Čím by ses projel/a po městě?",
+      "imposter": "Jmenuj nějaký způsob městské dopravy."
+    },
+    {
+      "crew": "Jaký výhled by tě dostal?",
+      "imposter": "Jmenuj nějaký typ scenérie."
+    },
+    {
+      "crew": "Kde bys postavil/a stan?",
+      "imposter": "Jmenuj nějaké místo v přírodě."
+    },
+    {
+      "crew": "Jaké roční období je v přírodě nejhezčí?",
+      "imposter": "Jmenuj roční období."
+    },
+    {
+      "crew": "Jaký dárek by udělal radost komukoli?",
+      "imposter": "Jmenuj nějaký univerzální dárek."
+    },
+    {
+      "crew": "Co bys dal/a partnerovi k výročí?",
+      "imposter": "Jmenuj nějaký romantický dárek."
+    },
+    {
+      "crew": "Jaký zážitek by sis dopřál/a k narozeninám?",
+      "imposter": "Jmenuj nějaký zážitkový dárek."
+    },
+    {
+      "crew": "Co bys chtěl/a stihnout do konce roku?",
+      "imposter": "Jmenuj nějaký cíl nebo plán."
+    },
+    {
+      "crew": "Jaká vůně tě přenese na dovolenou?",
+      "imposter": "Jmenuj nějakou letní vůni."
+    },
+    {
+      "crew": "Jaký zvuk přírody tě uklidní?",
+      "imposter": "Jmenuj nějaký zvuk z přírody."
+    },
+    {
+      "crew": "Jaké počasí je ideální na výlet?",
+      "imposter": "Jmenuj nějaký typ počasí."
+    },
+    {
+      "crew": "Co máš rád/a na zimě?",
+      "imposter": "Jmenuj nějakou zimní věc nebo jev."
+    },
+    {
+      "crew": "Jakou oslavu bys uspořádal/a?",
+      "imposter": "Jmenuj nějakou příležitost k oslavě."
+    },
+    {
+      "crew": "Co k létu neodmyslitelně patří?",
+      "imposter": "Jmenuj nějakou letní aktivitu."
+    },
+    {
+      "crew": "Kolik zemí bys chtěl/a procestovat?",
+      "imposter": "Řekni nějaké číslo."
+    },
+    {
+      "crew": "V kolik chodíš nejradši spát?",
+      "imposter": "Řekni nějaký večerní čas."
+    },
+    {
+      "crew": "Jak bys pojmenoval/a kočku?",
+      "imposter": "Jmenuj nějaké jméno pro mazlíčka."
+    },
+    {
+      "crew": "Co si vezmeš na sebe na rande?",
+      "imposter": "Jmenuj nějaký kus oblečení."
+    },
+    {
+      "crew": "Jakou bundu nosíš nejradši?",
+      "imposter": "Jmenuj nějaký druh svrchního oblečení."
+    },
+    {
+      "crew": "Jaký vychytaný gadget by ses chtěl/a?",
+      "imposter": "Jmenuj nějakou chytrou věc do domácnosti."
+    },
+    {
+      "crew": "Bez jaké aplikace by ses neobešel/neobešla?",
+      "imposter": "Jmenuj nějakou appku."
+    },
+    {
+      "crew": "Co si dáš k brunchi?",
+      "imposter": "Jmenuj nějaké snídaňové jídlo."
+    },
+    {
+      "crew": "Jakou kávu si objednáš?",
+      "imposter": "Jmenuj nějaký druh kávy."
+    },
+    {
+      "crew": "Kam by ses vydal/a na jednodenní výlet?",
+      "imposter": "Jmenuj nějaké místo v okolí."
+    },
+    {
+      "crew": "Jaký hrad nebo zámek by sis prošel/prošla?",
+      "imposter": "Jmenuj nějaký hrad nebo zámek."
+    },
+    {
+      "crew": "Kde bys chtěl/a vidět vodopád?",
+      "imposter": "Jmenuj nějaké přírodní místo s vodou."
+    },
+    {
+      "crew": "Do jaké země by ses vrátil/a hned?",
+      "imposter": "Jmenuj nějakou zemi, kde jsi byl/a."
+    },
+    {
+      "crew": "Jaké jídlo objednáš na dovolené u moře?",
+      "imposter": "Jmenuj nějaké jídlo z mořských plodů."
+    },
+    {
+      "crew": "Co si dáš na festivalu?",
+      "imposter": "Jmenuj nějaké jídlo ze stánku."
+    },
+    {
+      "crew": "Jaké jídlo bys uměl/a připravit pro hosty?",
+      "imposter": "Jmenuj nějaké slavnostní jídlo."
+    },
+    {
+      "crew": "Co je tvoje nejlepší jídlo na kocovinu?",
+      "imposter": "Jmenuj nějaké mastné nebo vydatné jídlo."
+    },
+    {
+      "crew": "Jaký knedlík nebo přílohu si dáš k masu?",
+      "imposter": "Jmenuj nějakou přílohu."
+    },
+    {
+      "crew": "Jaký dezert si dáš v cukrárně?",
+      "imposter": "Jmenuj nějaký zákusek z cukrárny."
+    },
+    {
+      "crew": "Jakou náplň máš nejradši v koláči?",
+      "imposter": "Jmenuj nějaké ovoce nebo náplň."
+    },
+    {
+      "crew": "Co si dáš k snídani místo kávy?",
+      "imposter": "Jmenuj nějaký ranní nápoj."
+    },
+    {
+      "crew": "Jaký čaj tě zklidní?",
+      "imposter": "Jmenuj nějaký druh čaje."
+    },
+    {
+      "crew": "Které zvíře bys chtěl/a chránit?",
+      "imposter": "Jmenuj nějaké ohrožené zvíře."
+    },
+    {
+      "crew": "Jaké zvíře tě rozesměje?",
+      "imposter": "Jmenuj nějaké legrační zvíře."
+    },
+    {
+      "crew": "Jaký sport bys hrál/a u vody?",
+      "imposter": "Jmenuj nějaký plážový sport."
+    },
+    {
+      "crew": "Co bys dělal/a pro kondici?",
+      "imposter": "Jmenuj nějakou formu cvičení."
+    },
+    {
+      "crew": "Co tě baví dělat ve volném čase?",
+      "imposter": "Jmenuj nějakou zábavu."
+    },
+    {
+      "crew": "Jakou činnost bys dělal/a celý deštivý den?",
+      "imposter": "Jmenuj nějakou aktivitu na doma."
+    },
+    {
+      "crew": "Jaký seriál tě dostal hned od první epizody?",
+      "imposter": "Jmenuj nějaký seriál."
+    },
+    {
+      "crew": "Jaký film se hodí na první rande?",
+      "imposter": "Jmenuj nějaký romantický film."
+    },
+    {
+      "crew": "Jakou živnost bys provozoval/a?",
+      "imposter": "Jmenuj nějaké řemeslo nebo službu."
+    },
+    {
+      "crew": "V čem bys chtěl/a být odborník?",
+      "imposter": "Jmenuj nějaký obor."
+    },
+    {
+      "crew": "Kdybys mohl/a mít druhé jméno, jaké?",
+      "imposter": "Jmenuj nějaké jméno."
+    },
+    {
+      "crew": "Kdybys vyhrál/a v loterii, co bys koupil/a první?",
+      "imposter": "Jmenuj nějakou drahou věc."
+    },
+    {
+      "crew": "Kdybys mohl/a vlastnit cokoli, co by to bylo?",
+      "imposter": "Jmenuj nějaký luxusní předmět."
+    },
+    {
+      "crew": "Kdyby ses mohl/a stát mistrem v jedné věci, v čem?",
+      "imposter": "Jmenuj nějakou dovednost."
+    },
+    {
+      "crew": "Co tě potěší na obyčejný den?",
+      "imposter": "Jmenuj nějakou drobnou radost."
+    },
+    {
+      "crew": "Co tě dokáže nakopnout, když je ti mizerně?",
+      "imposter": "Jmenuj nějakou věc, co zlepší náladu."
+    },
+    {
+      "crew": "Co máš rád/a na podzimu?",
+      "imposter": "Jmenuj nějakou podzimní věc."
+    },
+    {
+      "crew": "Jaká vůně tě naladí na pohodu?",
+      "imposter": "Jmenuj nějakou příjemnou vůni."
+    },
+    {
+      "crew": "Jaký zvuk znamená pohodu?",
+      "imposter": "Jmenuj nějaký uklidňující zvuk."
+    },
+    {
+      "crew": "Jaký doplněk dotvoří útulný obývák?",
+      "imposter": "Jmenuj nějaký bytový doplněk."
+    },
+    {
+      "crew": "Co by ti doma zpříjemnilo večery?",
+      "imposter": "Jmenuj nějakou věc do obýváku."
+    },
+    {
+      "crew": "Jaký dárek bys vyrobil/a vlastnoručně?",
+      "imposter": "Jmenuj nějakou věc, co jde vyrobit doma."
+    },
+    {
+      "crew": "Jaké boty si vezmeš na celý den ve městě?",
+      "imposter": "Jmenuj nějaký druh bot."
+    },
+    {
+      "crew": "Co si oblečeš na chladný večer?",
+      "imposter": "Jmenuj nějaké teplé oblečení."
+    },
+    {
+      "crew": "Jakou hudbu pustíš na grilovačku?",
+      "imposter": "Jmenuj nějaký letní žánr."
+    },
+    {
+      "crew": "Kolik hodin spánku potřebuješ?",
+      "imposter": "Řekni nějaké číslo hodin."
+    },
+    {
+      "crew": "Co by ses chtěl/a doučit jen tak pro radost?",
+      "imposter": "Jmenuj nějaké téma nebo obor."
+    },
+    {
+      "crew": "Jaký tanec by ses chtěl/a naučit?",
+      "imposter": "Jmenuj nějaký druh tance."
+    },
+    {
+      "crew": "Co si dáš k odpolednímu posezení?",
+      "imposter": "Jmenuj nějakou kávu nebo zákusek."
+    },
+    {
+      "crew": "Jaká dovolená tě nejvíc nabije?",
+      "imposter": "Jmenuj nějaký typ dovolené."
+    },
+    {
+      "crew": "Kam by ses vydal/a na road trip?",
+      "imposter": "Jmenuj nějakou trasu nebo zemi."
+    },
+    {
+      "crew": "Které zvíře bys chtěl/a vyfotit ve volné přírodě?",
+      "imposter": "Jmenuj nějaké lesní zvíře."
+    },
+    {
+      "crew": "Po jaké asijské specialitě bys sáhl/a?",
+      "imposter": "Jmenuj nějaké asijské jídlo."
+    },
+    {
+      "crew": "Jaké italské jídlo si dáš?",
+      "imposter": "Jmenuj nějaké jídlo z Itálie."
+    },
+    {
+      "crew": "Jak nejradši začínáš víkendové ráno?",
+      "imposter": "Jmenuj nějakou ranní činnost."
+    },
+    {
+      "crew": "Co děláš pro klid před spaním?",
+      "imposter": "Jmenuj nějakou večerní aktivitu."
+    },
+    {
+      "crew": "Kam by ses chtěl/a podívat za poznáním?",
+      "imposter": "Jmenuj nějakou zemi s bohatou historií."
+    },
+    {
+      "crew": "Jaké jezero nebo řeku bys chtěl/a vidět?",
+      "imposter": "Jmenuj nějakou řeku nebo jezero."
+    },
+    {
+      "crew": "Kde bys chtěl/a strávit babí léto?",
+      "imposter": "Jmenuj nějaké místo v přírodě."
+    },
+    {
+      "crew": "Do jakého města by ses vrátil/a kvůli jídlu?",
+      "imposter": "Jmenuj nějaké město známé kuchyní."
+    },
+    {
+      "crew": "Jaký ostrov by sis vybral/a na robinsonádu?",
+      "imposter": "Jmenuj nějaký ostrov."
+    },
+    {
+      "crew": "Kam by ses vydal/a stanovat?",
+      "imposter": "Jmenuj nějaké místo u lesa nebo vody."
+    },
+    {
+      "crew": "Jaké jídlo si dáš, když chceš zhřešit?",
+      "imposter": "Jmenuj nějaké tučné jídlo."
+    },
+    {
+      "crew": "Co je nejlepší jídlo na chatu?",
+      "imposter": "Jmenuj jídlo, co se dělá na ohni."
+    },
+    {
+      "crew": "Jaký toust nebo sendvič si uděláš?",
+      "imposter": "Jmenuj nějakou náplň do sendviče."
+    },
+    {
+      "crew": "Jaké jídlo bys vařil/a na první rande?",
+      "imposter": "Jmenuj nějaké jídlo, co zvládneš uvařit."
+    },
+    {
+      "crew": "Co si dáš k snídani na dovolené?",
+      "imposter": "Jmenuj nějaké snídaňové jídlo."
+    },
+    {
+      "crew": "Jaká omáčka ti k masu sedne nejvíc?",
+      "imposter": "Jmenuj nějakou omáčku."
+    },
+    {
+      "crew": "Jaký koktejl by sis dal/a na pláži?",
+      "imposter": "Jmenuj nějaký letní drink."
+    },
+    {
+      "crew": "Co si dáš k snídaňové kávě?",
+      "imposter": "Jmenuj nějaké sladké pečivo."
+    },
+    {
+      "crew": "Jakou příchuť limonády máš nejradši?",
+      "imposter": "Jmenuj nějakou ovocnou příchuť."
+    },
+    {
+      "crew": "Jaké zvíře by ses chtěl/a naučit chovat?",
+      "imposter": "Jmenuj nějaké zvíře, co chovají lidé doma."
+    },
+    {
+      "crew": "Které zvíře tě nejvíc okouzlilo v zoo?",
+      "imposter": "Jmenuj nějaké zvíře ze zoo."
+    },
+    {
+      "crew": "Jaký sport bys zařadil/a do ranní rutiny?",
+      "imposter": "Jmenuj nějakou formu pohybu."
+    },
+    {
+      "crew": "U jakého sportu bys křičel/a na tribuně?",
+      "imposter": "Jmenuj nějaký divácký sport."
+    },
+    {
+      "crew": "Jakou túru by sis dal/a o víkendu?",
+      "imposter": "Jmenuj nějakou horu nebo trasu."
+    },
+    {
+      "crew": "Jaký song by tě dostal na parket?",
+      "imposter": "Jmenuj nějakou taneční písničku."
+    },
+    {
+      "crew": "Jaký film tě naučil něco do života?",
+      "imposter": "Jmenuj nějaký film se silným příběhem."
+    },
+    {
+      "crew": "Jakou knihu bys přečetl/a znovu?",
+      "imposter": "Jmenuj nějaký knižní žánr."
+    },
+    {
+      "crew": "Jaký podcast posloucháš rád/a?",
+      "imposter": "Jmenuj nějaké téma podcastu."
+    },
+    {
+      "crew": "Co tě baví tvořit vlastníma rukama?",
+      "imposter": "Jmenuj nějakou ruční práci."
+    },
+    {
+      "crew": "Jakou hru bys hrál/a na dlouhé cestě?",
+      "imposter": "Jmenuj nějakou slovní nebo cestovní hru."
+    },
+    {
+      "crew": "Jakou práci bys dělal/a, kdyby šlo o cokoli?",
+      "imposter": "Jmenuj nějaké zajímavé povolání."
+    },
+    {
+      "crew": "V jaké profesi bys pomáhal/a lidem?",
+      "imposter": "Jmenuj nějaké pomáhající povolání."
+    },
+    {
+      "crew": "V jakém autě by sis vyrazil/a na výlet?",
+      "imposter": "Jmenuj nějaký typ auta."
+    },
+    {
+      "crew": "Čím by ses projel/a krajinou?",
+      "imposter": "Jmenuj nějaký dopravní prostředek do přírody."
+    },
+    {
+      "crew": "Kdybys mohl/a mluvit jakýmkoli jazykem, jakým?",
+      "imposter": "Jmenuj nějaký světový jazyk."
+    },
+    {
+      "crew": "Kdybys měl/a vlastní firmu, co by vyráběla?",
+      "imposter": "Jmenuj nějaký produkt."
+    },
+    {
+      "crew": "Kdybys mohl/a být zvířetem na den, jakým?",
+      "imposter": "Jmenuj nějaké zvíře."
+    },
+    {
+      "crew": "Kdybys mohl/a žít v jakémkoli filmu, ve kterém?",
+      "imposter": "Jmenuj nějaký film."
+    },
+    {
+      "crew": "Co tě nabíjí v přírodě?",
+      "imposter": "Jmenuj nějaké přírodní prostředí."
+    },
+    {
+      "crew": "Jaké počasí je ideální na spaní?",
+      "imposter": "Jmenuj nějaký typ počasí."
+    },
+    {
+      "crew": "Jaký zvuk ti dělá radost?",
+      "imposter": "Jmenuj nějaký příjemný zvuk."
+    },
+    {
+      "crew": "Jaká vůně tě naladí na jaro?",
+      "imposter": "Jmenuj nějakou jarní vůni."
+    },
+    {
+      "crew": "Co ti vrátí dobrou náladu?",
+      "imposter": "Jmenuj nějakou věc, co tě potěší."
+    },
+    {
+      "crew": "Co tě naplní klidem po náročném dni?",
+      "imposter": "Jmenuj nějakou relaxační činnost."
+    },
+    {
+      "crew": "Jaký spotřebič bys nikdy nevyměnil/a?",
+      "imposter": "Jmenuj nějaký domácí spotřebič."
+    },
+    {
+      "crew": "Jakou drobnost si dopřáváš pro pohodlí?",
+      "imposter": "Jmenuj nějakou věc pro pohodlí."
+    },
+    {
+      "crew": "Jaký zážitek bys daroval/a kamarádovi?",
+      "imposter": "Jmenuj nějaký zážitek na poukaz."
+    },
+    {
+      "crew": "Co bys dal/a dítěti k svátku?",
+      "imposter": "Jmenuj nějakou hračku."
+    },
+    {
+      "crew": "Co k Silvestru neodmyslitelně patří?",
+      "imposter": "Jmenuj nějakou silvestrovskou věc."
+    },
+    {
+      "crew": "Jaká letní tradice tě baví?",
+      "imposter": "Jmenuj nějakou letní akci."
+    },
+    {
+      "crew": "Jaký doplněk nosíš pořád?",
+      "imposter": "Jmenuj nějaký módní doplněk."
+    },
+    {
+      "crew": "Co si vezmeš na slavnostní příležitost?",
+      "imposter": "Jmenuj nějaké elegantní oblečení."
+    },
+    {
+      "crew": "Co si dáš o víkendovém ránu?",
+      "imposter": "Jmenuj nějaké snídaňové jídlo."
+    },
+    {
+      "crew": "Kolik šálků kávy denně vypiješ?",
+      "imposter": "Řekni nějaké malé číslo."
+    },
+    {
+      "crew": "V kolik nejradši obědváš?",
+      "imposter": "Řekni nějaký čas kolem poledne."
+    },
+    {
+      "crew": "Jaký styl hudby ti sedne k létu?",
+      "imposter": "Jmenuj nějaký hudební žánr."
+    },
+    {
+      "crew": "Jaký vědní obor tě fascinuje?",
+      "imposter": "Jmenuj nějakou vědu."
+    },
+    {
+      "crew": "Co by sis vypěstoval/a na balkoně?",
+      "imposter": "Jmenuj nějakou bylinku nebo zeleninu."
+    },
+    {
+      "crew": "Jakou exotickou kuchyni bys ochutnal/a?",
+      "imposter": "Jmenuj nějakou národní kuchyni."
+    },
+    {
+      "crew": "Po jakém mexickém jídle bys sáhl/a?",
+      "imposter": "Jmenuj nějaké mexické jídlo."
+    },
+    {
+      "crew": "Jaká dovolená je pro tebe odpočinek?",
+      "imposter": "Jmenuj nějaký způsob, jak relaxovat na dovolené."
+    },
+    {
+      "crew": "Kam by ses chtěl/a vydat za sněhem?",
+      "imposter": "Jmenuj nějakou zasněženou destinaci."
+    },
+    {
+      "crew": "Jaká pláž je podle tebe rajská?",
+      "imposter": "Jmenuj nějakou známou pláž nebo letovisko."
+    },
+    {
+      "crew": "Které velkoměsto bys chtěl/a poznat ze střechy?",
+      "imposter": "Jmenuj nějakou metropoli s mrakodrapy."
+    },
+    {
+      "crew": "Kde bys chtěl/a ochutnat pouliční jídlo?",
+      "imposter": "Jmenuj nějakou zemi se street foodem."
+    },
+    {
+      "crew": "Do jaké země by ses vrátil/a za přírodou?",
+      "imposter": "Jmenuj zemi s krásnou krajinou."
+    },
+    {
+      "crew": "Jaké jídlo bys naservíroval/a hostům?",
+      "imposter": "Jmenuj nějaké jídlo na oslavu."
+    },
+    {
+      "crew": "Co si dáš, když máš hlad o půlnoci?",
+      "imposter": "Jmenuj nějakou rychlou svačinu."
+    },
+    {
+      "crew": "Jaká snídaně tě nejvíc zasytí?",
+      "imposter": "Jmenuj nějaké vydatné jídlo."
+    },
+    {
+      "crew": "Co je tvoje oblíbená houska nebo chleba?",
+      "imposter": "Jmenuj nějaký druh pečiva."
+    },
+    {
+      "crew": "Jaký guláš nebo dušené jídlo máš rád/a?",
+      "imposter": "Jmenuj nějaké jídlo na lžíci."
+    },
+    {
+      "crew": "Co si dáš na zahřátí v zimě?",
+      "imposter": "Jmenuj nějaký horký nápoj."
+    },
+    {
+      "crew": "Jaká zmrzlinová příchuť je nejlepší?",
+      "imposter": "Jmenuj příchuť zmrzliny."
+    },
+    {
+      "crew": "Jaký dort by sis přál/a na svatbu?",
+      "imposter": "Jmenuj nějaký druh dortu."
+    },
+    {
+      "crew": "Jaké zvíře bys chtěl/a pozorovat v moři?",
+      "imposter": "Jmenuj nějakého mořského tvora."
+    },
+    {
+      "crew": "Který pták má podle tebe nejhezčí zpěv?",
+      "imposter": "Jmenuj nějakého zpěvného ptáka."
+    },
+    {
+      "crew": "Jaký hmyz je podle tebe užitečný?",
+      "imposter": "Jmenuj nějaký hmyz."
+    },
+    {
+      "crew": "Jaký sport bys hrál/a na písku?",
+      "imposter": "Jmenuj nějaký plážový sport."
+    },
+    {
+      "crew": "Co bys dělal/a pro lepší kondici?",
+      "imposter": "Jmenuj nějaký druh cvičení."
+    },
+    {
+      "crew": "Jaký zimní sport bys zkusil/a poprvé?",
+      "imposter": "Jmenuj nějaký zimní sport."
+    },
+    {
+      "crew": "Jaký koncert byl tvůj nejlepší?",
+      "imposter": "Jmenuj nějakou kapelu."
+    },
+    {
+      "crew": "Jaký film tě rozesměje pokaždé?",
+      "imposter": "Jmenuj nějakou komedii."
+    },
+    {
+      "crew": "Jaký seriál bys doporučil/a na večer?",
+      "imposter": "Jmenuj nějaký seriál."
+    },
+    {
+      "crew": "Jaký kurz by ses chtěl/a přihlásit?",
+      "imposter": "Jmenuj nějakou zájmovou aktivitu."
+    },
+    {
+      "crew": "Jakou deskovku bys vytáhl/a na sešlost?",
+      "imposter": "Jmenuj nějakou deskovou hru."
+    },
+    {
+      "crew": "Jaký koníček bys předal/a dětem?",
+      "imposter": "Jmenuj nějakou volnočasovou činnost."
+    },
+    {
+      "crew": "Jaké povolání jsi obdivoval/a jako dítě?",
+      "imposter": "Jmenuj nějaké klasické povolání."
+    },
+    {
+      "crew": "Jakou práci bys dělal/a u moře?",
+      "imposter": "Jmenuj nějakou práci spojenou s vodou."
+    },
+    {
+      "crew": "V čem by ses chtěl/a svézt jen pro zážitek?",
+      "imposter": "Jmenuj nějaký netradiční dopravní prostředek."
+    },
+    {
+      "crew": "Kdybys mohl/a mít cokoli k narozeninám, co?",
+      "imposter": "Jmenuj nějakou věc, co se dává jako dárek."
+    },
+    {
+      "crew": "Kdybys mohl/a ochutnat jakékoli jídlo světa, jaké?",
+      "imposter": "Jmenuj nějaké zahraniční jídlo."
+    },
+    {
+      "crew": "Kdybys mohl/a žít kdekoli, kde by to bylo?",
+      "imposter": "Jmenuj nějaké město nebo zemi."
+    },
+    {
+      "crew": "Kdybys mohl/a vlastnit jakékoli zvíře, jaké?",
+      "imposter": "Jmenuj nějaké exotické zvíře."
+    },
+    {
+      "crew": "Co máš rád/a na slunečném dni?",
+      "imposter": "Jmenuj nějakou letní aktivitu."
+    },
+    {
+      "crew": "Jaký výhled tě uchvátí?",
+      "imposter": "Jmenuj nějaký typ krajiny."
+    },
+    {
+      "crew": "Jaká vůně tě potěší v kuchyni?",
+      "imposter": "Jmenuj nějakou vůni z vaření."
+    },
+    {
+      "crew": "Jaký zvuk znamená pro tebe domov?",
+      "imposter": "Jmenuj nějaký domácí zvuk."
+    },
+    {
+      "crew": "Co tě dokáže rozesmát do slz?",
+      "imposter": "Jmenuj nějakou vtipnou situaci nebo věc."
+    },
+    {
+      "crew": "Co tě naladí na dobrý den?",
+      "imposter": "Jmenuj nějakou ranní pohodu."
+    },
+    {
+      "crew": "Jaká věc by ti zpříjemnila domov?",
+      "imposter": "Jmenuj nějakou věc do bytu."
+    },
+    {
+      "crew": "Co by ti nesmělo chybět v kuchyni?",
+      "imposter": "Jmenuj nějaké kuchyňské náčiní."
+    },
+    {
+      "crew": "Jaký dárek by potěšil maminku?",
+      "imposter": "Jmenuj nějaký dárek pro ženu."
+    },
+    {
+      "crew": "Co bys dal/a tátovi k svátku?",
+      "imposter": "Jmenuj nějaký praktický dárek."
+    },
+    {
+      "crew": "Co si oblékneš na procházku v zimě?",
+      "imposter": "Jmenuj nějaké zimní oblečení."
+    },
+    {
+      "crew": "Jaké tričko nosíš nejradši?",
+      "imposter": "Jmenuj nějakou barvu nebo styl trička."
+    },
+    {
+      "crew": "Co si dáš ke kávě v kavárně?",
+      "imposter": "Jmenuj nějaký zákusek."
+    },
+    {
+      "crew": "Kolik dní dovolené je podle tebe ideální?",
+      "imposter": "Řekni nějaké číslo dní."
+    },
+    {
+      "crew": "Jaká květina ti udělá radost v bytě?",
+      "imposter": "Jmenuj nějakou pokojovou rostlinu."
+    },
+    {
+      "crew": "Jaký tanec by ses naučil/a na svatbu?",
+      "imposter": "Jmenuj nějaký společenský tanec."
+    },
+    {
+      "crew": "Jaké sushi nebo asijské jídlo si dáš?",
+      "imposter": "Jmenuj nějaké asijské jídlo."
+    },
+    {
+      "crew": "Jaký svátek bys oslavil/a v zahraničí?",
+      "imposter": "Jmenuj nějaký svátek."
+    },
+    {
+      "crew": "Kam by ses vydal/a na houby?",
+      "imposter": "Jmenuj nějaké místo v lese nebo přírodě."
+    }
+  ]
+}

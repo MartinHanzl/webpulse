@@ -31,4 +31,9 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'twelvedata' => [
+        'key' => env('TWELVEDATA_API_KEY'),
+        'base_currency' => env('TWELVEDATA_BASE_CURRENCY', 'CZK'),
+    ],
+
 ];

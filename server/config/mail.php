@@ -114,6 +114,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Fallback Recipient
+    |--------------------------------------------------------------------------
+    |
+    | Used when a site has no contact_email set, so site-specific
+    | notifications (demands, career applications, event registrations)
+    | still reach someone instead of being lost.
+    |
+    */
+
+    'fallback_to' => env('MAIL_FALLBACK_TO', 'martas.hanzl@email.cz'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Markdown Mail Settings
     |--------------------------------------------------------------------------
     |

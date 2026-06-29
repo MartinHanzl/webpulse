@@ -32,14 +32,24 @@ const games = ref([
     linkUrl: 'kvizy',
   },
   {
-    name: 'Piškvorky',
-    imageUrl: '/static/img/cards/piskvorky.png',
-    linkUrl: '/piskvorky',
+    name: 'Timer výzva',
+    imageUrl: '/static/img/cards/timer.png',
+    linkUrl: '/timer',
+  },
+  {
+    name: 'Imposter',
+    imageUrl: '/static/img/cards/imposter.png',
+    linkUrl: '/imposter',
   },
   {
     name: 'Slepá mapa',
     imageUrl: '/static/img/cards/mapa.png',
     linkUrl: '/slepa-mapa/cr/cela',
+  },
+  {
+    name: 'Piškvorky',
+    imageUrl: '/static/img/cards/piskvorky.png',
+    linkUrl: '/piskvorky',
   },
   {
     name: 'Aréna',

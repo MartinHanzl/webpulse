@@ -4,7 +4,9 @@ import { Form } from 'vee-validate';
 import {
   AdjustmentsHorizontalIcon,
   BanknotesIcon,
-  ExclamationTriangleIcon,
+  CheckIcon,
+  ClipboardDocumentIcon,
+  EnvelopeIcon,
   GlobeAltIcon,
   LanguageIcon,
   SquaresPlusIcon,
@@ -60,11 +62,13 @@ const settings = {
     'apartment_reservations',
     'posts',
     'pages',
+    'blocks',
     'novelties',
     'services',
     'events',
     'reviews',
     'logos',
+    'photo_galleries',
     'careers',
     'quizzes',
     'customers',
@@ -108,12 +112,39 @@ const settings = {
   enabled_locales: ['cs', 'sk', 'en'],
 };
 
+const hashCopied = ref(false);
+
+async function copyHash() {
+  if (!item.value.hash) return;
+  try {
+    await navigator.clipboard.writeText(item.value.hash);
+    hashCopied.value = true;
+    $toast.show({
+      summary: 'Zkopírováno',
+      detail: 'Site hash byl zkopírován do schránky.',
+      severity: 'success',
+    });
+    setTimeout(() => {
+      hashCopied.value = false;
+    }, 1500);
+  } catch {
+    $toast.show({
+      summary: 'Chyba',
+      detail: 'Nepodařilo se zkopírovat hash do schránky.',
+      severity: 'error',
+    });
+  }
+}
+
 const item = ref({
   id: null as number | null,
   name: '' as string,
   url: '' as string,
+  hash: '' as string,
   is_secure: false as boolean,
   is_active: false as boolean,
+  contact_email: '' as string,
+  contact_phone: '' as string,
   settings: {
     enabled_modules: [],
     enabled_currencies: [],
@@ -247,6 +278,8 @@ const getSettingTitle = computed(() => (key: string) => {
       return 'Blogové članky';
     case 'pages':
       return 'Informační stránky';
+    case 'blocks':
+      return 'Bloky';
     case 'novelties':
       return 'Novinky';
     case 'services':
@@ -257,6 +290,8 @@ const getSettingTitle = computed(() => (key: string) => {
       return 'Recenze';
     case 'logos':
       return 'Loga klientů';
+    case 'photo_galleries':
+      return 'Fotogalerie';
     case 'careers':
       return 'Pracovní pozice';
     case 'quizzes':
@@ -370,11 +405,13 @@ const moduleGroups = [
     slugs: [
       'posts',
       'pages',
+      'blocks',
       'novelties',
       'services',
       'events',
       'reviews',
       'logos',
+      'photo_galleries',
       'careers',
       'quizzes',
       'faqs',
@@ -551,6 +588,42 @@ definePageMeta({
                 placeholder="www.barbershop-praha.cz"
               />
 
+              <div v-if="item.hash" class="col-span-full">
+                <label
+                  for="site-hash"
+                  class="mb-1.5 block text-sm font-medium text-slate-700"
+                >
+                  Site hash
+                  <span class="ml-1 text-xs font-normal text-slate-400">
+                    (posílat v hlavičce <code>X-Site-Hash</code>)
+                  </span>
+                </label>
+                <div class="flex items-stretch gap-2">
+                  <input
+                    id="site-hash"
+                    :value="item.hash"
+                    type="text"
+                    readonly
+                    class="block w-full cursor-text rounded-xl border-0 bg-slate-50 px-4 py-2.5 font-mono text-xs text-slate-700 shadow-sm ring-1 ring-inset ring-slate-200 transition-all duration-200 hover:ring-slate-300 focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                    @focus="($event.target as HTMLInputElement).select()"
+                  />
+                  <button
+                    type="button"
+                    :title="hashCopied ? 'Zkopírováno' : 'Kopírovat do schránky'"
+                    class="flex shrink-0 items-center justify-center rounded-xl px-3 text-slate-600 shadow-sm ring-1 ring-inset transition-all duration-200"
+                    :class="
+                      hashCopied
+                        ? 'bg-emerald-50 text-emerald-600 ring-emerald-200'
+                        : 'bg-white ring-slate-300 hover:bg-slate-50 hover:ring-slate-400'
+                    "
+                    @click="copyHash"
+                  >
+                    <CheckIcon v-if="hashCopied" class="size-5" />
+                    <ClipboardDocumentIcon v-else class="size-5" />
+                  </button>
+                </div>
+              </div>
+
               <div
                 class="col-span-full grid grid-cols-2 gap-4 rounded-2xl bg-slate-50 p-4 ring-1 ring-inset ring-slate-200"
               >
@@ -575,6 +648,40 @@ definePageMeta({
                   />
                 </div>
               </div>
+            </div>
+          </LayoutContainer>
+
+          <LayoutContainer>
+            <div class="mb-6 flex items-center gap-3">
+              <div
+                class="flex size-8 items-center justify-center rounded-lg bg-rose-50 text-rose-600"
+              >
+                <EnvelopeIcon class="size-5" />
+              </div>
+              <LayoutTitle class="!mb-0">Kontaktní údaje</LayoutTitle>
+            </div>
+
+            <p class="mb-4 text-xs text-slate-500">
+              Na kontaktní e-mail budou chodit poptávky a další notifikace z webu. Pokud zůstane
+              prázdný, zprávy přijdou na výchozí adresu administrátora.
+            </p>
+
+            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <BaseFormInput
+                v-model="item.contact_email"
+                label="Kontaktní e-mail"
+                type="email"
+                name="contact_email"
+                rules="email"
+                placeholder="info@web-pulse.cz"
+              />
+              <BaseFormInput
+                v-model="item.contact_phone"
+                label="Kontaktní telefon"
+                type="text"
+                name="contact_phone"
+                placeholder="+420 777 123 456"
+              />
             </div>
           </LayoutContainer>
 
@@ -847,17 +954,6 @@ definePageMeta({
               </div>
             </div>
           </LayoutContainer>
-
-          <div class="rounded-3xl bg-amber-50 p-6 ring-1 ring-inset ring-amber-100">
-            <div class="flex items-start gap-4">
-              <ExclamationTriangleIcon class="size-6 shrink-0 text-amber-600" />
-              <p class="text-sm leading-relaxed text-amber-900">
-                <strong>Pozor:</strong> Deaktivace modulu, který se na webu aktivně používá, může
-                způsobit chyby v zobrazení frontendu. Před vypnutím se ujistěte, že modul není nikde
-                nasazen.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
     </Form>

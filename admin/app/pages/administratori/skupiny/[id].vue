@@ -2,13 +2,7 @@
 import { ref, inject } from 'vue';
 
 import { Form } from 'vee-validate';
-import {
-  InformationCircleIcon,
-  KeyIcon,
-  ShieldCheckIcon,
-  UserGroupIcon,
-  UserIcon,
-} from '@heroicons/vue/24/outline';
+import { KeyIcon, ShieldCheckIcon, UserGroupIcon, UserIcon } from '@heroicons/vue/24/outline';
 
 const { $toast } = useNuxtApp();
 const selectedSiteHash = ref(inject('selectedSiteHash', ''));
@@ -52,11 +46,13 @@ const moduleGroups = ref([
     modules: [
       { slug: 'posts', name: 'Blogové články' },
       { slug: 'pages', name: 'Informační stránky' },
+      { slug: 'blocks', name: 'Bloky' },
       { slug: 'novelties', name: 'Novinky' },
       { slug: 'services', name: 'Služby' },
       { slug: 'events', name: 'Události' },
       { slug: 'reviews', name: 'Reference' },
       { slug: 'logos', name: 'Loga klientů' },
+      { slug: 'photo_galleries', name: 'Fotogalerie' },
       { slug: 'careers', name: 'Pracovní pozice' },
       { slug: 'quizzes', name: 'Kvízy' },
       { slug: 'faqs', name: 'FAQ' },
@@ -546,28 +542,6 @@ definePageMeta({
             :allow-is-active="false"
             class="shadow-sm"
           />
-
-          <div class="rounded-3xl bg-indigo-600 p-6 text-white shadow-xl shadow-indigo-200">
-            <div class="mb-4 flex items-center gap-2">
-              <InformationCircleIcon class="size-5 text-indigo-200" />
-              <h4 class="text-sm font-bold uppercase tracking-wider">Bezpečnostní tip</h4>
-            </div>
-            <p class="text-xs leading-relaxed opacity-80">
-              Při nastavování rolí postupujte podle principu <strong>"Nejméně privilegií"</strong>.
-              Uživatel by měl mít přístup pouze k těm modulům, které nezbytně potřebuje ke své
-              práci.
-            </p>
-          </div>
-
-          <div class="rounded-3xl border border-dashed border-slate-300 p-6">
-            <h5 class="text-[10px] font-black uppercase tracking-widest text-slate-400">
-              Dědičnost
-            </h5>
-            <p class="mt-2 text-xs leading-relaxed text-slate-500">
-              Admin skupina má automaticky přístup ke všem modulům bez nutnosti explicitního
-              definování v této matici.
-            </p>
-          </div>
         </aside>
       </div>
     </Form>

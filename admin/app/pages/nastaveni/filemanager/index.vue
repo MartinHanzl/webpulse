@@ -43,6 +43,15 @@ const entityTypeOptions = [
   { value: 'event', label: 'Události' },
   { value: 'career', label: 'Pracovní pozice' },
   { value: 'quiz', label: 'Kvízy' },
+  { value: 'apartment', label: 'Apartmány' },
+  { value: 'apartment-type', label: 'Typy apartmánů' },
+  { value: 'building', label: 'Budovy' },
+  { value: 'gallery', label: 'Fotogalerie / Blok – Galerie' },
+  { value: 'review', label: 'Reference' },
+  { value: 'icon', label: 'Ikony' },
+  { value: 'block', label: 'Bloky (obecné)' },
+  { value: 'hero', label: 'Blok – Hero' },
+  { value: 'about', label: 'Blok – O nás' },
 ];
 
 async function loadItems() {
@@ -119,6 +128,11 @@ function updatePage(page: number) {
   tableQuery.value.page = page;
   loadItems();
 }
+function updatePerPage(perPage: number) {
+  tableQuery.value.paginate = perPage;
+  tableQuery.value.page = 1;
+  loadItems();
+}
 
 const debouncedLoadItems = _.debounce(loadItems, 400);
 watch(searchString, () => {
@@ -152,16 +166,6 @@ definePageMeta({
       :actions="[{ type: 'add', text: 'Přidat formát' }]"
       slug="filemanagers"
     />
-
-    <div class="mb-4 max-w-xs">
-      <BaseFormSelect
-        v-model="tableQuery.entity_type"
-        :options="entityTypeOptions"
-        label="Filtr podle typu"
-        name="entity_type_filter"
-      />
-    </div>
-
     <BaseTable
       :items="items"
       :columns="[
@@ -233,6 +237,7 @@ definePageMeta({
       @delete-item="deleteItem"
       @update-sort="updateSort"
       @update-page="updatePage"
+      @update-per-page="updatePerPage"
     />
   </div>
 </template>

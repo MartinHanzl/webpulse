@@ -18,11 +18,14 @@ class DemandEmail
     {
         $demand = $event->getDemand();
 
+        $site = $demand->sites()->first();
+        $to = $site?->contact_email ?: config('mail.fallback_to');
+
         $this->emailService->buildEmail(
             'demand',
-            'martas.hanzl@email.cz',
+            $to,
             'Nová poptávka',
-            data: ['demand' => $demand],
+            data: ['demand' => $demand, 'site' => $site],
             locale: $demand->locale,
         );
     }
