@@ -19,7 +19,7 @@ class DemandEmail
         $demand = $event->getDemand();
 
         $site = $demand->sites()->first();
-        $to = $site?->contact_email ?: 'martas.hanzl@email.cz';
+        $to = $site?->contact_email ?: config('mail.fallback_to');
 
         $this->emailService->buildEmail(
             'demand',

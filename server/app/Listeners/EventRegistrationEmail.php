@@ -19,11 +19,14 @@ class EventRegistrationEmail
         $eventRegistration = $event->getEventRegistration();
         $eventRegistration->load('event');
 
+        $site = $eventRegistration->event?->sites()->first();
+        $to = $site?->contact_email ?: config('mail.fallback_to');
+
         $this->emailService->buildEmail(
             'eventRegistration',
-            'martas.hanzl@email.cz', // TODO: replace with dynamic email
+            $to,
             'Registrace na akci '.$eventRegistration->event->name,
-            data: ['eventRegistration' => $eventRegistration]
+            data: ['eventRegistration' => $eventRegistration, 'site' => $site]
         );
     }
 }

@@ -39,7 +39,8 @@ class ContactController extends Controller
                         ->orWhere('city', 'like', '%'.$searchString.'%')
                         ->orWhere('zip', 'like', '%'.$searchString.'%')
                         ->orWhere('occupation', 'like', '%'.$searchString.'%')
-                        ->orWhere('goal', 'like', '%'.$searchString.'%');
+                        ->orWhere('goal', 'like', '%'.$searchString.'%')
+                        ->orWhere('note', 'like', '%'.$searchString.'%');
                 });
             }
         }
