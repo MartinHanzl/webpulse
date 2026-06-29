@@ -20,7 +20,11 @@ class QuizSavedEmail
         $quiz = $event->getQuiz();
 
         if ($quiz->status == 'public' && $quiz->published_at == null) {
-            $newsletters = Newsletter::query()->get();
+            $siteIds = $quiz->sites()->pluck('sites.id');
+
+            $newsletters = Newsletter::query()
+                ->whereHas('sites', fn ($q) => $q->whereIn('sites.id', $siteIds))
+                ->get();
             foreach ($newsletters as $newsletter) {
                 $this->emailService->buildEmail(
                     'quizSaved',

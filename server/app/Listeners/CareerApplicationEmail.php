@@ -19,20 +19,23 @@ class CareerApplicationEmail
         $careerApplication = $event->getCareerApplication();
         $careerApplication->load('career');
 
+        $site = $careerApplication->sites()->first();
+        $to = $site?->contact_email ?: config('mail.fallback_to');
+
         // build and add email to queue for client
         $this->emailService->buildEmail(
             'careerApplication',
-            'martas.hanzl@email.cz', // TODO: replace with dynamic email
+            $to,
             'Žádost o pracovní pozici '.$careerApplication->career->name,
-            data: ['careerApplication' => $careerApplication, 'type' => 'client']
+            data: ['careerApplication' => $careerApplication, 'type' => 'client', 'site' => $site]
         );
 
         // build and add email to queue for employee
         $this->emailService->buildEmail(
             'careerApplication',
-            'martas.hanzl@email.cz', // TODO: replace with dynamic email
+            $to,
             'Nová žádost o pracovní pozici '.$careerApplication->career->name,
-            data: ['careerApplication' => $careerApplication, 'type' => 'admin']
+            data: ['careerApplication' => $careerApplication, 'type' => 'admin', 'site' => $site]
         );
     }
 }
