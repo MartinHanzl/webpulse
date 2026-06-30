@@ -73,7 +73,18 @@ export function useDemos() {
     { label: 'Kontakt', to: `/demo/${slug}/kontakt` },
   ];
 
+  // Navigation for the REAL site (non-/demo). Points at the actual CMS routes,
+  // not the per-demo showcase pages.
+  const siteNav = (): DemoNavLink[] => [
+    { label: 'Domů', to: '/' },
+    { label: 'Služby', to: '/sluzby' },
+    { label: 'Blog', to: '/blog' },
+    { label: 'Recenze', to: '/review' },
+    { label: 'FAQ', to: '/faq' },
+    { label: 'Kontakt', to: '/kontakt' },
+  ];
+
   const getDemo = (slug: string): DemoDefinition | undefined => DEMOS.find((d) => d.slug === slug);
 
-  return { demos: DEMOS, nav, getDemo };
+  return { demos: DEMOS, nav, siteNav, getDemo };
 }

@@ -26,7 +26,7 @@ const card = computed(() =>
     <div class="container-x">
       <NuxtLink
         :to="`/demo/${demo.slug}/sluzby`"
-        class="reveal inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-all hover:gap-3"
+        class="reveal inline-flex items-center gap-1.5 text-sm font-semibold text-brand-pop transition-all hover:gap-3"
       >
         <span class="material-symbols-outlined text-[18px]">arrow_back</span>
         Zpět na výpis
@@ -45,7 +45,7 @@ const card = computed(() =>
 
           <div class="reveal mt-8 flex items-center gap-4">
             <span
-              class="flex size-14 items-center justify-center rounded-2xl bg-brand-soft text-brand"
+              class="flex size-14 items-center justify-center rounded-2xl bg-brand-pop/10 text-brand-pop"
             >
               <span class="material-symbols-outlined text-[28px]">{{ service.icon }}</span>
             </span>
@@ -62,7 +62,7 @@ const card = computed(() =>
               :class="card"
             >
               <span
-                class="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-brand text-white"
+                class="mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-brand-pop text-white"
               >
                 <span class="material-symbols-outlined text-[18px]">check</span>
               </span>
@@ -85,16 +85,20 @@ const card = computed(() =>
               <NuxtLink
                 :to="`/demo/${demo.slug}/sluzby/${o.slug}`"
                 class="group flex items-center gap-3 rounded-xl px-3 py-3 transition-colors"
-                :class="dark ? 'hover:bg-white/[0.06]' : 'hover:bg-brand-soft'"
+                :class="dark ? 'hover:bg-white/[0.06]' : 'hover:bg-brand-pop/10'"
               >
-                <span class="material-symbols-outlined text-[22px] text-brand">{{ o.icon }}</span>
+                <span class="material-symbols-outlined text-[22px] text-brand-pop">{{
+                  o.icon
+                }}</span>
                 <span
-                  class="flex-1 text-[15px] font-semibold transition-colors group-hover:text-brand"
+                  class="flex-1 text-[15px] font-semibold transition-colors group-hover:text-brand-pop"
                   :class="heading"
                 >
                   {{ o.name }}
                 </span>
-                <span class="material-symbols-outlined text-[18px] text-brand">chevron_right</span>
+                <span class="material-symbols-outlined text-[18px] text-brand-pop"
+                  >chevron_right</span
+                >
               </NuxtLink>
             </li>
           </ul>

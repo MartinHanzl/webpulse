@@ -2,9 +2,12 @@
 import { useI18n } from 'vue-i18n';
 import { useApi } from '~/../app/composables/useApi';
 import { useAsyncData } from '#app';
+import { useSiteTheme } from '~/../app/composables/useSiteTheme';
+import { useStockImages } from '~/../app/composables/useStockImages';
 
 const { locale, t } = useI18n();
 const api = useApi();
+const { slug, dark } = useSiteTheme();
 
 definePageMeta({ layout: false });
 
@@ -84,14 +87,16 @@ useHead({
 </script>
 
 <template>
-  <ThemeInnerLayout>
+  <ThemeInnerLayout :slug="slug">
     <ThemeBreadcrumb
+      :slug="slug"
       :title="t('blog.title')"
       subtitle="Blog"
       :crumbs="[{ label: t('blog.title') }]"
+      :image="useStockImages().get(slug).hero"
     />
 
-    <section class="section">
+    <section class="section" :class="dark ? 'bg-neutral-950' : ''">
       <div class="container-x">
         <!-- Categories -->
         <div
@@ -100,7 +105,7 @@ useHead({
         >
           <NuxtLink
             to="/blog"
-            class="rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white"
+            class="rounded-full bg-brand-pop px-5 py-2.5 text-sm font-semibold text-brand-ink"
           >
             Vše
           </NuxtLink>
@@ -108,7 +113,8 @@ useHead({
             v-for="cat in categoriesData"
             :key="cat.id"
             :to="`/blog/category/${cat.id}/${cat.slug}`"
-            class="rounded-full bg-brand-soft px-5 py-2.5 text-sm font-semibold text-brand-ink transition-colors hover:bg-brand hover:text-white"
+            class="rounded-full px-5 py-2.5 text-sm font-semibold transition-colors hover:bg-brand-pop hover:text-brand-ink"
+            :class="dark ? 'bg-white/10 text-white' : 'bg-brand-pop/10 text-brand-ink'"
           >
             {{ cat.name }}
           </NuxtLink>
@@ -123,7 +129,10 @@ useHead({
             v-for="(p, i) in postsData.data"
             :key="p.id"
             :to="localePath({ name: 'blog-id-slug', params: { id: p.id, slug: p.slug } })"
-            class="reveal group flex flex-col overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-100 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+            class="reveal group flex flex-col overflow-hidden rounded-3xl shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl"
+            :class="
+              dark ? 'bg-white/[0.04] ring-1 ring-white/10' : 'bg-white ring-1 ring-slate-100'
+            "
             :style="{ transitionDelay: `${(i % 3) * 80}ms` }"
           >
             <div class="aspect-[16/10] overflow-hidden">
@@ -134,19 +143,30 @@ useHead({
               />
             </div>
             <div class="flex flex-1 flex-col p-7">
-              <div class="flex items-center gap-3 text-xs font-semibold text-brand">
-                <span v-if="p.categories?.length" class="rounded-full bg-brand-soft px-3 py-1">{{
-                  p.categories[0].name
+              <div class="flex items-center gap-3 text-xs font-semibold text-brand-pop">
+                <span
+                  v-if="p.categories?.length"
+                  class="rounded-full px-3 py-1"
+                  :class="dark ? 'bg-white/10 text-white' : 'bg-brand-pop/10'"
+                  >{{ p.categories[0].name }}</span
+                >
+                <span :class="dark ? 'text-white/60' : 'text-brand-muted'">{{
+                  fmtDate(p.created_at)
                 }}</span>
-                <span class="text-brand-muted">{{ fmtDate(p.created_at) }}</span>
               </div>
               <h3
-                class="mt-4 text-lg font-bold leading-snug transition-colors group-hover:text-brand"
+                class="mt-4 text-lg font-bold leading-snug transition-colors group-hover:text-brand-pop"
+                :class="dark ? 'text-white' : ''"
               >
                 {{ p.name }}
               </h3>
-              <p class="mt-3 line-clamp-3 text-[15px] text-brand-muted" v-html="p.perex" />
-              <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand"
+              <p
+                class="mt-3 line-clamp-3 text-[15px]"
+                :class="dark ? 'text-white/60' : 'text-brand-muted'"
+                v-html="p.perex"
+              />
+              <span
+                class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-pop"
                 >Číst více
                 <span class="material-symbols-outlined text-[18px]">arrow_forward</span></span
               >
@@ -155,8 +175,12 @@ useHead({
         </div>
 
         <!-- Empty state -->
-        <div v-else class="rounded-3xl bg-brand-cream py-20 text-center text-brand-muted">
-          <span class="material-symbols-outlined text-5xl text-brand/40">article</span>
+        <div
+          v-else
+          class="rounded-3xl py-20 text-center"
+          :class="dark ? 'bg-white/[0.04] text-white/60' : 'bg-brand-cream text-brand-muted'"
+        >
+          <span class="material-symbols-outlined text-5xl text-brand-pop/40">article</span>
           <p class="mt-4 text-lg font-semibold">Zatím tu nejsou žádné články.</p>
         </div>
 

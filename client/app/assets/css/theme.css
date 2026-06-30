@@ -26,6 +26,10 @@
 	--brand-ink: 16 17 16; /* #101110 */
 	--brand-muted: 84 87 84; /* #545754 */
 
+	/* Per-theme accent for icons/links/badges. Defaults to the brand colour;
+	   the dark template overrides it to the yellow accent below. */
+	--brand-pop: var(--brand);
+
 	font-family: 'Fustat', 'Inter', sans-serif;
 	color: rgb(var(--brand-ink));
 	background-color: #fff;
@@ -49,6 +53,8 @@
 	--brand-accent: 254 207 2; /* #FECF02 */
 	--brand-ink: 16 17 16; /* #101110 */
 	--brand-muted: 84 87 84;
+	/* Dark template: icons/links/badges pop in yellow, not green. */
+	--brand-pop: var(--brand-accent);
 }
 
 /* `:where()` keeps specificity at 0 so Tailwind text-* utilities (e.g. text-white

@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { useStockImages } from '~/../app/composables/useStockImages';
+import { useSiteTheme } from '~/../app/composables/useSiteTheme';
 
 definePageMeta({ layout: false });
 
-const ph = useStockImages().get('lawn');
+const { slug, dark } = useSiteTheme();
+
+const ph = useStockImages().get(slug.value);
 
 const fallback = [
   {
@@ -48,10 +51,16 @@ useHead({ title: 'Naše služby' });
 </script>
 
 <template>
-  <ThemeInnerLayout v-slot="{ demo }">
-    <ThemeBreadcrumb title="Naše služby" subtitle="Co umíme" :crumbs="[{ label: 'Služby' }]" />
+  <ThemeInnerLayout v-slot="{ demo }" :slug="slug">
+    <ThemeBreadcrumb
+      :slug="slug"
+      title="Naše služby"
+      subtitle="Co umíme"
+      :crumbs="[{ label: 'Služby' }]"
+    />
 
     <ThemeSectionServices
+      :dark="dark"
       subtitle="Kompletní péče"
       title="Služby pro vaši zahradu i trávník"
       text="Od pravidelné údržby po kompletní realizaci. Postaráme se o každý detail."
@@ -60,6 +69,7 @@ useHead({ title: 'Naše služby' });
 
     <ThemeSectionContact
       :demo="demo"
+      :dark="dark"
       subtitle="Kontakt"
       title="Nevíte si rady s výběrem?"
       text="Napište nám a my doporučíme řešení na míru vašemu pozemku i rozpočtu."

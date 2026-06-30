@@ -77,6 +77,10 @@ export default defineNuxtConfig({
     public: {
       apiUrl: process.env.API_URL ?? 'https://api.web-pulse.cz',
       appUrl: process.env.APP_URL ?? 'https://api.web-pulse.cz',
+      // Active theme for the real (non-/demo) site. Pick one of the demo slugs
+      // (lawn | tree | landscaping). After copying /client for a client, set
+      // NUXT_PUBLIC_SITE_THEME to the demo they chose and the whole site re-skins.
+      siteTheme: process.env.SITE_THEME ?? 'lawn',
       siteHash:
         '8FdMaHTAizMcmODA6LlTIqi2uxl14GYUS6W4xH4eVYiWn2kGlmkSVZiHwWyp3eTfdR3KeluV5lFETLjz2zf2vblWmkaom3M7sDBh1nBcoMjVRSYnZ7hnv77PWXRw1tVy',
     },

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { useRoute } from '#app';
 import { useApi } from '~/../app/composables/useApi';
 import type { DemoDefinition, DemoNavLink } from '~/../app/composables/useDemos';
 import { useDemoContent } from '~/../app/composables/useDemoContent';
@@ -34,6 +35,14 @@ async function subscribe() {
 }
 
 const variant = computed(() => props.demo.slug);
+
+// On /demo routes the logo/services link into the demo; on the real site they
+// point at the real routes.
+const route = useRoute();
+const isDemo = computed(() => route.path.startsWith('/demo'));
+const homeTo = computed(() => (isDemo.value ? `/demo/${props.demo.slug}` : '/'));
+const serviceTo = (s: string) =>
+  isDemo.value ? `/demo/${props.demo.slug}/sluzby/${s}` : '/sluzby';
 
 /** Real services for this demo, capped to keep the column tidy. */
 const services = computed(() => useDemoContent(props.demo.slug).services.slice(0, 6));
@@ -99,7 +108,7 @@ const hours = [
       <!-- Columns -->
       <div class="grid grid-cols-1 gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <NuxtLink :to="`/demo/${demo.slug}`" class="flex items-center gap-2.5">
+          <NuxtLink :to="homeTo" class="flex items-center gap-2.5">
             <span class="flex size-11 items-center justify-center rounded-2xl bg-brand text-white">
               <svg class="size-6" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -141,7 +150,7 @@ const hours = [
           <ul class="flex flex-col gap-3">
             <li v-for="s in services" :key="s.slug">
               <NuxtLink
-                :to="`/demo/${demo.slug}/sluzby/${s.slug}`"
+                :to="serviceTo(s.slug)"
                 class="text-sm text-white/60 transition-colors hover:text-brand-accent"
                 >{{ s.name }}</NuxtLink
               >
@@ -217,7 +226,7 @@ const hours = [
       <!-- Columns -->
       <div class="grid grid-cols-1 gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <NuxtLink :to="`/demo/${demo.slug}`" class="flex items-center gap-2.5">
+          <NuxtLink :to="homeTo" class="flex items-center gap-2.5">
             <span class="flex size-11 items-center justify-center rounded-2xl bg-brand text-white">
               <svg class="size-6" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -259,7 +268,7 @@ const hours = [
           <ul class="flex flex-col gap-3">
             <li v-for="s in services" :key="s.slug">
               <NuxtLink
-                :to="`/demo/${demo.slug}/sluzby/${s.slug}`"
+                :to="serviceTo(s.slug)"
                 class="text-sm text-brand-muted transition-colors hover:text-brand"
                 >{{ s.name }}</NuxtLink
               >
@@ -339,7 +348,7 @@ const hours = [
       <div class="grid grid-cols-1 gap-10 pb-10 sm:grid-cols-2 lg:grid-cols-12">
         <!-- Brand + working hours -->
         <div class="lg:col-span-4">
-          <NuxtLink :to="`/demo/${demo.slug}`" class="flex items-center gap-2.5">
+          <NuxtLink :to="homeTo" class="flex items-center gap-2.5">
             <span class="flex size-11 items-center justify-center rounded-2xl bg-brand text-white">
               <svg class="size-6" viewBox="0 0 24 24" fill="currentColor">
                 <path
@@ -386,7 +395,7 @@ const hours = [
           <ul class="flex flex-col gap-3">
             <li v-for="s in services" :key="s.slug">
               <NuxtLink
-                :to="`/demo/${demo.slug}/sluzby/${s.slug}`"
+                :to="serviceTo(s.slug)"
                 class="text-sm text-white/60 transition-colors hover:text-brand-accent"
                 >{{ s.name }}</NuxtLink
               >

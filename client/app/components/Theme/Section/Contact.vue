@@ -74,11 +74,11 @@ const contacts = [
               v-for="c in contacts"
               :key="c.label"
               :href="c.href"
-              class="group flex items-center gap-4 rounded-2xl border p-5 transition-all hover:border-brand/30 hover:shadow-md"
+              class="group flex items-center gap-4 rounded-2xl border p-5 transition-all hover:border-brand-pop/30 hover:shadow-md"
               :class="dark ? 'border-white/10 bg-white/[0.04]' : 'border-slate-100 bg-white'"
             >
               <span
-                class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand-soft text-brand transition-colors group-hover:bg-brand group-hover:text-white"
+                class="flex size-12 shrink-0 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white"
               >
                 <span class="material-symbols-outlined">{{ c.icon }}</span>
               </span>

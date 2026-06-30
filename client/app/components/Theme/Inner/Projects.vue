@@ -48,13 +48,16 @@ const card = computed(() =>
               class="size-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
             <span
-              class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-brand shadow-sm"
+              class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-brand-pop shadow-sm"
             >
               {{ p.category }}
             </span>
           </div>
           <div class="flex flex-1 flex-col p-6">
-            <h3 class="text-lg font-bold transition-colors group-hover:text-brand" :class="heading">
+            <h3
+              class="text-lg font-bold transition-colors group-hover:text-brand-pop"
+              :class="heading"
+            >
               {{ p.title }}
             </h3>
             <p class="mt-2 line-clamp-2 flex-1 text-[15px] leading-relaxed" :class="body">
@@ -62,11 +65,13 @@ const card = computed(() =>
             </p>
             <div class="mt-5 flex items-center gap-4 text-sm" :class="body">
               <span class="inline-flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[18px] text-brand">place</span>
+                <span class="material-symbols-outlined text-[18px] text-brand-pop">place</span>
                 {{ p.location }}
               </span>
               <span class="inline-flex items-center gap-1.5">
-                <span class="material-symbols-outlined text-[18px] text-brand">calendar_today</span>
+                <span class="material-symbols-outlined text-[18px] text-brand-pop"
+                  >calendar_today</span
+                >
                 {{ p.year }}
               </span>
             </div>

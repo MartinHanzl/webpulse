@@ -44,12 +44,12 @@ const card = computed(() =>
             />
           </div>
           <div class="flex flex-1 flex-col p-7">
-            <div class="flex items-center gap-3 text-xs font-semibold text-brand">
-              <span class="rounded-full bg-brand-soft px-3 py-1">{{ a.category }}</span>
+            <div class="flex items-center gap-3 text-xs font-semibold text-brand-pop">
+              <span class="rounded-full bg-brand-pop/10 px-3 py-1">{{ a.category }}</span>
               <span :class="body">{{ a.date }}</span>
             </div>
             <h3
-              class="mt-4 text-lg font-bold leading-snug transition-colors group-hover:text-brand"
+              class="mt-4 text-lg font-bold leading-snug transition-colors group-hover:text-brand-pop"
               :class="heading"
             >
               {{ a.title }}
@@ -58,7 +58,7 @@ const card = computed(() =>
               {{ a.perex }}
             </p>
             <span
-              class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-all group-hover:gap-3"
+              class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-pop transition-all group-hover:gap-3"
             >
               Číst dál
               <span class="material-symbols-outlined text-[18px]">arrow_forward</span>

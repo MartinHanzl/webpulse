@@ -42,19 +42,19 @@ const card = computed(() =>
           :style="{ transitionDelay: `${(i % 3) * 90}ms` }"
         >
           <span
-            class="flex size-14 items-center justify-center rounded-2xl bg-brand-soft text-brand transition-colors group-hover:bg-brand group-hover:text-white"
+            class="flex size-14 items-center justify-center rounded-2xl bg-brand-pop/10 text-brand-pop transition-colors group-hover:bg-brand-pop group-hover:text-white"
           >
             <span class="material-symbols-outlined text-[28px]">{{ s.icon }}</span>
           </span>
           <h3
-            class="mt-6 text-xl font-bold transition-colors group-hover:text-brand"
+            class="mt-6 text-xl font-bold transition-colors group-hover:text-brand-pop"
             :class="heading"
           >
             {{ s.name }}
           </h3>
           <p class="mt-3 flex-1 text-[15px] leading-relaxed" :class="body">{{ s.perex }}</p>
           <span
-            class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-all group-hover:gap-3"
+            class="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-pop transition-all group-hover:gap-3"
           >
             Více
             <span class="material-symbols-outlined text-[18px]">arrow_forward</span>

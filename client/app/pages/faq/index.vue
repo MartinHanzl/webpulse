@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 import { useApi } from '~/../app/composables/useApi';
+import { useSiteTheme } from '~/../app/composables/useSiteTheme';
+import { useStockImages } from '~/../app/composables/useStockImages';
 import type { FaqCategory } from '~/types/FaqCategory';
 
 const { t, locale } = useI18n();
 const api = useApi();
+const { slug, dark } = useSiteTheme();
 
 definePageMeta({ layout: false });
 
@@ -53,10 +56,16 @@ useHead({
 </script>
 
 <template>
-  <ThemeInnerLayout>
-    <ThemeBreadcrumb :title="t('faq.title')" subtitle="FAQ" :crumbs="[{ label: t('faq.title') }]" />
+  <ThemeInnerLayout :slug="slug">
+    <ThemeBreadcrumb
+      :slug="slug"
+      :title="t('faq.title')"
+      subtitle="FAQ"
+      :crumbs="[{ label: t('faq.title') }]"
+      :image="useStockImages().get(slug).hero"
+    />
 
-    <section class="section">
+    <section class="section" :class="dark ? 'bg-neutral-950' : ''">
       <div class="container-x">
         <div class="grid gap-10 lg:grid-cols-[280px_1fr] lg:gap-14">
           <!-- Category sidebar -->
@@ -68,8 +77,10 @@ useHead({
                 class="flex items-center justify-between rounded-2xl px-5 py-4 text-left text-sm font-semibold transition-colors"
                 :class="
                   i === activeCat
-                    ? 'bg-brand text-white shadow-lg shadow-brand/25'
-                    : 'bg-brand-soft text-brand-ink hover:bg-brand/10'
+                    ? 'bg-brand-pop text-brand-ink shadow-lg shadow-brand-pop/25'
+                    : dark
+                      ? 'bg-white/10 text-white hover:bg-brand-pop/20'
+                      : 'bg-brand-pop/10 text-brand-ink hover:bg-brand-pop/15'
                 "
                 @click="selectCat(i)"
               >
@@ -84,21 +95,28 @@ useHead({
             <div
               v-for="(faq, i) in currentFaqs"
               :key="faq.id"
-              class="reveal overflow-hidden rounded-2xl bg-white ring-1 ring-slate-100 transition-shadow"
-              :class="openKey === `${activeCat}-${i}` ? 'shadow-lg' : ''"
+              class="reveal overflow-hidden rounded-2xl transition-shadow"
+              :class="[
+                dark ? 'bg-white/[0.04] ring-1 ring-white/10' : 'bg-white ring-1 ring-slate-100',
+                openKey === `${activeCat}-${i}` ? 'shadow-lg' : '',
+              ]"
               :style="{ transitionDelay: `${i * 60}ms` }"
             >
               <button
                 class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                 @click="toggle(`${activeCat}-${i}`)"
               >
-                <span class="text-lg font-bold text-brand-ink">{{ faq.question }}</span>
+                <span class="text-lg font-bold" :class="dark ? 'text-white' : 'text-brand-ink'">{{
+                  faq.question
+                }}</span>
                 <span
                   class="flex size-9 shrink-0 items-center justify-center rounded-full transition-all"
                   :class="
                     openKey === `${activeCat}-${i}`
-                      ? 'rotate-45 bg-brand text-white'
-                      : 'bg-brand-soft text-brand'
+                      ? 'rotate-45 bg-brand-pop text-brand-ink'
+                      : dark
+                        ? 'bg-white/10 text-brand-pop'
+                        : 'bg-brand-pop/10 text-brand-pop'
                   "
                 >
                   <span class="material-symbols-outlined">add</span>
@@ -106,16 +124,18 @@ useHead({
               </button>
               <div
                 v-show="openKey === `${activeCat}-${i}`"
-                class="px-6 pb-6 text-[15px] leading-relaxed text-brand-muted"
+                class="px-6 pb-6 text-[15px] leading-relaxed"
+                :class="dark ? 'text-white/60' : 'text-brand-muted'"
                 v-html="faq.answer"
               />
             </div>
 
             <div
               v-if="!currentFaqs.length"
-              class="rounded-3xl bg-brand-cream py-20 text-center text-brand-muted"
+              class="rounded-3xl py-20 text-center"
+              :class="dark ? 'bg-white/[0.04] text-white/60' : 'bg-brand-cream text-brand-muted'"
             >
-              <span class="material-symbols-outlined text-5xl text-brand/40">quiz</span>
+              <span class="material-symbols-outlined text-5xl text-brand-pop/40">quiz</span>
               <p class="mt-4 text-lg font-semibold">Zatím tu nejsou žádné dotazy.</p>
             </div>
           </div>

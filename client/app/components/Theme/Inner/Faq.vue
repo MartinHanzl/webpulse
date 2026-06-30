@@ -45,7 +45,7 @@ const item = computed(() =>
           >
             <span class="text-[17px] font-bold" :class="heading">{{ f.question }}</span>
             <span
-              class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-soft text-brand transition-transform duration-300"
+              class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-pop/10 text-brand-pop transition-transform duration-300"
               :class="open === i ? 'rotate-180' : ''"
             >
               <span class="material-symbols-outlined text-[22px]">expand_more</span>

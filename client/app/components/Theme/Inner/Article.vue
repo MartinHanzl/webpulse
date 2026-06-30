@@ -30,15 +30,15 @@ const card = computed(() =>
       <div class="container-x max-w-3xl">
         <NuxtLink
           :to="`/demo/${demo.slug}/blog`"
-          class="reveal inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-all hover:gap-3"
+          class="reveal inline-flex items-center gap-1.5 text-sm font-semibold text-brand-pop transition-all hover:gap-3"
         >
           <span class="material-symbols-outlined text-[18px]">arrow_back</span>
           Zpět na výpis
         </NuxtLink>
 
         <header class="reveal mt-6">
-          <div class="flex flex-wrap items-center gap-3 text-xs font-semibold text-brand">
-            <span class="rounded-full bg-brand-soft px-3 py-1">{{ article.category }}</span>
+          <div class="flex flex-wrap items-center gap-3 text-xs font-semibold text-brand-pop">
+            <span class="rounded-full bg-brand-pop/10 px-3 py-1">{{ article.category }}</span>
             <span :class="body">{{ article.date }}</span>
             <span :class="body">·</span>
             <span :class="body">{{ article.author }}</span>
@@ -95,18 +95,18 @@ const card = computed(() =>
               />
             </div>
             <div class="flex flex-1 flex-col p-7">
-              <div class="flex items-center gap-3 text-xs font-semibold text-brand">
-                <span class="rounded-full bg-brand-soft px-3 py-1">{{ o.category }}</span>
+              <div class="flex items-center gap-3 text-xs font-semibold text-brand-pop">
+                <span class="rounded-full bg-brand-pop/10 px-3 py-1">{{ o.category }}</span>
                 <span :class="body">{{ o.date }}</span>
               </div>
               <h3
-                class="mt-4 text-lg font-bold leading-snug transition-colors group-hover:text-brand"
+                class="mt-4 text-lg font-bold leading-snug transition-colors group-hover:text-brand-pop"
                 :class="heading"
               >
                 {{ o.title }}
               </h3>
               <span
-                class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-all group-hover:gap-3"
+                class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-pop transition-all group-hover:gap-3"
               >
                 Číst dál
                 <span class="material-symbols-outlined text-[18px]">arrow_forward</span>

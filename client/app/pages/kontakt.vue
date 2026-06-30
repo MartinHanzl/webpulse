@@ -1,24 +1,37 @@
 <script setup lang="ts">
+import { useSiteTheme } from '~/../app/composables/useSiteTheme';
+
 definePageMeta({ layout: false });
+
+const { slug, dark } = useSiteTheme();
 
 useHead({ title: 'Kontakt' });
 </script>
 
 <template>
-  <ThemeInnerLayout v-slot="{ demo }">
-    <ThemeBreadcrumb title="Kontaktujte nás" subtitle="Kontakt" :crumbs="[{ label: 'Kontakt' }]" />
+  <ThemeInnerLayout v-slot="{ demo }" :slug="slug">
+    <ThemeBreadcrumb
+      :slug="slug"
+      title="Kontaktujte nás"
+      subtitle="Kontakt"
+      :crumbs="[{ label: 'Kontakt' }]"
+    />
 
     <ThemeSectionContact
       :demo="demo"
+      :dark="dark"
       subtitle="Spojte se s námi"
       title="Rádi vám pomůžeme"
       text="Zavolejte, napište nebo vyplňte formulář. Ozveme se vám zpravidla do 24 hodin s návrhem řešení."
     />
 
     <!-- Map placeholder -->
-    <section class="pb-24">
+    <section class="pb-24" :class="dark ? 'bg-neutral-950' : ''">
       <div class="container-x">
-        <div class="reveal overflow-hidden rounded-3xl ring-1 ring-slate-100">
+        <div
+          class="reveal overflow-hidden rounded-3xl ring-1"
+          :class="dark ? 'ring-white/10' : 'ring-slate-100'"
+        >
           <iframe
             title="Mapa"
             class="h-[420px] w-full grayscale"

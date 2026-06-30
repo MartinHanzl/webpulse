@@ -82,7 +82,7 @@ const card = computed(() =>
             :style="{ transitionDelay: `${(i % 3) * 90}ms` }"
           >
             <span
-              class="flex size-14 items-center justify-center rounded-2xl bg-brand-soft text-brand"
+              class="flex size-14 items-center justify-center rounded-2xl bg-brand-pop/10 text-brand-pop"
             >
               <span class="material-symbols-outlined text-[28px]">{{ v.icon }}</span>
             </span>
@@ -138,7 +138,7 @@ const card = computed(() =>
             </div>
             <div class="p-6">
               <h3 class="text-lg font-bold" :class="heading">{{ m.name }}</h3>
-              <p class="mt-1 text-sm font-semibold text-brand">{{ m.role }}</p>
+              <p class="mt-1 text-sm font-semibold text-brand-pop">{{ m.role }}</p>
             </div>
           </div>
         </div>

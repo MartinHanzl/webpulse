@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { useRoute } from '#app';
 import { useDemos } from '~/../app/composables/useDemos';
 import { useScrollReveal } from '~/../app/composables/useScrollReveal';
 
-// Inner pages (blog, faq, services, contact) are shared across demos.
-// They use the Lawn palette/brand as a neutral default theme shell.
+// Shared theme shell for inner pages. Used both by the per-demo showcase pages
+// (/demo/<slug>/…) and by the real site (blog, faq, contact…). On /demo routes
+// it shows the demo navigation + the demo switcher; on the real site it uses
+// the real CMS navigation and hides the switcher.
 const props = withDefaults(defineProps<{ slug?: string }>(), { slug: 'lawn' });
 
-const { getDemo, nav } = useDemos();
+const route = useRoute();
+const isDemo = computed(() => route.path.startsWith('/demo'));
+
+const { getDemo, nav, siteNav } = useDemos();
 const demo = computed(() => getDemo(props.slug)!);
-const links = computed(() => nav(props.slug));
+const links = computed(() => (isDemo.value ? nav(props.slug) : siteNav()));
 
 useScrollReveal();
 </script>
@@ -25,6 +31,6 @@ useScrollReveal();
       <slot :demo="demo" />
     </main>
     <ThemeFooter :demo="demo" :links="links" />
-    <ThemeDemoSwitcher :active="slug" />
+    <ThemeDemoSwitcher v-if="isDemo" :active="slug" />
   </div>
 </template>

@@ -28,6 +28,9 @@ export default {
         'brand-accent': 'rgb(var(--brand-accent) / <alpha-value>)',
         'brand-ink': 'rgb(var(--brand-ink) / <alpha-value>)',
         'brand-muted': 'rgb(var(--brand-muted) / <alpha-value>)',
+        // Per-theme "pop" accent for icons / links / badges / highlights.
+        // Light themes → brand (green); dark template (landscaping) → yellow.
+        'brand-pop': 'rgb(var(--brand-pop) / <alpha-value>)',
 
         // Fixed reference greens from the theme
         leaf: {

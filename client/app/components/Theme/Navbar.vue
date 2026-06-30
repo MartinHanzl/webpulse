@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { useRoute } from '#app';
 import type { DemoDefinition, DemoNavLink } from '~/../app/composables/useDemos';
 
 const props = defineProps<{
@@ -23,7 +24,13 @@ const variant = computed(() => props.demo.slug);
 const lightText = computed(() => !solid.value || darkSolid.value);
 
 const telHref = computed(() => `tel:${props.demo.phone.replace(/\s/g, '')}`);
-const contactTo = computed(() => `/demo/${props.demo.slug}/kontakt`);
+
+// On /demo routes the logo/CTA point into the demo; on the real site they point
+// at the real routes.
+const route = useRoute();
+const isDemo = computed(() => route.path.startsWith('/demo'));
+const homeTo = computed(() => (isDemo.value ? `/demo/${props.demo.slug}` : '/'));
+const contactTo = computed(() => (isDemo.value ? `/demo/${props.demo.slug}/kontakt` : '/kontakt'));
 
 const onScroll = () => {
   scrolled.value = window.scrollY > 40;
@@ -55,7 +62,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
       :class="solid ? 'py-3' : 'py-5'"
     >
       <!-- Logo -->
-      <NuxtLink :to="`/demo/${demo.slug}`" class="flex items-center gap-2.5">
+      <NuxtLink :to="homeTo" class="flex items-center gap-2.5">
         <span
           class="flex size-11 items-center justify-center rounded-2xl bg-brand text-white shadow-lg shadow-brand/30"
         >
@@ -157,7 +164,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
         :class="solid ? 'py-3' : 'py-4'"
       >
         <!-- Logo with leaf mark -->
-        <NuxtLink :to="`/demo/${demo.slug}`" class="flex items-center gap-3">
+        <NuxtLink :to="homeTo" class="flex items-center gap-3">
           <span
             class="flex size-12 items-center justify-center rounded-full bg-brand-soft text-brand ring-4 ring-brand/10"
           >
@@ -220,7 +227,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
       :class="solid ? 'py-3.5' : 'py-5'"
     >
       <!-- Square wordmark logo -->
-      <NuxtLink :to="`/demo/${demo.slug}`" class="flex items-center gap-3">
+      <NuxtLink :to="homeTo" class="flex items-center gap-3">
         <span
           class="flex size-11 items-center justify-center rounded-md bg-brand-accent text-brand-dark shadow-lg shadow-brand-accent/30"
         >

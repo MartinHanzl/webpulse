@@ -4,11 +4,16 @@ import dayjs from 'dayjs';
 import { computed } from 'vue';
 import { useApi } from '~/../app/composables/useApi';
 import { useAsyncData, useRoute, useRuntimeConfig, useHead, createError } from '#app';
+import { useSiteTheme } from '~/../app/composables/useSiteTheme';
+import { useStockImages } from '~/../app/composables/useStockImages';
+
+definePageMeta({ layout: false });
 
 const localePath = useLocalePath();
 const { t, locale } = useI18n();
 const route = useRoute();
 const api = useApi();
+const { slug, dark } = useSiteTheme();
 
 // 1. DYNAMICKY KLIC A SLEDOVANI ZMEN
 const {
@@ -59,6 +64,11 @@ const pageMeta = computed(() => {
   };
 });
 
+const crumbs = computed(() => [
+  { label: t('blog.title'), to: localePath('/blog') },
+  { label: postData.value?.name ?? t('blog.title') },
+]);
+
 // 3. REAKTIVNI USEHEAD S FUNKCI
 useHead(() => ({
   title: pageMeta.value.title,
@@ -77,86 +87,100 @@ useHead(() => ({
 </script>
 
 <template>
-  <div class="min-h-screen bg-surface">
-    <LayoutContainer
-      v-if="!postPending && !postError && postData"
-      class="relative mx-auto max-w-4xl px-6 py-16 lg:py-24"
-    >
-      <article class="relative overflow-hidden rounded-2xl bg-white p-8 shadow-sm md:p-16">
-        <header class="mb-10">
-          <div
-            v-if="postData && postData.categories && postData.categories.length > 0"
-            class="mb-6 flex items-center gap-3"
-          >
-            <NuxtLink
-              v-for="(category, index) in postData.categories"
-              :key="index"
-              :to="
-                localePath({
-                  name: 'blog-category-id-slug',
-                  params: { id: category.id, slug: category.slug },
-                })
-              "
-              class="inline-block rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-white transition-colors hover:bg-primary-dark"
-            >
-              {{ category.name }}
-            </NuxtLink>
-          </div>
-          <span
-            v-else
-            class="mb-6 inline-block rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-white"
-          >
-            Article
-          </span>
+  <ThemeInnerLayout :slug="slug">
+    <ThemeBreadcrumb
+      :slug="slug"
+      :title="postData?.name ?? t('blog.title')"
+      subtitle="Blog"
+      :crumbs="crumbs"
+      :image="useStockImages().get(slug).hero"
+    />
 
-          <h1 class="mb-8 text-4xl font-bold leading-tight text-slate-900 md:text-5xl">
-            {{ postData.name }}
-          </h1>
-
-          <div class="flex items-center gap-4 border-t border-slate-200 pt-6">
+    <section class="section" :class="dark ? 'bg-neutral-950' : ''">
+      <div class="container-x">
+        <article
+          v-if="!postPending && !postError && postData"
+          class="reveal mx-auto max-w-4xl overflow-hidden rounded-3xl p-8 shadow-sm md:p-14"
+          :class="dark ? 'bg-white/[0.04] ring-1 ring-white/10' : 'bg-white ring-1 ring-slate-100'"
+        >
+          <header class="mb-10">
             <div
-              class="flex size-12 items-center justify-center rounded-xl bg-primary/10 text-primary"
+              v-if="postData && postData.categories && postData.categories.length > 0"
+              class="mb-6 flex flex-wrap items-center gap-3"
             >
-              <span class="material-symbols-outlined text-xl">edit_document</span>
+              <NuxtLink
+                v-for="(category, index) in postData.categories"
+                :key="index"
+                :to="
+                  localePath({
+                    name: 'blog-category-id-slug',
+                    params: { id: category.id, slug: category.slug },
+                  })
+                "
+                class="inline-block rounded-full bg-brand-pop px-4 py-1.5 text-sm font-semibold text-brand-ink transition-colors hover:bg-brand-pop/80"
+              >
+                {{ category.name }}
+              </NuxtLink>
             </div>
-            <div class="flex flex-col">
-              <span class="mt-1 text-xs font-medium uppercase tracking-widest text-slate-500">
-                {{ dayjs(postData.createdAt).format('DD.MM.YYYY') }} • 5 min read
+
+            <h1
+              class="text-4xl font-extrabold leading-tight md:text-5xl"
+              :class="dark ? 'text-white' : 'text-brand-ink'"
+            >
+              {{ postData.name }}
+            </h1>
+
+            <div
+              class="mt-8 flex items-center gap-4 border-t pt-6"
+              :class="dark ? 'border-white/10' : 'border-slate-200'"
+            >
+              <div
+                class="flex size-12 items-center justify-center rounded-xl text-brand-pop"
+                :class="dark ? 'bg-white/10' : 'bg-brand-pop/10'"
+              >
+                <span class="material-symbols-outlined text-xl">edit_document</span>
+              </div>
+              <span
+                class="text-xs font-semibold uppercase tracking-widest"
+                :class="dark ? 'text-white/60' : 'text-brand-muted'"
+              >
+                {{ dayjs(postData.createdAt).format('DD.MM.YYYY') }}
               </span>
             </div>
+          </header>
+
+          <div v-if="postData.image" class="group mb-12 overflow-hidden rounded-2xl">
+            <BaseImage
+              :src="`/content/images/post/large/${postData.image}`"
+              :alt="postData.name"
+              class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
           </div>
-        </header>
 
-        <div v-if="postData.image" class="group mb-12 overflow-hidden rounded-xl">
-          <BaseImage
-            :src="`/content/images/post/large/${postData.image}`"
-            :alt="postData.name"
-            class="aspect-video w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          <div
+            class="article-content text-lg leading-relaxed"
+            :class="dark ? 'is-dark text-white/70' : 'text-brand-muted'"
+            v-html="postData.text"
           />
+        </article>
+
+        <div v-else-if="postPending" class="flex min-h-[40vh] items-center justify-center">
+          <div
+            class="size-16 animate-spin rounded-full border-4 border-brand-pop/20 border-t-brand-pop"
+          ></div>
         </div>
-
-        <div
-          class="article-content text-lg font-medium leading-relaxed text-slate-700 md:text-xl"
-          v-html="postData.text"
-        ></div>
-      </article>
-    </LayoutContainer>
-
-    <div v-else-if="postPending" class="flex min-h-[50vh] items-center justify-center">
-      <div
-        class="size-16 animate-spin rounded-full border-4 border-primary/20 border-t-primary"
-      ></div>
-    </div>
-  </div>
+      </div>
+    </section>
+  </ThemeInnerLayout>
 </template>
 
 <style scoped>
 .article-content :deep(h2) {
-  @apply mb-6 mt-12 text-3xl font-bold leading-tight text-slate-900;
+  @apply mb-6 mt-12 text-3xl font-bold leading-tight text-brand-ink;
 }
 
 .article-content :deep(h3) {
-  @apply mb-4 mt-10 text-2xl font-bold text-slate-900;
+  @apply mb-4 mt-10 text-2xl font-bold text-brand-ink;
 }
 
 .article-content :deep(p) {
@@ -164,7 +188,7 @@ useHead(() => ({
 }
 
 .article-content :deep(a) {
-  @apply font-semibold text-primary underline decoration-primary/40 decoration-2 underline-offset-4 transition-all hover:decoration-primary;
+  @apply font-semibold text-brand-pop underline decoration-brand-pop/40 decoration-2 underline-offset-4 transition-all hover:decoration-brand-pop;
 }
 
 .article-content :deep(ul) {
@@ -176,7 +200,7 @@ useHead(() => ({
 }
 
 .article-content :deep(blockquote) {
-  @apply my-8 rounded-r-xl border-l-4 border-primary bg-primary/5 p-6 text-xl italic text-slate-800;
+  @apply my-8 rounded-r-xl border-l-4 border-brand-pop bg-brand-pop/5 p-6 text-xl italic;
 }
 
 .article-content :deep(img) {
@@ -184,6 +208,17 @@ useHead(() => ({
 }
 
 .article-content :deep(strong) {
-  @apply font-bold text-slate-900;
+  @apply font-bold text-brand-ink;
+}
+
+/* Dark theme overrides */
+.article-content.is-dark :deep(h2),
+.article-content.is-dark :deep(h3),
+.article-content.is-dark :deep(strong) {
+  @apply text-white;
+}
+
+.article-content.is-dark :deep(blockquote) {
+  @apply border-brand-pop bg-white/[0.04] text-white/80;
 }
 </style>

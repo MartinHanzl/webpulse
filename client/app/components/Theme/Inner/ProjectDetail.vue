@@ -36,7 +36,7 @@ const meta = computed(() => [
       <div class="container-x">
         <NuxtLink
           :to="`/demo/${demo.slug}/reference`"
-          class="reveal inline-flex items-center gap-1.5 text-sm font-semibold text-brand transition-all hover:gap-3"
+          class="reveal inline-flex items-center gap-1.5 text-sm font-semibold text-brand-pop transition-all hover:gap-3"
         >
           <span class="material-symbols-outlined text-[18px]">arrow_back</span>
           Zpět na výpis
@@ -44,7 +44,7 @@ const meta = computed(() => [
 
         <div class="reveal mt-6 max-w-3xl">
           <span
-            class="inline-block rounded-full bg-brand-soft px-3 py-1 text-xs font-semibold text-brand"
+            class="inline-block rounded-full bg-brand-pop/10 px-3 py-1 text-xs font-semibold text-brand-pop"
           >
             {{ project.category }}
           </span>
@@ -72,7 +72,7 @@ const meta = computed(() => [
             :class="card"
           >
             <span
-              class="flex size-11 items-center justify-center rounded-xl bg-brand-soft text-brand"
+              class="flex size-11 items-center justify-center rounded-xl bg-brand-pop/10 text-brand-pop"
             >
               <span class="material-symbols-outlined">{{ m.icon }}</span>
             </span>
@@ -123,25 +123,25 @@ const meta = computed(() => [
                 class="size-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <span
-                class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-brand shadow-sm"
+                class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-brand-pop shadow-sm"
               >
                 {{ o.category }}
               </span>
             </div>
             <div class="flex flex-1 flex-col p-6">
               <h3
-                class="text-lg font-bold transition-colors group-hover:text-brand"
+                class="text-lg font-bold transition-colors group-hover:text-brand-pop"
                 :class="heading"
               >
                 {{ o.title }}
               </h3>
               <div class="mt-3 flex items-center gap-4 text-sm" :class="body">
                 <span class="inline-flex items-center gap-1.5">
-                  <span class="material-symbols-outlined text-[18px] text-brand">place</span>
+                  <span class="material-symbols-outlined text-[18px] text-brand-pop">place</span>
                   {{ o.location }}
                 </span>
                 <span class="inline-flex items-center gap-1.5">
-                  <span class="material-symbols-outlined text-[18px] text-brand"
+                  <span class="material-symbols-outlined text-[18px] text-brand-pop"
                     >calendar_today</span
                   >
                   {{ o.year }}
