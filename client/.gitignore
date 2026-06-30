@@ -18,6 +18,9 @@ logs
 .fleet
 .idea
 
+# ThemeForest source template (not part of the app)
+/themes/
+
 # Local env files
 .env
 .env.*

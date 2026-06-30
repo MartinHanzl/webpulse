@@ -1,122 +1,167 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useI18n } from 'vue-i18n';
-import { useApi } from '~/../app/composables/useApi';
-import { useAsyncData, useRuntimeConfig, useHead } from '#app';
+import { useHead } from '#app';
+import { useDemos } from '~/../app/composables/useDemos';
 
-const { locale, t } = useI18n();
-const api = useApi();
+definePageMeta({ layout: false });
 
-// 1. ROZDĚLENÍ VYHLEDÁVACÍCH PROMĚNNÝCH
-const searchInput = ref(''); // To, co uživatel právě vidí a píše do políčka
-const debouncedSearch = ref(''); // To, co se reálně posílá na backend
+const { demos } = useDemos();
 
-const pageMeta = ref({
-  title: t('general.metaTitle'),
-  description: t('general.metaDescription'),
-  meta_title: t('general.metaTitle'),
-  meta_description: t('general.metaDescription'),
-});
-
-const tableQuery = ref({
-  paginate: 3 as number,
-  page: 1 as number,
-});
-
-// 2. OPRAVA VOLÁNÍ API: Přidán parametr pro vyhledávání
-const getPosts = () => {
-  return api.blog.posts(
-    tableQuery.value.page,
-    tableQuery.value.paginate,
-    locale.value,
-    null,
-    debouncedSearch.value, // API nyní skutečně dostane hledaný výraz
-  );
+// Per-demo presentation meta for the directory cards (colors mirror DemoSwitcher / theme.css).
+const meta: Record<
+  string,
+  { colors: [string, string, string]; dark: boolean; icon: string; highlights: string[] }
+> = {
+  lawn: {
+    colors: ['#1FA12E', '#FECF02', '#F5F5F5'],
+    dark: false,
+    icon: 'grass',
+    highlights: ['Slider hero', 'Karusel služeb', 'Světlá šablona'],
+  },
+  tree: {
+    colors: ['#2E7D32', '#8FB339', '#F5F1E8'],
+    dark: false,
+    icon: 'forest',
+    highlights: ['Ceník 3 tarify', 'Před / po slider', 'Světlá šablona'],
+  },
+  landscaping: {
+    colors: ['#3DA35C', '#FECF02', '#0A0C0A'],
+    dark: true,
+    icon: 'landscape',
+    highlights: ['Tmavá šablona', 'Číslovaný proces', 'Masonry recenze'],
+  },
 };
 
-// Z useAsyncData vytažena funkce 'refresh' pro manuální spuštění
-const { data: postsData, refresh } = useAsyncData('posts', () => getPosts(), {
-  // Vyhledávání jsme z hlídání odstranili, budeme ho řídit manuálně
-  watch: [locale, () => tableQuery.value.page, () => tableQuery.value.paginate],
-});
-
-// 3. DEBOUNCE LOGIKA PRO AUTOMATICKÉ VYHLEDÁVÁNÍ (Zpoždění 300ms)
-let timeout: ReturnType<typeof setTimeout>;
-
-watch(searchInput, (newValue) => {
-  // Při každém stisku klávesy vyčistíme předchozí odpočet
-  clearTimeout(timeout);
-
-  // Nastavíme nový odpočet na 300ms
-  timeout = setTimeout(async () => {
-    debouncedSearch.value = newValue;
-    tableQuery.value.page = 1; // Při novém hledání chceme vždy na 1. stránku
-
-    await refresh(); // Počkáme, až se stáhnou nové články
-
-    // Po úspěšném stažení odskrolujeme k článkům
-    // (případně můžeme podmínit if(newValue !== ''), aby se neskrolovalo při promazání pole)
-    scrollToArticles();
-  }, 300);
-});
-
-// 4. MANUÁLNÍ VYHLEDÁVÁNÍ (Např. uživatel zmáčkne Enter)
-async function handleManualSearch() {
-  clearTimeout(timeout); // Zrušíme automatický odpočet, protože to jdeme udělat hned
-  debouncedSearch.value = searchInput.value;
-  tableQuery.value.page = 1;
-
-  await refresh();
-  scrollToArticles();
-}
-
-async function updatePage(paginate: number) {
-  tableQuery.value.paginate = paginate;
-  // Volání refresh() zde není potřeba, postará se o to 'watch' uvnitř useAsyncData
-}
-
-// 5. FUNKCE PRO SCROLL
-function scrollToArticles() {
-  // Timeout 50ms zajistí, že Vue stihne překreslit DOM s novými daty před samotným scrollem
-  setTimeout(() => {
-    const articles = document.querySelector('.blog-posts');
-    if (articles) {
-      articles.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }, 50);
-}
-
 useHead({
-  title: pageMeta.value.title,
+  title: 'WebPulse — Demo prezentace',
   meta: [
-    { name: 'description', content: pageMeta.value.meta_description },
-    { property: 'og:title', content: pageMeta.value.meta_title },
-    { property: 'og:description', content: pageMeta.value.meta_description },
-  ],
-  link: [
     {
-      rel: 'canonical',
-      href: useRuntimeConfig().public.appUrl + (locale.value !== 'cs' ? `/${locale.value}` : ''),
+      name: 'description',
+      content: 'Rozcestník ukázkových webů postavených na platformě WebPulse.',
     },
   ],
 });
 </script>
 
 <template>
-  <div>
-    <HomeHero v-model:search="searchInput" @search="handleManualSearch" />
+  <div class="min-h-screen bg-slate-950 text-white">
+    <!-- Ambient background -->
+    <div class="pointer-events-none fixed inset-0 overflow-hidden">
+      <div class="absolute -left-32 -top-32 size-96 rounded-full bg-emerald-500/20 blur-3xl" />
+      <div class="absolute -bottom-40 right-0 size-[28rem] rounded-full bg-lime-400/10 blur-3xl" />
+    </div>
 
-    <BlogCategoryList />
+    <div class="relative mx-auto flex max-w-6xl flex-col px-6 py-16 sm:py-24">
+      <!-- Brand -->
+      <div class="flex items-center gap-3">
+        <span
+          class="flex size-11 items-center justify-center rounded-2xl bg-emerald-500 text-white shadow-lg shadow-emerald-500/30"
+        >
+          <svg class="size-6" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 2C7 6 5 10 5 14a7 7 0 0 0 14 0c0-4-2-8-7-12Zm0 17a5 5 0 0 1-5-5c0-2.5 1.2-5.3 5-8.4V19Z"
+            />
+          </svg>
+        </span>
+        <span class="text-xl font-extrabold tracking-tight">WebPulse</span>
+      </div>
 
-    <BlogPostList
-      v-if="postsData && postsData.data"
-      class="blog-posts"
-      :posts="postsData.data || []"
-      :page="tableQuery.page"
-      :per-page="tableQuery.paginate"
-      :last-page="postsData.lastPage"
-      :total="postsData.total"
-      @update-page="updatePage"
-    />
+      <!-- Heading -->
+      <div class="mt-12 max-w-2xl">
+        <span
+          class="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-emerald-300"
+        >
+          <span class="size-1.5 rounded-full bg-emerald-400" />
+          Demo prezentace
+        </span>
+        <h1 class="mt-6 text-4xl font-extrabold leading-tight sm:text-5xl">
+          Ukázkové weby na platformě WebPulse
+        </h1>
+        <p class="mt-5 text-lg leading-relaxed text-white/60">
+          Vyberte si demo a prohlédněte si, jak může vypadat váš web. Každá ukázka je postavena na
+          jiné šabloně. Otevře se v novém okně.
+        </p>
+      </div>
+
+      <!-- Demo grid -->
+      <div class="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
+        <a
+          v-for="d in demos"
+          :key="d.slug"
+          :href="`/demo/${d.slug}`"
+          target="_blank"
+          rel="noopener"
+          class="group relative flex flex-col overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-white/25 hover:bg-white/[0.06] hover:shadow-2xl"
+        >
+          <!-- Color preview -->
+          <div
+            class="relative flex h-32 items-center justify-center"
+            :style="{
+              background: `linear-gradient(135deg, ${meta[d.slug]?.colors[0]} 0%, ${
+                meta[d.slug]?.dark ? '#0A0C0A' : meta[d.slug]?.colors[1]
+              } 100%)`,
+            }"
+          >
+            <span
+              class="material-symbols-outlined text-5xl"
+              :class="meta[d.slug]?.dark ? 'text-white' : 'text-white/90'"
+              >{{ meta[d.slug]?.icon }}</span
+            >
+            <!-- swatches -->
+            <span
+              class="absolute bottom-3 left-3 flex overflow-hidden rounded-lg ring-1 ring-white/30"
+            >
+              <span
+                v-for="c in meta[d.slug]?.colors"
+                :key="c"
+                class="size-5"
+                :style="{ background: c }"
+              />
+            </span>
+          </div>
+
+          <!-- Body -->
+          <div class="flex flex-1 flex-col p-6">
+            <div class="flex items-center justify-between gap-3">
+              <h2 class="text-xl font-bold">{{ d.brandName }}</h2>
+              <span
+                class="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-white/70"
+                >{{ d.switchLabel }}</span
+              >
+            </div>
+            <p class="mt-1 text-sm font-medium text-emerald-300">{{ d.industry }}</p>
+            <p class="mt-3 text-sm leading-relaxed text-white/55">{{ d.tagline }}</p>
+
+            <ul class="mt-5 flex flex-wrap gap-2">
+              <li
+                v-for="h in meta[d.slug]?.highlights"
+                :key="h"
+                class="rounded-md bg-white/[0.06] px-2.5 py-1 text-xs text-white/60"
+              >
+                {{ h }}
+              </li>
+            </ul>
+
+            <span
+              class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors group-hover:text-emerald-300"
+            >
+              Otevřít demo
+              <svg
+                class="size-4 transition-transform group-hover:translate-x-1"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M13 6l6 6-6 6" />
+              </svg>
+            </span>
+          </div>
+        </a>
+      </div>
+
+      <p class="mt-16 text-sm text-white/40">© {{ new Date().getFullYear() }} WebPulse</p>
+    </div>
   </div>
 </template>

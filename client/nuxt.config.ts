@@ -68,7 +68,11 @@ export default defineNuxtConfig({
     },
   },
 
-  css: ['~/assets/css/style.css'],
+  css: [
+    'material-symbols/outlined.css',
+    '~/assets/css/style.css',
+    '~/assets/css/theme.css',
+  ],
   runtimeConfig: {
     public: {
       apiUrl: process.env.API_URL ?? 'https://api.web-pulse.cz',
