@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { useRestaurantContent } from '~/../app/composables/useRestaurantContent';
 import { useStockImages } from '~/../app/composables/useStockImages';
 
@@ -7,6 +8,13 @@ definePageMeta({ layout: false });
 const slug = 'restaurant';
 const c = useRestaurantContent();
 const ph = useStockImages().get('restaurant');
+
+// --- Timeline: horizontal scroll-snap carousel ---
+const track = ref<HTMLElement | null>(null);
+function scrollByCards(dir: number) {
+  const el = track.value;
+  if (el) el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: 'smooth' });
+}
 
 useHead(() => ({ title: 'Náš příběh — Savoria' }));
 </script>
@@ -67,42 +75,69 @@ useHead(() => ({ title: 'Náš příběh — Savoria' }));
       </div>
     </section>
 
-    <!-- TIMELINE -->
+    <!-- TIMELINE CAROUSEL -->
     <section class="bg-white py-24">
       <div class="container-x">
-        <div class="relative">
-          <!-- gold connecting line -->
-          <div class="absolute left-4 top-0 hidden h-full w-px bg-brand/30 lg:left-1/2 lg:block" />
-
-          <div class="flex flex-col gap-14 lg:gap-20">
-            <div
-              v-for="(step, i) in c.story"
-              :key="step.year"
-              class="reveal relative grid items-center gap-8 lg:grid-cols-2 lg:gap-16"
+        <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <ThemeSectionHeading
+            subtitle="Milníky"
+            title="Krok za krokem"
+            text="Projděte si nejdůležitější okamžiky, které utvářely naši restauraci."
+            align="left"
+            max="max-w-xl"
+          />
+          <div class="flex shrink-0 gap-3">
+            <button
+              type="button"
+              aria-label="Předchozí"
+              class="flex size-12 items-center justify-center rounded-full bg-brand text-brand-dark shadow-sm transition-transform duration-300 hover:scale-110"
+              @click="scrollByCards(-1)"
             >
-              <!-- node -->
-              <span
-                class="absolute left-4 top-8 z-10 hidden size-4 -translate-x-1/2 rounded-full border-4 border-white bg-brand shadow lg:left-1/2 lg:block"
-              />
-
-              <!-- image -->
-              <div
-                class="overflow-hidden rounded-3xl shadow-sm"
-                :class="i % 2 === 1 ? 'lg:order-2' : ''"
-              >
-                <img :src="step.image" alt="" class="h-72 w-full object-cover" />
-              </div>
-
-              <!-- text -->
-              <div :class="[i % 2 === 1 ? 'lg:order-1 lg:pr-16 lg:text-right' : 'lg:pl-16']">
-                <span class="text-5xl font-bold uppercase tracking-wide text-brand sm:text-6xl">{{
-                  step.year
-                }}</span>
-                <h3 class="mt-3 text-2xl uppercase tracking-wide">{{ step.title }}</h3>
-                <p class="mt-3 text-base leading-relaxed text-brand-muted">{{ step.text }}</p>
-              </div>
-            </div>
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Další"
+              class="flex size-12 items-center justify-center rounded-full bg-brand text-brand-dark shadow-sm transition-transform duration-300 hover:scale-110"
+              @click="scrollByCards(1)"
+            >
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
           </div>
+        </div>
+
+        <div
+          ref="track"
+          class="mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4"
+          style="scrollbar-width: none"
+        >
+          <article
+            v-for="step in c.story"
+            :key="step.year"
+            class="reveal group w-[85%] shrink-0 snap-start sm:w-[55%] lg:w-[38%] xl:w-[30%]"
+          >
+            <div class="overflow-hidden rounded-3xl shadow-sm">
+              <img
+                :src="step.image"
+                alt=""
+                class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+            </div>
+            <!-- gold connecting line + node -->
+            <div class="relative mt-8 flex items-center">
+              <span
+                class="size-4 shrink-0 rounded-full border-4 border-white bg-brand shadow ring-1 ring-brand/40"
+              />
+              <span class="h-px flex-1 bg-brand/30" />
+            </div>
+            <div class="mt-5">
+              <span class="text-4xl font-bold uppercase tracking-wide text-brand sm:text-5xl">{{
+                step.year
+              }}</span>
+              <h3 class="mt-3 text-2xl uppercase tracking-wide">{{ step.title }}</h3>
+              <p class="mt-3 text-base leading-relaxed text-brand-muted">{{ step.text }}</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>

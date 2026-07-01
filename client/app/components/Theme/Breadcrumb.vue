@@ -22,12 +22,11 @@ withDefaults(
 
 <template>
   <section class="relative flex min-h-[340px] items-center overflow-hidden pt-20 lg:min-h-[420px]">
-    <div class="absolute inset-0">
-      <img :src="image" alt="" class="size-full object-cover" />
+    <ThemeParallax :image="image" :speed="0.28">
       <div
         class="absolute inset-0 bg-gradient-to-r from-brand-dark/90 via-brand-dark/70 to-brand-dark/40"
       />
-    </div>
+    </ThemeParallax>
     <div
       class="floaty pointer-events-none absolute right-[10%] top-1/3 hidden size-56 rounded-full bg-brand-accent/20 blur-3xl lg:block"
     />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import type { DemoDefinition } from '~/../app/composables/useDemos';
 import { useRestaurantContent } from '~/../app/composables/useRestaurantContent';
 import { useStockImages } from '~/../app/composables/useStockImages';
@@ -9,19 +9,49 @@ const ph = useStockImages().get('restaurant');
 const { features, menu, specials, dishes } = useRestaurantContent();
 
 const activeCat = ref(menu[0].key);
+
+// --- Populární chody: autoplay scroll-snap carousel ---
+const track = ref<HTMLElement | null>(null);
+let dishTimer: ReturnType<typeof setInterval> | undefined;
+
+function scrollByCards(dir: number) {
+  const el = track.value;
+  if (el) el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: 'smooth' });
+}
+function autoAdvance() {
+  const el = track.value;
+  if (!el) return;
+  if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
+    el.scrollTo({ left: 0, behavior: 'smooth' });
+  } else {
+    scrollByCards(1);
+  }
+}
+function startDishAuto() {
+  stopDishAuto();
+  dishTimer = setInterval(autoAdvance, 3000);
+}
+function stopDishAuto() {
+  if (dishTimer) {
+    clearInterval(dishTimer);
+    dishTimer = undefined;
+  }
+}
+
+onMounted(startDishAuto);
+onBeforeUnmount(stopDishAuto);
 </script>
 
 <template>
   <div class="bg-brand-cream text-brand-ink">
     <!-- 1. HERO -->
     <section class="relative flex min-h-screen items-center overflow-hidden bg-brand-dark">
-      <div class="absolute inset-0">
-        <img :src="ph.hero" alt="" class="size-full object-cover" />
+      <ThemeParallax :image="ph.hero" :speed="0.25">
         <div class="absolute inset-0 bg-brand-dark/80" />
         <div
           class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/40 to-brand-dark/70"
         />
-      </div>
+      </ThemeParallax>
 
       <!-- decorative gold ring -->
       <div
@@ -41,9 +71,12 @@ const activeCat = ref(menu[0].key);
             <span class="h-px w-8 bg-brand" />
           </span>
           <h1
-            class="reveal mt-8 whitespace-pre-line text-6xl uppercase leading-[0.95] tracking-wide text-white sm:text-7xl lg:text-8xl"
+            class="reveal mt-8 text-6xl uppercase leading-[0.95] tracking-wide text-white sm:text-7xl lg:text-8xl"
           >
-            Chuť, na kterou{{ '\n' }}nezapomenete
+            Chuť, na kterou
+            <span class="mt-2 block text-brand">
+              <ThemeRotatingText :words="['nezapomenete', 'se vrátíte', 'si zamilujete']" />
+            </span>
           </h1>
           <p class="reveal mx-auto mt-8 max-w-xl text-lg leading-relaxed text-white/70">
             Zážitková kuchyně z lokálních sezónních surovin, výběrová vína a servis, který dělá z
@@ -82,7 +115,7 @@ const activeCat = ref(menu[0].key);
             <div
               class="absolute -left-4 top-8 flex items-center gap-3 rounded-2xl bg-brand px-6 py-4 text-brand-dark shadow-xl"
             >
-              <span class="text-4xl font-bold leading-none">35</span>
+              <span class="text-4xl font-bold leading-none"><ThemeCounter :to="35" /></span>
               <span class="text-sm font-semibold uppercase leading-tight">let<br />tradice</span>
             </div>
           </div>
@@ -143,9 +176,7 @@ const activeCat = ref(menu[0].key);
 
     <!-- 3. POPULAR MENU -->
     <section class="relative overflow-hidden bg-brand-dark py-24 text-white">
-      <div class="absolute inset-0 opacity-10">
-        <img :src="ph.facts" alt="" class="size-full object-cover" />
-      </div>
+      <ThemeParallax :image="ph.facts" :speed="0.2" class="opacity-10" />
       <div class="container-x relative z-10">
         <ThemeSectionHeading
           subtitle="Naše menu"
@@ -203,26 +234,52 @@ const activeCat = ref(menu[0].key);
     <!-- 4. POPULAR DISHES -->
     <section class="bg-brand-cream py-24">
       <div class="container-x">
-        <ThemeSectionHeading
-          subtitle="Speciality"
-          title="Populární chody"
-          text="Nejžádanější pokrmy naší kuchyně, které si hosté objednávají znovu a znovu."
-          align="center"
-        />
+        <div class="flex flex-col items-center gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <ThemeSectionHeading
+            subtitle="Speciality"
+            title="Populární chody"
+            text="Nejžádanější pokrmy naší kuchyně, které si hosté objednávají znovu a znovu."
+            align="left"
+            max="max-w-xl"
+          />
+          <!-- Arrow navigation -->
+          <div class="flex shrink-0 gap-3">
+            <button
+              type="button"
+              aria-label="Předchozí"
+              class="flex size-12 items-center justify-center rounded-full bg-brand text-brand-dark shadow-sm transition-transform duration-300 hover:scale-110"
+              @click="scrollByCards(-1)"
+            >
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Další"
+              class="flex size-12 items-center justify-center rounded-full bg-brand text-brand-dark shadow-sm transition-transform duration-300 hover:scale-110"
+              @click="scrollByCards(1)"
+            >
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
+        </div>
 
         <div
-          class="mt-14 flex snap-x gap-6 overflow-x-auto pb-4 lg:grid lg:grid-cols-5 lg:overflow-visible"
+          ref="track"
+          class="mt-14 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-4"
+          style="scrollbar-width: none"
+          @mouseenter="stopDishAuto"
+          @mouseleave="startDishAuto"
         >
           <article
             v-for="dish in dishes"
             :key="dish.name"
-            class="reveal group w-64 shrink-0 snap-start overflow-hidden rounded-3xl bg-white shadow-sm transition-transform duration-300 hover:-translate-y-2 lg:w-auto"
+            class="reveal group w-[80%] shrink-0 snap-start overflow-hidden rounded-3xl bg-white shadow-sm transition-transform duration-300 hover:-translate-y-2 sm:w-[45%] lg:w-[30%] xl:w-[23%]"
           >
             <div class="relative">
               <img
                 :src="dish.image"
                 alt=""
-                class="h-52 w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
               <span
                 class="absolute -bottom-6 right-5 flex size-16 flex-col items-center justify-center rounded-full bg-white text-center text-sm font-bold text-brand-accent shadow-lg"

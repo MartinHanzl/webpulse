@@ -58,7 +58,7 @@ useHead(() => ({ title: 'O nás — Savoria' }));
             <div
               class="absolute -left-4 top-8 flex items-center gap-3 rounded-2xl bg-brand px-6 py-4 text-brand-dark shadow-xl"
             >
-              <span class="text-4xl font-bold leading-none">35</span>
+              <span class="text-4xl font-bold leading-none"><ThemeCounter :to="35" /></span>
               <span class="text-sm font-semibold uppercase leading-tight">let<br />tradice</span>
             </div>
           </div>
@@ -116,6 +116,9 @@ useHead(() => ({ title: 'O nás — Savoria' }));
         </figure>
       </div>
     </section>
+
+    <!-- MARQUEE -->
+    <ThemeSectionMarquee :words="['Lahodné', 'Skvělé', 'Zážitek', 'Kuchyně', 'Čerstvé']" />
 
     <!-- FACILITIES -->
     <section class="bg-white py-24">

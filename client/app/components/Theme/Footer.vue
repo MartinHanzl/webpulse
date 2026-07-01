@@ -77,6 +77,13 @@ const restaurantHours = [
   { day: 'Pá–So', time: '11:00 – 24:00' },
   { day: 'Neděle', time: '11:00 – 22:00' },
 ];
+
+/** Office hours shown in the lawyer footer. */
+const lawyerHours = [
+  { day: 'Po–Pá', time: '8:00 – 18:00' },
+  { day: 'Sobota', time: 'Dle domluvy' },
+  { day: 'Neděle', time: 'Zavřeno' },
+];
 </script>
 
 <template>
@@ -439,6 +446,151 @@ const restaurantHours = [
         <div class="flex gap-6">
           <NuxtLink to="#" class="hover:text-brand">Ochrana soukromí</NuxtLink>
           <NuxtLink to="#" class="hover:text-brand">Obchodní podmínky</NuxtLink>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= LAWYER — elegant navy (dark) footer ================= -->
+  <footer
+    v-else-if="variant === 'lawyer'"
+    class="relative overflow-hidden bg-brand-dark text-white"
+  >
+    <!-- Top CTA band — signature "Potřebujete právní pomoc?" -->
+    <div class="border-b border-white/10 bg-brand/10">
+      <div
+        class="container-x flex flex-col items-center gap-6 py-12 text-center lg:flex-row lg:justify-between lg:text-left"
+      >
+        <div class="max-w-xl">
+          <h3
+            class="text-2xl italic !text-white [font-family:'Playfair_Display',serif] sm:text-3xl lg:text-4xl"
+          >
+            Potřebujete právní pomoc?
+          </h3>
+          <p class="mt-2 text-white/70">
+            První konzultaci vyřídíme rychle, diskrétně a bez jakýchkoli závazků.
+          </p>
+        </div>
+        <ThemeButton :to="contactTo" variant="accent" size="lg">Nezávazná konzultace</ThemeButton>
+      </div>
+    </div>
+
+    <div class="container-x relative pt-16">
+      <!-- Newsletter band -->
+      <div
+        class="reveal mb-16 flex flex-col gap-6 rounded-2xl border border-white/10 bg-white/5 p-8 sm:p-10 lg:flex-row lg:items-center lg:justify-between"
+      >
+        <div class="max-w-md">
+          <h3 class="text-xl font-semibold !text-white sm:text-2xl">Právní novinky do e-mailu</h3>
+          <p class="mt-2 text-sm text-white/60">
+            Přehled změn v legislativě a praktické tipy jednou měsíčně.
+          </p>
+        </div>
+        <form class="flex w-full max-w-md flex-col gap-3 sm:flex-row" @submit.prevent="subscribe">
+          <input
+            v-model="email"
+            type="email"
+            required
+            placeholder="Váš e-mail"
+            class="w-full rounded-full border border-white/15 bg-white/5 px-5 py-3.5 text-white placeholder:text-white/40 focus:border-brand focus:ring-2 focus:ring-brand/40"
+          />
+          <button
+            type="submit"
+            :disabled="sending"
+            class="shrink-0 rounded-full bg-brand px-7 py-3.5 font-semibold text-white transition-colors hover:bg-brand-dark disabled:opacity-60"
+          >
+            {{ sending ? '...' : sent ? 'Hotovo ✓' : 'Odebírat' }}
+          </button>
+        </form>
+      </div>
+      <p v-if="error" class="-mt-12 mb-12 text-center text-sm text-red-300">{{ error }}</p>
+
+      <!-- Columns -->
+      <div class="grid grid-cols-1 gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- Brand -->
+        <div>
+          <NuxtLink :to="homeTo" class="flex flex-col leading-none">
+            <span class="text-2xl italic text-white [font-family:'Playfair_Display',serif]">{{
+              demo.brandName
+            }}</span>
+            <span class="mt-1 text-[11px] uppercase tracking-[0.28em] text-brand">{{
+              demo.industry
+            }}</span>
+          </NuxtLink>
+          <p class="mt-5 text-sm leading-relaxed text-white/60">{{ aboutText }}</p>
+          <div class="mt-6 flex gap-3">
+            <a
+              v-for="s in social"
+              :key="s"
+              href="#"
+              class="flex size-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-brand hover:text-white"
+              :aria-label="s"
+            >
+              <span class="material-symbols-outlined text-[18px]">public</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Právní služby -->
+        <div>
+          <h4 class="mb-5 text-lg font-semibold !text-white">Právní služby</h4>
+          <ul class="flex flex-col gap-3">
+            <li v-for="s in services" :key="s.slug">
+              <NuxtLink
+                :to="serviceTo(s.slug)"
+                class="flex items-start gap-2 text-sm text-white/60 transition-colors hover:text-brand"
+              >
+                <span class="material-symbols-outlined text-[18px] text-brand">chevron_right</span>
+                {{ s.name }}
+              </NuxtLink>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Kontakt -->
+        <div>
+          <h4 class="mb-5 text-lg font-semibold !text-white">Kontakt</h4>
+          <ul class="flex flex-col gap-4 text-sm text-white/60">
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-brand">call</span>
+              <a :href="`tel:${demo.phone.replace(/\s/g, '')}`" class="hover:text-white">{{
+                demo.phone
+              }}</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-brand">mail</span>
+              <a :href="`mailto:${demo.email}`" class="hover:text-white">{{ demo.email }}</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-brand">location_on</span>
+              <span>{{ demo.address }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Otevírací doba -->
+        <div>
+          <h4 class="mb-5 text-lg font-semibold !text-white">Otevírací doba</h4>
+          <ul class="flex flex-col gap-2.5">
+            <li
+              v-for="h in lawyerHours"
+              :key="h.day"
+              class="flex items-center justify-between border-b border-white/10 pb-2.5 text-sm"
+            >
+              <span class="text-white/70">{{ h.day }}</span>
+              <span class="font-medium text-white">{{ h.time }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-7 text-sm text-white/50 sm:flex-row"
+      >
+        <p>© {{ currentYear }} {{ demo.brandName }}. Demo prezentace — WebPulse.</p>
+        <div class="flex gap-6">
+          <NuxtLink to="#" class="hover:text-white">Ochrana soukromí</NuxtLink>
+          <NuxtLink to="#" class="hover:text-white">Obchodní podmínky</NuxtLink>
         </div>
       </div>
     </div>

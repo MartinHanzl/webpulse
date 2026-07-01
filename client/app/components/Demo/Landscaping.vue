@@ -164,15 +164,14 @@ const teamCounters = [
   <div class="bg-neutral-950 text-white">
     <!-- 1. HERO -->
     <section class="relative flex min-h-[760px] items-center overflow-hidden">
-      <div class="absolute inset-0">
-        <img :src="ph.hero" alt="" class="size-full object-cover" />
+      <ThemeParallax :image="ph.hero" :speed="0.25">
         <div
           class="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/85 to-neutral-950/40"
         />
         <div
           class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-transparent to-neutral-950/60"
         />
-      </div>
+      </ThemeParallax>
 
       <div class="container-x relative z-10 pb-24 pt-40">
         <div class="max-w-3xl">

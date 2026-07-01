@@ -1,5 +1,5 @@
 <script setup lang="ts">
-defineProps<{ words: string[]; dark?: boolean }>();
+withDefaults(defineProps<{ words: string[]; dark?: boolean; icon?: string }>(), { icon: 'eco' });
 </script>
 
 <template>
@@ -13,7 +13,7 @@ defineProps<{ words: string[]; dark?: boolean }>();
           <span
             class="material-symbols-outlined text-brand-accent"
             style="font-variation-settings: 'FILL' 1"
-            >eco</span
+            >{{ icon }}</span
           >
         </span>
       </template>

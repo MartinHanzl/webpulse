@@ -17,6 +17,8 @@ const items = computed(() =>
     : c.gallery.filter((g) => g.category === activeFilter.value),
 );
 
+const lb = ref();
+
 useHead(() => ({ title: 'Galerie — Savoria' }));
 </script>
 
@@ -60,10 +62,12 @@ useHead(() => ({ title: 'Galerie — Savoria' }));
 
         <!-- Grid -->
         <div class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <figure
-            v-for="item in items"
+          <button
+            v-for="(item, i) in items"
             :key="item.title"
-            class="reveal group relative overflow-hidden rounded-3xl shadow-sm"
+            type="button"
+            class="reveal group relative block w-full overflow-hidden rounded-3xl text-left shadow-sm"
+            @click="lb.show(i)"
           >
             <img
               :src="item.image"
@@ -78,15 +82,17 @@ useHead(() => ({ title: 'Galerie — Savoria' }));
               >
                 <span class="material-symbols-outlined text-3xl">zoom_in</span>
               </span>
-              <figcaption class="px-6 text-center">
+              <div class="px-6 text-center">
                 <p class="text-xl uppercase tracking-wide text-white">{{ item.title }}</p>
                 <p class="mt-1 text-sm font-semibold uppercase tracking-wider text-brand-accent">
                   {{ item.category }}
                 </p>
-              </figcaption>
+              </div>
             </div>
-          </figure>
+          </button>
         </div>
+
+        <ThemeLightbox ref="lb" :images="items" />
       </div>
     </section>
   </ThemeInnerLayout>

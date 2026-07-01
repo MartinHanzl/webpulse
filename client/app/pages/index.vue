@@ -35,6 +35,12 @@ const meta: Record<
     icon: 'restaurant',
     highlights: ['Menu s cenami', 'Kuchaři & galerie', 'Bebas Neue'],
   },
+  lawyer: {
+    colors: ['#b98e44', '#152833', '#f6f3ef'],
+    dark: true,
+    icon: 'gavel',
+    highlights: ['Právní služby', 'Advokáti & profily', 'Playfair Display'],
+  },
 };
 
 useHead({

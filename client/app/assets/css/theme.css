@@ -6,6 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
 /* Restaurant demo fonts (Crafto): Bebas Neue display + Schibsted Grotesk body. */
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@400..800&display=swap');
+/* Lawyer demo fonts (Crafto): Playfair Display serif + DM Sans body. */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..700&family=DM+Sans:wght@400..700&display=swap');
 
 /* Material Symbols: font face + base class come from the local
    `material-symbols/outlined.css` (loaded in nuxt.config) so icons work
@@ -82,6 +84,28 @@
 	font-family: 'Bebas Neue', 'Fustat', sans-serif;
 	letter-spacing: 0.02em;
 	font-weight: 400;
+}
+
+/* Lawyer (Crafto) — bronze on navy/cream, Playfair Display serif headings. */
+.demo-root[data-demo='lawyer'] {
+	--brand: 185 142 68; /* #b98e44 bronze */
+	--brand-dark: 21 40 51; /* #152833 navy */
+	--brand-soft: 237 231 221; /* #EDE7DD warm tint */
+	--brand-cream: 246 243 239; /* #f6f3ef */
+	--brand-accent: 185 142 68; /* bronze */
+	--brand-ink: 21 40 51; /* #152833 navy text */
+	--brand-muted: 137 141 149; /* #898d95 */
+	--brand-pop: var(--brand);
+	font-family: 'DM Sans', 'Inter', sans-serif;
+}
+:where(.demo-root[data-demo='lawyer']) h1,
+:where(.demo-root[data-demo='lawyer']) h2,
+:where(.demo-root[data-demo='lawyer']) h3,
+:where(.demo-root[data-demo='lawyer']) h4,
+:where(.demo-root[data-demo='lawyer']) h5,
+:where(.demo-root[data-demo='lawyer']) h6 {
+	font-family: 'Playfair Display', 'Fustat', serif;
+	font-weight: 600;
 }
 
 /* `:where()` keeps specificity at 0 so Tailwind text-* utilities (e.g. text-white

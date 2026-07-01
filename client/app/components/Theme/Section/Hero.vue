@@ -20,12 +20,11 @@ withDefaults(
 <template>
   <section class="relative flex min-h-[720px] items-center overflow-hidden lg:min-h-[820px]">
     <!-- Background -->
-    <div class="absolute inset-0">
-      <img :src="image" alt="" class="size-full object-cover" />
+    <ThemeParallax :image="image" :speed="0.25">
       <div
         class="absolute inset-0 bg-gradient-to-r from-brand-dark/85 via-brand-dark/60 to-brand-dark/20"
       />
-    </div>
+    </ThemeParallax>
 
     <!-- Decorative leaf blob -->
     <div

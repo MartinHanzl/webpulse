@@ -10,9 +10,7 @@ defineProps<{ items: Fact[]; image?: string }>();
 
 <template>
   <section class="relative overflow-hidden bg-brand-dark py-20">
-    <div v-if="image" class="absolute inset-0 opacity-10">
-      <img :src="image" alt="" class="size-full object-cover" />
-    </div>
+    <ThemeParallax v-if="image" :image="image" :speed="0.2" class="opacity-10" />
     <div
       class="pointer-events-none absolute -left-20 top-1/2 size-72 -translate-y-1/2 rounded-full bg-brand/20 blur-3xl"
     />

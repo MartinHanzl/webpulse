@@ -504,8 +504,9 @@ const pos = ref(55);
 
     <!-- 8. CTA BAND -->
     <section class="relative overflow-hidden">
-      <img :src="ph.facts" alt="Les" class="absolute inset-0 size-full object-cover" />
-      <div class="absolute inset-0 bg-brand-ink/80" />
+      <ThemeParallax :image="ph.facts" :speed="0.25">
+        <div class="absolute inset-0 bg-brand-ink/80" />
+      </ThemeParallax>
       <div class="container-x relative flex flex-col items-center gap-6 py-24 text-center">
         <h2 class="reveal max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl">
           Máte problémový strom? Vyřešte to s námi ještě dnes

@@ -9,9 +9,9 @@ export interface DemoNavLink {
 }
 
 export interface DemoDefinition {
-  slug: 'lawn' | 'tree' | 'landscaping' | 'restaurant';
+  slug: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer';
   /** value for data-demo (palette key in theme.css) */
-  palette: 'lawn' | 'tree' | 'landscaping' | 'restaurant';
+  palette: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer';
   brandName: string;
   tagline: string;
   phone: string;
@@ -71,10 +71,32 @@ export const DEMOS: DemoDefinition[] = [
     switchLabel: 'Restaurant',
     industry: 'Restaurace',
   },
+  {
+    slug: 'lawyer',
+    palette: 'lawyer',
+    brandName: 'Veritas',
+    tagline: 'Právní jistota pro vás i vaši firmu',
+    phone: '+420 234 567 800',
+    email: 'kancelar@veritas-ak.cz',
+    address: 'Národní 10, Praha 1',
+    switchLabel: 'Law Firm',
+    industry: 'Advokátní kancelář',
+  },
 ];
 
 export function useDemos() {
   const nav = (slug: string): DemoNavLink[] => {
+    // Lawyer demo: practice areas, attorneys, journal.
+    if (slug === 'lawyer') {
+      return [
+        { label: 'Domů', to: `/demo/${slug}` },
+        { label: 'O nás', to: `/demo/${slug}/o-nas` },
+        { label: 'Právní služby', to: `/demo/${slug}/sluzby` },
+        { label: 'Advokáti', to: `/demo/${slug}/advokati` },
+        { label: 'Blog', to: `/demo/${slug}/blog` },
+        { label: 'Kontakt', to: `/demo/${slug}/kontakt` },
+      ];
+    }
     // Restaurant demo has its own page set (menu, chefs, gallery, story…).
     if (slug === 'restaurant') {
       return [

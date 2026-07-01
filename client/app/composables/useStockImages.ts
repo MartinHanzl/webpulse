@@ -34,6 +34,13 @@ const P = {
   wine: '1510812431401-41d2bd2722f3',
   chefCooking: '1577219491135-ce391730fb2c',
   tableSetting: '1414235077428-338989a2e8c0',
+  // Lawyer / office (Veritas demo)
+  lawOffice: '1521737604893-d14cc237f11d',
+  lawColumns: '1589829545856-d10d557cf95f',
+  lawBooks: '1521587760476-6c12a4b040da',
+  lawyerPortrait: '1560250097-0b93528c311a',
+  lawHandshake: '1454165804606-c3d57bc86b40',
+  lawBuilding: '1486406146926-c627a92ad1ab',
 };
 
 export interface VariantImages {
@@ -108,6 +115,25 @@ export function useStockImages() {
         U(p, 700),
       ),
       blog: [P.plating, P.chefCooking, P.dessert].map((p) => U(p, 700)),
+    },
+    lawyer: {
+      hero: U(P.lawColumns, 1920),
+      aboutMain: U(P.lawOffice, 900),
+      aboutSecondary: U(P.lawHandshake, 600),
+      choose: U(P.lawBooks, 900),
+      facts: U(P.lawBuilding, 1920),
+      work: [P.lawOffice, P.lawColumns, P.lawBooks, P.lawHandshake, P.lawBuilding].map((p) =>
+        U(p, 800),
+      ),
+      services: [
+        P.lawBooks,
+        P.lawHandshake,
+        P.lawOffice,
+        P.lawColumns,
+        P.lawBuilding,
+        P.lawyerPortrait,
+      ].map((p) => U(p, 700)),
+      blog: [P.lawOffice, P.lawBooks, P.lawHandshake].map((p) => U(p, 700)),
     },
   };
 

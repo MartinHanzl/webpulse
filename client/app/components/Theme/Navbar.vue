@@ -285,6 +285,71 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
     </div>
 
     <!-- ============================================================= -->
+    <!-- LAWYER — elegant law firm: Playfair wordmark, tracked serif    -->
+    <!-- nav, bronze phone + "Nezávazná konzultace" CTA; light theme    -->
+    <!-- (white over navy hero → cream/white bar with navy text).       -->
+    <!-- ============================================================= -->
+    <div
+      v-else-if="variant === 'lawyer'"
+      class="container-x flex items-center justify-between gap-6 transition-all"
+      :class="solid ? 'py-3' : 'py-5'"
+    >
+      <!-- Playfair serif wordmark -->
+      <NuxtLink :to="homeTo" class="flex flex-col leading-none">
+        <span
+          class="text-[26px] italic tracking-wide [font-family:'Playfair_Display',serif]"
+          :class="lightText ? 'text-white' : 'text-brand-ink'"
+          >{{ demo.brandName }}</span
+        >
+        <span class="mt-1 text-[11px] uppercase tracking-[0.28em] text-brand">{{
+          demo.industry
+        }}</span>
+      </NuxtLink>
+
+      <!-- Desktop nav -->
+      <nav class="hidden items-center gap-8 lg:flex">
+        <NuxtLink
+          v-for="link in links"
+          :key="link.to"
+          :to="link.to"
+          class="text-sm tracking-wide transition-colors hover:text-brand"
+          :class="lightText ? 'text-white/85' : 'text-brand-ink/80'"
+        >
+          {{ link.label }}
+        </NuxtLink>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4">
+        <a
+          :href="telHref"
+          class="hidden items-center gap-2.5 text-sm font-medium xl:flex"
+          :class="lightText ? 'text-white' : 'text-brand-ink'"
+        >
+          <span class="flex size-9 items-center justify-center rounded-full bg-brand text-white">
+            <span class="material-symbols-outlined text-[18px]">call</span>
+          </span>
+          {{ demo.phone }}
+        </a>
+        <NuxtLink
+          :to="contactTo"
+          class="hidden items-center gap-2 rounded-full bg-brand px-6 py-2.5 text-xs uppercase tracking-wide text-white shadow-lg shadow-brand/25 transition-all hover:-translate-y-0.5 hover:bg-brand-dark sm:inline-flex"
+        >
+          <span class="material-symbols-outlined text-[18px]">gavel</span>
+          Nezávazná konzultace
+        </NuxtLink>
+        <button
+          class="flex size-11 items-center justify-center rounded-full lg:hidden"
+          :class="lightText ? 'bg-white/15 text-white' : 'bg-brand-soft text-brand-ink'"
+          aria-label="Menu"
+          @click="mobileOpen = !mobileOpen"
+        >
+          <span class="material-symbols-outlined">{{ mobileOpen ? 'close' : 'menu' }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
     <!-- LANDSCAPING — bold/dark: uppercase tracked menu, square accent -->
     <!-- CTA, social dots; solid state is dark.                         -->
     <!-- ============================================================= -->
@@ -374,7 +439,7 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
         <div
           class="flex flex-col gap-1 rounded-2xl p-3 shadow-xl"
           :class="
-            variant === 'restaurant'
+            variant === 'restaurant' || variant === 'lawyer'
               ? 'border border-white/10 bg-brand-dark'
               : 'border border-slate-100 bg-white'
           "
@@ -387,7 +452,9 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
             :class="
               variant === 'restaurant'
                 ? 'font-medium uppercase tracking-wide text-white hover:bg-white/10 hover:text-brand'
-                : 'font-semibold text-brand-ink hover:bg-brand-soft hover:text-brand'
+                : variant === 'lawyer'
+                  ? 'tracking-wide text-white hover:bg-white/10 hover:text-brand'
+                  : 'font-semibold text-brand-ink hover:bg-brand-soft hover:text-brand'
             "
             @click="mobileOpen = false"
           >
@@ -396,14 +463,20 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
           <a
             :href="telHref"
             class="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-semibold"
-            :class="variant === 'restaurant' ? 'text-white' : 'text-brand-ink'"
+            :class="
+              variant === 'restaurant' || variant === 'lawyer' ? 'text-white' : 'text-brand-ink'
+            "
             @click="mobileOpen = false"
           >
             <span class="material-symbols-outlined text-[20px] text-brand">call</span>
             {{ demo.phone }}
           </a>
           <ThemeButton :to="contactTo" class="mt-2" @click="mobileOpen = false">{{
-            variant === 'restaurant' ? 'Rezervovat stůl' : 'Nezávazná poptávka'
+            variant === 'restaurant'
+              ? 'Rezervovat stůl'
+              : variant === 'lawyer'
+                ? 'Nezávazná konzultace'
+                : 'Nezávazná poptávka'
           }}</ThemeButton>
         </div>
       </div>
