@@ -44,14 +44,17 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
 
 <template>
   <header
-    class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
-    :class="
-      solid
-        ? darkSolid
-          ? 'border-b border-white/10 bg-neutral-900/90 shadow-sm backdrop-blur-md'
-          : 'border-b border-slate-100 bg-white/90 shadow-sm backdrop-blur-md'
-        : 'bg-transparent'
-    "
+    class="inset-x-0 top-0 z-50 transition-all duration-300"
+    :class="[
+      variant === 'freelancer' ? 'absolute bg-transparent' : 'fixed',
+      variant === 'freelancer'
+        ? ''
+        : solid
+          ? darkSolid
+            ? 'border-b border-white/10 bg-neutral-900/90 shadow-sm backdrop-blur-md'
+            : 'border-b border-slate-100 bg-white/90 shadow-sm backdrop-blur-md'
+          : 'bg-transparent',
+    ]"
   >
     <!-- ============================================================= -->
     <!-- LAWN — clean: left logo, rounded pill nav, green pill CTA      -->
@@ -350,6 +353,44 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
     </div>
 
     <!-- ============================================================= -->
+    <!-- FREELANCER — modern minimal personal portfolio: bold Inter     -->
+    <!-- wordmark + crimson dot, anchor nav, crimson "spolupracovat"     -->
+    <!-- CTA; LIGHT theme (white over hero → white bar, charcoal text).  -->
+    <!-- ============================================================= -->
+    <div
+      v-else-if="variant === 'freelancer'"
+      class="container-x flex items-center justify-between gap-4 py-3"
+    >
+      <!-- Left: brand dot + name -->
+      <NuxtLink :to="homeTo" class="flex items-center gap-3">
+        <span
+          class="flex size-9 items-center justify-center rounded-full bg-white text-brand-dark transition-colors hover:bg-brand hover:text-white"
+        >
+          <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+        </span>
+      </NuxtLink>
+
+      <!-- Right: email + hamburger (dark on the crimson hero) -->
+      <div class="flex items-center gap-5">
+        <a
+          :href="`mailto:${demo.email}`"
+          class="hidden text-sm font-semibold text-brand-ink transition-opacity hover:opacity-70 sm:inline-flex"
+        >
+          {{ demo.email }}
+        </a>
+        <button
+          class="flex size-9 items-center justify-center text-brand-ink transition-opacity hover:opacity-70"
+          aria-label="Menu"
+          @click="mobileOpen = !mobileOpen"
+        >
+          <span class="material-symbols-outlined text-[28px]">{{
+            mobileOpen ? 'close' : 'menu'
+          }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
     <!-- LANDSCAPING — bold/dark: uppercase tracked menu, square accent -->
     <!-- CTA, social dots; solid state is dark.                         -->
     <!-- ============================================================= -->
@@ -435,11 +476,11 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
       leave-from-class="opacity-100 translate-y-0"
       leave-to-class="opacity-0 -translate-y-2"
     >
-      <div v-if="mobileOpen" class="container-x mt-3 pb-3 xl:hidden">
+      <div v-if="mobileOpen && variant !== 'freelancer'" class="container-x mt-3 pb-3 xl:hidden">
         <div
           class="flex flex-col gap-1 rounded-2xl p-3 shadow-xl"
           :class="
-            variant === 'restaurant' || variant === 'lawyer'
+            variant === 'restaurant' || variant === 'lawyer' || variant === 'freelancer'
               ? 'border border-white/10 bg-brand-dark'
               : 'border border-slate-100 bg-white'
           "
@@ -454,7 +495,9 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
                 ? 'font-medium uppercase tracking-wide text-white hover:bg-white/10 hover:text-brand'
                 : variant === 'lawyer'
                   ? 'tracking-wide text-white hover:bg-white/10 hover:text-brand'
-                  : 'font-semibold text-brand-ink hover:bg-brand-soft hover:text-brand'
+                  : variant === 'freelancer'
+                    ? 'font-bold text-white hover:bg-white/10 hover:text-brand'
+                    : 'font-semibold text-brand-ink hover:bg-brand-soft hover:text-brand'
             "
             @click="mobileOpen = false"
           >
@@ -464,7 +507,9 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
             :href="telHref"
             class="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-semibold"
             :class="
-              variant === 'restaurant' || variant === 'lawyer' ? 'text-white' : 'text-brand-ink'
+              variant === 'restaurant' || variant === 'lawyer' || variant === 'freelancer'
+                ? 'text-white'
+                : 'text-brand-ink'
             "
             @click="mobileOpen = false"
           >
@@ -476,10 +521,85 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
               ? 'Rezervovat stůl'
               : variant === 'lawyer'
                 ? 'Nezávazná konzultace'
-                : 'Nezávazná poptávka'
+                : variant === 'freelancer'
+                  ? 'Pojďme spolupracovat'
+                  : 'Nezávazná poptávka'
           }}</ThemeButton>
         </div>
       </div>
     </transition>
+
+    <!-- Freelancer: modern right off-canvas menu -->
+    <Teleport to="body">
+      <transition
+        enter-active-class="transition-opacity duration-300"
+        enter-from-class="opacity-0"
+        leave-active-class="transition-opacity duration-300"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="mobileOpen && variant === 'freelancer'"
+          class="fixed inset-0 z-[90] bg-black/60 backdrop-blur-sm"
+          @click="mobileOpen = false"
+        />
+      </transition>
+      <transition
+        enter-active-class="transition-transform duration-300 ease-out"
+        enter-from-class="translate-x-full"
+        leave-active-class="transition-transform duration-300 ease-in"
+        leave-to-class="translate-x-full"
+      >
+        <aside
+          v-if="mobileOpen && variant === 'freelancer'"
+          class="fixed right-0 top-0 z-[95] flex h-full w-full flex-col justify-center bg-[#232323] px-10 py-16 text-white shadow-2xl md:w-[60%] lg:w-1/2 lg:px-20"
+        >
+          <button
+            class="absolute right-8 top-8 flex size-12 items-center justify-center rounded-full bg-white text-[#232323] transition-transform hover:rotate-90"
+            aria-label="Zavřít"
+            @click="mobileOpen = false"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+
+          <nav class="flex flex-col gap-1">
+            <NuxtLink
+              v-for="link in links"
+              :key="link.to"
+              :to="link.to"
+              class="w-fit text-4xl font-bold tracking-tight text-white transition-colors hover:text-[#c2001c] sm:text-5xl"
+              @click="mobileOpen = false"
+            >
+              {{ link.label }}
+            </NuxtLink>
+          </nav>
+
+          <div class="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2">
+            <div>
+              <p class="text-sm font-semibold text-white/50">Kontaktní údaje</p>
+              <p class="mt-3 text-sm leading-relaxed text-white/80">{{ demo.address }}</p>
+              <a
+                :href="telHref"
+                class="mt-1 block text-sm text-white/80 transition-colors hover:text-[#c2001c]"
+                >{{ demo.phone }}</a
+              >
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-white/50">Napište mi</p>
+              <a
+                :href="`mailto:${demo.email}`"
+                class="mt-3 block text-sm text-white/80 transition-colors hover:text-[#c2001c]"
+                >{{ demo.email }}</a
+              >
+              <div class="mt-3 flex gap-4 text-sm font-bold text-white/70">
+                <a href="#" class="transition-colors hover:text-[#c2001c]">Fb.</a>
+                <a href="#" class="transition-colors hover:text-[#c2001c]">Ig.</a>
+                <a href="#" class="transition-colors hover:text-[#c2001c]">Tw.</a>
+                <a href="#" class="transition-colors hover:text-[#c2001c]">Be.</a>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </transition>
+    </Teleport>
   </header>
 </template>

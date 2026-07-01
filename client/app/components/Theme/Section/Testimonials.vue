@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useAutoSlider } from '~/../app/composables/useAutoSlider';
 
 interface Testimonial {
   name: string;
@@ -14,31 +14,22 @@ const props = defineProps<{
   items: Testimonial[];
 }>();
 
-const active = ref(0);
-let timer: ReturnType<typeof setInterval> | null = null;
-
-const next = () => (active.value = (active.value + 1) % props.items.length);
-const prev = () => (active.value = (active.value - 1 + props.items.length) % props.items.length);
-const go = (i: number) => (active.value = i);
-
-const startAuto = () => {
-  stopAuto();
-  timer = setInterval(next, 6000);
-};
-const stopAuto = () => {
-  if (timer) clearInterval(timer);
-  timer = null;
-};
-
-onMounted(startAuto);
-onBeforeUnmount(stopAuto);
+// 1-per-view auto-advancing carousel (pause on hover).
+const {
+  index: active,
+  go,
+  next,
+  prev,
+  pause,
+  resume,
+} = useAutoSlider(() => props.items.length, 6000);
 </script>
 
 <template>
   <section
     class="section relative overflow-hidden bg-brand-soft"
-    @mouseenter="stopAuto"
-    @mouseleave="startAuto"
+    @mouseenter="pause"
+    @mouseleave="resume"
   >
     <div class="container-x">
       <ThemeSectionHeading :subtitle="subtitle" :title="title" />
@@ -93,6 +84,7 @@ onBeforeUnmount(stopAuto);
         <!-- Controls -->
         <div class="mt-8 flex items-center justify-center gap-4">
           <button
+            type="button"
             class="flex size-11 items-center justify-center rounded-full border border-brand/20 text-brand-ink transition-colors hover:bg-brand hover:text-white"
             aria-label="Předchozí"
             @click="prev"
@@ -103,6 +95,7 @@ onBeforeUnmount(stopAuto);
             <button
               v-for="(t, i) in items"
               :key="i"
+              type="button"
               class="h-2.5 rounded-full transition-all"
               :class="i === active ? 'w-7 bg-brand' : 'w-2.5 bg-brand/30'"
               :aria-label="`Reference ${i + 1}`"
@@ -110,6 +103,7 @@ onBeforeUnmount(stopAuto);
             />
           </div>
           <button
+            type="button"
             class="flex size-11 items-center justify-center rounded-full border border-brand/20 text-brand-ink transition-colors hover:bg-brand hover:text-white"
             aria-label="Další"
             @click="next"

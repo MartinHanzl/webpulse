@@ -41,6 +41,12 @@ const meta: Record<
     icon: 'gavel',
     highlights: ['Právní služby', 'Advokáti & profily', 'Playfair Display'],
   },
+  freelancer: {
+    colors: ['#c2001c', '#232323', '#f7f7f7'],
+    dark: true,
+    icon: 'draw',
+    highlights: ['Portfolio filtr', 'Expertíza & ocenění', 'Single-page'],
+  },
 };
 
 useHead({

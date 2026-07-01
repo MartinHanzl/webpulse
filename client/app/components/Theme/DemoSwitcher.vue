@@ -13,6 +13,7 @@ const swatches: Record<string, string[]> = {
   landscaping: ['#3DA35C', '#FECF02', '#0A0C0A'],
   restaurant: ['#d39121', '#d51f0f', '#282725'],
   lawyer: ['#b98e44', '#152833', '#f6f3ef'],
+  freelancer: ['#c2001c', '#232323', '#f7f7f7'],
 };
 </script>
 

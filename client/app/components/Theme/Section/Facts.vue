@@ -1,11 +1,36 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 interface Fact {
-  value: number;
+  value: number | string;
   suffix?: string;
   label: string;
   icon: string;
 }
-defineProps<{ items: Fact[]; image?: string }>();
+const props = defineProps<{ items: Fact[]; image?: string }>();
+
+interface ParsedFact extends Fact {
+  numeric: number | null;
+  parsedSuffix: string;
+}
+
+// Parse a numeric part + suffix out of each stat so plain numbers animate
+// with ThemeCounter, while non-numeric values (e.g. "ISO", "4,9★") stay static.
+const parsed = computed<ParsedFact[]>(() =>
+  props.items.map((f) => {
+    if (typeof f.value === 'number') {
+      return { ...f, numeric: f.value, parsedSuffix: f.suffix ?? '' };
+    }
+    const match = String(f.value).match(/^\s*([\d.,]+)(.*)$/);
+    if (match && match[1]) {
+      const numeric = Number(match[1].replace(/\s/g, '').replace(',', '.'));
+      if (!Number.isNaN(numeric)) {
+        return { ...f, numeric, parsedSuffix: f.suffix ?? match[2].trimEnd() };
+      }
+    }
+    return { ...f, numeric: null, parsedSuffix: f.suffix ?? '' };
+  }),
+);
 </script>
 
 <template>
@@ -16,7 +41,7 @@ defineProps<{ items: Fact[]; image?: string }>();
     />
     <div class="container-x relative grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
       <div
-        v-for="(f, i) in items"
+        v-for="(f, i) in parsed"
         :key="f.label"
         class="reveal flex flex-col items-center gap-3 text-center"
         :style="{ transitionDelay: `${i * 100}ms` }"
@@ -27,7 +52,8 @@ defineProps<{ items: Fact[]; image?: string }>();
           <span class="material-symbols-outlined text-[32px]">{{ f.icon }}</span>
         </span>
         <span class="text-4xl font-extrabold !text-white sm:text-5xl">
-          <ThemeCounter :to="f.value" :suffix="f.suffix" />
+          <ThemeCounter v-if="f.numeric !== null" :to="f.numeric" :suffix="f.parsedSuffix" />
+          <template v-else>{{ f.value }}</template>
         </span>
         <span class="text-sm font-medium text-white/60">{{ f.label }}</span>
       </div>

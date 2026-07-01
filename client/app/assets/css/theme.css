@@ -8,6 +8,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@400..800&display=swap');
 /* Lawyer demo fonts (Crafto): Playfair Display serif + DM Sans body. */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..700&family=DM+Sans:wght@400..700&display=swap');
+/* Freelancer demo font (Crafto): Inter. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap');
 
 /* Material Symbols: font face + base class come from the local
    `material-symbols/outlined.css` (loaded in nuxt.config) so icons work
@@ -106,6 +108,29 @@
 :where(.demo-root[data-demo='lawyer']) h6 {
 	font-family: 'Playfair Display', 'Fustat', serif;
 	font-weight: 600;
+}
+
+/* Freelancer (Crafto) — crimson on charcoal/off-white, bold Inter. */
+.demo-root[data-demo='freelancer'] {
+	--brand: 194 0 28; /* #c2001c crimson */
+	--brand-dark: 35 35 35; /* #232323 charcoal */
+	--brand-soft: 254 237 236; /* #feedec */
+	--brand-cream: 247 247 247; /* #f7f7f7 */
+	--brand-accent: 194 0 28; /* crimson */
+	--brand-ink: 35 35 35; /* #232323 */
+	--brand-muted: 113 117 128; /* #717580 */
+	--brand-pop: var(--brand);
+	font-family: 'Inter', sans-serif;
+}
+:where(.demo-root[data-demo='freelancer']) h1,
+:where(.demo-root[data-demo='freelancer']) h2,
+:where(.demo-root[data-demo='freelancer']) h3,
+:where(.demo-root[data-demo='freelancer']) h4,
+:where(.demo-root[data-demo='freelancer']) h5,
+:where(.demo-root[data-demo='freelancer']) h6 {
+	font-family: 'Inter', sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.02em;
 }
 
 /* `:where()` keeps specificity at 0 so Tailwind text-* utilities (e.g. text-white

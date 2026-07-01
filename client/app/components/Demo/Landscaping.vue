@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import type { DemoDefinition } from '~/../app/composables/useDemos';
 import { useStockImages } from '~/../app/composables/useStockImages';
 
 defineProps<{ demo: DemoDefinition }>();
 const ph = useStockImages().get('landscaping');
+
+// Parse a display string ("320+", "60 ha", "99 %", "28") into a numeric
+// count-up target + trailing suffix. Returns null for non-numeric ("ISO").
+function parseCounter(value: string): { to: number; suffix: string } | null {
+  const m = value.match(/^(\d+)(.*)$/);
+  return m ? { to: Number(m[1]), suffix: m[2] } : null;
+}
 
 const heroCards = [
   {
@@ -52,6 +60,7 @@ const facts = [
   { value: '28 let', label: 'Na trhu', icon: 'workspace_premium' },
   { value: 'ISO', label: 'Certifikovaná firma', icon: 'verified' },
 ];
+const factItems = facts.map((f) => ({ ...f, counter: parseCounter(f.value) }));
 
 const services = [
   {
@@ -124,6 +133,7 @@ const projects = [
   { title: 'Park u sídliště', city: 'Hradec Králové', image: ph.work[1] },
   { title: 'Areál výrobního závodu', city: 'Pardubice', image: ph.work[2] },
 ];
+const projectItems = projects.map((p) => ({ image: p.image, title: p.title, category: p.city }));
 
 const testimonials = [
   {
@@ -158,6 +168,39 @@ const teamCounters = [
   { value: '99 %', label: 'Spokojenosti' },
   { value: '12', label: 'Ocenění' },
 ];
+const teamItems = teamCounters.map((c) => ({ ...c, counter: parseCounter(c.value) }));
+
+// Case-studies lightbox + scroll-snap carousel with autoplay.
+const lb = ref();
+const track = ref<HTMLElement | null>(null);
+
+function scrollByCards(dir: number) {
+  const el = track.value;
+  if (el) el.scrollBy({ left: dir * el.clientWidth * 0.85, behavior: 'smooth' });
+}
+
+let autoplay: ReturnType<typeof setInterval> | null = null;
+function startAutoplay() {
+  stopAutoplay();
+  autoplay = setInterval(() => {
+    const el = track.value;
+    if (!el) return;
+    if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 8) {
+      el.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      scrollByCards(1);
+    }
+  }, 4500);
+}
+function stopAutoplay() {
+  if (autoplay) {
+    clearInterval(autoplay);
+    autoplay = null;
+  }
+}
+
+onMounted(startAutoplay);
+onBeforeUnmount(stopAutoplay);
 </script>
 
 <template>
@@ -277,14 +320,17 @@ const teamCounters = [
       <div class="container-x">
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           <div
-            v-for="f in facts"
+            v-for="f in factItems"
             :key="f.label"
             class="reveal relative overflow-hidden rounded-3xl border border-white/10 bg-neutral-950 p-8 text-center"
           >
             <span class="material-symbols-outlined mb-4 text-4xl text-brand-accent">{{
               f.icon
             }}</span>
-            <p class="text-4xl font-extrabold text-white lg:text-5xl">{{ f.value }}</p>
+            <p class="text-4xl font-extrabold text-brand-accent lg:text-5xl">
+              <ThemeCounter v-if="f.counter" :to="f.counter.to" :suffix="f.counter.suffix" />
+              <template v-else>{{ f.value }}</template>
+            </p>
             <p class="mt-2 text-sm font-medium uppercase tracking-wide text-white/50">
               {{ f.label }}
             </p>
@@ -422,30 +468,65 @@ const teamCounters = [
           align="center"
         />
 
-        <div class="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          <article
-            v-for="p in projects"
-            :key="p.title"
-            class="reveal group relative overflow-hidden rounded-3xl border border-white/10 transition-transform duration-300 hover:-translate-y-2"
+        <div class="mt-14">
+          <div
+            ref="track"
+            class="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-2"
+            style="scrollbar-width: none"
+            @mouseenter="stopAutoplay"
+            @mouseleave="startAutoplay"
           >
-            <img
-              :src="p.image"
-              alt=""
-              class="h-72 w-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            <div
-              class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent"
-            />
-            <div class="absolute inset-x-0 bottom-0 p-7">
-              <p class="flex items-center gap-1.5 text-sm font-medium text-brand-accent">
-                <span class="material-symbols-outlined text-base">location_on</span>
-                {{ p.city }}
-              </p>
-              <h3 class="mt-2 text-xl font-bold text-white">{{ p.title }}</h3>
-            </div>
-          </article>
+            <article
+              v-for="(p, i) in projects"
+              :key="p.title"
+              class="group relative w-[85%] shrink-0 cursor-pointer snap-start overflow-hidden rounded-3xl border border-white/10 transition-transform duration-300 hover:-translate-y-2 sm:w-[60%] lg:w-[40%]"
+              @click="lb.show(i)"
+            >
+              <img
+                :src="p.image"
+                alt=""
+                class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
+              />
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-neutral-950 via-neutral-950/20 to-transparent"
+              />
+              <span
+                class="absolute right-5 top-5 flex size-11 items-center justify-center rounded-full bg-neutral-950/60 text-brand-accent opacity-0 backdrop-blur transition-opacity duration-300 group-hover:opacity-100"
+              >
+                <span class="material-symbols-outlined">zoom_in</span>
+              </span>
+              <div class="absolute inset-x-0 bottom-0 p-7">
+                <p class="flex items-center gap-1.5 text-sm font-medium text-brand-accent">
+                  <span class="material-symbols-outlined text-base">location_on</span>
+                  {{ p.city }}
+                </p>
+                <h3 class="mt-2 text-xl font-bold text-white">{{ p.title }}</h3>
+              </div>
+            </article>
+          </div>
+
+          <div class="mt-8 flex justify-center gap-3">
+            <button
+              type="button"
+              aria-label="Předchozí realizace"
+              class="flex size-12 items-center justify-center rounded-full bg-brand-accent text-brand-dark transition hover:opacity-90"
+              @click="scrollByCards(-1)"
+            >
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button
+              type="button"
+              aria-label="Další realizace"
+              class="flex size-12 items-center justify-center rounded-full bg-brand-accent text-brand-dark transition hover:opacity-90"
+              @click="scrollByCards(1)"
+            >
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </div>
         </div>
       </div>
+
+      <ThemeLightbox ref="lb" :images="projectItems" />
     </section>
 
     <!-- 7. TESTIMONIALS -->
@@ -546,8 +627,11 @@ const teamCounters = [
         <div
           class="mt-16 grid gap-6 rounded-3xl border border-white/10 bg-neutral-900 p-10 sm:grid-cols-3"
         >
-          <div v-for="c in teamCounters" :key="c.label" class="text-center">
-            <p class="text-4xl font-extrabold text-brand-accent lg:text-5xl">{{ c.value }}</p>
+          <div v-for="c in teamItems" :key="c.label" class="text-center">
+            <p class="text-4xl font-extrabold text-brand-accent lg:text-5xl">
+              <ThemeCounter v-if="c.counter" :to="c.counter.to" :suffix="c.counter.suffix" />
+              <template v-else>{{ c.value }}</template>
+            </p>
             <p class="mt-2 text-sm font-medium uppercase tracking-wide text-white/50">
               {{ c.label }}
             </p>

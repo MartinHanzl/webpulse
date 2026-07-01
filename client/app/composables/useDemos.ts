@@ -9,9 +9,9 @@ export interface DemoNavLink {
 }
 
 export interface DemoDefinition {
-  slug: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer';
+  slug: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer';
   /** value for data-demo (palette key in theme.css) */
-  palette: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer';
+  palette: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer';
   brandName: string;
   tagline: string;
   phone: string;
@@ -82,10 +82,32 @@ export const DEMOS: DemoDefinition[] = [
     switchLabel: 'Law Firm',
     industry: 'Advokátní kancelář',
   },
+  {
+    slug: 'freelancer',
+    palette: 'freelancer',
+    brandName: 'Adam Kovář',
+    tagline: 'UX/UI designér & vývojář na volné noze',
+    phone: '+420 777 908 112',
+    email: 'ahoj@adamkovar.cz',
+    address: 'Brno, Česko',
+    switchLabel: 'Freelancer',
+    industry: 'Freelancer',
+  },
 ];
 
 export function useDemos() {
   const nav = (slug: string): DemoNavLink[] => {
+    // Freelancer demo is a single page — anchor navigation.
+    if (slug === 'freelancer') {
+      return [
+        { label: 'Domů', to: `/demo/${slug}` },
+        { label: 'O mně', to: `/demo/${slug}#about` },
+        { label: 'Práce', to: `/demo/${slug}#work` },
+        { label: 'Expertíza', to: `/demo/${slug}#expertise` },
+        { label: 'Ocenění', to: `/demo/${slug}#awards` },
+        { label: 'Kontakt', to: `/demo/${slug}#contact` },
+      ];
+    }
     // Lawyer demo: practice areas, attorneys, journal.
     if (slug === 'lawyer') {
       return [

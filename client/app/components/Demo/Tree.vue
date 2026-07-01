@@ -7,9 +7,9 @@ defineProps<{ demo: DemoDefinition }>();
 const ph = useStockImages().get('tree');
 
 const aboutCounters = [
-  { value: '1 200+', label: 'pokácených stromů' },
-  { value: '18', label: 'let praxe' },
-  { value: '2 900+', label: 'spokojených klientů' },
+  { to: 1200, suffix: '+', label: 'pokácených stromů' },
+  { to: 18, suffix: '', label: 'let praxe' },
+  { to: 2900, suffix: '+', label: 'spokojených klientů' },
 ];
 
 const services = [
@@ -166,7 +166,9 @@ const pos = ref(55);
               <span class="material-symbols-outlined">workspace_premium</span>
             </span>
             <div>
-              <p class="text-2xl font-bold leading-none text-brand-ink">18 let</p>
+              <p class="text-2xl font-bold leading-none text-brand-ink">
+                <ThemeCounter :to="18" /> let
+              </p>
               <p class="text-sm text-brand-muted">praxe v oboru</p>
             </div>
           </div>
@@ -212,9 +214,11 @@ const pos = ref(55);
             <div
               v-for="c in aboutCounters"
               :key="c.label"
-              class="rounded-2xl bg-brand-cream px-4 py-5 text-center"
+              class="rounded-2xl bg-brand-cream px-4 py-5 text-center transition-colors duration-300 hover:bg-brand-soft"
             >
-              <p class="text-2xl font-bold text-brand sm:text-3xl">{{ c.value }}</p>
+              <p class="text-2xl font-bold text-brand sm:text-3xl">
+                <ThemeCounter :to="c.to" :suffix="c.suffix" />
+              </p>
               <p class="mt-1 text-sm leading-snug text-brand-muted">{{ c.label }}</p>
             </div>
           </div>
@@ -330,8 +334,12 @@ const pos = ref(55);
           <div
             v-for="p in pricing"
             :key="p.name"
-            class="reveal relative flex flex-col gap-6 rounded-3xl p-8 shadow-sm"
-            :class="p.featured ? 'bg-brand text-white shadow-xl lg:scale-105' : 'bg-white'"
+            class="reveal relative flex flex-col gap-6 rounded-3xl p-8 shadow-sm transition-all duration-300"
+            :class="
+              p.featured
+                ? 'bg-brand text-white shadow-2xl ring-2 ring-brand-accent lg:scale-105'
+                : 'bg-white hover:-translate-y-2 hover:shadow-xl'
+            "
           >
             <span
               v-if="p.featured"
@@ -423,11 +431,17 @@ const pos = ref(55);
               Po
             </span>
 
-            <!-- divider line -->
+            <!-- divider line + handle knob -->
             <span
-              class="pointer-events-none absolute inset-y-0 w-0.5 bg-white shadow-[0_0_8px_rgba(0,0,0,0.4)]"
+              class="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white shadow-[0_0_8px_rgba(0,0,0,0.4)]"
               :style="{ left: `${pos}%` }"
-            />
+            >
+              <span
+                class="absolute left-1/2 top-1/2 flex size-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-brand shadow-lg ring-1 ring-brand/10"
+              >
+                <span class="material-symbols-outlined text-xl">drag_indicator</span>
+              </span>
+            </span>
           </div>
 
           <div class="mt-6 flex items-center gap-4">

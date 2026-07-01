@@ -41,6 +41,26 @@ const P = {
   lawyerPortrait: '1560250097-0b93528c311a',
   lawHandshake: '1454165804606-c3d57bc86b40',
   lawBuilding: '1486406146926-c627a92ad1ab',
+  // Freelancer / creative (Adam Kovář demo)
+  fWorkspace: '1498050108023-c5249f4df085',
+  fDesk: '1497366754035-f200968a6e72',
+  fDesigner: '1507003211169-0a1dd7228f2d',
+  fAbstract: '1550745165-9bc0b252726f',
+  fLaptop: '1517245386807-bb43f82c33c4',
+  fMockup: '1559028012-481c04fa702d',
+  fCreative: '1561070791-2526d30994b5',
+  fBranding: '1600880292203-757bb62b4baf',
+  fApp: '1512941937669-90a1b58e7e9c',
+  fUi: '1545235617-9465d2a55698',
+  fPortrait: '1500648767791-00dcc994a43e',
+  fSkincare: '1571781926291-c477ebfd024b',
+  fCosmetic: '1523293182086-7651a899d37f',
+  fLeaf: '1512207736890-6ffed8a84e8d',
+  fCamera: '1526170375885-4d8ecf77b99f',
+  fFashion: '1503602642458-232111445657',
+  fPerfume: '1541643600914-78b084683601',
+  fShoe: '1542291026-7eec264c27ff',
+  fWatch: '1523275335684-37898b6baf30',
 };
 
 export interface VariantImages {
@@ -134,6 +154,18 @@ export function useStockImages() {
         P.lawyerPortrait,
       ].map((p) => U(p, 700)),
       blog: [P.lawOffice, P.lawBooks, P.lawHandshake].map((p) => U(p, 700)),
+    },
+    freelancer: {
+      hero: U(P.fPortrait, 1200),
+      aboutMain: U(P.fDesk, 900),
+      aboutSecondary: U(P.fPortrait, 900),
+      choose: U(P.fCreative, 900),
+      facts: U(P.fAbstract, 1920),
+      work: [P.fSkincare, P.fCosmetic, P.fLeaf, P.fFashion, P.fPerfume].map((p) => U(p, 800)),
+      services: [P.fCamera, P.fWatch, P.fShoe, P.fCosmetic, P.fSkincare, P.fFashion].map((p) =>
+        U(p, 700),
+      ),
+      blog: [P.fCreative, P.fDesk, P.fAbstract].map((p) => U(p, 700)),
     },
   };
 
