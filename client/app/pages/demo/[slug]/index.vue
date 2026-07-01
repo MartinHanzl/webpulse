@@ -8,6 +8,7 @@ import {
   DemoRestaurant,
   DemoLawyer,
   DemoFreelancer,
+  DemoSpa,
 } from '#components';
 import { useDemos } from '~/../app/composables/useDemos';
 
@@ -30,6 +31,7 @@ const componentMap = {
   restaurant: DemoRestaurant,
   lawyer: DemoLawyer,
   freelancer: DemoFreelancer,
+  spa: DemoSpa,
 };
 const variantComponent = computed(
   () => componentMap[slug.value as keyof typeof componentMap] ?? DemoLawn,

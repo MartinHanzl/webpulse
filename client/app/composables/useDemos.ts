@@ -9,9 +9,9 @@ export interface DemoNavLink {
 }
 
 export interface DemoDefinition {
-  slug: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer';
+  slug: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer' | 'spa';
   /** value for data-demo (palette key in theme.css) */
-  palette: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer';
+  palette: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer' | 'spa';
   brandName: string;
   tagline: string;
   phone: string;
@@ -93,10 +93,32 @@ export const DEMOS: DemoDefinition[] = [
     switchLabel: 'Freelancer',
     industry: 'Freelancer',
   },
+  {
+    slug: 'spa',
+    palette: 'spa',
+    brandName: 'Serenity',
+    tagline: 'Lázně a wellness studio',
+    phone: '+420 222 018 000',
+    email: 'rezervace@serenityspa.cz',
+    address: 'Vodičkova 30, Praha 1',
+    switchLabel: 'Spa Salon',
+    industry: 'Spa & wellness',
+  },
 ];
 
 export function useDemos() {
   const nav = (slug: string): DemoNavLink[] => {
+    // Spa demo: treatments, packages, facility.
+    if (slug === 'spa') {
+      return [
+        { label: 'Domů', to: `/demo/${slug}` },
+        { label: 'O nás', to: `/demo/${slug}/o-nas` },
+        { label: 'Procedury', to: `/demo/${slug}/procedury` },
+        { label: 'Balíčky', to: `/demo/${slug}/balicky` },
+        { label: 'Prostředí', to: `/demo/${slug}/prostredi` },
+        { label: 'Kontakt', to: `/demo/${slug}/kontakt` },
+      ];
+    }
     // Freelancer demo is a single page — anchor navigation.
     if (slug === 'freelancer') {
       return [

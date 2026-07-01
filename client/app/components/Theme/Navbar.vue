@@ -46,8 +46,8 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
   <header
     class="inset-x-0 top-0 z-50 transition-all duration-300"
     :class="[
-      variant === 'freelancer' ? 'absolute bg-transparent' : 'fixed',
-      variant === 'freelancer'
+      variant === 'freelancer' || variant === 'spa' ? 'absolute bg-transparent' : 'fixed',
+      variant === 'freelancer' || variant === 'spa'
         ? ''
         : solid
           ? darkSolid
@@ -391,6 +391,82 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
     </div>
 
     <!-- ============================================================= -->
+    <!-- SPA — elegant wellness: 3-part bar with a centered split-circle -->
+    <!-- serif monogram; phone + half the nav left, half + socials right; -->
+    <!-- transparent over the dark hero, all white text, coral hover.    -->
+    <!-- ============================================================= -->
+    <div
+      v-else-if="variant === 'spa'"
+      class="container-x flex items-center justify-between gap-6 py-6"
+    >
+      <!-- Left: phone + first half of nav (hamburger on mobile) -->
+      <div class="flex flex-1 items-center gap-8">
+        <button
+          class="flex size-11 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:text-brand lg:hidden"
+          aria-label="Menu"
+          @click="mobileOpen = !mobileOpen"
+        >
+          <span class="material-symbols-outlined">{{ mobileOpen ? 'close' : 'menu' }}</span>
+        </button>
+        <a
+          :href="telHref"
+          class="hidden items-center gap-2 text-sm tracking-wide text-white transition-colors hover:text-brand xl:flex"
+        >
+          <span class="material-symbols-outlined text-[18px]">call</span>
+          {{ demo.phone }}
+        </a>
+        <nav class="hidden items-center gap-7 lg:flex">
+          <NuxtLink
+            v-for="link in links.slice(0, 3)"
+            :key="link.to"
+            :to="link.to"
+            class="text-sm tracking-wide text-white transition-colors hover:text-brand"
+          >
+            {{ link.label }}
+          </NuxtLink>
+        </nav>
+      </div>
+
+      <!-- Center: circular split-colour serif monogram -->
+      <NuxtLink :to="homeTo" class="shrink-0" aria-label="Domů">
+        <span
+          class="flex size-14 items-center justify-center rounded-full bg-gradient-to-b from-brand from-50% to-brand-cream to-50% shadow-lg shadow-black/20"
+        >
+          <span class="text-2xl font-bold text-brand-ink [font-family:'Rufina',serif]">{{
+            demo.brandName.charAt(0)
+          }}</span>
+        </span>
+      </NuxtLink>
+
+      <!-- Right: second half of nav + social icons -->
+      <div class="flex flex-1 items-center justify-end gap-8">
+        <nav class="hidden items-center gap-7 lg:flex">
+          <NuxtLink
+            v-for="link in links.slice(3)"
+            :key="link.to"
+            :to="link.to"
+            class="text-sm tracking-wide text-white transition-colors hover:text-brand"
+          >
+            {{ link.label }}
+          </NuxtLink>
+        </nav>
+        <div class="hidden items-center gap-4 lg:flex">
+          <a
+            v-for="s in ['facebook', 'instagram', 'twitter']"
+            :key="s"
+            href="#"
+            class="text-white/80 transition-colors hover:text-brand"
+            :aria-label="s"
+          >
+            <span class="material-symbols-outlined text-[20px]">public</span>
+          </a>
+        </div>
+        <!-- Balances the mobile hamburger so the monogram stays centred -->
+        <span class="size-11 lg:hidden" aria-hidden="true" />
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
     <!-- LANDSCAPING — bold/dark: uppercase tracked menu, square accent -->
     <!-- CTA, social dots; solid state is dark.                         -->
     <!-- ============================================================= -->
@@ -480,7 +556,10 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
         <div
           class="flex flex-col gap-1 rounded-2xl p-3 shadow-xl"
           :class="
-            variant === 'restaurant' || variant === 'lawyer' || variant === 'freelancer'
+            variant === 'restaurant' ||
+            variant === 'lawyer' ||
+            variant === 'freelancer' ||
+            variant === 'spa'
               ? 'border border-white/10 bg-brand-dark'
               : 'border border-slate-100 bg-white'
           "
@@ -497,7 +576,9 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
                   ? 'tracking-wide text-white hover:bg-white/10 hover:text-brand'
                   : variant === 'freelancer'
                     ? 'font-bold text-white hover:bg-white/10 hover:text-brand'
-                    : 'font-semibold text-brand-ink hover:bg-brand-soft hover:text-brand'
+                    : variant === 'spa'
+                      ? 'tracking-wide text-white hover:bg-white/10 hover:text-brand'
+                      : 'font-semibold text-brand-ink hover:bg-brand-soft hover:text-brand'
             "
             @click="mobileOpen = false"
           >
@@ -507,7 +588,10 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
             :href="telHref"
             class="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-semibold"
             :class="
-              variant === 'restaurant' || variant === 'lawyer' || variant === 'freelancer'
+              variant === 'restaurant' ||
+              variant === 'lawyer' ||
+              variant === 'freelancer' ||
+              variant === 'spa'
                 ? 'text-white'
                 : 'text-brand-ink'
             "
@@ -523,7 +607,9 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
                 ? 'Nezávazná konzultace'
                 : variant === 'freelancer'
                   ? 'Pojďme spolupracovat'
-                  : 'Nezávazná poptávka'
+                  : variant === 'spa'
+                    ? 'Rezervovat termín'
+                    : 'Nezávazná poptávka'
           }}</ThemeButton>
         </div>
       </div>

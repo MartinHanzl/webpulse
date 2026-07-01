@@ -53,6 +53,18 @@ const P = {
   fApp: '1512941937669-90a1b58e7e9c',
   fUi: '1545235617-9465d2a55698',
   fPortrait: '1500648767791-00dcc994a43e',
+  // Spa / wellness (Serenity demo)
+  spaMassage: '1544161515-4ab6ce6db874',
+  spaScene: '1600334129128-685c5582fd35',
+  spaFacial: '1570172619644-dfd03ed5d881',
+  spaStones: '1519823551278-64ac92734fb1',
+  spaSauna: '1571019613454-1cb2f99b2d8b',
+  spaTowels: '1540555700478-4be289fbecef',
+  spaOils: '1608571423902-eed4a5ad8108',
+  spaWellness: '1512290923902-8a9f81dc236c',
+  spaHotstone: '1600334089648-b0d9d3028eb2',
+  spaAroma: '1596178065887-1198b6148b2b',
+  spaRelax: '1519415387722-a1c3bbef716c',
   fSkincare: '1571781926291-c477ebfd024b',
   fCosmetic: '1523293182086-7651a899d37f',
   fLeaf: '1512207736890-6ffed8a84e8d',
@@ -166,6 +178,20 @@ export function useStockImages() {
         U(p, 700),
       ),
       blog: [P.fCreative, P.fDesk, P.fAbstract].map((p) => U(p, 700)),
+    },
+    spa: {
+      hero: U(P.spaMassage, 1920),
+      aboutMain: U(P.spaFacial, 900),
+      aboutSecondary: U(P.spaStones, 600),
+      choose: U(P.spaTowels, 900),
+      facts: U(P.spaScene, 1920),
+      work: [P.spaMassage, P.spaFacial, P.spaStones, P.spaHotstone, P.spaAroma].map((p) =>
+        U(p, 800),
+      ),
+      services: [P.spaMassage, P.spaFacial, P.spaStones, P.spaSauna, P.spaAroma, P.spaHotstone].map(
+        (p) => U(p, 700),
+      ),
+      blog: [P.spaWellness, P.spaOils, P.spaRelax].map((p) => U(p, 700)),
     },
   };
 

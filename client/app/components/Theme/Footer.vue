@@ -596,133 +596,89 @@ const lawyerHours = [
     </div>
   </footer>
 
-  <!-- ============ FREELANCER — bold charcoal, minimal portfolio ============ -->
-  <footer
-    v-else-if="variant === 'freelancer'"
-    id="contact"
-    class="relative overflow-hidden bg-brand-dark text-white"
-  >
-    <div
-      class="pointer-events-none absolute -right-24 -top-24 size-80 rounded-full bg-brand/20 blur-3xl"
-    />
-    <div class="container-x relative pt-20">
-      <!-- Big "let's work together" CTA row -->
-      <div
-        class="reveal border-b border-white/10 pb-14 lg:flex lg:items-end lg:justify-between lg:gap-10"
+  <!-- ============ FREELANCER — minimal slim footer ============ -->
+  <footer v-else-if="variant === 'freelancer'" class="bg-brand-dark text-white">
+    <div class="container-x flex flex-col items-center justify-between gap-6 py-10 sm:flex-row">
+      <NuxtLink :to="homeTo" class="text-xl font-extrabold tracking-tight text-white"
+        >{{ demo.brandName }}<span class="text-brand">.</span></NuxtLink
       >
-        <div class="max-w-2xl">
-          <span class="text-sm font-bold uppercase tracking-[0.24em] text-brand">Spolupráce</span>
-          <h3
-            class="mt-4 text-4xl font-extrabold leading-[1.05] tracking-tight !text-white sm:text-5xl lg:text-6xl"
-          >
-            Máte projekt?<br />Pojďme na to<span class="text-brand">.</span>
-          </h3>
+      <nav class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+        <NuxtLink
+          v-for="link in links"
+          :key="link.to"
+          :to="link.to"
+          class="text-sm font-medium text-white/60 transition-colors hover:text-brand"
+          >{{ link.label }}</NuxtLink
+        >
+      </nav>
+      <div class="flex gap-4 text-sm font-bold text-white/60">
+        <a href="#" class="transition-colors hover:text-brand">Fb.</a>
+        <a href="#" class="transition-colors hover:text-brand">Ig.</a>
+        <a href="#" class="transition-colors hover:text-brand">Tw.</a>
+        <a href="#" class="transition-colors hover:text-brand">Be.</a>
+      </div>
+    </div>
+    <div class="border-t border-white/10">
+      <p class="container-x py-5 text-center text-xs text-white/40 sm:text-left">
+        © {{ currentYear }} {{ demo.brandName }}. Demo prezentace — WebPulse.
+      </p>
+    </div>
+  </footer>
+
+  <!-- =============== SPA — light, elegant wellness footer =============== -->
+  <footer v-else-if="variant === 'spa'" class="bg-brand-soft text-brand-ink">
+    <div class="container-x pt-20">
+      <!-- Decorative rotating badge -->
+      <div class="reveal flex justify-center">
+        <ThemeCircleText
+          text="• SERENITY • LÁZNĚ A WELLNESS STUDIO "
+          :duration="20"
+          class="size-32 text-brand-ink"
+        >
+          <span class="flex size-12 items-center justify-center rounded-full bg-brand text-white">
+            <span class="material-symbols-outlined text-[24px]">spa</span>
+          </span>
+        </ThemeCircleText>
+      </div>
+
+      <!-- Two columns -->
+      <div class="mt-14 grid grid-cols-1 gap-10 border-t border-brand-ink/10 pt-14 sm:grid-cols-2">
+        <div class="text-center sm:text-left">
+          <h4 class="mb-4 text-xl">Kde nás najdete</h4>
+          <p class="text-sm leading-relaxed text-brand-muted">{{ demo.address }}</p>
+          <p class="mt-2 text-sm leading-relaxed text-brand-muted">{{ aboutText }}</p>
         </div>
-        <div class="mt-8 flex flex-col items-start gap-5 lg:mt-0 lg:items-end">
-          <ThemeButton :to="contactTo" size="lg">Napište mi</ThemeButton>
+        <div class="text-center sm:text-right">
+          <h4 class="mb-4 text-xl">Jak vám pomůžeme?</h4>
           <a
             :href="`mailto:${demo.email}`"
-            class="text-2xl font-extrabold tracking-tight text-white transition-colors hover:text-brand sm:text-3xl"
+            class="block text-sm text-brand-muted transition-colors hover:text-brand"
+            >{{ demo.email }}</a
           >
-            {{ demo.email }}
-          </a>
+          <a
+            :href="`tel:${demo.phone.replace(/\s/g, '')}`"
+            class="mt-2 block text-sm text-brand-muted transition-colors hover:text-brand"
+            >{{ demo.phone }}</a
+          >
+          <ThemeButton :to="contactTo" size="sm" class="mt-6">Rezervovat termín</ThemeButton>
         </div>
       </div>
 
-      <!-- Columns -->
-      <div class="grid grid-cols-1 gap-10 py-14 sm:grid-cols-2 lg:grid-cols-12">
-        <!-- Brand + bio -->
-        <div class="lg:col-span-4">
-          <NuxtLink :to="homeTo" class="flex flex-col leading-none">
-            <span class="text-2xl font-extrabold tracking-tight text-white"
-              >{{ demo.brandName }}<span class="text-brand">.</span></span
-            >
-            <span
-              class="mt-1.5 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/50"
-              >{{ demo.industry }}</span
-            >
-          </NuxtLink>
-          <p class="mt-5 max-w-xs text-sm leading-relaxed text-white/60">{{ aboutText }}</p>
-          <div class="mt-6 flex gap-3">
-            <a
-              v-for="s in social"
-              :key="s"
-              href="#"
-              class="flex size-10 items-center justify-center rounded-full bg-white/10 text-white/80 transition-colors hover:bg-brand hover:text-white"
-              :aria-label="s"
-            >
-              <span class="material-symbols-outlined text-[18px]">public</span>
-            </a>
-          </div>
-        </div>
-
-        <!-- Quick links -->
-        <div class="lg:col-span-3">
-          <h4 class="mb-5 text-lg font-bold !text-white">Navigace</h4>
-          <ul class="flex flex-col gap-3">
-            <li v-for="link in links" :key="link.to">
-              <NuxtLink
-                :to="link.to"
-                class="text-sm font-medium text-white/60 transition-colors hover:text-brand"
-                >{{ link.label }}</NuxtLink
-              >
-            </li>
-          </ul>
-        </div>
-
-        <!-- Contact -->
-        <div class="lg:col-span-2">
-          <h4 class="mb-5 text-lg font-bold !text-white">Kontakt</h4>
-          <ul class="flex flex-col gap-4 text-sm text-white/60">
-            <li class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-brand">call</span>
-              <a :href="`tel:${demo.phone.replace(/\s/g, '')}`" class="hover:text-white">{{
-                demo.phone
-              }}</a>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-brand">mail</span>
-              <a :href="`mailto:${demo.email}`" class="hover:text-white">{{ demo.email }}</a>
-            </li>
-            <li class="flex items-start gap-3">
-              <span class="material-symbols-outlined text-brand">location_on</span>
-              <span>{{ demo.address }}</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Newsletter (small, functional) -->
-        <div class="lg:col-span-3">
-          <h4 class="mb-5 text-lg font-bold !text-white">Newsletter</h4>
-          <p class="mb-4 text-sm text-white/60">Novinky z ateliéru, jednou za čas.</p>
-          <form class="flex flex-col gap-3" @submit.prevent="subscribe">
-            <input
-              v-model="email"
-              type="email"
-              required
-              placeholder="Váš e-mail"
-              class="w-full rounded-full border border-white/15 bg-white/5 px-5 py-3 text-white placeholder:text-white/40 focus:border-brand focus:ring-2 focus:ring-brand/40"
-            />
-            <button
-              type="submit"
-              :disabled="sending"
-              class="shrink-0 rounded-full bg-brand px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-accent disabled:opacity-60"
-            >
-              {{ sending ? '...' : sent ? 'Hotovo ✓' : 'Odebírat' }}
-            </button>
-          </form>
-          <p v-if="error" class="mt-3 text-sm text-red-300">{{ error }}</p>
-        </div>
+      <!-- Social icons row -->
+      <div class="mt-14 flex justify-center gap-6">
+        <a
+          v-for="s in ['facebook', 'dribbble', 'twitter', 'instagram', 'linkedin']"
+          :key="s"
+          href="#"
+          class="text-brand-ink/60 transition-colors hover:text-brand"
+          :aria-label="s"
+        >
+          <span class="material-symbols-outlined text-[22px]">public</span>
+        </a>
       </div>
 
-      <div
-        class="flex flex-col items-center justify-between gap-3 border-t border-white/10 py-7 text-sm text-white/50 sm:flex-row"
-      >
+      <div class="mt-12 border-t border-brand-ink/10 py-7 text-center text-sm text-brand-muted">
         <p>© {{ currentYear }} {{ demo.brandName }}. Demo prezentace — WebPulse.</p>
-        <div class="flex gap-6">
-          <NuxtLink to="#" class="hover:text-white">Ochrana soukromí</NuxtLink>
-          <NuxtLink to="#" class="hover:text-white">Obchodní podmínky</NuxtLink>
-        </div>
       </div>
     </div>
   </footer>

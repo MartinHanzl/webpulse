@@ -47,6 +47,12 @@ const meta: Record<
     icon: 'draw',
     highlights: ['Portfolio filtr', 'Expertíza & ocenění', 'Single-page'],
   },
+  spa: {
+    colors: ['#fb7d61', '#36332e', '#f8f3f0'],
+    dark: false,
+    icon: 'spa',
+    highlights: ['Hero slider', 'Ceník procedur', 'Rufina serif'],
+  },
 };
 
 useHead({
