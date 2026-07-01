@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useRoute, createError } from '#imports';
-import { DemoLawn, DemoTree, DemoLandscaping } from '#components';
+import { DemoLawn, DemoTree, DemoLandscaping, DemoRestaurant } from '#components';
 import { useDemos } from '~/../app/composables/useDemos';
 
 definePageMeta({ layout: false });
@@ -20,6 +20,7 @@ const componentMap = {
   lawn: DemoLawn,
   tree: DemoTree,
   landscaping: DemoLandscaping,
+  restaurant: DemoRestaurant,
 };
 const variantComponent = computed(
   () => componentMap[slug.value as keyof typeof componentMap] ?? DemoLawn,

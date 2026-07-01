@@ -9,9 +9,9 @@ export interface DemoNavLink {
 }
 
 export interface DemoDefinition {
-  slug: 'lawn' | 'tree' | 'landscaping';
+  slug: 'lawn' | 'tree' | 'landscaping' | 'restaurant';
   /** value for data-demo (palette key in theme.css) */
-  palette: 'lawn' | 'tree' | 'landscaping';
+  palette: 'lawn' | 'tree' | 'landscaping' | 'restaurant';
   brandName: string;
   tagline: string;
   phone: string;
@@ -60,18 +60,44 @@ export const DEMOS: DemoDefinition[] = [
     industry: 'Krajinářství',
     dark: true,
   },
+  {
+    slug: 'restaurant',
+    palette: 'restaurant',
+    brandName: 'Savoria',
+    tagline: 'Sezónní kuchyně & vinný sklep',
+    phone: '+420 222 315 900',
+    email: 'rezervace@savoria.cz',
+    address: 'Michalská 6, Praha 1',
+    switchLabel: 'Restaurant',
+    industry: 'Restaurace',
+  },
 ];
 
 export function useDemos() {
-  const nav = (slug: string): DemoNavLink[] => [
-    { label: 'Domů', to: `/demo/${slug}` },
-    { label: 'O nás', to: `/demo/${slug}/o-nas` },
-    { label: 'Služby', to: `/demo/${slug}/sluzby` },
-    { label: 'Reference', to: `/demo/${slug}/reference` },
-    { label: 'Blog', to: `/demo/${slug}/blog` },
-    { label: 'FAQ', to: `/demo/${slug}/faq` },
-    { label: 'Kontakt', to: `/demo/${slug}/kontakt` },
-  ];
+  const nav = (slug: string): DemoNavLink[] => {
+    // Restaurant demo has its own page set (menu, chefs, gallery, story…).
+    if (slug === 'restaurant') {
+      return [
+        { label: 'Domů', to: `/demo/${slug}` },
+        { label: 'O nás', to: `/demo/${slug}/o-nas` },
+        { label: 'Menu', to: `/demo/${slug}/menu` },
+        { label: 'Příběh', to: `/demo/${slug}/pribeh` },
+        { label: 'Galerie', to: `/demo/${slug}/galerie` },
+        { label: 'Kuchaři', to: `/demo/${slug}/kuchari` },
+        { label: 'Blog', to: `/demo/${slug}/blog` },
+        { label: 'Kontakt', to: `/demo/${slug}/kontakt` },
+      ];
+    }
+    return [
+      { label: 'Domů', to: `/demo/${slug}` },
+      { label: 'O nás', to: `/demo/${slug}/o-nas` },
+      { label: 'Služby', to: `/demo/${slug}/sluzby` },
+      { label: 'Reference', to: `/demo/${slug}/reference` },
+      { label: 'Blog', to: `/demo/${slug}/blog` },
+      { label: 'FAQ', to: `/demo/${slug}/faq` },
+      { label: 'Kontakt', to: `/demo/${slug}/kontakt` },
+    ];
+  };
 
   // Navigation for the REAL site (non-/demo). Points at the actual CMS routes,
   // not the per-demo showcase pages.

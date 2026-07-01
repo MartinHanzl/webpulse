@@ -218,6 +218,73 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
     </div>
 
     <!-- ============================================================= -->
+    <!-- RESTAURANT — elegant fine-dining: Bebas wordmark, uppercase    -->
+    <!-- inline nav, gold "Rezervovat stůl" CTA; light (cream) solid.   -->
+    <!-- ============================================================= -->
+    <div
+      v-else-if="variant === 'restaurant'"
+      class="container-x flex items-center justify-between gap-6 transition-all"
+      :class="solid ? 'py-3' : 'py-5'"
+    >
+      <!-- Bebas wordmark logo -->
+      <NuxtLink :to="homeTo" class="flex flex-col leading-none">
+        <span
+          class="text-[26px] uppercase tracking-wide"
+          :class="lightText ? 'text-white' : 'text-brand-ink'"
+          >{{ demo.brandName }}</span
+        >
+        <span class="mt-0.5 text-[11px] uppercase tracking-[0.3em] text-brand">{{
+          demo.industry
+        }}</span>
+      </NuxtLink>
+
+      <!-- Desktop nav -->
+      <nav class="hidden items-center gap-8 lg:flex">
+        <NuxtLink
+          v-for="link in links"
+          :key="link.to"
+          :to="link.to"
+          class="text-sm uppercase tracking-wide transition-colors hover:text-brand"
+          :class="lightText ? 'text-white/85' : 'text-brand-ink/80'"
+        >
+          {{ link.label }}
+        </NuxtLink>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-4">
+        <a
+          :href="telHref"
+          class="hidden items-center gap-2 text-sm font-medium xl:flex"
+          :class="lightText ? 'text-white' : 'text-brand-ink'"
+        >
+          <span class="material-symbols-outlined text-[20px] text-brand">call</span>
+          {{ demo.phone }}
+        </a>
+        <NuxtLink
+          :to="contactTo"
+          class="hidden items-center gap-2 rounded-full border px-6 py-2.5 text-xs uppercase tracking-wide transition-all hover:-translate-y-0.5 sm:inline-flex"
+          :class="
+            lightText
+              ? 'border-white/40 text-white hover:border-brand hover:bg-brand'
+              : 'border-brand text-brand hover:bg-brand hover:text-white'
+          "
+        >
+          <span class="material-symbols-outlined text-[18px]">restaurant</span>
+          Rezervovat stůl
+        </NuxtLink>
+        <button
+          class="flex size-11 items-center justify-center rounded-full lg:hidden"
+          :class="lightText ? 'bg-white/15 text-white' : 'bg-brand-cream text-brand-ink'"
+          aria-label="Menu"
+          @click="mobileOpen = !mobileOpen"
+        >
+          <span class="material-symbols-outlined">{{ mobileOpen ? 'close' : 'menu' }}</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================= -->
     <!-- LANDSCAPING — bold/dark: uppercase tracked menu, square accent -->
     <!-- CTA, social dots; solid state is dark.                         -->
     <!-- ============================================================= -->
@@ -304,27 +371,40 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
       leave-to-class="opacity-0 -translate-y-2"
     >
       <div v-if="mobileOpen" class="container-x mt-3 pb-3 xl:hidden">
-        <div class="flex flex-col gap-1 rounded-2xl border border-slate-100 bg-white p-3 shadow-xl">
+        <div
+          class="flex flex-col gap-1 rounded-2xl p-3 shadow-xl"
+          :class="
+            variant === 'restaurant'
+              ? 'border border-white/10 bg-brand-dark'
+              : 'border border-slate-100 bg-white'
+          "
+        >
           <NuxtLink
             v-for="link in links"
             :key="link.to"
             :to="link.to"
-            class="rounded-xl px-4 py-3 text-base font-semibold text-brand-ink transition-colors hover:bg-brand-soft hover:text-brand"
+            class="rounded-xl px-4 py-3 text-base transition-colors"
+            :class="
+              variant === 'restaurant'
+                ? 'font-medium uppercase tracking-wide text-white hover:bg-white/10 hover:text-brand'
+                : 'font-semibold text-brand-ink hover:bg-brand-soft hover:text-brand'
+            "
             @click="mobileOpen = false"
           >
             {{ link.label }}
           </NuxtLink>
           <a
             :href="telHref"
-            class="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-semibold text-brand-ink"
+            class="flex items-center gap-2 rounded-xl px-4 py-3 text-base font-semibold"
+            :class="variant === 'restaurant' ? 'text-white' : 'text-brand-ink'"
             @click="mobileOpen = false"
           >
             <span class="material-symbols-outlined text-[20px] text-brand">call</span>
             {{ demo.phone }}
           </a>
-          <ThemeButton :to="contactTo" class="mt-2" @click="mobileOpen = false"
-            >Nezávazná poptávka</ThemeButton
-          >
+          <ThemeButton :to="contactTo" class="mt-2" @click="mobileOpen = false">{{
+            variant === 'restaurant' ? 'Rezervovat stůl' : 'Nezávazná poptávka'
+          }}</ThemeButton>
         </div>
       </div>
     </transition>

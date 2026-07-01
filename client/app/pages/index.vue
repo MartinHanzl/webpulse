@@ -29,6 +29,12 @@ const meta: Record<
     icon: 'landscape',
     highlights: ['Tmavá šablona', 'Číslovaný proces', 'Masonry recenze'],
   },
+  restaurant: {
+    colors: ['#d39121', '#d51f0f', '#282725'],
+    dark: true,
+    icon: 'restaurant',
+    highlights: ['Menu s cenami', 'Kuchaři & galerie', 'Bebas Neue'],
+  },
 };
 
 useHead({

@@ -41,6 +41,7 @@ const variant = computed(() => props.demo.slug);
 const route = useRoute();
 const isDemo = computed(() => route.path.startsWith('/demo'));
 const homeTo = computed(() => (isDemo.value ? `/demo/${props.demo.slug}` : '/'));
+const contactTo = computed(() => (isDemo.value ? `/demo/${props.demo.slug}/kontakt` : '/kontakt'));
 const serviceTo = (s: string) =>
   isDemo.value ? `/demo/${props.demo.slug}/sluzby/${s}` : '/sluzby';
 
@@ -68,6 +69,13 @@ const hours = [
   { day: 'Po–Pá', time: '8:00 – 17:00' },
   { day: 'Sobota', time: '9:00 – 13:00' },
   { day: 'Neděle', time: 'Zavřeno' },
+];
+
+/** Opening hours shown in the restaurant footer. */
+const restaurantHours = [
+  { day: 'Po–Čt', time: '11:00 – 23:00' },
+  { day: 'Pá–So', time: '11:00 – 24:00' },
+  { day: 'Neděle', time: '11:00 – 22:00' },
 ];
 </script>
 
@@ -285,6 +293,133 @@ const hours = [
                 demo.phone
               }}</a>
             </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-brand">mail</span>
+              <a :href="`mailto:${demo.email}`" class="hover:text-brand">{{ demo.email }}</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-brand">location_on</span>
+              <span>{{ demo.address }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div
+        class="flex flex-col items-center justify-between gap-3 border-t border-brand/10 py-7 text-sm text-brand-muted sm:flex-row"
+      >
+        <p>© {{ currentYear }} {{ demo.brandName }}. Demo prezentace — WebPulse.</p>
+        <div class="flex gap-6">
+          <NuxtLink to="#" class="hover:text-brand">Ochrana soukromí</NuxtLink>
+          <NuxtLink to="#" class="hover:text-brand">Obchodní podmínky</NuxtLink>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ================= RESTAURANT — elegant light / cream footer ================= -->
+  <footer v-else-if="variant === 'restaurant'" class="bg-brand-cream text-brand-ink">
+    <div class="container-x pt-20">
+      <!-- Newsletter band (clean, pill input + gold button) -->
+      <div
+        class="reveal mb-16 flex flex-col gap-6 rounded-3xl border border-brand/20 bg-white p-8 text-center shadow-sm sm:p-12 lg:flex-row lg:items-center lg:justify-between lg:text-left"
+      >
+        <div class="max-w-md">
+          <h3 class="text-2xl uppercase tracking-wide text-brand-ink sm:text-3xl">
+            Odebírejte novinky a nabídky
+          </h3>
+          <p class="mt-2 text-brand-muted">Sezónní menu, akce a události jednou měsíčně.</p>
+        </div>
+        <form class="flex w-full max-w-md flex-col gap-3 sm:flex-row" @submit.prevent="subscribe">
+          <input
+            v-model="email"
+            type="email"
+            required
+            placeholder="Váš e-mail"
+            class="w-full rounded-full border border-brand/20 bg-brand-cream px-5 py-3.5 text-brand-ink placeholder:text-brand-muted focus:border-brand focus:ring-2 focus:ring-brand/30"
+          />
+          <button
+            type="submit"
+            :disabled="sending"
+            class="shrink-0 rounded-full bg-brand px-7 py-3.5 font-semibold text-white transition-colors hover:bg-brand-dark disabled:opacity-60"
+          >
+            {{ sending ? '...' : sent ? 'Hotovo ✓' : 'Odebírat' }}
+          </button>
+        </form>
+      </div>
+      <p v-if="error" class="-mt-12 mb-12 text-center text-sm text-brand-accent">{{ error }}</p>
+
+      <!-- Columns -->
+      <div class="grid grid-cols-1 gap-10 pb-14 sm:grid-cols-2 lg:grid-cols-4">
+        <!-- O restauraci -->
+        <div>
+          <NuxtLink :to="homeTo" class="flex flex-col leading-none">
+            <span class="text-2xl uppercase tracking-wide text-brand-ink">{{
+              demo.brandName
+            }}</span>
+            <span class="mt-1 text-[11px] uppercase tracking-[0.3em] text-brand">{{
+              demo.industry
+            }}</span>
+          </NuxtLink>
+          <p class="mt-5 text-sm leading-relaxed text-brand-muted">{{ aboutText }}</p>
+          <div class="mt-6 flex gap-3">
+            <a
+              v-for="s in social"
+              :key="s"
+              href="#"
+              class="flex size-10 items-center justify-center rounded-full bg-brand/10 text-brand transition-colors hover:bg-brand hover:text-white"
+              :aria-label="s"
+            >
+              <span class="material-symbols-outlined text-[18px]">public</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Rezervace -->
+        <div>
+          <h4 class="mb-5 text-lg uppercase tracking-wide text-brand-ink">Rezervace</h4>
+          <ul class="flex flex-col gap-4 text-sm text-brand-muted">
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-brand">call</span>
+              <a :href="`tel:${demo.phone.replace(/\s/g, '')}`" class="hover:text-brand">{{
+                demo.phone
+              }}</a>
+            </li>
+            <li class="flex items-start gap-3">
+              <span class="material-symbols-outlined text-brand">restaurant</span>
+              <NuxtLink :to="contactTo" class="hover:text-brand">Rezervovat stůl</NuxtLink>
+            </li>
+          </ul>
+          <ul class="mt-5 flex flex-col gap-2.5">
+            <li v-for="link in links" :key="link.to">
+              <NuxtLink
+                :to="link.to"
+                class="text-sm text-brand-muted transition-colors hover:text-brand"
+                >{{ link.label }}</NuxtLink
+              >
+            </li>
+          </ul>
+        </div>
+
+        <!-- Otevírací doba -->
+        <div>
+          <h4 class="mb-5 text-lg uppercase tracking-wide text-brand-ink">Otevírací doba</h4>
+          <ul class="flex flex-col gap-2.5">
+            <li
+              v-for="h in restaurantHours"
+              :key="h.day"
+              class="flex items-center justify-between border-b border-brand/10 pb-2.5 text-sm"
+            >
+              <span class="text-brand-muted">{{ h.day }}</span>
+              <span class="font-medium text-brand-ink">{{ h.time }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Kontakt -->
+        <div>
+          <h4 class="mb-5 text-lg uppercase tracking-wide text-brand-ink">Kontakt</h4>
+          <ul class="flex flex-col gap-4 text-sm text-brand-muted">
             <li class="flex items-start gap-3">
               <span class="material-symbols-outlined text-brand">mail</span>
               <a :href="`mailto:${demo.email}`" class="hover:text-brand">{{ demo.email }}</a>

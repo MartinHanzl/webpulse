@@ -4,6 +4,8 @@
    `data-demo="lawn|tree|landscaping"` to recolor the whole subtree.
    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
+/* Restaurant demo fonts (Crafto): Bebas Neue display + Schibsted Grotesk body. */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@400..800&display=swap');
 
 /* Material Symbols: font face + base class come from the local
    `material-symbols/outlined.css` (loaded in nuxt.config) so icons work
@@ -55,6 +57,31 @@
 	--brand-muted: 84 87 84;
 	/* Dark template: icons/links/badges pop in yellow, not green. */
 	--brand-pop: var(--brand-accent);
+}
+
+/* Restaurant (Crafto) — warm gold on charcoal/cream, Bebas Neue display. */
+.demo-root[data-demo='restaurant'] {
+	--brand: 211 145 33; /* #d39121 gold */
+	--brand-dark: 40 39 37; /* #282725 charcoal */
+	--brand-soft: 244 236 226; /* #F4ECE2 warm tint */
+	--brand-cream: 249 246 243; /* #f9f6f3 */
+	--brand-accent: 213 31 15; /* #d51f0f red */
+	--brand-ink: 40 39 37; /* #282725 */
+	--brand-muted: 141 137 135; /* #8d8987 */
+	/* Icons/links/highlights pop in gold. */
+	--brand-pop: var(--brand);
+	font-family: 'Schibsted Grotesk', 'Inter', sans-serif;
+}
+/* Restaurant headings use the condensed display face. */
+:where(.demo-root[data-demo='restaurant']) h1,
+:where(.demo-root[data-demo='restaurant']) h2,
+:where(.demo-root[data-demo='restaurant']) h3,
+:where(.demo-root[data-demo='restaurant']) h4,
+:where(.demo-root[data-demo='restaurant']) h5,
+:where(.demo-root[data-demo='restaurant']) h6 {
+	font-family: 'Bebas Neue', 'Fustat', sans-serif;
+	letter-spacing: 0.02em;
+	font-weight: 400;
 }
 
 /* `:where()` keeps specificity at 0 so Tailwind text-* utilities (e.g. text-white

@@ -25,6 +25,15 @@ const P = {
   stonePath: '1558618666-fcd25c85cd64',
   treeCanopy: '1441974231531-c6227db76b6e',
   pineForest: '1448375240586-882707db888b',
+  // Restaurant / food (Savoria demo)
+  restoInterior: '1517248135467-4c7edcad34c4',
+  plating: '1504674900247-0877df9cc836',
+  pasta: '1551183053-bf91a1d81141',
+  steak: '1546964124-0cce460f38ef',
+  dessert: '1551024506-0bccd828d307',
+  wine: '1510812431401-41d2bd2722f3',
+  chefCooking: '1577219491135-ce391730fb2c',
+  tableSetting: '1414235077428-338989a2e8c0',
 };
 
 export interface VariantImages {
@@ -66,14 +75,9 @@ export function useStockImages() {
       choose: U(P.greenHills, 900),
       facts: U(P.pineForest, 1920),
       work: [P.forestPath, P.treeCanopy, P.greenHills, P.hedge, P.parkGreen].map((p) => U(p, 800)),
-      services: [
-        P.forestPath,
-        P.treeCanopy,
-        P.pineForest,
-        P.greenHills,
-        P.parkGreen,
-        P.hedge,
-      ].map((p) => U(p, 700)),
+      services: [P.forestPath, P.treeCanopy, P.pineForest, P.greenHills, P.parkGreen, P.hedge].map(
+        (p) => U(p, 700),
+      ),
       blog: [P.forestPath, P.treeCanopy, P.greenHills].map((p) => U(p, 700)),
     },
     landscaping: {
@@ -92,6 +96,18 @@ export function useStockImages() {
         P.hedge,
       ].map((p) => U(p, 700)),
       blog: [P.parkGreen, P.landscaping, P.hedge].map((p) => U(p, 700)),
+    },
+    restaurant: {
+      hero: U(P.restoInterior, 1920),
+      aboutMain: U(P.plating, 900),
+      aboutSecondary: U(P.chefCooking, 600),
+      choose: U(P.tableSetting, 900),
+      facts: U(P.restoInterior, 1920),
+      work: [P.plating, P.steak, P.pasta, P.dessert, P.wine].map((p) => U(p, 800)),
+      services: [P.pasta, P.steak, P.dessert, P.wine, P.plating, P.tableSetting].map((p) =>
+        U(p, 700),
+      ),
+      blog: [P.plating, P.chefCooking, P.dessert].map((p) => U(p, 700)),
     },
   };
 
