@@ -25,6 +25,22 @@ const P = {
   stonePath: '1558618666-fcd25c85cd64',
   treeCanopy: '1441974231531-c6227db76b6e',
   pineForest: '1448375240586-882707db888b',
+  // Trades / electrician + plumber (ProfiServis "remeslo" demo)
+  crewSky: '1516216628859-9bccecab13ca', // crew in blue overalls climbing scaffold
+  electricianPanel: '1621905251189-08b45d6a269e', // electrician testing an electrical box
+  electricianPortrait: '1621905252507-b35492cc74b4', // tradesman by electrical box
+  electricianBox: '1621905251918-48416bd8575a', // electrician wiring a box
+  circuitRepair: '1581092918056-0c4c3acd3789', // hands repairing electronics
+  blueprintConsult: '1581092446327-9b52bd1570c2', // hi-vis worker over blueprints
+  toolsRack: '1530124566582-a618bc2615dc', // rack of pliers / hand tools
+  welding: '1504328345606-18bbc8c9d7d1', // welder with sparks
+  pipesBrick: '1607472586893-edb57bdc0e39', // industrial pipes on brick wall
+  faucetChrome: '1542013936693-884638332954', // chrome kitchen tap + water
+  faucetBlack: '1521207418485-99c705420785', // black tap running water
+  faucetDrip: '1517646287270-a5a9ca602e5c', // dripping faucet (b&w)
+  insulation: '1607400201889-565b1ee75f8e', // worker installing insulation
+  solarPanels: '1558449028-b53a39d100fc', // solar panel array
+  constructionSite: '1591955506264-3f5a6834570a', // construction site with crane (b&w)
   // Restaurant / food (Savoria demo)
   restoInterior: '1517248135467-4c7edcad34c4',
   plating: '1504674900247-0877df9cc836',
@@ -107,17 +123,28 @@ export function useStockImages() {
       ].map((p) => U(p, 700)),
       blog: [P.grassField, P.wateringPlant, P.greenPlants].map((p) => U(p, 700)),
     },
-    tree: {
-      hero: U(P.treeCanopy, 1920),
-      aboutMain: U(P.forestPath, 900),
-      aboutSecondary: U(P.pineForest, 600),
-      choose: U(P.greenHills, 900),
-      facts: U(P.pineForest, 1920),
-      work: [P.forestPath, P.treeCanopy, P.greenHills, P.hedge, P.parkGreen].map((p) => U(p, 800)),
-      services: [P.forestPath, P.treeCanopy, P.pineForest, P.greenHills, P.parkGreen, P.hedge].map(
-        (p) => U(p, 700),
-      ),
-      blog: [P.forestPath, P.treeCanopy, P.greenHills].map((p) => U(p, 700)),
+    remeslo: {
+      hero: U(P.crewSky, 1920),
+      aboutMain: U(P.electricianPanel, 900),
+      aboutSecondary: U(P.toolsRack, 600),
+      choose: U(P.faucetChrome, 900),
+      facts: U(P.constructionSite, 1920),
+      work: [
+        P.electricianPortrait,
+        P.electricianBox,
+        P.blueprintConsult,
+        P.pipesBrick,
+        P.solarPanels,
+      ].map((p) => U(p, 800)),
+      services: [
+        P.electricianPanel,
+        P.pipesBrick,
+        P.faucetChrome,
+        P.welding,
+        P.solarPanels,
+        P.insulation,
+      ].map((p) => U(p, 700)),
+      blog: [P.circuitRepair, P.faucetBlack, P.solarPanels].map((p) => U(p, 700)),
     },
     landscaping: {
       hero: U(P.landscaping, 1920),

@@ -21,7 +21,9 @@ const darkSolid = computed(() => solid.value && !!props.demo.dark);
 const variant = computed(() => props.demo.slug);
 
 // Light text is used over the dark hero (transparent state) and on the dark bar.
-const lightText = computed(() => !solid.value || darkSolid.value);
+// The remeslo demo has a LIGHT (cream) hero, so it always keeps dark text —
+// otherwise the transparent top header would be white-on-cream (unreadable).
+const lightText = computed(() => (!solid.value || darkSolid.value) && variant.value !== 'remeslo');
 
 const telHref = computed(() => `tel:${props.demo.phone.replace(/\s/g, '')}`);
 
@@ -129,9 +131,9 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
     </div>
 
     <!-- ============================================================= -->
-    <!-- TREE — friendly/light: slim top utility bar + pill CTA         -->
+    <!-- REMESLO — friendly/light: slim top utility bar + pill CTA      -->
     <!-- ============================================================= -->
-    <div v-else-if="variant === 'tree'">
+    <div v-else-if="variant === 'remeslo'">
       <!-- Top utility bar -->
       <div
         class="hidden border-b transition-all md:block"
@@ -166,12 +168,12 @@ onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
         class="container-x flex items-center justify-between gap-6 transition-all"
         :class="solid ? 'py-3' : 'py-4'"
       >
-        <!-- Logo with leaf mark -->
+        <!-- Logo with trade mark -->
         <NuxtLink :to="homeTo" class="flex items-center gap-3">
           <span
             class="flex size-12 items-center justify-center rounded-full bg-brand-soft text-brand ring-4 ring-brand/10"
           >
-            <span class="material-symbols-outlined text-[26px]">forest</span>
+            <span class="material-symbols-outlined text-[26px]">electrical_services</span>
           </span>
           <span class="flex flex-col leading-tight">
             <span

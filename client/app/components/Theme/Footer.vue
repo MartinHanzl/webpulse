@@ -55,8 +55,8 @@ const currentYear = new Date().getFullYear();
 /** Neutral, per-industry intro copy (replaces the gardening-only text). */
 const aboutText = computed(() => {
   switch (props.demo.slug) {
-    case 'tree':
-      return `${props.demo.tagline}. Certifikovaní specialisté s plným pojištěním a důrazem na bezpečnost.`;
+    case 'remeslo':
+      return `${props.demo.tagline}. Elektrikáři a instalatéři pod jednou střechou — s revizí a zárukou na práci.`;
     case 'landscaping':
       return `${props.demo.tagline}. Komplexní řešení pod jednou střechou — od projektu přes realizaci po údržbu.`;
     default:
@@ -206,8 +206,8 @@ const lawyerHours = [
     </div>
   </footer>
 
-  <!-- ====================== TREE — light / cream footer ====================== -->
-  <footer v-else-if="variant === 'tree'" class="bg-brand-cream text-brand-ink">
+  <!-- ====================== REMESLO — light / cream footer ====================== -->
+  <footer v-else-if="variant === 'remeslo'" class="bg-brand-cream text-brand-ink">
     <div class="container-x pt-20">
       <!-- Newsletter band (light, pill input + button) -->
       <div

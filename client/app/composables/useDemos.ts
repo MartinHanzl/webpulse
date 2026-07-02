@@ -9,9 +9,9 @@ export interface DemoNavLink {
 }
 
 export interface DemoDefinition {
-  slug: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer' | 'spa';
+  slug: 'lawn' | 'remeslo' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer' | 'spa';
   /** value for data-demo (palette key in theme.css) */
-  palette: 'lawn' | 'tree' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer' | 'spa';
+  palette: 'lawn' | 'remeslo' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer' | 'spa';
   brandName: string;
   tagline: string;
   phone: string;
@@ -38,15 +38,15 @@ export const DEMOS: DemoDefinition[] = [
     industry: 'Údržba trávníků',
   },
   {
-    slug: 'tree',
-    palette: 'tree',
-    brandName: 'ArborPro',
-    tagline: 'Péče o stromy a rizikové kácení',
+    slug: 'remeslo',
+    palette: 'remeslo',
+    brandName: 'ProfiServis',
+    tagline: 'Elektroinstalace, voda, topení a plyn',
     phone: '+420 608 987 654',
-    email: 'info@arborpro.cz',
-    address: 'Lesní 22, Brno',
-    switchLabel: 'Tree Service',
-    industry: 'Arboristika',
+    email: 'info@profiservis.cz',
+    address: 'Průmyslová 14, Brno',
+    switchLabel: 'Elektro & Instalatér',
+    industry: 'Elektro · voda · topení',
   },
   {
     slug: 'landscaping',

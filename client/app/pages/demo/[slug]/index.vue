@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import { useRoute, createError } from '#imports';
 import {
   DemoLawn,
-  DemoTree,
+  DemoRemeslo,
   DemoLandscaping,
   DemoRestaurant,
   DemoLawyer,
@@ -26,7 +26,7 @@ if (!demo.value) {
 
 const componentMap = {
   lawn: DemoLawn,
-  tree: DemoTree,
+  remeslo: DemoRemeslo,
   landscaping: DemoLandscaping,
   restaurant: DemoRestaurant,
   lawyer: DemoLawyer,

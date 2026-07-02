@@ -4,111 +4,111 @@ import type { DemoDefinition } from '~/../app/composables/useDemos';
 import { useStockImages } from '~/../app/composables/useStockImages';
 
 defineProps<{ demo: DemoDefinition }>();
-const ph = useStockImages().get('tree');
+const ph = useStockImages().get('remeslo');
 
 const aboutCounters = [
-  { to: 1200, suffix: '+', label: 'pokácených stromů' },
-  { to: 18, suffix: '', label: 'let praxe' },
-  { to: 2900, suffix: '+', label: 'spokojených klientů' },
+  { to: 3500, suffix: '+', label: 'dokončených zakázek' },
+  { to: 15, suffix: '', label: 'let praxe' },
+  { to: 24, suffix: '/7', label: 'havarijní servis' },
 ];
 
 const services = [
   {
-    icon: 'forest',
-    title: 'Kácení stromů',
-    text: 'Bezpečné pokácení stromů od malých dřevin po vzrostlé velikány — vždy s ohledem na okolí.',
+    icon: 'electrical_services',
+    title: 'Elektroinstalace',
+    text: 'Kompletní elektroinstalace novostaveb i rekonstrukce — rozvaděče, zásuvky, světla i datové rozvody.',
+  },
+  {
+    icon: 'plumbing',
+    title: 'Voda a odpady',
+    text: 'Rozvody vody a odpadů, výměna baterií, umyvadel, WC i připojení myček a praček.',
+  },
+  {
+    icon: 'mode_heat',
+    title: 'Topení a kotle',
+    text: 'Montáž a servis kotlů, radiátorů a podlahového vytápění. Postaráme se i o pravidelný servis.',
   },
   {
     icon: 'emergency',
-    title: 'Rizikové kácení',
-    text: 'Stromolezecká technika a postupné kácení v zástavbě, u budov a ve stísněných prostorech.',
+    title: 'Havarijní servis 24/7',
+    text: 'Prasklá voda nebo výpadek proudu? Přijedeme co nejdříve — i o víkendu a svátcích.',
   },
   {
-    icon: 'content_cut',
-    title: 'Řez a ořez korun',
-    text: 'Zdravotní, bezpečnostní i redukční řezy, které stromu prospějí a prodlouží jeho život.',
+    icon: 'solar_power',
+    title: 'Chytrá domácnost & FVE',
+    text: 'Chytré vypínače, termostaty a fotovoltaika na klíč. Ušetříte energii i starosti.',
   },
   {
-    icon: 'agriculture',
-    title: 'Frézování pařezů',
-    text: 'Odstranění pařezů frézou až pod úroveň terénu — bez kopání a poškození okolí.',
-  },
-  {
-    icon: 'recycling',
-    title: 'Štěpkování větví',
-    text: 'Likvidace a štěpkování větví přímo na místě. Štěpku odvezeme nebo ji necháme k mulčování.',
-  },
-  {
-    icon: 'healing',
-    title: 'Ošetření a vazby',
-    text: 'Instalace bezpečnostních vazeb v korunách a ošetření poškozených či nemocných stromů.',
+    icon: 'fact_check',
+    title: 'Revize a certifikace',
+    text: 'Revize elektro i plynu s platnou zprávou pro pojišťovnu, kolaudaci i klidný spánek.',
   },
 ];
 
 const chooseFeatures = [
-  'Certifikovaní arboristé',
-  'Plné pojištění odpovědnosti',
-  'Výškové plošiny a moderní technika',
-  'Úklid a odvoz dřeva po práci',
+  'Certifikovaní elektrikáři a instalatéři',
+  'Revizní technik pro elektro i plyn',
+  'Doprava a cenová nabídka zdarma',
+  'Záruka na práci i materiál',
 ];
 
 const pricing = [
   {
-    name: 'Základní',
-    price: 'od 1 500 Kč',
-    desc: 'Pro menší zásahy a jednotlivé stromy na dostupném místě.',
+    name: 'Drobné opravy',
+    price: 'od 490 Kč',
+    desc: 'Pro rychlé opravy a jednotlivé úkony u vás doma.',
     featured: false,
     features: [
-      'Posouzení stavu na místě',
-      'Kácení do 8 m výšky',
-      'Základní úklid pracoviště',
-      'Cenová nabídka zdarma',
+      'Výjezd technika',
+      'Oprava do jedné hodiny',
+      'Drobný spojovací materiál',
+      'Cena známá předem',
     ],
   },
   {
-    name: 'Standard',
-    price: 'od 4 900 Kč',
-    desc: 'Nejčastější volba pro zahrady, chaty i firemní pozemky.',
+    name: 'Montáž & instalace',
+    price: 'od 2 900 Kč',
+    desc: 'Nejčastější volba pro byty, domy i provozovny.',
     featured: true,
     features: [
-      'Rizikové i stromolezecké kácení',
-      'Řez a redukce korun',
-      'Štěpkování větví na místě',
-      'Kompletní úklid a odvoz',
-      'Plné pojištění zásahu',
+      'Elektro, voda i topení',
+      'Montáž zařízení a rozvodů',
+      'Odzkoušení a předání',
+      'Úklid pracoviště',
+      'Záruka na práci i materiál',
     ],
   },
   {
-    name: 'Kompletní',
-    price: 'od 9 900 Kč',
-    desc: 'Komplexní péče o pozemek se vzrostlými stromy.',
+    name: 'Rekonstrukce',
+    price: 'od 12 900 Kč',
+    desc: 'Kompletní rekonstrukce rozvodů na klíč.',
     featured: false,
     features: [
-      'Vše ze Standardu',
-      'Frézování pařezů',
-      'Instalace bezpečnostních vazeb',
-      'Odvoz a likvidace dřeva',
-      'Následná péče a kontrola',
+      'Vše z Montáže',
+      'Nové rozvody elektro i vody',
+      'Rozvaděč a jištění',
+      'Revizní zpráva',
+      'Následný servis',
     ],
   },
 ];
 
 const blogPosts = [
   {
-    title: 'Kdy je nejlepší čas na kácení stromů',
-    category: 'Rady',
+    title: 'Jak poznat, že potřebujete nový rozvaděč',
+    category: 'Elektro',
     date: '14. ledna 2025',
     image: ph.blog[0],
   },
   {
-    title: 'Rizikové kácení v zástavbě krok za krokem',
-    category: 'Technika',
+    title: 'Kapající kohoutek: kdy stačí těsnění a kdy výměna',
+    category: 'Voda',
     date: '3. února 2025',
     image: ph.blog[1],
   },
   {
-    title: 'Jak poznat nemocný strom včas',
-    category: 'Péče',
+    title: 'Vyplatí se fotovoltaika v roce 2025?',
+    category: 'Úspory',
     date: '26. února 2025',
     image: ph.blog[2],
   },
@@ -133,19 +133,19 @@ const pos = ref(55);
           <span
             class="inline-flex items-center gap-2 rounded-full bg-brand-soft px-4 py-1.5 text-sm font-semibold uppercase tracking-wider text-brand"
           >
-            <span class="material-symbols-outlined text-base">forest</span>
-            Kácení &middot; ošetření &middot; arboristika
+            <span class="material-symbols-outlined text-base">electrical_services</span>
+            Elektro &middot; voda &middot; topení &middot; plyn
           </span>
           <h1 class="text-4xl font-bold leading-tight text-brand-ink sm:text-5xl lg:text-[56px]">
-            Péče o stromy, na kterou se spolehnete
+            Řemeslo, na které se spolehnete
           </h1>
           <p class="max-w-xl text-lg leading-relaxed text-brand-muted">
-            Kácení, rizikové kácení a odborné ošetření stromů. Pracujeme bezpečně, s certifikovanými
-            arboristy, moderní technikou a vždy po sobě uklidíme.
+            Elektroinstalace, voda, topení i plyn — od drobné opravy po kompletní rekonstrukci.
+            Přijedeme včas, po sobě uklidíme a práci vám vždy odzkoušíme.
           </p>
           <div class="flex flex-wrap gap-4">
-            <ThemeButton to="#contact" variant="solid" size="lg">Objednat zásah</ThemeButton>
-            <ThemeButton to="#contact" variant="outline" size="lg">Kontakt</ThemeButton>
+            <ThemeButton to="#contact" variant="solid" size="lg">Nezávazná poptávka</ThemeButton>
+            <ThemeButton to="#contact" variant="outline" size="lg">Zavolat</ThemeButton>
           </div>
         </div>
 
@@ -153,7 +153,7 @@ const pos = ref(55);
           <div class="overflow-hidden rounded-[2.5rem] shadow-2xl shadow-brand/20">
             <img
               :src="ph.hero"
-              alt="Arborista při práci na stromě"
+              alt="Řemeslníci při práci"
               class="h-[26rem] w-full object-cover sm:h-[32rem]"
             />
           </div>
@@ -167,7 +167,7 @@ const pos = ref(55);
             </span>
             <div>
               <p class="text-2xl font-bold leading-none text-brand-ink">
-                <ThemeCounter :to="18" /> let
+                <ThemeCounter :to="15" /> let
               </p>
               <p class="text-sm text-brand-muted">praxe v oboru</p>
             </div>
@@ -181,14 +181,18 @@ const pos = ref(55);
       <div class="container-x grid items-center gap-14 lg:grid-cols-2">
         <div class="reveal-left relative">
           <div class="overflow-hidden rounded-3xl shadow-xl">
-            <img :src="ph.aboutMain" alt="Tým arboristů" class="h-[28rem] w-full object-cover" />
+            <img
+              :src="ph.aboutMain"
+              alt="Elektrikář při práci"
+              class="h-[28rem] w-full object-cover"
+            />
           </div>
           <div
             class="absolute -bottom-8 -right-4 hidden w-48 overflow-hidden rounded-2xl border-8 border-white shadow-xl sm:block"
           >
             <img
               :src="ph.aboutSecondary"
-              alt="Detail práce ve výškách"
+              alt="Nářadí řemeslníka"
               class="h-40 w-full object-cover"
             />
           </div>
@@ -202,12 +206,12 @@ const pos = ref(55);
             O nás
           </span>
           <h2 class="text-3xl font-bold leading-tight text-brand-ink sm:text-4xl">
-            Stromům rozumíme — a víme, kdy je čas zasáhnout
+            Jedna firma pro elektřinu i vodu
           </h2>
           <p class="text-lg leading-relaxed text-brand-muted">
-            Jsme parta arboristů, která má stromy ráda. Posoudíme stav, navrhneme nejšetrnější
-            řešení a postaráme se o bezpečný průběh i následný úklid. Pracujeme po celém kraji,
-            spolehlivě a s férovou cenou.
+            Jsme parta řemeslníků, která zvládne elektroinstalace, vodu, topení i plyn pod jednou
+            střechou. Nemusíte shánět tři různé firmy — domluvíte se s námi a je hotovo. Pracujeme
+            spolehlivě, čistě a za férovou cenu.
           </p>
 
           <div class="grid w-full grid-cols-3 gap-4">
@@ -223,7 +227,7 @@ const pos = ref(55);
             </div>
           </div>
 
-          <ThemeButton to="#contact" variant="solid" size="lg">Poptat zásah</ThemeButton>
+          <ThemeButton to="#contact" variant="solid" size="lg">Poptat práci</ThemeButton>
         </div>
       </div>
     </section>
@@ -233,8 +237,8 @@ const pos = ref(55);
       <div class="container-x">
         <ThemeSectionHeading
           subtitle="Naše služby"
-          title="Kompletní péče o stromy a zeleň"
-          text="Od jednoho problémového stromu po celý pozemek — postaráme se o vše bezpečně a profesionálně."
+          title="Vše kolem domu i firmy — pod jednou střechou"
+          text="Od zásuvky po kotel. Postaráme se o elektřinu, vodu, topení i plyn — profesionálně a s revizí."
           align="center"
         />
 
@@ -274,11 +278,11 @@ const pos = ref(55);
             Proč my
           </span>
           <h2 class="text-3xl font-bold leading-tight text-brand-ink sm:text-4xl">
-            Bezpečně, pojištěno a vždy uklizeno
+            Přijedeme včas a uklidíme po sobě
           </h2>
           <p class="text-lg leading-relaxed text-brand-muted">
-            Spojujeme odborné znalosti se zkušeností z tisíců zásahů. U nás máte jistotu, že práce
-            proběhne bezpečně, podle plánu a bez nepříjemných překvapení.
+            Spojujeme řemeslnou zručnost s pořádkem a spolehlivostí. Víte předem, kolik zaplatíte, a
+            práci vždy předáme odzkoušenou, čistou a s revizí.
           </p>
 
           <ul class="flex w-full flex-col gap-3">
@@ -301,7 +305,11 @@ const pos = ref(55);
 
         <div class="reveal-right relative">
           <div class="overflow-hidden rounded-3xl shadow-xl">
-            <img :src="ph.choose" alt="Práce ve výškách" class="h-[30rem] w-full object-cover" />
+            <img
+              :src="ph.choose"
+              alt="Kvalitně provedená instalace"
+              class="h-[30rem] w-full object-cover"
+            />
           </div>
           <div
             class="absolute -left-5 top-8 hidden items-center gap-3 rounded-2xl bg-white px-5 py-4 shadow-xl sm:flex"
@@ -309,11 +317,11 @@ const pos = ref(55);
             <span
               class="flex size-11 items-center justify-center rounded-full bg-brand-soft text-brand"
             >
-              <span class="material-symbols-outlined">shield</span>
+              <span class="material-symbols-outlined">verified</span>
             </span>
             <div>
-              <p class="font-bold leading-none text-brand-ink">Plné pojištění</p>
-              <p class="text-sm text-brand-muted">každého zásahu</p>
+              <p class="font-bold leading-none text-brand-ink">Záruka</p>
+              <p class="text-sm text-brand-muted">na práci i materiál</p>
             </div>
           </div>
         </div>
@@ -325,8 +333,8 @@ const pos = ref(55);
       <div class="container-x">
         <ThemeSectionHeading
           subtitle="Ceník"
-          title="Transparentní ceny bez skrytých poplatků"
-          text="Vyberte si rozsah, který odpovídá vašemu pozemku. Přesnou cenu vždy potvrdíme po prohlídce na místě."
+          title="Férové ceny bez skrytých poplatků"
+          text="Vyberte si rozsah podle zakázky. Přesnou cenu vždy potvrdíme po prohlídce nebo podle fotky."
           align="center"
         />
 
@@ -445,7 +453,7 @@ const pos = ref(55);
           </div>
 
           <div class="mt-6 flex items-center gap-4">
-            <span class="material-symbols-outlined text-brand-muted">park</span>
+            <span class="material-symbols-outlined text-brand-muted">construction</span>
             <input
               v-model="pos"
               type="range"
@@ -454,7 +462,7 @@ const pos = ref(55);
               class="h-2 w-full cursor-pointer appearance-none rounded-full bg-brand-soft accent-brand"
               aria-label="Posuvník porovnání před a po"
             />
-            <span class="material-symbols-outlined text-brand">forest</span>
+            <span class="material-symbols-outlined text-brand">bolt</span>
           </div>
         </div>
       </div>
@@ -466,7 +474,7 @@ const pos = ref(55);
         <div class="reveal flex flex-wrap items-end justify-between gap-6">
           <ThemeSectionHeading
             subtitle="Blog"
-            title="Rady a novinky ze světa stromů"
+            title="Rady a tipy pro váš dům"
             align="left"
             max="max-w-xl"
           />
@@ -499,7 +507,7 @@ const pos = ref(55);
             </div>
             <div class="flex flex-1 flex-col gap-3 p-7">
               <span class="flex items-center gap-2 text-sm text-brand-muted">
-                <span class="material-symbols-outlined text-base">park</span>
+                <span class="material-symbols-outlined text-base">calendar_month</span>
                 {{ post.date }}
               </span>
               <h3 class="text-lg font-bold leading-snug text-brand-ink">{{ post.title }}</h3>
@@ -523,12 +531,12 @@ const pos = ref(55);
       </ThemeParallax>
       <div class="container-x relative flex flex-col items-center gap-6 py-24 text-center">
         <h2 class="reveal max-w-3xl text-3xl font-bold leading-tight text-white sm:text-4xl">
-          Máte problémový strom? Vyřešte to s námi ještě dnes
+          Nefunguje elektřina nebo teče voda? Ozvěte se ještě dnes
         </h2>
         <p class="reveal max-w-2xl text-lg leading-relaxed text-white/80">
-          Přijedeme na prohlídku, posoudíme stav a navrhneme bezpečný postup s konkrétní cenou.
+          Přijedeme na prohlídku, navrhneme řešení a řekneme přesnou cenu předem — bez závazku.
         </p>
-        <ThemeButton to="#contact" variant="accent" size="lg">Objednat zásah</ThemeButton>
+        <ThemeButton to="#contact" variant="accent" size="lg">Objednat řemeslníka</ThemeButton>
       </div>
     </section>
 
@@ -536,8 +544,8 @@ const pos = ref(55);
     <ThemeSectionContact
       :demo="demo"
       subtitle="Kontakt"
-      title="Pojďme naplánovat zásah"
-      text="Napište nám, o jaké stromy jde a kde. Ozveme se s termínem a cenovou nabídkou."
+      title="Pojďme naplánovat vaši zakázku"
+      text="Napište nám, co potřebujete a kde. Ozveme se s termínem a cenovou nabídkou."
     />
   </div>
 </template>

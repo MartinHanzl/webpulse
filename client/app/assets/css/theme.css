@@ -1,7 +1,7 @@
 /* ==========================================================================
    ThemeForest "Lawnc" demo — Tailwind rebuild
    Per-variant theming via CSS variables. Wrap a demo in `.demo-root` and set
-   `data-demo="lawn|tree|landscaping"` to recolor the whole subtree.
+   `data-demo="lawn|remeslo|landscaping"` to recolor the whole subtree.
    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
 /* Restaurant demo fonts (Crafto): Bebas Neue display + Schibsted Grotesk body. */
@@ -43,14 +43,15 @@
 	background-color: #fff;
 }
 
-.demo-root[data-demo='tree'] {
-	--brand: 46 125 50; /* #2E7D32 forest green */
-	--brand-dark: 20 54 26; /* #14361A */
-	--brand-soft: 230 244 230; /* #E6F4E6 */
-	--brand-cream: 245 241 232; /* #F5F1E8 warm cream */
-	--brand-accent: 143 179 57; /* #8FB339 off-green */
-	--brand-ink: 20 32 26; /* #14201A */
-	--brand-muted: 91 107 94; /* #5B6B5E */
+/* Trades (electrician + plumber) — strong blue with amber accent. */
+.demo-root[data-demo='remeslo'] {
+	--brand: 21 101 192; /* #1565C0 electric blue */
+	--brand-dark: 13 42 77; /* #0D2A4D deep navy */
+	--brand-soft: 227 240 252; /* #E3F0FC light blue tint */
+	--brand-cream: 244 247 250; /* #F4F7FA cool off-white */
+	--brand-accent: 255 179 0; /* #FFB300 amber */
+	--brand-ink: 15 30 46; /* #0F1E2E navy text */
+	--brand-muted: 90 104 120; /* #5A6878 slate */
 }
 
 .demo-root[data-demo='landscaping'] {

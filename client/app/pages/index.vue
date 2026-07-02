@@ -17,11 +17,11 @@ const meta: Record<
     icon: 'grass',
     highlights: ['Slider hero', 'Karusel služeb', 'Světlá šablona'],
   },
-  tree: {
-    colors: ['#2E7D32', '#8FB339', '#F5F1E8'],
+  remeslo: {
+    colors: ['#1565C0', '#FFB300', '#F4F7FA'],
     dark: false,
-    icon: 'forest',
-    highlights: ['Ceník 3 tarify', 'Před / po slider', 'Světlá šablona'],
+    icon: 'electrical_services',
+    highlights: ['Havarijní servis 24/7', 'Ceník 3 tarify', 'Před / po slider'],
   },
   landscaping: {
     colors: ['#3DA35C', '#FECF02', '#0A0C0A'],
