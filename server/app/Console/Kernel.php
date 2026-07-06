@@ -60,6 +60,13 @@ class Kernel extends ConsoleKernel
             ->onFailure(function () {
                 Log::error('Fakturoid sync command failed');
             });
+
+        $schedule->command('demo:reset')
+            ->everyFiveMinutes()
+            ->withoutOverlapping()
+            ->onFailure(function () {
+                Log::error('Demo reset command failed');
+            });
     }
 
     /**
