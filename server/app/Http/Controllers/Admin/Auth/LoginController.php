@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\User\UserLoginResource;
+use App\Models\User\User;
+use App\Services\LoginLogService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +31,14 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (! Auth::attempt($credentials)) {
+            $attemptedUser = User::where('email', $credentials['email'])->first();
+            LoginLogService::record($request, $attemptedUser?->id, $credentials['email'], false);
+
             return Response::json(['error' => 'Unauthorized'], 401);
         }
 
         $user = Auth::user();
+        LoginLogService::record($request, $user->id, $user->email, true);
         $remember = $request->boolean('remember', false);
         $expiration = $remember ? now()->addYear() : now()->addDays(3);
         $token = $user->createToken('auth_token', ['*'], $expiration)->plainTextToken;
