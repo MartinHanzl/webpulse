@@ -37,8 +37,8 @@ export default defineNuxtConfig({
       charset: 'utf-8',
       viewport:
         'width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no, maximum-scale=1',
-      title: 'Diamond CRM',
-      titleTemplate: '%s | Diamond CRM',
+      title: 'Web Pulse',
+      titleTemplate: '%s | Web Pulse',
       htmlAttrs: {
         lang: 'cs',
       },
