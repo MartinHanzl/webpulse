@@ -911,7 +911,7 @@ onMounted(() => {
                     class="transition-transform hover:scale-105"
                   >
                     <img
-                      class="h-10 w-auto"
+                      class="h-16 w-auto"
                       src="/static/img/logo-gray-300.png"
                       alt="Your Company"
                     />
@@ -1054,13 +1054,13 @@ onMounted(() => {
       <div
         class="flex grow flex-col gap-y-6 overflow-y-auto bg-zinc-950 px-6 pb-6 shadow-2xl ring-1 ring-white/5"
       >
-        <div class="flex h-24 shrink-0 items-center justify-center border-b border-white/5">
+        <div class="flex h-32 shrink-0 items-center justify-center border-b border-white/5">
           <NuxtLink
             :to="selectedSiteUrl"
             target="_blank"
             class="transition-transform hover:scale-105"
           >
-            <img class="h-10 w-auto" src="/static/img/logo-gray-300.png" alt="Your Company" />
+            <img class="h-16 w-auto" src="/static/img/logo-gray-300.png" alt="Your Company" />
           </NuxtLink>
         </div>
 
