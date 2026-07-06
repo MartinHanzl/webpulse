@@ -93,7 +93,7 @@ onMounted(() => {
   loadItems();
 });
 definePageMeta({
-  middleware: 'sanctum:auth',
+  middleware: ['sanctum:auth', 'only-user-one'],
 });
 </script>
 

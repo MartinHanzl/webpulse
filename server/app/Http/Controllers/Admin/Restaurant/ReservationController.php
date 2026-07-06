@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\Restaurant;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\Admin\Restaurant\ReservationResource;
 use App\Models\Restaurant\Reservation;
+use App\Models\Restaurant\RestaurantTable;
+use App\Traits\Siteable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -15,9 +17,14 @@ use Illuminate\Support\Facades\Validator;
 
 class ReservationController extends Controller
 {
+    use Siteable;
+
     public function index(Request $request): JsonResponse
     {
-        $query = Reservation::with(['restaurantTable', 'customer']);
+        $siteId = $this->handleSite($request->header('X-Site-Hash'));
+
+        $query = Reservation::with(['restaurantTable', 'customer'])
+            ->whereRelation('sites', 'site_id', $siteId);
 
         if ($request->filled('table_id')) {
             $query->where('table_id', $request->get('table_id'));
@@ -72,8 +79,10 @@ class ReservationController extends Controller
 
     public function store(Request $request, ?int $id = null): JsonResponse
     {
+        $siteId = $this->handleSite($request->header('X-Site-Hash'));
+
         if ($id) {
-            $reservation = Reservation::find($id);
+            $reservation = Reservation::whereRelation('sites', 'site_id', $siteId)->find($id);
             if (! $reservation) {
                 App::abort(404);
             }
@@ -94,6 +103,13 @@ class ReservationController extends Controller
             return Response::json($validator->errors(), 400);
         }
 
+        $tableOnSite = RestaurantTable::whereRelation('sites', 'site_id', $siteId)
+            ->where('id', $request->get('table_id'))
+            ->exists();
+        if (! $tableOnSite) {
+            return Response::json(['message' => 'Stůl nepatří k tomuto webu.'], 404);
+        }
+
         // Check for time conflict
         $conflictQuery = Reservation::where('table_id', $request->get('table_id'))
             ->where('date', $request->get('date'))
@@ -112,6 +128,7 @@ class ReservationController extends Controller
             DB::beginTransaction();
             $reservation->fill($request->all());
             $reservation->save();
+            $this->saveSites($reservation, [$siteId]);
             DB::commit();
         } catch (\Throwable $e) {
             DB::rollBack();
@@ -125,9 +142,13 @@ class ReservationController extends Controller
         ));
     }
 
-    public function show(int $id): JsonResponse
+    public function show(Request $request, int $id): JsonResponse
     {
-        $reservation = Reservation::with(['restaurantTable', 'customer'])->find($id);
+        $siteId = $this->handleSite($request->header('X-Site-Hash'));
+
+        $reservation = Reservation::with(['restaurantTable', 'customer'])
+            ->whereRelation('sites', 'site_id', $siteId)
+            ->find($id);
         if (! $reservation) {
             App::abort(404);
         }
@@ -137,7 +158,9 @@ class ReservationController extends Controller
 
     public function updateStatus(Request $request, int $id): JsonResponse
     {
-        $reservation = Reservation::find($id);
+        $siteId = $this->handleSite($request->header('X-Site-Hash'));
+
+        $reservation = Reservation::whereRelation('sites', 'site_id', $siteId)->find($id);
         if (! $reservation) {
             App::abort(404);
         }
@@ -156,9 +179,11 @@ class ReservationController extends Controller
         return Response::json(ReservationResource::make($reservation->fresh(['restaurantTable', 'customer'])));
     }
 
-    public function destroy(int $id): JsonResponse
+    public function destroy(Request $request, int $id): JsonResponse
     {
-        $reservation = Reservation::find($id);
+        $siteId = $this->handleSite($request->header('X-Site-Hash'));
+
+        $reservation = Reservation::whereRelation('sites', 'site_id', $siteId)->find($id);
         if (! $reservation) {
             App::abort(404);
         }

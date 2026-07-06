@@ -79,6 +79,10 @@ class Controller extends BaseController
 
     public function statistics(Request $request): JsonResponse
     {
+        if ($request->user()?->id !== 1) {
+            App::abort(403);
+        }
+
         $bActivityIds = Activity::query()
             ->where('is_business', true)
             ->pluck('id')

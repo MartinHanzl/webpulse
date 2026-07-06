@@ -72,7 +72,11 @@ async function loadItems() {
   await client('/api/admin/food/reservation', {
     method: 'GET',
     query,
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Site-Hash': selectedSiteHash.value,
+    },
   })
     .then((r) => {
       items.value = r;
@@ -90,7 +94,11 @@ async function deleteItem(id: number) {
   const client = useSanctumClient();
   await client('/api/admin/food/reservation/' + id, {
     method: 'DELETE',
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Site-Hash': selectedSiteHash.value,
+    },
   }).finally(() => {
     loadItems();
   });
@@ -120,6 +128,7 @@ watch(searchString, () => {
   tableQuery.value.search = searchString.value;
   debouncedLoadItems();
 });
+watch(selectedSiteHash, () => loadItems());
 
 useHead({ title: pageTitle.value });
 onMounted(() => {

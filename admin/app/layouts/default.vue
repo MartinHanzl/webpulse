@@ -83,7 +83,9 @@ const sidebarOpen = ref(false);
 const searchString = ref('');
 provide('searchString', searchString);
 
-const selectedSiteHash = ref('');
+const selectedSiteHash = ref(
+  import.meta.client ? localStorage.getItem('selectedSiteHash') || '' : '',
+);
 provide('selectedSiteHash', selectedSiteHash);
 
 const navigation = ref([
@@ -96,6 +98,7 @@ const navigation = ref([
         link: '/statistiky',
         icon: ChartPieIcon,
         current: false,
+        onlyUserId: 1,
       },
     ],
   },
@@ -757,13 +760,13 @@ watchEffect(() => {
 
 const { canView, moduleBelongsToSite } = usePermissions(selectedSiteHash);
 
+function isMenuItemVisible(item: any): boolean {
+  if (item.onlyUserId && user?.value?.id !== item.onlyUserId) return false;
+  return !item.slug || (moduleBelongsToSite(item.slug) && canView(item.slug));
+}
+
 const filteredNavigation = computed(() => {
-  return navigation.value.filter((group: any) =>
-    group.menu.some(
-      (item: any) =>
-        !item.slug || (item.slug && moduleBelongsToSite(item.slug) && canView(item.slug)),
-    ),
-  );
+  return navigation.value.filter((group: any) => group.menu.some(isMenuItemVisible));
 });
 
 function canViewBySlug(slug: string): boolean {
@@ -820,21 +823,23 @@ watch(
   },
 );
 
+// Auto-select first assigned site when user loads without a valid selection
+// (first login, or stored hash belongs to a site the user is not assigned to)
+watch(
+  () => user?.value?.sites,
+  (sites: any[] | undefined) => {
+    if (!import.meta.client || !sites?.length) return;
+    const isValid = sites.some((s: any) => s.hash === selectedSiteHash.value);
+    if (!selectedSiteHash.value || !isValid) {
+      selectedSiteHash.value = sites[0].hash;
+    }
+  },
+  { immediate: true },
+);
+
 onMounted(() => {
   refreshIdentity();
   getQuickAccess();
-
-  if (
-    import.meta.client &&
-    !localStorage.getItem('selectedSiteHash') &&
-    user?.value?.sites?.length > 0
-  ) {
-    localStorage.setItem('selectedSiteHash', user.value.sites[0].hash);
-  }
-
-  if (import.meta.client && localStorage.getItem('selectedSiteHash')) {
-    selectedSiteHash.value = localStorage.getItem('selectedSiteHash') || '';
-  }
 
   activityStore.fetchActivities();
   languageStore.fetchLanguages();
@@ -932,13 +937,7 @@ onMounted(() => {
                           @click="sidebarOpen = false"
                         >
                           <NuxtLink
-                            v-if="
-                              (!item.slug ||
-                                (item.slug &&
-                                  canViewBySite(item.slug) &&
-                                  canViewBySlug(item.slug))) &&
-                              !item.submenu
-                            "
+                            v-if="isMenuItemVisible(item) && !item.submenu"
                             :to="item.link"
                             :class="[
                               item.current
@@ -961,10 +960,7 @@ onMounted(() => {
                           </NuxtLink>
 
                           <Disclosure
-                            v-else-if="
-                              !item.slug ||
-                              (item.slug && canViewBySite(item.slug) && canViewBySlug(item.slug))
-                            "
+                            v-else-if="isMenuItemVisible(item)"
                             v-slot="{ open }"
                             as="div"
                             class="w-full"
@@ -1073,11 +1069,7 @@ onMounted(() => {
               <ul role="list" class="-mx-2 space-y-1.5">
                 <li v-for="(item, key) in group.menu" :key="key">
                   <NuxtLink
-                    v-if="
-                      (!item.slug ||
-                        (item.slug && canViewBySite(item.slug) && canViewBySlug(item.slug))) &&
-                      !item.submenu
-                    "
+                    v-if="isMenuItemVisible(item) && !item.submenu"
                     :to="item.link"
                     :class="[
                       item.current
@@ -1098,10 +1090,7 @@ onMounted(() => {
                   </NuxtLink>
 
                   <Disclosure
-                    v-else-if="
-                      !item.slug ||
-                      (item.slug && canViewBySite(item.slug) && canViewBySlug(item.slug))
-                    "
+                    v-else-if="isMenuItemVisible(item)"
                     v-slot="{ open }"
                     as="div"
                     class="w-full"

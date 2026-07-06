@@ -67,7 +67,11 @@ async function loadItem() {
   loading.value = true;
   await client('/api/admin/food/reservation/' + route.params.id, {
     method: 'GET',
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Site-Hash': selectedSiteHash.value,
+    },
   })
     .then((r) => {
       item.value = r;
@@ -114,7 +118,11 @@ async function saveItem(redirect = true) {
     {
       method: 'POST',
       body: JSON.stringify(item.value),
-      headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Site-Hash': selectedSiteHash.value,
+      },
     },
   )
     .then((r) => {
@@ -137,7 +145,11 @@ async function updateStatus(newStatus: string) {
   await client('/api/admin/food/reservation/' + route.params.id + '/status', {
     method: 'POST',
     body: JSON.stringify({ status: newStatus }),
-    headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Site-Hash': selectedSiteHash.value,
+    },
   }).then((r) => {
     item.value = r;
     $toast.show({ summary: 'Hotovo', detail: 'Stav rezervace aktualizován.', severity: 'success' });

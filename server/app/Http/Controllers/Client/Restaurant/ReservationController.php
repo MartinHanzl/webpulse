@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Client\Restaurant\ReservationResource;
 use App\Models\Restaurant\Reservation;
 use App\Models\Restaurant\RestaurantTable;
+use App\Traits\Siteable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Validator;
 
 class ReservationController extends Controller
 {
+    use Siteable;
+
     public function store(Request $request, ?string $lang = null): JsonResponse
     {
         $this->handleLanguage($lang);
@@ -79,6 +82,7 @@ class ReservationController extends Controller
             $reservation->status = 'pending';
             $reservation->source = 'web';
             $reservation->save();
+            $this->saveSites($reservation, [$siteId]);
 
             DB::commit();
         } catch (\Throwable $e) {

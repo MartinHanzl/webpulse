@@ -3,10 +3,13 @@
 namespace App\Models\Restaurant;
 
 use App\Models\Customer\Customer;
+use App\Traits\Siteable;
 use Illuminate\Database\Eloquent\Model;
 
 class Reservation extends Model
 {
+    use Siteable;
+
     protected $table = 'reservations';
 
     protected $fillable = [
@@ -38,6 +41,11 @@ class Reservation extends Model
         static::deleted(function (Reservation $reservation) {
             $reservation->restaurantTable?->refreshStatus();
         });
+    }
+
+    public function sites()
+    {
+        return $this->morphToMany('App\Models\Site\Site', 'siteable');
     }
 
     public function restaurantTable()
