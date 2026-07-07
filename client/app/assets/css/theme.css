@@ -12,6 +12,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap');
 /* Spa demo fonts (Crafto): Rufina serif + Jost body. */
 @import url('https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&family=Jost:wght@300..700&display=swap');
+/* Medical demo font (Crafto): Manrope for headings and body. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 
 /* Material Symbols: font face + base class come from the local
    `material-symbols/outlined.css` (loaded in nuxt.config) so icons work
@@ -158,6 +160,29 @@
 	font-weight: 400;
 }
 
+/* Medical (Crafto) — turquoise on white/pale-turquoise, extra-bold Manrope. */
+.demo-root[data-demo='medical'] {
+	--brand: 24 188 199; /* #18bcc7 turquoise */
+	--brand-dark: 48 51 52; /* #303334 dark gray */
+	--brand-soft: 237 249 250; /* #edf9fa pale turquoise */
+	--brand-cream: 247 247 247; /* #f7f7f7 */
+	--brand-accent: 253 150 30; /* #fd961e golden yellow (star badges) */
+	--brand-ink: 48 51 52; /* #303334 */
+	--brand-muted: 132 133 135; /* #848587 */
+	--brand-pop: var(--brand);
+	font-family: 'Manrope', 'Inter', sans-serif;
+}
+:where(.demo-root[data-demo='medical']) h1,
+:where(.demo-root[data-demo='medical']) h2,
+:where(.demo-root[data-demo='medical']) h3,
+:where(.demo-root[data-demo='medical']) h4,
+:where(.demo-root[data-demo='medical']) h5,
+:where(.demo-root[data-demo='medical']) h6 {
+	font-family: 'Manrope', 'Inter', sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+}
+
 /* `:where()` keeps specificity at 0 so Tailwind text-* utilities (e.g. text-white
    on dark sections) win without needing !important. */
 :where(.demo-root) h1,
@@ -239,6 +264,30 @@
 }
 .marquee-mask {
 	overflow: hidden;
+}
+
+/* Expanding "sonar" ring (medical hero heart badge) */
+@keyframes sonar {
+	0% {
+		transform: scale(1);
+		opacity: 0.6;
+	}
+	100% {
+		transform: scale(1.9);
+		opacity: 0;
+	}
+}
+.sonar-ring::before,
+.sonar-ring::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 9999px;
+	border: 1px solid currentColor;
+	animation: sonar 2s ease-out infinite;
+}
+.sonar-ring::after {
+	animation-delay: 1s;
 }
 
 /* Subtle float used for hero decorations */

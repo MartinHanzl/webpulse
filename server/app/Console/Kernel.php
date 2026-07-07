@@ -61,6 +61,14 @@ class Kernel extends ConsoleKernel
                 Log::error('Fakturoid sync command failed');
             });
 
+        $schedule->command('sitemaps:generate')
+            ->dailyAt('03:00')
+            ->withoutOverlapping()
+            ->runInBackground()
+            ->onFailure(function () {
+                Log::error('Sitemaps generation command failed');
+            });
+
         $schedule->command('demo:reset')
             ->everyFiveMinutes()
             ->withoutOverlapping()

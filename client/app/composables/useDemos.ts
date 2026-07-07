@@ -9,9 +9,25 @@ export interface DemoNavLink {
 }
 
 export interface DemoDefinition {
-  slug: 'lawn' | 'remeslo' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer' | 'spa';
+  slug:
+    | 'lawn'
+    | 'remeslo'
+    | 'landscaping'
+    | 'restaurant'
+    | 'lawyer'
+    | 'freelancer'
+    | 'spa'
+    | 'medical';
   /** value for data-demo (palette key in theme.css) */
-  palette: 'lawn' | 'remeslo' | 'landscaping' | 'restaurant' | 'lawyer' | 'freelancer' | 'spa';
+  palette:
+    | 'lawn'
+    | 'remeslo'
+    | 'landscaping'
+    | 'restaurant'
+    | 'lawyer'
+    | 'freelancer'
+    | 'spa'
+    | 'medical';
   brandName: string;
   tagline: string;
   phone: string;
@@ -104,6 +120,17 @@ export const DEMOS: DemoDefinition[] = [
     switchLabel: 'Spa Salon',
     industry: 'Spa & wellness',
   },
+  {
+    slug: 'medical',
+    palette: 'medical',
+    brandName: 'Vitalmed',
+    tagline: 'Nejdůvěryhodnější partner pro vaše zdraví',
+    phone: '+420 233 456 789',
+    email: 'recepce@vitalmed.cz',
+    address: 'Zdravotní 8, Praha 4',
+    switchLabel: 'Medical',
+    industry: 'Zdravotní klinika',
+  },
 ];
 
 export function useDemos() {
@@ -116,6 +143,17 @@ export function useDemos() {
         { label: 'Procedury', to: `/demo/${slug}/procedury` },
         { label: 'Balíčky', to: `/demo/${slug}/balicky` },
         { label: 'Prostředí', to: `/demo/${slug}/prostredi` },
+        { label: 'Kontakt', to: `/demo/${slug}/kontakt` },
+      ];
+    }
+    // Medical demo: treatments, doctors, appointment.
+    if (slug === 'medical') {
+      return [
+        { label: 'Domů', to: `/demo/${slug}` },
+        { label: 'O nás', to: `/demo/${slug}/o-nas` },
+        { label: 'Léčba', to: `/demo/${slug}/lecba` },
+        { label: 'Lékaři', to: `/demo/${slug}/lekari` },
+        { label: 'Objednání', to: `/demo/${slug}/objednani` },
         { label: 'Kontakt', to: `/demo/${slug}/kontakt` },
       ];
     }

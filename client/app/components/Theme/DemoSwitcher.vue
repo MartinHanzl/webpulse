@@ -15,6 +15,7 @@ const swatches: Record<string, string[]> = {
   lawyer: ['#b98e44', '#152833', '#f6f3ef'],
   freelancer: ['#c2001c', '#232323', '#f7f7f7'],
   spa: ['#fb7d61', '#36332e', '#f8f3f0'],
+  medical: ['#18bcc7', '#303334', '#edf9fa'],
 };
 </script>
 

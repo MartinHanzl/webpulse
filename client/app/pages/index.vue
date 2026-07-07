@@ -53,6 +53,12 @@ const meta: Record<
     icon: 'spa',
     highlights: ['Hero slider', 'Ceník procedur', 'Rufina serif'],
   },
+  medical: {
+    colors: ['#18bcc7', '#303334', '#edf9fa'],
+    dark: false,
+    icon: 'medical_services',
+    highlights: ['Karusel oddělení', 'Objednávkový formulář', 'Manrope'],
+  },
 };
 
 useHead({

@@ -81,6 +81,22 @@ const P = {
   spaHotstone: '1600334089648-b0d9d3028eb2',
   spaAroma: '1596178065887-1198b6148b2b',
   spaRelax: '1519415387722-a1c3bbef716c',
+  // Medical / clinic (Vitalmed demo)
+  mDoctorTeam: '1582750433449-648ed127bb54', // doctor portrait, warm light
+  mClinicHall: '1519494026892-80bbd2d6fd0d', // modern clinic corridor
+  mSurgeons: '1551190822-a9333d879b1f', // surgeons at work
+  mDoctorPatient: '1576091160399-112ba8d25d1d', // doctor with tablet
+  mStethoscope: '1505751172876-fa1923c5c528', // stethoscope on desk
+  mNurse: '1559839734-2b71ea197ec2', // smiling female doctor
+  mLab: '1579154204601-01588f351e67', // laboratory samples
+  mDentist: '1588776814546-1ffcf47267a5', // dental care
+  mPediatric: '1632053002928-1919605ee6f7', // pediatrician with child
+  mCardio: '1628348068343-c6a848d2b6dd', // heart model
+  mMri: '1516069677018-378515003435', // MRI scanner (b&w)
+  mReception: '1629909613654-28e377c37b09', // clinic reception
+  mDoctorMale: '1612349317150-e413f6a5b16d', // male doctor portrait
+  mDoctorFemale: '1594824476967-48c8b964273f', // female doctor portrait
+  mConsult: '1521791136064-7986c2920216', // consultation handshake
   fSkincare: '1571781926291-c477ebfd024b',
   fCosmetic: '1523293182086-7651a899d37f',
   fLeaf: '1512207736890-6ffed8a84e8d',
@@ -205,6 +221,18 @@ export function useStockImages() {
         U(p, 700),
       ),
       blog: [P.fCreative, P.fDesk, P.fAbstract].map((p) => U(p, 700)),
+    },
+    medical: {
+      hero: U(P.mClinicHall, 1920),
+      aboutMain: U(P.mDoctorPatient, 900),
+      aboutSecondary: U(P.mNurse, 600),
+      choose: U(P.mSurgeons, 900),
+      facts: U(P.mMri, 1920),
+      work: [P.mDoctorTeam, P.mSurgeons, P.mLab, P.mPediatric, P.mReception].map((p) => U(p, 800)),
+      services: [P.mCardio, P.mDentist, P.mPediatric, P.mLab, P.mMri, P.mDoctorPatient].map((p) =>
+        U(p, 700),
+      ),
+      blog: [P.mStethoscope, P.mConsult, P.mLab].map((p) => U(p, 700)),
     },
     spa: {
       hero: U(P.spaMassage, 1920),
