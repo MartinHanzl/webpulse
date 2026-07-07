@@ -4,9 +4,10 @@ const PROJECTS = [
     title: 'Web CHPP s. r. o.',
     tag: 'Firemní web · na míru',
     placeholder: 'Screenshot projektu 1',
+    image: 'chpp.png'
   },
-  { title: 'Název projektu', tag: 'E‑shop · Shopify', placeholder: 'Screenshot projektu 2' },
-  { title: 'Název projektu', tag: 'Webová aplikace · React', placeholder: 'Screenshot projektu 3' },
+  { title: 'Redesign webu', tag: 'Web spolku · CMS', placeholder: 'Screenshot projektu 2', image: 'shopify.png' },
+  { title: 'Podnikový web', tag: 'Webová aplikace · API', placeholder: 'Screenshot projektu 3', image: 'react.png' },
 ];
 </script>
 
@@ -31,7 +32,14 @@ const PROJECTS = [
           class="reveal overflow-hidden rounded-3xl bg-white shadow-[0_8px_24px_rgb(var(--brand-dark)/0.06)]"
         >
           <div class="relative aspect-[16/11]">
-            <SiteImagePlaceholder :label="project.placeholder" class="absolute inset-0" />
+            <img
+              v-if="project.image"
+              :src="`/images/${project.image}`"
+              :alt="project.title"
+              class="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <SiteImagePlaceholder v-else :label="project.placeholder" class="absolute inset-0" />
           </div>
           <div class="flex flex-col gap-1.5 px-6 py-[22px]">
             <h3 class="m-0 text-lg">{{ project.title }}</h3>

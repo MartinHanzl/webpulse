@@ -1,22 +1,29 @@
 <script setup lang="ts">
+import {
+  BoltIcon,
+  CodeBracketIcon,
+  ShoppingCartIcon,
+  WrenchScrewdriverIcon,
+} from '@heroicons/vue/24/outline';
+
 const SERVICES = [
   {
-    icon: '</>',
+    icon: CodeBracketIcon,
     title: 'Weby na míru',
     text: 'Firemní weby a prezentace postavené přesně podle vašich potřeb, ne podle šablony.',
   },
   {
-    icon: '🛒',
+    icon: ShoppingCartIcon,
     title: 'Systémy',
     text: 'Prodejní e‑shopy na Shopify nebo na míru — včetně napojení na platby a dopravce.',
   },
   {
-    icon: '⚙',
+    icon: WrenchScrewdriverIcon,
     title: 'Správa a údržba',
     text: 'Pravidelné aktualizace, zálohy a drobné úpravy. Web, o který se nemusíte starat.',
   },
   {
-    icon: '⚡',
+    icon: BoltIcon,
     title: 'Rychlost a SEO',
     text: 'Audit a optimalizace stávajícího webu — rychlejší načítání, lepší pozice ve vyhledávání.',
   },
@@ -46,10 +53,8 @@ const SERVICES = [
           :key="service.title"
           class="reveal flex flex-col gap-3.5 rounded-3xl bg-brand-cream px-7 py-8"
         >
-          <span
-            class="grid size-12 place-items-center rounded-[14px] bg-brand text-xl font-extrabold text-white"
-          >
-            {{ service.icon }}
+          <span class="grid size-12 place-items-center rounded-[14px] bg-brand text-white">
+            <component :is="service.icon" class="size-6" />
           </span>
           <h3 class="m-0 text-xl">{{ service.title }}</h3>
           <p class="m-0 text-[15px] leading-relaxed text-brand-muted">{{ service.text }}</p>

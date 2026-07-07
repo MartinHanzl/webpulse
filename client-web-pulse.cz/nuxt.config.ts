@@ -92,7 +92,7 @@ export default defineNuxtConfig({
       // NUXT_PUBLIC_SITE_THEME to the demo they chose and the whole site re-skins.
       siteTheme: process.env.SITE_THEME ?? 'lawn',
       siteHash:
-        '8FdMaHTAizMcmODA6LlTIqi2uxl14GYUS6W4xH4eVYiWn2kGlmkSVZiHwWyp3eTfdR3KeluV5lFETLjz2zf2vblWmkaom3M7sDBh1nBcoMjVRSYnZ7hnv77PWXRw1tVy',
+        '190iI67CUn3twXVLhGJrpVPcuW325wksHOBE90epwiXCdVrTc3kmA7zf0GcmbhpVIuZrnVKJKpys6EVMFQTCIkryNfv3JoaRnvyscWe5EHaIcvExKIngXnnuqajL2WHL',
     },
   },
 

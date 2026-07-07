@@ -70,7 +70,7 @@ const PLANS = [
             {{ plan.badge }}
           </span>
           <h3 class="m-0 text-xl" :class="plan.featured ? '!text-white' : ''">{{ plan.title }}</h3>
-          <div class="flex items-baseline gap-1.5">
+          <!--<div class="flex items-baseline gap-1.5">
             <strong
               class="text-4xl font-extrabold"
               :class="plan.featured ? 'text-white' : 'text-brand-ink'"
@@ -80,7 +80,7 @@ const PLANS = [
             <span v-if="plan.priceSuffix" class="text-[15px] text-brand-muted">
               {{ plan.priceSuffix }}
             </span>
-          </div>
+          </div>-->
           <p
             class="m-0 text-[15px] leading-relaxed"
             :class="plan.featured ? 'text-white/65' : 'text-brand-muted'"

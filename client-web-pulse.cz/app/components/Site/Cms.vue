@@ -43,9 +43,11 @@ const BENEFITS = [
         <div
           class="relative aspect-[16/10] w-full overflow-hidden rounded-3xl border border-brand-soft shadow-[0_32px_64px_rgb(var(--brand-dark)/0.18)]"
         >
-          <SiteImagePlaceholder
-            label="Screenshot administrace vašeho CMS/CRM"
-            class="absolute inset-0"
+          <img
+            src="/images/admin.png"
+            alt="Screenshot administrace CMS/CRM"
+            class="absolute inset-0 h-full w-full object-cover"
+            loading="lazy"
           />
         </div>
         <div
