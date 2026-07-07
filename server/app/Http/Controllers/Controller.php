@@ -36,7 +36,11 @@ class Controller extends BaseController
         if (! $hash) {
             App::abort(404);
         }
-        $site = Site::query()->where('hash', $hash)->first();
+        $site = Site::query()
+            ->where('hash', $hash)
+            ->where('is_active', true)
+            ->first();
+
         if (! $site) {
             App::abort(404);
         }

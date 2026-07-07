@@ -1,0 +1,305 @@
+/* ==========================================================================
+   ThemeForest "Lawnc" demo — Tailwind rebuild
+   Per-variant theming via CSS variables. Wrap a demo in `.demo-root` and set
+   `data-demo="lawn|remeslo|landscaping"` to recolor the whole subtree.
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
+/* Restaurant demo fonts (Crafto): Bebas Neue display + Schibsted Grotesk body. */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Schibsted+Grotesk:wght@400..800&display=swap');
+/* Lawyer demo fonts (Crafto): Playfair Display serif + DM Sans body. */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..700&family=DM+Sans:wght@400..700&display=swap');
+/* Freelancer demo font (Crafto): Inter. */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap');
+/* Spa demo fonts (Crafto): Rufina serif + Jost body. */
+@import url('https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&family=Jost:wght@300..700&display=swap');
+/* Medical demo font (Crafto): Manrope for headings and body. */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+
+/* Material Symbols: font face + base class come from the local
+   `material-symbols/outlined.css` (loaded in nuxt.config) so icons work
+   offline. Default the variable axes here. */
+.material-symbols-outlined {
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 400,
+		'GRAD' 0,
+		'opsz' 24;
+}
+
+/* Default brand = Lawn. Values are space-separated RGB for rgb(var() / alpha). */
+.demo-root {
+	--brand: 31 161 46; /* #1FA12E */
+	--brand-dark: 25 32 12; /* #19200C */
+	--brand-soft: 236 248 223; /* #ECF8DF */
+	--brand-cream: 245 245 245; /* #F5F5F5 */
+	--brand-accent: 254 207 2; /* #FECF02 */
+	--brand-ink: 16 17 16; /* #101110 */
+	--brand-muted: 84 87 84; /* #545754 */
+
+	/* Per-theme accent for icons/links/badges. Defaults to the brand colour;
+	   the dark template overrides it to the yellow accent below. */
+	--brand-pop: var(--brand);
+
+	font-family: 'Fustat', 'Inter', sans-serif;
+	color: rgb(var(--brand-ink));
+	background-color: #fff;
+}
+
+/* Trades (electrician + plumber) — strong blue with amber accent. */
+.demo-root[data-demo='remeslo'] {
+	--brand: 21 101 192; /* #1565C0 electric blue */
+	--brand-dark: 13 42 77; /* #0D2A4D deep navy */
+	--brand-soft: 227 240 252; /* #E3F0FC light blue tint */
+	--brand-cream: 244 247 250; /* #F4F7FA cool off-white */
+	--brand-accent: 255 179 0; /* #FFB300 amber */
+	--brand-ink: 15 30 46; /* #0F1E2E navy text */
+	--brand-muted: 90 104 120; /* #5A6878 slate */
+}
+
+.demo-root[data-demo='landscaping'] {
+	--brand: 61 163 92; /* #3DA35C */
+	--brand-dark: 17 22 8; /* #111608 */
+	--brand-soft: 231 253 207; /* #E7FDCF */
+	--brand-cream: 248 255 240; /* #F8FFF0 */
+	--brand-accent: 254 207 2; /* #FECF02 */
+	--brand-ink: 16 17 16; /* #101110 */
+	--brand-muted: 84 87 84;
+	/* Dark template: icons/links/badges pop in yellow, not green. */
+	--brand-pop: var(--brand-accent);
+}
+
+/* Restaurant (Crafto) — warm gold on charcoal/cream, Bebas Neue display. */
+.demo-root[data-demo='restaurant'] {
+	--brand: 211 145 33; /* #d39121 gold */
+	--brand-dark: 40 39 37; /* #282725 charcoal */
+	--brand-soft: 244 236 226; /* #F4ECE2 warm tint */
+	--brand-cream: 249 246 243; /* #f9f6f3 */
+	--brand-accent: 213 31 15; /* #d51f0f red */
+	--brand-ink: 40 39 37; /* #282725 */
+	--brand-muted: 141 137 135; /* #8d8987 */
+	/* Icons/links/highlights pop in gold. */
+	--brand-pop: var(--brand);
+	font-family: 'Schibsted Grotesk', 'Inter', sans-serif;
+}
+/* Restaurant headings use the condensed display face. */
+:where(.demo-root[data-demo='restaurant']) h1,
+:where(.demo-root[data-demo='restaurant']) h2,
+:where(.demo-root[data-demo='restaurant']) h3,
+:where(.demo-root[data-demo='restaurant']) h4,
+:where(.demo-root[data-demo='restaurant']) h5,
+:where(.demo-root[data-demo='restaurant']) h6 {
+	font-family: 'Bebas Neue', 'Fustat', sans-serif;
+	letter-spacing: 0.02em;
+	font-weight: 400;
+}
+
+/* Lawyer (Crafto) — bronze on navy/cream, Playfair Display serif headings. */
+.demo-root[data-demo='lawyer'] {
+	--brand: 185 142 68; /* #b98e44 bronze */
+	--brand-dark: 21 40 51; /* #152833 navy */
+	--brand-soft: 237 231 221; /* #EDE7DD warm tint */
+	--brand-cream: 246 243 239; /* #f6f3ef */
+	--brand-accent: 185 142 68; /* bronze */
+	--brand-ink: 21 40 51; /* #152833 navy text */
+	--brand-muted: 137 141 149; /* #898d95 */
+	--brand-pop: var(--brand);
+	font-family: 'DM Sans', 'Inter', sans-serif;
+}
+:where(.demo-root[data-demo='lawyer']) h1,
+:where(.demo-root[data-demo='lawyer']) h2,
+:where(.demo-root[data-demo='lawyer']) h3,
+:where(.demo-root[data-demo='lawyer']) h4,
+:where(.demo-root[data-demo='lawyer']) h5,
+:where(.demo-root[data-demo='lawyer']) h6 {
+	font-family: 'Playfair Display', 'Fustat', serif;
+	font-weight: 600;
+}
+
+/* Freelancer (Crafto) — crimson on charcoal/off-white, bold Inter. */
+.demo-root[data-demo='freelancer'] {
+	--brand: 194 0 28; /* #c2001c crimson */
+	--brand-dark: 35 35 35; /* #232323 charcoal */
+	--brand-soft: 254 237 236; /* #feedec */
+	--brand-cream: 247 247 247; /* #f7f7f7 */
+	--brand-accent: 194 0 28; /* crimson */
+	--brand-ink: 35 35 35; /* #232323 */
+	--brand-muted: 113 117 128; /* #717580 */
+	--brand-pop: var(--brand);
+	font-family: 'Inter', sans-serif;
+}
+:where(.demo-root[data-demo='freelancer']) h1,
+:where(.demo-root[data-demo='freelancer']) h2,
+:where(.demo-root[data-demo='freelancer']) h3,
+:where(.demo-root[data-demo='freelancer']) h4,
+:where(.demo-root[data-demo='freelancer']) h5,
+:where(.demo-root[data-demo='freelancer']) h6 {
+	font-family: 'Inter', sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.02em;
+}
+
+/* Spa (Crafto) — soft coral on warm off-white, Rufina serif headings. */
+.demo-root[data-demo='spa'] {
+	--brand: 251 125 97; /* #fb7d61 coral */
+	--brand-dark: 54 51 46; /* #36332e warm charcoal */
+	--brand-soft: 248 243 240; /* #f8f3f0 */
+	--brand-cream: 238 232 230; /* #EEE8E6 */
+	--brand-accent: 251 125 97; /* coral */
+	--brand-ink: 54 51 46; /* #36332e */
+	--brand-muted: 133 129 129; /* #858181 */
+	--brand-pop: var(--brand);
+	font-family: 'Jost', 'Inter', sans-serif;
+}
+:where(.demo-root[data-demo='spa']) h1,
+:where(.demo-root[data-demo='spa']) h2,
+:where(.demo-root[data-demo='spa']) h3,
+:where(.demo-root[data-demo='spa']) h4,
+:where(.demo-root[data-demo='spa']) h5,
+:where(.demo-root[data-demo='spa']) h6 {
+	font-family: 'Rufina', 'Georgia', serif;
+	font-weight: 400;
+}
+
+/* Medical (Crafto) — turquoise on white/pale-turquoise, extra-bold Manrope. */
+.demo-root[data-demo='medical'] {
+	--brand: 24 188 199; /* #18bcc7 turquoise */
+	--brand-dark: 48 51 52; /* #303334 dark gray */
+	--brand-soft: 237 249 250; /* #edf9fa pale turquoise */
+	--brand-cream: 247 247 247; /* #f7f7f7 */
+	--brand-accent: 253 150 30; /* #fd961e golden yellow (star badges) */
+	--brand-ink: 48 51 52; /* #303334 */
+	--brand-muted: 132 133 135; /* #848587 */
+	--brand-pop: var(--brand);
+	font-family: 'Manrope', 'Inter', sans-serif;
+}
+:where(.demo-root[data-demo='medical']) h1,
+:where(.demo-root[data-demo='medical']) h2,
+:where(.demo-root[data-demo='medical']) h3,
+:where(.demo-root[data-demo='medical']) h4,
+:where(.demo-root[data-demo='medical']) h5,
+:where(.demo-root[data-demo='medical']) h6 {
+	font-family: 'Manrope', 'Inter', sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.03em;
+}
+
+/* `:where()` keeps specificity at 0 so Tailwind text-* utilities (e.g. text-white
+   on dark sections) win without needing !important. */
+:where(.demo-root) h1,
+:where(.demo-root) h2,
+:where(.demo-root) h3,
+:where(.demo-root) h4,
+:where(.demo-root) h5,
+:where(.demo-root) h6 {
+	font-family: 'Fustat', 'Inter', sans-serif;
+	color: rgb(var(--brand-ink));
+	font-weight: 700;
+	line-height: 1.15;
+}
+
+/* ---- Reveal-on-scroll (replaces the theme's `sal.js`) -------------------- */
+.reveal {
+	opacity: 0;
+	transform: translateY(28px);
+	transition:
+		opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: opacity, transform;
+}
+.reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+.reveal-left {
+	transform: translateX(-32px);
+}
+.reveal-right {
+	transform: translateX(32px);
+}
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+	transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none;
+	}
+}
+
+/* ---- Helpers ------------------------------------------------------------- */
+.demo-root .section {
+	padding-top: 6.25rem;
+	padding-bottom: 6.25rem;
+}
+@media (max-width: 768px) {
+	.demo-root .section {
+		padding-top: 4rem;
+		padding-bottom: 4rem;
+	}
+}
+
+.demo-root .container-x {
+	width: 100%;
+	max-width: 1320px;
+	margin-inline: auto;
+	padding-inline: 1.25rem;
+}
+
+/* Marquee strip used in several variants */
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+.marquee-track {
+	display: inline-flex;
+	white-space: nowrap;
+	animation: marquee 28s linear infinite;
+}
+.marquee-mask {
+	overflow: hidden;
+}
+
+/* Expanding "sonar" ring (medical hero heart badge) */
+@keyframes sonar {
+	0% {
+		transform: scale(1);
+		opacity: 0.6;
+	}
+	100% {
+		transform: scale(1.9);
+		opacity: 0;
+	}
+}
+.sonar-ring::before,
+.sonar-ring::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 9999px;
+	border: 1px solid currentColor;
+	animation: sonar 2s ease-out infinite;
+}
+.sonar-ring::after {
+	animation-delay: 1s;
+}
+
+/* Subtle float used for hero decorations */
+@keyframes floaty {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-14px);
+	}
+}
+.floaty {
+	animation: floaty 6s ease-in-out infinite;
+}
