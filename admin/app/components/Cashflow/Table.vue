@@ -41,17 +41,44 @@ const cashflowBudgetDialog = ref({
   budget: 0 as number,
 });
 
-const emit = defineEmits(['create-category', 'load-items', 'save-day-records', 'save-budget']);
+const emit = defineEmits([
+  'edit-category',
+  'reorder-categories',
+  'load-items',
+  'save-day-records',
+  'save-budget',
+]);
 
-function handleMouseOver(event: MouseEvent) {
-  const target = event.currentTarget as HTMLElement;
-  const verticalLine = target.querySelector('.vertical-line::after');
-  if (verticalLine) {
-    verticalLine.style.display = 'flex';
+const draggedIndex = ref<number | null>(null);
+const dragOverIndex = ref<number | null>(null);
+
+function onDragStart(index: number) {
+  draggedIndex.value = index;
+}
+
+function onDragEnter(index: number) {
+  if (draggedIndex.value !== null && index !== draggedIndex.value) {
+    dragOverIndex.value = index;
   }
 }
-function handleClick() {
-  emit('create-category');
+
+function onDrop(index: number) {
+  if (draggedIndex.value === null || draggedIndex.value === index) {
+    onDragEnd();
+    return;
+  }
+
+  const ids = props.categories.map((category: any) => category.id);
+  const [moved] = ids.splice(draggedIndex.value, 1);
+  ids.splice(index, 0, moved);
+
+  emit('reorder-categories', ids);
+  onDragEnd();
+}
+
+function onDragEnd() {
+  draggedIndex.value = null;
+  dragOverIndex.value = null;
 }
 
 function summaryByDay(categoryId: number, day: number) {
@@ -264,10 +291,18 @@ function formatAmount(amount: number) {
                     v-for="(category, index) in categories"
                     :key="index"
                     scope="col"
-                    class="w-auto min-w-[120px] px-3 py-3.5 text-right text-[10px] font-bold uppercase tracking-wider text-slate-500 transition-colors hover:bg-slate-100 lg:px-4 lg:text-[11px]"
-                    :class="{ 'vertical-line': index === categories.length - 1 }"
-                    @mouseover="handleMouseOver"
-                    @click="handleClick"
+                    class="w-auto min-w-[120px] cursor-pointer px-3 py-3.5 text-right text-[10px] font-bold uppercase tracking-wider text-slate-500 transition-colors hover:bg-slate-100 lg:px-4 lg:text-[11px]"
+                    :class="{
+                      'opacity-40': draggedIndex === index,
+                      'bg-indigo-100': dragOverIndex === index,
+                    }"
+                    draggable="true"
+                    @click="emit('edit-category', category)"
+                    @dragstart="onDragStart(index)"
+                    @dragenter.prevent="onDragEnter(index)"
+                    @dragover.prevent
+                    @drop.prevent="onDrop(index)"
+                    @dragend="onDragEnd"
                   >
                     {{ category.name }}
                   </th>
@@ -432,38 +467,6 @@ function formatAmount(amount: number) {
 </template>
 
 <style scoped>
-/* Vylepšené tlačítko pro přidání kategorie (+) */
-.vertical-line {
-  position: relative;
-}
-
-.vertical-line::after {
-  content: '+';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 36px;
-  background-color: rgb(79 70 229 / 0.9); /* indigo-600 s lehkou průhledností */
-  backdrop-filter: blur(4px);
-  display: none;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 1.25rem;
-  font-weight: 300;
-  transition: all 0.2s ease-in-out;
-}
-
-.vertical-line:hover::after {
-  display: flex;
-}
-
-.vertical-line:active::after {
-  background-color: rgb(67 56 202); /* indigo-700 */
-}
-
 /* Vylepšený highlight kříže (sloupec + řádek) */
 .highlight {
   background-color: #f8fafc !important; /* slate-50 */

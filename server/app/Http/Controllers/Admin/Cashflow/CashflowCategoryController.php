@@ -52,7 +52,9 @@ class CashflowCategoryController extends Controller
             $categoriesQuery->without(['budgets', 'cashflows']);
         }
 
-        $categoriesQuery->where('user_id', $request->user()->id);
+        $categoriesQuery->where('user_id', $request->user()->id)
+            ->orderBy('position')
+            ->orderBy('id');
 
         if (! $onlyCategories) {
             $incomeQuery = Cashflow::query()
@@ -116,6 +118,10 @@ class CashflowCategoryController extends Controller
             $cashflowCategory->fill($request->all());
             $cashflowCategory->user_id = $request->user()->id;
 
+            if (! $id) {
+                $cashflowCategory->position = CashflowCategory::where('user_id', $request->user()->id)->max('position') + 1;
+            }
+
             $cashflowCategory->save();
 
             if (! $id) {
@@ -124,6 +130,35 @@ class CashflowCategoryController extends Controller
                     'end_date' => date('Y-m-t'),
                     'amount' => 1000,
                 ]);
+            }
+
+            DB::commit();
+        } catch (\Throwable|\Exception $e) {
+            DB::rollBack();
+
+            return Response::json(['errors' => $e->getMessage()], 422);
+        }
+
+        return Response::json();
+    }
+
+    public function reorder(Request $request): JsonResponse
+    {
+        $validator = Validator::make($request->all(), [
+            'ids' => 'required|array',
+            'ids.*' => 'integer',
+        ]);
+
+        if ($validator->fails()) {
+            return Response::json(['errors' => $validator->errors()], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            foreach ($request->ids as $position => $categoryId) {
+                CashflowCategory::where('user_id', $request->user()->id)
+                    ->where('id', $categoryId)
+                    ->update(['position' => $position]);
             }
 
             DB::commit();

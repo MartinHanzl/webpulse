@@ -73,7 +73,7 @@ const emit = defineEmits(['submit']);
 
                   <div class="mt-8 sm:flex sm:flex-row-reverse sm:gap-3">
                     <BaseButton type="submit" variant="success" size="lg" class="w-full sm:w-auto">
-                      Vytvořit
+                      {{ category.id ? 'Uložit' : 'Vytvořit' }}
                     </BaseButton>
                     <BaseButton
                       ref="cancelButtonRef"

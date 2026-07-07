@@ -198,6 +198,57 @@ async function saveBudget(categoryId: number, budget: number) {
     });
 }
 
+async function reorderCategories(ids: number[]) {
+  const client = useSanctumClient();
+  error.value = false;
+
+  // Optimistické přeuspořádání sloupců ještě před odpovědí API
+  items.value.categories = ids
+    .map((id) => items.value.categories.find((category) => category.id === id))
+    .filter(Boolean);
+
+  await client('/api/admin/cashflow/category/reorder', {
+    method: 'POST',
+    body: JSON.stringify({ ids }),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(() => {
+      $toast.show({
+        summary: 'Hotovo',
+        detail: 'Pořadí kategorií bylo uloženo.',
+        severity: 'success',
+      });
+    })
+    .catch(() => {
+      error.value = true;
+      $toast.show({
+        summary: 'Chyba',
+        detail: 'Nepodařilo se uložit pořadí kategorií. Zkuste to prosím později.',
+        severity: 'error',
+      });
+      loadItems();
+    });
+}
+
+function createCategory() {
+  categoryDialog.value.category = {
+    id: 0,
+    name: '',
+  };
+  categoryDialog.value.show = true;
+}
+
+function editCategory(category: { id: number; name: string }) {
+  categoryDialog.value.category = {
+    id: category.id,
+    name: category.name,
+  };
+  categoryDialog.value.show = true;
+}
+
 function previousMonth() {
   const month = tableQuery.value.month - 1;
   const year = tableQuery.value.year;
@@ -254,8 +305,13 @@ definePageMeta({
           type: 'filter-dialog',
           text: 'Filtrovat přehled',
         },
+        {
+          type: 'add-category',
+          text: 'Vytvořit kategorii',
+        },
       ]"
       @filter-dialog="filterDialogIsOpen = true"
+      @add-category="createCategory"
     />
 
     <div class="flex items-center justify-between gap-4">
@@ -286,7 +342,8 @@ definePageMeta({
             :income="items.income"
             :year="tableQuery.year"
             :month="tableQuery.month"
-            @create-category="categoryDialog.show = true"
+            @edit-category="editCategory"
+            @reorder-categories="reorderCategories"
             @load-items="loadItems"
             @save-day-records="saveDayRecords"
             @save-budget="saveBudget"

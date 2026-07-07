@@ -69,6 +69,7 @@ const emit = defineEmits([
   'update-filters',
   'apply-filters',
   'add-dialog',
+  'add-category',
   'filter-dialog',
   'open-cashflow-dialog',
   'open-dashboard-settings',
@@ -183,6 +184,16 @@ const emitUpdateFilters = () => {
               variant="primary"
               size="lg"
               @click="emit('add-dialog')"
+            >
+              <PlusIcon class="mr-2 size-4" />
+              {{ action.text }}
+            </BaseButton>
+
+            <BaseButton
+              v-if="action.type === 'add-category'"
+              variant="primary"
+              size="lg"
+              @click="emit('add-category')"
             >
               <PlusIcon class="mr-2 size-4" />
               {{ action.text }}

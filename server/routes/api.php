@@ -548,6 +548,7 @@ Route::group([
             ], function () {
                 Route::get('', [CashflowCategoryController::class, 'index']);
                 Route::get('{id}', [CashflowCategoryController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('reorder', [CashflowCategoryController::class, 'reorder']);
                 Route::post('{id?}', [CashflowCategoryController::class, 'store']);
                 Route::delete('{id}', [CashflowCategoryController::class, 'destroy'])->where('id', '[0-9]+');
             });
