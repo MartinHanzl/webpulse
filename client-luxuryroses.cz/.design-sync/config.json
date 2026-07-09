@@ -1,0 +1,8 @@
+{
+	"projectId": "5503232e-bdb3-4205-a974-76689af1711e",
+	"projectName": "WebPulse Brand",
+	"shape": "tokens-only",
+	"pkg": "client-luxuryroses.cz",
+	"readmeHeader": ".design-sync/conventions.md",
+	"notes": "Vue/Nuxt app — no React components to sync. Tokens + styles only: Tailwind palette, demo brand CSS variables (theme.css), self-hosted Google Fonts (latin + latin-ext for Czech)."
+}

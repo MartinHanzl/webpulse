@@ -1,0 +1,183 @@
+/* ==========================================================================
+   ThemeForest "Lawnc" demo — Tailwind rebuild
+   Per-variant theming via CSS variables. Wrap a demo in `.demo-root` and set
+   `data-demo="lawn|remeslo|landscaping"` to recolor the whole subtree.
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300..900&display=swap');
+/* Luxury Roses — Rufina serif headings + Jost body. */
+@import url('https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&family=Jost:wght@300..700&display=swap');
+
+/* Material Symbols: font face + base class come from the local
+   `material-symbols/outlined.css` (loaded in nuxt.config) so icons work
+   offline. Default the variable axes here. */
+.material-symbols-outlined {
+	font-variation-settings:
+		'FILL' 0,
+		'wght' 400,
+		'GRAD' 0,
+		'opsz' 24;
+}
+
+/* Default brand = Lawn. Values are space-separated RGB for rgb(var() / alpha). */
+.demo-root {
+	--brand: 31 161 46; /* #1FA12E */
+	--brand-dark: 25 32 12; /* #19200C */
+	--brand-soft: 236 248 223; /* #ECF8DF */
+	--brand-cream: 245 245 245; /* #F5F5F5 */
+	--brand-accent: 254 207 2; /* #FECF02 */
+	--brand-ink: 16 17 16; /* #101110 */
+	--brand-muted: 84 87 84; /* #545754 */
+
+	/* Per-theme accent for icons/links/badges. Defaults to the brand colour;
+	   the dark template overrides it to the yellow accent below. */
+	--brand-pop: var(--brand);
+
+	font-family: 'Fustat', 'Inter', sans-serif;
+	color: rgb(var(--brand-ink));
+	background-color: #fff;
+}
+
+/* Luxury Roses — deep rose/wine on ivory with a soft gold accent,
+   Rufina serif headings + Jost body. Elegant florist boutique look. */
+.demo-root[data-demo='luxuryroses'] {
+	--brand: 155 34 66; /* #9B2242 deep rose / wine */
+	--brand-dark: 92 18 40; /* #5C1228 darker wine (button hover, dark bits) */
+	--brand-soft: 247 233 236; /* #F7E9EC blush tint */
+	--brand-cream: 250 245 242; /* #FAF5F2 warm ivory */
+	--brand-accent: 196 156 77; /* #C49C4D soft gold */
+	--brand-ink: 43 26 31; /* #2B1A1F deep charcoal-wine text */
+	--brand-muted: 138 112 118; /* #8A7076 mauve-gray */
+	--brand-pop: var(--brand);
+	font-family: 'Jost', 'Inter', sans-serif;
+}
+:where(.demo-root[data-demo='luxuryroses']) h1,
+:where(.demo-root[data-demo='luxuryroses']) h2,
+:where(.demo-root[data-demo='luxuryroses']) h3,
+:where(.demo-root[data-demo='luxuryroses']) h4,
+:where(.demo-root[data-demo='luxuryroses']) h5,
+:where(.demo-root[data-demo='luxuryroses']) h6 {
+	font-family: 'Rufina', 'Georgia', serif;
+	font-weight: 400;
+}
+
+/* `:where()` keeps specificity at 0 so Tailwind text-* utilities (e.g. text-white
+   on dark sections) win without needing !important. */
+:where(.demo-root) h1,
+:where(.demo-root) h2,
+:where(.demo-root) h3,
+:where(.demo-root) h4,
+:where(.demo-root) h5,
+:where(.demo-root) h6 {
+	font-family: 'Fustat', 'Inter', sans-serif;
+	color: rgb(var(--brand-ink));
+	font-weight: 700;
+	line-height: 1.15;
+}
+
+/* ---- Reveal-on-scroll (replaces the theme's `sal.js`) -------------------- */
+.reveal {
+	opacity: 0;
+	transform: translateY(28px);
+	transition:
+		opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+		transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+	will-change: opacity, transform;
+}
+.reveal.is-visible {
+	opacity: 1;
+	transform: translateY(0);
+}
+.reveal-left {
+	transform: translateX(-32px);
+}
+.reveal-right {
+	transform: translateX(32px);
+}
+.reveal-left.is-visible,
+.reveal-right.is-visible {
+	transform: translateX(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.reveal {
+		opacity: 1 !important;
+		transform: none !important;
+		transition: none;
+	}
+}
+
+/* ---- Helpers ------------------------------------------------------------- */
+.demo-root .section {
+	padding-top: 6.25rem;
+	padding-bottom: 6.25rem;
+}
+@media (max-width: 768px) {
+	.demo-root .section {
+		padding-top: 4rem;
+		padding-bottom: 4rem;
+	}
+}
+
+.demo-root .container-x {
+	width: 100%;
+	max-width: 1320px;
+	margin-inline: auto;
+	padding-inline: 1.25rem;
+}
+
+/* Marquee strip used in several variants */
+@keyframes marquee {
+	from {
+		transform: translateX(0);
+	}
+	to {
+		transform: translateX(-50%);
+	}
+}
+.marquee-track {
+	display: inline-flex;
+	white-space: nowrap;
+	animation: marquee 28s linear infinite;
+}
+.marquee-mask {
+	overflow: hidden;
+}
+
+/* Expanding "sonar" ring (medical hero heart badge) */
+@keyframes sonar {
+	0% {
+		transform: scale(1);
+		opacity: 0.6;
+	}
+	100% {
+		transform: scale(1.9);
+		opacity: 0;
+	}
+}
+.sonar-ring::before,
+.sonar-ring::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	border-radius: 9999px;
+	border: 1px solid currentColor;
+	animation: sonar 2s ease-out infinite;
+}
+.sonar-ring::after {
+	animation-delay: 1s;
+}
+
+/* Subtle float used for hero decorations */
+@keyframes floaty {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-14px);
+	}
+}
+.floaty {
+	animation: floaty 6s ease-in-out infinite;
+}
