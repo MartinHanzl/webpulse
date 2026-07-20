@@ -52,11 +52,14 @@
         isolation: isolate;
     }
 
+    @page {
+        margin: 0;
+    }
+
     html, body {
         margin: 0;
         padding: 0;
         width: 210mm;
-        height: 297mm;
     }
 
     body {
@@ -72,8 +75,6 @@
     }
 
     .wrapper {
-        position: fixed;
-        top: 0;
         margin-left: 64mm;
         width: calc(210mm - 64mm);
     }
@@ -131,6 +132,11 @@
     .experience_or_education {
         margin-top: 16px;
         margin-bottom: 64px;
+        page-break-inside: avoid;
+    }
+
+    h2, h3 {
+        page-break-after: avoid;
     }
 
     .date {

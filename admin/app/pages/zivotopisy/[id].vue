@@ -532,18 +532,18 @@ function removeSkill(groupIndex: number, skillIndex: number) {
                     :name="`job_experiences[${index}][position]`"
                     rules="required"
                   />
-                  <div class="grid grid-cols-2 gap-4">
+                  <div class="space-y-5">
                     <BaseFormInput
                       v-model="experience.start_date"
                       label="Od"
                       type="date"
-                      name="..."
+                      :name="`job_experiences[${index}][start_date]`"
                     />
                     <BaseFormInput
                       v-model="experience.end_date"
                       label="Do"
                       type="date"
-                      name="..."
+                      :name="`job_experiences[${index}][end_date]`"
                     />
                   </div>
                 </div>
@@ -625,23 +625,28 @@ function removeSkill(groupIndex: number, skillIndex: number) {
                   <BaseFormInput
                     v-model="education.institution"
                     label="Instituce"
-                    name="..."
+                    :name="`education[${index}][institution]`"
                     rules="required"
                   />
                   <BaseFormInput
                     v-model="education.degree"
                     label="Titul / Obor"
-                    name="..."
+                    :name="`education[${index}][degree]`"
                     rules="required"
                   />
-                  <div class="grid grid-cols-2 gap-4">
+                  <div class="space-y-5">
                     <BaseFormInput
                       v-model="education.start_date"
                       label="Od"
                       type="date"
-                      name="..."
+                      :name="`education[${index}][start_date]`"
                     />
-                    <BaseFormInput v-model="education.end_date" label="Do" type="date" name="..." />
+                    <BaseFormInput
+                      v-model="education.end_date"
+                      label="Do"
+                      type="date"
+                      :name="`education[${index}][end_date]`"
+                    />
                   </div>
                 </div>
                 <div class="lg:col-span-3">
@@ -649,7 +654,7 @@ function removeSkill(groupIndex: number, skillIndex: number) {
                     v-model="education.description"
                     label="Popis studia"
                     rows="4"
-                    name="..."
+                    :name="`education[${index}][description]`"
                   />
                 </div>
               </div>
