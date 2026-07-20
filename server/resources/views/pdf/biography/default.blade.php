@@ -52,11 +52,25 @@
         isolation: isolate;
     }
 
-    @page {
-        margin: 0;
+    /* První stránka začíná hlavičkou zarovnanou s okrajem papíru. */
+    @page :first {
+        margin-top: 0;
+        margin-bottom: 64px;
     }
 
-    html, body {
+    /*
+     * V dompdf je margin kořenového <html> zároveň okrajem každé stránky.
+     * Díky tomu má i druhá a další stránka nahoře/dole stejné odsazení
+     * jako obsah po stranách (64px). První stránka má margin-top 0 (viz @page :first),
+     * aby hlavička lícovala s okrajem papíru.
+     */
+    html {
+        margin: 64px 0;
+        padding: 0;
+        width: 210mm;
+    }
+
+    body {
         margin: 0;
         padding: 0;
         width: 210mm;
