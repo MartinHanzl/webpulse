@@ -1,6 +1,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
+import { InformationCircleIcon } from '@heroicons/vue/24/outline';
 import TrendChart from '~/components/DiscGolf/TrendChart.vue';
+
+const recommendedHandicapInfo =
+  'Doporučený handicap = korekce, která by hráče dostala na par, tj. MÍNUS vážený průměr skóre ' +
+  'vůči paru (počet hodů − par, BEZ handicapu) z posledních 5 her na tomto hřišti. ' +
+  'Novější hry mají vyšší váhu (nejnovější hra váha 5, nejstarší z pětice váha 1). ' +
+  'Např. průměr +5 nad par → handicap −5; průměr −2 pod par → handicap +2. Zaokrouhleno.';
 
 interface PlayerStat {
   player_id: number;
@@ -51,7 +58,15 @@ const hasPlayers = computed(() => props.players.length > 0);
           <th class="px-4 py-3 text-center">Průměr +/- par</th>
           <th class="px-4 py-3 text-center">Posl. 5 +/- par</th>
           <th class="px-4 py-3 text-center">Posl. 10 +/- par</th>
-          <th v-if="showRecommendedHandicap" class="px-4 py-3 text-center">Doporučený handicap</th>
+          <th v-if="showRecommendedHandicap" class="px-4 py-3 text-center">
+            <span
+              class="inline-flex cursor-help items-center gap-1"
+              :title="recommendedHandicapInfo"
+            >
+              Doporučený handicap
+              <InformationCircleIcon class="size-4 text-slate-400" />
+            </span>
+          </th>
           <th class="px-4 py-3 text-center">Trend</th>
           <th class="px-4 py-3 text-center">Vývoj</th>
         </tr>

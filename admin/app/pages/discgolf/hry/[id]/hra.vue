@@ -65,11 +65,20 @@ function liveTotal(gpId: number) {
     return sum + (typeof v === 'number' ? v : 0);
   }, 0);
 }
+/** Sum of par over holes this player already has a score on (for a live +/- par). */
+function playedPar(gpId: number) {
+  return holes.value.reduce((sum: number, h: any) => {
+    const v = localScores.value[scoreKey(gpId, h.id)];
+    return sum + (typeof v === 'number' ? Number(h.par) || 0 : 0);
+  }, 0);
+}
 function liveNet(gp: any) {
-  return liveTotal(gp.id) - (Number(gp.handicap) || 0);
+  // Handicap is a signed correction added to throws: net = throws + handicap.
+  return liveTotal(gp.id) + (Number(gp.handicap) || 0);
 }
 function liveRelative(gp: any) {
-  return liveNet(gp) - (Number(game.value?.par) || 0);
+  // +/- par against the par of holes played SO FAR, plus the handicap correction.
+  return liveTotal(gp.id) - playedPar(gp.id) + (Number(gp.handicap) || 0);
 }
 
 const activeRows = computed(() => {
@@ -401,7 +410,7 @@ definePageMeta({ middleware: 'sanctum:auth' });
               </thead>
               <tbody class="divide-y divide-slate-100">
                 <tr
-                  v-for="gp in [...gamePlayers].sort((a, b) => liveNet(a) - liveNet(b))"
+                  v-for="gp in [...gamePlayers].sort((a, b) => liveRelative(a) - liveRelative(b))"
                   :key="gp.id"
                   class="hover:bg-slate-50"
                 >

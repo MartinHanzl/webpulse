@@ -120,7 +120,8 @@ class StatsController extends Controller
         $score = (int) $gp->total_throws;
         $handicap = (int) $gp->handicap;
         $par = (int) $game->par;
-        $net = $score - $handicap;
+        // Handicap is a signed correction added to the score: net = throws + handicap.
+        $net = $score + $handicap;
 
         return [
             'game_id' => $game->id,
@@ -203,8 +204,10 @@ class StatsController extends Controller
     }
 
     /**
-     * Recommended handicap = weighted average of gross +/- par over the last 5 games on the course,
-     * weighting more recent games higher. Clamped to >= 0.
+     * Recommended handicap = the signed correction that would bring the player to par, i.e.
+     * the NEGATIVE of the weighted average of gross +/- par (throws − par, without handicap)
+     * over the last 5 games on the course, weighting more recent games higher.
+     * A player averaging +5 over par → handicap −5; averaging −2 under par → handicap +2.
      */
     private function recommendedHandicap(array $results): int
     {
@@ -225,7 +228,7 @@ class StatsController extends Controller
 
         $avg = $weightTotal > 0 ? $weightedSum / $weightTotal : 0;
 
-        return (int) max(0, round($avg));
+        return (int) round(-$avg);
     }
 
     private function emptyStats(): array
