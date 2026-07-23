@@ -123,6 +123,7 @@ class StatsController extends Controller
         $net = $score - $handicap;
 
         return [
+            'game_id' => $game->id,
             'played_at' => $game->played_at?->toDateString(),
             'score' => $score,
             'handicap' => $handicap,
@@ -164,6 +165,7 @@ class StatsController extends Controller
             'last10_relative' => round(array_sum($last10) / count($last10), 1),
             'trend' => $this->trend($reversed),
             'chart' => array_map(fn ($r) => [
+                'game_id' => $r['game_id'],
                 'date' => $r['played_at'],
                 'relative' => $r['relative'],
             ], $results),

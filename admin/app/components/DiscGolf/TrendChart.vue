@@ -3,6 +3,7 @@ import { computed } from 'vue';
 import type { ApexOptions } from 'apexcharts';
 
 interface ChartPoint {
+  game_id: number;
   date: string;
   relative: number;
 }
@@ -55,28 +56,59 @@ const palette = [
   '#6366f1',
 ];
 
-function toXY(pts: ChartPoint[]) {
-  return (pts ?? [])
-    .map((p) => ({ x: new Date(p.date).getTime(), y: p.relative }))
-    .filter((p) => !isNaN(p.x) && typeof p.y === 'number');
+/** Source series (normalize single-points input into a one-series shape). */
+const sourceSeries = computed<SeriesInput[]>(() =>
+  props.series.length ? props.series : [{ name: '+/- par', data: props.points ?? [] }],
+);
+
+function fmtDate(d: string) {
+  const [y, m, day] = d.split('-');
+  return `${Number(day)}. ${Number(m)}. ${y}`;
 }
 
-const resolvedSeries = computed(() => {
-  if (props.series.length) {
-    return props.series.map((s) => ({
-      name: s.name,
-      data: toXY(s.data),
-    }));
-  }
-  return [
-    {
-      name: '+/- par',
-      data: toXY(props.points),
-    },
-  ];
+/**
+ * Unified, chronologically ordered list of GAMES across every series
+ * (by date, then game id). One category per game — so multiple games on the
+ * same day stay as separate points instead of collapsing.
+ */
+const games = computed(() => {
+  const map = new Map<number, string>(); // game_id -> date
+  sourceSeries.value.forEach((s) =>
+    (s.data ?? []).forEach((p) => {
+      if (!map.has(p.game_id)) map.set(p.game_id, p.date);
+    }),
+  );
+  return Array.from(map.entries())
+    .map(([id, date]) => ({ id, date }))
+    .sort((a, b) => (a.date === b.date ? a.id - b.id : a.date < b.date ? -1 : 1));
 });
 
-const hasData = computed(() => resolvedSeries.value.some((s) => s.data.length > 0));
+/** Category labels (date) shown on the x-axis — one per game. */
+const categories = computed(() => games.value.map((g) => fmtDate(g.date)));
+
+/**
+ * Series aligned to the shared per-game axis: each player gets one value per
+ * game (null where they didn't play it). Aligned arrays make the shared
+ * tooltip list every player for the hovered game — same as the Growth chart.
+ */
+const resolvedSeries = computed(() =>
+  sourceSeries.value.map((s) => {
+    const byGame: Record<number, number> = {};
+    (s.data ?? []).forEach((p) => {
+      byGame[p.game_id] = p.relative;
+    });
+    return {
+      name: s.name,
+      data: games.value.map((g) => (g.id in byGame ? byGame[g.id] : null)),
+    };
+  }),
+);
+
+const hasData = computed(() =>
+  resolvedSeries.value.some((s) => s.data.some((v) => v !== null && v !== undefined)),
+);
+
+const signed = (val: number) => (val > 0 ? `+${val}` : val === 0 ? 'E' : `${val}`);
 
 const chartOptions = computed<ApexOptions>(() => {
   if (props.sparkline) {
@@ -86,13 +118,13 @@ const chartOptions = computed<ApexOptions>(() => {
         sparkline: { enabled: true },
         animations: { enabled: false },
       },
-      xaxis: { type: 'datetime' },
+      xaxis: { categories: categories.value },
       stroke: { curve: 'straight', width: 2 },
       colors: [palette[0]],
       tooltip: {
         x: { show: false },
         y: {
-          formatter: (val: number) => (val > 0 ? `+${val}` : val === 0 ? 'E' : `${val}`),
+          formatter: (val: number) => signed(val),
           title: { formatter: () => '' },
         },
       },
@@ -110,28 +142,27 @@ const chartOptions = computed<ApexOptions>(() => {
     },
     colors: palette,
     stroke: { curve: 'straight', width: 2.5 },
-    markers: { size: 4, hover: { size: 6 } },
+    markers: { size: 5, hover: { size: 7 } },
     dataLabels: { enabled: false },
-    legend: { show: props.series.length > 1, position: 'top' },
+    legend: { show: resolvedSeries.value.length > 1, position: 'top' },
     grid: { borderColor: '#e2e8f0', strokeDashArray: 4 },
     xaxis: {
-      type: 'datetime',
-      labels: { datetimeUTC: false, style: { colors: '#94a3b8' } },
+      categories: categories.value,
+      labels: { style: { colors: '#94a3b8' } },
+      tooltip: { enabled: false },
     },
     yaxis: {
       reversed: true,
       labels: {
         style: { colors: '#94a3b8' },
-        formatter: (val: number) => {
-          const r = Math.round(val);
-          return r > 0 ? `+${r}` : r === 0 ? 'E' : `${r}`;
-        },
+        formatter: (val: number) => signed(Math.round(val)),
       },
     },
     tooltip: {
-      x: { format: 'dd. MM. yyyy' },
+      shared: true,
+      intersect: false,
       y: {
-        formatter: (val: number) => (val > 0 ? `+${val}` : val === 0 ? 'E' : `${val}`),
+        formatter: (val: number) => (val === null || val === undefined ? '—' : signed(val)),
       },
     },
   };

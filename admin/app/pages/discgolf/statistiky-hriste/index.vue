@@ -72,7 +72,7 @@ definePageMeta({ middleware: 'sanctum:auth' });
     </div>
 
     <template v-else-if="!error">
-      <LayoutContainer v-for="course in courses" :key="course.course_id" class="space-y-6">
+      <LayoutContainer v-for="course in courses" :key="course.course_name" class="space-y-6">
         <div class="flex items-center gap-3">
           <div
             class="flex size-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600"

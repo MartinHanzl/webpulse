@@ -179,7 +179,8 @@ async function loadPlayers() {
 }
 
 function isSelected(playerId: number) {
-  return Object.prototype.hasOwnProperty.call(selectedPlayers.value, playerId);
+  // Property access (get trap) so Vue tracks it reactively — hasOwnProperty does not.
+  return selectedPlayers.value[playerId] !== undefined;
 }
 function togglePlayer(playerId: number) {
   if (isSelected(playerId)) {
