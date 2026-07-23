@@ -253,6 +253,14 @@ definePageMeta({ middleware: 'sanctum:auth' });
             hidden: false,
             sortable: false,
           },
+          {
+            key: 'winner_name',
+            name: 'Vítěz',
+            type: 'text',
+            width: 160,
+            hidden: false,
+            sortable: false,
+          },
         ]"
         :actions="[{ type: 'edit', path: '/discgolf/hry' }, { type: 'delete' }]"
         :loading="loading"

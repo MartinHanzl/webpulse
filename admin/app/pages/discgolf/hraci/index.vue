@@ -127,6 +127,18 @@ definePageMeta({ middleware: 'sanctum:auth' });
           sortable: false,
         },
         {
+          key: 'include_in_stats',
+          name: 'Ve statistikách',
+          type: 'mapped',
+          width: 140,
+          hidden: false,
+          sortable: false,
+          map: {
+            true: { label: 'Ano', class: 'bg-emerald-100 text-emerald-700' },
+            false: { label: 'Ne', class: 'bg-slate-100 text-slate-500' },
+          },
+        },
+        {
           key: 'position',
           name: 'Pořadí',
           type: 'number',

@@ -27,13 +27,15 @@ class GameResource extends JsonResource
             'layout' => CourseLayoutResource::make($this->whenLoaded('layout')),
             'holes' => GameHoleResource::collection($this->whenLoaded('holes')),
             'players' => GamePlayerResource::collection($this->whenLoaded('players')),
-            'players_count' => $this->whenLoaded('players', fn () => $this->players->count()),
+            'players_count' => $this->players_count
+                ?? ($this->relationLoaded('players') ? $this->players->count() : 0),
             'winner' => $this->whenLoaded('players', fn () => $this->winner ? [
                 'player_id' => $this->winner->player_id,
                 'player_name' => $this->winner->player?->name,
                 'net_score' => $this->winner->net_score,
                 'relative_to_par' => $this->winner->relative_to_par,
             ] : null),
+            'winner_name' => $this->whenLoaded('players', fn () => $this->winner?->player?->name),
             'sites' => $this->sites,
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,

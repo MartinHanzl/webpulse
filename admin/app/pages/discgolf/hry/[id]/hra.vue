@@ -8,6 +8,7 @@ import {
   BoltIcon,
   ArrowPathIcon,
   CheckCircleIcon,
+  PencilSquareIcon,
 } from '@heroicons/vue/24/outline';
 import LiveHoleTab from '~/components/DiscGolf/LiveHoleTab.vue';
 import GameSummary from '~/components/DiscGolf/GameSummary.vue';
@@ -25,6 +26,7 @@ const saving = ref(false);
 const game = ref<any>(null);
 
 const activeHoleIndex = ref(0);
+const editMode = ref(route.query.edit === '1');
 const retroMode = ref(false);
 const retroTotals = ref<Record<number, number | null>>({});
 const retroHandicaps = ref<Record<number, number>>({});
@@ -47,6 +49,8 @@ function headers() {
 }
 
 const isCompleted = computed(() => game.value?.status === 'completed');
+// Read-only summary only when completed AND not explicitly editing.
+const showReadOnly = computed(() => isCompleted.value && !editMode.value);
 const holes = computed(() => game.value?.holes ?? []);
 const gamePlayers = computed(() => game.value?.players ?? []);
 const activeHole = computed(() => holes.value[activeHoleIndex.value] ?? null);
@@ -214,7 +218,8 @@ async function completeGame() {
       headers: headers(),
     });
     game.value = { ...game.value, ...res };
-    $toast.show({ summary: 'Hotovo', detail: 'Hra byla dokončena.', severity: 'success' });
+    editMode.value = false;
+    $toast.show({ summary: 'Hotovo', detail: 'Hra byla uložena.', severity: 'success' });
   } catch {
     $toast.show({ summary: 'Chyba', detail: 'Nepodařilo se dokončit hru.', severity: 'error' });
   } finally {
@@ -248,7 +253,7 @@ definePageMeta({ middleware: 'sanctum:auth' });
     </div>
 
     <!-- ============================================ COMPLETED (read-only) -->
-    <LayoutContainer v-else-if="game && isCompleted">
+    <LayoutContainer v-else-if="game && showReadOnly">
       <div
         class="mb-4 flex items-center gap-2 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700 ring-1 ring-emerald-200"
       >
@@ -256,15 +261,25 @@ definePageMeta({ middleware: 'sanctum:auth' });
         Hra je dokončená.
       </div>
       <GameSummary :players="gamePlayers" :par="game.par ?? 0" />
-      <div class="mt-6 flex justify-end">
-        <BaseButton variant="primary" size="lg" @click="router.push('/discgolf/hry')">
+      <div class="mt-6 flex flex-col-reverse justify-end gap-3 sm:flex-row">
+        <BaseButton variant="secondary" size="lg" @click="router.push('/discgolf/hry')">
           Zpět na přehled her
+        </BaseButton>
+        <BaseButton variant="primary" size="lg" @click="editMode = true">
+          <PencilSquareIcon class="mr-2 size-4" /> Upravit skóre
         </BaseButton>
       </div>
     </LayoutContainer>
 
-    <!-- ============================================ LIVE -->
+    <!-- ============================================ LIVE / EDIT -->
     <template v-else-if="game">
+      <LayoutContainer
+        v-if="isCompleted && editMode"
+        class="!mt-0 flex items-center gap-2 border-amber-200 bg-amber-50 text-sm text-amber-700"
+      >
+        <PencilSquareIcon class="size-5" />
+        Upravuješ dokončenou hru. Změny ulož tlačítkem „Uložit změny".
+      </LayoutContainer>
       <!-- retro toggle + save indicator -->
       <LayoutContainer class="!mt-0">
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -413,7 +428,8 @@ definePageMeta({ middleware: 'sanctum:auth' });
       <!-- complete -->
       <div class="flex justify-end">
         <BaseButton variant="success" size="lg" :disabled="loading" @click="completeGame">
-          <FlagIcon class="mr-2 size-4" /> Dokončit hru
+          <FlagIcon class="mr-2 size-4" />
+          {{ isCompleted && editMode ? 'Uložit změny' : 'Dokončit hru' }}
         </BaseButton>
       </div>
     </template>

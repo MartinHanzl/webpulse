@@ -17,8 +17,7 @@ class GameController extends Controller
         $siteId = $this->handleSite($request->header('X-Site-Hash'));
 
         $query = Game::query()
-            ->with(['course', 'layout'])
-            ->withCount('players')
+            ->with(['course', 'layout', 'players.player'])
             ->whereRelation('sites', 'site_id', $siteId);
 
         if ($request->filled('search')) {

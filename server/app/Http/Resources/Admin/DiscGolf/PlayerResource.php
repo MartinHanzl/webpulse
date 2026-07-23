@@ -12,8 +12,10 @@ class PlayerResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'include_in_stats' => (bool) $this->include_in_stats,
             'position' => $this->position,
-            'games_count' => $this->whenLoaded('gamePlayers', fn () => $this->gamePlayers->count()),
+            'games_count' => $this->game_players_count
+                ?? ($this->relationLoaded('gamePlayers') ? $this->gamePlayers->count() : 0),
             'sites' => $this->sites,
             'updated_at' => $this->updated_at,
             'created_at' => $this->created_at,

@@ -25,6 +25,9 @@ class StatsController extends Controller
         $names = [];
         foreach ($games as $game) {
             foreach ($game->players as $gp) {
+                if (! $gp->player || ! $gp->player->include_in_stats) {
+                    continue;
+                }
                 $byPlayer[$gp->player_id][] = $this->result($game, $gp);
                 $names[$gp->player_id] = $gp->player?->name;
             }
@@ -54,19 +57,24 @@ class StatsController extends Controller
 
         $games = $this->loadGames($siteId);
 
-        // Group games by course identity (real course id, or custom name)
+        // Group games by course NAME (so a custom one-off with the same name as a
+        // real course merges into one table).
         $courses = [];
         foreach ($games as $game) {
-            $key = $game->course_id ? 'c'.$game->course_id : 'custom:'.($game->custom_course_name ?? '—');
+            $name = $game->course_name ?? '—';
+            $key = mb_strtolower(trim($name));
             if (! isset($courses[$key])) {
                 $courses[$key] = [
                     'course_id' => $game->course_id,
-                    'course_name' => $game->course_name,
+                    'course_name' => $name,
                     'byPlayer' => [],
                     'names' => [],
                 ];
             }
             foreach ($game->players as $gp) {
+                if (! $gp->player || ! $gp->player->include_in_stats) {
+                    continue;
+                }
                 $courses[$key]['byPlayer'][$gp->player_id][] = $this->result($game, $gp);
                 $courses[$key]['names'][$gp->player_id] = $gp->player?->name;
             }

@@ -25,6 +25,7 @@ const breadcrumbs = ref([
 const item = ref({
   id: null as number | null,
   name: '' as string,
+  include_in_stats: true as boolean,
   position: 0 as number,
   sites: [] as number[],
 });
@@ -45,6 +46,7 @@ async function loadItem() {
       item.value = {
         id: response.id,
         name: response.name || '',
+        include_in_stats: response.include_in_stats ?? true,
         position: response.position || 0,
         sites: response.sites?.map((s: any) => s.id) || [],
       };
@@ -145,7 +147,7 @@ definePageMeta({ middleware: 'sanctum:auth' });
               <LayoutTitle class="!mb-0">Údaje hráče</LayoutTitle>
             </div>
 
-            <div class="max-w-xl">
+            <div class="max-w-xl space-y-6">
               <BaseFormInput
                 v-model="item.name"
                 label="Jméno hráče"
@@ -154,6 +156,19 @@ definePageMeta({ middleware: 'sanctum:auth' });
                 rules="required|min:2"
                 placeholder="Např. Jan Novák"
               />
+
+              <div
+                class="flex items-center justify-between rounded-2xl bg-slate-50 px-5 py-4 ring-1 ring-slate-200"
+              >
+                <div>
+                  <div class="font-semibold text-slate-800">Zahrnout do statistik</div>
+                  <div class="text-xs text-slate-500">
+                    Vypni pro jednorázové/hostující hráče — zůstanou v záznamech her, ale nebudou ve
+                    statistikách hráčů ani hřišť.
+                  </div>
+                </div>
+                <BaseFormSwitch v-model:enabled="item.include_in_stats" />
+              </div>
             </div>
           </LayoutContainer>
         </div>

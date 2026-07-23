@@ -13,7 +13,12 @@ class Player extends Model
 
     protected $fillable = [
         'name',
+        'include_in_stats',
         'position',
+    ];
+
+    protected $casts = [
+        'include_in_stats' => 'boolean',
     ];
 
     public function gamePlayers()

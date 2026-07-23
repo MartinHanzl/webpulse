@@ -55,17 +55,23 @@ const palette = [
   '#6366f1',
 ];
 
+function toXY(pts: ChartPoint[]) {
+  return (pts ?? [])
+    .map((p) => ({ x: new Date(p.date).getTime(), y: p.relative }))
+    .filter((p) => !isNaN(p.x) && typeof p.y === 'number');
+}
+
 const resolvedSeries = computed(() => {
   if (props.series.length) {
     return props.series.map((s) => ({
       name: s.name,
-      data: (s.data ?? []).map((p) => ({ x: p.date, y: p.relative })),
+      data: toXY(s.data),
     }));
   }
   return [
     {
       name: '+/- par',
-      data: (props.points ?? []).map((p) => ({ x: p.date, y: p.relative })),
+      data: toXY(props.points),
     },
   ];
 });
@@ -80,6 +86,7 @@ const chartOptions = computed<ApexOptions>(() => {
         sparkline: { enabled: true },
         animations: { enabled: false },
       },
+      xaxis: { type: 'datetime' },
       stroke: { curve: 'straight', width: 2 },
       colors: [palette[0]],
       tooltip: {
@@ -89,7 +96,8 @@ const chartOptions = computed<ApexOptions>(() => {
           title: { formatter: () => '' },
         },
       },
-      markers: { size: 0 },
+      // size 3 so a player with a single game still shows a visible point
+      markers: { size: 3 },
     };
   }
 

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, ref } from 'vue';
-import { TrophyIcon, FlagIcon, UserGroupIcon } from '@heroicons/vue/24/outline';
+import { TrophyIcon, FlagIcon, UserGroupIcon, PencilSquareIcon } from '@heroicons/vue/24/outline';
 import { useFormat } from '~/composables/useFormat';
 
 const { $toast } = useNuxtApp();
@@ -87,6 +87,16 @@ definePageMeta({ middleware: 'sanctum:auth' });
     <LayoutHeader :title="pageTitle" :breadcrumbs="breadcrumbs" slug="games" />
 
     <div v-if="game" class="space-y-8">
+      <div class="flex justify-end">
+        <NuxtLink
+          :to="`/discgolf/hry/${route.params.id}/hra?edit=1`"
+          class="inline-flex items-center justify-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-indigo-700"
+        >
+          <PencilSquareIcon class="size-4" />
+          Upravit skóre
+        </NuxtLink>
+      </div>
+
       <LayoutContainer>
         <div class="grid grid-cols-2 gap-6 sm:grid-cols-4">
           <div>
