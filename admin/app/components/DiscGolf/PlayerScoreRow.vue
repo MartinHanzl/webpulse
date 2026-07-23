@@ -92,13 +92,6 @@ function step(delta: number) {
     </div>
 
     <div class="flex items-center gap-3">
-      <span
-        v-if="holeRelative !== null"
-        class="w-10 text-center text-xs font-bold tabular-nums"
-        :class="relativeColor(holeRelative)"
-      >
-        {{ formatRelative(holeRelative) }}
-      </span>
       <div class="flex items-center gap-1">
         <button
           type="button"
@@ -124,6 +117,13 @@ function step(delta: number) {
           <PlusIcon class="size-4" />
         </button>
       </div>
+      <span
+          v-if="holeRelative !== null"
+          class="w-10 text-center text-xs font-bold tabular-nums"
+          :class="relativeColor(holeRelative)"
+      >
+        {{ formatRelative(holeRelative) }}
+      </span>
     </div>
   </div>
 </template>

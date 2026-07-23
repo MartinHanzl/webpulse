@@ -290,15 +290,12 @@ definePageMeta({ middleware: 'sanctum:auth' });
         Upravuješ dokončenou hru. Změny ulož tlačítkem „Uložit změny".
       </LayoutContainer>
       <!-- retro toggle + save indicator -->
-      <LayoutContainer class="!mt-0">
+      <LayoutContainer>
         <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div class="flex items-center gap-3">
             <BoltIcon class="size-5 text-amber-500" />
             <div>
               <div class="font-semibold text-slate-800">Rychlý zápis (jen celkové skóre)</div>
-              <div class="text-xs text-slate-500">
-                Zapiš rovnou celkové hody místo jamku po jamce.
-              </div>
             </div>
           </div>
           <div class="flex items-center gap-4">
@@ -378,7 +375,7 @@ definePageMeta({ middleware: 'sanctum:auth' });
               :disabled="activeHoleIndex === 0"
               @click="goHole(activeHoleIndex - 1)"
             >
-              <ChevronLeftIcon class="mr-1 size-4" /> Předchozí
+              <ChevronLeftIcon class="mr-1 size-4" />
             </BaseButton>
             <span class="text-sm font-medium text-slate-500">
               Jamka {{ activeHoleIndex + 1 }} / {{ holes.length }}
@@ -388,8 +385,7 @@ definePageMeta({ middleware: 'sanctum:auth' });
               size="md"
               :disabled="activeHoleIndex === holes.length - 1"
               @click="goHole(activeHoleIndex + 1)"
-            >
-              Další <ChevronRightIcon class="ml-1 size-4" />
+            ><ChevronRightIcon class="ml-1 size-4" />
             </BaseButton>
           </div>
         </LayoutContainer>
