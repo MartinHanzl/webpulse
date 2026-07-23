@@ -6,6 +6,11 @@ use App\Http\Controllers\Admin\Amenity\AmenityController;
 use App\Http\Controllers\Admin\Apartment\ApartmentBlockController;
 use App\Http\Controllers\Admin\Apartment\ApartmentController;
 use App\Http\Controllers\Admin\Apartment\ApartmentTypeController;
+use App\Http\Controllers\Admin\DiscGolf\CourseController;
+use App\Http\Controllers\Admin\DiscGolf\GameController;
+use App\Http\Controllers\Admin\DiscGolf\GameFlowController;
+use App\Http\Controllers\Admin\DiscGolf\PlayerController;
+use App\Http\Controllers\Admin\DiscGolf\StatsController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
@@ -1105,6 +1110,52 @@ Route::group([
             Route::get('{id}', [ApartmentController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [ApartmentController::class, 'store']);
             Route::delete('{id}', [ApartmentController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        // Disc golf routes
+        Route::group([
+            'prefix' => 'discgolf',
+        ], function () {
+            Route::group([
+                'prefix' => 'course',
+            ], function () {
+                Route::post('reorder', [CourseController::class, 'reorder']);
+                Route::get('', [CourseController::class, 'index']);
+                Route::get('{id}', [CourseController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [CourseController::class, 'store']);
+                Route::delete('{id}', [CourseController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            Route::group([
+                'prefix' => 'player',
+            ], function () {
+                Route::post('reorder', [PlayerController::class, 'reorder']);
+                Route::get('', [PlayerController::class, 'index']);
+                Route::get('{id}', [PlayerController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [PlayerController::class, 'store']);
+                Route::delete('{id}', [PlayerController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            Route::group([
+                'prefix' => 'stats',
+            ], function () {
+                Route::get('players', [StatsController::class, 'players']);
+                Route::get('courses', [StatsController::class, 'courses']);
+            });
+
+            Route::group([
+                'prefix' => 'game',
+            ], function () {
+                Route::get('matrix', [GameController::class, 'matrix']);
+                Route::post('create', [GameFlowController::class, 'create']);
+                Route::post('{id}/players', [GameFlowController::class, 'players'])->where('id', '[0-9]+');
+                Route::post('{id}/start', [GameFlowController::class, 'start'])->where('id', '[0-9]+');
+                Route::post('{id}/scores', [GameFlowController::class, 'scores'])->where('id', '[0-9]+');
+                Route::post('{id}/complete', [GameFlowController::class, 'complete'])->where('id', '[0-9]+');
+                Route::get('', [GameController::class, 'index']);
+                Route::get('{id}', [GameController::class, 'show'])->where('id', '[0-9]+');
+                Route::delete('{id}', [GameController::class, 'destroy'])->where('id', '[0-9]+');
+            });
         });
 
         // Career routes

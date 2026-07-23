@@ -82,6 +82,14 @@ const moduleGroups = ref([
     ],
   },
   {
+    title: 'Disc Golf',
+    modules: [
+      { slug: 'courses', name: 'Hřiště' },
+      { slug: 'players', name: 'Hráči' },
+      { slug: 'games', name: 'Hry / Disc golf' },
+    ],
+  },
+  {
     title: 'Zákazníci',
     modules: [
       { slug: 'customers', name: 'Zákazníci' },

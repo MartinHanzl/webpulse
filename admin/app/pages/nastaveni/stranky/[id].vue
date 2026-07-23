@@ -60,6 +60,9 @@ const settings = {
     'amenities',
     'seasons',
     'apartment_reservations',
+    'courses',
+    'players',
+    'games',
     'posts',
     'pages',
     'blocks',
@@ -390,6 +393,12 @@ const getSettingTitle = computed(() => (key: string) => {
       return 'Filemanager';
     case 'project_time_entries':
       return 'Sledování času';
+    case 'courses':
+      return 'Hřiště';
+    case 'players':
+      return 'Hráči';
+    case 'games':
+      return 'Hry / Disc golf';
     default:
       return key.replace('_', ' ').toUpperCase();
   }
@@ -439,6 +448,10 @@ const moduleGroups = [
       'seasons',
       'apartment_reservations',
     ],
+  },
+  {
+    title: 'Disc Golf',
+    slugs: ['courses', 'players', 'games'],
   },
   {
     title: 'Zákazníci',
@@ -589,10 +602,7 @@ definePageMeta({
               />
 
               <div v-if="item.hash" class="col-span-full">
-                <label
-                  for="site-hash"
-                  class="mb-1.5 block text-sm font-medium text-slate-700"
-                >
+                <label for="site-hash" class="mb-1.5 block text-sm font-medium text-slate-700">
                   Site hash
                   <span class="ml-1 text-xs font-normal text-slate-400">
                     (posílat v hlavičce <code>X-Site-Hash</code>)

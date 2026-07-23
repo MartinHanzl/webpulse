@@ -58,6 +58,11 @@ import {
   Squares2X2Icon,
   BuildingOffice2Icon,
   RectangleStackIcon,
+  FlagIcon,
+  MapPinIcon,
+  MapIcon,
+  ChartBarIcon,
+  UserGroupIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { useActivityStore } from '~/../stores/activityStore';
@@ -382,6 +387,46 @@ const navigation = ref([
         icon: KeyIcon,
         current: false,
         slug: 'apartment_reservations',
+      },
+    ],
+  },
+  {
+    title: 'Disc Golf',
+    menu: [
+      {
+        name: 'Hřiště',
+        link: '/discgolf/hriste',
+        icon: MapPinIcon,
+        current: false,
+        slug: 'courses',
+      },
+      {
+        name: 'Hráči',
+        link: '/discgolf/hraci',
+        icon: UserGroupIcon,
+        current: false,
+        slug: 'players',
+      },
+      {
+        name: 'Hry',
+        link: '/discgolf/hry',
+        icon: FlagIcon,
+        current: false,
+        slug: 'games',
+      },
+      {
+        name: 'Statistiky hráčů',
+        link: '/discgolf/statistiky',
+        icon: ChartBarIcon,
+        current: false,
+        slug: 'games',
+      },
+      {
+        name: 'Statistiky hřišť',
+        link: '/discgolf/statistiky-hriste',
+        icon: MapIcon,
+        current: false,
+        slug: 'games',
       },
     ],
   },
