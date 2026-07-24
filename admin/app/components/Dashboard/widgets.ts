@@ -5,15 +5,18 @@ import {
   AtSymbolIcon,
   CalendarDaysIcon,
   DocumentIcon,
+  FlagIcon,
   KeyIcon,
   NewspaperIcon,
   PhoneIcon,
   QuestionMarkCircleIcon,
   RocketLaunchIcon,
+  TrophyIcon,
   UsersIcon,
 } from '@heroicons/vue/24/outline';
 import DashboardWidgetContentList from './Widget/ContentList.vue';
 import DashboardWidgetChangelog from './Widget/Changelog.vue';
+import DashboardWidgetDiscGolfGames from './Widget/DiscGolfGames.vue';
 
 export type WidgetSize = 'half' | 'full';
 
@@ -325,11 +328,61 @@ export const availableWidgets: WidgetDefinition[] = [
     defaultEnabled: true,
   },
   {
+    key: 'discgolf_players',
+    title: 'Přehled hráčů',
+    icon: TrophyIcon,
+    component: markRaw(DashboardWidgetContentList),
+    props: {
+      endpoint: '/api/admin/discgolf/stats/players',
+      link: '/discgolf/statistiky',
+      color: 'emerald',
+      emptyLabel: 'Zatím žádné statistiky',
+      paginate: false,
+      dataKey: 'data',
+      actions: [],
+      columns: [
+        { key: 'player_name', name: 'Hráč', type: 'text' },
+        { key: 'games_played', name: 'Her', type: 'number' },
+        { key: 'avg_score', name: 'Ø skóre', type: 'number', decimals: 1, hidden: true },
+        { key: 'avg_relative', name: 'Ø +/- par', type: 'number', decimals: 1 },
+        {
+          key: 'trend',
+          name: 'Trend',
+          type: 'mapped',
+          map: {
+            improving: { label: 'Zlepšuje se', class: 'bg-emerald-100 text-emerald-700' },
+            stable: { label: 'Stabilní', class: 'bg-slate-100 text-slate-600' },
+            worsening: { label: 'Zhoršuje se', class: 'bg-red-100 text-red-700' },
+          },
+        },
+      ],
+    },
+    permissionSlug: 'games',
+    defaultPosition: 12,
+    defaultSize: 'half',
+    defaultEnabled: true,
+  },
+  {
+    key: 'discgolf_games',
+    title: 'Záznamy her',
+    icon: FlagIcon,
+    component: markRaw(DashboardWidgetDiscGolfGames),
+    props: {
+      endpoint: '/api/admin/discgolf/game/matrix',
+      link: '/discgolf/hry',
+      color: 'sky',
+    },
+    permissionSlug: 'games',
+    defaultPosition: 13,
+    defaultSize: 'full',
+    defaultEnabled: true,
+  },
+  {
     key: 'changelog',
     title: 'Changelog',
     icon: RocketLaunchIcon,
     component: markRaw(DashboardWidgetChangelog),
-    defaultPosition: 12,
+    defaultPosition: 14,
     defaultSize: 'half',
     defaultEnabled: true,
   },
