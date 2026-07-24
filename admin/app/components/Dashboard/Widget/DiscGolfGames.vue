@@ -54,6 +54,46 @@ const error = ref(false);
 
 const total = computed(() => rows.value.length);
 
+// Per-game placement: rank players by net_score ascending (lowest wins),
+// ties share the same place (standard competition ranking).
+const placements = computed(() => {
+  const byRow = new Map<number, Map<number, number>>();
+  rows.value.forEach((row) => {
+    const scored = row.players
+      .filter((p) => p.net_score !== null && p.net_score !== undefined)
+      .slice()
+      .sort((a, b) => (a.net_score as number) - (b.net_score as number));
+    const placeMap = new Map<number, number>();
+    let place = 0;
+    let prevScore: number | null = null;
+    scored.forEach((p, idx) => {
+      if (prevScore === null || p.net_score !== prevScore) {
+        place = idx + 1;
+        prevScore = p.net_score;
+      }
+      placeMap.set(p.player_id, place);
+    });
+    byRow.set(row.id, placeMap);
+  });
+  return byRow;
+});
+
+function placeOf(rowId: number, playerId: number): number | null {
+  return placements.value.get(rowId)?.get(playerId) ?? null;
+}
+
+// Background tint per placement (gold / silver / bronze).
+const placeBg: Record<number, string> = {
+  1: 'bg-amber-100',
+  2: 'bg-slate-200/70',
+  3: 'bg-orange-100',
+};
+
+function placeBgClass(rowId: number, playerId: number): string {
+  const place = placeOf(rowId, playerId);
+  return (place && placeBg[place]) || '';
+}
+
 // Union of all players present across all rows, preserving first-seen order.
 const players = computed(() => {
   const map = new Map<number, string>();
@@ -241,7 +281,10 @@ watch(selectedSiteHash, () => loadRows());
               <template v-if="playerCell(row, player.player_id).present">
                 <td
                   class="whitespace-nowrap border-l border-slate-100 px-2.5 py-2.5 text-center font-bold tabular-nums"
-                  :class="relativeClass(playerCell(row, player.player_id).relative_to_par)"
+                  :class="[
+                    relativeClass(playerCell(row, player.player_id).relative_to_par),
+                    placeBgClass(row.id, player.player_id),
+                  ]"
                 >
                   {{ playerCell(row, player.player_id).net_score
                   }}<span class="ml-1 text-[10px] font-semibold"
@@ -250,10 +293,16 @@ watch(selectedSiteHash, () => loadRows());
                     }})</span
                   >
                 </td>
-                <td class="whitespace-nowrap px-2.5 py-2.5 text-center tabular-nums text-slate-500">
+                <td
+                  class="whitespace-nowrap px-2.5 py-2.5 text-center tabular-nums text-slate-500"
+                  :class="placeBgClass(row.id, player.player_id)"
+                >
                   {{ playerCell(row, player.player_id).handicap ?? '-' }}
                 </td>
-                <td class="whitespace-nowrap px-2.5 py-2.5 text-center tabular-nums text-slate-700">
+                <td
+                  class="whitespace-nowrap px-2.5 py-2.5 text-center tabular-nums text-slate-700"
+                  :class="placeBgClass(row.id, player.player_id)"
+                >
                   {{ playerCell(row, player.player_id).total_throws ?? '-' }}
                 </td>
               </template>

@@ -138,6 +138,9 @@ definePageMeta({ middleware: 'sanctum:auth' });
           </div>
           <LayoutTitle class="!mb-0">Výsledky hráčů</LayoutTitle>
         </div>
+        <div v-if="game.players && game.players.length" class="mb-8 pt-2">
+          <DiscGolfPodium :players="game.players" />
+        </div>
         <div class="overflow-hidden rounded-xl ring-1 ring-slate-200">
           <table class="w-full text-left text-sm">
             <thead class="bg-slate-50 text-[11px] uppercase tracking-wide text-slate-500">

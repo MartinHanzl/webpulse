@@ -62,8 +62,13 @@ function setThrows(value: string) {
 }
 
 function step(delta: number) {
-  const base = props.throws ?? props.holePar ?? 0;
-  emit('update', Math.max(0, base + delta));
+  // No value yet: minus seeds the hole par, plus seeds par + 1.
+  if (props.throws === null || props.throws === undefined) {
+    const par = props.holePar ?? 0;
+    emit('update', Math.max(0, delta < 0 ? par : par + 1));
+    return;
+  }
+  emit('update', Math.max(0, props.throws + delta));
 }
 </script>
 
