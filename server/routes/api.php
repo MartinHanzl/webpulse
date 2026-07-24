@@ -51,6 +51,7 @@ use App\Http\Controllers\Admin\Faq\FaqController;
 use App\Http\Controllers\Admin\Filemanager\FilemanagerController as AdminFilemanagerController;
 use App\Http\Controllers\Admin\Food\Allergen\AllergenController;
 use App\Http\Controllers\Admin\Food\Foodstuff\FoodstuffCategoryController;
+use App\Http\Controllers\Admin\Food\CalorieMeasurement\CalorieMeasurementController;
 use App\Http\Controllers\Admin\Food\Foodstuff\FoodstuffController;
 use App\Http\Controllers\Admin\Food\Meal\MealCategoryController;
 use App\Http\Controllers\Admin\Food\Meal\MealController;
@@ -1250,6 +1251,16 @@ Route::group([
                 Route::get('{id}', [FoodstuffController::class, 'show'])->where('id', '[0-9]+');
                 Route::post('{id?}', [FoodstuffController::class, 'store']);
                 Route::delete('{id}', [FoodstuffController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            // Calorie calculator — saved measurements
+            Route::group([
+                'prefix' => 'calorie-measurement',
+            ], function () {
+                Route::get('', [CalorieMeasurementController::class, 'index']);
+                Route::get('{id}', [CalorieMeasurementController::class, 'show'])->where('id', '[0-9]+');
+                Route::post('{id?}', [CalorieMeasurementController::class, 'store']);
+                Route::delete('{id}', [CalorieMeasurementController::class, 'destroy'])->where('id', '[0-9]+');
             });
 
             // Meal routes

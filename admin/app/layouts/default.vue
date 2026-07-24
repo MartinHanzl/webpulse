@@ -26,6 +26,7 @@ import {
   BanknotesIcon,
   ClockIcon,
   BuildingOfficeIcon,
+  CalculatorIcon,
   WalletIcon,
   DocumentTextIcon,
   ChatBubbleBottomCenterTextIcon,
@@ -326,6 +327,13 @@ const navigation = ref([
             current: false,
           },
         ],
+      },
+      {
+        name: 'Kalorická kalkulačka',
+        link: '/restaurace/kalkulacka',
+        icon: CalculatorIcon,
+        current: false,
+        slug: 'calorie_measurements',
       },
       {
         name: 'Stoly',

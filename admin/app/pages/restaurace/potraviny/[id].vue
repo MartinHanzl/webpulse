@@ -335,7 +335,7 @@ definePageMeta({
               >
                 <ChartBarIcon class="size-5" />
               </div>
-              <LayoutTitle class="!mb-0">Nutriční hodnoty (na 100 g)</LayoutTitle>
+              <LayoutTitle class="!mb-0">Nutriční hodnoty (na 100 g/ml)</LayoutTitle>
             </div>
 
             <div class="grid grid-cols-2 gap-x-8 gap-y-6 lg:grid-cols-5">
