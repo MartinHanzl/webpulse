@@ -29,6 +29,11 @@ const props = defineProps({
     required: false,
     default: '',
   },
+  autocomplete: {
+    type: String,
+    required: false,
+    default: 'off',
+  },
   disabled: {
     type: Boolean,
     required: false,
@@ -66,8 +71,8 @@ const props = defineProps({
         :type="type"
         :placeholder="placeholder"
         :disabled="disabled"
-        aria-autocomplete="none"
-        autocomplete="off"
+        :autocomplete="autocomplete"
+        :aria-autocomplete="autocomplete === 'off' ? 'none' : undefined"
         :autofocus="false"
         :min="type === 'number' ? (min >= 0 ? min : 3) : undefined"
         :max="type === 'number' ? (max > 0 ? max : 45) : undefined"

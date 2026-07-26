@@ -14,11 +14,31 @@ const form = ref({
 });
 
 const isSubmitting = ref(false);
+const formEl = ref<{ $el?: HTMLElement } | HTMLElement | null>(null);
 const { $toast } = useNuxtApp();
 const { login } = useSanctumAuth();
 
 async function handleSubmit() {
-  if (!form.value.email || !form.value.password) return;
+  // Mobilní autofill/password manager nemusí dispatchnout input event, takže
+  // v-model zůstane prázdný i když je pole vizuálně vyplněné. Načteme proto
+  // hodnoty přímo z DOM jako fallback před odesláním.
+  const root = formEl.value && '$el' in formEl.value ? formEl.value.$el : formEl.value;
+  if (root) {
+    const emailEl = root.querySelector<HTMLInputElement>('input[name="email"]');
+    const passwordEl = root.querySelector<HTMLInputElement>('input[name="password"]');
+    if (emailEl && emailEl.value) form.value.email = emailEl.value;
+    if (passwordEl && passwordEl.value) form.value.password = passwordEl.value;
+  }
+
+  if (!form.value.email || !form.value.password) {
+    $toast.show({
+      summary: 'Chyba',
+      detail: 'Vyplňte prosím e-mail i heslo.',
+      severity: 'error',
+      group: 'bc',
+    });
+    return;
+  }
 
   isSubmitting.value = true;
   try {
@@ -62,7 +82,7 @@ async function handleSubmit() {
       class="rounded-[2rem] border border-slate-200 !bg-white p-8 shadow-2xl shadow-slate-200/40"
       :background-show="false"
     >
-      <Form class="space-y-6" @submit="handleSubmit">
+      <Form ref="formEl" class="space-y-6" @submit="handleSubmit">
         <div class="space-y-5">
           <BaseFormInput
             v-model="form.email"
@@ -70,6 +90,7 @@ async function handleSubmit() {
             name="email"
             label="Uživatelský e-mail"
             placeholder="vložit e-mail"
+            autocomplete="username"
             class="col-span-full"
           />
 
@@ -79,6 +100,7 @@ async function handleSubmit() {
             name="password"
             label="Heslo"
             placeholder="••••••••"
+            autocomplete="current-password"
             class="col-span-full"
           />
         </div>
