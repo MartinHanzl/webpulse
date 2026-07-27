@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
 class FoodstuffController extends Controller
@@ -30,11 +31,12 @@ class FoodstuffController extends Controller
 
         if ($request->has('search') && $request->get('search') != '' && $request->get('search') != null) {
             $searchString = $request->get('search');
-            if (str_contains(':', $searchString)) {
-                $searchString = explode(':', $searchString);
-                $query->where($searchString[0], 'like', '%'.$searchString[1].'%');
+            $parts = explode(':', $searchString, 2);
+
+            if (count($parts) === 2 && Schema::hasColumn('foodstuffs', $parts[0])) {
+                $query->where($parts[0], 'like', '%'.$parts[1].'%');
             } else {
-                $query->orWhereTranslation('name', 'like', '%'.$searchString.'%');
+                $query->whereTranslationLike('name', '%'.$searchString.'%');
             }
         }
 
