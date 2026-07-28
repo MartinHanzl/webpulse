@@ -1,0 +1,502 @@
+[
+  {
+    "cislo": "001",
+    "obor": "Zvířata",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Který savec má ze všech nejdelší březost?", "odpoved": "slon" },
+      { "otazka": "Jakou barvu má krev chobotnice?", "odpoved": "modrou" },
+      { "otazka": "Který savec klade vejce?", "odpoved": "ptakopysk" }
+    ]
+  },
+  {
+    "cislo": "002",
+    "obor": "Zvířata",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Jaký je největší žijící ještěr na světě?", "odpoved": "varan komodský" },
+      { "otazka": "Který pták umí létat pozpátku?", "odpoved": "kolibřík" },
+      { "otazka": "Který živočich má nejvíc zubů?", "odpoved": "hlemýžď" }
+    ]
+  },
+  {
+    "cislo": "003",
+    "obor": "Zvířata",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Které zvíře má otisky prstů téměř k nerozeznání od lidských?", "odpoved": "koala" },
+      { "otazka": "Jaká je nejrychlejší ryba světa?", "odpoved": "plachetník" },
+      { "otazka": "Kolik srdcí má chobotnice?", "odpoved": "tři" }
+    ]
+  },
+  {
+    "cislo": "004",
+    "obor": "Příroda",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Která poušť je největší na světě?", "odpoved": "Antarktida" },
+      { "otazka": "Který strom je nejvyšší na světě?", "odpoved": "sekvoj" },
+      { "otazka": "Kolik srdcí má žížala?", "odpoved": "pět" }
+    ]
+  },
+  {
+    "cislo": "005",
+    "obor": "Svět",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Jaké je hlavní město Austrálie?", "odpoved": "Canberra" },
+      { "otazka": "Jaké je hlavní město Kanady?", "odpoved": "Ottawa" },
+      { "otazka": "Jaké je hlavní město Turecka?", "odpoved": "Ankara" }
+    ]
+  },
+  {
+    "cislo": "006",
+    "obor": "Svět",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Která řeka je nejdelší v Evropě?", "odpoved": "Volha" },
+      { "otazka": "Které jezero je nejhlubší na světě?", "odpoved": "Bajkal" },
+      { "otazka": "Kterým směrem teče Nil?", "odpoved": "na sever" }
+    ]
+  },
+  {
+    "cislo": "007",
+    "obor": "Svět",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Které město leží na dvou kontinentech zároveň?", "odpoved": "Istanbul" },
+      { "otazka": "Který je největší ostrov světa?", "odpoved": "Grónsko" },
+      { "otazka": "Které moře nemá žádné břehy?", "odpoved": "Sargasové" }
+    ]
+  },
+  {
+    "cislo": "008",
+    "obor": "Svět",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Které město bylo hlavním městem Brazílie před Brasílií?", "odpoved": "Rio de Janeiro" },
+      { "otazka": "Která země je nejnavštěvovanější na světě?", "odpoved": "Francie" },
+      { "otazka": "Ve které zemi leží chrámový komplex Angkor Vat?", "odpoved": "v Kambodži" }
+    ]
+  },
+  {
+    "cislo": "009",
+    "obor": "Dějiny",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Jak se jmenoval kůň Alexandra Velikého?", "odpoved": "Bukefalos" },
+      { "otazka": "Kdo byl podle pověsti spolu s Removem vychován vlčicí?", "odpoved": "Romulus" },
+      { "otazka": "Jak dlouho trvala stoletá válka?", "odpoved": "116 let" }
+    ]
+  },
+  {
+    "cislo": "010",
+    "obor": "Dějiny",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Kdo objevil penicilin?", "odpoved": "Alexander Fleming" },
+      { "otazka": "Kdo vynalezl měkké kontaktní čočky?", "odpoved": "Otto Wichterle" },
+      { "otazka": "Kdo vynalezl lodní šroub?", "odpoved": "Josef Ressel" }
+    ]
+  },
+  {
+    "cislo": "011",
+    "obor": "Dějiny",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Kdo byl prvním člověkem ve vesmíru?", "odpoved": "Jurij Gagarin" },
+      { "otazka": "Jak se jmenoval první umělý satelit Země?", "odpoved": "Sputnik" },
+      { "otazka": "Který národ vynalezl papír?", "odpoved": "Číňané" }
+    ]
+  },
+  {
+    "cislo": "012",
+    "obor": "Dějiny",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Která univerzita je nejstarší ve střední Evropě?", "odpoved": "Univerzita Karlova" },
+      { "otazka": "Kolik manželek měl Jindřich VIII.?", "odpoved": "šest" },
+      { "otazka": "Která britská panovnice vládla nejdéle?", "odpoved": "Alžběta II." }
+    ]
+  },
+  {
+    "cislo": "013",
+    "obor": "Slova",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Z jakého jazyka pochází slovo „robot“?", "odpoved": "z češtiny" },
+      { "otazka": "Jak se nazývá slovo čtené stejně zepředu i zezadu?", "odpoved": "palindrom" },
+      { "otazka": "Které je nejdelší české slovo bez samohlásky?", "odpoved": "scvrnkls" }
+    ]
+  },
+  {
+    "cislo": "014",
+    "obor": "Slova",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Jak se odborně říká zvukomalbě?", "odpoved": "onomatopoie" },
+      { "otazka": "Co doslova znamená „déjà vu“?", "odpoved": "již viděno" },
+      { "otazka": "Jak se odborně říká znaménku &?", "odpoved": "ampersand" }
+    ]
+  },
+  {
+    "cislo": "015",
+    "obor": "Slova",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Který jazyk má nejvíc rodilých mluvčích?", "odpoved": "čínština" },
+      { "otazka": "Jak se latinsky řekne „voda“?", "odpoved": "aqua" },
+      { "otazka": "Jak se nazývá nauka o původu slov?", "odpoved": "etymologie" }
+    ]
+  },
+  {
+    "cislo": "016",
+    "obor": "Popkultura",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Ze které země pochází skupina ABBA?", "odpoved": "ze Švédska" },
+      { "otazka": "Ze které země pochází skupina AC/DC?", "odpoved": "z Austrálie" },
+      { "otazka": "Které album je nejprodávanější všech dob?", "odpoved": "Thriller" }
+    ]
+  },
+  {
+    "cislo": "017",
+    "obor": "Popkultura",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Která videohra je nejprodávanější všech dob?", "odpoved": "Minecraft" },
+      { "otazka": "Kdo složil hudbu k Hvězdným válkám?", "odpoved": "John Williams" },
+      { "otazka": "Který animovaný seriál se vysílá nejdéle?", "odpoved": "Simpsonovi" }
+    ]
+  },
+  {
+    "cislo": "018",
+    "obor": "Popkultura",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Kdo nakreslil Krtečka?", "odpoved": "Zdeněk Miler" },
+      { "otazka": "Jaké zvíře je ve znaku značky Lacoste?", "odpoved": "krokodýl" },
+      { "otazka": "Na jaký nástroj hrál Louis Armstrong?", "odpoved": "na trubku" }
+    ]
+  },
+  {
+    "cislo": "019",
+    "obor": "Tělo",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Který materiál je v lidském těle nejtvrdší?", "odpoved": "zubní sklovina" },
+      { "otazka": "Která kost je v lidském těle nejmenší?", "odpoved": "třmínek" },
+      { "otazka": "Který orgán vytváří inzulín?", "odpoved": "slinivka" }
+    ]
+  },
+  {
+    "cislo": "020",
+    "obor": "Věda",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Který orgán se dokáže sám dorůst?", "odpoved": "játra" },
+      { "otazka": "Který plyn tvoří většinu zemské atmosféry?", "odpoved": "dusík" },
+      { "otazka": "Který prvek je nejlehčí?", "odpoved": "vodík" }
+    ]
+  },
+  {
+    "cislo": "021",
+    "obor": "Technika",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Co znamená zkratka WWW?", "odpoved": "World Wide Web" },
+      { "otazka": "Kdo založil firmu Apple společně se Stevem Jobsem?", "odpoved": "Steve Wozniak" },
+      { "otazka": "Která značka vyrobila první sériově montovaný automobil?", "odpoved": "Ford" }
+    ]
+  },
+  {
+    "cislo": "022",
+    "obor": "Technika",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Který operační systém je na mobilech nejrozšířenější?", "odpoved": "Android" },
+      { "otazka": "Co znamená zkratka GPS?", "odpoved": "Global Positioning System" },
+      { "otazka": "Ve které zemi vznikla technologie Bluetooth?", "odpoved": "ve Švédsku" }
+    ]
+  },
+  {
+    "cislo": "023",
+    "obor": "Vesmír",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Která planeta je Slunci nejblíž?", "odpoved": "Merkur" },
+      { "otazka": "Který měsíc je největší ve Sluneční soustavě?", "odpoved": "Ganymed" },
+      { "otazka": "Která planeta je nejteplejší?", "odpoved": "Venuše" }
+    ]
+  },
+  {
+    "cislo": "024",
+    "obor": "Vesmír",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Jak se jmenuje galaxie, ve které žijeme?", "odpoved": "Mléčná dráha" },
+      { "otazka": "Kdo byla první ženou ve vesmíru?", "odpoved": "Valentina Těreškovová" },
+      { "otazka": "Která sonda jako první opustila Sluneční soustavu?", "odpoved": "Voyager 1" }
+    ]
+  },
+  {
+    "cislo": "025",
+    "obor": "Hudba",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Kolik strun mají housle?", "odpoved": "čtyři" },
+      { "otazka": "Který slavný skladatel na konci života ohluchl?", "odpoved": "Beethoven" },
+      { "otazka": "Kdo složil operu Prodaná nevěsta?", "odpoved": "Bedřich Smetana" }
+    ]
+  },
+  {
+    "cislo": "026",
+    "obor": "Film",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Ve které zemi se natáčí filmy zvané Bollywood?", "odpoved": "v Indii" },
+      { "otazka": "Která filmová série o tajném agentovi běží nejdéle?", "odpoved": "James Bond" },
+      { "otazka": "Ve kterém městě se udílejí Oscary?", "odpoved": "v Los Angeles" }
+    ]
+  },
+  {
+    "cislo": "027",
+    "obor": "Literatura",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Kdo napsal Malého prince?", "odpoved": "Antoine de Saint-Exupéry" },
+      { "otazka": "Kdo napsal Osudy dobrého vojáka Švejka?", "odpoved": "Jaroslav Hašek" },
+      { "otazka": "Který Čech dostal Nobelovu cenu za literaturu?", "odpoved": "Jaroslav Seifert" }
+    ]
+  },
+  {
+    "cislo": "028",
+    "obor": "Česko",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Která řeka je v Česku nejdelší?", "odpoved": "Vltava" },
+      { "otazka": "Ve kterém městě stojí nejstarší kamenný most v Česku?", "odpoved": "v Písku" },
+      { "otazka": "Které je nejnižší místo v Česku?", "odpoved": "hladina Labe u Hřenska" }
+    ]
+  },
+  {
+    "cislo": "029",
+    "obor": "Česko",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Kdo navrhl Tančící dům v Praze?", "odpoved": "Frank Gehry a Vlado Milunić" },
+      { "otazka": "Ve kterém městě se vyrábějí vozy Škoda?", "odpoved": "v Mladé Boleslavi" },
+      { "otazka": "Který vodopád je v Česku nejvyšší?", "odpoved": "Pančavský" }
+    ]
+  },
+  {
+    "cislo": "030",
+    "obor": "Hry",
+    "zpusob": "REKNI",
+    "otazky": [
+      { "otazka": "Kolik polí má šachovnice?", "odpoved": "64" },
+      { "otazka": "Kolik kamenů má klasické domino?", "odpoved": "28" },
+      { "otazka": "Ze které země pochází desková hra go?", "odpoved": "z Číny" }
+    ]
+  },
+  {
+    "cislo": "031",
+    "obor": "Zvířata",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Které zvíře spí zavěšené hlavou dolů?", "odpoved": "netopýr" },
+      { "otazka": "Který pták neumí létat, ale výborně plave?", "odpoved": "tučňák" },
+      { "otazka": "Které zvíře nosí mládě v kapse?", "odpoved": "klokan" }
+    ]
+  },
+  {
+    "cislo": "032",
+    "obor": "Zvířata",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Které zvíře mění barvu podle okolí?", "odpoved": "chameleon" },
+      { "otazka": "Které zvíře se brání stočením do klubíčka?", "odpoved": "ježek" },
+      { "otazka": "Které zvíře má na zádech hrb?", "odpoved": "velbloud" }
+    ]
+  },
+  {
+    "cislo": "033",
+    "obor": "Zvířata",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Které zvíře v ohrožení předstírá, že je mrtvé?", "odpoved": "vačice" },
+      { "otazka": "Který pták tluče zobákem do kmenů stromů?", "odpoved": "datel" },
+      { "otazka": "Které zvíře staví na potocích hráze?", "odpoved": "bobr" }
+    ]
+  },
+  {
+    "cislo": "034",
+    "obor": "Sport",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Který sport se hraje s ovoidním míčem?", "odpoved": "ragby" },
+      { "otazka": "Který sport se hraje na ledě s koštětem?", "odpoved": "curling" },
+      { "otazka": "Ve kterém sportu se používá luk?", "odpoved": "lukostřelba" }
+    ]
+  },
+  {
+    "cislo": "035",
+    "obor": "Sport",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Který sport kombinuje běh na lyžích a střelbu?", "odpoved": "biatlon" },
+      { "otazka": "Ve kterém sportu se používá rapír?", "odpoved": "šerm" },
+      { "otazka": "Ve kterém sportu je cílem položit soupeře na lopatky?", "odpoved": "zápas" }
+    ]
+  },
+  {
+    "cislo": "036",
+    "obor": "Sport",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Ve kterém sportu se běhá podle mapy a buzoly?", "odpoved": "orientační běh" },
+      { "otazka": "Jak se jmenuje styl plavání na zádech?", "odpoved": "znak" },
+      { "otazka": "Jak se jmenuje sport, kde se skáče z mostu na pružném laně?", "odpoved": "bungee jumping" }
+    ]
+  },
+  {
+    "cislo": "037",
+    "obor": "Povolání",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Kdo v divadle napovídá hercům?", "odpoved": "nápověda" },
+      { "otazka": "Kdo řídí orchestr?", "odpoved": "dirigent" },
+      { "otazka": "Kdo v cirkuse chodí po laně?", "odpoved": "provazochodec" }
+    ]
+  },
+  {
+    "cislo": "038",
+    "obor": "Povolání",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Kdo podkovává koně?", "odpoved": "podkovář" },
+      { "otazka": "Kdo se stará o včely?", "odpoved": "včelař" },
+      { "otazka": "Kdo v pivovaru řídí vaření piva?", "odpoved": "sládek" }
+    ]
+  },
+  {
+    "cislo": "039",
+    "obor": "Povolání",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Kdo opravuje hodiny?", "odpoved": "hodinář" },
+      { "otazka": "Kdo cvičí dravé ptáky k lovu?", "odpoved": "sokolník" },
+      { "otazka": "Kdo pokrývá střechy?", "odpoved": "pokrývač" }
+    ]
+  },
+  {
+    "cislo": "040",
+    "obor": "Činnosti",
+    "zpusob": "PREDVED",
+    "otazky": [
+      { "otazka": "Jak se jmenuje japonské umění skládání papíru?", "odpoved": "origami" },
+      { "otazka": "Jak se jmenuje španělský tanec dupaný podpatky?", "odpoved": "flamenco" },
+      { "otazka": "Jak se jmenuje divadelní představení beze slov?", "odpoved": "pantomima" }
+    ]
+  },
+  {
+    "cislo": "041",
+    "obor": "Svět",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Jak se jmenuje průliv mezi Evropou a Afrikou?", "odpoved": "Gibraltarský" },
+      { "otazka": "Ve které zemi leží Machu Picchu?", "odpoved": "v Peru" },
+      { "otazka": "Který stát je nejmenší na světě?", "odpoved": "Vatikán" }
+    ]
+  },
+  {
+    "cislo": "042",
+    "obor": "Svět",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Jak se jmenuje nejvyšší hora Afriky?", "odpoved": "Kilimandžáro" },
+      { "otazka": "Které město se přezdívá Věčné město?", "odpoved": "Řím" },
+      { "otazka": "Jak se jmenuje kanál spojující Středozemní a Rudé moře?", "odpoved": "Suezský" }
+    ]
+  },
+  {
+    "cislo": "043",
+    "obor": "Příroda",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Jak se jmenuje jev, kdy Měsíc zakryje Slunce?", "odpoved": "zatmění Slunce" },
+      { "otazka": "Jak se jmenuje vítr točící se do trychtýře?", "odpoved": "tornádo" },
+      { "otazka": "Jak se jmenuje horká voda tryskající ze země?", "odpoved": "gejzír" }
+    ]
+  },
+  {
+    "cislo": "044",
+    "obor": "Věci",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Jak se jmenuje přístroj zaznamenávající zemětřesení?", "odpoved": "seismograf" },
+      { "otazka": "Jak se jmenuje přístroj měřící tlak vzduchu?", "odpoved": "barometr" },
+      { "otazka": "Jak se jmenuje přístroj na určování světových stran?", "odpoved": "kompas" }
+    ]
+  },
+  {
+    "cislo": "045",
+    "obor": "Jídlo",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Z jaké rostliny se vyrábí čokoláda?", "odpoved": "kakaovník" },
+      { "otazka": "Z jaké části rostliny je skořice?", "odpoved": "z kůry" },
+      { "otazka": "Jaká houba se používá ke kynutí těsta?", "odpoved": "kvasinky (droždí)" }
+    ]
+  },
+  {
+    "cislo": "046",
+    "obor": "Jídlo",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Jak se jmenuje italská zeleninová polévka?", "odpoved": "minestrone" },
+      { "otazka": "Ze které země pochází guláš?", "odpoved": "z Maďarska" },
+      { "otazka": "Jak se jmenuje francouzský sýr s modrou plísní?", "odpoved": "roquefort" }
+    ]
+  },
+  {
+    "cislo": "047",
+    "obor": "Dějiny",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Jak se jmenovala Kolumbova vlajková loď?", "odpoved": "Santa Maria" },
+      { "otazka": "Jak se jmenuje písmo starých Egypťanů?", "odpoved": "hieroglyfy" },
+      { "otazka": "Jak se jmenovala obchodní cesta mezi Evropou a Čínou?", "odpoved": "hedvábná stezka" }
+    ]
+  },
+  {
+    "cislo": "048",
+    "obor": "Tělo",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Který je největší orgán lidského těla?", "odpoved": "kůže" },
+      { "otazka": "Jak se jmenuje sval oddělující hrudník od břicha?", "odpoved": "bránice" },
+      { "otazka": "Kolik chromozomů má člověk?", "odpoved": "46" }
+    ]
+  },
+  {
+    "cislo": "049",
+    "obor": "Kultura",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Jak se jmenuje malba na mokré omítce?", "odpoved": "freska" },
+      { "otazka": "Jak se jmenuje sbírka map v knize?", "odpoved": "atlas" },
+      { "otazka": "Jak se jmenuje socha vytesaná z jednoho kusu kamene?", "odpoved": "monolit" }
+    ]
+  },
+  {
+    "cislo": "050",
+    "obor": "Slova",
+    "zpusob": "POPIS",
+    "otazky": [
+      { "otazka": "Jak se nazývá strach z uzavřených prostor?", "odpoved": "klaustrofobie" },
+      { "otazka": "Jak se nazývá slovo opačného významu?", "odpoved": "antonymum" },
+      { "otazka": "Jak se nazývá přehnané zveličení v řeči?", "odpoved": "hyperbola" }
+    ]
+  }
+]

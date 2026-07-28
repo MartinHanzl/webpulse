@@ -42,6 +42,11 @@ const games = ref([
     linkUrl: '/imposter',
   },
   {
+    name: 'Šeptanda',
+    imageUrl: '/static/img/cards/septanda.png',
+    linkUrl: '/septanda',
+  },
+  {
     name: 'Slepá mapa',
     imageUrl: '/static/img/cards/mapa.png',
     linkUrl: '/slepa-mapa/cr/cela',
