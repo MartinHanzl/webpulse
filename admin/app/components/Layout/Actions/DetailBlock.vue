@@ -103,10 +103,21 @@ function updateItemImage(files) {
 
 const hasMultipleSites = computed(() => user.value?.sites?.length > 1);
 
+const selectedSiteHash = inject('selectedSiteHash', ref(''));
+const selectedSiteId = computed(
+  () => user.value?.sites?.find((site) => site.hash === selectedSiteHash.value)?.id,
+);
+
 // Pokud má uživatel jen jednu stránku, automaticky ji přiřadíme
 watchEffect(() => {
   if (user.value?.sites?.length === 1 && !sites.value.includes(user.value.sites[0].id)) {
     sites.value = [user.value.sites[0].id];
+    return;
+  }
+
+  // U více stránek defaultně zaškrtneme tu, kterou má uživatel právě vybranou (jen pokud ještě nic nevybráno)
+  if (hasMultipleSites.value && sites.value.length === 0 && selectedSiteId.value) {
+    sites.value = [selectedSiteId.value];
   }
 });
 

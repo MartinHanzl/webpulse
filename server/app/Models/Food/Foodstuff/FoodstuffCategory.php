@@ -23,6 +23,7 @@ class FoodstuffCategory extends Model
 
     protected $fillable = [
         'foodstuff_category_id',
+        'rohlik_id',
     ];
 
     public function getAttribute($key)

@@ -24,6 +24,7 @@ class Foodstuff extends Model
 
     protected $fillable = [
         'macronutrients',
+        'rohlik_id',
     ];
 
     protected $casts = [
