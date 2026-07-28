@@ -34,9 +34,9 @@ const zpusobLabel: Record<Zpusob, string> = {
 };
 
 const zpusobPopis: Record<Zpusob, string> = {
-  REKNI: 'Všichni najednou zakřičí svou odpověď. Přes sebe.',
-  PREDVED: 'Beze slov, jen tělem. Po kole, každý pět vteřin.',
-  POPIS: 'Mluvit se smí, ale odpověď ani žádnou její část říct nesmíš. Po kole, pět vteřin.',
+  REKNI: 'Všichni najednou zakřičí svou odpověď.',
+  PREDVED: 'Beze slov, jen tělem. Každý postupně předvádí.',
+  POPIS: 'Mluvit se smí, ale odpověď ani žádnou její část říct nesmíš. Každý postupně popisuje',
 };
 
 type Phase = 'setup' | 'draw' | 'roles' | 'answer' | 'guess' | 'result' | 'gameEnd' | 'tiebreak';
