@@ -9,6 +9,7 @@ import {
   FlagIcon,
   BoltIcon,
   ArrowLeftIcon,
+  ScaleIcon,
 } from '@heroicons/vue/24/outline';
 import GameSummary from '~/components/DiscGolf/GameSummary.vue';
 
@@ -145,8 +146,9 @@ async function createGame() {
     body: JSON.stringify(body),
     headers: headers(),
   })
-    .then((res: any) => {
+    .then(async (res: any) => {
       draftGame.value = res;
+      await loadRecommendedHandicaps();
       step.value = 2;
     })
     .catch(() => {
@@ -162,6 +164,34 @@ const players = ref<any[]>([]);
 const selectedPlayers = ref<Record<number, { handicap: number; total_throws: number | null }>>({});
 const quickRetro = ref(false);
 const summaryGame = ref<any>(null);
+const recommendedHandicaps = ref<Record<number, number>>({});
+
+async function loadRecommendedHandicaps() {
+  const courseName =
+    courseMode.value === 'existing' ? selectedCourse.value?.name : customCourseName.value.trim();
+  if (!courseName) {
+    recommendedHandicaps.value = {};
+    return;
+  }
+  const client = useSanctumClient();
+  await client('/api/admin/discgolf/stats/courses', {
+    method: 'GET',
+    headers: headers(),
+  })
+    .then((res: any) => {
+      const data = res.data ?? res ?? [];
+      const key = courseName.trim().toLowerCase();
+      const match = data.find((c: any) => (c.course_name ?? '').trim().toLowerCase() === key);
+      const map: Record<number, number> = {};
+      (match?.players ?? []).forEach((p: any) => {
+        map[p.player_id] = p.recommended_handicap ?? 0;
+      });
+      recommendedHandicaps.value = map;
+    })
+    .catch(() => {
+      recommendedHandicaps.value = {};
+    });
+}
 
 async function loadPlayers() {
   const client = useSanctumClient();
@@ -187,13 +217,27 @@ function togglePlayer(playerId: number) {
     const { [playerId]: _removed, ...rest } = selectedPlayers.value;
     selectedPlayers.value = rest;
   } else {
-    selectedPlayers.value[playerId] = { handicap: 0, total_throws: null };
+    selectedPlayers.value[playerId] = {
+      handicap: recommendedHandicaps.value[playerId] ?? 0,
+      total_throws: null,
+    };
   }
 }
 
 const selectedPlayerIds = computed(() =>
   Object.keys(selectedPlayers.value).map((id) => Number(id)),
 );
+
+function equalizeHandicaps() {
+  const ids = selectedPlayerIds.value;
+  if (ids.length < 2) return;
+  // Nejsilnější hráč = nejvyšší (nejméně záporný) handicap; ostatní se vůči němu posunou tak,
+  // aby si zachovali stejný vzájemný rozestup, ale nejsilnější skončí na 0.
+  const strongest = Math.max(...ids.map((id) => selectedPlayers.value[id].handicap));
+  ids.forEach((id) => {
+    selectedPlayers.value[id].handicap -= strongest;
+  });
+}
 
 async function savePlayers() {
   if (!selectedPlayerIds.value.length) {
@@ -493,13 +537,23 @@ definePageMeta({ middleware: 'sanctum:auth' });
 
     <!-- ================================================= STEP 2 -->
     <LayoutContainer v-if="step === 2" class="space-y-6">
-      <div class="flex items-center gap-3">
-        <div
-          class="flex size-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600"
-        >
-          <UserGroupIcon class="size-5" />
+      <div class="flex items-center justify-between gap-3">
+        <div class="flex items-center gap-3">
+          <div
+            class="flex size-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600"
+          >
+            <UserGroupIcon class="size-5" />
+          </div>
+          <LayoutTitle class="!mb-0">Hráči a handicap</LayoutTitle>
         </div>
-        <LayoutTitle class="!mb-0">Hráči a handicap</LayoutTitle>
+        <BaseButton
+          v-if="selectedPlayerIds.length >= 2"
+          variant="secondary"
+          size="sm"
+          @click="equalizeHandicaps"
+        >
+          <ScaleIcon class="mr-1.5 size-4" /> Vyrovnat handikap
+        </BaseButton>
       </div>
 
       <div
@@ -547,6 +601,12 @@ definePageMeta({ middleware: 'sanctum:auth' });
                 type="number"
                 class="w-20 rounded-xl border-0 px-3 py-2 text-center text-sm shadow-sm ring-1 ring-inset ring-slate-300 focus:ring-2 focus:ring-inset focus:ring-indigo-500"
               />
+              <span
+                v-if="recommendedHandicaps[player.id] !== undefined"
+                class="text-xs text-slate-400"
+              >
+                (doporučeno {{ recommendedHandicaps[player.id] }})
+              </span>
             </div>
             <div v-if="quickRetro" class="flex items-center gap-2">
               <label class="text-xs font-medium text-slate-500">Celkem hodů</label>
