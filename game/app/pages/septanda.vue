@@ -135,7 +135,7 @@ function buildRoles() {
 
   revealIndex.value = 0;
   revealStep.value = 'handoff';
-  phase.value = 'roles';
+  phase.value = withoutZradce.value ? 'answer' : 'roles';
 }
 
 const currentReveal = computed(() => roleAssignments.value[revealIndex.value]);
