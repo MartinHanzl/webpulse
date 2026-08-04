@@ -1,9 +1,11 @@
 <script setup lang="ts">
 import { Form } from 'vee-validate';
+import { useRoute, useRouter } from 'vue-router';
 
 import { DocumentDuplicateIcon, LockClosedIcon, UserIcon } from '@heroicons/vue/24/outline';
 import { definePageMeta } from '#imports';
 import { useUserGroupStore } from '~/../stores/userGroupStore';
+import ProfilMenuOrderTab from '~/components/Profil/MenuOrderTab.vue';
 
 const userGroupStore = useUserGroupStore();
 
@@ -11,6 +13,8 @@ const { $toast } = useNuxtApp();
 const error = ref(false);
 const loading = ref(false);
 const { refreshIdentity, logout } = useSanctumAuth();
+const route = useRoute();
+const router = useRouter();
 
 const pageTitle = ref('Uživatelský profil');
 
@@ -21,6 +25,24 @@ const breadcrumbs = ref([
     current: true,
   },
 ]);
+
+const tabs = ref([
+  { name: 'Osobní údaje', link: '#osobni', current: false },
+  { name: 'Zabezpečení', link: '#zabezpeceni', current: false },
+  { name: 'Pořadí menu', link: '#menu', current: false },
+]);
+
+watchEffect(() => {
+  const h = route.hash;
+  if (h)
+    tabs.value.forEach((t) => {
+      t.current = t.link === h;
+    });
+  else {
+    tabs.value[0].current = true;
+    router.push(route.path + '#osobni');
+  }
+});
 
 const item = ref({
   firstname: '' as string,
@@ -220,119 +242,129 @@ definePageMeta({
       @save="saveItem"
     />
 
+    <LayoutTabs :tabs="tabs" />
+
     <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
       <div class="col-span-1 space-y-8 lg:col-span-9">
-        <LayoutContainer>
-          <Form @submit="saveItem">
-            <div class="mb-8 flex items-center gap-3">
-              <div
-                class="flex size-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600"
-              >
-                <UserIcon class="size-5" />
-              </div>
-              <LayoutTitle class="!mb-0">Osobní údaje</LayoutTitle>
-            </div>
-
-            <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              <BaseFormInput
-                v-model="item.firstname"
-                label="Jméno"
-                type="text"
-                name="firstname"
-                rules="required|min:3"
-              />
-              <BaseFormInput
-                v-model="item.lastname"
-                label="Příjmení"
-                type="text"
-                name="lastname"
-                rules="required|min:3"
-              />
-              <BaseFormInput
-                v-model="item.email"
-                label="E-mailová adresa"
-                type="text"
-                name="email"
-                rules="required|email"
-                class="col-span-1 lg:col-span-1"
-              />
-
-              <div class="col-span-full pt-4">
-                <LayoutDivider>Bydliště / Kontaktní adresa</LayoutDivider>
+        <template v-if="tabs.find((t) => t.current && t.link === '#osobni')">
+          <LayoutContainer>
+            <Form @submit="saveItem">
+              <div class="mb-8 flex items-center gap-3">
+                <div
+                  class="flex size-8 items-center justify-center rounded-lg bg-indigo-50 text-indigo-600"
+                >
+                  <UserIcon class="size-5" />
+                </div>
+                <LayoutTitle class="!mb-0">Osobní údaje</LayoutTitle>
               </div>
 
-              <BaseFormInput
-                v-model="item.street"
-                label="Ulice a č.p."
-                type="text"
-                name="street"
-                class="col-span-1 sm:col-span-2 lg:col-span-2"
-              />
-
-              <div class="col-span-1 hidden lg:block"></div>
-
-              <BaseFormInput v-model="item.zip" label="PSČ" type="text" name="zip" />
-              <BaseFormInput
-                v-model="item.city"
-                label="Město"
-                type="text"
-                name="city"
-                class="col-span-1 sm:col-span-1 lg:col-span-2"
-              />
-            </div>
-          </Form>
-        </LayoutContainer>
-
-        <LayoutContainer>
-          <Form @submit="savePassword">
-            <div class="mb-8 flex items-center gap-3">
-              <div
-                class="flex size-8 items-center justify-center rounded-lg bg-rose-50 text-rose-600"
-              >
-                <LockClosedIcon class="size-5" />
-              </div>
-              <LayoutTitle class="!mb-0">Zabezpečení účtu</LayoutTitle>
-            </div>
-
-            <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
-              <div class="col-span-full lg:col-span-1">
+              <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 <BaseFormInput
-                  v-model="passwords.current_password"
-                  label="Současné heslo"
+                  v-model="item.firstname"
+                  label="Jméno"
+                  type="text"
+                  name="firstname"
+                  rules="required|min:3"
+                />
+                <BaseFormInput
+                  v-model="item.lastname"
+                  label="Příjmení"
+                  type="text"
+                  name="lastname"
+                  rules="required|min:3"
+                />
+                <BaseFormInput
+                  v-model="item.email"
+                  label="E-mailová adresa"
+                  type="text"
+                  name="email"
+                  rules="required|email"
+                  class="col-span-1 lg:col-span-1"
+                />
+
+                <div class="col-span-full pt-4">
+                  <LayoutDivider>Bydliště / Kontaktní adresa</LayoutDivider>
+                </div>
+
+                <BaseFormInput
+                  v-model="item.street"
+                  label="Ulice a č.p."
+                  type="text"
+                  name="street"
+                  class="col-span-1 sm:col-span-2 lg:col-span-2"
+                />
+
+                <div class="col-span-1 hidden lg:block"></div>
+
+                <BaseFormInput v-model="item.zip" label="PSČ" type="text" name="zip" />
+                <BaseFormInput
+                  v-model="item.city"
+                  label="Město"
+                  type="text"
+                  name="city"
+                  class="col-span-1 sm:col-span-1 lg:col-span-2"
+                />
+              </div>
+            </Form>
+          </LayoutContainer>
+        </template>
+
+        <template v-if="tabs.find((t) => t.current && t.link === '#zabezpeceni')">
+          <LayoutContainer>
+            <Form @submit="savePassword">
+              <div class="mb-8 flex items-center gap-3">
+                <div
+                  class="flex size-8 items-center justify-center rounded-lg bg-rose-50 text-rose-600"
+                >
+                  <LockClosedIcon class="size-5" />
+                </div>
+                <LayoutTitle class="!mb-0">Zabezpečení účtu</LayoutTitle>
+              </div>
+
+              <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                <div class="col-span-full lg:col-span-1">
+                  <BaseFormInput
+                    v-model="passwords.current_password"
+                    label="Současné heslo"
+                    type="password"
+                    name="password"
+                    rules="required"
+                  />
+                  <p class="mt-2 text-xs text-slate-400">
+                    Pro změnu údajů musíte potvrdit stávající heslo.
+                  </p>
+                </div>
+
+                <div class="hidden lg:col-span-2 lg:block"></div>
+
+                <BaseFormInput
+                  v-model="passwords.new_password"
+                  label="Nové heslo"
                   type="password"
-                  name="password"
+                  name="new_password"
                   rules="required"
                 />
-                <p class="mt-2 text-xs text-slate-400">
-                  Pro změnu údajů musíte potvrdit stávající heslo.
-                </p>
+                <BaseFormInput
+                  v-model="passwords.confirm_new_password"
+                  label="Potvrzení hesla"
+                  type="password"
+                  name="confirm_new_password"
+                  rules="required"
+                />
+
+                <div class="col-span-full flex items-end justify-end pt-4">
+                  <BaseButton type="submit" variant="primary" size="xl" class="w-full sm:w-auto">
+                    Aktualizovat heslo
+                  </BaseButton>
+                </div>
               </div>
+            </Form>
+          </LayoutContainer>
+        </template>
 
-              <div class="hidden lg:col-span-2 lg:block"></div>
-
-              <BaseFormInput
-                v-model="passwords.new_password"
-                label="Nové heslo"
-                type="password"
-                name="new_password"
-                rules="required"
-              />
-              <BaseFormInput
-                v-model="passwords.confirm_new_password"
-                label="Potvrzení hesla"
-                type="password"
-                name="confirm_new_password"
-                rules="required"
-              />
-
-              <div class="col-span-full flex items-end justify-end pt-4">
-                <BaseButton type="submit" variant="primary" size="xl" class="w-full sm:w-auto">
-                  Aktualizovat heslo
-                </BaseButton>
-              </div>
-            </div>
-          </Form>
-        </LayoutContainer>
+        <template v-if="tabs.find((t) => t.current && t.link === '#menu')">
+          <ProfilMenuOrderTab />
+        </template>
       </div>
 
       <aside class="col-span-1 space-y-6 lg:sticky lg:top-8 lg:col-span-3">

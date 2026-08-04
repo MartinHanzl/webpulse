@@ -94,6 +94,7 @@ use App\Http\Controllers\Admin\Task\TaskBoardController;
 use App\Http\Controllers\Admin\Task\TaskController;
 use App\Http\Controllers\Admin\TaxRate\TaxRateController;
 use App\Http\Controllers\Admin\TimeEntry\TimeEntryController;
+use App\Http\Controllers\Admin\User\MenuOrderController;
 use App\Http\Controllers\Admin\User\ProfileController;
 use App\Http\Controllers\Admin\User\QuickAccessController;
 use App\Http\Controllers\Admin\User\TablePreferenceController;
@@ -429,6 +430,15 @@ Route::group([
             Route::get('', [TablePreferenceController::class, 'show']);
             Route::post('', [TablePreferenceController::class, 'store']);
             Route::delete('', [TablePreferenceController::class, 'destroy']);
+        });
+
+        // Per-user, per-site left menu order (sections + first-level links)
+        Route::group([
+            'prefix' => 'menu-order',
+        ], function () {
+            Route::get('', [MenuOrderController::class, 'index']);
+            Route::post('', [MenuOrderController::class, 'store']);
+            Route::delete('', [MenuOrderController::class, 'destroy']);
         });
 
         // Profile routes
