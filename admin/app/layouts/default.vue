@@ -53,7 +53,7 @@ provide('selectedSiteHash', selectedSiteHash);
 
 const navigation = ref(menuSections);
 
-const { load: loadMenuOrder } = useMenuOrder();
+const { load: loadMenuOrder } = useMenuOrder(selectedSiteHash);
 
 async function reloadMenuOrder() {
   const rows = await loadMenuOrder();
@@ -276,13 +276,13 @@ onMounted(() => {
                           <NuxtLink
                             v-if="isMenuItemVisible(item) && !item.submenu"
                             :to="item.link"
-                            @click="sidebarOpen = false"
                             :class="[
                               item.current
                                 ? 'bg-zinc-800 text-white shadow-sm ring-1 ring-white/10'
                                 : 'text-zinc-400 hover:bg-zinc-800/50 hover:text-white',
                               'group flex gap-x-3 rounded-xl p-2.5 text-sm font-medium transition-all duration-200',
                             ]"
+                            @click="sidebarOpen = false"
                           >
                             <component
                               :is="item.icon"

@@ -64,8 +64,8 @@ export function menuOrderRowsFromSections(sections: MenuSectionDef[]): MenuOrder
   return rows;
 }
 
-export function useMenuOrder() {
-  const selectedSiteHash = inject<Ref<string>>('selectedSiteHash', ref(''));
+export function useMenuOrder(siteHash?: Ref<string>) {
+  const selectedSiteHash = siteHash ?? inject<Ref<string>>('selectedSiteHash', ref(''));
 
   async function load(): Promise<MenuOrderRow[]> {
     if (!selectedSiteHash.value) return [];
