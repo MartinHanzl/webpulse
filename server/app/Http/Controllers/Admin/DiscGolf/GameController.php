@@ -99,14 +99,17 @@ class GameController extends Controller
             ->get();
 
         $rows = $games->map(function (Game $game) {
-            $players = $game->players->map(fn ($gp) => [
-                'player_id' => $gp->player_id,
-                'player_name' => $gp->player?->name,
-                'handicap' => $gp->handicap,
-                'total_throws' => $gp->total_throws,
-                'net_score' => $gp->net_score,
-                'relative_to_par' => $gp->relative_to_par,
-            ]);
+            $players = $game->players
+                ->filter(fn ($gp) => $gp->player && $gp->player->include_in_stats)
+                ->map(fn ($gp) => [
+                    'player_id' => $gp->player_id,
+                    'player_name' => $gp->player?->name,
+                    'handicap' => $gp->handicap,
+                    'total_throws' => $gp->total_throws,
+                    'net_score' => $gp->net_score,
+                    'relative_to_par' => $gp->relative_to_par,
+                ])
+                ->values();
 
             $winner = $game->winner;
 

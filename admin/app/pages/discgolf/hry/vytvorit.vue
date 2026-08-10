@@ -176,6 +176,7 @@ async function loadRecommendedHandicaps() {
   const client = useSanctumClient();
   await client('/api/admin/discgolf/stats/courses', {
     method: 'GET',
+    query: { include_hidden: 1 },
     headers: headers(),
   })
     .then((res: any) => {

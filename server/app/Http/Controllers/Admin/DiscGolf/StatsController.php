@@ -54,11 +54,14 @@ class StatsController extends Controller
     public function courses(Request $request): JsonResponse
     {
         $siteId = $this->handleSite($request->header('X-Site-Hash'));
+        $includeHidden = $request->boolean('include_hidden');
 
         $games = $this->loadGames($siteId);
 
         // Group games by course NAME (so a custom one-off with the same name as a
-        // real course merges into one table).
+        // real course merges into one table). Every player's games are collected
+        // here — including include_in_stats=false ones — so the handicap keeps
+        // being computed for them in the background even while hidden from tables.
         $courses = [];
         foreach ($games as $game) {
             $name = $game->course_name ?? '—';
@@ -69,14 +72,16 @@ class StatsController extends Controller
                     'course_name' => $name,
                     'byPlayer' => [],
                     'names' => [],
+                    'includeInStats' => [],
                 ];
             }
             foreach ($game->players as $gp) {
-                if (! $gp->player || ! $gp->player->include_in_stats) {
+                if (! $gp->player) {
                     continue;
                 }
                 $courses[$key]['byPlayer'][$gp->player_id][] = $this->result($game, $gp);
-                $courses[$key]['names'][$gp->player_id] = $gp->player?->name;
+                $courses[$key]['names'][$gp->player_id] = $gp->player->name;
+                $courses[$key]['includeInStats'][$gp->player_id] = (bool) $gp->player->include_in_stats;
             }
         }
 
@@ -84,6 +89,9 @@ class StatsController extends Controller
         foreach ($courses as $course) {
             $rows = [];
             foreach ($course['byPlayer'] as $playerId => $results) {
+                if (! $includeHidden && ! ($course['includeInStats'][$playerId] ?? true)) {
+                    continue;
+                }
                 $stats = $this->computeStats($results);
                 $stats['recommended_handicap'] = $this->recommendedHandicap($results);
                 $rows[] = array_merge([
