@@ -517,6 +517,11 @@ export const menuSections: MenuSectionDef[] = [
             current: false,
           },
           {
+            name: 'Nástěnka',
+            link: '/kontakty/nastenka',
+            current: false,
+          },
+          {
             name: 'Seznamy kontaktů',
             link: '/kontakty/seznamy',
             current: false,

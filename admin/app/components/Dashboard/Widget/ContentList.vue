@@ -14,6 +14,7 @@ const props = withDefaults(
     enums?: Record<string, Record<string | number, string>>;
     actions?: any[];
     dateField?: string;
+    orderWay?: string;
     permissionSlug?: string;
     paginate?: boolean;
     dataKey?: string;
@@ -23,6 +24,7 @@ const props = withDefaults(
     enums: () => ({}),
     actions: () => [{ type: 'edit' }],
     dateField: 'updated_at',
+    orderWay: 'desc',
     permissionSlug: '',
     paginate: true,
     dataKey: '',
@@ -61,7 +63,7 @@ async function loadItems() {
   const client = useSanctumClient();
 
   const query: Record<string, any> = props.paginate
-    ? { paginate: 5, page: 1, orderBy: orderBy.value, orderWay: 'desc' }
+    ? { paginate: 5, page: 1, orderBy: orderBy.value, orderWay: props.orderWay }
     : {};
 
   try {

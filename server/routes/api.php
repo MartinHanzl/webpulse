@@ -26,6 +26,8 @@ use App\Http\Controllers\Admin\Cashflow\CashflowCategoryController;
 use App\Http\Controllers\Admin\Cashflow\CashflowController;
 use App\Http\Controllers\Admin\Changelog\ChangelogController;
 use App\Http\Controllers\Admin\Client\ClientController;
+use App\Http\Controllers\Admin\Contact\ContactBoardCardController;
+use App\Http\Controllers\Admin\Contact\ContactBoardSectionController;
 use App\Http\Controllers\Admin\Contact\ContactController;
 use App\Http\Controllers\Admin\Contact\ContactListController;
 use App\Http\Controllers\Admin\Contact\ContactPhaseController;
@@ -521,6 +523,30 @@ Route::group([
                 Route::get('{id}', [ContactListController::class, 'show'])->where('id', '[0-9]+');
                 Route::post('{id?}', [ContactListController::class, 'store']);
                 Route::delete('{id}', [ContactListController::class, 'destroy'])->where('id', '[0-9]+');
+            });
+
+            // Contact board routes (Trello-like nástěnka)
+            Route::group([
+                'prefix' => 'board',
+            ], function () {
+                Route::group([
+                    'prefix' => 'section',
+                ], function () {
+                    Route::post('reorder', [ContactBoardSectionController::class, 'reorder']);
+                    Route::get('', [ContactBoardSectionController::class, 'index']);
+                    Route::post('{id?}', [ContactBoardSectionController::class, 'store']);
+                    Route::delete('{id}', [ContactBoardSectionController::class, 'destroy'])->where('id', '[0-9]+');
+                });
+
+                Route::group([
+                    'prefix' => 'card',
+                ], function () {
+                    Route::post('reorder', [ContactBoardCardController::class, 'reorder']);
+                    Route::get('', [ContactBoardCardController::class, 'index']);
+                    Route::get('{id}', [ContactBoardCardController::class, 'show'])->where('id', '[0-9]+');
+                    Route::post('{id?}', [ContactBoardCardController::class, 'store']);
+                    Route::delete('{id}', [ContactBoardCardController::class, 'destroy'])->where('id', '[0-9]+');
+                });
             });
 
             Route::get('', [ContactController::class, 'index']);
