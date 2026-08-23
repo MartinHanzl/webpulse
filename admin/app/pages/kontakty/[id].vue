@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { Form } from 'vee-validate';
 import {
   CheckCircleIcon,
@@ -38,6 +38,25 @@ const tabs = ref([
 const historyDialog = ref({
   open: false,
   item: null,
+});
+
+type TimelineEntryData = { id: number; created_at?: string | null } & Record<string, unknown>;
+
+const timelineItems = computed(() => {
+  const historyEntries = ((item.value.history || []) as TimelineEntryData[]).map((entry) => ({
+    kind: 'history' as const,
+    date: entry.created_at,
+    data: entry,
+  }));
+  const boardCardEntries = ((item.value.board_cards || []) as TimelineEntryData[]).map((entry) => ({
+    kind: 'board_card' as const,
+    date: entry.created_at,
+    data: entry,
+  }));
+
+  return [...historyEntries, ...boardCardEntries].sort(
+    (a, b) => new Date(b.date ?? 0).getTime() - new Date(a.date ?? 0).getTime(),
+  );
 });
 
 const breadcrumbs = ref([
@@ -85,6 +104,7 @@ const item = ref({
   formatted_last_contacted_at: '' as string,
   contact_id: null as number | null,
   history: [] as [],
+  board_cards: [] as [],
   contacts: [] as [],
   interests: [] as [],
   parent_contact: {
@@ -524,6 +544,10 @@ function editHistoryItem(history) {
   historyDialog.value.open = true;
 }
 
+function setLastContactedAt(date: string) {
+  item.value.formatted_last_contacted_at = date;
+}
+
 useHead({
   title: pageTitle.value,
 });
@@ -763,6 +787,17 @@ definePageMeta({
                     label="Naposledy kontaktováno"
                     name="last_contacted_at"
                   />
+                  <BaseButton
+                    type="button"
+                    @click="
+                      setLastContactedAt(
+                        new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
+                          .toISOString()
+                          .slice(0, 16),
+                      )
+                    "
+                    >Teď</BaseButton
+                  >
                 </div>
               </div>
             </LayoutContainer>
@@ -845,13 +880,15 @@ definePageMeta({
 
           <div class="relative px-4">
             <ol class="relative ml-4 space-y-10 border-s-2 border-slate-200">
-              <ContactHistoryCard
-                v-for="(history, index) in item.history"
-                :key="index"
-                :history="history"
-                @edit-history="editHistoryItem(history)"
-                @delete-item="deleteHistoryItem(history)"
-              />
+              <template v-for="(entry, index) in timelineItems" :key="index">
+                <ContactHistoryCard
+                  v-if="entry.kind === 'history'"
+                  :history="entry.data"
+                  @edit-history="editHistoryItem(entry.data)"
+                  @delete-item="deleteHistoryItem(entry.data)"
+                />
+                <ContactBoardCardHistoryItem v-else :card="entry.data" />
+              </template>
             </ol>
           </div>
         </LayoutContainer>

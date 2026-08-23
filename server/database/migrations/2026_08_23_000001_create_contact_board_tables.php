@@ -12,7 +12,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('name');
-            $table->string('color')->default('#6366f1');
+            $table->string('color')->default('indigo');
             $table->unsignedInteger('position')->default(0);
             $table->timestamps();
 

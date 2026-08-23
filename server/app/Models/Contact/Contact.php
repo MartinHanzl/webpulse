@@ -72,6 +72,11 @@ class Contact extends Model
         return $this->hasMany(ContactHistory::class, 'contact_id', 'id');
     }
 
+    public function boardCards()
+    {
+        return $this->hasMany(ContactBoardCard::class, 'contact_id', 'id');
+    }
+
     public function tasks()
     {
         return $this->belongsToMany(ContactTask::class, 'contacts_has_tasks', 'contact_id', 'contact_task_id');

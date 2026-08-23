@@ -38,6 +38,7 @@ class ContactResource extends JsonResource
             'phase' => ContactPhaseResource::make($this->phase),
             'tasks' => ContactTaskResource::collection($this->tasks),
             'history' => ContactHistoryResource::collection($this->histories),
+            'board_cards' => ContactBoardCardResource::collection($this->boardCards),
             'contacts' => [
                 'data' => ContactSimpleResource::collection($this->contacts),
             ],

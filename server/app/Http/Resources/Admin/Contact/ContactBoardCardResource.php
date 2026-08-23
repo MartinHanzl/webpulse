@@ -28,6 +28,11 @@ class ContactBoardCardResource extends JsonResource
             'contact_name' => $this->contact
                 ? trim($this->contact->firstname.' '.$this->contact->lastname)
                 : null,
+            'section' => $this->whenLoaded('section', fn () => $this->section ? [
+                'id' => $this->section->id,
+                'name' => $this->section->name,
+                'color' => $this->section->color,
+            ] : null),
             'created_at' => $this->created_at?->format('Y-m-d H:i:s'),
         ];
     }

@@ -37,6 +37,36 @@ const priorityColors: Record<string, string> = {
   low: 'bg-blue-100 text-blue-600',
 };
 
+// Mapování na Tailwind třídy (stejný vzor jako Props/Badge.vue) — BaseFormColorPicker
+// vrací název Tailwind barvy (např. "indigo"), ne hex kód, takže třídy musí být literální.
+const sectionColorClasses: Record<string, { bg: string; dot: string }> = {
+  red: { bg: 'bg-red-50', dot: 'bg-red-500' },
+  orange: { bg: 'bg-orange-50', dot: 'bg-orange-500' },
+  yellow: { bg: 'bg-yellow-50', dot: 'bg-yellow-500' },
+  lime: { bg: 'bg-lime-50', dot: 'bg-lime-500' },
+  green: { bg: 'bg-green-50', dot: 'bg-green-500' },
+  emerald: { bg: 'bg-emerald-50', dot: 'bg-emerald-500' },
+  teal: { bg: 'bg-teal-50', dot: 'bg-teal-500' },
+  cyan: { bg: 'bg-cyan-50', dot: 'bg-cyan-500' },
+  sky: { bg: 'bg-sky-50', dot: 'bg-sky-500' },
+  blue: { bg: 'bg-blue-50', dot: 'bg-blue-500' },
+  indigo: { bg: 'bg-indigo-50', dot: 'bg-indigo-500' },
+  violet: { bg: 'bg-violet-50', dot: 'bg-violet-500' },
+  purple: { bg: 'bg-purple-50', dot: 'bg-purple-500' },
+  fuchsia: { bg: 'bg-fuchsia-50', dot: 'bg-fuchsia-500' },
+  pink: { bg: 'bg-pink-50', dot: 'bg-pink-500' },
+  rose: { bg: 'bg-rose-50', dot: 'bg-rose-500' },
+  slate: { bg: 'bg-slate-100', dot: 'bg-slate-500' },
+  gray: { bg: 'bg-gray-100', dot: 'bg-gray-500' },
+  zinc: { bg: 'bg-zinc-100', dot: 'bg-zinc-500' },
+  stone: { bg: 'bg-stone-100', dot: 'bg-stone-500' },
+  neutral: { bg: 'bg-neutral-100', dot: 'bg-neutral-500' },
+};
+
+function sectionColorClass(color: string, variant: 'bg' | 'dot') {
+  return (sectionColorClasses[color] || sectionColorClasses.slate)[variant];
+}
+
 // ─── Load ──────────────────────────────────────────────────
 
 async function loadSections() {
@@ -64,10 +94,10 @@ async function loadSections() {
 // ─── Sections CRUD + reorder ───────────────────────────────
 
 const showSectionDialog = ref(false);
-const editingSection = ref({ id: null as number | null, name: '', color: '#6366f1' });
+const editingSection = ref({ id: null as number | null, name: '', color: 'indigo' });
 
 function openNewSection() {
-  editingSection.value = { id: null, name: '', color: '#6366f1' };
+  editingSection.value = { id: null, name: '', color: 'indigo' };
   showSectionDialog.value = true;
 }
 
@@ -294,7 +324,10 @@ definePageMeta({ middleware: 'sanctum:auth' });
       @end="persistSectionOrder"
     >
       <template #item="{ element: section }">
-        <div class="flex w-80 shrink-0 flex-col rounded-2xl bg-slate-100/70 p-3">
+        <div
+          class="flex w-80 shrink-0 flex-col rounded-2xl p-3"
+          :class="sectionColorClass(section.color, 'bg')"
+        >
           <!-- Section header -->
           <div class="mb-3 flex items-center justify-between gap-2 px-1">
             <div class="flex min-w-0 items-center gap-2">
@@ -303,7 +336,7 @@ definePageMeta({ middleware: 'sanctum:auth' });
               />
               <span
                 class="size-2.5 shrink-0 rounded-full"
-                :style="{ backgroundColor: section.color }"
+                :class="sectionColorClass(section.color, 'dot')"
               />
               <span class="truncate text-sm font-bold text-slate-900">{{ section.name }}</span>
               <span
