@@ -220,10 +220,10 @@ async function openCard(card: any) {
 }
 
 async function saveCard() {
-  if (!selectedCard.value?.title || !selectedCard.value?.contact_id) {
+  if (!selectedCard.value?.title) {
     $toast.show({
       summary: 'Chybí údaje',
-      detail: 'Vyplňte nadpis a přiřazený kontakt.',
+      detail: 'Vyplňte nadpis karty.',
       severity: 'warn',
     });
     return;

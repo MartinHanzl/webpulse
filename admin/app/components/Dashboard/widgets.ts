@@ -18,6 +18,7 @@ import {
 import DashboardWidgetContentList from './Widget/ContentList.vue';
 import DashboardWidgetChangelog from './Widget/Changelog.vue';
 import DashboardWidgetDiscGolfGames from './Widget/DiscGolfGames.vue';
+import DashboardWidgetContactBoard from './Widget/ContactBoard.vue';
 
 export type WidgetSize = 'half' | 'full';
 
@@ -382,35 +383,15 @@ export const availableWidgets: WidgetDefinition[] = [
     key: 'contact_board_cards',
     title: 'Nástěnka kontaktů',
     icon: ClipboardDocumentListIcon,
-    component: markRaw(DashboardWidgetContentList),
+    component: markRaw(DashboardWidgetContactBoard),
     props: {
-      endpoint: '/api/admin/contact/board/card',
+      endpoint: '/api/admin/contact/board/section',
       link: '/kontakty/nastenka',
       color: 'violet',
-      emptyLabel: 'Žádné karty s termínem splnění',
-      dateField: 'due_date',
-      orderWay: 'asc',
-      actions: [],
-      columns: [
-        { key: 'title', name: 'Karta', type: 'text' },
-        { key: 'contact_name', name: 'Kontakt', type: 'text' },
-        { key: 'due_date', name: 'Termín', type: 'date' },
-        {
-          key: 'priority',
-          name: 'Priorita',
-          type: 'mapped',
-          map: {
-            low: { label: 'Nízká', class: 'bg-blue-100 text-blue-600' },
-            medium: { label: 'Střední', class: 'bg-slate-100 text-slate-600' },
-            high: { label: 'Vysoká', class: 'bg-orange-100 text-orange-700' },
-            critical: { label: 'Kritická', class: 'bg-red-100 text-red-700' },
-          },
-        },
-      ],
     },
     permissionSlug: 'contacts',
     defaultPosition: 15,
-    defaultSize: 'half',
+    defaultSize: 'full',
     defaultEnabled: true,
   },
   {

@@ -3,6 +3,7 @@ import { computed, ref } from 'vue';
 import { Form } from 'vee-validate';
 import {
   CheckCircleIcon,
+  ClipboardDocumentListIcon,
   HeartIcon,
   IdentificationIcon,
   PlusIcon,
@@ -39,6 +40,8 @@ const historyDialog = ref({
   open: false,
   item: null,
 });
+
+const showCreateBoardCardDialog = ref(false);
 
 type TimelineEntryData = { id: number; created_at?: string | null } & Record<string, unknown>;
 
@@ -867,19 +870,30 @@ definePageMeta({
                 Chronologický přehled všech interakcí a změn fází.
               </p>
             </div>
-            <BaseButton
-              variant="primary"
-              size="xl"
-              type="button"
-              class="shadow-lg shadow-indigo-100"
-              @click="
-                historyDialog.item = {};
-                historyDialog.open = true;
-              "
-            >
-              <PlusIcon class="mr-2 size-5" />
-              Nový záznam
-            </BaseButton>
+            <div class="flex items-center gap-3">
+              <BaseButton
+                variant="secondary"
+                size="xl"
+                type="button"
+                @click="showCreateBoardCardDialog = true"
+              >
+                <ClipboardDocumentListIcon class="mr-2 size-5" />
+                Vytvořit kartičku
+              </BaseButton>
+              <BaseButton
+                variant="primary"
+                size="xl"
+                type="button"
+                class="shadow-lg shadow-indigo-100"
+                @click="
+                  historyDialog.item = {};
+                  historyDialog.open = true;
+                "
+              >
+                <PlusIcon class="mr-2 size-5" />
+                Nový záznam
+              </BaseButton>
+            </div>
           </div>
 
           <div class="relative px-4">
@@ -902,6 +916,12 @@ definePageMeta({
           v-model:item="historyDialog.item"
           :phases="phases"
           @save-item="saveHistoryItem"
+        />
+
+        <ContactBoardCardCreateDialog
+          v-model:show="showCreateBoardCardDialog"
+          :contact-id="item.id"
+          @created="loadItem"
         />
       </template>
 

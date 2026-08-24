@@ -73,7 +73,7 @@ class ContactBoardCardController extends Controller
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'contact_board_section_id' => 'required|integer|exists:contact_board_sections,id',
-            'contact_id' => 'required|integer|exists:contacts,id',
+            'contact_id' => 'nullable|integer|exists:contacts,id',
             'description' => 'nullable|string',
             'note' => 'nullable|string',
             'priority' => 'nullable|in:low,medium,high,critical',
@@ -92,12 +92,14 @@ class ContactBoardCardController extends Controller
             return Response::json(['message' => 'Sekce nenalezena.'], 422);
         }
 
-        $contact = Contact::where('user_id', $request->user()->id)
-            ->where('id', $request->get('contact_id'))
-            ->first();
+        if ($request->filled('contact_id')) {
+            $contact = Contact::where('user_id', $request->user()->id)
+                ->where('id', $request->get('contact_id'))
+                ->first();
 
-        if (! $contact) {
-            return Response::json(['message' => 'Kontakt nenalezen.'], 422);
+            if (! $contact) {
+                return Response::json(['message' => 'Kontakt nenalezen.'], 422);
+            }
         }
 
         try {
@@ -111,7 +113,13 @@ class ContactBoardCardController extends Controller
             ]));
             $card->user_id = $request->user()->id;
 
-            if (! $card->exists || $sectionChanged) {
+            if (! $card->exists && $request->boolean('pin_to_top')) {
+                // Zamkne řádek sekce, aby se souběžné vytvoření karty v téže sekci serializovalo
+                // (increment() sám o sobě nic nezamkne, pokud je sekce prázdná).
+                ContactBoardSection::where('id', $card->contact_board_section_id)->lockForUpdate()->first();
+                ContactBoardCard::where('contact_board_section_id', $card->contact_board_section_id)->increment('position');
+                $card->position = 0;
+            } elseif (! $card->exists || $sectionChanged) {
                 $card->position = (int) ContactBoardCard::where('contact_board_section_id', $card->contact_board_section_id)->max('position') + 1;
             }
 

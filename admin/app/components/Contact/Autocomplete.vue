@@ -13,7 +13,8 @@ import { debounce } from 'lodash';
 
 const model = defineModel({
   type: Number,
-  required: true,
+  required: false,
+  default: null,
 });
 
 const props = defineProps({
@@ -30,6 +31,7 @@ const props = defineProps({
   contactOptions: {
     type: Object,
     required: false,
+    default: () => ({ id: null, firstname: '', lastname: '' }),
   },
 });
 const { $toast } = useNuxtApp();
@@ -129,6 +131,19 @@ const selectedContact = computed(() => {
           <ComboboxOptions
             class="absolute z-50 mt-2 max-h-60 w-full overflow-auto rounded-2xl bg-white p-1.5 text-base shadow-xl shadow-slate-200/50 ring-1 ring-slate-200 focus:outline-none sm:text-sm"
           >
+            <ComboboxOption v-slot="{ selected, active }" as="template" :value="null">
+              <li
+                :class="[
+                  active ? 'bg-indigo-50 text-indigo-700' : 'text-slate-500',
+                  'relative cursor-pointer select-none rounded-xl py-2.5 pl-4 pr-4 italic transition-colors duration-150',
+                ]"
+              >
+                <span :class="[selected ? 'font-bold text-indigo-700' : 'font-medium', 'block truncate']">
+                  Bez kontaktu
+                </span>
+              </li>
+            </ComboboxOption>
+
             <div
               v-if="contacts.length === 0"
               class="relative cursor-default select-none px-4 py-3 text-center text-sm font-medium text-slate-500"

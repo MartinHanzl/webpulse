@@ -19,6 +19,8 @@ import {
   XMarkIcon,
   ArrowTopRightOnSquareIcon,
   ChevronRightIcon,
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
 } from '@heroicons/vue/24/outline';
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 import { menuSections } from '~/components/Layout/navigation';
@@ -42,6 +44,19 @@ const router = useRouter();
 const user = useSanctumUser();
 const { logout, refreshIdentity } = useSanctumAuth();
 const sidebarOpen = ref(false);
+
+const sidebarCollapsed = ref(
+  import.meta.client ? localStorage.getItem('sidebarCollapsed') === '1' : false,
+);
+const sidebarHovered = ref(false);
+const isSidebarExpanded = computed(() => !sidebarCollapsed.value || sidebarHovered.value);
+
+function toggleSidebarCollapsed() {
+  sidebarCollapsed.value = !sidebarCollapsed.value;
+  if (import.meta.client) {
+    localStorage.setItem('sidebarCollapsed', sidebarCollapsed.value ? '1' : '0');
+  }
+}
 
 const searchString = ref('');
 provide('searchString', searchString);
@@ -385,36 +400,63 @@ onMounted(() => {
       </Dialog>
     </TransitionRoot>
 
-    <div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+    <div
+      class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col lg:transition-all lg:duration-200"
+      :class="isSidebarExpanded ? 'lg:w-72' : 'lg:w-20'"
+      @mouseenter="sidebarCollapsed && (sidebarHovered = true)"
+      @mouseleave="sidebarHovered = false"
+    >
       <div
-        class="flex grow flex-col gap-y-6 overflow-y-auto bg-zinc-950 px-6 pb-6 shadow-2xl ring-1 ring-white/5"
+        class="flex grow flex-col gap-y-6 overflow-y-auto bg-zinc-950 pb-6 shadow-2xl ring-1 ring-white/5"
+        :class="isSidebarExpanded ? 'px-6' : 'px-3'"
       >
-        <div class="flex h-32 shrink-0 items-center justify-center border-b border-white/5">
+        <div
+          class="relative flex h-32 shrink-0 items-center justify-center border-b border-white/5"
+        >
           <NuxtLink
             :to="selectedSiteUrl"
             target="_blank"
             class="transition-transform hover:scale-105"
           >
-            <img class="h-16 w-auto" src="/static/img/logo-gray-300.png" alt="Your Company" />
+            <img
+              v-if="isSidebarExpanded"
+              class="h-16 w-auto"
+              src="/static/img/logo-gray-300.png"
+              alt="Your Company"
+            />
+            <img
+              v-else
+              class="size-10"
+              src="/static/img/icon/logo-gray-300.png"
+              alt="Your Company"
+            />
           </NuxtLink>
         </div>
 
         <nav class="mt-2 flex flex-1 flex-col">
           <ul role="list" class="flex flex-1 flex-col gap-y-8">
             <li v-for="(group, index) in filteredNavigation" :key="index">
-              <div class="mb-3 text-[11px] font-bold uppercase tracking-widest text-zinc-500">
+              <div
+                v-if="isSidebarExpanded"
+                class="mb-3 text-[11px] font-bold uppercase tracking-widest text-zinc-500"
+              >
                 {{ group.title }}
+              </div>
+              <div v-else class="mb-3 flex justify-center">
+                <span class="h-px w-6 bg-white/10" />
               </div>
               <ul role="list" class="-mx-2 space-y-1.5">
                 <li v-for="(item, key) in group.menu" :key="key">
                   <NuxtLink
                     v-if="isMenuItemVisible(item) && !item.submenu"
                     :to="item.link"
+                    :title="isSidebarExpanded ? undefined : item.name"
                     :class="[
                       item.current
                         ? 'bg-zinc-800 text-white shadow-sm ring-1 ring-white/10'
                         : 'text-zinc-400 hover:bg-zinc-800/50 hover:text-white',
-                      'group flex items-center gap-x-3 rounded-xl p-2.5 text-sm font-medium transition-all duration-200',
+                      isSidebarExpanded ? 'gap-x-3 p-2.5' : 'justify-center p-2.5',
+                      'group flex items-center rounded-xl text-sm font-medium transition-all duration-200',
                     ]"
                   >
                     <component
@@ -425,7 +467,7 @@ onMounted(() => {
                       ]"
                       aria-hidden="true"
                     />
-                    <span class="truncate">{{ item.name }}</span>
+                    <span v-if="isSidebarExpanded" class="truncate">{{ item.name }}</span>
                   </NuxtLink>
 
                   <Disclosure
@@ -435,11 +477,15 @@ onMounted(() => {
                     class="w-full"
                   >
                     <DisclosureButton
+                      :title="isSidebarExpanded ? undefined : item.name"
                       :class="[
                         item.current
                           ? 'bg-zinc-800 text-white shadow-sm ring-1 ring-white/10'
                           : 'text-zinc-400 hover:bg-zinc-800/50 hover:text-white',
-                        'group flex w-full items-center justify-between gap-x-3 rounded-xl p-2.5 text-sm font-medium transition-all duration-200',
+                        isSidebarExpanded
+                          ? 'justify-between gap-x-3 p-2.5'
+                          : 'justify-center p-2.5',
+                        'group flex w-full items-center rounded-xl text-sm font-medium transition-all duration-200',
                       ]"
                     >
                       <div class="flex items-center gap-x-3">
@@ -451,9 +497,10 @@ onMounted(() => {
                           ]"
                           aria-hidden="true"
                         />
-                        {{ item.name }}
+                        <span v-if="isSidebarExpanded">{{ item.name }}</span>
                       </div>
                       <ChevronRightIcon
+                        v-if="isSidebarExpanded"
                         :class="[
                           open ? 'rotate-90 text-white' : 'text-zinc-500 group-hover:text-zinc-300',
                           'size-4 shrink-0 transition-transform duration-200',
@@ -469,7 +516,7 @@ onMounted(() => {
                       leave-from-class="transform scale-100 opacity-100"
                       leave-to-class="transform scale-95 opacity-0"
                     >
-                      <DisclosurePanel as="ul" class="mt-1 px-2">
+                      <DisclosurePanel v-if="isSidebarExpanded" as="ul" class="mt-1 px-2">
                         <li v-for="subItem in item.submenu" :key="subItem.name" class="mt-1">
                           <NuxtLink
                             v-if="subItem.link"
@@ -498,10 +545,35 @@ onMounted(() => {
             </li>
           </ul>
         </nav>
+
+        <div class="shrink-0 border-t border-white/5 pt-3">
+          <button
+            type="button"
+            class="group flex w-full items-center rounded-xl p-2.5 text-sm font-medium text-zinc-400 transition-all duration-200 hover:bg-zinc-800/50 hover:text-white"
+            :class="isSidebarExpanded ? 'justify-start gap-x-3' : 'justify-center'"
+            :title="sidebarCollapsed ? 'Rozbalit menu' : 'Sbalit menu'"
+            @click="toggleSidebarCollapsed"
+          >
+            <ChevronDoubleRightIcon
+              v-if="sidebarCollapsed"
+              class="size-5 shrink-0 text-zinc-500 transition-colors group-hover:text-zinc-300"
+            />
+            <ChevronDoubleLeftIcon
+              v-else
+              class="size-5 shrink-0 text-zinc-500 transition-colors group-hover:text-zinc-300"
+            />
+            <span v-if="isSidebarExpanded">{{
+              sidebarCollapsed ? 'Rozbalit menu' : 'Sbalit menu'
+            }}</span>
+          </button>
+        </div>
       </div>
     </div>
 
-    <div class="flex min-h-screen flex-col lg:pl-72">
+    <div
+      class="flex min-h-screen flex-col transition-all duration-200"
+      :class="sidebarCollapsed ? 'lg:pl-20' : 'lg:pl-72'"
+    >
       <header
         class="no-print sticky top-0 z-40 flex h-20 shrink-0 items-center gap-x-4 border-b border-slate-200 bg-white/80 px-4 shadow-sm backdrop-blur-md transition-all sm:gap-x-6 sm:px-6 lg:px-8"
       >
