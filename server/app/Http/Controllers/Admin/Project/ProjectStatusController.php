@@ -68,7 +68,7 @@ class ProjectStatusController extends Controller
             DB::beginTransaction();
             $status->fill($request->all());
             if (! $status->color) {
-                $status->color = '#6366f1';
+                $status->color = 'indigo';
             }
             $status->save();
 

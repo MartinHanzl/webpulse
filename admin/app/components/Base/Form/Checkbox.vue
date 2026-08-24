@@ -48,7 +48,8 @@ const props = defineProps({
     default: false,
   },
 });
-const badgeClass = computed(() => (color: string) => {
+const badgeClass = computed(() => (colorProp: string) => {
+  const color = (colorProp || '').trim().toLowerCase();
   if (color === 'red') {
     return 'inline-flex items-center rounded-full bg-red-50 px-2 py-1 text-xs font-medium text-red-800 ring-1 ring-inset ring-red-600/20';
   } else if (color === 'orange') {

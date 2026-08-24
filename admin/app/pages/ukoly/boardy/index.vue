@@ -18,7 +18,7 @@ const showForm = ref(false);
 const editingBoard = ref({
   id: null,
   name: '',
-  color: '#6366f1',
+  color: 'indigo',
   is_completed: false,
   position: 0,
   sites: [] as number[],
@@ -47,7 +47,7 @@ function openNew() {
   editingBoard.value = {
     id: null,
     name: '',
-    color: '#6366f1',
+    color: 'indigo',
     is_completed: false,
     position: 0,
     sites: [],

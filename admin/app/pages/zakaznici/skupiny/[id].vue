@@ -23,7 +23,7 @@ const item = ref({
   id: null,
   name: '',
   description: '',
-  color: '#6366f1',
+  color: 'indigo',
   discount_type: null as string | null,
   discount_value: 0,
   discount_currency_id: null,

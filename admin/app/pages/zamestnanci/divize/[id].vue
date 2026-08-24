@@ -23,7 +23,7 @@ const item = ref({
   id: null,
   name: '',
   description: '',
-  color: '#6366f1',
+  color: 'indigo',
   address: '',
   city: '',
   zip: '',

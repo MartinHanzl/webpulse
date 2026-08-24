@@ -19,7 +19,7 @@ const breadcrumbs = ref([
 const item = ref({
   id: null,
   name: '',
-  color: '#6366f1',
+  color: 'indigo',
   start_time: '08:00',
   end_time: '16:00',
   break_minutes: 30,

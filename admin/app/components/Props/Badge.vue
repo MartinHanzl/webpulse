@@ -32,16 +32,32 @@ const colorMap: Record<string, string> = {
   gray: 'bg-gray-50 text-gray-700 ring-gray-600/20',
   zinc: 'bg-zinc-50 text-zinc-700 ring-zinc-600/20',
   stone: 'bg-stone-50 text-stone-700 ring-stone-600/20',
+  neutral: 'bg-neutral-50 text-neutral-700 ring-neutral-600/20',
 };
 
+// Barevná pole v DB byla dřív ukládána jako hex (starý default #6366f1 z formulářů
+// před zavedením BaseFormColorPicker) — pro takovou hodnotu vykreslíme inline styl
+// místo tichého fallbacku na šedou, aby štítek skutečně měl uloženou barvu.
+const isHexColor = computed(() => /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.test(props.color || ''));
+
 const badgeClass = computed(() => {
-  const selectedColor = colorMap[props.color] || colorMap.slate;
+  const normalizedColor = (props.color || '').trim().toLowerCase();
+  const selectedColor = colorMap[normalizedColor] || (isHexColor.value ? '' : colorMap.slate);
   return `inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-bold ring-1 ring-inset ${selectedColor}`;
+});
+
+const badgeStyle = computed(() => {
+  if (!isHexColor.value) return {};
+  return {
+    backgroundColor: `${props.color}1a`,
+    color: props.color,
+    boxShadow: `inset 0 0 0 1px ${props.color}33`,
+  };
 });
 </script>
 
 <template>
-  <span :class="badgeClass">
+  <span :class="badgeClass" :style="badgeStyle">
     <slot />
   </span>
 </template>

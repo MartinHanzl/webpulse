@@ -69,7 +69,7 @@ class TaskBoardController extends Controller
             DB::beginTransaction();
             $board->fill($request->all());
             if (! $board->color) {
-                $board->color = '#6366f1';
+                $board->color = 'indigo';
             }
             $board->save();
 

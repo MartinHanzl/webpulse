@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import { XMarkIcon, CheckCircleIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps<{
@@ -17,7 +17,9 @@ const { $toast } = useNuxtApp();
 const loadingSections = ref(false);
 const saving = ref(false);
 const sections = ref([] as any[]);
-const targetSection = ref(null as any);
+const targetSectionId = ref(null as number | null);
+
+const sectionOptions = computed(() => sections.value.map((s) => ({ value: s.id, name: s.name })));
 
 const form = ref({ title: '', due_date: null as string | null, note: '' });
 
@@ -30,11 +32,11 @@ async function loadSections() {
   })
     .then((r: any) => {
       sections.value = r;
-      targetSection.value = r?.[0] || null;
+      targetSectionId.value = r?.[0]?.id || null;
     })
     .catch(() => {
       sections.value = [];
-      targetSection.value = null;
+      targetSectionId.value = null;
     })
     .finally(() => {
       loadingSections.value = false;
@@ -60,7 +62,7 @@ async function submit() {
     $toast.show({ summary: 'Chybí údaje', detail: 'Vyplňte nadpis kartičky.', severity: 'error' });
     return;
   }
-  if (!targetSection.value) {
+  if (!targetSectionId.value) {
     $toast.show({
       summary: 'Chybí sekce',
       detail: 'Nejdřív vytvořte sekci na nástěnce kontaktů.',
@@ -78,19 +80,27 @@ async function submit() {
       due_date: form.value.due_date,
       note: form.value.note,
       contact_id: props.contactId,
-      contact_board_section_id: targetSection.value.id,
+      contact_board_section_id: targetSectionId.value,
       priority: 'critical',
       pin_to_top: true,
     }),
     headers: { Accept: 'application/json', 'Content-Type': 'application/json' },
   })
     .then(() => {
-      $toast.show({ summary: 'Hotovo', detail: 'Kartička byla vytvořena na nástěnce.', severity: 'success' });
+      $toast.show({
+        summary: 'Hotovo',
+        detail: 'Kartička byla vytvořena na nástěnce.',
+        severity: 'success',
+      });
       emit('created');
       close();
     })
     .catch(() => {
-      $toast.show({ summary: 'Chyba', detail: 'Nepodařilo se vytvořit kartičku.', severity: 'error' });
+      $toast.show({
+        summary: 'Chyba',
+        detail: 'Nepodařilo se vytvořit kartičku.',
+        severity: 'error',
+      });
     })
     .finally(() => {
       saving.value = false;
@@ -116,26 +126,48 @@ async function submit() {
         <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
           <div class="mb-4 flex items-center justify-between">
             <h3 class="text-lg font-bold text-slate-900">Nová kartička na nástěnce</h3>
-            <button type="button" class="rounded-lg p-1 text-slate-400 hover:bg-slate-100" @click="close">
+            <button
+              type="button"
+              class="rounded-lg p-1 text-slate-400 hover:bg-slate-100"
+              @click="close"
+            >
               <XMarkIcon class="size-5" />
             </button>
           </div>
 
           <div class="space-y-4">
-            <BaseFormInput v-model="form.title" label="Nadpis" name="board_card_title" rules="required" />
-            <BaseFormInput v-model="form.due_date" label="Datum splnění" type="date" name="board_card_due_date" />
-            <BaseFormTextarea v-model="form.note" label="Poznámka" name="board_card_note" rows="3" />
+            <BaseFormInput
+              v-model="form.title"
+              label="Nadpis"
+              name="board_card_title"
+              rules="required"
+            />
+            <BaseFormSelect
+              v-model="targetSectionId"
+              label="Sekce"
+              name="board_card_section"
+              :options="sectionOptions"
+              :disabled="loadingSections"
+            />
+            <BaseFormInput
+              v-model="form.due_date"
+              label="Datum splnění"
+              type="date"
+              name="board_card_due_date"
+            />
+            <BaseFormTextarea
+              v-model="form.note"
+              label="Poznámka"
+              name="board_card_note"
+              rows="3"
+            />
 
             <p class="text-xs text-slate-500">
               Priorita:
               <span class="rounded-full bg-red-100 px-2 py-0.5 text-[10px] font-bold text-red-700"
                 >Kritická</span
               >
-              · Sekce:
-              <span class="font-semibold text-slate-700">{{
-                loadingSections ? 'načítám…' : targetSection?.name || 'žádná sekce'
-              }}</span>
-              (bude nahoře)
+              — karta bude v dané sekci nahoře.
             </p>
 
             <div class="flex justify-end gap-3 pt-2">
