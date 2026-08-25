@@ -198,6 +198,47 @@ async function saveBudget(categoryId: number, budget: number) {
     });
 }
 
+async function saveTotalBudget(totalBudget: number, months: number) {
+  const client = useSanctumClient();
+  error.value = false;
+
+  const month = tableQuery.value.month;
+  const year = tableQuery.value.year;
+
+  await client('/api/admin/cashflow/budget/total', {
+    method: 'POST',
+    body: JSON.stringify({
+      totalBudget,
+      months,
+      month,
+      year,
+    }),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(() => {
+      $toast.show({
+        summary: 'Hotovo',
+        detail: 'Celkový budget byl rozpočítán mezi kategorie.',
+        severity: 'success',
+      });
+    })
+    .catch(() => {
+      error.value = true;
+      $toast.show({
+        summary: 'Chyba',
+        detail: 'Nepodařilo se nastavit celkový budget. Zkuste to prosím později.',
+        severity: 'error',
+      });
+    })
+    .finally(() => {
+      loading.value = false;
+      loadItems();
+    });
+}
+
 async function reorderCategories(ids: number[]) {
   const client = useSanctumClient();
   error.value = false;
@@ -347,6 +388,7 @@ definePageMeta({
             @load-items="loadItems"
             @save-day-records="saveDayRecords"
             @save-budget="saveBudget"
+            @save-total-budget="saveTotalBudget"
           />
         </div>
       </div>

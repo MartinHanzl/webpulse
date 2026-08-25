@@ -41,12 +41,19 @@ const cashflowBudgetDialog = ref({
   budget: 0 as number,
 });
 
+const cashflowTotalBudgetDialog = ref({
+  show: false as boolean,
+  totalBudget: 0 as number,
+  months: 3 as number,
+});
+
 const emit = defineEmits([
   'edit-category',
   'reorder-categories',
   'load-items',
   'save-day-records',
   'save-budget',
+  'save-total-budget',
 ]);
 
 const draggedIndex = ref<number | null>(null);
@@ -236,6 +243,20 @@ function summaryMonthlyLeft() {
   return summaryMonthlyBudget() - summaryMonthlySpent();
 }
 
+function summaryMonthlyIncome() {
+  return props.income.reduce((acc: number, cashflow: any) => acc + cashflow.amount, 0);
+}
+
+function monthlyBalance() {
+  return summaryMonthlyIncome() - summaryMonthlySpent();
+}
+
+function openTotalBudgetDialog() {
+  cashflowTotalBudgetDialog.value.totalBudget = summaryMonthlyBudget();
+  cashflowTotalBudgetDialog.value.months = 3;
+  cashflowTotalBudgetDialog.value.show = true;
+}
+
 function markRowColumn(event: MouseEvent) {
   const target = event.currentTarget as HTMLElement;
   const row = target.parentElement as HTMLElement;
@@ -369,9 +390,13 @@ function formatAmount(amount: number) {
                 <tr class="divide-x divide-slate-200 border-t-2 border-slate-200 bg-slate-50/50">
                   <td
                     class="whitespace-nowrap px-3 py-3 text-right text-xs font-bold uppercase tracking-wide text-slate-600"
-                    colspan="2"
                   >
                     Celkem utraceno
+                  </td>
+                  <td
+                    class="whitespace-nowrap px-3 py-3 text-right text-xs font-bold text-emerald-600"
+                  >
+                    {{ formatAmount(summaryMonthlyIncome()) }} Kč
                   </td>
                   <td
                     v-for="(category, index) in categories"
@@ -403,7 +428,9 @@ function formatAmount(amount: number) {
                     {{ formatAmount(monthlyCategoryBudget(category.id)) }} Kč
                   </td>
                   <td
-                    class="whitespace-nowrap px-3 py-3 text-center text-xs font-bold text-slate-500"
+                    class="cursor-pointer whitespace-nowrap px-3 py-3 text-center text-xs font-bold text-slate-500 transition-colors hover:bg-slate-200"
+                    title="Nastavit celkový budget"
+                    @click="openTotalBudgetDialog"
                   >
                     {{ formatAmount(summaryMonthlyBudget()) }} Kč
                   </td>
@@ -430,6 +457,21 @@ function formatAmount(amount: number) {
                     class="whitespace-nowrap bg-indigo-50/50 px-3 py-3 text-center text-xs font-bold text-indigo-600"
                   >
                     {{ formatAmount(summaryMonthlyLeft()) }} Kč
+                  </td>
+                </tr>
+
+                <tr class="divide-x divide-slate-200 border-t-2 border-slate-300 bg-slate-100/60">
+                  <td
+                    class="whitespace-nowrap px-3 py-3 text-right text-xs font-bold uppercase tracking-wide text-slate-600"
+                    :colspan="2 + categories.length"
+                  >
+                    Bilance (příjmy − výdaje)
+                  </td>
+                  <td
+                    class="whitespace-nowrap px-3 py-3 text-center text-xs font-bold"
+                    :class="monthlyBalance() >= 0 ? 'bg-green-100 text-success' : 'bg-red-100 text-danger'"
+                  >
+                    {{ formatAmount(monthlyBalance()) }} Kč
                   </td>
                 </tr>
               </tbody>
@@ -459,8 +501,24 @@ function formatAmount(amount: number) {
       :id="cashflowBudgetDialog.categoryId"
       v-model:show="cashflowBudgetDialog.show"
       v-model:budget="cashflowBudgetDialog.budget"
+      :month="month"
+      :year="year"
       @save-budget="
         emit('save-budget', cashflowBudgetDialog.categoryId, cashflowBudgetDialog.budget)
+      "
+    />
+    <CashflowDialogTotalBudget
+      v-model:show="cashflowTotalBudgetDialog.show"
+      v-model:total-budget="cashflowTotalBudgetDialog.totalBudget"
+      v-model:months="cashflowTotalBudgetDialog.months"
+      :month="month"
+      :year="year"
+      @save-total-budget="
+        emit(
+          'save-total-budget',
+          cashflowTotalBudgetDialog.totalBudget,
+          cashflowTotalBudgetDialog.months,
+        )
       "
     />
   </div>

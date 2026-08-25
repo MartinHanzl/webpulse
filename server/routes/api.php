@@ -6,19 +6,14 @@ use App\Http\Controllers\Admin\Amenity\AmenityController;
 use App\Http\Controllers\Admin\Apartment\ApartmentBlockController;
 use App\Http\Controllers\Admin\Apartment\ApartmentController;
 use App\Http\Controllers\Admin\Apartment\ApartmentTypeController;
-use App\Http\Controllers\Admin\DiscGolf\CourseController;
-use App\Http\Controllers\Admin\DiscGolf\GameController;
-use App\Http\Controllers\Admin\DiscGolf\GameFlowController;
-use App\Http\Controllers\Admin\DiscGolf\PlayerController;
-use App\Http\Controllers\Admin\DiscGolf\StatsController;
 use App\Http\Controllers\Admin\Auth\ForgotPasswordController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use App\Http\Controllers\Admin\Biography\BiographyController;
 use App\Http\Controllers\Admin\Block\BlockController;
-use App\Http\Controllers\Admin\Building\BuildingController;
 use App\Http\Controllers\Admin\Blog\PostCategoryController;
 use App\Http\Controllers\Admin\Blog\PostController;
+use App\Http\Controllers\Admin\Building\BuildingController;
 use App\Http\Controllers\Admin\Career\CareerApplicationController;
 use App\Http\Controllers\Admin\Career\CareerController;
 use App\Http\Controllers\Admin\Cashflow\CashflowBudgetController;
@@ -38,8 +33,15 @@ use App\Http\Controllers\Admin\Country\CountryController;
 use App\Http\Controllers\Admin\Currency\CurrencyController;
 use App\Http\Controllers\Admin\Customer\CustomerController;
 use App\Http\Controllers\Admin\Customer\CustomerGroupController;
+use App\Http\Controllers\Admin\Dashboard\DashboardContactController;
 use App\Http\Controllers\Admin\Dashboard\DashboardWidgetController;
+use App\Http\Controllers\Admin\Dashboard\StatisticsController;
 use App\Http\Controllers\Admin\Demand\DemandController;
+use App\Http\Controllers\Admin\DiscGolf\CourseController;
+use App\Http\Controllers\Admin\DiscGolf\GameController;
+use App\Http\Controllers\Admin\DiscGolf\GameFlowController;
+use App\Http\Controllers\Admin\DiscGolf\PlayerController;
+use App\Http\Controllers\Admin\DiscGolf\StatsController;
 use App\Http\Controllers\Admin\Email\EmailController;
 use App\Http\Controllers\Admin\Employee\EmployeeContractController;
 use App\Http\Controllers\Admin\Employee\EmployeeController;
@@ -52,8 +54,8 @@ use App\Http\Controllers\Admin\Faq\FaqCategoryController;
 use App\Http\Controllers\Admin\Faq\FaqController;
 use App\Http\Controllers\Admin\Filemanager\FilemanagerController as AdminFilemanagerController;
 use App\Http\Controllers\Admin\Food\Allergen\AllergenController;
-use App\Http\Controllers\Admin\Food\Foodstuff\FoodstuffCategoryController;
 use App\Http\Controllers\Admin\Food\CalorieMeasurement\CalorieMeasurementController;
+use App\Http\Controllers\Admin\Food\Foodstuff\FoodstuffCategoryController;
 use App\Http\Controllers\Admin\Food\Foodstuff\FoodstuffController;
 use App\Http\Controllers\Admin\Food\Meal\MealCategoryController;
 use App\Http\Controllers\Admin\Food\Meal\MealController;
@@ -103,9 +105,14 @@ use App\Http\Controllers\Admin\User\TablePreferenceController;
 use App\Http\Controllers\Admin\User\UserController;
 use App\Http\Controllers\Admin\User\UserGroupController;
 use App\Http\Controllers\Admin\Voucher\VoucherController;
+use App\Http\Controllers\Client\Amenity\AmenityController as ClientAmenityController;
+use App\Http\Controllers\Client\Apartment\ApartmentController as ClientApartmentController;
+use App\Http\Controllers\Client\Apartment\ApartmentTypeController as ClientApartmentTypeController;
+use App\Http\Controllers\Client\Apartment\ReservationController as ClientApartmentReservationController;
 use App\Http\Controllers\Client\Block\BlockController as ClientBlockController;
 use App\Http\Controllers\Client\Blog\PostCategoryController as ClientPostCategoryController;
 use App\Http\Controllers\Client\Blog\PostController as ClientPostController;
+use App\Http\Controllers\Client\Building\BuildingController as ClientBuildingController;
 use App\Http\Controllers\Client\Career\CareerApplicationController as ClientCareerApplicationController;
 use App\Http\Controllers\Client\Career\CareerController as ClientCareerController;
 use App\Http\Controllers\Client\Demand\DemandController as ClientDemandController;
@@ -114,29 +121,23 @@ use App\Http\Controllers\Client\Event\EventController as ClientEventController;
 use App\Http\Controllers\Client\Event\EventRegistrationController as ClientEventRegistrationController;
 use App\Http\Controllers\Client\Faq\FaqCategoryController as ClientFaqCategoryController;
 use App\Http\Controllers\Client\Faq\FaqController as ClientFaqController;
-use App\Http\Controllers\Client\Logo\LogoController as ClientLogoController;
-use App\Http\Controllers\Client\Newsletter\NewsletterController as ClientNewsletterController;
-use App\Http\Controllers\Client\Novelty\NoveltyController as ClientNoveltyController;
-use App\Http\Controllers\Client\Page\PageController as ClientPageController;
-use App\Http\Controllers\Client\Quiz\QuizController as ClientQuizController;
-use App\Http\Controllers\Client\Review\ReviewController as ClientReviewController;
-use App\Http\Controllers\Client\Service\ServiceController as ClientServiceController;
-use App\Http\Controllers\Client\Setting\SettingController as ClientSettingController;
-use App\Http\Controllers\Client\Amenity\AmenityController as ClientAmenityController;
-use App\Http\Controllers\Client\Apartment\ApartmentController as ClientApartmentController;
-use App\Http\Controllers\Client\Apartment\ApartmentTypeController as ClientApartmentTypeController;
-use App\Http\Controllers\Client\Apartment\ReservationController as ClientApartmentReservationController;
-use App\Http\Controllers\Client\Building\BuildingController as ClientBuildingController;
 use App\Http\Controllers\Client\Food\Allergen\AllergenController as ClientAllergenController;
 use App\Http\Controllers\Client\Food\Foodstuff\FoodstuffController as ClientFoodstuffController;
 use App\Http\Controllers\Client\Food\Meal\MealController as ClientMealController;
 use App\Http\Controllers\Client\Food\Menu\MenuController as ClientMenuController;
 use App\Http\Controllers\Client\Food\Recipe\RecipeController as ClientRecipeController;
+use App\Http\Controllers\Client\Logo\LogoController as ClientLogoController;
+use App\Http\Controllers\Client\Newsletter\NewsletterController as ClientNewsletterController;
+use App\Http\Controllers\Client\Novelty\NoveltyController as ClientNoveltyController;
+use App\Http\Controllers\Client\Page\PageController as ClientPageController;
 use App\Http\Controllers\Client\PhotoGallery\PhotoGalleryController as ClientPhotoGalleryController;
+use App\Http\Controllers\Client\Quiz\QuizController as ClientQuizController;
 use App\Http\Controllers\Client\Restaurant\ReservationController as ClientRestaurantReservationController;
 use App\Http\Controllers\Client\Restaurant\RestaurantTableController as ClientRestaurantTableController;
+use App\Http\Controllers\Client\Review\ReviewController as ClientReviewController;
 use App\Http\Controllers\Client\Season\SeasonController as ClientSeasonController;
-use App\Http\Controllers\Controller as BaseController;
+use App\Http\Controllers\Client\Service\ServiceController as ClientServiceController;
+use App\Http\Controllers\Client\Setting\SettingController as ClientSettingController;
 use App\Http\Controllers\FilemanagerController;
 use Illuminate\Support\Facades\Route;
 
@@ -599,6 +600,7 @@ Route::group([
             Route::group([
                 'prefix' => 'budget',
             ], function () {
+                Route::post('total', [CashflowBudgetController::class, 'storeTotal']);
                 Route::post('{id?}', [CashflowBudgetController::class, 'store']);
             });
 
@@ -961,8 +963,8 @@ Route::group([
         // Dashboard and statistics routes
         Route::get('dashboard/widget', [DashboardWidgetController::class, 'index']);
         Route::post('dashboard/widget', [DashboardWidgetController::class, 'store']);
-        Route::get('dashboard/contact', [BaseController::class, 'dashboardContact']);
-        Route::get('statistics', [BaseController::class, 'statistics']);
+        Route::get('dashboard/contact', [DashboardContactController::class, 'index']);
+        Route::get('statistics', [StatisticsController::class, 'index']);
 
         // Contract routes
         Route::group([
