@@ -40,7 +40,7 @@ const breadcrumbs = ref([
 const item = ref({
   id: null as number | null,
   name: '' as string,
-  color: '' as string,
+  color: 'red' as string,
 });
 
 async function loadItem() {
@@ -199,7 +199,8 @@ definePageMeta({
               <LayoutTitle class="!mb-0">Definice nového seznamu</LayoutTitle>
             </div>
 
-            <div class="max-w-xl">
+            <div class="w-full grid grid-cols-6 gap-6">
+              <div class="col-span-4">
               <BaseFormInput
                 v-model="item.name"
                 label="Název seznamu"
@@ -207,49 +208,21 @@ definePageMeta({
                 name="name"
                 rules="required|min:3"
                 placeholder="Např. VIP klienti 2026"
+                class="w-full"
               />
               <p class="mt-2 text-sm italic text-slate-400">
                 Název by měl být stručný a výstižný pro snadnou orientaci v CRM.
               </p>
+              </div>
+              <BaseFormColorPicker
+                  v-model="item.color"
+                  label="Barva štítku"
+                  name="color"
+                  class="w-full col-span-2"
+              />
             </div>
           </LayoutContainer>
         </div>
-
-        <aside class="col-span-1 lg:sticky lg:top-8 lg:col-span-3">
-          <LayoutContainer class="!py-6">
-            <div class="mb-6 flex items-center gap-2 text-slate-400">
-              <SwatchIcon class="size-4" />
-              <LayoutTitle class="!mb-0 text-xs uppercase tracking-widest"
-                >Barevné odlišení</LayoutTitle
-              >
-            </div>
-
-            <BaseFormColorPicker
-              v-model="item.color"
-              label="Barva štítku"
-              name="color"
-              class="w-full"
-            />
-
-            <div
-              class="mt-6 flex flex-col items-center justify-center gap-3 rounded-2xl bg-slate-50 p-4 ring-1 ring-inset ring-slate-200"
-            >
-              <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400"
-                >Náhled segmentu</span
-              >
-              <div
-                class="rounded-full px-4 py-1 text-xs font-bold shadow-sm transition-all"
-                :style="{
-                  backgroundColor: item.color + '20',
-                  color: item.color,
-                  border: `1px solid ${item.color}40`,
-                }"
-              >
-                {{ item.name || 'Ukázka názvu' }}
-              </div>
-            </div>
-          </LayoutContainer>
-        </aside>
       </div>
     </Form>
 
