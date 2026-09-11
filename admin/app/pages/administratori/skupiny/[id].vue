@@ -130,6 +130,7 @@ const moduleGroups = ref([
       { slug: 'users', name: 'Administrátoři' },
       { slug: 'sites', name: 'Stránky' },
       { slug: 'filemanagers', name: 'Filemanager' },
+      { slug: 'service_booking_settings', name: 'Nastavení rezervací' },
       { slug: 'settings', name: 'Nastavení' },
       { slug: 'changelogs', name: 'Changelog' },
       { slug: 'activities', name: 'Aktivity' },

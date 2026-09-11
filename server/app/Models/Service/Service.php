@@ -91,4 +91,9 @@ class Service extends Model
     {
         return $this->morphToMany('App\Models\Site\Site', 'siteable');
     }
+
+    public function bookingSetting()
+    {
+        return $this->hasOne(ServiceBookingSetting::class, 'service_id', 'id');
+    }
 }

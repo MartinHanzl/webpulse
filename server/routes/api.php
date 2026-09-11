@@ -89,6 +89,8 @@ use App\Http\Controllers\Admin\Restaurant\ReservationController;
 use App\Http\Controllers\Admin\Restaurant\RestaurantTableController;
 use App\Http\Controllers\Admin\Review\ReviewController;
 use App\Http\Controllers\Admin\Season\SeasonController;
+use App\Http\Controllers\Admin\Service\ServiceBookingController;
+use App\Http\Controllers\Admin\Service\ServiceBookingSettingController;
 use App\Http\Controllers\Admin\Service\ServiceController;
 use App\Http\Controllers\Admin\Setting\SettingController;
 use App\Http\Controllers\Admin\Shift\ShiftController;
@@ -136,6 +138,7 @@ use App\Http\Controllers\Client\Restaurant\ReservationController as ClientRestau
 use App\Http\Controllers\Client\Restaurant\RestaurantTableController as ClientRestaurantTableController;
 use App\Http\Controllers\Client\Review\ReviewController as ClientReviewController;
 use App\Http\Controllers\Client\Season\SeasonController as ClientSeasonController;
+use App\Http\Controllers\Client\Service\ServiceBookingController as ClientServiceBookingController;
 use App\Http\Controllers\Client\Service\ServiceController as ClientServiceController;
 use App\Http\Controllers\Client\Setting\SettingController as ClientSettingController;
 use App\Http\Controllers\FilemanagerController;
@@ -171,6 +174,8 @@ Route::group([
     'prefix' => 'service',
 ], function () {
     Route::get('{lang?}', [ClientServiceController::class, 'index']);
+    Route::get('{id}/booking-slots', [ClientServiceBookingController::class, 'slots'])->where('id', '[0-9]+');
+    Route::post('{id}/booking', [ClientServiceBookingController::class, 'store'])->where('id', '[0-9]+');
     Route::get('{id}/{lang?}', [ClientServiceController::class, 'show'])->where('id', '[0-9]+');
 });
 
@@ -655,6 +660,27 @@ Route::group([
             Route::get('{id}', [ServiceController::class, 'show'])->where('id', '[0-9]+');
             Route::post('{id?}', [ServiceController::class, 'store']);
             Route::delete('{id}', [ServiceController::class, 'destroy'])->where('id', '[0-9]+');
+        });
+
+        // Service booking settings routes
+        Route::group([
+            'prefix' => 'service-booking-setting',
+        ], function () {
+            Route::get('', [ServiceBookingSettingController::class, 'index']);
+            Route::get('{serviceId}', [ServiceBookingSettingController::class, 'show'])->where('serviceId', '[0-9]+');
+            Route::post('{serviceId}', [ServiceBookingSettingController::class, 'store'])->where('serviceId', '[0-9]+');
+            Route::delete('{serviceId}', [ServiceBookingSettingController::class, 'destroy'])->where('serviceId', '[0-9]+');
+        });
+
+        // Service booking routes
+        Route::group([
+            'prefix' => 'service-booking',
+        ], function () {
+            Route::get('', [ServiceBookingController::class, 'index']);
+            Route::get('slots', [ServiceBookingController::class, 'slots']);
+            Route::post('{id?}', [ServiceBookingController::class, 'store']);
+            Route::post('{id}/status', [ServiceBookingController::class, 'updateStatus'])->where('id', '[0-9]+');
+            Route::delete('{id}', [ServiceBookingController::class, 'destroy'])->where('id', '[0-9]+');
         });
 
         // Novelties routes

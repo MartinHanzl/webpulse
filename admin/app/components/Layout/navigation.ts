@@ -136,10 +136,21 @@ export const menuSections: MenuSectionDef[] = [
       {
         key: 'obsah_sluzby',
         name: 'Služby',
-        link: '/obsah/sluzby',
         icon: WrenchScrewdriverIcon,
         current: false,
         slug: 'services',
+        submenu: [
+          {
+            name: 'Přehled',
+            link: '/obsah/sluzby',
+            current: false,
+          },
+          {
+            name: 'Rezervace',
+            link: '/obsah/sluzby/rezervace',
+            current: false,
+          },
+        ],
       },
       {
         key: 'events',
@@ -758,6 +769,14 @@ export const menuSections: MenuSectionDef[] = [
         icon: PhotoIcon,
         current: false,
         slug: 'filemanagers',
+      },
+      {
+        key: 'service_booking_settings',
+        name: 'Nastavení rezervací',
+        link: '/nastaveni/rezervace',
+        icon: ClockIcon,
+        current: false,
+        slug: 'service_booking_settings',
       },
       {
         key: 'settings',
