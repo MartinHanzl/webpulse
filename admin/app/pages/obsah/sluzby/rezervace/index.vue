@@ -7,6 +7,7 @@ import {
   ChatBubbleLeftIcon,
   ArrowsRightLeftIcon,
   XCircleIcon,
+  CheckCircleIcon,
   ClockIcon,
 } from '@heroicons/vue/24/outline';
 import { getCzechHolidays } from '~/composables/useCzechHolidays';
@@ -260,16 +261,11 @@ async function confirmMove() {
     });
 }
 
-async function cancelBooking(booking: any) {
-  const confirmed = window.confirm(
-    `Opravdu chcete zrušit rezervaci ${booking.first_name} ${booking.last_name} (${booking.time_from?.slice(0, 5)})?`,
-  );
-  if (!confirmed) return;
-
+async function updateBookingStatus(booking: any, status: string, errorMsg: string) {
   const client = useSanctumClient();
   await client('/api/admin/service-booking/' + booking.id + '/status', {
     method: 'POST',
-    body: JSON.stringify({ status: 'cancelled' }),
+    body: JSON.stringify({ status }),
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
@@ -277,17 +273,26 @@ async function cancelBooking(booking: any) {
     },
   })
     .then(() => {
-      $toast.show({ summary: 'Hotovo', detail: 'Rezervace byla zrušena.', severity: 'success' });
+      $toast.show({ summary: 'Hotovo', detail: 'Stav rezervace byl změněn.', severity: 'success' });
       loadDayBookings();
       loadMonthBookings();
     })
     .catch(() => {
-      $toast.show({
-        summary: 'Chyba',
-        detail: 'Nepodařilo se zrušit rezervaci.',
-        severity: 'error',
-      });
+      $toast.show({ summary: 'Chyba', detail: errorMsg, severity: 'error' });
     });
+}
+
+async function cancelBooking(booking: any) {
+  const confirmed = window.confirm(
+    `Opravdu chcete zrušit rezervaci ${booking.first_name} ${booking.last_name} (${booking.time_from?.slice(0, 5)})?`,
+  );
+  if (!confirmed) return;
+
+  await updateBookingStatus(booking, 'cancelled', 'Nepodařilo se zrušit rezervaci.');
+}
+
+async function completeBooking(booking: any) {
+  await updateBookingStatus(booking, 'completed', 'Nepodařilo se označit rezervaci jako hotovou.');
 }
 
 watch(selectedSiteHash, () => {
@@ -475,6 +480,15 @@ definePageMeta({ middleware: 'sanctum:auth' });
                 >
                   <ArrowsRightLeftIcon class="size-4" />
                   Přesunout
+                </button>
+                <button
+                  v-if="['pending', 'confirmed'].includes(booking.status)"
+                  type="button"
+                  class="flex items-center gap-1 rounded-lg bg-emerald-100 px-3 py-1.5 text-xs font-medium text-emerald-700 hover:bg-emerald-200"
+                  @click="completeBooking(booking)"
+                >
+                  <CheckCircleIcon class="size-4" />
+                  Hotovo
                 </button>
                 <button
                   v-if="['pending', 'confirmed'].includes(booking.status)"
