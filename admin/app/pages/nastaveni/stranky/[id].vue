@@ -108,6 +108,7 @@ const settings = {
     'faqs',
     'changelogs',
     'filemanagers',
+    'service_booking_settings',
   ],
   default_currency: 1,
   enabled_currencies: [1, 3],
@@ -499,6 +500,7 @@ const moduleGroups = [
       'currencies',
       'tax_rates',
       'trackings',
+      'service_booking_settings',
     ],
   },
 ];

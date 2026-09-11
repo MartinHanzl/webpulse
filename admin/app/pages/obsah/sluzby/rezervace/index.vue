@@ -9,6 +9,7 @@ import {
   XCircleIcon,
   CheckCircleIcon,
   ClockIcon,
+  PlusIcon,
 } from '@heroicons/vue/24/outline';
 import { getCzechHolidays } from '~/composables/useCzechHolidays';
 
@@ -295,13 +296,142 @@ async function completeBooking(booking: any) {
   await updateBookingStatus(booking, 'completed', 'Nepodařilo se označit rezervaci jako hotovou.');
 }
 
+// Add booking modal
+const services = ref<any[]>([]);
+const showAddModal = ref(false);
+const addServiceId = ref<number | string>('');
+const addDate = ref('');
+const addTime = ref('');
+const addSlots = ref<string[]>([]);
+const addFirstName = ref('');
+const addLastName = ref('');
+const addPhone = ref('');
+const addEmail = ref('');
+const addNote = ref('');
+const addLoading = ref(false);
+
+async function loadServices() {
+  const client = useSanctumClient();
+  await client('/api/admin/service', {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Site-Hash': selectedSiteHash.value,
+    },
+  })
+    .then((r) => {
+      services.value = Array.isArray(r) ? r : r?.data || [];
+    })
+    .catch(() => {
+      services.value = [];
+    });
+}
+
+async function loadAddSlots() {
+  if (!addServiceId.value || !addDate.value) {
+    addSlots.value = [];
+    return;
+  }
+  const client = useSanctumClient();
+  await client('/api/admin/service-booking/slots', {
+    method: 'GET',
+    query: { service_id: addServiceId.value, date: addDate.value },
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Site-Hash': selectedSiteHash.value,
+    },
+  })
+    .then((r) => {
+      addSlots.value = Array.isArray(r) ? r : [];
+    })
+    .catch(() => {
+      addSlots.value = [];
+    });
+}
+
+watch([addServiceId, addDate], () => {
+  addTime.value = '';
+  loadAddSlots();
+});
+
+function openAddModal() {
+  addServiceId.value = services.value[0]?.id ?? '';
+  addDate.value = selectedDate.value;
+  addTime.value = '';
+  addSlots.value = [];
+  addFirstName.value = '';
+  addLastName.value = '';
+  addPhone.value = '';
+  addEmail.value = '';
+  addNote.value = '';
+  showAddModal.value = true;
+  loadAddSlots();
+}
+
+async function confirmAdd() {
+  if (!addServiceId.value) {
+    $toast.show({ summary: 'Chyba', detail: 'Vyberte prosím službu.', severity: 'error' });
+    return;
+  }
+  if (!addTime.value) {
+    $toast.show({ summary: 'Chyba', detail: 'Vyberte prosím volný čas.', severity: 'error' });
+    return;
+  }
+  if (!addFirstName.value || !addLastName.value || !addPhone.value) {
+    $toast.show({
+      summary: 'Chyba',
+      detail: 'Vyplňte prosím jméno, příjmení a telefon.',
+      severity: 'error',
+    });
+    return;
+  }
+
+  addLoading.value = true;
+  const client = useSanctumClient();
+  await client('/api/admin/service-booking', {
+    method: 'POST',
+    body: JSON.stringify({
+      service_id: addServiceId.value,
+      date: addDate.value,
+      time_from: addTime.value,
+      first_name: addFirstName.value,
+      last_name: addLastName.value,
+      phone: addPhone.value,
+      email: addEmail.value || null,
+      note: addNote.value || null,
+    }),
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Site-Hash': selectedSiteHash.value,
+    },
+  })
+    .then(() => {
+      $toast.show({ summary: 'Hotovo', detail: 'Rezervace byla vytvořena.', severity: 'success' });
+      showAddModal.value = false;
+      loadDayBookings();
+      loadMonthBookings();
+    })
+    .catch((e) => {
+      const msg = e?.data?.message || 'Nepodařilo se vytvořit rezervaci.';
+      $toast.show({ summary: 'Chyba', detail: msg, severity: 'error' });
+    })
+    .finally(() => {
+      addLoading.value = false;
+    });
+}
+
 watch(selectedSiteHash, () => {
+  loadServices();
   loadMonthBookings();
   loadDayBookings();
 });
 
 useHead({ title: pageTitle.value });
 onMounted(() => {
+  loadServices();
   loadMonthBookings();
   loadDayBookings();
 });
@@ -393,7 +523,17 @@ definePageMeta({ middleware: 'sanctum:auth' });
       <!-- Day detail -->
       <div class="space-y-4">
         <LayoutContainer class="!py-4">
-          <h2 class="text-lg font-bold text-slate-900">Rezervace — {{ selectedDateFormatted }}</h2>
+          <div class="flex items-center justify-between gap-2">
+            <h2 class="text-lg font-bold text-slate-900">Rezervace — {{ selectedDateFormatted }}</h2>
+            <button
+              type="button"
+              class="flex shrink-0 items-center gap-1 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-500"
+              @click="openAddModal"
+            >
+              <PlusIcon class="size-4" />
+              Přidat rezervaci
+            </button>
+          </div>
         </LayoutContainer>
 
         <div v-if="dayLoading" class="flex items-center justify-center py-12">
@@ -560,6 +700,89 @@ definePageMeta({ middleware: 'sanctum:auth' });
                   @click="confirmMove"
                 >
                   Potvrdit přesun
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
+
+    <!-- Add booking modal -->
+    <Teleport to="body">
+      <Transition
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="opacity-0"
+        enter-to-class="opacity-100"
+        leave-active-class="transition duration-150 ease-in"
+        leave-from-class="opacity-100"
+        leave-to-class="opacity-0"
+      >
+        <div
+          v-if="showAddModal"
+          class="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+          @click.self="showAddModal = false"
+        >
+          <div class="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl">
+            <h3 class="mb-4 text-lg font-bold text-slate-900">Přidat rezervaci</h3>
+
+            <div class="space-y-4">
+              <div>
+                <label class="mb-1 block text-xs font-medium text-slate-700">Služba</label>
+                <select
+                  v-model="addServiceId"
+                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                >
+                  <option value="" disabled>-- Vyberte službu --</option>
+                  <option v-for="service in services" :key="service.id" :value="service.id">
+                    {{ service.name }}
+                  </option>
+                </select>
+              </div>
+
+              <BaseFormInput v-model="addDate" label="Datum" type="date" name="add_date" />
+
+              <div>
+                <label class="mb-1 block text-xs font-medium text-slate-700">Volný čas</label>
+                <select
+                  v-model="addTime"
+                  class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-indigo-500"
+                >
+                  <option value="" disabled>-- Vyberte čas --</option>
+                  <option v-for="slot in addSlots" :key="slot" :value="slot">{{ slot }}</option>
+                </select>
+                <p v-if="!addSlots.length" class="mt-1 text-xs text-slate-400">
+                  Pro vybranou službu a den nejsou dostupné žádné volné časy.
+                </p>
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <BaseFormInput v-model="addFirstName" label="Jméno" name="add_first_name" />
+                <BaseFormInput v-model="addLastName" label="Příjmení" name="add_last_name" />
+              </div>
+
+              <div class="grid grid-cols-2 gap-3">
+                <BaseFormInput v-model="addPhone" label="Telefon" name="add_phone" />
+                <BaseFormInput v-model="addEmail" label="E-mail" name="add_email" />
+              </div>
+
+              <BaseFormTextarea v-model="addNote" label="Poznámka" name="add_note" />
+
+              <div class="flex justify-end gap-2 pt-2">
+                <button
+                  type="button"
+                  class="rounded-lg px-4 py-2 text-sm font-medium text-slate-600 hover:bg-slate-100"
+                  @click="showAddModal = false"
+                >
+                  Zrušit
+                </button>
+                <button
+                  type="button"
+                  class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500 disabled:opacity-50"
+                  :disabled="addLoading"
+                  @click="confirmAdd"
+                >
+                  Vytvořit rezervaci
                 </button>
               </div>
             </div>
